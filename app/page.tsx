@@ -38,7 +38,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <PrimaryButton href="/cards">Browse Components</PrimaryButton>
           <OutlineButton
-            href="https://github.com/poyrazavsever/ui-poyraz"
+            href="https://github.com/poyrazavsever/poyraz-ui"
             target="_blank"
           >
             View on GitHub
