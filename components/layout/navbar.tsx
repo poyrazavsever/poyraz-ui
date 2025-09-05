@@ -18,6 +18,11 @@ const allNavItems = [
     label: "Color Palette",
   },
   {
+    href: "/icons",
+    icon: "hugeicons:hugeicons",
+    label: "Icons",
+  },
+  {
     href: "/buttons",
     icon: "hugeicons:mouse-left-click-06",
     label: "Buttons",
