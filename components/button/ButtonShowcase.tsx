@@ -6,7 +6,7 @@ import Button, {
   GhostButton,
   GradientButton,
   IconButton,
-} from "../Button";
+} from "./Button";
 
 const ButtonShowcase = () => {
   return (
