@@ -32,6 +32,11 @@ const allNavItems = [
     icon: "hugeicons:credit-card-pos",
     label: "Cards",
   },
+  {
+    href: "/inputs",
+    icon: "hugeicons:picture-in-picture-exit",
+    label: "Inputs",
+  },
 ];
 
 // Social media links array
