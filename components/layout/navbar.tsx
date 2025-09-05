@@ -37,6 +37,11 @@ const allNavItems = [
     icon: "hugeicons:picture-in-picture-exit",
     label: "Inputs",
   },
+  {
+    href: "/not-found",
+    icon: "hugeicons:album-not-found-01",
+    label: "Not Found",
+  },
 ];
 
 // Social media links array
