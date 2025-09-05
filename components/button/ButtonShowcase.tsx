@@ -198,7 +198,7 @@ const ButtonShowcase = () => {
             <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
               <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
                 <Icon
-                  icon="hugeicons:cursor-click-01"
+                  icon="hugeicons:mouse-left-click-01"
                   className="w-6 h-6 text-neutral-600 dark:text-neutral-400"
                 />
               </div>
@@ -213,7 +213,7 @@ const ButtonShowcase = () => {
             <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
               <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
                 <Icon
-                  icon="hugeicons:spacing"
+                  icon="hugeicons:spaceship"
                   className="w-6 h-6 text-neutral-600 dark:text-neutral-400"
                 />
               </div>
