@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Button, {
   PrimaryButton,
@@ -10,7 +11,7 @@ import Button, {
 
 const ButtonShowcase = () => {
   return (
-    <div className="flex flex-col gap-8 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl">
+    <div className="flex flex-col gap-8 p-6">
       <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
         Button Variants
       </h2>
