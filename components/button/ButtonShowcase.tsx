@@ -11,7 +11,7 @@ import Button, {
 
 const ButtonShowcase = () => {
   return (
-    <div className="flex flex-col gap-8 p-6">
+    <div className="flex flex-col gap-8 p-6 mt-18 sm:mt-0">
       <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
         Button Variants
       </h2>
