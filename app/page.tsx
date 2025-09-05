@@ -10,9 +10,9 @@ export default function Home() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex flex-col justify-center items-center min-h-screen px-6 sm:px-24"
+      className="flex flex-col justify-start items-start mt-24 sm:mt-10 px-6 sm:px-24 gap-12"
     >
-      <div className="flex flex-col items-center text-center gap-8 max-w-2xl">
+      <div className="flex flex-col items-start text-left gap-8 max-w-2xl">
         {/* Logo */}
         <div className="w-16 h-16">
           <img
@@ -47,7 +47,7 @@ export default function Home() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 w-full">
-          <div className="flex flex-col items-center text-center p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
+          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
             <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
               <Icon
                 icon="hugeicons:paint-brush-01"
@@ -62,7 +62,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center text-center p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
+          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
             <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
               <Icon
                 icon="hugeicons:traffic-light"
@@ -77,7 +77,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center text-center p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
+          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
             <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
               <Icon
                 icon="hugeicons:settings-01"
