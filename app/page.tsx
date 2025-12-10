@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { PrimaryButton, OutlineButton } from "@/components/button/Button";
 
@@ -10,33 +9,43 @@ export default function Home() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex flex-col justify-start items-start mt-24 sm:mt-10 px-6 sm:px-24 gap-12"
+      className="flex flex-col justify-start items-start p-6 sm:p-10 gap-12"
     >
       <div className="flex flex-col items-start text-left gap-8 max-w-2xl">
         {/* Logo */}
-        <div className="w-16 h-16">
-          <img
-            src="/logo.png"
-            alt="Poyraz UI"
-            className="w-full h-full object-contain"
-          />
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-14 rounded-2xl bg-(--color-accent)/10 border border-(--color-accent)/30 flex items-center justify-center">
+            <Icon
+              icon="solar:code-square-bold-duotone"
+              className="text-3xl text-(--color-accent)"
+            />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-(--color-text)">
+              Poyraz UI Kit
+            </h1>
+            <p className="text-xs text-(--color-muted)">Design System</p>
+          </div>
         </div>
 
-        {/* Hero Title */}
-        <h1 className="text-4xl sm:text-5xl font-semibold text-neutral-800 dark:text-neutral-100">
-          Poyraz UI Kit
-        </h1>
-
         {/* Hero Description */}
-        <p className="text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed">
+        <p className="text-(--color-muted) max-w-xl leading-relaxed">
           A collection of beautiful, reusable UI components and design patterns
-          from poyrazavsever.com portfolio. Built with React, TypeScript, and
-          Tailwind CSS.
+          from{" "}
+          <a
+            href="https://poyrazavsever.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-(--color-accent) hover:underline"
+          >
+            poyrazavsever.com
+          </a>{" "}
+          portfolio. Built with React, TypeScript, and Tailwind CSS.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <PrimaryButton href="/cards">Browse Components</PrimaryButton>
+          <PrimaryButton href="/buttons">Browse Components</PrimaryButton>
           <OutlineButton
             href="https://github.com/poyrazavsever/poyraz-ui"
             target="_blank"
@@ -46,49 +55,49 @@ export default function Home() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 w-full">
-          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
-            <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 w-full">
+          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
+            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
               <Icon
-                icon="hugeicons:paint-brush-01"
-                className="w-6 h-6 text-neutral-600 dark:text-neutral-400"
+                icon="solar:palette-bold-duotone"
+                className="w-6 h-6 text-(--color-accent)"
               />
             </div>
-            <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
-              Modern Design
+            <h3 className="font-semibold text-(--color-text) mb-2">
+              38+ Themes
             </h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Clean, minimal design patterns with dark mode support
+            <p className="text-sm text-(--color-muted)">
+              Beautiful color palettes with light and dark modes
             </p>
           </div>
 
-          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
-            <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
+          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
+            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
               <Icon
-                icon="hugeicons:traffic-light"
-                className="w-6 h-6 text-neutral-600 dark:text-neutral-400"
+                icon="solar:code-bold-duotone"
+                className="w-6 h-6 text-(--color-accent)"
               />
             </div>
-            <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+            <h3 className="font-semibold text-(--color-text) mb-2">
               Production Ready
             </h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            <p className="text-sm text-(--color-muted)">
               Battle-tested components from real portfolio projects
             </p>
           </div>
 
-          <div className="flex flex-col items-start text-left p-6 border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50">
-            <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center mb-4">
+          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
+            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
               <Icon
-                icon="hugeicons:settings-01"
-                className="w-6 h-6 text-neutral-600 dark:text-neutral-400"
+                icon="solar:copy-bold-duotone"
+                className="w-6 h-6 text-(--color-accent)"
               />
             </div>
-            <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
-              Easy to Use
+            <h3 className="font-semibold text-(--color-text) mb-2">
+              Copy & Paste
             </h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Copy-paste components with TypeScript support
+            <p className="text-sm text-(--color-muted)">
+              Easy to use components with TypeScript support
             </p>
           </div>
         </div>
