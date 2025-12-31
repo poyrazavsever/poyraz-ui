@@ -280,7 +280,27 @@ export const APP_THEMES = [
 ] as const;
 
 export type ThemeId = (typeof APP_THEMES)[number]["id"];
-const DEFAULT_THEME: ThemeId = "obsidian";
+const DEFAULT_THEME: ThemeId = "crimson-light";
+const LIGHT_THEMES: ThemeId[] = [
+  "solstice",
+  "daybreak",
+  "glacier",
+  "mint",
+  "mono",
+  "crimson-light",
+  "alpine",
+  "lavender",
+  "sandbar",
+  "citrus",
+  "porcelain",
+  "meadow",
+  "horizon",
+  "blossom",
+  "lagoon",
+  "parchment",
+];
+
+const isLightTheme = (themeId: ThemeId) => LIGHT_THEMES.includes(themeId);
 
 type ThemeContextValue = {
   theme: ThemeId;
@@ -290,6 +310,15 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const STORAGE_KEY = "uikit.theme";
+const applyThemeToRoot = (themeId: ThemeId) => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const root = document.documentElement;
+  root.dataset.theme = themeId;
+  root.classList.toggle("dark", !isLightTheme(themeId));
+};
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<ThemeId>(DEFAULT_THEME);
@@ -301,15 +330,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     const stored = window.localStorage.getItem(STORAGE_KEY) as ThemeId | null;
-    const root = document.documentElement;
     if (stored && APP_THEMES.some((item) => item.id === stored)) {
-      root.dataset.theme = stored;
+      applyThemeToRoot(stored);
       setTheme(stored);
       return;
     }
 
     window.localStorage.setItem(STORAGE_KEY, DEFAULT_THEME);
-    root.dataset.theme = DEFAULT_THEME;
+    applyThemeToRoot(DEFAULT_THEME);
   }, []);
 
   useEffect(() => {
@@ -318,8 +346,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    const root = document.documentElement;
-    root.dataset.theme = theme;
+    applyThemeToRoot(theme);
     if (typeof window !== "undefined") {
       window.localStorage.setItem(STORAGE_KEY, theme);
     }

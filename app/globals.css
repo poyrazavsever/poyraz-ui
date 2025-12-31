@@ -553,6 +553,8 @@
 }
 
 body {
-  @apply bg-light-bg dark:bg-dark-bg transition-all;
+  @apply transition-all;
   font-family: "Nunito", system-ui, -apple-system, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
