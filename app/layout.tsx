@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme/theme-provider";
 import ActivityBar from "../components/layout/activitybar";
 import Sidebar from "../components/layout/sidebar";
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "UI-Kit by poyrazavsever.com",
@@ -17,11 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-(--color-background) text-(--color-text) transition-colors duration-300">
+      <body
+        className={`${nunito.className} bg-(--color-background) text-(--color-text) transition-colors duration-300`}
+      >
         <ThemeProvider>
           <ActivityBar />
           <Sidebar />
-          <main className="min-h-screen pl-0 sm:pl-[calc(56px+1rem+256px)] pb-20 sm:pb-0">
+          <main className="min-h-screen pl-0 sm:pl-[calc(56px+1rem+256px)] pb-20">
             {children}
           </main>
         </ThemeProvider>
