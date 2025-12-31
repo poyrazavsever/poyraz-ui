@@ -163,7 +163,7 @@ const ActivityBar = () => {
                   key="social-dropdown"
                   {...dropdownMotion}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute left-16 -top-32 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/80 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
+                  className="absolute left-16 -top-42 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/80 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
                 >
                   <ul className="flex flex-col gap-1.5">
                     {SOCIAL_LINKS.map((social) => (
