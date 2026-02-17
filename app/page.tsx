@@ -22,6 +22,7 @@ import {
   ProfileCard,
   GhostCard,
 } from "./demos/card-demos";
+import { MoleculesDemo } from "@/components/demos/molecules-demo";
 
 export default function Home() {
   return (
@@ -301,6 +302,16 @@ export default function Home() {
               <GhostCard />
             </div>
           </div>
+        </section>
+
+        <Separator />
+
+        {/* ═══════════════════════════════════════════ */}
+        {/* MOLECULES                                   */}
+        {/* ═══════════════════════════════════════════ */}
+        <section className="space-y-8">
+          <Typography variant="h2">Molecules</Typography>
+          <MoleculesDemo />
         </section>
       </div>
     </main>
