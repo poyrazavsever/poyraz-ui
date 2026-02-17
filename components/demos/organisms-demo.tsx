@@ -1,7 +1,25 @@
 "use client";
 
 import * as React from "react";
-import { MapPin, Rss, Activity, Settings, Globe } from "lucide-react";
+import {
+  MapPin,
+  Rss,
+  Activity,
+  Settings,
+  Globe,
+  Home,
+  FileText,
+  CreditCard,
+  BarChart3,
+  Users,
+  Package,
+  HelpCircle,
+  LogOut,
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/atoms/button";
 import { Logo } from "@/components/ui/atoms/logo";
@@ -20,10 +38,34 @@ import {
   NavbarMobileMenu,
   NavbarMobileLink,
 } from "@/components/ui/organisms/navbar";
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarSeparator,
+  SidebarFooter,
+  SidebarTrigger,
+} from "@/components/ui/organisms/sidebar";
+import {
+  Footer,
+  FooterGrid,
+  FooterSection,
+  FooterHeading,
+  FooterLink,
+  FooterBrand,
+  FooterSocials,
+  FooterSocialLink,
+  FooterBottom,
+  FooterBottomLinks,
+} from "@/components/ui/organisms/footer";
 
-/* ------------------------------------------------------------------ */
-/*  Shared nav items                                                   */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  NAVBAR DEMOS                                                       */
+/* ================================================================== */
 
 function TopBarContent() {
   return (
@@ -98,7 +140,6 @@ function SharedNavLinks() {
           </div>
         </NavbarMegaMenu>
       </NavbarDropdown>
-
       <NavbarDropdown label="Products">
         <NavbarMegaMenu className="grid-cols-2">
           <NavbarMegaMenuItem
@@ -123,7 +164,6 @@ function SharedNavLinks() {
           />
         </NavbarMegaMenu>
       </NavbarDropdown>
-
       <NavbarDropdown label="Resources">
         <NavbarMegaMenu className="grid-cols-2">
           <NavbarMegaMenuItem
@@ -138,40 +178,58 @@ function SharedNavLinks() {
           />
         </NavbarMegaMenu>
       </NavbarDropdown>
-
       <NavbarLink href="#">Pricing</NavbarLink>
       <NavbarLink href="#">Contact</NavbarLink>
     </>
   );
 }
 
-function SharedActions() {
-  return (
-    <>
-      <Button variant="outline" size="sm">
-        Login
-      </Button>
-      <Button size="sm">Let&apos;s Start</Button>
-    </>
-  );
-}
+/* ================================================================== */
+/*  SIDEBAR CONTENT SHARED                                             */
+/* ================================================================== */
 
-function SharedMobileMenu() {
+function DashboardSidebarContent({
+  showLabels = true,
+}: {
+  showLabels?: boolean;
+}) {
   return (
     <>
-      <NavbarMobileLink href="#">Showcase</NavbarMobileLink>
-      <NavbarMobileLink href="#">Products</NavbarMobileLink>
-      <NavbarMobileLink href="#">Resources</NavbarMobileLink>
-      <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
-      <NavbarMobileLink href="#">Contact</NavbarMobileLink>
-      <div className="flex gap-2 mt-3 pt-3 border-t-2 border-dashed border-slate-200">
-        <Button variant="outline" size="sm" className="flex-1">
-          Login
-        </Button>
-        <Button size="sm" className="flex-1">
-          Let&apos;s Start
-        </Button>
-      </div>
+      <SidebarGroup>
+        {showLabels && <SidebarGroupLabel>Main</SidebarGroupLabel>}
+        <SidebarMenu>
+          <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
+            Dashboard
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<FileText className="h-4 w-4" />} badge="3">
+            Invoices
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>
+            Payments
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
+            Clients
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<Package className="h-4 w-4" />}>
+            Products
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />} badge="New">
+            Analytics
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+      <SidebarSeparator />
+      <SidebarGroup>
+        {showLabels && <SidebarGroupLabel>Support</SidebarGroupLabel>}
+        <SidebarMenu>
+          <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>
+            Settings
+          </SidebarMenuItem>
+          <SidebarMenuItem icon={<HelpCircle className="h-4 w-4" />}>
+            Help
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
     </>
   );
 }
@@ -183,12 +241,19 @@ function SharedMobileMenu() {
 export function OrganismsDemo() {
   return (
     <div className="space-y-16 w-full">
-      {/* VARIANT: DEFAULT */}
+      {/* ──────────────────────────────────────────── */}
+      {/* NAVBAR SECTION                               */}
+      {/* ──────────────────────────────────────────── */}
+
+      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+        Navbar
+      </h2>
+
+      {/* DEFAULT */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Navbar — Default</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Full navbar with top bar, navigation links, mega-menu dropdowns and
-          action buttons.
+          Full navbar with top bar, mega-menu dropdowns and CTA buttons.
         </p>
         <div className="border-2 border-dashed border-slate-200 overflow-visible">
           <Navbar variant="default">
@@ -203,23 +268,29 @@ export function OrganismsDemo() {
                 <SharedNavLinks />
               </NavbarLinks>
               <NavbarActions>
-                <SharedActions />
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
+                <Button size="sm">Let&apos;s Start</Button>
               </NavbarActions>
               <NavbarMobileToggle />
             </NavbarMain>
             <NavbarMobileMenu>
-              <SharedMobileMenu />
+              <NavbarMobileLink href="#">Showcase</NavbarMobileLink>
+              <NavbarMobileLink href="#">Products</NavbarMobileLink>
+              <NavbarMobileLink href="#">Resources</NavbarMobileLink>
+              <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
+              <NavbarMobileLink href="#">Contact</NavbarMobileLink>
             </NavbarMobileMenu>
           </Navbar>
         </div>
       </section>
 
-      {/* VARIANT: MINIMAL */}
+      {/* MINIMAL */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Navbar — Minimal</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Clean navigation without the top bar. Ideal for dashboards and
-          internal apps.
+          No top bar. Ideal for SaaS dashboards and internal tools.
         </p>
         <div className="border-2 border-dashed border-slate-200 overflow-visible">
           <Navbar variant="minimal">
@@ -231,22 +302,22 @@ export function OrganismsDemo() {
                 <SharedNavLinks />
               </NavbarLinks>
               <NavbarActions>
-                <SharedActions />
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
+                <Button size="sm">Let&apos;s Start</Button>
               </NavbarActions>
               <NavbarMobileToggle />
             </NavbarMain>
-            <NavbarMobileMenu>
-              <SharedMobileMenu />
-            </NavbarMobileMenu>
           </Navbar>
         </div>
       </section>
 
-      {/* VARIANT: TRANSPARENT */}
+      {/* TRANSPARENT */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Navbar — Transparent</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Transparent background for overlaying on hero sections or banners.
+          For overlaying on hero sections and colored backgrounds.
         </p>
         <div className="border-2 border-dashed border-slate-200 overflow-visible bg-gradient-to-r from-red-600 to-red-700">
           <Navbar variant="transparent">
@@ -297,48 +368,264 @@ export function OrganismsDemo() {
               </NavbarActions>
               <NavbarMobileToggle className="border-white/50 text-white hover:bg-white/10" />
             </NavbarMain>
-            <NavbarMobileMenu className="bg-red-700 border-white/20">
-              <NavbarMobileLink
-                href="#"
-                className="text-white hover:bg-white/10 hover:border-white/20"
-              >
-                Home
-              </NavbarMobileLink>
-              <NavbarMobileLink
-                href="#"
-                className="text-white hover:bg-white/10 hover:border-white/20"
-              >
-                About
-              </NavbarMobileLink>
-              <NavbarMobileLink
-                href="#"
-                className="text-white hover:bg-white/10 hover:border-white/20"
-              >
-                Services
-              </NavbarMobileLink>
-              <NavbarMobileLink
-                href="#"
-                className="text-white hover:bg-white/10 hover:border-white/20"
-              >
-                Contact
-              </NavbarMobileLink>
-              <div className="flex gap-2 mt-3 pt-3 border-t-2 border-dashed border-white/20">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex-1 border-white/50 text-white hover:bg-white hover:text-red-600"
-                >
-                  Login
-                </Button>
-                <Button
-                  size="sm"
-                  className="flex-1 bg-white text-red-600 border-white hover:bg-white/90"
-                >
-                  Get Started
-                </Button>
-              </div>
-            </NavbarMobileMenu>
           </Navbar>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────── */}
+      {/* SIDEBAR SECTION                              */}
+      {/* ──────────────────────────────────────────── */}
+
+      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+        Sidebar
+      </h2>
+
+      {/* DEFAULT */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Sidebar — Default</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Fixed full-width sidebar for SaaS dashboards and admin panels.
+        </p>
+        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+          <Sidebar variant="default">
+            <SidebarHeader>
+              <Logo width={32} height={32} />
+              <span className="text-sm font-bold tracking-tight">
+                Invoice App
+              </span>
+            </SidebarHeader>
+            <SidebarContent>
+              <DashboardSidebarContent />
+            </SidebarContent>
+            <SidebarFooter>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">PA</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold truncate">Poyraz A.</p>
+                  <p className="text-[10px] text-slate-400 truncate">
+                    admin@poyraz.dev
+                  </p>
+                </div>
+                <LogOut className="h-4 w-4 text-slate-400 hover:text-red-600 cursor-pointer transition-colors" />
+              </div>
+            </SidebarFooter>
+          </Sidebar>
+          <div className="flex-1 p-6 bg-slate-50 flex items-center justify-center">
+            <span className="text-sm text-slate-400">Main Content Area</span>
+          </div>
+        </div>
+      </section>
+
+      {/* COLLAPSIBLE */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Sidebar — Collapsible</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Collapses to icon-only rail. Click the trigger to toggle. Tooltips on
+          hover when collapsed.
+        </p>
+        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+          <Sidebar variant="collapsible" defaultCollapsed={false}>
+            <SidebarHeader>
+              <Logo width={32} height={32} />
+              <SidebarTrigger className="ml-auto" />
+            </SidebarHeader>
+            <SidebarContent>
+              <DashboardSidebarContent />
+            </SidebarContent>
+            <SidebarFooter>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 shrink-0 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">PA</span>
+                </div>
+              </div>
+            </SidebarFooter>
+          </Sidebar>
+          <div className="flex-1 p-6 bg-slate-50 flex items-center justify-center">
+            <span className="text-sm text-slate-400">
+              Main Content — Click the toggle to collapse
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* MINI */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Sidebar — Mini</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Always icon-only rail. Hover on items to see tooltip labels.
+        </p>
+        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+          <Sidebar variant="mini">
+            <SidebarHeader>
+              <div className="h-8 w-8 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">P</span>
+              </div>
+            </SidebarHeader>
+            <SidebarContent>
+              <DashboardSidebarContent showLabels={false} />
+            </SidebarContent>
+            <SidebarFooter>
+              <Settings className="h-4 w-4 text-slate-400 mx-auto cursor-pointer hover:text-red-600 transition-colors" />
+            </SidebarFooter>
+          </Sidebar>
+          <div className="flex-1 p-6 bg-slate-50 flex items-center justify-center">
+            <span className="text-sm text-slate-400">
+              Main Content — Hover sidebar icons for tooltips
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────── */}
+      {/* FOOTER SECTION                               */}
+      {/* ──────────────────────────────────────────── */}
+
+      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+        Footer
+      </h2>
+
+      {/* FULL */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Footer — Full</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Multi-column layout for portfolio, hub, and public-facing projects.
+        </p>
+        <div className="border-2 border-dashed border-slate-200">
+          <Footer variant="full">
+            <FooterGrid>
+              <FooterSection>
+                <FooterHeading>Product</FooterHeading>
+                <FooterLink href="#">Features</FooterLink>
+                <FooterLink href="#">Pricing</FooterLink>
+                <FooterLink href="#">Changelog</FooterLink>
+                <FooterLink href="#">Roadmap</FooterLink>
+              </FooterSection>
+              <FooterSection>
+                <FooterHeading>Resources</FooterHeading>
+                <FooterLink href="#">Documentation</FooterLink>
+                <FooterLink href="#">API Reference</FooterLink>
+                <FooterLink href="#">Guides</FooterLink>
+                <FooterLink href="#">Blog</FooterLink>
+              </FooterSection>
+              <FooterSection>
+                <FooterHeading>Company</FooterHeading>
+                <FooterLink href="#">About</FooterLink>
+                <FooterLink href="#">Careers</FooterLink>
+                <FooterLink href="#">Contact</FooterLink>
+                <FooterLink href="#">Press</FooterLink>
+              </FooterSection>
+              <FooterSection>
+                <FooterHeading>Connect</FooterHeading>
+                <FooterSocials>
+                  <FooterSocialLink href="#" aria-label="GitHub">
+                    <Github className="h-4 w-4" />
+                  </FooterSocialLink>
+                  <FooterSocialLink href="#" aria-label="Twitter">
+                    <Twitter className="h-4 w-4" />
+                  </FooterSocialLink>
+                  <FooterSocialLink href="#" aria-label="LinkedIn">
+                    <Linkedin className="h-4 w-4" />
+                  </FooterSocialLink>
+                  <FooterSocialLink href="#" aria-label="Email">
+                    <Mail className="h-4 w-4" />
+                  </FooterSocialLink>
+                </FooterSocials>
+              </FooterSection>
+            </FooterGrid>
+            <FooterBottom>
+              <span>
+                &copy; {new Date().getFullYear()} Poyraz. All rights reserved.
+              </span>
+              <FooterBottomLinks>
+                <FooterLink href="#">Privacy Policy</FooterLink>
+                <FooterLink href="#">Terms of Service</FooterLink>
+                <FooterLink href="#">Cookie Policy</FooterLink>
+              </FooterBottomLinks>
+            </FooterBottom>
+          </Footer>
+        </div>
+      </section>
+
+      {/* COMPACT */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Footer — Compact</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Single-line footer for SaaS dashboards and internal tools.
+        </p>
+        <div className="border-2 border-dashed border-slate-200">
+          <Footer
+            variant="compact"
+            className="flex items-center justify-between"
+          >
+            <span className="text-xs text-slate-400">
+              &copy; {new Date().getFullYear()} Poyraz. All rights reserved.
+            </span>
+            <FooterBottomLinks>
+              <FooterLink href="#">Privacy</FooterLink>
+              <FooterLink href="#">Terms</FooterLink>
+              <FooterLink href="#">Status</FooterLink>
+            </FooterBottomLinks>
+          </Footer>
+        </div>
+      </section>
+
+      {/* BRANDED */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Footer — Branded</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Logo + tagline + CTA for landing pages and marketing sites.
+        </p>
+        <div className="border-2 border-dashed border-slate-200">
+          <Footer variant="branded">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <FooterBrand>
+                <div className="flex items-center gap-3">
+                  <Logo width={40} height={40} />
+                  <span className="text-xl font-bold tracking-tight">
+                    Poyraz
+                  </span>
+                </div>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  Brutalist UI components for modern web applications. No
+                  rounding, no shadows — just bold design.
+                </p>
+                <Button size="sm">Get Started Free</Button>
+              </FooterBrand>
+              <FooterGrid className="flex-1 max-w-lg grid-cols-2">
+                <FooterSection>
+                  <FooterHeading>Product</FooterHeading>
+                  <FooterLink href="#">Components</FooterLink>
+                  <FooterLink href="#">Templates</FooterLink>
+                  <FooterLink href="#">Pricing</FooterLink>
+                </FooterSection>
+                <FooterSection>
+                  <FooterHeading>Support</FooterHeading>
+                  <FooterLink href="#">Documentation</FooterLink>
+                  <FooterLink href="#">Discord</FooterLink>
+                  <FooterLink href="#">GitHub</FooterLink>
+                </FooterSection>
+              </FooterGrid>
+            </div>
+            <FooterBottom>
+              <span>
+                &copy; {new Date().getFullYear()} Poyraz. Built with ❤️ in
+                Ankara.
+              </span>
+              <FooterSocials>
+                <FooterSocialLink href="#" aria-label="GitHub">
+                  <Github className="h-4 w-4" />
+                </FooterSocialLink>
+                <FooterSocialLink href="#" aria-label="Twitter">
+                  <Twitter className="h-4 w-4" />
+                </FooterSocialLink>
+                <FooterSocialLink href="#" aria-label="LinkedIn">
+                  <Linkedin className="h-4 w-4" />
+                </FooterSocialLink>
+              </FooterSocials>
+            </FooterBottom>
+          </Footer>
         </div>
       </section>
     </div>
