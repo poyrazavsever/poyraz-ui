@@ -72,18 +72,6 @@ _Complex UI sections composed of molecules and atoms._
 - **Navbar** (Logo + Links + Auth/Theme Toggle)
 - **Sidebar** (Navigation Links + User Profile)
 - **Footer** (Links + Socials + Copyright)
-- **Hero Section** (Headline + CTA + Image/Pattern)
-- **Feature Section** (Grid of Cards/Icons)
-- **Testimonial Carousel**
-- **Pricing Table**
-
-### 4. Templates / Layouts
-
-_Page-level structures._
-
-- **Auth Layout** (Centered Card, Split View)
-- **Dashboard Layout** (Sidebar + Header + Main Content)
-- **Landing Page Layout** (Navbar + Hero + Sections + Footer)
 
 ### Button
 

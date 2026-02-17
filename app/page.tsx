@@ -23,6 +23,7 @@ import {
   GhostCard,
 } from "./demos/card-demos";
 import { MoleculesDemo } from "@/components/demos/molecules-demo";
+import { OrganismsDemo } from "@/components/demos/organisms-demo";
 
 export default function Home() {
   return (
@@ -312,6 +313,16 @@ export default function Home() {
         <section className="space-y-8">
           <Typography variant="h2">Molecules</Typography>
           <MoleculesDemo />
+        </section>
+
+        <Separator />
+
+        {/* ═══════════════════════════════════════════ */}
+        {/* ORGANISMS                                   */}
+        {/* ═══════════════════════════════════════════ */}
+        <section className="space-y-8 w-full">
+          <Typography variant="h2">Organisms</Typography>
+          <OrganismsDemo />
         </section>
       </div>
     </main>
