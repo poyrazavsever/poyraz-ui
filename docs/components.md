@@ -40,7 +40,6 @@ _Fundamental building blocks. Cannot be broken down further._
 - **Avatar** (Image, Fallback)
 - **Separator** (Divider)
 - **Skeleton** (Loading state)
-- **Icon** (Wrapper for icons - Lucide React recommended)
 - **Logo** (Project logo SVG)
 
 ### 2. Molecules
