@@ -8,7 +8,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "UI-Kit by poyrazavsever.com",
+  title: "Poyraz Avsever's UI-Kit",
   description:
     "A UI kit for Poyraz Avsever. Created with ❤️ by Poyraz Avsever.",
 };
@@ -20,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
