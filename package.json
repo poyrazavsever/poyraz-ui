@@ -8,8 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@iconify/react": "^6.0.1",
-    "framer-motion": "^12.23.12",
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1"
