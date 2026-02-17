@@ -1,330 +1,175 @@
+import Link from "next/link";
+import { ArrowRight, Github, Package, Copy, Check } from "lucide-react";
+
 import { Button } from "@/components/ui/atoms/button";
-import { Logo } from "@/components/ui/atoms/logo";
 import { Typography } from "@/components/ui/atoms/typography";
-import { Input } from "@/components/ui/atoms/input";
-import { Textarea } from "@/components/ui/atoms/textarea";
-import { Label } from "@/components/ui/atoms/label";
+import {
+  Footer,
+  FooterBottom,
+  FooterBrand,
+  FooterGrid,
+  FooterHeading,
+  FooterLink,
+  FooterSection,
+  FooterSocialLink,
+  FooterSocials,
+} from "@/components/ui/organisms/footer";
+import { Logo } from "@/components/ui/atoms/logo";
 import { Badge } from "@/components/ui/atoms/badge";
-import { Skeleton } from "@/components/ui/atoms/skeleton";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/atoms/avatar";
-import { Separator } from "@/components/ui/atoms/separator";
-import { CheckboxDemo } from "./demos/checkbox-demo";
-import { RadioDemo } from "./demos/radio-demo";
-import { SwitchDemo } from "./demos/switch-demo";
-import {
-  BlogCard,
-  VideoCard,
-  CourseCard,
-  ProfileCard,
-  GhostCard,
-} from "./demos/card-demos";
-import { MoleculesDemo } from "@/components/demos/molecules-demo";
-import { OrganismsDemo } from "@/components/demos/organisms-demo";
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/atoms/card";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 md:p-16 lg:p-24 gap-16">
-      {/* ── Header ──────────────────────────────────── */}
-      <div className="text-center space-y-3">
-        <Typography variant="h1">Poyraz UI Kit</Typography>
-        <Typography variant="lead">
-          Brutalist Design System Components
+    <div className="min-h-screen flex flex-col bg-slate-50/50">
+      {/* HERO SECTION */}
+      <section className="relative px-6 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center max-w-5xl mx-auto space-y-8">
+        <Badge
+          variant="outline"
+          className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest mb-4"
+        >
+          v0.1.0 Released
+        </Badge>
+
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-950">
+          POYRAZ{" "}
+          <span className="text-red-600 decoration-dashed underline decoration-4 underline-offset-8">
+            UI
+          </span>
+        </h1>
+
+        <Typography
+          variant="lead"
+          className="max-w-2xl text-xl md:text-2xl text-slate-600"
+        >
+          A brutalist, unstyled-first component library built for modern web
+          applications.
+          <span className="block mt-2 font-medium text-slate-900">
+            No rounding. No shadows. Just bold design.
+          </span>
         </Typography>
-      </div>
 
-      <div className="grid gap-16 w-full max-w-4xl">
-        {/* ═══════════════════════════════════════════ */}
-        {/* LOGO                                        */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Logo</Typography>
-          <div className="flex flex-wrap gap-8 items-end">
-            <div className="space-y-2">
-              <Typography variant="small" className="text-slate-500">
-                Default (48×48)
+        <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full justify-center">
+          <Link href="/docs">
+            <Button size="lg" className="h-14 px-8 text-lg w-full sm:w-auto">
+              Get Started <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          <Link
+            href="https://github.com/poyrazavsever/poyraz-ui"
+            target="_blank"
+          >
+            <Button
+              variant="outline"
+              size="lg"
+              className="h-14 px-8 text-lg bg-white w-full sm:w-auto"
+            >
+              <Github className="mr-2 h-5 w-5" /> GitHub
+            </Button>
+          </Link>
+        </div>
+
+        {/* INSTALL COPY */}
+        <div className="mt-12 p-4 bg-slate-950 text-slate-50 border-2 border-dashed border-red-600 font-mono text-sm md:text-base flex items-center gap-4 shadow-[4px_4px_0px_0px_rgba(220,38,38,1)]">
+          <span className="text-red-500">$</span>
+          <span>pnpm add poyraz-ui</span>
+          <Copy className="h-4 w-4 text-slate-500 hover:text-white cursor-pointer ml-auto" />
+        </div>
+      </section>
+
+      {/* FEATURES GRID */}
+      <section className="px-6 py-24 bg-white border-y-2 border-dashed border-slate-200">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+          <Card className="border-2 border-slate-950 bg-slate-50">
+            <CardHeader>
+              <Package className="h-10 w-10 text-red-600 mb-4" />
+              <CardTitle className="text-2xl">Copy & Paste</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Typography variant="p" className="mt-0">
+                Designed to be copied directly into your project. Own your code.
+                No hidden npm abstractions required (unless you want them).
               </Typography>
-              <Logo />
-            </div>
-            <div className="space-y-2">
-              <Typography variant="small" className="text-slate-500">
-                Large (80×80)
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-slate-950 bg-slate-50">
+            <CardHeader>
+              <Check className="h-10 w-10 text-red-600 mb-4" />
+              <CardTitle className="text-2xl">Accessible by Default</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Typography variant="p" className="mt-0">
+                Built on top of Radix UI primitives. Fully keyboard navigable,
+                screen reader friendly, and ARIA compliant.
               </Typography>
-              <Logo width={80} height={80} />
-            </div>
-            <div className="space-y-2">
-              <Typography variant="small" className="text-slate-500">
-                XL (120×120)
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-slate-950 bg-slate-50">
+            <CardHeader>
+              <Badge variant="outline" className="w-fit mb-4 border-slate-950">
+                Tailwind CSS v4
+              </Badge>
+              <CardTitle className="text-2xl">Modern Stack</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Typography variant="p" className="mt-0">
+                Leverages the latest Tailwind v4 features. Zero runtime styles.
+                Typescript first.
               </Typography>
-              <Logo width={120} height={120} />
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <Footer variant="branded" className="mt-auto bg-white">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <FooterBrand>
+            <div className="flex items-center gap-3">
+              <Logo width={40} height={40} />
+              <span className="text-xl font-bold tracking-tight">Poyraz</span>
             </div>
-          </div>
-        </section>
-
-        <Separator />
-        {/* ═══════════════════════════════════════════ */}
-        {/* BUTTON                                      */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Button</Typography>
-
-          <div className="space-y-3">
-            <Typography variant="small" className="text-slate-500">
-              Variants
-            </Typography>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button>Default</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="destructive">Destructive</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="link">Link</Button>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <Typography variant="small" className="text-slate-500">
-              Sizes
-            </Typography>
-            <div className="flex flex-wrap items-end gap-3">
-              <Button size="sm">Small</Button>
-              <Button size="default">Default</Button>
-              <Button size="lg">Large</Button>
-              <Button size="icon" aria-label="Add">
-                <span className="text-lg">＋</span>
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <Typography variant="small" className="text-slate-500">
-              States
-            </Typography>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button disabled>Disabled</Button>
-              <Button loading>Loading</Button>
-              <Button variant="outline" disabled>
-                Disabled
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* INPUT & TEXTAREA                            */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Input & Textarea</Typography>
-
-          <div className="grid gap-4 max-w-md">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Enter your name..." />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="hello@poyraz.dev" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="••••••••" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="disabled-input">Disabled</Label>
-              <Input
-                id="disabled-input"
-                placeholder="Cannot type here"
-                disabled
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="file">File Upload</Label>
-              <Input id="file" type="file" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" placeholder="Write your message..." />
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* CHECKBOX, RADIO, SWITCH                     */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Checkbox, Radio & Switch</Typography>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Checkbox
-              </Typography>
-              <CheckboxDemo />
-            </div>
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Radio Group
-              </Typography>
-              <RadioDemo />
-            </div>
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Switch
-              </Typography>
-              <SwitchDemo />
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* BADGE                                       */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Badge</Typography>
-          <div className="flex flex-wrap gap-3 items-center">
-            <Badge>Default</Badge>
-            <Badge variant="secondary">Secondary</Badge>
-            <Badge variant="destructive">Destructive</Badge>
-            <Badge variant="outline">Outline</Badge>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* AVATAR                                      */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Avatar</Typography>
-          <div className="flex gap-4 items-center">
-            <Avatar>
-              <AvatarImage src="https://i.pravatar.cc/80?img=3" alt="User" />
-              <AvatarFallback>PA</AvatarFallback>
-            </Avatar>
-            <Avatar>
-              <AvatarFallback>PY</AvatarFallback>
-            </Avatar>
-            <Avatar className="h-14 w-14">
-              <AvatarFallback>LG</AvatarFallback>
-            </Avatar>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* SKELETON                                    */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Skeleton</Typography>
-          <div className="space-y-3 max-w-md">
-            <div className="flex items-center gap-4">
-              <Skeleton className="h-10 w-10" />
-              <div className="space-y-2 flex-1">
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
-              </div>
-            </div>
-            <Skeleton className="h-24 w-full" />
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* SEPARATOR                                   */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-6">
-          <Typography variant="h2">Separator</Typography>
-          <div className="space-y-4">
-            <Typography variant="p">Content above separator</Typography>
-            <Separator />
-            <Typography variant="p">Content below separator</Typography>
-            <div className="flex items-center gap-4 h-6">
-              <span className="text-sm">Left</span>
-              <Separator orientation="vertical" />
-              <span className="text-sm">Center</span>
-              <Separator orientation="vertical" />
-              <span className="text-sm">Right</span>
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* CARD                                        */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-8">
-          <Typography variant="h2">Card</Typography>
-
-          <div className="space-y-3">
-            <Typography variant="small" className="text-slate-500">
-              Blog Card — elevated variant, horizontal
-            </Typography>
-            <BlogCard />
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Video Card — bordered variant
-              </Typography>
-              <VideoCard />
-            </div>
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Course Card — highlight variant
-              </Typography>
-              <CourseCard />
-            </div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Profile Card — default variant
-              </Typography>
-              <ProfileCard />
-            </div>
-            <div className="space-y-3">
-              <Typography variant="small" className="text-slate-500">
-                Ghost Card — hover reveal
-              </Typography>
-              <GhostCard />
-            </div>
-          </div>
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* MOLECULES                                   */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-8">
-          <Typography variant="h2">Molecules</Typography>
-          <MoleculesDemo />
-        </section>
-
-        <Separator />
-
-        {/* ═══════════════════════════════════════════ */}
-        {/* ORGANISMS                                   */}
-        {/* ═══════════════════════════════════════════ */}
-        <section className="space-y-8 w-full">
-          <Typography variant="h2">Organisms</Typography>
-          <OrganismsDemo />
-        </section>
-      </div>
-    </main>
+            <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
+              An open-source UI component library for building brutalist,
+              high-performance web applications.
+            </p>
+          </FooterBrand>
+          <FooterGrid className="flex-1 max-w-lg grid-cols-2">
+            <FooterSection>
+              <FooterHeading>Product</FooterHeading>
+              <FooterLink href="/docs">Documentation</FooterLink>
+              <FooterLink href="/atoms">Components</FooterLink>
+              <FooterLink href="https://github.com/poyrazavsever/poyraz-ui">
+                GitHub
+              </FooterLink>
+            </FooterSection>
+            <FooterSection>
+              <FooterHeading>Resources</FooterHeading>
+              <FooterLink href="/molecules">Examples</FooterLink>
+              <FooterLink href="/organisms">Templates</FooterLink>
+            </FooterSection>
+          </FooterGrid>
+        </div>
+        <FooterBottom>
+          <span>
+            &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
+          </span>
+          <FooterSocials>
+            <FooterSocialLink
+              href="https://github.com/poyrazavsever"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </FooterSocialLink>
+          </FooterSocials>
+        </FooterBottom>
+      </Footer>
+    </div>
   );
 }
