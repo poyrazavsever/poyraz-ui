@@ -15,6 +15,13 @@ import { Separator } from "@/components/ui/atoms/separator";
 import { CheckboxDemo } from "./demos/checkbox-demo";
 import { RadioDemo } from "./demos/radio-demo";
 import { SwitchDemo } from "./demos/switch-demo";
+import {
+  BlogCard,
+  VideoCard,
+  CourseCard,
+  ProfileCard,
+  GhostCard,
+} from "./demos/card-demos";
 
 export default function Home() {
   return (
@@ -246,6 +253,52 @@ export default function Home() {
               <span className="text-sm">Center</span>
               <Separator orientation="vertical" />
               <span className="text-sm">Right</span>
+            </div>
+          </div>
+        </section>
+
+        <Separator />
+
+        {/* ═══════════════════════════════════════════ */}
+        {/* CARD                                        */}
+        {/* ═══════════════════════════════════════════ */}
+        <section className="space-y-8">
+          <Typography variant="h2">Card</Typography>
+
+          <div className="space-y-3">
+            <Typography variant="small" className="text-slate-500">
+              Blog Card — elevated variant, horizontal
+            </Typography>
+            <BlogCard />
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-3">
+              <Typography variant="small" className="text-slate-500">
+                Video Card — bordered variant
+              </Typography>
+              <VideoCard />
+            </div>
+            <div className="space-y-3">
+              <Typography variant="small" className="text-slate-500">
+                Course Card — highlight variant
+              </Typography>
+              <CourseCard />
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-3">
+              <Typography variant="small" className="text-slate-500">
+                Profile Card — default variant
+              </Typography>
+              <ProfileCard />
+            </div>
+            <div className="space-y-3">
+              <Typography variant="small" className="text-slate-500">
+                Ghost Card — hover reveal
+              </Typography>
+              <GhostCard />
             </div>
           </div>
         </section>
