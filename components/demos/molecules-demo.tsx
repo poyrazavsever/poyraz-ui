@@ -1,26 +1,8 @@
 "use client";
 
 import * as React from "react";
-import {
-  Terminal,
-  CreditCard,
-  Settings,
-  User,
-  Cloud,
-  LifeBuoy,
-  LogOut,
-  Keyboard,
-  Users,
-  Mail,
-  MessageSquare,
-  PlusCircle,
-  Plus,
-  Github,
-} from "lucide-react";
-import { toast } from "sonner";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { CreditCard, Settings, User, LogOut, Keyboard } from "lucide-react";
+import { toast } from "@/components/ui/molecules/sonner";
 
 import { Button } from "@/components/ui/atoms/button";
 import { Input } from "@/components/ui/atoms/input";
@@ -108,43 +90,73 @@ export function MoleculesDemo() {
       {/* ALERT */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Alert</h3>
-        <Alert>
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components to your app using the cli.
-          </AlertDescription>
-        </Alert>
-        <Alert variant="destructive">
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>
-            Your session has expired. Please log in again.
-          </AlertDescription>
-        </Alert>
+        <div className="grid gap-3">
+          <Alert>
+            <AlertTitle>Default</AlertTitle>
+            <AlertDescription>
+              You can add components to your app using the cli.
+            </AlertDescription>
+          </Alert>
+          <Alert variant="info">
+            <AlertTitle>Info</AlertTitle>
+            <AlertDescription>
+              Your account has been updated with new permissions.
+            </AlertDescription>
+          </Alert>
+          <Alert variant="success">
+            <AlertTitle>Success</AlertTitle>
+            <AlertDescription>
+              Your changes have been saved successfully.
+            </AlertDescription>
+          </Alert>
+          <Alert variant="warning">
+            <AlertTitle>Warning</AlertTitle>
+            <AlertDescription>
+              Your free trial is expiring in 3 days.
+            </AlertDescription>
+          </Alert>
+          <Alert variant="destructive">
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              Your session has expired. Please log in again.
+            </AlertDescription>
+          </Alert>
+        </div>
       </section>
 
       {/* TOAST */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Toast / Sonner</h3>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-3">
           <Button
             variant="outline"
             onClick={() => toast("Event has been created")}
           >
-            Default Toast
+            Default
           </Button>
           <Button
             variant="outline"
-            onClick={() => toast.success("Event has been created")}
+            onClick={() => toast.info("A new software update is available.")}
           >
-            Success Toast
+            Info
           </Button>
           <Button
             variant="outline"
-            onClick={() => toast.error("Event has been created")}
+            onClick={() => toast.success("Changes saved successfully.")}
           >
-            Error Toast
+            Success
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => toast.warning("Your trial is expiring soon.")}
+          >
+            Warning
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => toast.error("Something went wrong.")}
+          >
+            Error
           </Button>
           <Button
             variant="outline"
@@ -158,7 +170,22 @@ export function MoleculesDemo() {
               })
             }
           >
-            Action Toast
+            With Action
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              toast.promise(
+                new Promise((resolve) => setTimeout(resolve, 2000)),
+                {
+                  loading: "Loading...",
+                  success: "Data loaded successfully!",
+                  error: "Failed to load data.",
+                },
+              );
+            }}
+          >
+            Promise
           </Button>
         </div>
       </section>
