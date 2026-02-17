@@ -85,3 +85,39 @@ _Page-level structures._
 - **Auth Layout** (Centered Card, Split View)
 - **Dashboard Layout** (Sidebar + Header + Main Content)
 - **Landing Page Layout** (Navbar + Hero + Sections + Footer)
+
+### Button
+
+A brutalist-style button component with dashed borders, no rounding, and no shadows.
+
+#### Installation
+
+The button component relies on `class-variance-authority` and `@radix-ui/react-slot`.
+
+#### Usage
+
+```tsx
+import { Button } from "@/components/ui/atoms/button"
+
+<Button>Default Button</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+```
+
+#### Props
+
+| Prop      | Type                                                                        | Default   | Description                                        |
+| --------- | --------------------------------------------------------------------------- | --------- | -------------------------------------------------- |
+| `variant` | `default` \| `destructive` \| `outline` \| `secondary` \| `ghost` \| `link` | `default` | The visual style of the button.                    |
+| `size`    | `default` \| `sm` \| `lg` \| `icon`                                         | `default` | The size of the button.                            |
+| `asChild` | `boolean`                                                                   | `false`   | Whether to render as a child element (delegation). |
+
+#### Visual Style Notes
+
+- **Border**: Always `2px dashed`.
+- **Rounding**: Always `none` (0px).
+- **Shadow**: Always `none`.
+- **Animation**: `active:scale-95` and hover effects.

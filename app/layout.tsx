@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Inter, Agbalumo } from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito({
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
+});
+
+const agbalumo = Agbalumo({
+  variable: "--font-secondary",
+  weight: "400",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Poyraz Avsever's UI-Kit",
-  description:
-    "A UI kit for Poyraz Avsever. Created with ❤️ by Poyraz Avsever.",
+  title: "Poyraz UI",
+  description: "Modern, Minimalist UI Kit",
 };
 
 export default function RootLayout({
@@ -19,8 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+    <html lang="en">
+      <body className={`${inter.variable} ${agbalumo.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

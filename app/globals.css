@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-secondary: var(--font-secondary);
+  --color-primary: #dc2626; /* red-600 */
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    @apply text-slate-950 bg-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    @apply font-bold tracking-tight;
+  }
+
+  /* Optional: Use secondary font for specific display headings if desired, 
+     or just keep it available via font-secondary utility */
+}
+
+@utility font-secondary {
+  font-family: var(--font-secondary);
+}
+
+@utility decoration-dashed {
+  text-decoration-style: dashed;
+}
