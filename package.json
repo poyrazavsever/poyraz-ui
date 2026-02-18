@@ -70,10 +70,17 @@
     "dist",
     "src/preset.css"
   ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@tailwindcss/oxide",
+      "sharp"
+    ]
+  },
   "sideEffects": false,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsup --tsconfig tsconfig.lib.json && next build",
     "build:lib": "tsup --tsconfig tsconfig.lib.json",
     "start": "next start",
     "prepublishOnly": "pnpm build:lib"
