@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -26,6 +29,13 @@ import {
 } from "@/components/ui/atoms/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/atoms/radio-group";
 import { Switch } from "@/components/ui/atoms/switch";
+import {
+  NumberInput,
+  SearchInput,
+  PhoneInput,
+  PasswordInput,
+  UrlInput,
+} from "@/components/ui/atoms/form-fields";
 
 function DemoBox({
   children,
@@ -43,13 +53,18 @@ function DemoBox({
   );
 }
 
+function NumberInputDemo() {
+  const [value, setValue] = React.useState(5);
+  return <NumberInput value={value} onChange={setValue} min={0} max={100} />;
+}
+
 export default function AtomsPage() {
   return (
     <div className="space-y-14 pb-10">
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          14 components
+          19 components
         </Badge>
         <Typography variant="h1">Atoms</Typography>
         <Typography variant="lead">
@@ -343,6 +358,49 @@ export default function AtomsPage() {
             </div>
           </div>
         </DemoBox>
+      </section>
+
+      {/* FORM FIELDS */}
+      <section className="space-y-4">
+        <Typography variant="h2" id="form-fields">
+          Form Fields
+        </Typography>
+        <Typography variant="p">
+          Specialized input variants — number stepper, search, phone, password
+          toggle, and URL prefix.
+        </Typography>
+
+        <div className="space-y-6">
+          {/* Number Input */}
+          <div className="space-y-2 max-w-xs">
+            <Label>Number Input</Label>
+            <NumberInputDemo />
+          </div>
+
+          {/* Search Input */}
+          <div className="space-y-2 max-w-sm">
+            <Label>Search</Label>
+            <SearchInput placeholder="Search components..." />
+          </div>
+
+          {/* Phone Input */}
+          <div className="space-y-2 max-w-sm">
+            <Label>Phone</Label>
+            <PhoneInput countryCode="+90" placeholder="555 123 4567" />
+          </div>
+
+          {/* Password Input */}
+          <div className="space-y-2 max-w-sm">
+            <Label>Password</Label>
+            <PasswordInput placeholder="Enter password" />
+          </div>
+
+          {/* URL Input */}
+          <div className="space-y-2 max-w-sm">
+            <Label>URL</Label>
+            <UrlInput placeholder="example.com" />
+          </div>
+        </div>
       </section>
 
       {/* LOGO */}

@@ -24,3 +24,10 @@ export { Skeleton } from "@/components/ui/atoms/skeleton";
 export { Switch } from "@/components/ui/atoms/switch";
 export { Textarea } from "@/components/ui/atoms/textarea";
 export { Typography } from "@/components/ui/atoms/typography";
+export {
+  NumberInput,
+  SearchInput,
+  PhoneInput,
+  PasswordInput,
+  UrlInput,
+} from "@/components/ui/atoms/form-fields";

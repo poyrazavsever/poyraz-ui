@@ -1,11 +1,24 @@
 "use client";
 
 import * as React from "react";
-import { CreditCard, Settings, User, LogOut, Keyboard } from "lucide-react";
+import {
+  CreditCard,
+  Settings,
+  User,
+  LogOut,
+  Keyboard,
+  CalendarIcon,
+} from "lucide-react";
 import { toast } from "@/components/ui/molecules/sonner";
 
 import { Button } from "@/components/ui/atoms/button";
 import { Input } from "@/components/ui/atoms/input";
+import { Label } from "@/components/ui/atoms/label";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/ui/atoms/avatar";
 import {
   Alert,
   AlertDescription,
@@ -83,6 +96,45 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/molecules/dropdown-menu";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/molecules/hover-card";
+import { Calendar } from "@/components/ui/molecules/calendar";
+import { DatePicker } from "@/components/ui/molecules/date-picker";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/molecules/drawer";
+import {
+  Modal,
+  ModalClose,
+  ModalContent,
+  ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
+} from "@/components/ui/molecules/modal";
+
+function CalendarDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  return <Calendar selected={date} onSelect={setDate} />;
+}
+
+function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date | undefined>();
+  return (
+    <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />
+  );
+}
 
 export function MoleculesDemo() {
   return (
@@ -413,6 +465,189 @@ export function MoleculesDemo() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      </section>
+
+      {/* HOVER CARD */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Hover Card</h3>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Button variant="link" className="text-base">
+              @poyrazavsever
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="w-80">
+            <div className="flex gap-4">
+              <Avatar>
+                <AvatarImage src="https://github.com/poyrazavsever.png" />
+                <AvatarFallback>PA</AvatarFallback>
+              </Avatar>
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold">@poyrazavsever</h4>
+                <p className="text-sm text-slate-500">
+                  Creator of Poyraz UI — Brutalist design system for the modern
+                  web.
+                </p>
+                <div className="flex items-center pt-1">
+                  <CalendarIcon className="mr-2 h-3 w-3 opacity-70" />
+                  <span className="text-xs text-slate-400">
+                    Joined December 2021
+                  </span>
+                </div>
+              </div>
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      </section>
+
+      {/* CALENDAR & DATE PICKER */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Calendar & Date Picker</h3>
+        <div className="grid sm:grid-cols-2 gap-6 items-start">
+          <div className="space-y-2">
+            <Label className="text-sm font-semibold">Inline Calendar</Label>
+            <div className="border-2 border-dashed border-slate-200 bg-white w-fit">
+              <CalendarDemo />
+            </div>
+          </div>
+          <div className="space-y-2 max-w-xs">
+            <Label className="text-sm font-semibold">Date Picker</Label>
+            <DatePickerDemo />
+          </div>
+        </div>
+      </section>
+
+      {/* DRAWER */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Drawer</h3>
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button variant="outline">Open Drawer</Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle>Edit Profile</DrawerTitle>
+                <DrawerDescription>
+                  Make changes to your profile. Click save when you&apos;re
+                  done.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="p-4 space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="drawer-name">Name</Label>
+                  <Input id="drawer-name" placeholder="Your name" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="drawer-email">Email</Label>
+                  <Input
+                    id="drawer-email"
+                    type="email"
+                    placeholder="hello@example.com"
+                  />
+                </div>
+              </div>
+              <DrawerFooter>
+                <Button>Save changes</Button>
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </section>
+
+      {/* MODAL */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Modal</h3>
+        <p className="text-sm text-slate-500">
+          Opinionated dialog with size variants (sm, default, lg, xl, full) and
+          position options.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Modal>
+            <ModalTrigger asChild>
+              <Button variant="outline">Small Modal</Button>
+            </ModalTrigger>
+            <ModalContent size="sm">
+              <ModalHeader>
+                <ModalTitle>Small Modal</ModalTitle>
+                <ModalDescription>
+                  This is the small size variant.
+                </ModalDescription>
+              </ModalHeader>
+              <p className="text-sm text-slate-600">
+                Compact modal for confirmations and quick actions.
+              </p>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button variant="outline" size="sm">
+                    Cancel
+                  </Button>
+                </ModalClose>
+                <Button size="sm">Confirm</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+
+          <Modal>
+            <ModalTrigger asChild>
+              <Button variant="outline">Default Modal</Button>
+            </ModalTrigger>
+            <ModalContent>
+              <ModalHeader>
+                <ModalTitle>Default Modal</ModalTitle>
+                <ModalDescription>
+                  Standard size for forms and content.
+                </ModalDescription>
+              </ModalHeader>
+              <div className="space-y-4 py-2">
+                <div className="space-y-2">
+                  <Label htmlFor="modal-name">Name</Label>
+                  <Input id="modal-name" placeholder="Enter your name" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="modal-email">Email</Label>
+                  <Input
+                    id="modal-email"
+                    type="email"
+                    placeholder="hello@example.com"
+                  />
+                </div>
+              </div>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </ModalClose>
+                <Button>Save</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+
+          <Modal>
+            <ModalTrigger asChild>
+              <Button variant="outline">Large Modal</Button>
+            </ModalTrigger>
+            <ModalContent size="lg">
+              <ModalHeader>
+                <ModalTitle>Large Modal</ModalTitle>
+                <ModalDescription>
+                  Extra space for complex content.
+                </ModalDescription>
+              </ModalHeader>
+              <p className="text-sm text-slate-600">
+                The large variant provides more room for tables, multi-step
+                forms, or detailed content layouts.
+              </p>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button variant="outline">Close</Button>
+                </ModalClose>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </div>
       </section>
     </div>
   );

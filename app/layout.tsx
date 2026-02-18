@@ -15,8 +15,10 @@ const agbalumo = Agbalumo({
 });
 
 export const metadata: Metadata = {
-  title: "Poyraz UI",
-  description: "Modern, Minimalist UI Kit",
+  title: "Poyraz Avsever's UI Kit - Poyraz UI - Brutalist React Components",
+  description: "Poyraz UI is a brutalist design system built with React, Next.js, Tailwind CSS v4, and Radix UI. It offers a collection of unstyled, accessible components that you can customize to create your own unique designs.",
+  icons: "/favicon.ico",
+
 };
 
 export default function RootLayout({

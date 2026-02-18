@@ -125,7 +125,8 @@ export default function Home() {
           </Badge>
 
           <Typography variant="h1">
-            <span className="font-secondary text-red-600">UI Kit</span> for Poyraz
+            <span className="font-secondary text-red-600">UI Kit</span> for
+            Poyraz
           </Typography>
 
           <Typography variant="lead" className="max-w-2xl">
@@ -215,7 +216,7 @@ export default function Home() {
           <div className="text-center space-y-3">
             <Typography variant="h2">Component Library</Typography>
             <Typography variant="muted" className="max-w-xl mx-auto">
-              30+ components across three layers of abstraction.
+              40+ components across three layers of abstraction.
             </Typography>
           </div>
 
@@ -223,7 +224,7 @@ export default function Home() {
             {[
               {
                 title: "Atoms",
-                count: 14,
+                count: 19,
                 href: "/docs/atoms",
                 items: [
                   "Button",
@@ -231,21 +232,21 @@ export default function Home() {
                   "Badge",
                   "Avatar",
                   "Card",
-                  "Typography",
+                  "Form Fields",
                 ],
                 color: "border-red-600",
               },
               {
                 title: "Molecules",
-                count: 12,
+                count: 16,
                 href: "/docs/molecules",
                 items: [
                   "Accordion",
                   "Dialog",
-                  "Tabs",
-                  "Select",
-                  "Dropdown",
-                  "Tooltip",
+                  "Modal",
+                  "Drawer",
+                  "DatePicker",
+                  "HoverCard",
                 ],
                 color: "border-slate-900",
               },

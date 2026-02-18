@@ -13,7 +13,7 @@ export default function MoleculesPage() {
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          12 components
+          16 components
         </Badge>
         <Typography variant="h1">Molecules</Typography>
         <Typography variant="lead">
