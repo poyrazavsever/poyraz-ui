@@ -137,4 +137,21 @@ interface PatternRadialProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const PatternRadial: React.ForwardRefExoticComponent<PatternRadialProps & React.RefAttributes<HTMLDivElement>>;
 
-export { Avatar, AvatarFallback, AvatarImage, Badge, type BgPatternProps, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Input, Logo, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, RadioGroup, RadioGroupItem, SearchInput, Separator, Skeleton, Switch, Textarea, Typography, UrlInput, badgeVariants };
+interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Maximum height before scrolling kicks in */
+    maxHeight?: string | number;
+    /** Orientation of the scrollbar */
+    orientation?: "vertical" | "horizontal" | "both";
+    /** Scrollbar size: track + thumb width / height */
+    scrollbarSize?: "sm" | "md" | "lg";
+}
+/**
+ * Brutalist-themed scroll area with a dashed-border scrollbar track
+ * and a dashed-outline thumb.
+ *
+ * Uses pure CSS `scrollbar-*` properties (supported in Chrome 121+ / Firefox 64+)
+ * with a fallback for webkit browsers.
+ */
+declare const ScrollArea: React.ForwardRefExoticComponent<ScrollAreaProps & React.RefAttributes<HTMLDivElement>>;
+
+export { Avatar, AvatarFallback, AvatarImage, Badge, type BgPatternProps, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Input, Logo, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, RadioGroup, RadioGroupItem, ScrollArea, type ScrollAreaProps, SearchInput, Separator, Skeleton, Switch, Textarea, Typography, UrlInput, badgeVariants };
