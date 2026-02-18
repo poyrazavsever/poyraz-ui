@@ -160,6 +160,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── SHOWCASE ─────────────────────────────────────── */}
+      <section className="w-full overflow-hidden mt-16">
+        <div className="flex items-end justify-center">
+          {/* Image 2 — person with success alert (left) */}
+          <div className="shrink-0">
+            <img
+              src="/images/image 2.png"
+              alt="Poyraz UI success alert showcase"
+              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom"
+              draggable={false}
+            />
+          </div>
+
+          {/* Image 1 — person with button (right, cut off) + red box */}
+          <div className="flex items-end flex-1 min-w-0">
+            <img
+              src="/images/image 1.png"
+              alt="Poyraz UI button showcase"
+              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom shrink-0"
+              draggable={false}
+            />
+            {/* Red-600 box — starts at 0 from image 1's cut edge */}
+            <div className="self-stretch bg-red-600 flex-1 flex items-center overflow-hidden px-6 sm:px-10">
+              <p className="text-red-200 font-secondary text-lg sm:text-2xl md:text-3xl lg:text-4xl  tracking-wide leading-tight whitespace-nowrap">
+                I love building things...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── DESIGN PRINCIPLES ──────────────────────────────── */}
       <section className="px-6 py-20 bg-slate-50/80 border-y-2 border-dashed border-slate-200">
         <div className="max-w-5xl mx-auto space-y-12">
