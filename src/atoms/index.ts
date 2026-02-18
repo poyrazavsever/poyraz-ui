@@ -31,3 +31,19 @@ export {
   PasswordInput,
   UrlInput,
 } from "@/components/ui/atoms/form-fields";
+export {
+  PatternDots,
+  PatternGrid,
+  PatternLines,
+  PatternDiagonal,
+  PatternCross,
+  PatternCheckerboard,
+  PatternDiamond,
+  PatternZigzag,
+  PatternDashedGrid,
+  PatternRadial,
+} from "@/components/ui/atoms/bg-pattern";
+export type {
+  BgPatternProps,
+  PatternRadialProps,
+} from "@/components/ui/atoms/bg-pattern";

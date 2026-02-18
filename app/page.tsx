@@ -20,6 +20,7 @@ import { Typography } from "@/components/ui/atoms/typography";
 import { Badge } from "@/components/ui/atoms/badge";
 import { Separator } from "@/components/ui/atoms/separator";
 import { Logo } from "@/components/ui/atoms/logo";
+import { PatternDots } from "@/components/ui/atoms/bg-pattern";
 import {
   Navbar,
   NavbarMain,
@@ -115,8 +116,15 @@ export default function Home() {
       </Navbar>
 
       {/* ─── HERO ───────────────────────────────────────────── */}
-      <section className="relative px-6 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
-        <div className="max-w-5xl mx-auto space-y-8 flex flex-col items-center">
+      <section className="relative px-6 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center overflow-hidden">
+        <PatternDots
+          overlay
+          size={28}
+          opacity={0.12}
+          color="#334155"
+          className="w-full h-full"
+        />
+        <div className="relative z-10 max-w-5xl mx-auto space-y-8 flex flex-col items-center">
           <Badge
             variant="outline"
             className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest"

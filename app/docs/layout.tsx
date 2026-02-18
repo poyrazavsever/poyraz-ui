@@ -53,6 +53,7 @@ const atoms = [
   "Skeleton",
   "Form Fields",
   "Logo",
+  "BG Patterns",
 ];
 
 const molecules = [

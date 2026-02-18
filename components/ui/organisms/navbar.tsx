@@ -117,7 +117,7 @@ const NavbarTopBar = React.forwardRef<
     >
       <div
         className={cn(
-          "px-6 py-1.5",
+          "px-6 py-1.5 sm:px-0",
           "flex items-center justify-between",
           containerClassName,
         )}
