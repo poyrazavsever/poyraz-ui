@@ -70,14 +70,18 @@ export default function OrganismsPage() {
       {/* Navigation */}
       <section className="space-y-4">
         <Separator />
-        <div className="flex gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <Link href="/docs/molecules">
-            <Button variant="outline" size="lg" className="gap-2">
+            <Button
+              variant="outline"
+              size="lg"
+              className="gap-2 w-full sm:w-auto"
+            >
               <ArrowRight className="h-4 w-4 rotate-180" /> Molecules
             </Button>
           </Link>
           <Link href="/docs">
-            <Button size="lg" className="gap-2">
+            <Button size="lg" className="gap-2 w-full sm:w-auto">
               Back to Docs <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

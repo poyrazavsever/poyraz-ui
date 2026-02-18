@@ -34,64 +34,12 @@ import {
   FooterSocials,
   FooterSocialLink,
 } from "@/components/ui/organisms/footer";
-
-/* ── Component registry ───────────────────────────────────────────── */
-
-const atoms = [
-  "Button",
-  "Input",
-  "Textarea",
-  "Checkbox",
-  "Radio Group",
-  "Switch",
-  "Badge",
-  "Avatar",
-  "Card",
-  "Typography",
-  "Label",
-  "Separator",
-  "Skeleton",
-  "Scroll Area",
-  "Form Fields",
-  "Logo",
-  "BG Patterns",
-];
-
-const molecules = [
-  "Accordion",
-  "Alert",
-  "Autocomplete",
-  "Breadcrumb",
-  "Calendar",
-  "Command Palette",
-  "Date Picker",
-  "Dialog",
-  "Drawer",
-  "Dropdown Menu",
-  "Form",
-  "Hover Card",
-  "Mermaid",
-  "Modal",
-  "Pagination",
-  "Popover",
-  "Select",
-  "Sheet",
-  "Sonner",
-  "Tabs",
-  "Tooltip",
-];
-
-const organisms = [
-  "Announcement Bar",
-  "Data Table",
-  "Footer",
-  "Navbar",
-  "Sidebar",
-];
-
-function toSlug(name: string) {
-  return name.toLowerCase().replace(/\s+/g, "-");
-}
+import {
+  componentRegistry,
+  docsMobileNav,
+  socialLinks,
+  toSlug,
+} from "@/lib/navigation";
 
 /* ── Collapsible sidebar group ────────────────────────────────────── */
 
@@ -184,24 +132,15 @@ function DocsSidebarContent() {
       </SidebarGroup>
 
       <div className="px-2 space-y-2 mt-2">
-        <SidebarSection
-          label={`Atoms (${atoms.length})`}
-          basePath="/docs/atoms"
-          items={atoms}
-          pathname={pathname}
-        />
-        <SidebarSection
-          label={`Molecules (${molecules.length})`}
-          basePath="/docs/molecules"
-          items={molecules}
-          pathname={pathname}
-        />
-        <SidebarSection
-          label={`Organisms (${organisms.length})`}
-          basePath="/docs/organisms"
-          items={organisms}
-          pathname={pathname}
-        />
+        {componentRegistry.map((group) => (
+          <SidebarSection
+            key={group.label}
+            label={`${group.label} (${group.items.length})`}
+            basePath={group.basePath}
+            items={group.items}
+            pathname={pathname}
+          />
+        ))}
       </div>
     </>
   );
@@ -227,10 +166,7 @@ export default function DocsLayout({
           </NavbarLinks>
 
           <NavbarActions>
-            <Link
-              href="https://github.com/poyrazavsever/poyraz-ui"
-              target="_blank"
-            >
+            <Link href={socialLinks.repo} target="_blank">
               <Button size="icon" variant="ghost">
                 <Github className="h-4 w-4" />
               </Button>
@@ -241,13 +177,11 @@ export default function DocsLayout({
         </NavbarMain>
 
         <NavbarMobileMenu>
-          <NavbarMobileLink href="/docs">Introduction</NavbarMobileLink>
-          <NavbarMobileLink href="/docs/installation">
-            Installation
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/docs/atoms">Atoms</NavbarMobileLink>
-          <NavbarMobileLink href="/docs/molecules">Molecules</NavbarMobileLink>
-          <NavbarMobileLink href="/docs/organisms">Organisms</NavbarMobileLink>
+          {docsMobileNav.map((item) => (
+            <NavbarMobileLink key={item.href} href={item.href}>
+              {item.label}
+            </NavbarMobileLink>
+          ))}
         </NavbarMobileMenu>
       </Navbar>
 
@@ -284,7 +218,7 @@ export default function DocsLayout({
               </span>
               <FooterSocials>
                 <FooterSocialLink
-                  href="https://github.com/poyrazavsever"
+                  href={socialLinks.github}
                   aria-label="GitHub"
                   className="h-7 w-7"
                 >

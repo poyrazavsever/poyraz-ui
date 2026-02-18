@@ -43,6 +43,7 @@ import {
   FooterSocialLink,
   FooterSocials,
 } from "@/components/ui/organisms/footer";
+import { mainNav, mobileNav, footerNav, socialLinks } from "@/lib/navigation";
 
 function CopyInstallCommand() {
   const [copied, setCopied] = useState(false);
@@ -87,18 +88,19 @@ export default function Home() {
           </NavbarBrand>
 
           <NavbarLinks>
-            <NavbarLink href="/docs">Docs</NavbarLink>
-            <NavbarLink href="/docs/atoms">Components</NavbarLink>
-            <NavbarLink
-              href="https://github.com/poyrazavsever/poyraz-ui"
-              target="_blank"
-            >
-              GitHub
-            </NavbarLink>
+            {mainNav.map((item) => (
+              <NavbarLink
+                key={item.href}
+                href={item.href}
+                {...(item.external ? { target: "_blank" } : {})}
+              >
+                {item.label}
+              </NavbarLink>
+            ))}
           </NavbarLinks>
 
           <NavbarActions>
-            <Link href="https://poyrazavsever.com" target="_blank">
+            <Link href={socialLinks.website} target="_blank">
               <Button size="sm">Return Back</Button>
             </Link>
           </NavbarActions>
@@ -107,11 +109,11 @@ export default function Home() {
         </NavbarMain>
 
         <NavbarMobileMenu>
-          <NavbarMobileLink href="/docs">Documentation</NavbarMobileLink>
-          <NavbarMobileLink href="/docs/atoms">Components</NavbarMobileLink>
-          <NavbarMobileLink href="https://poyrazavsever.com">
-            Return Back
-          </NavbarMobileLink>
+          {mobileNav.map((item) => (
+            <NavbarMobileLink key={item.href} href={item.href}>
+              {item.label}
+            </NavbarMobileLink>
+          ))}
         </NavbarMobileMenu>
       </Navbar>
 
@@ -150,10 +152,7 @@ export default function Home() {
                 Get Started <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link
-              href="https://github.com/poyrazavsever/poyraz-ui"
-              target="_blank"
-            >
+            <Link href={socialLinks.repo} target="_blank">
               <Button
                 variant="outline"
                 size="lg"
@@ -375,21 +374,16 @@ export default function Home() {
             </p>
           </FooterBrand>
           <FooterGrid className="flex-1 max-w-lg grid-cols-2">
-            <FooterSection>
-              <FooterHeading>Documentation</FooterHeading>
-              <FooterLink href="/docs">Getting Started</FooterLink>
-              <FooterLink href="/docs/installation">Installation</FooterLink>
-              <FooterLink href="/docs/atoms">Components</FooterLink>
-            </FooterSection>
-            <FooterSection>
-              <FooterHeading>Links</FooterHeading>
-              <FooterLink href="https://github.com/poyrazavsever/poyraz-ui">
-                GitHub
-              </FooterLink>
-              <FooterLink href="https://npmjs.com/package/poyraz-ui">
-                npm
-              </FooterLink>
-            </FooterSection>
+            {footerNav.map((section) => (
+              <FooterSection key={section.heading}>
+                <FooterHeading>{section.heading}</FooterHeading>
+                {section.links.map((link) => (
+                  <FooterLink key={link.href} href={link.href}>
+                    {link.label}
+                  </FooterLink>
+                ))}
+              </FooterSection>
+            ))}
           </FooterGrid>
         </div>
         <FooterBottom>
@@ -397,10 +391,7 @@ export default function Home() {
             &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
           </span>
           <FooterSocials>
-            <FooterSocialLink
-              href="https://github.com/poyrazavsever"
-              aria-label="GitHub"
-            >
+            <FooterSocialLink href={socialLinks.github} aria-label="GitHub">
               <Github className="h-4 w-4" />
             </FooterSocialLink>
           </FooterSocials>

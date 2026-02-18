@@ -14,7 +14,12 @@ export {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
+  NavbarMobileGroup,
+  NavbarMobileActions,
+  NavbarSearch,
+  NavbarDivider,
   navbarVariants,
+  useNavbar,
 } from "@/components/ui/organisms/navbar";
 export {
   Sidebar,
@@ -27,6 +32,10 @@ export {
   SidebarSeparator,
   SidebarFooter,
   SidebarTrigger,
+  SidebarSearch,
+  SidebarSubMenu,
+  SidebarSubMenuItem,
+  SidebarUserProfile,
   useSidebar,
   sidebarVariants,
 } from "@/components/ui/organisms/sidebar";
@@ -39,6 +48,8 @@ export {
   FooterBrand,
   FooterSocials,
   FooterSocialLink,
+  FooterNewsletter,
+  FooterDivider,
   FooterBottom,
   FooterBottomLinks,
   footerVariants,

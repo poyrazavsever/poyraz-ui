@@ -9,23 +9,18 @@ import { cn } from "@/components/ui/atoms/typography";
 
 const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 
-const footerVariants = cva(
-  [
-    "w-full",
-    "bg-white text-slate-950",
-    "border-t-2 border-dashed border-slate-200",
-  ].join(" "),
-  {
-    variants: {
-      variant: {
-        full: "py-12",
-        compact: "py-4",
-        branded: "py-10",
-      },
+const footerVariants = cva(["w-full", "border-t-2 border-dashed"].join(" "), {
+  variants: {
+    variant: {
+      full: "py-12 bg-white text-slate-950 border-slate-200",
+      compact: "py-4 bg-white text-slate-950 border-slate-200",
+      branded: "py-10 bg-white text-slate-950 border-slate-200",
+      centered: "py-12 text-center bg-white text-slate-950 border-slate-200",
+      dark: "py-12 bg-slate-950 text-slate-100 border-slate-800",
     },
-    defaultVariants: { variant: "full" },
   },
-);
+  defaultVariants: { variant: "full" },
+});
 
 export interface FooterProps
   extends
@@ -65,7 +60,7 @@ const FooterGrid = React.forwardRef<
     ref={ref}
     className={cn(
       "grid gap-8",
-      "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+      "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
       className,
     )}
     {...props}
@@ -232,13 +227,117 @@ const FooterBottomLinks = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center gap-4", "text-xs", className)}
+    className={cn("flex items-center gap-4 flex-wrap", "text-xs", className)}
     {...props}
   >
     {children}
   </div>
 ));
 FooterBottomLinks.displayName = "FooterBottomLinks";
+
+/* ================================================================== */
+/*  FOOTER NEWSLETTER                                                  */
+/* ================================================================== */
+
+export interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
+  heading?: string;
+  description?: string;
+  placeholder?: string;
+  buttonText?: string;
+  onSubscribe?: (email: string) => void;
+}
+
+function FooterNewsletterInner(
+  {
+    className,
+    heading = "Subscribe to our newsletter",
+    description = "Get the latest updates and news directly in your inbox.",
+    placeholder = "you@example.com",
+    buttonText = "Subscribe",
+    onSubscribe,
+    ...props
+  }: FooterNewsletterProps,
+  ref: React.Ref<HTMLDivElement>,
+) {
+  const [email, setEmail] = React.useState("");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      onSubscribe?.(email.trim());
+      setEmail("");
+    }
+  };
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "py-6 px-6",
+        "border-2 border-dashed border-slate-200",
+        "bg-slate-50",
+        className,
+      )}
+      {...props}
+    >
+      <h4 className="text-sm font-bold uppercase tracking-wide mb-1">
+        {heading}
+      </h4>
+      <p className="text-xs text-slate-500 mb-4">{description}</p>
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={placeholder}
+          required
+          className={cn(
+            "flex-1 h-10 px-3 text-sm",
+            "border-2 border-dashed border-slate-300 bg-white",
+            "placeholder:text-slate-400",
+            "focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-1",
+            "rounded-none shadow-none",
+          )}
+        />
+        <button
+          type="submit"
+          className={cn(
+            "h-10 px-5",
+            "text-xs font-bold uppercase tracking-wide",
+            "bg-red-600 text-white",
+            "border-2 border-dashed border-red-800",
+            "hover:bg-red-700 hover:border-red-900",
+            "active:bg-red-800 active:scale-[0.97]",
+            "transition-all duration-150",
+            "rounded-none shadow-none cursor-pointer",
+          )}
+        >
+          {buttonText}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+const FooterNewsletter = React.forwardRef<
+  HTMLDivElement,
+  FooterNewsletterProps
+>(FooterNewsletterInner);
+FooterNewsletter.displayName = "FooterNewsletter";
+
+/* ================================================================== */
+/*  FOOTER DIVIDER                                                     */
+/* ================================================================== */
+
+const FooterDivider = React.forwardRef<
+  HTMLHRElement,
+  React.HTMLAttributes<HTMLHRElement>
+>(({ className, ...props }, ref) => (
+  <hr
+    ref={ref}
+    className={cn("border-t-2 border-dashed border-slate-200 my-8", className)}
+    {...props}
+  />
+));
+FooterDivider.displayName = "FooterDivider";
 
 /* ================================================================== */
 /*  EXPORTS                                                            */
@@ -253,6 +352,8 @@ export {
   FooterBrand,
   FooterSocials,
   FooterSocialLink,
+  FooterNewsletter,
+  FooterDivider,
   FooterBottom,
   FooterBottomLinks,
   footerVariants,

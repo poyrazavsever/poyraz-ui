@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 
 import { cn } from "@/components/ui/atoms/typography";
 
@@ -14,7 +14,7 @@ import { cn } from "@/components/ui/atoms/typography";
 interface NavbarContextValue {
   mobileOpen: boolean;
   setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  variant: "default" | "minimal" | "transparent";
+  variant: "default" | "minimal" | "transparent" | "bordered";
   containerClassName: string;
 }
 
@@ -36,9 +36,11 @@ const useNavbar = () => React.useContext(NavbarContext);
 const navbarVariants = cva("w-full", {
   variants: {
     variant: {
-      default: "bg-white",
-      minimal: "bg-white",
-      transparent: "bg-transparent",
+      default: "bg-white text-slate-950",
+      minimal: "bg-white text-slate-950",
+      transparent: "bg-transparent text-slate-950",
+      bordered:
+        "bg-white text-slate-950 border-2 border-dashed border-slate-300",
     },
   },
   defaultVariants: { variant: "default" },
@@ -50,6 +52,8 @@ export interface NavbarProps
     VariantProps<typeof navbarVariants> {
   /** Show sticky behavior */
   sticky?: boolean;
+  /** Auto-hide when scrolling down, reveal when scrolling up */
+  autoHide?: boolean;
   /** Class name applied to inner containers for width constraint */
   containerClassName?: string;
 }
@@ -60,6 +64,7 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
       className,
       variant = "default",
       sticky = false,
+      autoHide = false,
       containerClassName,
       children,
       ...props
@@ -67,6 +72,23 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
     ref,
   ) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [hidden, setHidden] = React.useState(false);
+    const lastScrollY = React.useRef(0);
+
+    React.useEffect(() => {
+      if (!autoHide || !sticky) return;
+      const handleScroll = () => {
+        const currentY = window.scrollY;
+        if (currentY > lastScrollY.current && currentY > 80) {
+          setHidden(true);
+        } else {
+          setHidden(false);
+        }
+        lastScrollY.current = currentY;
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, [autoHide, sticky]);
 
     return (
       <NavbarContext.Provider
@@ -82,6 +104,8 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
           className={cn(
             navbarVariants({ variant }),
             sticky && "sticky top-0 z-50",
+            autoHide && "transition-transform duration-300",
+            hidden && "-translate-y-full",
             className,
           )}
           {...props}
@@ -108,9 +132,9 @@ const NavbarTopBar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "w-full bg-red-600 text-white",
-        "border-b-2 border-dashed border-red-800",
+        "w-full",
         "text-xs font-medium tracking-wide",
+        "bg-red-600 text-white border-b-2 border-dashed border-red-800",
         className,
       )}
       {...props}
@@ -145,7 +169,11 @@ const NavbarMain = React.forwardRef<
       className={cn(
         "relative w-full",
         "border-b-2 border-dashed",
-        variant === "transparent" ? "border-white/30" : "border-slate-200",
+        variant === "transparent"
+          ? "border-white/30"
+          : variant === "bordered"
+            ? "border-slate-300"
+            : "border-slate-200",
         className,
       )}
       {...props}
@@ -153,7 +181,8 @@ const NavbarMain = React.forwardRef<
       <div
         className={cn(
           "px-6 py-3",
-          "flex items-center justify-between gap-6",
+          "flex items-center justify-between gap-4 sm:gap-6",
+          "overflow-hidden",
           containerClassName,
         )}
       >
@@ -217,7 +246,7 @@ const NavbarLinks = React.forwardRef<
     <NavigationMenuPrimitive.List className="flex items-center gap-1">
       {children}
     </NavigationMenuPrimitive.List>
-    <div className="absolute left-0 top-full w-full z-50">
+    <div className="absolute left-0 top-full w-full z-[60]">
       <NavigationMenuPrimitive.Viewport
         className={cn(
           "relative w-full overflow-hidden",
@@ -239,16 +268,14 @@ NavbarLinks.displayName = "NavbarLinks";
 /*  LINK ITEM (simple)                                                 */
 /* ================================================================== */
 
-const navLinkStyles = cva(
-  [
-    "inline-flex items-center gap-1 px-3 py-2",
-    "text-sm font-medium tracking-wide",
-    "rounded-none transition-colors duration-150",
-    "hover:bg-slate-100",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-    "data-[active]:border-b-2 data-[active]:border-dashed data-[active]:border-red-600",
-  ].join(" "),
-);
+const navLinkStyles = [
+  "inline-flex items-center gap-1 px-3 py-2",
+  "text-sm font-medium tracking-wide",
+  "rounded-none transition-colors duration-150",
+  "hover:bg-slate-100",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
+  "data-[active]:border-b-2 data-[active]:border-dashed data-[active]:border-red-600",
+].join(" ");
 
 const NavbarLink = React.forwardRef<
   React.ComponentRef<typeof NavigationMenuPrimitive.Link>,
@@ -257,7 +284,7 @@ const NavbarLink = React.forwardRef<
   <NavigationMenuPrimitive.Item>
     <NavigationMenuPrimitive.Link
       ref={ref}
-      className={cn(navLinkStyles(), className)}
+      className={cn(navLinkStyles, className)}
       {...props}
     >
       {children}
@@ -276,7 +303,7 @@ const NavbarDropdownTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Trigger
     ref={ref}
-    className={cn(navLinkStyles(), "group cursor-pointer", className)}
+    className={cn(navLinkStyles, "group cursor-pointer", className)}
     {...props}
   >
     {children}
@@ -410,8 +437,8 @@ const NavbarMobileToggle = React.forwardRef<
       className={cn(
         "inline-flex items-center justify-center",
         "h-10 w-10",
-        "border-2 border-dashed border-slate-300 rounded-none",
-        "hover:bg-slate-100 hover:border-slate-500",
+        "border-2 border-dashed rounded-none",
+        "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
         "transition-colors duration-150",
         "lg:hidden",
         "cursor-pointer",
@@ -452,7 +479,7 @@ const NavbarMobileMenu = React.forwardRef<
       {/* Backdrop */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-40 bg-black/40 transition-opacity duration-300",
+          "lg:hidden fixed inset-0 z-[998] bg-black/40 transition-opacity duration-300",
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
@@ -465,7 +492,7 @@ const NavbarMobileMenu = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "lg:hidden fixed top-0 right-0 z-50 h-full w-[70%] max-w-sm",
+          "lg:hidden fixed top-0 right-0 z-[999] h-full w-[75%] max-w-sm",
           "bg-white",
           "border-l-2 border-dashed border-slate-200",
           "shadow-none",
@@ -487,8 +514,8 @@ const NavbarMobileMenu = React.forwardRef<
             className={cn(
               "inline-flex items-center justify-center",
               "h-8 w-8",
-              "border-2 border-dashed border-slate-300 rounded-none",
-              "hover:bg-slate-100 hover:border-slate-500",
+              "border-2 border-dashed rounded-none",
+              "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
               "transition-colors duration-150",
               "cursor-pointer",
             )}
@@ -511,18 +538,24 @@ NavbarMobileMenu.displayName = "NavbarMobileMenu";
 /*  MOBILE LINK                                                        */
 /* ================================================================== */
 
+interface NavbarMobileLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  active?: boolean;
+}
+
 const NavbarMobileLink = React.forwardRef<
   HTMLAnchorElement,
-  React.AnchorHTMLAttributes<HTMLAnchorElement>
->(({ className, children, ...props }, ref) => (
+  NavbarMobileLinkProps
+>(({ className, active, children, ...props }, ref) => (
   <a
     ref={ref}
     className={cn(
       "block px-3 py-2.5",
       "text-sm font-medium",
       "border-2 border-dashed border-transparent",
-      "hover:bg-slate-50 hover:border-slate-200",
       "transition-colors duration-150",
+      active
+        ? "bg-red-50 text-red-700 border-red-200 font-semibold"
+        : "hover:bg-slate-50 hover:border-slate-200",
       className,
     )}
     {...props}
@@ -531,6 +564,130 @@ const NavbarMobileLink = React.forwardRef<
   </a>
 ));
 NavbarMobileLink.displayName = "NavbarMobileLink";
+
+/* ================================================================== */
+/*  MOBILE GROUP (labeled section in mobile menu)                      */
+/* ================================================================== */
+
+interface NavbarMobileGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+  label?: string;
+}
+
+const NavbarMobileGroup = React.forwardRef<
+  HTMLDivElement,
+  NavbarMobileGroupProps
+>(({ className, label, children, ...props }, ref) => (
+  <div ref={ref} className={cn("mb-3", className)} {...props}>
+    {label && (
+      <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">
+        {label}
+      </div>
+    )}
+    <div className="flex flex-col gap-0.5">{children}</div>
+  </div>
+));
+NavbarMobileGroup.displayName = "NavbarMobileGroup";
+
+/* ================================================================== */
+/*  MOBILE ACTIONS (CTA buttons in bottom of mobile menu)              */
+/* ================================================================== */
+
+const NavbarMobileActions = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "mt-auto px-4 py-4",
+      "border-t-2 border-dashed border-slate-200",
+      "flex flex-col gap-2",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </div>
+));
+NavbarMobileActions.displayName = "NavbarMobileActions";
+
+/* ================================================================== */
+/*  SEARCH                                                             */
+/* ================================================================== */
+
+interface NavbarSearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Callback when user submits search */
+  onSearch?: (value: string) => void;
+  /** Container class */
+  wrapperClassName?: string;
+}
+
+const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
+  (
+    {
+      className,
+      placeholder = "Search…",
+      onSearch,
+      wrapperClassName,
+      ...props
+    },
+    ref,
+  ) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter" && onSearch) {
+        onSearch(e.currentTarget.value);
+      }
+    };
+
+    return (
+      <div
+        className={cn("relative hidden sm:flex items-center", wrapperClassName)}
+      >
+        <Search className="absolute left-2.5 h-3.5 w-3.5 text-slate-400" />
+        <input
+          ref={ref}
+          type="text"
+          placeholder={placeholder}
+          onKeyDown={handleKeyDown}
+          className={cn(
+            "h-8 w-40 lg:w-52 pl-8 pr-3",
+            "text-xs font-medium",
+            "border-2 border-dashed rounded-none",
+            "bg-white border-slate-300 text-slate-950 placeholder:text-slate-400",
+            "transition-colors duration-150",
+            "focus:outline-none focus:ring-2 focus:ring-red-600",
+            className,
+          )}
+          {...props}
+        />
+      </div>
+    );
+  },
+);
+NavbarSearch.displayName = "NavbarSearch";
+
+/* ================================================================== */
+/*  DIVIDER (vertical separator)                                       */
+/* ================================================================== */
+
+const NavbarDivider = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    role="separator"
+    className={cn(
+      "hidden lg:block",
+      "h-6 w-px",
+      "border-l-2 border-dashed border-slate-200",
+      "mx-2",
+      className,
+    )}
+    {...props}
+  />
+));
+NavbarDivider.displayName = "NavbarDivider";
 
 /* ================================================================== */
 /*  EXPORTS                                                            */
@@ -551,5 +708,10 @@ export {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
+  NavbarMobileGroup,
+  NavbarMobileActions,
+  NavbarSearch,
+  NavbarDivider,
   navbarVariants,
+  useNavbar,
 };
