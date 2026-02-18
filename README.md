@@ -232,7 +232,6 @@ Composed groups of atoms that form discrete UI patterns.
 | **Dropdown Menu**   | Context / action menu with keyboard navigation.       |
 | **Form**            | react-hook-form integration with validation messages. |
 | **Hover Card**      | Popover card that appears on hover.                   |
-| **Mermaid**         | Render Mermaid diagrams inline.                       |
 | **Modal**           | Centered/drawer modal with size variants.             |
 | **Pagination**      | Page navigation with previous/next and ellipsis.      |
 | **Popover**         | Floating content anchored to a trigger.               |
@@ -535,7 +534,6 @@ poyraz-ui/
 | **Lucide React**             | Icon library                                   |
 | **Vaul**                     | Drawer component primitive                     |
 | **Sonner**                   | Toast notification system                      |
-| **Mermaid**                  | Diagram rendering                              |
 | **tsup**                     | Library bundler (ESM + CJS + DTS)              |
 
 ---

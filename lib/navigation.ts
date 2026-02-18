@@ -94,7 +94,6 @@ export const componentRegistry: ComponentGroup[] = [
       "Dropdown Menu",
       "Form",
       "Hover Card",
-      "Mermaid",
       "Modal",
       "Pagination",
       "Popover",
