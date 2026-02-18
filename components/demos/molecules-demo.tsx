@@ -8,6 +8,13 @@ import {
   LogOut,
   Keyboard,
   CalendarIcon,
+  FileText,
+  Calculator,
+  Smile,
+  PanelRight,
+  PanelLeft,
+  PanelTop,
+  PanelBottom,
 } from "lucide-react";
 import { toast } from "@/components/ui/molecules/sonner";
 
@@ -123,6 +130,28 @@ import {
   ModalTitle,
   ModalTrigger,
 } from "@/components/ui/molecules/modal";
+import {
+  CommandPalette,
+  CommandPaletteTrigger,
+  CommandPaletteContent,
+  CommandPaletteInput,
+  CommandPaletteList,
+  CommandPaletteGroup,
+  CommandPaletteItem,
+  CommandPaletteEmpty,
+  CommandPaletteSeparator,
+  CommandPaletteFooter,
+} from "@/components/ui/molecules/command-palette";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+  SheetClose,
+} from "@/components/ui/molecules/sheet";
 
 function CalendarDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -647,6 +676,195 @@ export function MoleculesDemo() {
               </ModalFooter>
             </ModalContent>
           </Modal>
+        </div>
+      </section>
+
+      {/* COMMAND PALETTE */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Command Palette</h3>
+        <p className="text-sm text-slate-500">
+          Cmd+K style global search / command overlay built on Radix Dialog.
+        </p>
+        <CommandPalette>
+          <CommandPaletteTrigger asChild>
+            <Button variant="outline" className="gap-2">
+              <span>Open Command Palette</span>
+              <kbd className="ml-1 text-[11px] font-mono tracking-wider text-slate-400 border border-dashed border-slate-200 px-1.5 py-0.5">
+                ⌘K
+              </kbd>
+            </Button>
+          </CommandPaletteTrigger>
+          <CommandPaletteContent>
+            <CommandPaletteInput placeholder="Type a command or search..." />
+            <CommandPaletteList>
+              <CommandPaletteGroup heading="Suggestions">
+                <CommandPaletteItem
+                  icon={<CalendarIcon className="h-4 w-4" />}
+                  shortcut="⌘D"
+                >
+                  Calendar
+                </CommandPaletteItem>
+                <CommandPaletteItem
+                  icon={<Smile className="h-4 w-4" />}
+                  shortcut="⌘E"
+                >
+                  Search Emoji
+                </CommandPaletteItem>
+                <CommandPaletteItem icon={<Calculator className="h-4 w-4" />}>
+                  Calculator
+                </CommandPaletteItem>
+              </CommandPaletteGroup>
+              <CommandPaletteSeparator />
+              <CommandPaletteGroup heading="Settings">
+                <CommandPaletteItem
+                  icon={<User className="h-4 w-4" />}
+                  shortcut="⌘P"
+                >
+                  Profile
+                </CommandPaletteItem>
+                <CommandPaletteItem
+                  icon={<CreditCard className="h-4 w-4" />}
+                  shortcut="⌘B"
+                >
+                  Billing
+                </CommandPaletteItem>
+                <CommandPaletteItem
+                  icon={<Settings className="h-4 w-4" />}
+                  shortcut="⌘S"
+                >
+                  Settings
+                </CommandPaletteItem>
+              </CommandPaletteGroup>
+            </CommandPaletteList>
+            <CommandPaletteFooter>
+              <span>Navigate with ↑↓</span>
+              <span>·</span>
+              <span>Select with ↵</span>
+              <span>·</span>
+              <span>Close with Esc</span>
+            </CommandPaletteFooter>
+          </CommandPaletteContent>
+        </CommandPalette>
+      </section>
+
+      {/* SHEET */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Sheet</h3>
+        <p className="text-sm text-slate-500">
+          Full-height side panel from left, right, top, or bottom. Built on
+          Radix Dialog.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                <PanelRight className="h-4 w-4" /> Right Sheet
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Edit Profile</SheetTitle>
+                <SheetDescription>
+                  Make changes to your profile. Click save when done.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="space-y-4 py-6">
+                <div className="space-y-2">
+                  <Label htmlFor="sheet-name">Name</Label>
+                  <Input id="sheet-name" placeholder="Your name" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="sheet-email">Email</Label>
+                  <Input
+                    id="sheet-email"
+                    type="email"
+                    placeholder="hello@example.com"
+                  />
+                </div>
+              </div>
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </SheetClose>
+                <Button>Save changes</Button>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                <PanelLeft className="h-4 w-4" /> Left Sheet
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetHeader>
+                <SheetTitle>Navigation</SheetTitle>
+                <SheetDescription>Browse pages and sections.</SheetDescription>
+              </SheetHeader>
+              <nav className="flex flex-col gap-2 py-6">
+                {["Dashboard", "Projects", "Team", "Settings", "Help"].map(
+                  (item) => (
+                    <button
+                      key={item}
+                      className="text-left px-3 py-2.5 text-sm border-2 border-dashed border-transparent hover:border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
+                    >
+                      {item}
+                    </button>
+                  ),
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                <PanelTop className="h-4 w-4" /> Top Sheet
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="top">
+              <SheetHeader>
+                <SheetTitle>Search</SheetTitle>
+                <SheetDescription>
+                  Find anything in your workspace.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="py-4">
+                <Input placeholder="Search..." className="max-w-md" />
+              </div>
+            </SheetContent>
+          </Sheet>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                <PanelBottom className="h-4 w-4" /> Bottom Sheet
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="bottom">
+              <SheetHeader>
+                <SheetTitle>Notifications</SheetTitle>
+                <SheetDescription>
+                  Your recent activity and alerts.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="py-4 space-y-3">
+                {[
+                  "New comment on your post",
+                  "System update complete",
+                  "Project invitation received",
+                ].map((msg) => (
+                  <div
+                    key={msg}
+                    className="text-sm p-3 border-2 border-dashed border-slate-200 bg-slate-50"
+                  >
+                    {msg}
+                  </div>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </section>
     </div>

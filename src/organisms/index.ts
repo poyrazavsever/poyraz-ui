@@ -43,3 +43,9 @@ export {
   FooterBottomLinks,
   footerVariants,
 } from "@/components/ui/organisms/footer";
+export {
+  AnnouncementBar,
+  announcementBarVariants,
+} from "@/components/ui/organisms/announcement-bar";
+export { DataTable } from "@/components/ui/organisms/data-table";
+export type { DataTableColumnDef } from "@/components/ui/organisms/data-table";

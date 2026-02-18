@@ -13,7 +13,7 @@ export default function OrganismsPage() {
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          3 components
+          5 components
         </Badge>
         <Typography variant="h1">Organisms</Typography>
         <Typography variant="lead">

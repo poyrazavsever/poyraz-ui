@@ -216,7 +216,7 @@ export default function Home() {
           <div className="text-center space-y-3">
             <Typography variant="h2">Component Library</Typography>
             <Typography variant="muted" className="max-w-xl mx-auto">
-              40+ components across three layers of abstraction.
+              45+ components across three layers of abstraction.
             </Typography>
           </div>
 
@@ -238,23 +238,29 @@ export default function Home() {
               },
               {
                 title: "Molecules",
-                count: 16,
+                count: 19,
                 href: "/docs/molecules",
                 items: [
                   "Accordion",
                   "Dialog",
-                  "Modal",
+                  "Command Palette",
+                  "Sheet",
                   "Drawer",
                   "DatePicker",
-                  "HoverCard",
                 ],
                 color: "border-slate-900",
               },
               {
                 title: "Organisms",
-                count: 3,
+                count: 5,
                 href: "/docs/organisms",
-                items: ["Navbar", "Sidebar", "Footer"],
+                items: [
+                  "Navbar",
+                  "Data Table",
+                  "Announcement Bar",
+                  "Sidebar",
+                  "Footer",
+                ],
                 color: "border-slate-400",
               },
             ].map((layer) => (

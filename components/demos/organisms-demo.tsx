@@ -19,9 +19,16 @@ import {
   Twitter,
   Linkedin,
   Mail,
+  Megaphone,
+  Sparkles,
+  AlertTriangle,
+  Info,
+  CheckCircle2,
+  Zap,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/atoms/button";
+import { Badge } from "@/components/ui/atoms/badge";
 import { Logo } from "@/components/ui/atoms/logo";
 import {
   Navbar,
@@ -62,6 +69,11 @@ import {
   FooterBottom,
   FooterBottomLinks,
 } from "@/components/ui/organisms/footer";
+import { AnnouncementBar } from "@/components/ui/organisms/announcement-bar";
+import {
+  DataTable,
+  type ColumnDef,
+} from "@/components/ui/organisms/data-table";
 
 /* ================================================================== */
 /*  NAVBAR DEMOS                                                       */
@@ -231,6 +243,238 @@ function DashboardSidebarContent({
         </SidebarMenu>
       </SidebarGroup>
     </>
+  );
+}
+
+/* ================================================================== */
+/*  DATA TABLE DEMO DATA & HELPERS                                     */
+/* ================================================================== */
+
+interface Employee {
+  id: string;
+  name: string;
+  role: string;
+  department: string;
+  status: "Active" | "On Leave" | "Remote";
+  salary: number;
+  startDate: string;
+}
+
+const sampleEmployees: Employee[] = [
+  {
+    id: "EMP001",
+    name: "Ali Yılmaz",
+    role: "Frontend Developer",
+    department: "Engineering",
+    status: "Active",
+    salary: 95000,
+    startDate: "2021-03-12",
+  },
+  {
+    id: "EMP002",
+    name: "Ayşe Kaya",
+    role: "Product Designer",
+    department: "Design",
+    status: "Active",
+    salary: 88000,
+    startDate: "2020-07-01",
+  },
+  {
+    id: "EMP003",
+    name: "Mehmet Demir",
+    role: "Backend Developer",
+    department: "Engineering",
+    status: "Remote",
+    salary: 102000,
+    startDate: "2019-11-15",
+  },
+  {
+    id: "EMP004",
+    name: "Zeynep Çelik",
+    role: "Product Manager",
+    department: "Product",
+    status: "Active",
+    salary: 115000,
+    startDate: "2018-01-20",
+  },
+  {
+    id: "EMP005",
+    name: "Burak Arslan",
+    role: "DevOps Engineer",
+    department: "Engineering",
+    status: "Active",
+    salary: 98000,
+    startDate: "2022-05-10",
+  },
+  {
+    id: "EMP006",
+    name: "Elif Korkmaz",
+    role: "UX Researcher",
+    department: "Design",
+    status: "On Leave",
+    salary: 82000,
+    startDate: "2021-09-01",
+  },
+  {
+    id: "EMP007",
+    name: "Can Özkan",
+    role: "Data Analyst",
+    department: "Analytics",
+    status: "Active",
+    salary: 78000,
+    startDate: "2023-01-15",
+  },
+  {
+    id: "EMP008",
+    name: "Deniz Aydın",
+    role: "QA Engineer",
+    department: "Engineering",
+    status: "Remote",
+    salary: 85000,
+    startDate: "2020-04-20",
+  },
+  {
+    id: "EMP009",
+    name: "Emre Şahin",
+    role: "Tech Lead",
+    department: "Engineering",
+    status: "Active",
+    salary: 130000,
+    startDate: "2017-08-01",
+  },
+  {
+    id: "EMP010",
+    name: "Fatma Erdoğan",
+    role: "Marketing Manager",
+    department: "Marketing",
+    status: "Active",
+    salary: 92000,
+    startDate: "2019-06-15",
+  },
+  {
+    id: "EMP011",
+    name: "Gökhan Yıldız",
+    role: "iOS Developer",
+    department: "Engineering",
+    status: "Active",
+    salary: 97000,
+    startDate: "2021-11-03",
+  },
+  {
+    id: "EMP012",
+    name: "Hülya Polat",
+    role: "Content Strategist",
+    department: "Marketing",
+    status: "On Leave",
+    salary: 76000,
+    startDate: "2022-02-14",
+  },
+  {
+    id: "EMP013",
+    name: "İbrahim Karaca",
+    role: "Security Engineer",
+    department: "Engineering",
+    status: "Remote",
+    salary: 112000,
+    startDate: "2020-10-22",
+  },
+  {
+    id: "EMP014",
+    name: "Jale Uçar",
+    role: "HR Manager",
+    department: "People",
+    status: "Active",
+    salary: 89000,
+    startDate: "2018-05-07",
+  },
+  {
+    id: "EMP015",
+    name: "Kemal Taş",
+    role: "Android Developer",
+    department: "Engineering",
+    status: "Active",
+    salary: 94000,
+    startDate: "2022-09-18",
+  },
+];
+
+const basicColumns: ColumnDef<Employee>[] = [
+  { id: "name", header: "Name", accessorKey: "name" },
+  { id: "role", header: "Role", accessorKey: "role" },
+  { id: "department", header: "Department", accessorKey: "department" },
+  {
+    id: "salary",
+    header: "Salary",
+    accessorKey: "salary",
+    cell: (row) => `$${row.salary.toLocaleString()}`,
+  },
+];
+
+const fullColumns: ColumnDef<Employee>[] = [
+  { id: "id", header: "ID", accessorKey: "id", className: "w-24" },
+  { id: "name", header: "Name", accessorKey: "name" },
+  { id: "role", header: "Role", accessorKey: "role" },
+  { id: "department", header: "Dept", accessorKey: "department" },
+  {
+    id: "status",
+    header: "Status",
+    accessorKey: "status",
+    cell: (row) => {
+      const color =
+        row.status === "Active"
+          ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+          : row.status === "Remote"
+            ? "bg-blue-100 text-blue-800 border-blue-300"
+            : "bg-amber-100 text-amber-800 border-amber-300";
+      return (
+        <span
+          className={`inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 border border-dashed ${color}`}
+        >
+          {row.status}
+        </span>
+      );
+    },
+  },
+  {
+    id: "salary",
+    header: "Salary",
+    accessorKey: "salary",
+    cell: (row) => (
+      <span className="font-mono text-xs">${row.salary.toLocaleString()}</span>
+    ),
+  },
+  {
+    id: "startDate",
+    header: "Start Date",
+    accessorKey: "startDate",
+    hidden: true,
+  },
+];
+
+function DataTableBasicDemo() {
+  return (
+    <DataTable
+      columns={basicColumns}
+      data={sampleEmployees}
+      pageSize={5}
+      getRowId={(row) => row.id}
+      searchPlaceholder="Search employees..."
+    />
+  );
+}
+
+function DataTableFullDemo() {
+  return (
+    <DataTable
+      columns={fullColumns}
+      data={sampleEmployees}
+      pageSize={5}
+      getRowId={(row) => row.id}
+      selectable
+      columnToggle
+      searchPlaceholder="Filter employees..."
+      caption="Employee directory"
+    />
   );
 }
 
@@ -627,6 +871,114 @@ export function OrganismsDemo() {
             </FooterBottom>
           </Footer>
         </div>
+      </section>
+
+      {/* ──────────────────────────────────────────── */}
+      {/* ANNOUNCEMENT BAR SECTION                     */}
+      {/* ──────────────────────────────────────────── */}
+
+      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+        Announcement Bar
+      </h2>
+
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Announcement Bar — Variants</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Dismissable notification strip with 6 variants, icons, and action
+          slots.
+        </p>
+        <div className="space-y-3">
+          <AnnouncementBar
+            variant="default"
+            icon={<Megaphone className="h-4 w-4" />}
+            action={
+              <a
+                href="#"
+                className="underline text-xs font-semibold hover:no-underline"
+              >
+                Learn more →
+              </a>
+            }
+          >
+            Poyraz UI v2.0 is now available — check the changelog!
+          </AnnouncementBar>
+
+          <AnnouncementBar variant="info" icon={<Info className="h-4 w-4" />}>
+            Scheduled maintenance on Dec 15 from 2:00–4:00 AM UTC.
+          </AnnouncementBar>
+
+          <AnnouncementBar
+            variant="success"
+            icon={<CheckCircle2 className="h-4 w-4" />}
+          >
+            All systems are operational. Status: online.
+          </AnnouncementBar>
+
+          <AnnouncementBar
+            variant="warning"
+            icon={<AlertTriangle className="h-4 w-4" />}
+          >
+            Your trial expires in 3 days. Upgrade now to keep access.
+          </AnnouncementBar>
+
+          <AnnouncementBar
+            variant="danger"
+            icon={<Zap className="h-4 w-4" />}
+            action={
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-6 text-[11px] border-white/40 text-white hover:bg-white/10"
+              >
+                Fix now
+              </Button>
+            }
+          >
+            Critical security update required — action needed.
+          </AnnouncementBar>
+
+          <AnnouncementBar
+            variant="branded"
+            icon={<Sparkles className="h-4 w-4" />}
+            action={
+              <a
+                href="#"
+                className="underline text-xs font-semibold hover:no-underline"
+              >
+                Get started →
+              </a>
+            }
+          >
+            🎉 Introducing Poyraz Design Tokens — consistent styling everywhere.
+          </AnnouncementBar>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────── */}
+      {/* DATA TABLE SECTION                           */}
+      {/* ──────────────────────────────────────────── */}
+
+      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+        Data Table
+      </h2>
+
+      {/* Basic Table */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Data Table — Basic</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Sortable columns, global search, and pagination out of the box.
+        </p>
+        <DataTableBasicDemo />
+      </section>
+
+      {/* Full-featured Table */}
+      <section className="space-y-4">
+        <h3 className="text-lg font-bold">Data Table — Full Featured</h3>
+        <p className="text-sm text-slate-500 mb-4">
+          Row selection, column visibility toggle, custom cell renderers, and
+          all features enabled.
+        </p>
+        <DataTableFullDemo />
       </section>
     </div>
   );
