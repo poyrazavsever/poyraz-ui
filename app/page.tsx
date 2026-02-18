@@ -1,107 +1,411 @@
 "use client";
-import { motion } from "framer-motion";
-import { Icon } from "@iconify/react";
-import { PrimaryButton, OutlineButton } from "@/components/button/Button";
+
+import Link from "next/link";
+import { useState } from "react";
+import {
+  ArrowRight,
+  Github,
+  Copy,
+  Check,
+  Layers,
+  Paintbrush,
+  Zap,
+  Component,
+  BookOpen,
+} from "lucide-react";
+import { toast } from "@/components/ui/molecules/sonner";
+
+import { Button } from "@/components/ui/atoms/button";
+import { Typography } from "@/components/ui/atoms/typography";
+import { Badge } from "@/components/ui/atoms/badge";
+import { Separator } from "@/components/ui/atoms/separator";
+import { Logo } from "@/components/ui/atoms/logo";
+import { PatternDots } from "@/components/ui/atoms/bg-pattern";
+import {
+  Navbar,
+  NavbarMain,
+  NavbarBrand,
+  NavbarLinks,
+  NavbarLink,
+  NavbarActions,
+  NavbarMobileToggle,
+  NavbarMobileMenu,
+  NavbarMobileLink,
+} from "@/components/ui/organisms/navbar";
+import {
+  Footer,
+  FooterBottom,
+  FooterBrand,
+  FooterGrid,
+  FooterHeading,
+  FooterLink,
+  FooterSection,
+  FooterSocialLink,
+  FooterSocials,
+} from "@/components/ui/organisms/footer";
+
+function CopyInstallCommand() {
+  const [copied, setCopied] = useState(false);
+  const command = "pnpm add poyraz-ui";
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(command);
+    setCopied(true);
+    toast.success("Copied to clipboard!", {
+      description: command,
+    });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="mt-8 p-4 bg-slate-950 text-slate-50 border-2 border-dashed border-red-600 font-mono text-sm md:text-base flex items-center gap-4 w-full max-w-md">
+      <span className="text-red-500">$</span>
+      <span>{command}</span>
+      <button
+        onClick={handleCopy}
+        className="ml-auto text-slate-500 hover:text-white cursor-pointer transition-colors"
+        aria-label="Copy install command"
+      >
+        {copied ? (
+          <Check className="h-4 w-4 text-green-400" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+      </button>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex flex-col justify-start items-start p-6 sm:p-10 gap-12"
-    >
-      <div className="flex flex-col items-start text-left gap-8 max-w-2xl">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-2xl bg-(--color-accent)/10 border border-(--color-accent)/30 flex items-center justify-center">
-            <Icon
-              icon="solar:code-square-bold-duotone"
-              className="text-3xl text-(--color-accent)"
+    <div className="min-h-screen flex flex-col bg-white">
+      {/* ─── NAVBAR ─────────────────────────────────────────── */}
+      <Navbar variant="default" sticky>
+        <NavbarMain>
+          <NavbarBrand href="/">
+            <Logo width={32} height={32} />
+          </NavbarBrand>
+
+          <NavbarLinks>
+            <NavbarLink href="/docs">Docs</NavbarLink>
+            <NavbarLink href="/docs/atoms">Components</NavbarLink>
+            <NavbarLink
+              href="https://github.com/poyrazavsever/poyraz-ui"
+              target="_blank"
+            >
+              GitHub
+            </NavbarLink>
+          </NavbarLinks>
+
+          <NavbarActions>
+            <Link href="https://poyrazavsever.com" target="_blank">
+              <Button size="sm">Return Back</Button>
+            </Link>
+          </NavbarActions>
+
+          <NavbarMobileToggle />
+        </NavbarMain>
+
+        <NavbarMobileMenu>
+          <NavbarMobileLink href="/docs">Documentation</NavbarMobileLink>
+          <NavbarMobileLink href="/docs/atoms">Components</NavbarMobileLink>
+          <NavbarMobileLink href="https://poyrazavsever.com">
+            Return Back
+          </NavbarMobileLink>
+        </NavbarMobileMenu>
+      </Navbar>
+
+      {/* ─── HERO ───────────────────────────────────────────── */}
+      <section className="relative px-6 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center overflow-hidden">
+        <PatternDots
+          overlay
+          size={28}
+          opacity={0.12}
+          color="#334155"
+          className="w-full h-full"
+        />
+        <div className="relative z-10 max-w-5xl mx-auto space-y-8 flex flex-col items-center">
+          <Badge
+            variant="outline"
+            className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest"
+          >
+            v0.1.0 — Open Source
+          </Badge>
+
+          <Typography variant="h1">
+            <span className="font-secondary text-red-600">UI Kit</span> for
+            Poyraz
+          </Typography>
+
+          <Typography variant="lead" className="max-w-2xl">
+            Brutalist design system for modern web applications.
+            <span className="block mt-2 font-medium text-slate-900">
+              No rounding. No shadows. Just bold, functional design.
+            </span>
+          </Typography>
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full justify-center">
+            <Link href="/docs">
+              <Button size="lg" className="h-14 px-8 text-lg w-full sm:w-auto">
+                Get Started <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link
+              href="https://github.com/poyrazavsever/poyraz-ui"
+              target="_blank"
+            >
+              <Button
+                variant="outline"
+                size="lg"
+                className="h-14 px-8 text-lg bg-white w-full sm:w-auto"
+              >
+                <Github className="mr-2 h-5 w-5" /> GitHub
+              </Button>
+            </Link>
+          </div>
+
+          <CopyInstallCommand />
+        </div>
+      </section>
+
+      {/* ─── SHOWCASE ─────────────────────────────────────── */}
+      <section className="w-full overflow-hidden mt-36">
+        <div className="flex items-end justify-center">
+          {/* Image 2 — person with success alert (left) */}
+          <div className="shrink-0">
+            <img
+              src="/images/image 2.png"
+              alt="Poyraz UI success alert showcase"
+              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom"
+              draggable={false}
             />
           </div>
-          <div>
-            <h1 className="text-2xl font-bold text-(--color-text)">
-              Poyraz UI Kit
-            </h1>
-            <p className="text-xs text-(--color-muted)">Design System</p>
+
+          {/* Image 1 — person with button (right, cut off) + red box */}
+          <div className="flex items-end flex-1 min-w-0">
+            <img
+              src="/images/image 1.png"
+              alt="Poyraz UI button showcase"
+              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom shrink-0"
+              draggable={false}
+            />
+            {/* Red-600 box — starts at 0 from image 1's cut edge */}
+            <div className="self-stretch bg-red-600 flex-1 flex items-center overflow-hidden px-6 sm:px-10">
+              <p className="text-red-200 font-secondary text-lg sm:text-2xl md:text-3xl lg:text-4xl  tracking-wide leading-tight whitespace-nowrap">
+                I love building things...
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Hero Description */}
-        <p className="text-(--color-muted) max-w-xl leading-relaxed">
-          A collection of beautiful, reusable UI components and design patterns
-          from{" "}
-          <a
-            href="https://poyrazavsever.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-(--color-accent) hover:underline"
-          >
-            poyrazavsever.com
-          </a>{" "}
-          portfolio. Built with React, TypeScript, and Tailwind CSS.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          <PrimaryButton href="/buttons">Browse Components</PrimaryButton>
-          <OutlineButton
-            href="https://github.com/poyrazavsever/poyraz-ui"
-            target="_blank"
-          >
-            View on GitHub
-          </OutlineButton>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 w-full">
-          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
-            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
-              <Icon
-                icon="solar:palette-bold-duotone"
-                className="w-6 h-6 text-(--color-accent)"
-              />
-            </div>
-            <h3 className="font-semibold text-(--color-text) mb-2">
-              38+ Themes
-            </h3>
-            <p className="text-sm text-(--color-muted)">
-              Beautiful color palettes with light and dark modes
-            </p>
+      {/* ─── DESIGN PRINCIPLES ──────────────────────────────── */}
+      <section className="px-6 py-20 bg-slate-50/80 border-y-2 border-dashed border-slate-200">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+            <Typography variant="h2">Design Principles</Typography>
+            <Typography variant="muted" className="max-w-xl mx-auto">
+              Every component follows a strict brutalist design language.
+            </Typography>
           </div>
 
-          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
-            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
-              <Icon
-                icon="solar:code-bold-duotone"
-                className="w-6 h-6 text-(--color-accent)"
-              />
-            </div>
-            <h3 className="font-semibold text-(--color-text) mb-2">
-              Production Ready
-            </h3>
-            <p className="text-sm text-(--color-muted)">
-              Battle-tested components from real portfolio projects
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start text-left p-5 border border-(--color-border) rounded-2xl bg-(--color-surface)/50 hover:bg-(--color-surface) transition-colors">
-            <div className="w-12 h-12 bg-(--color-accent-soft) rounded-xl flex items-center justify-center mb-4">
-              <Icon
-                icon="solar:copy-bold-duotone"
-                className="w-6 h-6 text-(--color-accent)"
-              />
-            </div>
-            <h3 className="font-semibold text-(--color-text) mb-2">
-              Copy & Paste
-            </h3>
-            <p className="text-sm text-(--color-muted)">
-              Easy to use components with TypeScript support
-            </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <Paintbrush className="h-6 w-6" />,
+                title: "Dashed Borders",
+                desc: "Border-dashed is the DNA. Every interactive element uses dashed borders.",
+              },
+              {
+                icon: <Component className="h-6 w-6" />,
+                title: "No Rounding",
+                desc: "rounded-none everywhere. Sharp, intentional corners for a raw aesthetic.",
+              },
+              {
+                icon: <Zap className="h-6 w-6" />,
+                title: "No Shadows",
+                desc: "shadow-none by default. Red offset boxes replace traditional elevation.",
+              },
+              {
+                icon: <Layers className="h-6 w-6" />,
+                title: "High Contrast",
+                desc: "Red-600 primary with slate palette. Bold typography and clear hierarchy.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="p-6 bg-white border-2 border-dashed border-slate-200 space-y-3 hover:border-slate-900 transition-colors"
+              >
+                <div className="text-red-600">{item.icon}</div>
+                <h3 className="font-bold text-sm uppercase tracking-wide">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </motion.div>
+      </section>
+
+      {/* ─── COMPONENT OVERVIEW ─────────────────────────────── */}
+      <section className="px-6 py-20">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+            <Typography variant="h2">Component Library</Typography>
+            <Typography variant="muted" className="max-w-xl mx-auto">
+              45+ components across three layers of abstraction.
+            </Typography>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Atoms",
+                count: 19,
+                href: "/docs/atoms",
+                items: [
+                  "Button",
+                  "Input",
+                  "Badge",
+                  "Avatar",
+                  "Card",
+                  "Form Fields",
+                ],
+                color: "border-red-600",
+              },
+              {
+                title: "Molecules",
+                count: 19,
+                href: "/docs/molecules",
+                items: [
+                  "Accordion",
+                  "Dialog",
+                  "Command Palette",
+                  "Sheet",
+                  "Drawer",
+                  "DatePicker",
+                ],
+                color: "border-slate-900",
+              },
+              {
+                title: "Organisms",
+                count: 5,
+                href: "/docs/organisms",
+                items: [
+                  "Navbar",
+                  "Data Table",
+                  "Announcement Bar",
+                  "Sidebar",
+                  "Footer",
+                ],
+                color: "border-slate-400",
+              },
+            ].map((layer) => (
+              <Link key={layer.title} href={layer.href}>
+                <div
+                  className={`p-6 bg-white border-2 border-dashed ${layer.color} space-y-4 hover:bg-slate-50 transition-colors h-full`}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-black uppercase tracking-wide">
+                      {layer.title}
+                    </h3>
+                    <Badge variant="outline" className="text-xs">
+                      {layer.count}
+                    </Badge>
+                  </div>
+                  <Separator />
+                  <ul className="space-y-1.5">
+                    {layer.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-sm text-slate-600 flex items-center gap-2"
+                      >
+                        <span className="w-1.5 h-1.5 bg-red-600 inline-block" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-2 text-xs font-semibold text-red-600 uppercase tracking-wide flex items-center gap-1">
+                    Explore <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ────────────────────────────────────────────── */}
+      <section className="px-6 py-20 bg-slate-50/80 border-y-2 border-dashed border-slate-200">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
+          <Typography variant="h2">Ready to Build?</Typography>
+          <Typography variant="muted" className="max-w-lg mx-auto">
+            Start using Poyraz UI in your projects today. Free, open-source, and
+            built with care.
+          </Typography>
+          <div className="flex justify-center gap-4 pt-4">
+            <Link href="/docs">
+              <Button size="lg">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Read the Docs
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ─────────────────────────────────────────── */}
+      <Footer
+        variant="branded"
+        className="mt-auto border-t-2 border-dashed border-slate-200"
+      >
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <FooterBrand>
+            <div className="flex items-center gap-3">
+              <Logo width={40} height={40} />
+              <span className="text-xl font-bold tracking-tight">
+                Poyraz UI
+              </span>
+            </div>
+            <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
+              An open-source brutalist UI component library for modern web
+              applications.
+            </p>
+          </FooterBrand>
+          <FooterGrid className="flex-1 max-w-lg grid-cols-2">
+            <FooterSection>
+              <FooterHeading>Documentation</FooterHeading>
+              <FooterLink href="/docs">Getting Started</FooterLink>
+              <FooterLink href="/docs/installation">Installation</FooterLink>
+              <FooterLink href="/docs/atoms">Components</FooterLink>
+            </FooterSection>
+            <FooterSection>
+              <FooterHeading>Links</FooterHeading>
+              <FooterLink href="https://github.com/poyrazavsever/poyraz-ui">
+                GitHub
+              </FooterLink>
+              <FooterLink href="https://npmjs.com/package/poyraz-ui">
+                npm
+              </FooterLink>
+            </FooterSection>
+          </FooterGrid>
+        </div>
+        <FooterBottom>
+          <span>
+            &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
+          </span>
+          <FooterSocials>
+            <FooterSocialLink
+              href="https://github.com/poyrazavsever"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </FooterSocialLink>
+          </FooterSocials>
+        </FooterBottom>
+      </Footer>
+    </div>
   );
 }
