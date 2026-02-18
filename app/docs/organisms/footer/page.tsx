@@ -13,7 +13,7 @@ import {
   FooterBottomLinks,
   FooterNewsletter,
   FooterDivider,
-} from "@/components/ui/organisms/footer";
+} from "poyraz-ui/organisms";
 import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 

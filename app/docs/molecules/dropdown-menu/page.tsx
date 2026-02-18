@@ -1,7 +1,7 @@
 "use client";
 
 import { User, CreditCard, Settings, Keyboard, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/atoms/button";
+import { Button } from "poyraz-ui/atoms";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/molecules/dropdown-menu";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function DropdownMenuPage() {

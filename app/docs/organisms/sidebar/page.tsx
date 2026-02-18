@@ -15,7 +15,7 @@ import {
   SidebarSubMenu,
   SidebarSubMenuItem,
   SidebarUserProfile,
-} from "@/components/ui/organisms/sidebar";
+} from "poyraz-ui/organisms";
 import {
   Home,
   Settings,

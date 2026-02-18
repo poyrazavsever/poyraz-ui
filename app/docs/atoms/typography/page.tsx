@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@/components/ui/atoms/typography";
+import { Typography } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function TypographyPage() {

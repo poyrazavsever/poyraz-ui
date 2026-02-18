@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Label } from "@/components/ui/atoms/label";
+import { Label } from "poyraz-ui/atoms";
 import {
   NumberInput,
   SearchInput,
   PhoneInput,
   PasswordInput,
   UrlInput,
-} from "@/components/ui/atoms/form-fields";
+} from "poyraz-ui/atoms";
 import {
   ComponentPage,
   DemoSection,

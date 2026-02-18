@@ -41,6 +41,8 @@ declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttri
 interface LogoProps extends React.HTMLAttributes<HTMLElement> {
     /** Link destination. Pass undefined or "" to render without a link wrapper. */
     href?: string;
+    /** Image source URL */
+    src?: string;
     /** Image width in pixels */
     width?: number;
     /** Image height in pixels */
@@ -48,7 +50,7 @@ interface LogoProps extends React.HTMLAttributes<HTMLElement> {
     /** Alt text for the logo image */
     alt?: string;
 }
-declare function Logo({ className, href, width, height, alt, ...props }: LogoProps): react_jsx_runtime.JSX.Element;
+declare function Logo({ className, href, src, width, height, alt, ...props }: LogoProps): react_jsx_runtime.JSX.Element;
 declare namespace Logo {
     var displayName: string;
 }

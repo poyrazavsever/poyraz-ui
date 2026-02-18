@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Agbalumo } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/molecules/sonner";
+import { Toaster } from "poyraz-ui/molecules";
 
 const inter = Inter({
   variable: "--font-sans",

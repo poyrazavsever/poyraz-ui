@@ -4,7 +4,7 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-} from "@/components/ui/atoms/avatar";
+} from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function AvatarPage() {

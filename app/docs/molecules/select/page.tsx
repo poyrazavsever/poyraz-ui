@@ -8,7 +8,7 @@ import {
   SelectValue,
   SelectGroup,
   SelectLabel,
-} from "@/components/ui/molecules/select";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function SelectPage() {

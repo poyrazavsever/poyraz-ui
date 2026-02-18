@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { DatePicker } from "@/components/ui/molecules/date-picker";
-import { Label } from "@/components/ui/atoms/label";
+import { DatePicker } from "poyraz-ui/molecules";
+import { Label } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function DatePickerDemo() {

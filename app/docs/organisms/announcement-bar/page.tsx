@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AnnouncementBar } from "@/components/ui/organisms/announcement-bar";
-import { Button } from "@/components/ui/atoms/button";
+import { AnnouncementBar } from "poyraz-ui/organisms";
+import { Button } from "poyraz-ui/atoms";
 import { Megaphone, Sparkles, AlertTriangle } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 

@@ -27,9 +27,9 @@ import {
   Zap,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/atoms/button";
-import { Badge } from "@/components/ui/atoms/badge";
-import { Logo } from "@/components/ui/atoms/logo";
+import { Button } from "poyraz-ui/atoms";
+import { Badge } from "poyraz-ui/atoms";
+import { Logo } from "poyraz-ui/atoms";
 import {
   Navbar,
   NavbarTopBar,
@@ -44,7 +44,7 @@ import {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
-} from "@/components/ui/organisms/navbar";
+} from "poyraz-ui/organisms";
 import {
   Sidebar,
   SidebarHeader,
@@ -56,7 +56,7 @@ import {
   SidebarSeparator,
   SidebarFooter,
   SidebarTrigger,
-} from "@/components/ui/organisms/sidebar";
+} from "poyraz-ui/organisms";
 import {
   Footer,
   FooterGrid,
@@ -68,12 +68,12 @@ import {
   FooterSocialLink,
   FooterBottom,
   FooterBottomLinks,
-} from "@/components/ui/organisms/footer";
-import { AnnouncementBar } from "@/components/ui/organisms/announcement-bar";
+} from "poyraz-ui/organisms";
+import { AnnouncementBar } from "poyraz-ui/organisms";
 import {
   DataTable,
   type ColumnDef,
-} from "@/components/ui/organisms/data-table";
+} from "poyraz-ui/organisms";
 
 /* ================================================================== */
 /*  NAVBAR DEMOS                                                       */

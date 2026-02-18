@@ -16,33 +16,33 @@ import {
   PanelTop,
   PanelBottom,
 } from "lucide-react";
-import { toast } from "@/components/ui/molecules/sonner";
+import { toast } from "poyraz-ui/molecules";
 
-import { Button } from "@/components/ui/atoms/button";
-import { Input } from "@/components/ui/atoms/input";
-import { Label } from "@/components/ui/atoms/label";
+import { Button } from "poyraz-ui/atoms";
+import { Input } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-} from "@/components/ui/atoms/avatar";
+} from "poyraz-ui/atoms";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@/components/ui/molecules/alert";
+} from "poyraz-ui/molecules";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/molecules/accordion";
+} from "poyraz-ui/molecules";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/molecules/tabs";
+} from "poyraz-ui/molecules";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -50,7 +50,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/molecules/breadcrumb";
+} from "poyraz-ui/molecules";
 import {
   Pagination,
   PaginationContent,
@@ -59,7 +59,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/molecules/pagination";
+} from "poyraz-ui/molecules";
 import {
   Dialog,
   DialogContent,
@@ -68,18 +68,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/molecules/dialog";
+} from "poyraz-ui/molecules";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/molecules/popover";
+} from "poyraz-ui/molecules";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/molecules/tooltip";
+} from "poyraz-ui/molecules";
 import {
   Select,
   SelectContent,
@@ -88,7 +88,7 @@ import {
   SelectValue,
   SelectGroup,
   SelectLabel,
-} from "@/components/ui/molecules/select";
+} from "poyraz-ui/molecules";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,14 +102,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/molecules/dropdown-menu";
+} from "poyraz-ui/molecules";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/molecules/hover-card";
-import { Calendar } from "@/components/ui/molecules/calendar";
-import { DatePicker } from "@/components/ui/molecules/date-picker";
+} from "poyraz-ui/molecules";
+import { Calendar } from "poyraz-ui/molecules";
+import { DatePicker } from "poyraz-ui/molecules";
 import {
   Drawer,
   DrawerClose,
@@ -119,7 +119,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/molecules/drawer";
+} from "poyraz-ui/molecules";
 import {
   Modal,
   ModalClose,
@@ -129,7 +129,7 @@ import {
   ModalHeader,
   ModalTitle,
   ModalTrigger,
-} from "@/components/ui/molecules/modal";
+} from "poyraz-ui/molecules";
 import {
   CommandPalette,
   CommandPaletteTrigger,
@@ -141,7 +141,7 @@ import {
   CommandPaletteEmpty,
   CommandPaletteSeparator,
   CommandPaletteFooter,
-} from "@/components/ui/molecules/command-palette";
+} from "poyraz-ui/molecules";
 import {
   Sheet,
   SheetTrigger,
@@ -151,7 +151,7 @@ import {
   SheetTitle,
   SheetDescription,
   SheetClose,
-} from "@/components/ui/molecules/sheet";
+} from "poyraz-ui/molecules";
 
 function CalendarDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());

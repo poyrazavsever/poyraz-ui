@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/atoms/skeleton";
+import { Skeleton } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function SkeletonPage() {

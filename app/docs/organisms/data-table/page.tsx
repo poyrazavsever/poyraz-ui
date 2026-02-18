@@ -3,8 +3,8 @@
 import {
   DataTable,
   type DataTableColumnDef,
-} from "@/components/ui/organisms/data-table";
-import { Badge } from "@/components/ui/atoms/badge";
+} from "poyraz-ui/organisms";
+import { Badge } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 /* ── Sample data ─────────────────────────────────────────────────── */

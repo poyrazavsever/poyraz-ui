@@ -1,7 +1,7 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "@/components/ui/atoms/radio-group";
-import { Label } from "@/components/ui/atoms/label";
+import { RadioGroup, RadioGroupItem } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 
 export function RadioDemo() {
   return (

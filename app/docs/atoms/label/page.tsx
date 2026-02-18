@@ -1,7 +1,7 @@
 "use client";
 
-import { Label } from "@/components/ui/atoms/label";
-import { Input } from "@/components/ui/atoms/input";
+import { Label } from "poyraz-ui/atoms";
+import { Input } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function LabelPage() {

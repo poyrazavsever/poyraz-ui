@@ -8,7 +8,7 @@ import {
   CreditCard,
   Settings,
 } from "lucide-react";
-import { Button } from "@/components/ui/atoms/button";
+import { Button } from "poyraz-ui/atoms";
 import {
   CommandPalette,
   CommandPaletteTrigger,
@@ -19,7 +19,7 @@ import {
   CommandPaletteItem,
   CommandPaletteSeparator,
   CommandPaletteFooter,
-} from "@/components/ui/molecules/command-palette";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function CommandPalettePage() {

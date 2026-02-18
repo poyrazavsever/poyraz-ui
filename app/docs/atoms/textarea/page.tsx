@@ -1,7 +1,7 @@
 "use client";
 
-import { Textarea } from "@/components/ui/atoms/textarea";
-import { Label } from "@/components/ui/atoms/label";
+import { Textarea } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function TextareaPage() {

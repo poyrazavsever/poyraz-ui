@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { ArrowRight, Layers, Paintbrush, Zap } from "lucide-react";
 
-import { Typography } from "@/components/ui/atoms/typography";
-import { Separator } from "@/components/ui/atoms/separator";
-import { Button } from "@/components/ui/atoms/button";
-import { Badge } from "@/components/ui/atoms/badge";
+import { Typography } from "poyraz-ui/atoms";
+import { Separator } from "poyraz-ui/atoms";
+import { Button } from "poyraz-ui/atoms";
+import { Badge } from "poyraz-ui/atoms";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/atoms/card";
+} from "poyraz-ui/atoms";
 
 export default function DocsIntroPage() {
   return (

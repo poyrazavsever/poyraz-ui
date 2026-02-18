@@ -1,6 +1,6 @@
 "use client";
 
-import { Separator } from "@/components/ui/atoms/separator";
+import { Separator } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function SeparatorPage() {

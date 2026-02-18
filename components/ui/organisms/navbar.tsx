@@ -197,8 +197,6 @@ NavbarMain.displayName = "NavbarMain";
 /*  BRAND                                                              */
 /* ================================================================== */
 
-import Link from "next/link";
-
 interface NavbarBrandProps extends React.HTMLAttributes<HTMLDivElement> {
   href?: string;
 }
@@ -207,13 +205,13 @@ const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
   ({ className, children, href, ...props }, ref) => {
     if (href) {
       return (
-        <Link
+        <a
           href={href}
           className={cn("flex items-center gap-2", className)}
           {...(props as any)}
         >
           {children}
-        </Link>
+        </a>
       );
     }
 

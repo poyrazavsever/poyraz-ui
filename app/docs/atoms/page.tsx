@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { Typography } from "@/components/ui/atoms/typography";
-import { Separator } from "@/components/ui/atoms/separator";
-import { Badge } from "@/components/ui/atoms/badge";
-import { Button } from "@/components/ui/atoms/button";
+import { Typography } from "poyraz-ui/atoms";
+import { Separator } from "poyraz-ui/atoms";
+import { Badge } from "poyraz-ui/atoms";
+import { Button } from "poyraz-ui/atoms";
 
 const atoms = [
   {

@@ -1,7 +1,7 @@
 "use client";
 
-import { Switch } from "@/components/ui/atoms/switch";
-import { Label } from "@/components/ui/atoms/label";
+import { Switch } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 
 export function SwitchDemo() {
   return (

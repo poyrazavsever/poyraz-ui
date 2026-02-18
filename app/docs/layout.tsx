@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FileText, Home, Download, ChevronDown, Github } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
-import { Logo } from "@/components/ui/atoms/logo";
-import { Button } from "@/components/ui/atoms/button";
+import { cn } from "poyraz-ui";
+import { Logo } from "poyraz-ui/atoms";
+import { Button } from "poyraz-ui/atoms";
 import {
   Navbar,
   NavbarBrand,
@@ -18,7 +18,7 @@ import {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
-} from "@/components/ui/organisms/navbar";
+} from "poyraz-ui/organisms";
 import {
   Sidebar,
   SidebarContent,
@@ -27,13 +27,13 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-} from "@/components/ui/organisms/sidebar";
+} from "poyraz-ui/organisms";
 import {
   Footer,
   FooterBottom,
   FooterSocials,
   FooterSocialLink,
-} from "@/components/ui/organisms/footer";
+} from "poyraz-ui/organisms";
 import {
   componentRegistry,
   docsMobileNav,

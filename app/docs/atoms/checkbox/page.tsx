@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/atoms/checkbox";
-import { Label } from "@/components/ui/atoms/label";
+import { Checkbox } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function CheckboxPage() {

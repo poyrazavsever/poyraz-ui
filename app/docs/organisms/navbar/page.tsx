@@ -18,9 +18,9 @@ import {
   NavbarMobileActions,
   NavbarSearch,
   NavbarDivider,
-} from "@/components/ui/organisms/navbar";
-import { Button } from "@/components/ui/atoms/button";
-import { Logo } from "@/components/ui/atoms/logo";
+} from "poyraz-ui/organisms";
+import { Button } from "poyraz-ui/atoms";
+import { Logo } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function NavbarPage() {

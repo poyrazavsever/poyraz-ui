@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ScrollArea } from "@/components/ui/atoms/scroll-area";
+import { ScrollArea } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function VerticalDemo() {

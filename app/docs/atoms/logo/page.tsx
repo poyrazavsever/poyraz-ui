@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "@/components/ui/atoms/logo";
+import { Logo } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function LogoPage() {

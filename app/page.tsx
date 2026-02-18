@@ -13,14 +13,14 @@ import {
   Component,
   BookOpen,
 } from "lucide-react";
-import { toast } from "@/components/ui/molecules/sonner";
+import { toast } from "poyraz-ui/molecules";
 
-import { Button } from "@/components/ui/atoms/button";
-import { Typography } from "@/components/ui/atoms/typography";
-import { Badge } from "@/components/ui/atoms/badge";
-import { Separator } from "@/components/ui/atoms/separator";
-import { Logo } from "@/components/ui/atoms/logo";
-import { PatternDots } from "@/components/ui/atoms/bg-pattern";
+import { Button } from "poyraz-ui/atoms";
+import { Typography } from "poyraz-ui/atoms";
+import { Badge } from "poyraz-ui/atoms";
+import { Separator } from "poyraz-ui/atoms";
+import { Logo } from "poyraz-ui/atoms";
+import { PatternDots } from "poyraz-ui/atoms";
 import {
   Navbar,
   NavbarMain,
@@ -31,7 +31,7 @@ import {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
-} from "@/components/ui/organisms/navbar";
+} from "poyraz-ui/organisms";
 import {
   Footer,
   FooterBottom,
@@ -42,7 +42,7 @@ import {
   FooterSection,
   FooterSocialLink,
   FooterSocials,
-} from "@/components/ui/organisms/footer";
+} from "poyraz-ui/organisms";
 import { mainNav, mobileNav, footerNav, socialLinks } from "@/lib/navigation";
 
 function CopyInstallCommand() {

@@ -1,17 +1,17 @@
 "use client";
 
 import { CalendarIcon } from "lucide-react";
-import { Button } from "@/components/ui/atoms/button";
+import { Button } from "poyraz-ui/atoms";
 import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-} from "@/components/ui/atoms/avatar";
+} from "poyraz-ui/atoms";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/molecules/hover-card";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function HoverCardPage() {

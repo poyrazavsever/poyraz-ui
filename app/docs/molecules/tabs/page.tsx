@@ -5,10 +5,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/molecules/tabs";
-import { Button } from "@/components/ui/atoms/button";
-import { Input } from "@/components/ui/atoms/input";
-import { Label } from "@/components/ui/atoms/label";
+} from "poyraz-ui/molecules";
+import { Button } from "poyraz-ui/atoms";
+import { Input } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function TabsPage() {

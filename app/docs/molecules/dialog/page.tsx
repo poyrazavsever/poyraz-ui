@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/atoms/button";
-import { Input } from "@/components/ui/atoms/input";
-import { Label } from "@/components/ui/atoms/label";
+import { Button } from "poyraz-ui/atoms";
+import { Input } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/molecules/dialog";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function DialogPage() {

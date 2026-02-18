@@ -11,7 +11,7 @@ import {
   PatternZigzag,
   PatternDashedGrid,
   PatternRadial,
-} from "@/components/ui/atoms/bg-pattern";
+} from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function PatternPreview({

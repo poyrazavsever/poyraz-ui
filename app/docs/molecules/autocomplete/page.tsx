@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   Autocomplete,
   type AutocompleteOption,
-} from "@/components/ui/molecules/autocomplete";
+} from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 const fruits: AutocompleteOption[] = [

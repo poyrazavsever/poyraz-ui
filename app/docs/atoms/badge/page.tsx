@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@/components/ui/atoms/badge";
+import { Badge } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function BadgePage() {

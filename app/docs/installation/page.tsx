@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Copy, Check } from "lucide-react";
-import { toast } from "@/components/ui/molecules/sonner";
+import { toast } from "poyraz-ui/molecules";
 
-import { Typography } from "@/components/ui/atoms/typography";
-import { Separator } from "@/components/ui/atoms/separator";
-import { Button } from "@/components/ui/atoms/button";
-import { Card, CardContent } from "@/components/ui/atoms/card";
+import { Typography } from "poyraz-ui/atoms";
+import { Separator } from "poyraz-ui/atoms";
+import { Button } from "poyraz-ui/atoms";
+import { Card, CardContent } from "poyraz-ui/atoms";
 
 function CopyBlock({
   code,

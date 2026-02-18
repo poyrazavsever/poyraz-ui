@@ -1,11 +1,11 @@
 import * as React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { cn } from "@/components/ui/atoms/typography";
 
 export interface LogoProps extends React.HTMLAttributes<HTMLElement> {
   /** Link destination. Pass undefined or "" to render without a link wrapper. */
   href?: string;
+  /** Image source URL */
+  src?: string;
   /** Image width in pixels */
   width?: number;
   /** Image height in pixels */
@@ -17,6 +17,7 @@ export interface LogoProps extends React.HTMLAttributes<HTMLElement> {
 function Logo({
   className,
   href,
+  src = "/logo/logo.jpeg",
   width = 48,
   height = 48,
   alt = "Poyraz Logo",
@@ -64,8 +65,8 @@ function Logo({
           "group-active:duration-75",
         )}
       >
-        <Image
-          src="/logo/logo.jpeg"
+        <img
+          src={src}
           alt={alt}
           width={width}
           height={height}
@@ -78,9 +79,9 @@ function Logo({
   // If href is provided, wrap in a Link; otherwise render a plain span
   if (href) {
     return (
-      <Link href={href} className={wrapperClassName} {...(props as any)}>
+      <a href={href} className={wrapperClassName} {...(props as any)}>
         {inner}
-      </Link>
+      </a>
     );
   }
 

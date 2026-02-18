@@ -7,9 +7,9 @@ import {
   CardTitle,
   CardDescription,
   CardFooter,
-} from "@/components/ui/atoms/card";
-import { Button } from "@/components/ui/atoms/button";
-import { Typography } from "@/components/ui/atoms/typography";
+} from "poyraz-ui/atoms";
+import { Button } from "poyraz-ui/atoms";
+import { Typography } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function CardPage() {
