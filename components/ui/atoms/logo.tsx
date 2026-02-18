@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/components/ui/atoms/typography";
 
-export interface LogoProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  /** Link destination (defaults to /) */
+export interface LogoProps extends React.HTMLAttributes<HTMLElement> {
+  /** Link destination. Pass undefined or "" to render without a link wrapper. */
   href?: string;
   /** Image width in pixels */
   width?: number;
@@ -16,24 +16,22 @@ export interface LogoProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 function Logo({
   className,
-  href = "/",
+  href,
   width = 48,
   height = 48,
   alt = "Poyraz Logo",
   ...props
 }: LogoProps) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        // Wrapper — relative for the red box offset
-        "group relative inline-block",
-        "transition-all duration-300 ease-out",
-        "cursor-pointer",
-        className,
-      )}
-      {...props}
-    >
+  const wrapperClassName = cn(
+    // Wrapper — relative for the red box offset
+    "group relative inline-block",
+    "transition-all duration-300 ease-out",
+    "cursor-pointer",
+    className,
+  );
+
+  const inner = (
+    <>
       {/* Red box behind — the brutalist "shadow" */}
       <div
         className={cn(
@@ -74,7 +72,22 @@ function Logo({
           className="object-cover rounded-none"
         />
       </div>
-    </Link>
+    </>
+  );
+
+  // If href is provided, wrap in a Link; otherwise render a plain span
+  if (href) {
+    return (
+      <Link href={href} className={wrapperClassName} {...(props as any)}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <span className={wrapperClassName} {...props}>
+      {inner}
+    </span>
   );
 }
 

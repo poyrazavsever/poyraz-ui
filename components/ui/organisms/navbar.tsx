@@ -15,12 +15,16 @@ interface NavbarContextValue {
   mobileOpen: boolean;
   setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
   variant: "default" | "minimal" | "transparent";
+  containerClassName: string;
 }
+
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 
 const NavbarContext = React.createContext<NavbarContextValue>({
   mobileOpen: false,
   setMobileOpen: () => {},
   variant: "default",
+  containerClassName: DEFAULT_CONTAINER,
 });
 
 const useNavbar = () => React.useContext(NavbarContext);
@@ -46,18 +50,32 @@ export interface NavbarProps
     VariantProps<typeof navbarVariants> {
   /** Show sticky behavior */
   sticky?: boolean;
+  /** Class name applied to inner containers for width constraint */
+  containerClassName?: string;
 }
 
 const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
   (
-    { className, variant = "default", sticky = false, children, ...props },
+    {
+      className,
+      variant = "default",
+      sticky = false,
+      containerClassName,
+      children,
+      ...props
+    },
     ref,
   ) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     return (
       <NavbarContext.Provider
-        value={{ mobileOpen, setMobileOpen, variant: variant ?? "default" }}
+        value={{
+          mobileOpen,
+          setMobileOpen,
+          variant: variant ?? "default",
+          containerClassName: containerClassName ?? DEFAULT_CONTAINER,
+        }}
       >
         <nav
           ref={ref}
@@ -83,22 +101,32 @@ Navbar.displayName = "Navbar";
 const NavbarTopBar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "w-full bg-red-600 text-white",
-      "border-b-2 border-dashed border-red-800",
-      "px-6 py-1.5",
-      "flex items-center justify-between",
-      "text-xs font-medium tracking-wide",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </div>
-));
+>(({ className, children, ...props }, ref) => {
+  const { containerClassName } = useNavbar();
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "w-full bg-red-600 text-white",
+        "border-b-2 border-dashed border-red-800",
+        "text-xs font-medium tracking-wide",
+        className,
+      )}
+      {...props}
+    >
+      <div
+        className={cn(
+          "px-6 py-1.5",
+          "flex items-center justify-between",
+          containerClassName,
+        )}
+      >
+        {children}
+      </div>
+    </div>
+  );
+});
 NavbarTopBar.displayName = "NavbarTopBar";
 
 /* ================================================================== */
@@ -109,21 +137,28 @@ const NavbarMain = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-  const { variant } = useNavbar();
+  const { variant, containerClassName } = useNavbar();
 
   return (
     <div
       ref={ref}
       className={cn(
-        "relative w-full px-6 py-3",
-        "flex items-center justify-between gap-6",
+        "relative w-full",
         "border-b-2 border-dashed",
         variant === "transparent" ? "border-white/30" : "border-slate-200",
         className,
       )}
       {...props}
     >
-      {children}
+      <div
+        className={cn(
+          "px-6 py-3",
+          "flex items-center justify-between gap-6",
+          containerClassName,
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 });
@@ -398,25 +433,76 @@ const NavbarMobileMenu = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-  const { mobileOpen } = useNavbar();
+  const { mobileOpen, setMobileOpen } = useNavbar();
 
-  if (!mobileOpen) return null;
+  // Prevent body scroll when menu is open
+  React.useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "lg:hidden",
-        "w-full bg-white",
-        "border-b-2 border-dashed border-slate-200",
-        "px-6 py-4",
-        "flex flex-col gap-1",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
+    <>
+      {/* Backdrop */}
+      <div
+        className={cn(
+          "lg:hidden fixed inset-0 z-40 bg-black/40 transition-opacity duration-300",
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
+        )}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden
+      />
+
+      {/* Slide-in panel */}
+      <div
+        ref={ref}
+        className={cn(
+          "lg:hidden fixed top-0 right-0 z-50 h-full w-[70%] max-w-sm",
+          "bg-white",
+          "border-l-2 border-dashed border-slate-200",
+          "shadow-none",
+          "transition-transform duration-300 ease-in-out",
+          mobileOpen ? "translate-x-0" : "translate-x-full",
+          className,
+        )}
+        {...props}
+      >
+        {/* Panel header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b-2 border-dashed border-slate-200">
+          <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+            Menu
+          </span>
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setMobileOpen(false)}
+            className={cn(
+              "inline-flex items-center justify-center",
+              "h-8 w-8",
+              "border-2 border-dashed border-slate-300 rounded-none",
+              "hover:bg-slate-100 hover:border-slate-500",
+              "transition-colors duration-150",
+              "cursor-pointer",
+            )}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Panel links */}
+        <nav className="flex flex-col gap-1 px-4 py-4 overflow-y-auto h-[calc(100%-57px)]">
+          {children}
+        </nav>
+      </div>
+    </>
   );
 });
 NavbarMobileMenu.displayName = "NavbarMobileMenu";

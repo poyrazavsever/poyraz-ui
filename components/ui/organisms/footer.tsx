@@ -7,6 +7,8 @@ import { cn } from "@/components/ui/atoms/typography";
 /*  FOOTER ROOT                                                        */
 /* ================================================================== */
 
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
+
 const footerVariants = cva(
   [
     "w-full",
@@ -16,9 +18,9 @@ const footerVariants = cva(
   {
     variants: {
       variant: {
-        full: "py-12 px-6 lg:px-12",
-        compact: "py-4 px-6",
-        branded: "py-10 px-6 lg:px-12",
+        full: "py-12",
+        compact: "py-4",
+        branded: "py-10",
       },
     },
     defaultVariants: { variant: "full" },
@@ -28,16 +30,24 @@ const footerVariants = cva(
 export interface FooterProps
   extends
     React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof footerVariants> {}
+    VariantProps<typeof footerVariants> {
+  /** Class name applied to inner container for width constraint */
+  containerClassName?: string;
+}
 
 const Footer = React.forwardRef<HTMLElement, FooterProps>(
-  ({ className, variant = "full", children, ...props }, ref) => (
+  (
+    { className, variant = "full", containerClassName, children, ...props },
+    ref,
+  ) => (
     <footer
       ref={ref}
       className={cn(footerVariants({ variant }), className)}
       {...props}
     >
-      {children}
+      <div className={cn("px-6", containerClassName ?? DEFAULT_CONTAINER)}>
+        {children}
+      </div>
     </footer>
   ),
 );
