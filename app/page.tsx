@@ -169,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* ─── SHOWCASE ─────────────────────────────────────── */}
-      <section className="w-full overflow-hidden mt-16">
+      <section className="w-full overflow-hidden mt-36">
         <div className="flex items-end justify-center">
           {/* Image 2 — person with success alert (left) */}
           <div className="shrink-0">
