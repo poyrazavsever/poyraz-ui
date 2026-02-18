@@ -26,6 +26,11 @@ declare const cardVariants: (props?: ({
 interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
 }
 declare const Card: React.ForwardRefExoticComponent<CardProps & React.RefAttributes<HTMLDivElement>>;
+interface CardImageProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Aspect ratio utility class, e.g. "aspect-video" or "aspect-square" */
+    aspect?: string;
+}
+declare const CardImage: React.ForwardRefExoticComponent<CardImageProps & React.RefAttributes<HTMLDivElement>>;
 declare const CardHeader: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const CardTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
 declare const CardDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
@@ -156,4 +161,4 @@ interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 declare const ScrollArea: React.ForwardRefExoticComponent<ScrollAreaProps & React.RefAttributes<HTMLDivElement>>;
 
-export { Avatar, AvatarFallback, AvatarImage, Badge, type BgPatternProps, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Input, Logo, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, RadioGroup, RadioGroupItem, ScrollArea, type ScrollAreaProps, SearchInput, Separator, Skeleton, Switch, Textarea, Typography, UrlInput, badgeVariants };
+export { Avatar, AvatarFallback, AvatarImage, Badge, type BgPatternProps, Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle, Checkbox, Input, Logo, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, RadioGroup, RadioGroupItem, ScrollArea, type ScrollAreaProps, SearchInput, Separator, Skeleton, Switch, Textarea, Typography, UrlInput, badgeVariants, cardVariants };

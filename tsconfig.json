@@ -25,6 +25,18 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "poyraz-ui": [
+        "./dist/index"
+      ],
+      "poyraz-ui/atoms": [
+        "./dist/atoms/index"
+      ],
+      "poyraz-ui/molecules": [
+        "./dist/molecules/index"
+      ],
+      "poyraz-ui/organisms": [
+        "./dist/organisms/index"
       ]
     }
   },

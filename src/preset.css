@@ -11,6 +11,9 @@
  * Or manually copy these tokens into your globals.css.
  */
 
+/* Scan poyraz-ui dist files so Tailwind generates the utility classes used by components */
+@source "../dist";
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-secondary: "Agbalumo", cursive;

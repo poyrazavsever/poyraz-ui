@@ -72,7 +72,7 @@ import {
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import {
   DataTable,
-  type ColumnDef,
+  type DataTableColumnDef,
 } from "poyraz-ui/organisms";
 
 /* ================================================================== */
@@ -398,7 +398,7 @@ const sampleEmployees: Employee[] = [
   },
 ];
 
-const basicColumns: ColumnDef<Employee>[] = [
+const basicColumns: DataTableColumnDef<Employee>[] = [
   { id: "name", header: "Name", accessorKey: "name" },
   { id: "role", header: "Role", accessorKey: "role" },
   { id: "department", header: "Department", accessorKey: "department" },
@@ -410,7 +410,7 @@ const basicColumns: ColumnDef<Employee>[] = [
   },
 ];
 
-const fullColumns: ColumnDef<Employee>[] = [
+const fullColumns: DataTableColumnDef<Employee>[] = [
   { id: "id", header: "ID", accessorKey: "id", className: "w-24" },
   { id: "name", header: "Name", accessorKey: "name" },
   { id: "role", header: "Role", accessorKey: "role" },

@@ -118,7 +118,6 @@ export default function InstallationPage() {
                 ["react", "≥ 18", "Yes"],
                 ["react-dom", "≥ 18", "Yes"],
                 ["tailwindcss", "≥ 4", "Yes"],
-                ["next", "≥ 14", "Optional"],
               ].map(([pkg, version, required]) => (
                 <tr
                   key={pkg}
@@ -145,7 +144,9 @@ export default function InstallationPage() {
         <Typography variant="h2">3. Import CSS Preset</Typography>
         <Typography variant="p">
           Add the Poyraz UI CSS preset to your global stylesheet. The preset
-          includes design tokens (colors, fonts) and base layer styles.
+          includes design tokens (colors, fonts), base layer styles, and
+          automatically configures Tailwind to scan Poyraz UI components for
+          utility classes.
         </Typography>
 
         <CopyBlock
