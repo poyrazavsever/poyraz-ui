@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Inter, Agbalumo } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme/theme-provider";
-import ActivityBar from "../components/layout/activitybar";
-import Sidebar from "../components/layout/sidebar";
+import { Toaster } from "@/components/ui/molecules/sonner";
 
-const nunito = Nunito({
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
+});
+
+const agbalumo = Agbalumo({
+  variable: "--font-secondary",
+  weight: "400",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "UI-Kit by poyrazavsever.com",
-  description:
-    "A UI kit for poyrazavsever.com. Created with ❤️ by Poyraz Avsever.",
+  title: "Poyraz Avsever's UI Kit - Poyraz UI - Brutalist React Components",
+  description: "Poyraz UI is a brutalist design system built with React, Next.js, Tailwind CSS v4, and Radix UI. It offers a collection of unstyled, accessible components that you can customize to create your own unique designs.",
+  icons: "/favicon.ico",
+
 };
 
 export default function RootLayout({
@@ -22,17 +27,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${nunito.className} bg-(--color-background) text-(--color-text) transition-colors duration-300`}
-      >
-        <ThemeProvider>
-          <ActivityBar />
-          <Sidebar />
-          <main className="min-h-screen pl-0 sm:pl-[calc(56px+1rem+256px)] pb-20">
-            {children}
-          </main>
-        </ThemeProvider>
+    <html lang="en">
+      <body className={`${inter.variable} ${agbalumo.variable} antialiased`}>
+        {children}
+        <Toaster />
       </body>
     </html>
   );

@@ -1,0 +1,40 @@
+/**
+ * Poyraz UI — Tailwind v4 Preset
+ *
+ * Import this in your project's CSS to apply the Poyraz design tokens:
+ *
+ * ```css
+ * @import "tailwindcss";
+ * @import "poyraz-ui/preset.css";
+ * ```
+ *
+ * Or manually copy these tokens into your globals.css.
+ */
+
+/*
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: "Agbalumo", cursive;
+  --color-primary: #dc2626;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    @apply text-slate-950 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    @apply font-bold tracking-tight;
+  }
+}
+
+@utility font-secondary {
+  font-family: var(--font-secondary);
+}
+
+@utility decoration-dashed {
+  text-decoration-style: dashed;
+}
+*/
