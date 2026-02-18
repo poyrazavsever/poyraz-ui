@@ -81,10 +81,22 @@
     "next": ">=14",
     "react": ">=18",
     "react-dom": ">=18",
-    "tailwindcss": ">=4"
+    "tailwindcss": ">=4",
+    "react-hook-form": ">=7",
+    "@hookform/resolvers": ">=3",
+    "zod": ">=3"
   },
   "peerDependenciesMeta": {
     "next": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    },
+    "@hookform/resolvers": {
+      "optional": true
+    },
+    "zod": {
       "optional": true
     }
   },

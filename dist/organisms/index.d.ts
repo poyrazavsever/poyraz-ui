@@ -6,12 +6,12 @@ import { VariantProps } from 'class-variance-authority';
 interface NavbarContextValue {
     mobileOpen: boolean;
     setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    variant: "default" | "minimal" | "transparent" | "bordered" | "dark";
+    variant: "default" | "minimal" | "transparent" | "bordered";
     containerClassName: string;
 }
 declare const useNavbar: () => NavbarContextValue;
 declare const navbarVariants: (props?: ({
-    variant?: "default" | "bordered" | "transparent" | "dark" | "minimal" | null | undefined;
+    variant?: "default" | "bordered" | "transparent" | "minimal" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface NavbarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof navbarVariants> {
     /** Show sticky behavior */
