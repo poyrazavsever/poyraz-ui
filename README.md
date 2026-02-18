@@ -1,7 +1,7 @@
 # Poyraz UI
 
 <div align="center">
-  <img src="public/logo/logo.png" alt="Poyraz UI" width="80" height="80">
+  <img src="https://raw.githubusercontent.com/poyrazavsever/poyraz-ui/refs/heads/master/public/logo/logo.jpeg" alt="Poyraz UI" width="80" height="80">
 
 **Brutalist UI component library for React**
 
