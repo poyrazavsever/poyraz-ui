@@ -3,16 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FileText,
-  Home,
-  Download,
-  Atom,
-  TestTube2,
-  Component,
-  Github,
-} from "lucide-react";
+import { FileText, Home, Download, ChevronDown, Github } from "lucide-react";
 
+import { cn } from "@/components/ui/atoms/typography";
 import { Logo } from "@/components/ui/atoms/logo";
 import { Button } from "@/components/ui/atoms/button";
 import {
@@ -42,6 +35,125 @@ import {
   FooterSocialLink,
 } from "@/components/ui/organisms/footer";
 
+/* ── Component registry ───────────────────────────────────────────── */
+
+const atoms = [
+  "Button",
+  "Input",
+  "Textarea",
+  "Checkbox",
+  "Radio Group",
+  "Switch",
+  "Badge",
+  "Avatar",
+  "Card",
+  "Typography",
+  "Label",
+  "Separator",
+  "Skeleton",
+  "Form Fields",
+  "Logo",
+];
+
+const molecules = [
+  "Accordion",
+  "Alert",
+  "Breadcrumb",
+  "Calendar",
+  "Command Palette",
+  "Date Picker",
+  "Dialog",
+  "Drawer",
+  "Dropdown Menu",
+  "Form",
+  "Hover Card",
+  "Modal",
+  "Pagination",
+  "Popover",
+  "Select",
+  "Sheet",
+  "Sonner",
+  "Tabs",
+  "Tooltip",
+];
+
+const organisms = [
+  "Announcement Bar",
+  "Data Table",
+  "Footer",
+  "Navbar",
+  "Sidebar",
+];
+
+function toSlug(name: string) {
+  return name.toLowerCase().replace(/\s+/g, "-");
+}
+
+/* ── Collapsible sidebar group ────────────────────────────────────── */
+
+function SidebarSection({
+  label,
+  basePath,
+  items,
+  pathname,
+  defaultOpen = false,
+}: {
+  label: string;
+  basePath: string;
+  items: string[];
+  pathname: string;
+  defaultOpen?: boolean;
+}) {
+  const isAnyActive = items.some(
+    (item) => pathname === `${basePath}/${toSlug(item)}`,
+  );
+  const [open, setOpen] = React.useState(defaultOpen || isAnyActive);
+
+  return (
+    <div className="space-y-0.5">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className={cn(
+          "flex items-center justify-between w-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest cursor-pointer",
+          "text-slate-400 hover:text-slate-600 transition-colors",
+        )}
+      >
+        <span>{label}</span>
+        <ChevronDown
+          className={cn(
+            "h-3.5 w-3.5 transition-transform duration-200",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      {open && (
+        <ul className="space-y-0.5">
+          {items.map((item) => {
+            const href = `${basePath}/${toSlug(item)}`;
+            const active = pathname === href;
+            return (
+              <li key={item}>
+                <Link
+                  href={href}
+                  className={cn(
+                    "block px-4 py-1.5 text-[13px] transition-colors no-underline",
+                    "border-l-[3px] border-solid",
+                    active
+                      ? "border-red-600 bg-red-50 text-red-700 font-semibold"
+                      : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50",
+                  )}
+                >
+                  {item}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 function DocsSidebarContent() {
   const pathname = usePathname();
 
@@ -67,32 +179,26 @@ function DocsSidebarContent() {
         </SidebarMenu>
       </SidebarGroup>
 
-      <SidebarGroup>
-        <SidebarGroupLabel>Components</SidebarGroupLabel>
-        <SidebarMenu>
-          <SidebarMenuItem
-            href="/docs/atoms"
-            icon={<Atom className="h-4 w-4" />}
-            active={pathname === "/docs/atoms"}
-          >
-            Atoms
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            href="/docs/molecules"
-            icon={<TestTube2 className="h-4 w-4" />}
-            active={pathname === "/docs/molecules"}
-          >
-            Molecules
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            href="/docs/organisms"
-            icon={<Component className="h-4 w-4" />}
-            active={pathname === "/docs/organisms"}
-          >
-            Organisms
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarGroup>
+      <div className="px-2 space-y-2 mt-2">
+        <SidebarSection
+          label={`Atoms (${atoms.length})`}
+          basePath="/docs/atoms"
+          items={atoms}
+          pathname={pathname}
+        />
+        <SidebarSection
+          label={`Molecules (${molecules.length})`}
+          basePath="/docs/molecules"
+          items={molecules}
+          pathname={pathname}
+        />
+        <SidebarSection
+          label={`Organisms (${organisms.length})`}
+          basePath="/docs/organisms"
+          items={organisms}
+          pathname={pathname}
+        />
+      </div>
     </>
   );
 }
