@@ -47,3 +47,5 @@ export type {
   BgPatternProps,
   PatternRadialProps,
 } from "@/components/ui/atoms/bg-pattern";
+export { ScrollArea } from "@/components/ui/atoms/scroll-area";
+export type { ScrollAreaProps } from "@/components/ui/atoms/scroll-area";

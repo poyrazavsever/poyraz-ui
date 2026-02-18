@@ -58,6 +58,11 @@ const atoms = [
     description: "Single-select option group.",
   },
   {
+    name: "Scroll Area",
+    slug: "scroll-area",
+    description: "Custom dashed scrollbar container.",
+  },
+  {
     name: "Separator",
     slug: "separator",
     description: "Horizontal or vertical divider line.",

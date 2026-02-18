@@ -263,7 +263,7 @@ export default function Home() {
             {[
               {
                 title: "Atoms",
-                count: 19,
+                count: 17,
                 href: "/docs/atoms",
                 items: [
                   "Button",
@@ -277,7 +277,7 @@ export default function Home() {
               },
               {
                 title: "Molecules",
-                count: 19,
+                count: 21,
                 href: "/docs/molecules",
                 items: [
                   "Accordion",

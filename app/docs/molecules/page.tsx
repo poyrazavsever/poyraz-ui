@@ -13,6 +13,11 @@ const molecules = [
     description: "Collapsible content sections.",
   },
   {
+    name: "Autocomplete",
+    slug: "autocomplete",
+    description: "Searchable combobox with single/multi select.",
+  },
+  {
     name: "Alert",
     slug: "alert",
     description: "Contextual feedback messages.",
@@ -53,6 +58,11 @@ const molecules = [
     name: "Hover Card",
     slug: "hover-card",
     description: "Content card on hover.",
+  },
+  {
+    name: "Mermaid",
+    slug: "mermaid",
+    description: "Render diagrams from mermaid code.",
   },
   {
     name: "Modal",

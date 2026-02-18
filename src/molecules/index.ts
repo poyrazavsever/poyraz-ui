@@ -154,3 +154,8 @@ export {
   SheetDescription,
   sheetContentVariants,
 } from "@/components/ui/molecules/sheet";
+export { Autocomplete } from "@/components/ui/molecules/autocomplete";
+export type {
+  AutocompleteOption,
+  AutocompleteProps,
+} from "@/components/ui/molecules/autocomplete";

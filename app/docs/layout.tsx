@@ -51,6 +51,7 @@ const atoms = [
   "Label",
   "Separator",
   "Skeleton",
+  "Scroll Area",
   "Form Fields",
   "Logo",
   "BG Patterns",
@@ -59,6 +60,7 @@ const atoms = [
 const molecules = [
   "Accordion",
   "Alert",
+  "Autocomplete",
   "Breadcrumb",
   "Calendar",
   "Command Palette",
@@ -68,6 +70,7 @@ const molecules = [
   "Dropdown Menu",
   "Form",
   "Hover Card",
+  "Mermaid",
   "Modal",
   "Pagination",
   "Popover",
