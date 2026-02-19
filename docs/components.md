@@ -69,7 +69,8 @@ _Groups of atoms working together._
 
 _Complex UI sections composed of molecules and atoms._
 
-- **Navbar** (Logo + Links + Auth/Theme Toggle)
+- **Navbar** (Logo + Links + Dropdown Menus + Auth/Theme Toggle)
+  - Dropdown Layouts: `full` (4-col spread), `columns` (2-col left), `featured` (links + card), `list` (single column)
 - **Sidebar** (Navigation Links + User Profile)
 - **Footer** (Links + Socials + Copyright)
 

@@ -9,6 +9,8 @@ import {
   NavbarLink,
   NavbarDropdown,
   NavbarMegaMenu,
+  NavbarMegaMenuLinks,
+  NavbarMegaMenuFeatured,
   NavbarMegaMenuItem,
   NavbarActions,
   NavbarMobileToggle,
@@ -243,49 +245,22 @@ export default function NavbarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 4. With Mega Menu ───────────────────────── */}
+      {/* ─── 4. Dropdown — Full Layout ───────────────── */}
       <DemoSection
-        title="With Dropdown / Mega Menu"
-        description="Desktop dropdown with mega menu items. Falls back to flat links on mobile."
-        code={`<Navbar>
-  <NavbarMain>
-    <NavbarBrand>
-      <Logo width={28} height={28} />
-    </NavbarBrand>
-    <NavbarLinks>
-      <NavbarLink href="#">Home</NavbarLink>
-      <NavbarDropdown label="Products">
-        <NavbarMegaMenu className="grid-cols-2">
-          <NavbarMegaMenuItem href="#" title="Analytics"
-            description="Real-time data dashboards" />
-          <NavbarMegaMenuItem href="#" title="Automation"
-            description="Workflow automations" />
-          <NavbarMegaMenuItem href="#" title="Integrations"
-            description="Connect your tools" />
-          <NavbarMegaMenuItem href="#" title="API"
-            description="Build custom solutions" />
-        </NavbarMegaMenu>
-      </NavbarDropdown>
-      <NavbarLink href="#">Pricing</NavbarLink>
-    </NavbarLinks>
-    <NavbarActions>
-      <Button size="sm">Get Started</Button>
-    </NavbarActions>
-    <NavbarMobileToggle />
-  </NavbarMain>
-  <NavbarMobileMenu>
-    <NavbarMobileGroup label="Pages">
-      <NavbarMobileLink href="#">Home</NavbarMobileLink>
-      <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
-    </NavbarMobileGroup>
-    <NavbarMobileGroup label="Products">
-      <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
-      <NavbarMobileLink href="#">Automation</NavbarMobileLink>
-      <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
-      <NavbarMobileLink href="#">API</NavbarMobileLink>
-    </NavbarMobileGroup>
-  </NavbarMobileMenu>
-</Navbar>`}
+        title="Dropdown — Full Layout"
+        description="Links spread across 4 columns using layout='full'. Items fill the entire dropdown width."
+        code={`<NavbarDropdown label="Products">
+  <NavbarMegaMenu layout="full">
+    <NavbarMegaMenuItem href="#" title="Analytics"
+      description="Real-time dashboards" />
+    <NavbarMegaMenuItem href="#" title="Automation"
+      description="Workflow tools" />
+    <NavbarMegaMenuItem href="#" title="Integrations"
+      description="Connect everything" />
+    <NavbarMegaMenuItem href="#" title="API"
+      description="Build custom solutions" />
+  </NavbarMegaMenu>
+</NavbarDropdown>`}
       >
         <div className="border-2 border-dashed border-slate-200">
           <Navbar>
@@ -296,7 +271,7 @@ export default function NavbarPage() {
               <NavbarLinks>
                 <NavbarLink href="#">Home</NavbarLink>
                 <NavbarDropdown label="Products">
-                  <NavbarMegaMenu className="grid-cols-2">
+                  <NavbarMegaMenu layout="full">
                     <NavbarMegaMenuItem
                       href="#"
                       title="Analytics"
@@ -305,12 +280,12 @@ export default function NavbarPage() {
                     <NavbarMegaMenuItem
                       href="#"
                       title="Automation"
-                      description="Workflow automations"
+                      description="Workflow automation tools"
                     />
                     <NavbarMegaMenuItem
                       href="#"
                       title="Integrations"
-                      description="Connect your tools"
+                      description="Connect your favorite tools"
                     />
                     <NavbarMegaMenuItem
                       href="#"
@@ -326,18 +301,192 @@ export default function NavbarPage() {
               </NavbarActions>
               <NavbarMobileToggle />
             </NavbarMain>
-            <NavbarMobileMenu>
-              <NavbarMobileGroup label="Pages">
-                <NavbarMobileLink href="#">Home</NavbarMobileLink>
-                <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
-              </NavbarMobileGroup>
-              <NavbarMobileGroup label="Products">
-                <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
-                <NavbarMobileLink href="#">Automation</NavbarMobileLink>
-                <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
-                <NavbarMobileLink href="#">API</NavbarMobileLink>
-              </NavbarMobileGroup>
-            </NavbarMobileMenu>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 4b. Dropdown — Columns Layout ──────────── */}
+      <DemoSection
+        title="Dropdown — Columns Layout"
+        description="Two-column link list on the left, compact and organized. Use layout='columns'."
+        code={`<NavbarDropdown label="Resources">
+  <NavbarMegaMenu layout="columns">
+    <NavbarMegaMenuItem href="#" title="Documentation"
+      description="Guides and references" />
+    <NavbarMegaMenuItem href="#" title="Tutorials"
+      description="Step-by-step walkthroughs" />
+    <NavbarMegaMenuItem href="#" title="Blog"
+      description="Latest updates" />
+    <NavbarMegaMenuItem href="#" title="Changelog"
+      description="What's new" />
+  </NavbarMegaMenu>
+</NavbarDropdown>`}
+      >
+        <div className="border-2 border-dashed border-slate-200">
+          <Navbar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarDropdown label="Resources">
+                  <NavbarMegaMenu layout="columns">
+                    <NavbarMegaMenuItem
+                      href="#"
+                      title="Documentation"
+                      description="Guides and references"
+                    />
+                    <NavbarMegaMenuItem
+                      href="#"
+                      title="Tutorials"
+                      description="Step-by-step walkthroughs"
+                    />
+                    <NavbarMegaMenuItem
+                      href="#"
+                      title="Blog"
+                      description="Latest updates and articles"
+                    />
+                    <NavbarMegaMenuItem
+                      href="#"
+                      title="Changelog"
+                      description="What's new in each release"
+                    />
+                  </NavbarMegaMenu>
+                </NavbarDropdown>
+                <NavbarLink href="#">Pricing</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 4c. Dropdown — Featured Layout ─────────── */}
+      <DemoSection
+        title="Dropdown — Featured Layout"
+        description="Links on the left, featured card/content on the right. Use layout='featured' with NavbarMegaMenuLinks and NavbarMegaMenuFeatured."
+        code={`<NavbarDropdown label="Products">
+  <NavbarMegaMenu layout="featured">
+    <NavbarMegaMenuLinks>
+      <NavbarMegaMenuItem href="#" title="Analytics"
+        description="Real-time dashboards" />
+      <NavbarMegaMenuItem href="#" title="Automation"
+        description="Workflow tools" />
+      <NavbarMegaMenuItem href="#" title="Integrations"
+        description="Connect everything" />
+      <NavbarMegaMenuItem href="#" title="API"
+        description="Build custom solutions" />
+    </NavbarMegaMenuLinks>
+    <NavbarMegaMenuFeatured>
+      <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">
+        What's New
+      </p>
+      <p className="text-sm font-medium">v2.0 Released</p>
+      <p className="text-xs text-slate-500 mt-1">
+        New dashboard, faster builds, and more.
+      </p>
+      <Button size="sm" className="mt-3">Learn More</Button>
+    </NavbarMegaMenuFeatured>
+  </NavbarMegaMenu>
+</NavbarDropdown>`}
+      >
+        <div className="border-2 border-dashed border-slate-200">
+          <Navbar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarDropdown label="Products">
+                  <NavbarMegaMenu layout="featured">
+                    <NavbarMegaMenuLinks>
+                      <NavbarMegaMenuItem
+                        href="#"
+                        title="Analytics"
+                        description="Real-time data dashboards"
+                      />
+                      <NavbarMegaMenuItem
+                        href="#"
+                        title="Automation"
+                        description="Workflow automation tools"
+                      />
+                      <NavbarMegaMenuItem
+                        href="#"
+                        title="Integrations"
+                        description="Connect your favorite tools"
+                      />
+                      <NavbarMegaMenuItem
+                        href="#"
+                        title="API"
+                        description="Build custom solutions"
+                      />
+                    </NavbarMegaMenuLinks>
+                    <NavbarMegaMenuFeatured>
+                      <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">
+                        What&apos;s New
+                      </p>
+                      <p className="text-sm font-medium">v2.0 Released</p>
+                      <p className="text-xs text-slate-500 mt-1">
+                        New dashboard, faster builds, and 20+ new components.
+                      </p>
+                      <Button size="sm" className="mt-3">
+                        Learn More
+                      </Button>
+                    </NavbarMegaMenuFeatured>
+                  </NavbarMegaMenu>
+                </NavbarDropdown>
+                <NavbarLink href="#">Pricing</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 4d. Dropdown — List Layout ─────────────── */}
+      <DemoSection
+        title="Dropdown — List Layout"
+        description="Simple single-column list for minimal dropdowns. Use layout='list'."
+        code={`<NavbarDropdown label="More">
+  <NavbarMegaMenu layout="list">
+    <NavbarMegaMenuItem href="#" title="Help Center" />
+    <NavbarMegaMenuItem href="#" title="Community" />
+    <NavbarMegaMenuItem href="#" title="Status" />
+    <NavbarMegaMenuItem href="#" title="Contact" />
+  </NavbarMegaMenu>
+</NavbarDropdown>`}
+      >
+        <div className="border-2 border-dashed border-slate-200">
+          <Navbar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarLink href="#">Docs</NavbarLink>
+                <NavbarDropdown label="More">
+                  <NavbarMegaMenu layout="list">
+                    <NavbarMegaMenuItem href="#" title="Help Center" />
+                    <NavbarMegaMenuItem href="#" title="Community" />
+                    <NavbarMegaMenuItem href="#" title="Status" />
+                    <NavbarMegaMenuItem href="#" title="Contact" />
+                  </NavbarMegaMenu>
+                </NavbarDropdown>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
           </Navbar>
         </div>
       </DemoSection>

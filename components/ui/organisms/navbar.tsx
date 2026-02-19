@@ -40,7 +40,7 @@ const navbarVariants = cva("w-full", {
       minimal: "bg-white text-slate-950",
       transparent: "bg-transparent text-slate-950",
       bordered:
-        "bg-white text-slate-950 border-2 border-dashed border-slate-300",
+        "bg-white text-slate-950 border-b-2 border-dashed border-slate-300",
     },
   },
   defaultVariants: { variant: "default" },
@@ -141,7 +141,7 @@ const NavbarTopBar = React.forwardRef<
     >
       <div
         className={cn(
-          "px-6 py-1.5 sm:px-0",
+          "py-1.5",
           "flex items-center justify-between",
           containerClassName,
         )}
@@ -180,9 +180,8 @@ const NavbarMain = React.forwardRef<
     >
       <div
         className={cn(
-          "px-6 py-3",
+          "py-3",
           "flex items-center justify-between gap-4 sm:gap-6",
-          "overflow-hidden",
           containerClassName,
         )}
       >
@@ -235,31 +234,37 @@ NavbarBrand.displayName = "NavbarBrand";
 const NavbarLinks = React.forwardRef<
   React.ComponentRef<typeof NavigationMenuPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
->(({ className, children, ...props }, ref) => (
-  <NavigationMenuPrimitive.Root
-    ref={ref}
-    className={cn("static z-10 hidden lg:flex items-center", className)}
-    {...props}
-  >
-    <NavigationMenuPrimitive.List className="flex items-center gap-1">
-      {children}
-    </NavigationMenuPrimitive.List>
-    <div className="absolute left-0 top-full w-full z-[60]">
-      <NavigationMenuPrimitive.Viewport
-        className={cn(
-          "relative w-full overflow-hidden",
-          "bg-white",
-          "border-2 border-dashed border-slate-200 border-t-0",
-          "rounded-none shadow-none",
-          "h-[var(--radix-navigation-menu-viewport-height)]",
-          "transition-[width,height] duration-200",
-          "data-[state=open]:animate-in data-[state=open]:fade-in",
-          "data-[state=closed]:animate-out data-[state=closed]:fade-out",
-        )}
-      />
-    </div>
-  </NavigationMenuPrimitive.Root>
-));
+>(({ className, children, ...props }, ref) => {
+  const { containerClassName } = useNavbar();
+
+  return (
+    <NavigationMenuPrimitive.Root
+      ref={ref}
+      className={cn("static z-10 hidden lg:flex items-center", className)}
+      {...props}
+    >
+      <NavigationMenuPrimitive.List className="flex items-center gap-1">
+        {children}
+      </NavigationMenuPrimitive.List>
+      <div className="absolute left-0 top-full w-full z-[60]">
+        <div className={cn(containerClassName)}>
+          <NavigationMenuPrimitive.Viewport
+            className={cn(
+              "relative w-full overflow-hidden",
+              "bg-white",
+              "border-2 border-dashed border-slate-200 border-t-0",
+              "rounded-none shadow-none",
+              "h-[var(--radix-navigation-menu-viewport-height)]",
+              "transition-[width,height] duration-200",
+              "data-[state=open]:animate-in data-[state=open]:fade-in",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out",
+            )}
+          />
+        </div>
+      </div>
+    </NavigationMenuPrimitive.Root>
+  );
+});
 NavbarLinks.displayName = "NavbarLinks";
 
 /* ================================================================== */
@@ -346,19 +351,78 @@ NavbarDropdown.displayName = "NavbarDropdown";
 /*  MEGA MENU PANEL                                                    */
 /* ================================================================== */
 
-const NavbarMegaMenu = React.forwardRef<
+const megaMenuVariants = cva("p-6", {
+  variants: {
+    layout: {
+      /** Full-width: items spread across the entire row */
+      full: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3",
+      /** Two columns on the left side */
+      columns: "grid grid-cols-2 gap-3 max-w-lg",
+      /** Featured: links on left, featured card slot on right */
+      featured: "grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6",
+      /** Simple list (single column) */
+      list: "flex flex-col gap-1 max-w-xs",
+    },
+  },
+  defaultVariants: { layout: "full" },
+});
+
+export interface NavbarMegaMenuProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof megaMenuVariants> {}
+
+const NavbarMegaMenu = React.forwardRef<HTMLDivElement, NavbarMegaMenuProps>(
+  ({ className, layout, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(megaMenuVariants({ layout }), className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
+NavbarMegaMenu.displayName = "NavbarMegaMenu";
+
+/* ================================================================== */
+/*  MEGA MENU LINKS COLUMN (for "featured" layout left side)           */
+/* ================================================================== */
+
+const NavbarMegaMenuLinks = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("grid gap-4 p-6", "md:w-[500px] lg:w-[700px]", className)}
+    className={cn("grid grid-cols-2 gap-2", className)}
     {...props}
   >
     {children}
   </div>
 ));
-NavbarMegaMenu.displayName = "NavbarMegaMenu";
+NavbarMegaMenuLinks.displayName = "NavbarMegaMenuLinks";
+
+/* ================================================================== */
+/*  MEGA MENU FEATURED (card slot for "featured" layout right side)    */
+/* ================================================================== */
+
+const NavbarMegaMenuFeatured = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-2 border-dashed border-slate-200 p-4",
+      "bg-slate-50",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </div>
+));
+NavbarMegaMenuFeatured.displayName = "NavbarMegaMenuFeatured";
 
 /* ================================================================== */
 /*  MEGA MENU LINK ITEM                                                */
@@ -384,9 +448,9 @@ const NavbarMegaMenuItem = React.forwardRef<
       )}
       {...props}
     >
-      <div className="text-sm font-bold leading-none">{title}</div>
+      <div className="text-sm font-medium leading-none">{title}</div>
       {description && (
-        <p className="mt-1 text-xs text-slate-500 leading-snug">
+        <p className="mt-1.5 text-xs text-slate-500 leading-snug">
           {description}
         </p>
       )}
@@ -701,6 +765,8 @@ export {
   NavbarDropdown,
   NavbarDropdownTrigger,
   NavbarMegaMenu,
+  NavbarMegaMenuLinks,
+  NavbarMegaMenuFeatured,
   NavbarMegaMenuItem,
   NavbarActions,
   NavbarMobileToggle,
@@ -711,5 +777,6 @@ export {
   NavbarSearch,
   NavbarDivider,
   navbarVariants,
+  megaMenuVariants,
   useNavbar,
 };

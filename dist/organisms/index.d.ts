@@ -34,7 +34,14 @@ declare const NavbarDropdownTrigger: React.ForwardRefExoticComponent<Omit<Naviga
 declare const NavbarDropdown: React.ForwardRefExoticComponent<Omit<NavigationMenuPrimitive.NavigationMenuItemProps & React.RefAttributes<HTMLLIElement>, "ref"> & {
     label: string;
 } & React.RefAttributes<HTMLLIElement>>;
-declare const NavbarMegaMenu: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const megaMenuVariants: (props?: ({
+    layout?: "list" | "full" | "columns" | "featured" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface NavbarMegaMenuProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof megaMenuVariants> {
+}
+declare const NavbarMegaMenu: React.ForwardRefExoticComponent<NavbarMegaMenuProps & React.RefAttributes<HTMLDivElement>>;
+declare const NavbarMegaMenuLinks: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const NavbarMegaMenuFeatured: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const NavbarMegaMenuItem: React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement> & {
     title: string;
     description?: string;
@@ -223,4 +230,4 @@ declare const DataTable: <T>(props: DataTableProps<T> & {
     ref?: React.Ref<HTMLDivElement>;
 }) => React.ReactElement;
 
-export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterBottom, FooterBottomLinks, FooterBrand, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuItem, NavbarMobileActions, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarSearch, NavbarTopBar, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarSearch, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, navbarVariants, sidebarVariants, useNavbar, useSidebar };
+export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterBottom, FooterBottomLinks, FooterBrand, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarSearch, NavbarTopBar, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarSearch, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, useNavbar, useSidebar };

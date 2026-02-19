@@ -9,6 +9,8 @@ export {
   NavbarDropdown,
   NavbarDropdownTrigger,
   NavbarMegaMenu,
+  NavbarMegaMenuLinks,
+  NavbarMegaMenuFeatured,
   NavbarMegaMenuItem,
   NavbarActions,
   NavbarMobileToggle,
@@ -19,6 +21,7 @@ export {
   NavbarSearch,
   NavbarDivider,
   navbarVariants,
+  megaMenuVariants,
   useNavbar,
 } from "@/components/ui/organisms/navbar";
 export {
