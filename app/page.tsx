@@ -21,6 +21,29 @@ import { Badge } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import { PatternDots } from "poyraz-ui/atoms";
+import { Input } from "poyraz-ui/atoms";
+import { Switch } from "poyraz-ui/atoms";
+import { Checkbox } from "poyraz-ui/atoms";
+import { Skeleton } from "poyraz-ui/atoms";
+import { Avatar, AvatarFallback } from "poyraz-ui/atoms";
+import { Label } from "poyraz-ui/atoms";
+import { Textarea } from "poyraz-ui/atoms";
+import { RadioGroup, RadioGroupItem } from "poyraz-ui/atoms";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "poyraz-ui/atoms";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "poyraz-ui/molecules";
 import {
   Navbar,
   NavbarMain,
@@ -189,10 +212,190 @@ export default function Home() {
               draggable={false}
             />
             {/* Red-600 box — starts at 0 from image 1's cut edge */}
-            <div className="self-stretch bg-red-600 flex-1 flex items-center overflow-hidden px-6 sm:px-10">
-              <p className="text-red-200 font-secondary text-lg sm:text-2xl md:text-3xl lg:text-4xl  tracking-wide leading-tight whitespace-nowrap">
-                I love building things...
-              </p>
+            <div className="self-stretch bg-red-600 flex-1 flex items-center overflow-hidden">
+              {/* Decorative showcase components */}
+              <div className="flex items-center gap-2.5 px-3 py-2 opacity-50 pointer-events-none select-none flex-wrap content-center justify-center w-full h-full">
+                {/* Row 1 type elements */}
+                <Button
+                  size="sm"
+                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
+                >
+                  Button
+                </Button>
+                <Badge
+                  variant="outline"
+                  className="border-white/80 text-white text-xs"
+                >
+                  Badge
+                </Badge>
+                <Input
+                  className="w-20 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
+                  placeholder="Email"
+                  tabIndex={-1}
+                  readOnly
+                />
+                <Switch
+                  checked
+                  className="data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
+                />
+                <Checkbox
+                  checked
+                  className="border-white/80 data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
+                />
+                <Avatar className="border-white/80 h-8 w-8">
+                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
+                    PA
+                  </AvatarFallback>
+                </Avatar>
+
+                {/* Mini card */}
+                <Card className="border-white/60 bg-white/10 w-28">
+                  <CardHeader className="p-2">
+                    <CardTitle className="text-[10px] text-white">
+                      Card
+                    </CardTitle>
+                    <CardDescription className="text-[9px] text-white/60">
+                      Content
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Label className="text-white/90 text-[10px]">Label</Label>
+                <Skeleton className="w-14 h-3.5 border-white/60 bg-white/20" />
+                <RadioGroup defaultValue="a" className="flex gap-1.5">
+                  <RadioGroupItem
+                    value="a"
+                    className="border-white/80 data-[state=checked]:border-white scale-90"
+                  />
+                  <RadioGroupItem
+                    value="b"
+                    className="border-white/80 scale-90"
+                  />
+                </RadioGroup>
+                <Textarea
+                  className="w-20 h-8 min-h-0 border-white/80 bg-transparent text-white placeholder:text-white/60 resize-none py-1 text-xs"
+                  placeholder="Text"
+                  tabIndex={-1}
+                  readOnly
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
+                >
+                  Outline
+                </Button>
+                <Badge
+                  variant="outline"
+                  className="border-white/80 text-white text-xs"
+                >
+                  v0.2
+                </Badge>
+                <Avatar className="border-white/80 h-8 w-8">
+                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
+                    UI
+                  </AvatarFallback>
+                </Avatar>
+                <Skeleton className="w-10 h-3.5 border-white/60 bg-white/20" />
+                <Switch className="data-[state=unchecked]:bg-white/20 border-white/80 scale-90" />
+                <Checkbox className="border-white/80 scale-90" />
+
+                {/* Pagination */}
+                <Pagination className="w-auto mx-0">
+                  <PaginationContent className="gap-0.5">
+                    <PaginationItem>
+                      <PaginationPrevious
+                        href="#"
+                        className="h-7 text-[10px] text-white border-white/60 px-1.5"
+                      />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#"
+                        isActive
+                        className="h-7 w-7 text-[10px] text-white bg-white/20 border-white/60"
+                      >
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#"
+                        className="h-7 w-7 text-[10px] text-white"
+                      >
+                        2
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext
+                        href="#"
+                        className="h-7 text-[10px] text-white border-white/60 px-1.5"
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+
+                {/* Row 3 — more to fill */}
+                <Input
+                  className="w-16 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
+                  placeholder="Name"
+                  tabIndex={-1}
+                  readOnly
+                />
+                <Card className="border-white/60 bg-white/10 w-24">
+                  <CardContent className="p-2">
+                    <Skeleton className="w-full h-2.5 border-white/40 bg-white/15 mb-1" />
+                    <Skeleton className="w-3/4 h-2.5 border-white/40 bg-white/15" />
+                  </CardContent>
+                </Card>
+                <Avatar className="border-white/80 h-8 w-8">
+                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
+                    AB
+                  </AvatarFallback>
+                </Avatar>
+                <Badge
+                  variant="outline"
+                  className="border-white/80 text-white text-xs"
+                >
+                  New
+                </Badge>
+                <Skeleton className="w-12 h-3.5 border-white/60 bg-white/20" />
+                <Button
+                  size="sm"
+                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
+                >
+                  Submit
+                </Button>
+                <Switch
+                  checked
+                  className="data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
+                />
+                <Input
+                  className="w-20 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
+                  placeholder="Password"
+                  tabIndex={-1}
+                  readOnly
+                />
+                <Checkbox
+                  checked
+                  className="border-white/80 data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
+                />
+                <Label className="text-white/90 text-[10px]">Toggle</Label>
+                <Skeleton className="w-16 h-3.5 border-white/60 bg-white/20" />
+                <RadioGroup defaultValue="x" className="flex gap-1.5">
+                  <RadioGroupItem
+                    value="x"
+                    className="border-white/80 data-[state=checked]:border-white scale-90"
+                  />
+                  <RadioGroupItem
+                    value="y"
+                    className="border-white/80 scale-90"
+                  />
+                  <RadioGroupItem
+                    value="z"
+                    className="border-white/80 scale-90"
+                  />
+                </RadioGroup>
+              </div>
             </div>
           </div>
         </div>
