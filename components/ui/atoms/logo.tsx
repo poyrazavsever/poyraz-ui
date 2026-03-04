@@ -38,8 +38,7 @@ function Logo({
         className={cn(
           "absolute inset-0",
           "bg-red-600",
-          "border-2 border-dashed border-red-900",
-          "rounded-none",
+          "rounded-sm",
           // Offset to bottom-right
           "translate-x-1.5 translate-y-1.5",
           // On hover, the red box shifts further
@@ -53,8 +52,7 @@ function Logo({
       <div
         className={cn(
           "relative z-10",
-          "border-2 border-dashed border-slate-900",
-          "rounded-none shadow-none",
+          "rounded-sm shadow-none",
           "overflow-hidden",
           "bg-white",
           // On hover, the image lifts slightly (opposite direction of red box)
@@ -70,7 +68,7 @@ function Logo({
           alt={alt}
           width={width}
           height={height}
-          className="object-cover rounded-none"
+          className="object-cover rounded-sm"
         />
       </div>
     </>
