@@ -13,9 +13,9 @@ const Switch = React.forwardRef<
     className={cn(
       // Layout — rectangular track
       "peer inline-flex h-6 w-11 shrink-0 items-center",
-      // Shape — brutalist
-      "rounded-none shadow-none",
-      "border-2 border-dashed border-slate-400",
+      // Shape — minimal
+      "rounded-sm shadow-none",
+      "border border-slate-400",
       // Background
       "bg-slate-200",
       // Transitions
@@ -34,10 +34,10 @@ const Switch = React.forwardRef<
   >
     <SwitchPrimitive.Thumb
       className={cn(
-        // Square thumb — brutalist
+        // Square thumb
         "block h-4 w-4 bg-white",
-        "rounded-none shadow-none",
-        "border border-dashed border-slate-300",
+        "rounded-sm shadow-none",
+        "border border-slate-300",
         // Transitions
         "transition-transform duration-200 ease-out",
         // Position

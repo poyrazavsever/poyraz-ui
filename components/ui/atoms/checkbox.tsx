@@ -13,9 +13,9 @@ const Checkbox = React.forwardRef<
     className={cn(
       // Size
       "h-5 w-5 shrink-0",
-      // Shape — brutalist: square, dashed
-      "rounded-none shadow-none",
-      "border-2 border-dashed border-slate-400",
+      // Shape — minimal: square
+      "rounded-sm shadow-none",
+      "border border-slate-400",
       // Background
       "bg-white",
       // Transitions

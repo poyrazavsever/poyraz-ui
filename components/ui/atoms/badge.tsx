@@ -6,8 +6,8 @@ const badgeVariants = cva(
   [
     "inline-flex items-center justify-center gap-1",
     "text-xs font-semibold tracking-wide uppercase",
-    "rounded-none shadow-none",
-    "border-2 border-dashed",
+    "rounded-sm shadow-none",
+    "border",
     "px-3 py-1",
     "transition-all duration-200 ease-out",
   ].join(" "),

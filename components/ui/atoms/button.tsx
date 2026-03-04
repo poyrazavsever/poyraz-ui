@@ -9,10 +9,10 @@ const buttonVariants = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     // Typography
     "text-sm font-semibold tracking-wide uppercase",
-    // Shape — brutalist: no rounding, no shadow, ever
-    "rounded-none shadow-none",
-    // Border — dashed is the DNA of this design system
-    "border-2 border-dashed",
+    // Shape — minimal
+    "rounded-sm shadow-none",
+    // Border
+    "border",
     // Interaction
     "cursor-pointer select-none",
     // Transitions
@@ -59,7 +59,7 @@ const buttonVariants = cva(
 
         link: [
           "bg-transparent text-red-600 border-red-600",
-          "decoration-dashed underline-offset-4",
+          "underline underline-offset-4",
           "hover:underline hover:text-red-700 hover:border-red-700",
           "active:text-red-800",
           // px-0 so the link variant sits naturally in text

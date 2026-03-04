@@ -86,7 +86,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     #e2e8f0 3px,
     #e2e8f0 4px
   );
-  border-left: 1px dashed #cbd5e1;
+  border-left: 1px solid #cbd5e1;
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-track:horizontal {
@@ -98,12 +98,12 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     #e2e8f0 4px
   );
   border-left: none;
-  border-top: 1px dashed #cbd5e1;
+  border-top: 1px solid #cbd5e1;
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-thumb {
   background: #94a3b8;
-  border: 1px dashed #475569;
+  border: 1px solid #475569;
   min-height: 32px;
 }
 
@@ -118,7 +118,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
 
 .poyraz-scroll-area::-webkit-scrollbar-corner {
   background: transparent;
-  border: 1px dashed #e2e8f0;
+  border: 1px solid #e2e8f0;
 }
 `,
           }}

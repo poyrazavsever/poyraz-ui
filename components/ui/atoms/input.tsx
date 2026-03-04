@@ -14,10 +14,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           "flex h-11 w-full px-4 py-2",
           // Typography
           "text-sm text-slate-900 placeholder:text-slate-400",
-          // Shape — brutalist
-          "rounded-none shadow-none",
-          // Border — dashed DNA
-          "border-2 border-dashed border-slate-400",
+          // Shape — minimal
+          "rounded-sm shadow-none",
+          // Border
+          "border border-slate-400",
           // Background
           "bg-white",
           // Transitions

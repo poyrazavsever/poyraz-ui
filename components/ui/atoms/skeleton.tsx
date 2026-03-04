@@ -9,8 +9,8 @@ function Skeleton({
     <div
       className={cn(
         "animate-pulse",
-        "rounded-none shadow-none",
-        "border-2 border-dashed border-slate-200",
+        "rounded-sm shadow-none",
+        "border border-slate-200",
         "bg-slate-100",
         className,
       )}
