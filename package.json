@@ -1,7 +1,7 @@
 {
   "name": "poyraz-ui",
-  "version": "0.2.2",
-  "description": "Brutalist UI component library — dashed borders, no rounding, no shadows",
+  "version": "0.3.0",
+  "description": "Minimal UI component library — clean borders, subtle rounding, modern design",
   "author": "Poyraz Avsever",
   "license": "MIT",
   "repository": {
@@ -12,7 +12,7 @@
   "keywords": [
     "ui",
     "components",
-    "brutalist",
+    "minimal",
     "react",
     "nextjs",
     "tailwindcss",
@@ -134,6 +134,7 @@
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-hook-form": "^7.71.1",
+    "shiki": "^4.0.1",
     "tailwindcss": "^4",
     "tsup": "^8.5.0",
     "typescript": "^5",

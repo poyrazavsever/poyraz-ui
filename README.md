@@ -3,9 +3,9 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/poyrazavsever/poyraz-ui/refs/heads/master/public/logo/logo.jpeg" alt="Poyraz UI" width="80" height="80">
 
-**Brutalist UI component library for React**
+**Minimal UI component library for React**
 
-No rounding. No shadows. Dashed borders. Bold, functional design.
+Subtle rounding. No shadows. Clean borders. Bold, functional design.
 
 [![npm](https://img.shields.io/npm/v/poyraz-ui)](https://www.npmjs.com/package/poyraz-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](LICENSE)
@@ -38,7 +38,7 @@ No rounding. No shadows. Dashed borders. Bold, functional design.
 
 ## Overview
 
-Poyraz UI is an open-source component library built around a **brutalist design language**: dashed borders, zero border-radius, zero box-shadow, monospaced accents, and a red-600 primary palette. Every component is built on top of Radix UI primitives for accessibility, styled with Tailwind CSS v4, and managed with `class-variance-authority` for variant control.
+Poyraz UI is an open-source component library built around a **minimal design language**: clean solid borders, subtle rounding (rounded-sm), shadow-none defaults, and a red-600 primary palette. Every component is built on top of Radix UI primitives for accessibility, styled with Tailwind CSS v4, and managed with `class-variance-authority` for variant control.
 
 The library follows **Atomic Design** methodology, organizing 43+ components into three tiers:
 
@@ -87,7 +87,7 @@ Import the preset stylesheet in your root layout or global CSS file:
 @import "poyraz-ui/preset.css";
 ```
 
-This provides the base design tokens (colors, fonts, spacing) and the brutalist defaults (no rounding, dashed borders, no shadows).
+This provides the base design tokens (colors, fonts, spacing) and the minimal defaults (subtle rounding, clean borders, no shadows).
 
 ---
 
@@ -132,7 +132,7 @@ function App() {
           </DialogTrigger>
           <DialogContent>
             <DialogTitle>Hello from Poyraz UI</DialogTitle>
-            <p>Brutalist design, accessible by default.</p>
+            <p>Minimal design, accessible by default.</p>
           </DialogContent>
         </Dialog>
       </main>
@@ -171,7 +171,7 @@ Tree-shaking and code-splitting are enabled by default.
 
 ### Design Principles
 
-1. **Brutalist Aesthetic** -- `rounded-none shadow-none border-2 border-dashed` on every component
+1. **Minimal Aesthetic** -- `rounded-sm shadow-none border` on every component
 2. **Accessibility First** -- Radix UI primitives provide WCAG-compliant keyboard navigation, focus management, and ARIA attributes out of the box
 3. **Variant-Driven** -- `class-variance-authority` (cva) manages every visual variant, making customization predictable
 4. **Composition over Configuration** -- Components are small, composable pieces. A `Navbar` is assembled from `NavbarMain`, `NavbarBrand`, `NavbarLinks`, etc.
@@ -187,7 +187,7 @@ Fundamental building blocks -- single-responsibility UI elements.
 | Component       | Description                                                                                                      |
 | --------------- | ---------------------------------------------------------------------------------------------------------------- |
 | **Button**      | Primary, outline, ghost, link variants. Multiple sizes.                                                          |
-| **Input**       | Text input with dashed-border brutalist styling.                                                                 |
+| **Input**       | Text input with clean minimal styling.                                                                           |
 | **Textarea**    | Multi-line text input.                                                                                           |
 | **Checkbox**    | Radix-based checkbox with indicator.                                                                             |
 | **Radio Group** | Radix-based radio buttons.                                                                                       |
@@ -421,13 +421,13 @@ This pattern keeps navigation DRY across Navbar, Sidebar, Footer, and mobile men
 
 ## Theming and Design Tokens
 
-Poyraz UI uses Tailwind CSS v4 with `@theme` tokens. The brutalist defaults are:
+Poyraz UI uses Tailwind CSS v4 with `@theme` tokens. The minimal defaults are:
 
 ```css
 /* Core design language */
-border-radius: 0; /* rounded-none on all components */
+border-radius: 2px; /* rounded-sm on all components */
 box-shadow: none; /* shadow-none everywhere */
-border: 2px dashed; /* border-2 border-dashed */
+border: 1px solid; /* border */
 
 /* Primary palette */
 --color-primary: #dc2626; /* red-600 */
@@ -509,7 +509,7 @@ poyraz-ui/
   src/
     index.ts                  # Main package entry point
     utils.ts                  # cn() utility (clsx + tailwind-merge)
-    preset.css                # Base design tokens and brutalist defaults
+    preset.css                # Base design tokens and minimal defaults
     atoms/index.ts            # Atom barrel exports
     molecules/index.ts        # Molecule barrel exports
     organisms/index.ts        # Organism barrel exports
