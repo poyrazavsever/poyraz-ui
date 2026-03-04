@@ -39,8 +39,7 @@ const navbarVariants = cva("w-full", {
       default: "bg-white text-slate-950",
       minimal: "bg-white text-slate-950",
       transparent: "bg-transparent text-slate-950",
-      bordered:
-        "bg-white text-slate-950 border-b-2 border-dashed border-slate-300",
+      bordered: "bg-white text-slate-950 border-b border-slate-300",
     },
   },
   defaultVariants: { variant: "default" },
@@ -134,7 +133,7 @@ const NavbarTopBar = React.forwardRef<
       className={cn(
         "w-full",
         "text-xs font-medium tracking-wide",
-        "bg-red-600 text-white border-b-2 border-dashed border-red-800",
+        "bg-red-600 text-white border-b border-red-800",
         className,
       )}
       {...props}
@@ -168,7 +167,7 @@ const NavbarMain = React.forwardRef<
       ref={ref}
       className={cn(
         "relative w-full",
-        "border-b-2 border-dashed",
+        "border-b",
         variant === "transparent"
           ? "border-white/30"
           : variant === "bordered"
@@ -252,8 +251,8 @@ const NavbarLinks = React.forwardRef<
             className={cn(
               "relative w-full overflow-hidden",
               "bg-white",
-              "border-2 border-dashed border-slate-200 border-t-0",
-              "rounded-none shadow-none",
+              "border border-slate-200 border-t-0",
+              "rounded-sm shadow-none",
               "h-[var(--radix-navigation-menu-viewport-height)]",
               "transition-[width,height] duration-200",
               "data-[state=open]:animate-in data-[state=open]:fade-in",
@@ -274,10 +273,10 @@ NavbarLinks.displayName = "NavbarLinks";
 const navLinkStyles = [
   "inline-flex items-center gap-1 px-3 py-2",
   "text-sm font-medium tracking-wide",
-  "rounded-none transition-colors duration-150",
+  "rounded-sm transition-colors duration-150",
   "hover:bg-slate-100",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-  "data-[active]:border-b-2 data-[active]:border-dashed data-[active]:border-red-600",
+  "data-[active]:border-b data-[active]:border-red-600",
 ].join(" ");
 
 const NavbarLink = React.forwardRef<
@@ -368,7 +367,8 @@ const megaMenuVariants = cva("p-6", {
 });
 
 export interface NavbarMegaMenuProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof megaMenuVariants> {}
 
 const NavbarMegaMenu = React.forwardRef<HTMLDivElement, NavbarMegaMenuProps>(
@@ -392,11 +392,7 @@ const NavbarMegaMenuLinks = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("grid grid-cols-2 gap-2", className)}
-    {...props}
-  >
+  <div ref={ref} className={cn("grid grid-cols-2 gap-2", className)} {...props}>
     {children}
   </div>
 ));
@@ -412,11 +408,7 @@ const NavbarMegaMenuFeatured = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "border-2 border-dashed border-slate-200 p-4",
-      "bg-slate-50",
-      className,
-    )}
+    className={cn("border border-slate-200 p-4", "bg-slate-50", className)}
     {...props}
   >
     {children}
@@ -440,8 +432,8 @@ const NavbarMegaMenuItem = React.forwardRef<
       ref={ref}
       className={cn(
         "block select-none p-3",
-        "border-2 border-dashed border-transparent",
-        "rounded-none transition-colors",
+        "border border-transparent",
+        "rounded-sm transition-colors",
         "hover:bg-slate-50 hover:border-slate-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
         className,
@@ -499,7 +491,7 @@ const NavbarMobileToggle = React.forwardRef<
       className={cn(
         "inline-flex items-center justify-center",
         "h-10 w-10",
-        "border-2 border-dashed rounded-none",
+        "border rounded-sm",
         "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
         "transition-colors duration-150",
         "lg:hidden",
@@ -556,7 +548,7 @@ const NavbarMobileMenu = React.forwardRef<
         className={cn(
           "lg:hidden fixed top-0 right-0 z-[999] h-full w-[75%] max-w-sm",
           "bg-white",
-          "border-l-2 border-dashed border-slate-200",
+          "border-l border-slate-200",
           "shadow-none",
           "transition-transform duration-300 ease-in-out",
           mobileOpen ? "translate-x-0" : "translate-x-full",
@@ -565,7 +557,7 @@ const NavbarMobileMenu = React.forwardRef<
         {...props}
       >
         {/* Panel header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b-2 border-dashed border-slate-200">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
           <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
             Menu
           </span>
@@ -576,7 +568,7 @@ const NavbarMobileMenu = React.forwardRef<
             className={cn(
               "inline-flex items-center justify-center",
               "h-8 w-8",
-              "border-2 border-dashed rounded-none",
+              "border rounded-sm",
               "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
               "transition-colors duration-150",
               "cursor-pointer",
@@ -613,7 +605,7 @@ const NavbarMobileLink = React.forwardRef<
     className={cn(
       "block px-3 py-2.5",
       "text-sm font-medium",
-      "border-2 border-dashed border-transparent",
+      "border border-transparent",
       "transition-colors duration-150",
       active
         ? "bg-red-50 text-red-700 border-red-200 font-semibold"
@@ -662,7 +654,7 @@ const NavbarMobileActions = React.forwardRef<
     ref={ref}
     className={cn(
       "mt-auto px-4 py-4",
-      "border-t-2 border-dashed border-slate-200",
+      "border-t border-slate-200",
       "flex flex-col gap-2",
       className,
     )}
@@ -714,7 +706,7 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
           className={cn(
             "h-8 w-40 lg:w-52 pl-8 pr-3",
             "text-xs font-medium",
-            "border-2 border-dashed rounded-none",
+            "border rounded-sm",
             "bg-white border-slate-300 text-slate-950 placeholder:text-slate-400",
             "transition-colors duration-150",
             "focus:outline-none focus:ring-2 focus:ring-red-600",
@@ -742,7 +734,7 @@ const NavbarDivider = React.forwardRef<
     className={cn(
       "hidden lg:block",
       "h-6 w-px",
-      "border-l-2 border-dashed border-slate-200",
+      "border-l border-slate-200",
       "mx-2",
       className,
     )}

@@ -9,7 +9,7 @@ import { cn } from "@/components/ui/atoms/typography";
 
 const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 
-const footerVariants = cva(["w-full", "border-t-2 border-dashed"].join(" "), {
+const footerVariants = cva(["w-full", "border-t"].join(" "), {
   variants: {
     variant: {
       full: "py-12 bg-white text-slate-950 border-slate-200",
@@ -98,7 +98,7 @@ const FooterHeading = React.forwardRef<
       "text-xs font-bold uppercase tracking-[0.15em]",
       "text-slate-900",
       "pb-2",
-      "border-b-2 border-dashed border-slate-200",
+      "border-b border-slate-200",
       className,
     )}
     {...props}
@@ -180,7 +180,7 @@ const FooterSocialLink = React.forwardRef<
     className={cn(
       "inline-flex items-center justify-center",
       "h-9 w-9",
-      "border-2 border-dashed border-slate-300 rounded-none",
+      "border border-slate-300 rounded-sm",
       "text-slate-500",
       "hover:bg-red-600 hover:text-white hover:border-red-800",
       "transition-colors duration-150",
@@ -206,7 +206,7 @@ const FooterBottom = React.forwardRef<
     className={cn(
       "flex flex-col sm:flex-row items-center justify-between gap-4",
       "pt-6 mt-8",
-      "border-t-2 border-dashed border-slate-200",
+      "border-t border-slate-200",
       "text-xs text-slate-400",
       className,
     )}
@@ -272,7 +272,7 @@ function FooterNewsletterInner(
       ref={ref}
       className={cn(
         "py-6 px-6",
-        "border-2 border-dashed border-slate-200",
+        "border border-slate-200",
         "bg-slate-50",
         className,
       )}
@@ -291,10 +291,10 @@ function FooterNewsletterInner(
           required
           className={cn(
             "flex-1 h-10 px-3 text-sm",
-            "border-2 border-dashed border-slate-300 bg-white",
+            "border border-slate-300 bg-white",
             "placeholder:text-slate-400",
             "focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-1",
-            "rounded-none shadow-none",
+            "rounded-sm shadow-none",
           )}
         />
         <button
@@ -303,11 +303,11 @@ function FooterNewsletterInner(
             "h-10 px-5",
             "text-xs font-bold uppercase tracking-wide",
             "bg-red-600 text-white",
-            "border-2 border-dashed border-red-800",
+            "border border-red-800",
             "hover:bg-red-700 hover:border-red-900",
             "active:bg-red-800 active:scale-[0.97]",
             "transition-all duration-150",
-            "rounded-none shadow-none cursor-pointer",
+            "rounded-sm shadow-none cursor-pointer",
           )}
         >
           {buttonText}
@@ -333,7 +333,7 @@ const FooterDivider = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <hr
     ref={ref}
-    className={cn("border-t-2 border-dashed border-slate-200 my-8", className)}
+    className={cn("border-t border-slate-200 my-8", className)}
     {...props}
   />
 ));

@@ -14,7 +14,7 @@ const announcementBarVariants = cva(
   [
     "relative w-full",
     "text-sm font-medium tracking-wide",
-    "border-b-2 border-dashed",
+    "border-b",
     "transition-all duration-300",
   ].join(" "),
   {

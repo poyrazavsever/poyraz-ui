@@ -282,7 +282,7 @@ function DataTableInner<T>(
                       className="fixed inset-0 z-40"
                       onClick={() => setColToggleOpen(false)}
                     />
-                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-white border-2 border-dashed border-slate-200 p-2 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-white border border-slate-200 p-2 space-y-0.5">
                       {columns.map((col) => (
                         <button
                           key={col.id}
@@ -292,7 +292,7 @@ function DataTableInner<T>(
                         >
                           <span
                             className={cn(
-                              "h-4 w-4 border-2 border-dashed flex items-center justify-center shrink-0",
+                              "h-4 w-4 border flex items-center justify-center shrink-0",
                               hiddenCols.has(col.id)
                                 ? "border-slate-300"
                                 : "border-red-600 bg-red-600 text-white",
@@ -315,11 +315,11 @@ function DataTableInner<T>(
       )}
 
       {/* Table */}
-      <div className="border-2 border-dashed border-slate-200 overflow-x-auto">
+      <div className="border border-slate-200 overflow-x-auto">
         <table className="w-full text-sm">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
-            <tr className="border-b-2 border-dashed border-slate-200 bg-slate-50/80">
+            <tr className="border-b border-slate-200 bg-slate-50/80">
               {selectable && (
                 <th className="w-12 p-3 text-center">
                   <Checkbox
@@ -381,7 +381,7 @@ function DataTableInner<T>(
                   <tr
                     key={id}
                     className={cn(
-                      "border-b border-dashed border-slate-100 transition-colors",
+                      "border-b border-slate-100 transition-colors",
                       "hover:bg-slate-50/50",
                       isSelected && "bg-red-50/50",
                     )}
