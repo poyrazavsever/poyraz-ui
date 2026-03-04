@@ -48,37 +48,49 @@ function SidebarSection({
   basePath,
   items,
   pathname,
-  defaultOpen = false,
+  isOpen,
+  onToggle,
 }: {
   label: string;
   basePath: string;
   items: string[];
   pathname: string;
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
-  const isAnyActive = items.some(
-    (item) => pathname === `${basePath}/${toSlug(item)}`,
-  );
-  const [open, setOpen] = React.useState(defaultOpen || isAnyActive);
-
   return (
     <div className="space-y-0.5">
-      <button
-        onClick={() => setOpen((v) => !v)}
+      <div
         className={cn(
-          "flex items-center justify-between w-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest cursor-pointer",
+          "flex items-center justify-between w-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest",
           "text-slate-400 hover:text-slate-600 transition-colors",
         )}
       >
-        <span>{label}</span>
-        <ChevronDown
+        <Link
+          href={basePath}
           className={cn(
-            "h-3.5 w-3.5 transition-transform duration-200",
-            open && "rotate-180",
+            "flex-1 no-underline cursor-pointer transition-colors",
+            pathname === basePath || pathname.startsWith(basePath + "/")
+              ? "text-slate-700"
+              : "text-slate-400 hover:text-slate-600",
           )}
-        />
-      </button>
-      {open && (
+        >
+          {label}
+        </Link>
+        <button
+          onClick={onToggle}
+          className="cursor-pointer p-0.5 text-slate-400 hover:text-slate-600 transition-colors"
+          aria-label={isOpen ? "Collapse section" : "Expand section"}
+        >
+          <ChevronDown
+            className={cn(
+              "h-3.5 w-3.5 transition-transform duration-200",
+              isOpen && "rotate-180",
+            )}
+          />
+        </button>
+      </div>
+      {isOpen && (
         <ul className="space-y-0.5">
           {items.map((item) => {
             const href = `${basePath}/${toSlug(item)}`;
@@ -108,6 +120,32 @@ function SidebarSection({
 
 function DocsSidebarContent() {
   const pathname = usePathname();
+
+  // Determine which section should be open based on the current path
+  const getActiveSection = React.useCallback(() => {
+    for (const group of componentRegistry) {
+      // Match both category page (/docs/atoms) and individual items (/docs/atoms/button)
+      if (
+        pathname === group.basePath ||
+        pathname.startsWith(group.basePath + "/")
+      ) {
+        return group.label;
+      }
+    }
+    return null;
+  }, [pathname]);
+
+  const [openSection, setOpenSection] = React.useState<string | null>(
+    () => getActiveSection() ?? componentRegistry[0]?.label ?? null,
+  );
+
+  // Sync when navigating to a different section
+  React.useEffect(() => {
+    const active = getActiveSection();
+    if (active) {
+      setOpenSection(active);
+    }
+  }, [getActiveSection]);
 
   return (
     <>
@@ -139,6 +177,12 @@ function DocsSidebarContent() {
             basePath={group.basePath}
             items={group.items}
             pathname={pathname}
+            isOpen={openSection === group.label}
+            onToggle={() =>
+              setOpenSection((prev) =>
+                prev === group.label ? null : group.label,
+              )
+            }
           />
         ))}
       </div>
@@ -191,7 +235,7 @@ export default function DocsLayout({
         <div className="hidden lg:block w-64 shrink-0">
           <Sidebar
             variant="default"
-            className="fixed top-[57px] left-0 w-64 h-[calc(100vh-57px)] border-r-2 border-dashed border-slate-200 overflow-y-auto"
+            className="fixed top-[57px] left-0 w-64 h-[calc(100vh-57px)] border-r border-slate-200 overflow-y-auto"
           >
             <SidebarHeader className="h-14">
               <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
