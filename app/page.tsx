@@ -7,35 +7,52 @@ import {
   Github,
   Copy,
   Check,
-  Layers,
-  Paintbrush,
-  Zap,
-  Component,
   BookOpen,
+  Shield,
+  CheckCircle,
+  ChevronRight,
+  Loader2,
+  SlidersHorizontal,
+  Users,
+  BarChart3,
+  TrendingUp,
+  Activity,
+  Calendar,
+  CircleDot,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "poyraz-ui/molecules";
 
 import { Button } from "poyraz-ui/atoms";
 import { Typography } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
-import { Separator } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
-import { PatternDots } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Switch } from "poyraz-ui/atoms";
 import { Checkbox } from "poyraz-ui/atoms";
-import { Skeleton } from "poyraz-ui/atoms";
-import { Avatar, AvatarFallback } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
-import { Textarea } from "poyraz-ui/atoms";
+import { Separator } from "poyraz-ui/atoms";
 import { RadioGroup, RadioGroupItem } from "poyraz-ui/atoms";
+import { Avatar, AvatarFallback, AvatarImage } from "poyraz-ui/atoms";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardDescription,
+  CardFooter,
 } from "poyraz-ui/atoms";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "poyraz-ui/molecules";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import {
   Pagination,
   PaginationContent,
@@ -68,6 +85,8 @@ import {
 } from "poyraz-ui/organisms";
 import { mainNav, mobileNav, footerNav, socialLinks } from "@/lib/navigation";
 
+/* ── Copy Install Command ───────────────────────────────────────── */
+
 function CopyInstallCommand() {
   const [copied, setCopied] = useState(false);
   const command = "pnpm add poyraz-ui";
@@ -75,23 +94,21 @@ function CopyInstallCommand() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(command);
     setCopied(true);
-    toast.success("Copied to clipboard!", {
-      description: command,
-    });
+    toast.success("Copied to clipboard!", { description: command });
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="mt-8 p-4 bg-slate-950 text-slate-50 border-2 border-dashed border-red-600 font-mono text-sm md:text-base flex items-center gap-4 w-full max-w-md">
-      <span className="text-red-500">$</span>
-      <span>{command}</span>
+    <div className="flex items-center gap-3 rounded-sm border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-700 w-full max-w-md">
+      <span className="text-slate-400">$</span>
+      <span className="flex-1">{command}</span>
       <button
         onClick={handleCopy}
-        className="ml-auto text-slate-500 hover:text-white cursor-pointer transition-colors"
+        className="text-slate-400 hover:text-slate-900 cursor-pointer transition-colors"
         aria-label="Copy install command"
       >
         {copied ? (
-          <Check className="h-4 w-4 text-green-400" />
+          <Check className="h-4 w-4 text-green-500" />
         ) : (
           <Copy className="h-4 w-4" />
         )}
@@ -100,10 +117,666 @@ function CopyInstallCommand() {
   );
 }
 
+/* ── Showcase Cards (shadcn-style) ──────────────────────────────── */
+
+function PaymentMethodCard() {
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-base">Payment Method</CardTitle>
+        <CardDescription>
+          All transactions are secure and encrypted
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label>Name on Card</Label>
+          <Input placeholder="John Doe" readOnly tabIndex={-1} />
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          <div className="col-span-2 space-y-2">
+            <Label>Card Number</Label>
+            <Input placeholder="1234 5678 9012 3456" readOnly tabIndex={-1} />
+          </div>
+          <div className="space-y-2">
+            <Label>CVV</Label>
+            <Input placeholder="123" readOnly tabIndex={-1} />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-2">
+            <Label>Month</Label>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="MM" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="01">01</SelectItem>
+                <SelectItem value="02">02</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label>Year</Label>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="YYYY" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2026">2026</SelectItem>
+                <SelectItem value="2027">2027</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TeamMembersCard() {
+  return (
+    <Card className="w-full">
+      <CardContent className="pt-6 flex flex-col items-center text-center space-y-4">
+        <div className="flex -space-x-2">
+          <Avatar className="h-10 w-10 border-2 border-white">
+            <AvatarImage src="https://i.pravatar.cc/40?img=1" />
+            <AvatarFallback>A</AvatarFallback>
+          </Avatar>
+          <Avatar className="h-10 w-10 border-2 border-white">
+            <AvatarImage src="https://i.pravatar.cc/40?img=2" />
+            <AvatarFallback>B</AvatarFallback>
+          </Avatar>
+          <Avatar className="h-10 w-10 border-2 border-white">
+            <AvatarImage src="https://i.pravatar.cc/40?img=3" />
+            <AvatarFallback>C</AvatarFallback>
+          </Avatar>
+        </div>
+        <div>
+          <p className="font-semibold text-sm">No Team Members</p>
+          <p className="text-xs text-slate-500 mt-1">
+            Invite your team to collaborate on this project.
+          </p>
+        </div>
+        <Button variant="outline" size="sm">
+          <Users className="mr-1.5 h-3.5 w-3.5" /> Invite Members
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+function SecurityCard() {
+  return (
+    <Card className="w-full">
+      <CardContent className="pt-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Shield className="h-5 w-5 text-slate-600" />
+            <div>
+              <p className="text-sm font-semibold">Two-factor authentication</p>
+              <p className="text-xs text-slate-500">
+                Verify via email or phone number.
+              </p>
+            </div>
+          </div>
+          <Button variant="outline" size="sm">
+            Enable
+          </Button>
+        </div>
+        <Separator />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <CheckCircle className="h-5 w-5 text-green-600" />
+            <p className="text-sm">Your profile has been verified.</p>
+          </div>
+          <ChevronRight className="h-4 w-4 text-slate-400" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function AppearanceCard() {
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-sm">Appearance Settings</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label>Compute Environment</Label>
+          <RadioGroup defaultValue="kubernetes" className="space-y-2">
+            <div className="flex items-start gap-3 rounded-sm border border-slate-200 p-3">
+              <RadioGroupItem value="kubernetes" id="k8s" className="mt-0.5" />
+              <div>
+                <Label
+                  htmlFor="k8s"
+                  className="normal-case font-medium text-sm"
+                >
+                  Kubernetes
+                </Label>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Run GPU workloads on a K8s configured cluster.
+                </p>
+              </div>
+            </div>
+          </RadioGroup>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function StatusBadges() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="outline" className="gap-1.5">
+        <Loader2 className="h-3 w-3 animate-spin" /> Syncing
+      </Badge>
+      <Badge variant="outline" className="gap-1.5">
+        <Loader2 className="h-3 w-3 animate-spin" /> Updating
+      </Badge>
+      <Badge variant="outline" className="gap-1.5">
+        <Loader2 className="h-3 w-3 animate-spin" /> Loading
+      </Badge>
+    </div>
+  );
+}
+
+function ChatInput() {
+  return (
+    <div className="flex items-center gap-2 rounded-sm border border-slate-200 px-3 py-2">
+      <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
+        <span className="text-lg">+</span>
+      </Button>
+      <input
+        className="flex-1 text-sm border-0 outline-none bg-transparent placeholder:text-slate-400"
+        placeholder="Send a message..."
+        readOnly
+        tabIndex={-1}
+      />
+      <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
+        <SlidersHorizontal className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+}
+
+function CheckboxCard() {
+  return (
+    <div className="flex items-center gap-2.5 rounded-sm border border-slate-200 px-4 py-3">
+      <Checkbox id="terms-home" defaultChecked />
+      <Label htmlFor="terms-home" className="normal-case font-normal text-sm">
+        I agree to the terms and conditions
+      </Label>
+    </div>
+  );
+}
+
+function PaginationDemo() {
+  return (
+    <div className="flex items-center gap-3">
+      <Pagination className="w-auto mx-0">
+        <PaginationContent className="gap-1">
+          <PaginationItem>
+            <PaginationPrevious href="#" className="h-9 px-2" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" isActive className="h-9 w-9">
+              1
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="h-9 w-9">
+              2
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="h-9 w-9">
+              3
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" className="h-9 px-2" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
+  );
+}
+
+/* ── Dashboard Showcase ─────────────────────────────────────────── */
+
+function DashboardShowcase() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Stats row */}
+      <Card className="w-full">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Total Revenue
+              </p>
+              <p className="text-2xl font-bold mt-1">$45,231</p>
+              <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
+                <TrendingUp className="h-3 w-3" /> +20.1%
+              </p>
+            </div>
+            <div className="h-10 w-10 rounded-sm bg-red-50 flex items-center justify-center">
+              <BarChart3 className="h-5 w-5 text-red-600" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="w-full">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Subscriptions
+              </p>
+              <p className="text-2xl font-bold mt-1">+2,350</p>
+              <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
+                <TrendingUp className="h-3 w-3" /> +180.1%
+              </p>
+            </div>
+            <div className="h-10 w-10 rounded-sm bg-slate-100 flex items-center justify-center">
+              <Users className="h-5 w-5 text-slate-600" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="w-full">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Active Now
+              </p>
+              <p className="text-2xl font-bold mt-1">+573</p>
+              <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <Activity className="h-3 w-3" /> +201 since last hour
+              </p>
+            </div>
+            <div className="h-10 w-10 rounded-sm bg-green-50 flex items-center justify-center">
+              <Activity className="h-5 w-5 text-green-600" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Recent sales */}
+      <Card className="w-full lg:row-span-2">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-sm">Recent Sales</CardTitle>
+          <CardDescription>You made 265 sales this month.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {[
+            {
+              name: "Olivia Martin",
+              email: "olivia@email.com",
+              amount: "+$1,999",
+            },
+            { name: "Jackson Lee", email: "jackson@email.com", amount: "+$39" },
+            {
+              name: "Isabella Nguyen",
+              email: "isabella@email.com",
+              amount: "+$299",
+            },
+            { name: "William Kim", email: "will@email.com", amount: "+$99" },
+          ].map((sale) => (
+            <div key={sale.email} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="text-[10px]">
+                    {sale.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">{sale.name}</p>
+                  <p className="text-xs text-slate-500">{sale.email}</p>
+                </div>
+              </div>
+              <span className="text-sm font-semibold">{sale.amount}</span>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Chart placeholder */}
+      <Card className="w-full lg:col-span-3">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-sm">Overview</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-end gap-1.5 h-32">
+            {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 50].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 bg-red-600/80 rounded-t-sm transition-all hover:bg-red-600"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+          <div className="flex justify-between mt-2 text-[10px] text-slate-400">
+            <span>Jan</span>
+            <span>Feb</span>
+            <span>Mar</span>
+            <span>Apr</span>
+            <span>May</span>
+            <span>Jun</span>
+            <span>Jul</span>
+            <span>Aug</span>
+            <span>Sep</span>
+            <span>Oct</span>
+            <span>Nov</span>
+            <span>Dec</span>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+/* ── Tasks Showcase ─────────────────────────────────────────────── */
+
+function TasksShowcase() {
+  const tasks = [
+    {
+      id: 1,
+      label: "TASK-8782",
+      title:
+        "You can't compress the program without quantifying the open-source SSD.",
+      status: "In Progress",
+      priority: "Medium",
+      checked: false,
+    },
+    {
+      id: 2,
+      label: "TASK-7878",
+      title:
+        "Try to calculate the EXE feed, maybe it will index the multi-byte pixel!",
+      status: "Backlog",
+      priority: "High",
+      checked: false,
+    },
+    {
+      id: 3,
+      label: "TASK-7839",
+      title: "We need to bypass the neural TCP card!",
+      status: "Todo",
+      priority: "High",
+      checked: true,
+    },
+    {
+      id: 4,
+      label: "TASK-5562",
+      title:
+        "The SAS interface is down, bypass the open-source pixel so we can program.",
+      status: "Backlog",
+      priority: "Medium",
+      checked: false,
+    },
+    {
+      id: 5,
+      label: "TASK-8686",
+      title:
+        "I'll parse the wireless SSL protocol, that should driver the API panel!",
+      status: "Canceled",
+      priority: "Low",
+      checked: false,
+    },
+    {
+      id: 6,
+      label: "TASK-1280",
+      title:
+        "Use the digital TLS panel, then you can transmit the haptic system!",
+      status: "Done",
+      priority: "High",
+      checked: true,
+    },
+  ];
+
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-bold">Welcome back!</h3>
+          <p className="text-sm text-slate-500">
+            Here&apos;s a list of your tasks for this month!
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Input
+            placeholder="Filter tasks..."
+            className="w-48 h-9"
+            readOnly
+            tabIndex={-1}
+          />
+          <Button variant="outline" size="sm">
+            View
+          </Button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <Card className="w-full overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-200">
+                <th className="p-3 text-left w-10">
+                  <Checkbox />
+                </th>
+                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                  Task
+                </th>
+                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                  Title
+                </th>
+                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                  Status
+                </th>
+                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                  Priority
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((task) => (
+                <tr
+                  key={task.id}
+                  className="border-b border-slate-100 last:border-0"
+                >
+                  <td className="p-3">
+                    <Checkbox defaultChecked={task.checked} />
+                  </td>
+                  <td className="p-3 font-mono text-xs text-slate-500">
+                    {task.label}
+                  </td>
+                  <td className="p-3 max-w-xs truncate">{task.title}</td>
+                  <td className="p-3">
+                    <Badge variant="outline" className="text-[10px] gap-1">
+                      <CircleDot className="h-3 w-3" />
+                      {task.status}
+                    </Badge>
+                  </td>
+                  <td className="p-3">
+                    <span
+                      className={`text-xs font-medium ${
+                        task.priority === "High"
+                          ? "text-red-600"
+                          : task.priority === "Medium"
+                            ? "text-yellow-600"
+                            : "text-slate-400"
+                      }`}
+                    >
+                      {task.priority}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex items-center justify-between px-4 py-3 border-t border-slate-200">
+          <p className="text-xs text-slate-500">
+            0 of {tasks.length} row(s) selected.
+          </p>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="h-8 text-xs">
+              Previous
+            </Button>
+            <Button variant="outline" size="sm" className="h-8 text-xs">
+              Next
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+/* ── Auth Showcase ──────────────────────────────────────────────── */
+
+function AuthShowcase() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Login Card */}
+      <Card className="w-full">
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label>Email</Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Input
+                placeholder="m@example.com"
+                className="pl-9"
+                readOnly
+                tabIndex={-1}
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label>Password</Label>
+              <button className="text-xs text-red-600 hover:underline cursor-pointer">
+                Forgot password?
+              </button>
+            </div>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                className="pl-9 pr-9"
+                readOnly
+                tabIndex={-1}
+              />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox id="remember" />
+            <Label
+              htmlFor="remember"
+              className="normal-case font-normal text-sm"
+            >
+              Remember me
+            </Label>
+          </div>
+          <Button className="w-full">Login</Button>
+        </CardContent>
+        <CardFooter className="justify-center">
+          <p className="text-xs text-slate-500">
+            Don&apos;t have an account?{" "}
+            <span className="text-red-600 font-medium cursor-pointer hover:underline">
+              Sign up
+            </span>
+          </p>
+        </CardFooter>
+      </Card>
+
+      {/* Create Account Card */}
+      <Card className="w-full">
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Create Account</CardTitle>
+          <CardDescription>
+            Enter your information to create an account
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <Label>First Name</Label>
+              <Input placeholder="Poyraz" readOnly tabIndex={-1} />
+            </div>
+            <div className="space-y-2">
+              <Label>Last Name</Label>
+              <Input placeholder="Avsever" readOnly tabIndex={-1} />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Email</Label>
+            <Input placeholder="m@example.com" readOnly tabIndex={-1} />
+          </div>
+          <div className="space-y-2">
+            <Label>Password</Label>
+            <Input
+              type="password"
+              placeholder="••••••••"
+              readOnly
+              tabIndex={-1}
+            />
+          </div>
+          <Button className="w-full">Create Account</Button>
+          <div className="relative">
+            <Separator />
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-xs text-slate-400">
+              OR
+            </span>
+          </div>
+          <Button variant="outline" className="w-full">
+            <Github className="mr-2 h-4 w-4" /> Sign up with GitHub
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+/* ── Main Page ──────────────────────────────────────────────────── */
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* ─── NAVBAR ─────────────────────────────────────────── */}
+      {/* ─── NAVBAR ──────────────────────────────────────── */}
       <Navbar variant="default" sticky>
         <NavbarMain>
           <NavbarBrand href="/">
@@ -140,22 +813,17 @@ export default function Home() {
         </NavbarMobileMenu>
       </Navbar>
 
-      {/* ─── HERO ───────────────────────────────────────────── */}
-      <section className="relative px-6 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center overflow-hidden">
-        <PatternDots
-          overlay
-          size={28}
-          opacity={0.12}
-          color="#334155"
-          className="w-full h-full"
-        />
-        <div className="relative z-10 max-w-5xl mx-auto space-y-8 flex flex-col items-center">
-          <Badge
-            variant="outline"
-            className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest"
-          >
-            v0.1.0 — Open Source
-          </Badge>
+      {/* ─── HERO ────────────────────────────────────────── */}
+      <section className="px-6 pt-20 pb-8 md:pt-28 md:pb-12">
+        <div className="max-w-5xl mx-auto text-center space-y-8 flex flex-col items-center">
+          <Link href={socialLinks.repo} target="_blank">
+            <Badge
+              variant="outline"
+              className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors"
+            >
+              v0.3.0 — Open Source
+            </Badge>
+          </Link>
 
           <Typography variant="h1">
             <span className="font-secondary text-red-600">UI Kit</span> for
@@ -163,9 +831,9 @@ export default function Home() {
           </Typography>
 
           <Typography variant="lead" className="max-w-2xl">
-            Brutalist design system for modern web applications.
+            Minimal design system for modern web applications.
             <span className="block mt-2 font-medium text-slate-900">
-              No rounding. No shadows. Just bold, functional design.
+              Clean borders. Subtle rounding. Modern, functional design.
             </span>
           </Typography>
 
@@ -190,357 +858,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── SHOWCASE ─────────────────────────────────────── */}
-      <section className="w-full overflow-hidden mt-36">
-        <div className="flex items-end justify-center">
-          {/* Image 2 — person with success alert (left) */}
-          <div className="shrink-0">
-            <img
-              src="/images/image 2.png"
-              alt="Poyraz UI success alert showcase"
-              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom"
-              draggable={false}
-            />
-          </div>
+      {/* ─── COMPONENT SHOWCASE ──────────────────────────── */}
+      <section className="px-6 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <Tabs defaultValue="examples">
+            <TabsList className="mb-6">
+              <TabsTrigger value="examples">Examples</TabsTrigger>
+              <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+              <TabsTrigger value="tasks">Tasks</TabsTrigger>
+              <TabsTrigger value="auth">Authentication</TabsTrigger>
+            </TabsList>
 
-          {/* Image 1 — person with button (right, cut off) + red box */}
-          <div className="flex items-end flex-1 min-w-0">
-            <img
-              src="/images/image 1.png"
-              alt="Poyraz UI button showcase"
-              className="h-52 sm:h-64 md:h-72 lg:h-80 w-auto object-contain object-bottom shrink-0"
-              draggable={false}
-            />
-            {/* Red-600 box — starts at 0 from image 1's cut edge */}
-            <div className="self-stretch bg-red-600 flex-1 flex items-center overflow-hidden">
-              {/* Decorative showcase components */}
-              <div className="flex items-center gap-2.5 px-3 py-2 opacity-50 pointer-events-none select-none flex-wrap content-center justify-center w-full h-full">
-                {/* Row 1 type elements */}
-                <Button
-                  size="sm"
-                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
-                >
-                  Button
-                </Button>
-                <Badge
-                  variant="outline"
-                  className="border-white/80 text-white text-xs"
-                >
-                  Badge
-                </Badge>
-                <Input
-                  className="w-20 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
-                  placeholder="Email"
-                  tabIndex={-1}
-                  readOnly
-                />
-                <Switch
-                  checked
-                  className="data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
-                />
-                <Checkbox
-                  checked
-                  className="border-white/80 data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
-                />
-                <Avatar className="border-white/80 h-8 w-8">
-                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
-                    PA
-                  </AvatarFallback>
-                </Avatar>
-
-                {/* Mini card */}
-                <Card className="border-white/60 bg-white/10 w-28">
-                  <CardHeader className="p-2">
-                    <CardTitle className="text-[10px] text-white">
-                      Card
-                    </CardTitle>
-                    <CardDescription className="text-[9px] text-white/60">
-                      Content
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-                <Label className="text-white/90 text-[10px]">Label</Label>
-                <Skeleton className="w-14 h-3.5 border-white/60 bg-white/20" />
-                <RadioGroup defaultValue="a" className="flex gap-1.5">
-                  <RadioGroupItem
-                    value="a"
-                    className="border-white/80 data-[state=checked]:border-white scale-90"
-                  />
-                  <RadioGroupItem
-                    value="b"
-                    className="border-white/80 scale-90"
-                  />
-                </RadioGroup>
-                <Textarea
-                  className="w-20 h-8 min-h-0 border-white/80 bg-transparent text-white placeholder:text-white/60 resize-none py-1 text-xs"
-                  placeholder="Text"
-                  tabIndex={-1}
-                  readOnly
-                />
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
-                >
-                  Outline
-                </Button>
-                <Badge
-                  variant="outline"
-                  className="border-white/80 text-white text-xs"
-                >
-                  v0.2
-                </Badge>
-                <Avatar className="border-white/80 h-8 w-8">
-                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
-                    UI
-                  </AvatarFallback>
-                </Avatar>
-                <Skeleton className="w-10 h-3.5 border-white/60 bg-white/20" />
-                <Switch className="data-[state=unchecked]:bg-white/20 border-white/80 scale-90" />
-                <Checkbox className="border-white/80 scale-90" />
-
-                {/* Pagination */}
-                <Pagination className="w-auto mx-0">
-                  <PaginationContent className="gap-0.5">
-                    <PaginationItem>
-                      <PaginationPrevious
-                        href="#"
-                        className="h-7 text-[10px] text-white border-white/60 px-1.5"
-                      />
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#"
-                        isActive
-                        className="h-7 w-7 text-[10px] text-white bg-white/20 border-white/60"
-                      >
-                        1
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#"
-                        className="h-7 w-7 text-[10px] text-white"
-                      >
-                        2
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationNext
-                        href="#"
-                        className="h-7 text-[10px] text-white border-white/60 px-1.5"
-                      />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-
-                {/* Row 3 — more to fill */}
-                <Input
-                  className="w-16 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
-                  placeholder="Name"
-                  tabIndex={-1}
-                  readOnly
-                />
-                <Card className="border-white/60 bg-white/10 w-24">
-                  <CardContent className="p-2">
-                    <Skeleton className="w-full h-2.5 border-white/40 bg-white/15 mb-1" />
-                    <Skeleton className="w-3/4 h-2.5 border-white/40 bg-white/15" />
-                  </CardContent>
-                </Card>
-                <Avatar className="border-white/80 h-8 w-8">
-                  <AvatarFallback className="bg-white/20 text-white text-[10px]">
-                    AB
-                  </AvatarFallback>
-                </Avatar>
-                <Badge
-                  variant="outline"
-                  className="border-white/80 text-white text-xs"
-                >
-                  New
-                </Badge>
-                <Skeleton className="w-12 h-3.5 border-white/60 bg-white/20" />
-                <Button
-                  size="sm"
-                  className="border-white/80 text-white bg-transparent hover:bg-transparent text-xs h-8"
-                >
-                  Submit
-                </Button>
-                <Switch
-                  checked
-                  className="data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
-                />
-                <Input
-                  className="w-20 h-8 border-white/80 bg-transparent text-white placeholder:text-white/60 text-xs"
-                  placeholder="Password"
-                  tabIndex={-1}
-                  readOnly
-                />
-                <Checkbox
-                  checked
-                  className="border-white/80 data-[state=checked]:bg-white/40 data-[state=checked]:border-white/80 scale-90"
-                />
-                <Label className="text-white/90 text-[10px]">Toggle</Label>
-                <Skeleton className="w-16 h-3.5 border-white/60 bg-white/20" />
-                <RadioGroup defaultValue="x" className="flex gap-1.5">
-                  <RadioGroupItem
-                    value="x"
-                    className="border-white/80 data-[state=checked]:border-white scale-90"
-                  />
-                  <RadioGroupItem
-                    value="y"
-                    className="border-white/80 scale-90"
-                  />
-                  <RadioGroupItem
-                    value="z"
-                    className="border-white/80 scale-90"
-                  />
-                </RadioGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── DESIGN PRINCIPLES ──────────────────────────────── */}
-      <section className="px-6 py-20 bg-slate-50/80 border-y-2 border-dashed border-slate-200">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div className="text-center space-y-3">
-            <Typography variant="h2">Design Principles</Typography>
-            <Typography variant="muted" className="max-w-xl mx-auto">
-              Every component follows a strict brutalist design language.
-            </Typography>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: <Paintbrush className="h-6 w-6" />,
-                title: "Dashed Borders",
-                desc: "Border-dashed is the DNA. Every interactive element uses dashed borders.",
-              },
-              {
-                icon: <Component className="h-6 w-6" />,
-                title: "No Rounding",
-                desc: "rounded-none everywhere. Sharp, intentional corners for a raw aesthetic.",
-              },
-              {
-                icon: <Zap className="h-6 w-6" />,
-                title: "No Shadows",
-                desc: "shadow-none by default. Red offset boxes replace traditional elevation.",
-              },
-              {
-                icon: <Layers className="h-6 w-6" />,
-                title: "High Contrast",
-                desc: "Red-600 primary with slate palette. Bold typography and clear hierarchy.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="p-6 bg-white border-2 border-dashed border-slate-200 space-y-3 hover:border-slate-900 transition-colors"
-              >
-                <div className="text-red-600">{item.icon}</div>
-                <h3 className="font-bold text-sm uppercase tracking-wide">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── COMPONENT OVERVIEW ─────────────────────────────── */}
-      <section className="px-6 py-20">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div className="text-center space-y-3">
-            <Typography variant="h2">Component Library</Typography>
-            <Typography variant="muted" className="max-w-xl mx-auto">
-              45+ components across three layers of abstraction.
-            </Typography>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Atoms",
-                count: 17,
-                href: "/docs/atoms",
-                items: [
-                  "Button",
-                  "Input",
-                  "Badge",
-                  "Avatar",
-                  "Card",
-                  "Form Fields",
-                ],
-                color: "border-red-600",
-              },
-              {
-                title: "Molecules",
-                count: 21,
-                href: "/docs/molecules",
-                items: [
-                  "Accordion",
-                  "Dialog",
-                  "Command Palette",
-                  "Sheet",
-                  "Drawer",
-                  "DatePicker",
-                ],
-                color: "border-slate-900",
-              },
-              {
-                title: "Organisms",
-                count: 5,
-                href: "/docs/organisms",
-                items: [
-                  "Navbar",
-                  "Data Table",
-                  "Announcement Bar",
-                  "Sidebar",
-                  "Footer",
-                ],
-                color: "border-slate-400",
-              },
-            ].map((layer) => (
-              <Link key={layer.title} href={layer.href}>
-                <div
-                  className={`p-6 bg-white border-2 border-dashed ${layer.color} space-y-4 hover:bg-slate-50 transition-colors h-full`}
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-black uppercase tracking-wide">
-                      {layer.title}
-                    </h3>
-                    <Badge variant="outline" className="text-xs">
-                      {layer.count}
-                    </Badge>
-                  </div>
-                  <Separator />
-                  <ul className="space-y-1.5">
-                    {layer.items.map((item) => (
-                      <li
-                        key={item}
-                        className="text-sm text-slate-600 flex items-center gap-2"
-                      >
-                        <span className="w-1.5 h-1.5 bg-red-600 inline-block" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="pt-2 text-xs font-semibold text-red-600 uppercase tracking-wide flex items-center gap-1">
-                    Explore <ArrowRight className="h-3 w-3" />
-                  </div>
+            <TabsContent value="examples">
+              {/* Component grid — shadcn-style */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Col 1 — Payment */}
+                <div className="space-y-4 lg:col-span-1">
+                  <PaymentMethodCard />
                 </div>
-              </Link>
-            ))}
-          </div>
+                {/* Col 2 — Team + badges + chat */}
+                <div className="space-y-4 lg:col-span-1">
+                  <TeamMembersCard />
+                  <StatusBadges />
+                  <ChatInput />
+                </div>
+                {/* Col 3 — Security + Appearance */}
+                <div className="space-y-4 lg:col-span-1">
+                  <SecurityCard />
+                  <AppearanceCard />
+                </div>
+                {/* Col 4 — Actions */}
+                <div className="space-y-4 lg:col-span-1">
+                  <CopyInstallCommand />
+                  <CheckboxCard />
+                  <PaginationDemo />
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="dashboard">
+              <DashboardShowcase />
+            </TabsContent>
+
+            <TabsContent value="tasks">
+              <TasksShowcase />
+            </TabsContent>
+
+            <TabsContent value="auth">
+              <AuthShowcase />
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
-      {/* ─── CTA ────────────────────────────────────────────── */}
-      <section className="px-6 py-20 bg-slate-50/80 border-y-2 border-dashed border-slate-200">
+      {/* ─── CTA ─────────────────────────────────────────── */}
+      <section className="px-6 py-20 bg-slate-50/80 border-y border-slate-200">
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <Typography variant="h2">Ready to Build?</Typography>
           <Typography variant="muted" className="max-w-lg mx-auto">
@@ -558,11 +930,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FOOTER ─────────────────────────────────────────── */}
-      <Footer
-        variant="branded"
-        className="mt-auto border-t-2 border-dashed border-slate-200"
-      >
+      {/* ─── FOOTER ──────────────────────────────────────── */}
+      <Footer variant="branded" className="mt-auto border-t border-slate-200">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <FooterBrand>
             <div className="flex items-center gap-3">
@@ -572,7 +941,7 @@ export default function Home() {
               </span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
-              An open-source brutalist UI component library for modern web
+              An open-source minimal UI component library for modern web
               applications.
             </p>
           </FooterBrand>
