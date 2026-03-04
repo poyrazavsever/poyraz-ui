@@ -30,6 +30,4 @@
   font-family: var(--font-secondary);
 }
 
-@utility decoration-dashed {
-  text-decoration-style: dashed;
-}
+/* decoration-dashed utility removed — no longer part of the design system */
