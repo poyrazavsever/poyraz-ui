@@ -73,8 +73,8 @@ const CommandPaletteContent = React.forwardRef<
       className={cn(
         "fixed left-[50%] top-[20%] z-50 w-full max-w-lg translate-x-[-50%]",
         "bg-white",
-        "border-2 border-dashed border-slate-200",
-        "rounded-none shadow-none",
+        "border border-slate-200",
+        "rounded-sm shadow-none",
         "overflow-hidden",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -114,7 +114,7 @@ const CommandPaletteInput = React.forwardRef<
     <div
       className={cn(
         "flex items-center gap-2 px-4",
-        "border-b-2 border-dashed border-slate-200",
+        "border-b border-slate-200",
       )}
     >
       <Search className="h-4 w-4 shrink-0 text-slate-400" />
@@ -134,7 +134,7 @@ const CommandPaletteInput = React.forwardRef<
         )}
         {...props}
       />
-      <DialogPrimitive.Close className="rounded-none p-1 opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+      <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -199,7 +199,7 @@ const CommandPaletteItem = React.forwardRef<
     aria-disabled={disabled}
     className={cn(
       "flex items-center gap-3 px-3 py-2.5 text-sm cursor-pointer select-none",
-      "border-2 border-dashed border-transparent",
+      "border border-transparent",
       "transition-colors duration-100",
       "hover:bg-slate-50 hover:border-slate-200",
       "focus:bg-slate-50 focus:border-slate-200 focus:outline-none",
@@ -212,7 +212,7 @@ const CommandPaletteItem = React.forwardRef<
     {icon && <span className="text-slate-400 shrink-0">{icon}</span>}
     <span className="flex-1 truncate">{children}</span>
     {shortcut && (
-      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-slate-400 border border-dashed border-slate-200 px-1.5 py-0.5">
+      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-slate-400 border border-slate-200 px-1.5 py-0.5">
         {shortcut}
       </kbd>
     )}
@@ -258,7 +258,7 @@ const CommandPaletteFooter = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-center gap-4 px-4 py-2",
-      "border-t-2 border-dashed border-slate-200",
+      "border-t border-slate-200",
       "text-[11px] text-slate-400",
       className,
     )}

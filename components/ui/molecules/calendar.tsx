@@ -173,7 +173,7 @@ function Calendar({
             "flex items-center justify-center",
             "hover:bg-slate-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-            today && !sel && "border-2 border-dashed border-red-600",
+            today && !sel && "border border-red-600",
             sel && "bg-red-600 text-white hover:bg-red-700",
             disabled && "opacity-30 cursor-not-allowed hover:bg-transparent",
           )}
@@ -202,7 +202,7 @@ function Calendar({
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
               "px-2 py-1 hover:bg-slate-100 transition-colors",
-              "border-b-2 border-dashed border-transparent hover:border-slate-300",
+              "border-b border-transparent hover:border-slate-300",
             )}
           >
             {MONTHS[viewMonth]} {viewYear}
@@ -262,7 +262,7 @@ function Calendar({
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
               "px-2 py-1 hover:bg-slate-100 transition-colors",
-              "border-b-2 border-dashed border-transparent hover:border-slate-300",
+              "border-b border-transparent hover:border-slate-300",
             )}
           >
             {viewYear}
@@ -300,9 +300,7 @@ function Calendar({
                   "flex items-center justify-center",
                   "hover:bg-slate-100",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-                  isCurrent &&
-                    !isSelected &&
-                    "border-2 border-dashed border-red-600",
+                  isCurrent && !isSelected && "border border-red-600",
                   isSelected && "bg-red-600 text-white hover:bg-red-700",
                 )}
               >
@@ -365,9 +363,7 @@ function Calendar({
                   "flex items-center justify-center",
                   "hover:bg-slate-100",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-                  isCurrent &&
-                    !isSelected &&
-                    "border-2 border-dashed border-red-600",
+                  isCurrent && !isSelected && "border border-red-600",
                   isSelected && "bg-red-600 text-white hover:bg-red-700",
                 )}
               >
