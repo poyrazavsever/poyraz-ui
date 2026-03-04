@@ -11,7 +11,7 @@ import { cn } from "@/components/ui/atoms/typography";
 /*  Shiki highlighting helper (lazy-loaded)                            */
 /* ================================================================== */
 
-let highlighterPromise: ReturnType<typeof import("shiki").then> | null = null;
+let highlighterPromise: Promise<Awaited<ReturnType<typeof import("shiki")["createHighlighter"]>>> | null = null;
 
 function getHighlighter() {
   if (!highlighterPromise) {
