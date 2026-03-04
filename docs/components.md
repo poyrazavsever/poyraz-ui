@@ -76,7 +76,7 @@ _Complex UI sections composed of molecules and atoms._
 
 ### Button
 
-A brutalist-style button component with dashed borders, no rounding, and no shadows.
+A minimal button component with clean borders, subtle rounding, and no shadows.
 
 #### Installation
 
@@ -105,7 +105,7 @@ import { Button } from "@/components/ui/atoms/button"
 
 #### Visual Style Notes
 
-- **Border**: Always `2px dashed`.
-- **Rounding**: Always `none` (0px).
+- **Border**: Always `1px solid`.
+- **Rounding**: Always `rounded-sm` (2px).
 - **Shadow**: Always `none`.
 - **Animation**: `active:scale-95` and hover effects.

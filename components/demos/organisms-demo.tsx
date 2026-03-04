@@ -70,10 +70,7 @@ import {
   FooterBottomLinks,
 } from "poyraz-ui/organisms";
 import { AnnouncementBar } from "poyraz-ui/organisms";
-import {
-  DataTable,
-  type DataTableColumnDef,
-} from "poyraz-ui/organisms";
+import { DataTable, type DataTableColumnDef } from "poyraz-ui/organisms";
 
 /* ================================================================== */
 /*  NAVBAR DEMOS                                                       */
@@ -140,12 +137,12 @@ function SharedNavLinks() {
               description="Community contributions"
             />
           </div>
-          <div className="bg-slate-100 border-2 border-dashed border-slate-200 p-4 flex items-center justify-center min-h-[150px]">
+          <div className="bg-slate-100 border border-slate-200 rounded-sm p-4 flex items-center justify-center min-h-[150px]">
             <span className="text-xs text-slate-400 uppercase tracking-wider">
               Featured Project
             </span>
           </div>
-          <div className="bg-slate-100 border-2 border-dashed border-slate-200 p-4 flex items-center justify-center min-h-[150px]">
+          <div className="bg-slate-100 border border-slate-200 rounded-sm p-4 flex items-center justify-center min-h-[150px]">
             <span className="text-xs text-slate-400 uppercase tracking-wider">
               Latest Work
             </span>
@@ -428,7 +425,7 @@ const fullColumns: DataTableColumnDef<Employee>[] = [
             : "bg-amber-100 text-amber-800 border-amber-300";
       return (
         <span
-          className={`inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 border border-dashed ${color}`}
+          className={`inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 border ${color}`}
         >
           {row.status}
         </span>
@@ -489,7 +486,7 @@ export function OrganismsDemo() {
       {/* NAVBAR SECTION                               */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
         Navbar
       </h2>
 
@@ -499,7 +496,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Full navbar with top bar, mega-menu dropdowns and CTA buttons.
         </p>
-        <div className="border-2 border-dashed border-slate-200 overflow-visible">
+        <div className="border border-slate-200 rounded-sm overflow-visible">
           <Navbar variant="default">
             <NavbarTopBar>
               <TopBarContent />
@@ -536,7 +533,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           No top bar. Ideal for SaaS dashboards and internal tools.
         </p>
-        <div className="border-2 border-dashed border-slate-200 overflow-visible">
+        <div className="border border-slate-200 rounded-sm overflow-visible">
           <Navbar variant="minimal">
             <NavbarMain>
               <NavbarBrand>
@@ -563,7 +560,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           For overlaying on hero sections and colored backgrounds.
         </p>
-        <div className="border-2 border-dashed border-slate-200 overflow-visible bg-gradient-to-r from-red-600 to-red-700">
+        <div className="border border-slate-200 rounded-sm overflow-visible bg-gradient-to-r from-red-600 to-red-700">
           <Navbar variant="transparent">
             <NavbarMain className="text-white">
               <NavbarBrand>
@@ -620,7 +617,7 @@ export function OrganismsDemo() {
       {/* SIDEBAR SECTION                              */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
         Sidebar
       </h2>
 
@@ -630,7 +627,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Fixed full-width sidebar for SaaS dashboards and admin panels.
         </p>
-        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+        <div className="border border-slate-200 rounded-sm h-[420px] flex">
           <Sidebar variant="default">
             <SidebarHeader>
               <Logo width={32} height={32} />
@@ -643,7 +640,7 @@ export function OrganismsDemo() {
             </SidebarContent>
             <SidebarFooter>
               <div className="flex items-center gap-3">
-                <div className="h-8 w-8 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+                <div className="h-8 w-8 bg-red-600 border border-red-800 rounded-sm flex items-center justify-center">
                   <span className="text-white text-xs font-bold">PA</span>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -669,7 +666,7 @@ export function OrganismsDemo() {
           Collapses to icon-only rail. Click the trigger to toggle. Tooltips on
           hover when collapsed.
         </p>
-        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+        <div className="border border-slate-200 rounded-sm h-[420px] flex">
           <Sidebar variant="collapsible" defaultCollapsed={false}>
             <SidebarHeader>
               <Logo width={32} height={32} />
@@ -680,7 +677,7 @@ export function OrganismsDemo() {
             </SidebarContent>
             <SidebarFooter>
               <div className="flex items-center gap-3">
-                <div className="h-8 w-8 shrink-0 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+                <div className="h-8 w-8 shrink-0 bg-red-600 border border-red-800 rounded-sm flex items-center justify-center">
                   <span className="text-white text-xs font-bold">PA</span>
                 </div>
               </div>
@@ -700,10 +697,10 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Always icon-only rail. Hover on items to see tooltip labels.
         </p>
-        <div className="border-2 border-dashed border-slate-200 h-[420px] flex">
+        <div className="border border-slate-200 rounded-sm h-[420px] flex">
           <Sidebar variant="mini">
             <SidebarHeader>
-              <div className="h-8 w-8 bg-red-600 border-2 border-dashed border-red-800 flex items-center justify-center">
+              <div className="h-8 w-8 bg-red-600 border border-red-800 rounded-sm flex items-center justify-center">
                 <span className="text-white text-xs font-bold">P</span>
               </div>
             </SidebarHeader>
@@ -726,7 +723,7 @@ export function OrganismsDemo() {
       {/* FOOTER SECTION                               */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
         Footer
       </h2>
 
@@ -736,7 +733,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Multi-column layout for portfolio, hub, and public-facing projects.
         </p>
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Footer variant="full">
             <FooterGrid>
               <FooterSection>
@@ -798,7 +795,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Single-line footer for SaaS dashboards and internal tools.
         </p>
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Footer
             variant="compact"
             className="flex items-center justify-between"
@@ -821,7 +818,7 @@ export function OrganismsDemo() {
         <p className="text-sm text-slate-500 mb-4">
           Logo + tagline + CTA for landing pages and marketing sites.
         </p>
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Footer variant="branded">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
               <FooterBrand>
@@ -877,7 +874,7 @@ export function OrganismsDemo() {
       {/* ANNOUNCEMENT BAR SECTION                     */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
         Announcement Bar
       </h2>
 
@@ -958,7 +955,7 @@ export function OrganismsDemo() {
       {/* DATA TABLE SECTION                           */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b-2 border-dashed border-slate-200 pb-3">
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
         Data Table
       </h2>
 

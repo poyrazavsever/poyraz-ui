@@ -104,7 +104,7 @@ export default function MoleculesPage() {
           <Link
             key={component.slug}
             href={`/docs/molecules/${component.slug}`}
-            className="group block p-5 border-2 border-dashed border-slate-200 hover:border-slate-400 transition-colors"
+            className="group block p-5 border border-slate-200 rounded-sm hover:border-slate-400 transition-colors"
           >
             <h3 className="font-semibold text-sm group-hover:underline">
               {component.name}

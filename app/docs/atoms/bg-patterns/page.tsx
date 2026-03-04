@@ -22,7 +22,7 @@ function PatternPreview({
   label: string;
 }) {
   return (
-    <div className="relative h-48 border-2 border-dashed border-slate-200 bg-white overflow-hidden">
+    <div className="relative h-48 border border-slate-200 rounded-sm bg-white overflow-hidden">
       {children}
       <div className="absolute bottom-3 left-3 z-10 text-xs font-semibold uppercase tracking-wide text-slate-500 bg-white/80 px-2 py-1">
         {label}
@@ -221,7 +221,7 @@ export default function BgPatternsPage() {
   </div>
 </section>`}
       >
-        <div className="relative h-48 bg-white border-2 border-dashed border-slate-200 overflow-hidden flex items-center justify-center">
+        <div className="relative h-48 bg-white border border-slate-200 rounded-sm overflow-hidden flex items-center justify-center">
           <PatternDots
             overlay
             size={28}

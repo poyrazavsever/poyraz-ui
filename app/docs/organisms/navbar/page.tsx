@@ -74,7 +74,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -151,7 +151,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarTopBar>
               <span className="text-xs">
@@ -218,7 +218,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 p-3 bg-slate-50">
+        <div className="border border-slate-200 rounded-sm p-3 bg-slate-50">
           <Navbar variant="bordered">
             <NavbarMain>
               <NavbarBrand>
@@ -262,7 +262,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -322,7 +322,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -394,7 +394,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -464,7 +464,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -507,7 +507,7 @@ export default function NavbarPage() {
   </NavbarMain>
 </Navbar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 bg-gradient-to-r from-slate-100 to-slate-200">
+        <div className="border border-slate-200 rounded-sm bg-gradient-to-r from-slate-100 to-slate-200">
           <Navbar variant="transparent">
             <NavbarMain>
               <NavbarBrand>
@@ -538,7 +538,7 @@ export default function NavbarPage() {
   </NavbarMain>
 </Navbar>`}
       >
-        <div className="border-2 border-dashed border-slate-200">
+        <div className="border border-slate-200 rounded-sm">
           <Navbar variant="minimal">
             <NavbarMain>
               <NavbarBrand href="#">
@@ -615,11 +615,11 @@ import { mainNav } from "@/lib/navigation";
   ))}
 </NavbarLinks>`}
       >
-        <div className="border-2 border-dashed border-slate-200 p-6 bg-slate-50">
+        <div className="border border-slate-200 rounded-sm p-6 bg-slate-50">
           <div className="space-y-3">
             <p className="text-sm font-medium text-slate-700">
               Place your navigation config in{" "}
-              <code className="px-1.5 py-0.5 bg-white border-2 border-dashed border-slate-200 text-xs font-mono">
+              <code className="px-1.5 py-0.5 bg-white border border-slate-200 rounded-sm text-xs font-mono">
                 lib/navigation.ts
               </code>
             </p>

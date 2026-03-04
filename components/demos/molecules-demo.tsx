@@ -21,28 +21,15 @@ import { toast } from "poyraz-ui/molecules";
 import { Button } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "poyraz-ui/atoms";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "poyraz-ui/molecules";
+import { Avatar, AvatarImage, AvatarFallback } from "poyraz-ui/atoms";
+import { Alert, AlertDescription, AlertTitle } from "poyraz-ui/molecules";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "poyraz-ui/molecules";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "poyraz-ui/molecules";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "poyraz-ui/molecules";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -69,11 +56,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "poyraz-ui/molecules";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "poyraz-ui/molecules";
+import { Popover, PopoverContent, PopoverTrigger } from "poyraz-ui/molecules";
 import {
   Tooltip,
   TooltipContent,
@@ -535,7 +518,7 @@ export function MoleculesDemo() {
         <div className="grid sm:grid-cols-2 gap-6 items-start">
           <div className="space-y-2">
             <Label className="text-sm font-semibold">Inline Calendar</Label>
-            <div className="border-2 border-dashed border-slate-200 bg-white w-fit">
+            <div className="border border-slate-200 rounded-sm bg-white w-fit">
               <CalendarDemo />
             </div>
           </div>
@@ -689,7 +672,7 @@ export function MoleculesDemo() {
           <CommandPaletteTrigger asChild>
             <Button variant="outline" className="gap-2">
               <span>Open Command Palette</span>
-              <kbd className="ml-1 text-[11px] font-mono tracking-wider text-slate-400 border border-dashed border-slate-200 px-1.5 py-0.5">
+              <kbd className="ml-1 text-[11px] font-mono tracking-wider text-slate-400 border border-slate-200 px-1.5 py-0.5">
                 ⌘K
               </kbd>
             </Button>
@@ -807,7 +790,7 @@ export function MoleculesDemo() {
                   (item) => (
                     <button
                       key={item}
-                      className="text-left px-3 py-2.5 text-sm border-2 border-dashed border-transparent hover:border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
+                      className="text-left px-3 py-2.5 text-sm border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer rounded-sm"
                     >
                       {item}
                     </button>
@@ -857,7 +840,7 @@ export function MoleculesDemo() {
                 ].map((msg) => (
                   <div
                     key={msg}
-                    className="text-sm p-3 border-2 border-dashed border-slate-200 bg-slate-50"
+                    className="text-sm p-3 border border-slate-200 rounded-sm bg-slate-50"
                   >
                     {msg}
                   </div>

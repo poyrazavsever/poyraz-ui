@@ -82,7 +82,7 @@ export default function CommandPalettePage() {
           <CommandPaletteTrigger asChild>
             <Button variant="outline" className="gap-2">
               <span>Open Command Palette</span>
-              <kbd className="ml-1 text-[11px] font-mono tracking-wider text-slate-400 border border-dashed border-slate-200 px-1.5 py-0.5">
+              <kbd className="ml-1 text-[11px] font-mono tracking-wider text-slate-400 border border-slate-200 px-1.5 py-0.5">
                 ⌘K
               </kbd>
             </Button>

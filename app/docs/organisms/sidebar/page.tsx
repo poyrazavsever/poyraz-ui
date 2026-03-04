@@ -104,7 +104,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 h-[520px] overflow-hidden">
+        <div className="border border-slate-200 rounded-sm h-[520px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <span className="font-bold text-lg">Poyraz UI</span>
@@ -194,7 +194,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 h-[360px] overflow-hidden">
+        <div className="border border-slate-200 rounded-sm h-[360px] overflow-hidden">
           <Sidebar variant="collapsible">
             <SidebarHeader>
               <div className="flex items-center justify-between w-full">
@@ -271,7 +271,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 h-[520px] overflow-hidden">
+        <div className="border border-slate-200 rounded-sm h-[520px] overflow-hidden">
           <Sidebar variant="dark">
             <SidebarHeader>
               <span className="font-bold text-lg text-white">Admin</span>
@@ -407,7 +407,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 h-[280px] overflow-hidden">
+        <div className="border border-slate-200 rounded-sm h-[280px] overflow-hidden">
           <Sidebar variant="mini">
             <SidebarContent>
               <SidebarMenu>
@@ -455,7 +455,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="border-2 border-dashed border-slate-200 h-[350px] overflow-hidden">
+        <div className="border border-slate-200 rounded-sm h-[350px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <SidebarUserProfile
