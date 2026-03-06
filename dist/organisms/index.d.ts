@@ -1,3 +1,4 @@
+import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import * as React from 'react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
@@ -22,7 +23,18 @@ interface NavbarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<ty
     containerClassName?: string;
 }
 declare const Navbar: React.ForwardRefExoticComponent<NavbarProps & React.RefAttributes<HTMLElement>>;
-declare const NavbarTopBar: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const topBarVariants: (props?: ({
+    variant?: "secondary" | "info" | "announcement" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface NavbarTopBarProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof topBarVariants> {
+    /** Show a dismiss / close button */
+    dismissible?: boolean;
+}
+declare const NavbarTopBar: React.ForwardRefExoticComponent<NavbarTopBarProps & React.RefAttributes<HTMLDivElement>>;
+interface NavbarTopBarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+    align?: "start" | "center" | "end";
+}
+declare const NavbarTopBarSection: React.ForwardRefExoticComponent<NavbarTopBarSectionProps & React.RefAttributes<HTMLDivElement>>;
 declare const NavbarMain: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 interface NavbarBrandProps extends React.HTMLAttributes<HTMLDivElement> {
     href?: string;
@@ -66,6 +78,59 @@ interface NavbarSearchProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 declare const NavbarSearch: React.ForwardRefExoticComponent<NavbarSearchProps & React.RefAttributes<HTMLInputElement>>;
 declare const NavbarDivider: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface NavbarPopoverDropdownProps {
+    label: string;
+    /** Alignment relative to the trigger */
+    align?: "start" | "center" | "end";
+    /** Custom width (default: auto, min 180px) */
+    width?: string;
+    children: React.ReactNode;
+    className?: string;
+}
+declare function NavbarPopoverDropdown({ label, align, width, children, className, }: NavbarPopoverDropdownProps): react_jsx_runtime.JSX.Element;
+declare namespace NavbarPopoverDropdown {
+    var displayName: string;
+}
+declare const NavbarPopoverDropdownItem: React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>>;
+interface NavbarPanelDropdownProps {
+    label: string;
+    /** Alignment relative to the trigger */
+    align?: "start" | "center" | "end";
+    /** Panel width (default: 360px) */
+    width?: string;
+    children: React.ReactNode;
+    className?: string;
+}
+declare function NavbarPanelDropdown({ label, align, width, children, className, }: NavbarPanelDropdownProps): react_jsx_runtime.JSX.Element;
+declare namespace NavbarPanelDropdown {
+    var displayName: string;
+}
+interface NavbarPanelDropdownItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+    title: string;
+    description?: string;
+    icon?: React.ReactNode;
+}
+declare const NavbarPanelDropdownItem: React.ForwardRefExoticComponent<NavbarPanelDropdownItemProps & React.RefAttributes<HTMLAnchorElement>>;
+interface NavbarMobileDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+    label: string;
+    defaultOpen?: boolean;
+}
+declare const NavbarMobileDropdown: React.ForwardRefExoticComponent<NavbarMobileDropdownProps & React.RefAttributes<HTMLDivElement>>;
+interface NavbarMobileDrillMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+}
+declare const NavbarMobileDrillMenu: React.ForwardRefExoticComponent<NavbarMobileDrillMenuProps & React.RefAttributes<HTMLDivElement>>;
+interface NavbarMobileDrillTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
+    /** Unique panel ID this trigger opens */
+    panelId: string;
+}
+declare const NavbarMobileDrillTrigger: React.ForwardRefExoticComponent<NavbarMobileDrillTriggerProps & React.RefAttributes<HTMLButtonElement>>;
+interface NavbarMobileDrillPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Unique ID matching the trigger's panelId */
+    panelId: string;
+    /** Back button label */
+    backLabel?: string;
+}
+declare const NavbarMobileDrillPanel: React.ForwardRefExoticComponent<NavbarMobileDrillPanelProps & React.RefAttributes<HTMLDivElement>>;
 
 interface SidebarContextValue {
     collapsed: boolean;
@@ -137,7 +202,7 @@ interface SidebarUserProfileProps extends React.HTMLAttributes<HTMLDivElement> {
 declare const SidebarUserProfile: React.ForwardRefExoticComponent<SidebarUserProfileProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const footerVariants: (props?: ({
-    variant?: "dark" | "compact" | "full" | "branded" | "centered" | null | undefined;
+    variant?: "dark" | "compact" | "full" | "minimal" | "branded" | "centered" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface FooterProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof footerVariants> {
     /** Class name applied to inner container for width constraint */
@@ -162,6 +227,16 @@ interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const FooterNewsletter: React.ForwardRefExoticComponent<FooterNewsletterProps & React.RefAttributes<HTMLDivElement>>;
 declare const FooterDivider: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHRElement> & React.RefAttributes<HTMLHRElement>>;
+declare const FooterDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
+declare const FooterBadge: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLSpanElement> & React.RefAttributes<HTMLSpanElement>>;
+declare const FooterLinkGroup: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface FooterCTAProps extends React.HTMLAttributes<HTMLDivElement> {
+    heading?: string;
+    description?: string;
+}
+declare const FooterCTA: React.ForwardRefExoticComponent<FooterCTAProps & React.RefAttributes<HTMLDivElement>>;
+declare const FooterApp: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const FooterAppLink: React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>>;
 
 declare const announcementBarVariants: (props?: ({
     variant?: "default" | "info" | "success" | "warning" | "branded" | "danger" | null | undefined;
@@ -230,4 +305,4 @@ declare const DataTable: <T>(props: DataTableProps<T> & {
     ref?: React.Ref<HTMLDivElement>;
 }) => React.ReactElement;
 
-export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterBottom, FooterBottomLinks, FooterBrand, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarSearch, NavbarTopBar, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarSearch, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, useNavbar, useSidebar };
+export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarSearch, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };

@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDown, Menu, Search, X } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronLeft, Menu, Search, X } from "lucide-react";
 
 import { cn } from "@/components/ui/atoms/typography";
 
@@ -18,7 +19,7 @@ interface NavbarContextValue {
   containerClassName: string;
 }
 
-const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto px-6";
 
 const NavbarContext = React.createContext<NavbarContextValue>({
   mobileOpen: false,
@@ -118,39 +119,101 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
 Navbar.displayName = "Navbar";
 
 /* ================================================================== */
-/*  TOP BAR                                                            */
+/*  TOP BAR (announcement / info / secondary)                          */
 /* ================================================================== */
 
-const NavbarTopBar = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { containerClassName } = useNavbar();
+const topBarVariants = cva(
+  ["w-full", "text-xs font-medium tracking-wide"].join(" "),
+  {
+    variants: {
+      variant: {
+        announcement: "bg-red-600 text-white border-b border-red-800",
+        info: "bg-slate-100 text-slate-700 border-b border-slate-200",
+        secondary: "bg-slate-50 text-slate-600 border-b border-slate-200",
+      },
+    },
+    defaultVariants: { variant: "announcement" },
+  },
+);
 
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "w-full",
-        "text-xs font-medium tracking-wide",
-        "bg-red-600 text-white border-b border-red-800",
-        className,
-      )}
-      {...props}
-    >
+export interface NavbarTopBarProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof topBarVariants> {
+  /** Show a dismiss / close button */
+  dismissible?: boolean;
+}
+
+const NavbarTopBar = React.forwardRef<HTMLDivElement, NavbarTopBarProps>(
+  ({ className, variant = "announcement", dismissible = false, children, ...props }, ref) => {
+    const { containerClassName } = useNavbar();
+    const [dismissed, setDismissed] = React.useState(false);
+
+    if (dismissed) return null;
+
+    return (
       <div
-        className={cn(
-          "py-1",
-          "flex items-center justify-between",
-          containerClassName,
-        )}
+        ref={ref}
+        className={cn(topBarVariants({ variant }), className)}
+        {...props}
       >
-        {children}
+        <div
+          className={cn(
+            "py-1",
+            "flex items-center justify-between",
+            containerClassName,
+          )}
+        >
+          <div className="flex items-center gap-4 flex-1 min-w-0">{children}</div>
+          {dismissible && (
+            <button
+              type="button"
+              aria-label="Dismiss"
+              onClick={() => setDismissed(true)}
+              className={cn(
+                "inline-flex items-center justify-center shrink-0",
+                "h-5 w-5 rounded-sm ml-2",
+                "transition-colors duration-150 cursor-pointer",
+                variant === "announcement"
+                  ? "hover:bg-red-700 text-white/80 hover:text-white"
+                  : "hover:bg-slate-200 text-slate-400 hover:text-slate-600",
+              )}
+            >
+              <X className="h-3 w-3" />
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 NavbarTopBar.displayName = "NavbarTopBar";
+
+/* ================================================================== */
+/*  TOP BAR SECTION (for secondary variant layout)                     */
+/* ================================================================== */
+
+interface NavbarTopBarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+  align?: "start" | "center" | "end";
+}
+
+const NavbarTopBarSection = React.forwardRef<
+  HTMLDivElement,
+  NavbarTopBarSectionProps
+>(({ className, align = "start", children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex items-center gap-3 text-[11px]",
+      align === "center" && "justify-center",
+      align === "end" && "ml-auto",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </div>
+));
+NavbarTopBarSection.displayName = "NavbarTopBarSection";
 
 /* ================================================================== */
 /*  MAIN CONTAINER                                                     */
@@ -744,12 +807,421 @@ const NavbarDivider = React.forwardRef<
 NavbarDivider.displayName = "NavbarDivider";
 
 /* ================================================================== */
+/*  POPOVER DROPDOWN (small, link-specific)                            */
+/* ================================================================== */
+
+interface NavbarPopoverDropdownProps {
+  label: string;
+  /** Alignment relative to the trigger */
+  align?: "start" | "center" | "end";
+  /** Custom width (default: auto, min 180px) */
+  width?: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+function NavbarPopoverDropdown({
+  label,
+  align = "start",
+  width,
+  children,
+  className,
+}: NavbarPopoverDropdownProps) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <NavigationMenuPrimitive.Item className="relative">
+      <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+        <PopoverPrimitive.Trigger asChild>
+          <button
+            type="button"
+            className={cn(navLinkStyles, "group cursor-pointer")}
+          >
+            {label}
+            <ChevronDown
+              className={cn(
+                "h-3.5 w-3.5 transition-transform duration-200",
+                open && "rotate-180",
+              )}
+              aria-hidden
+            />
+          </button>
+        </PopoverPrimitive.Trigger>
+        <PopoverPrimitive.Portal>
+          <PopoverPrimitive.Content
+            align={align}
+            sideOffset={8}
+            className={cn(
+              "z-[70] min-w-[180px]",
+              "bg-white",
+              "border border-slate-200",
+              "rounded-sm shadow-sm",
+              "py-1",
+              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-top-2",
+              "duration-150",
+              className,
+            )}
+            style={width ? { width } : undefined}
+          >
+            {children}
+          </PopoverPrimitive.Content>
+        </PopoverPrimitive.Portal>
+      </PopoverPrimitive.Root>
+    </NavigationMenuPrimitive.Item>
+  );
+}
+NavbarPopoverDropdown.displayName = "NavbarPopoverDropdown";
+
+/* ================================================================== */
+/*  POPOVER DROPDOWN ITEM (simple link)                                */
+/* ================================================================== */
+
+const NavbarPopoverDropdownItem = React.forwardRef<
+  HTMLAnchorElement,
+  React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(({ className, children, ...props }, ref) => (
+  <a
+    ref={ref}
+    className={cn(
+      "block px-3 py-1.5",
+      "text-sm font-medium text-slate-700",
+      "transition-colors duration-150",
+      "hover:bg-slate-50 hover:text-slate-950",
+      "focus-visible:outline-none focus-visible:bg-slate-50",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </a>
+));
+NavbarPopoverDropdownItem.displayName = "NavbarPopoverDropdownItem";
+
+/* ================================================================== */
+/*  PANEL DROPDOWN (medium, icon+title+description)                    */
+/* ================================================================== */
+
+interface NavbarPanelDropdownProps {
+  label: string;
+  /** Alignment relative to the trigger */
+  align?: "start" | "center" | "end";
+  /** Panel width (default: 360px) */
+  width?: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+function NavbarPanelDropdown({
+  label,
+  align = "start",
+  width = "360px",
+  children,
+  className,
+}: NavbarPanelDropdownProps) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <NavigationMenuPrimitive.Item className="relative">
+      <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+        <PopoverPrimitive.Trigger asChild>
+          <button
+            type="button"
+            className={cn(navLinkStyles, "group cursor-pointer")}
+          >
+            {label}
+            <ChevronDown
+              className={cn(
+                "h-3.5 w-3.5 transition-transform duration-200",
+                open && "rotate-180",
+              )}
+              aria-hidden
+            />
+          </button>
+        </PopoverPrimitive.Trigger>
+        <PopoverPrimitive.Portal>
+          <PopoverPrimitive.Content
+            align={align}
+            sideOffset={8}
+            className={cn(
+              "z-[70]",
+              "bg-white",
+              "border border-slate-200",
+              "rounded-sm shadow-sm",
+              "p-3",
+              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-top-2",
+              "duration-150",
+              className,
+            )}
+            style={{ width }}
+          >
+            <div className="grid gap-1">{children}</div>
+          </PopoverPrimitive.Content>
+        </PopoverPrimitive.Portal>
+      </PopoverPrimitive.Root>
+    </NavigationMenuPrimitive.Item>
+  );
+}
+NavbarPanelDropdown.displayName = "NavbarPanelDropdown";
+
+/* ================================================================== */
+/*  PANEL DROPDOWN ITEM (icon + title + description)                   */
+/* ================================================================== */
+
+interface NavbarPanelDropdownItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  title: string;
+  description?: string;
+  icon?: React.ReactNode;
+}
+
+const NavbarPanelDropdownItem = React.forwardRef<
+  HTMLAnchorElement,
+  NavbarPanelDropdownItemProps
+>(({ className, title, description, icon, children, ...props }, ref) => (
+  <a
+    ref={ref}
+    className={cn(
+      "flex items-start gap-3 p-2.5",
+      "rounded-sm transition-colors duration-150",
+      "hover:bg-slate-50",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
+      className,
+    )}
+    {...props}
+  >
+    {icon && (
+      <span className="flex items-center justify-center h-8 w-8 rounded-sm bg-slate-100 text-slate-600 shrink-0 mt-0.5">
+        {icon}
+      </span>
+    )}
+    <div className="min-w-0">
+      <div className="text-sm font-medium leading-none text-slate-900">{title}</div>
+      {description && (
+        <p className="mt-1 text-xs text-slate-500 leading-snug">{description}</p>
+      )}
+      {children}
+    </div>
+  </a>
+));
+NavbarPanelDropdownItem.displayName = "NavbarPanelDropdownItem";
+
+/* ================================================================== */
+/*  MOBILE DROPDOWN (accordion-style nested nav)                       */
+/* ================================================================== */
+
+interface NavbarMobileDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+  label: string;
+  defaultOpen?: boolean;
+}
+
+const NavbarMobileDropdown = React.forwardRef<
+  HTMLDivElement,
+  NavbarMobileDropdownProps
+>(({ className, label, defaultOpen = false, children, ...props }, ref) => {
+  const [open, setOpen] = React.useState(defaultOpen);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const [height, setHeight] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [children, open]);
+
+  return (
+    <div ref={ref} className={cn(className)} {...props}>
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className={cn(
+          "flex items-center justify-between w-full",
+          "px-2.5 py-2",
+          "text-sm font-medium",
+          "border border-transparent",
+          "transition-colors duration-150",
+          "hover:bg-slate-50 hover:border-slate-200",
+          "cursor-pointer",
+        )}
+      >
+        {label}
+        <ChevronDown
+          className={cn(
+            "h-4 w-4 text-slate-400 transition-transform duration-200",
+            open && "rotate-180",
+          )}
+          aria-hidden
+        />
+      </button>
+      <div
+        ref={contentRef}
+        className="overflow-hidden transition-[max-height] duration-200 ease-in-out"
+        style={{ maxHeight: open ? `${height}px` : "0px" }}
+      >
+        <div className="pl-3 pb-1 flex flex-col gap-0.5">{children}</div>
+      </div>
+    </div>
+  );
+});
+NavbarMobileDropdown.displayName = "NavbarMobileDropdown";
+
+/* ================================================================== */
+/*  MOBILE DRILL-DOWN CONTEXT                                          */
+/* ================================================================== */
+
+interface DrillDownContextValue {
+  activePanel: string | null;
+  pushPanel: (id: string) => void;
+  popPanel: () => void;
+}
+
+const DrillDownContext = React.createContext<DrillDownContextValue>({
+  activePanel: null,
+  pushPanel: () => {},
+  popPanel: () => {},
+});
+
+/* ================================================================== */
+/*  MOBILE DRILL-DOWN MENU (wraps mobile menu content with stack)      */
+/* ================================================================== */
+
+interface NavbarMobileDrillMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const NavbarMobileDrillMenu = React.forwardRef<
+  HTMLDivElement,
+  NavbarMobileDrillMenuProps
+>(({ className, children, ...props }, ref) => {
+  const [panelStack, setPanelStack] = React.useState<string[]>([]);
+
+  const activePanel = panelStack.length > 0 ? panelStack[panelStack.length - 1] : null;
+
+  const pushPanel = React.useCallback((id: string) => {
+    setPanelStack((prev) => [...prev, id]);
+  }, []);
+
+  const popPanel = React.useCallback(() => {
+    setPanelStack((prev) => prev.slice(0, -1));
+  }, []);
+
+  return (
+    <DrillDownContext.Provider value={{ activePanel, pushPanel, popPanel }}>
+      <div ref={ref} className={cn("relative overflow-hidden", className)} {...props}>
+        {/* Main panel */}
+        <div
+          className={cn(
+            "transition-transform duration-300 ease-in-out",
+            activePanel ? "-translate-x-full" : "translate-x-0",
+          )}
+        >
+          {children}
+        </div>
+      </div>
+    </DrillDownContext.Provider>
+  );
+});
+NavbarMobileDrillMenu.displayName = "NavbarMobileDrillMenu";
+
+/* ================================================================== */
+/*  MOBILE DRILL-DOWN TRIGGER                                          */
+/* ================================================================== */
+
+interface NavbarMobileDrillTriggerProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
+  /** Unique panel ID this trigger opens */
+  panelId: string;
+}
+
+const NavbarMobileDrillTrigger = React.forwardRef<
+  HTMLButtonElement,
+  NavbarMobileDrillTriggerProps
+>(({ className, panelId, children, ...props }, ref) => {
+  const { pushPanel } = React.useContext(DrillDownContext);
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={() => pushPanel(panelId)}
+      className={cn(
+        "flex items-center justify-between w-full",
+        "px-2.5 py-2",
+        "text-sm font-medium",
+        "border border-transparent",
+        "transition-colors duration-150",
+        "hover:bg-slate-50 hover:border-slate-200",
+        "cursor-pointer",
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden />
+    </button>
+  );
+});
+NavbarMobileDrillTrigger.displayName = "NavbarMobileDrillTrigger";
+
+/* ================================================================== */
+/*  MOBILE DRILL-DOWN PANEL (sub-page that slides in)                  */
+/* ================================================================== */
+
+interface NavbarMobileDrillPanelProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /** Unique ID matching the trigger's panelId */
+  panelId: string;
+  /** Back button label */
+  backLabel?: string;
+}
+
+const NavbarMobileDrillPanel = React.forwardRef<
+  HTMLDivElement,
+  NavbarMobileDrillPanelProps
+>(({ className, panelId, backLabel = "Back", children, ...props }, ref) => {
+  const { activePanel, popPanel } = React.useContext(DrillDownContext);
+  const isActive = activePanel === panelId;
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "absolute inset-0 h-full",
+        "bg-white",
+        "transition-transform duration-300 ease-in-out",
+        isActive ? "translate-x-0" : "translate-x-full",
+        className,
+      )}
+      {...props}
+    >
+      <button
+        type="button"
+        onClick={popPanel}
+        className={cn(
+          "flex items-center gap-1 w-full",
+          "px-2.5 py-2 mb-1",
+          "text-sm font-medium text-slate-500",
+          "border-b border-slate-100",
+          "transition-colors duration-150",
+          "hover:bg-slate-50 hover:text-slate-700",
+          "cursor-pointer",
+        )}
+      >
+        <ChevronLeft className="h-4 w-4" aria-hidden />
+        {backLabel}
+      </button>
+      <div className="flex flex-col gap-0.5 px-1">{children}</div>
+    </div>
+  );
+});
+NavbarMobileDrillPanel.displayName = "NavbarMobileDrillPanel";
+
+/* ================================================================== */
 /*  EXPORTS                                                            */
 /* ================================================================== */
 
 export {
   Navbar,
   NavbarTopBar,
+  NavbarTopBarSection,
   NavbarMain,
   NavbarBrand,
   NavbarLinks,
@@ -760,15 +1232,24 @@ export {
   NavbarMegaMenuLinks,
   NavbarMegaMenuFeatured,
   NavbarMegaMenuItem,
+  NavbarPopoverDropdown,
+  NavbarPopoverDropdownItem,
+  NavbarPanelDropdown,
+  NavbarPanelDropdownItem,
   NavbarActions,
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
   NavbarMobileGroup,
   NavbarMobileActions,
+  NavbarMobileDropdown,
+  NavbarMobileDrillMenu,
+  NavbarMobileDrillTrigger,
+  NavbarMobileDrillPanel,
   NavbarSearch,
   NavbarDivider,
   navbarVariants,
   megaMenuVariants,
+  topBarVariants,
   useNavbar,
 };

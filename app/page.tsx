@@ -131,16 +131,16 @@ function PaymentMethodCard() {
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>Name on Card</Label>
-          <Input placeholder="John Doe" readOnly tabIndex={-1} />
+          <Input placeholder="John Doe" />
         </div>
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2 space-y-2">
             <Label>Card Number</Label>
-            <Input placeholder="1234 5678 9012 3456" readOnly tabIndex={-1} />
+            <Input placeholder="1234 5678 9012 3456" />
           </div>
           <div className="space-y-2">
             <Label>CVV</Label>
-            <Input placeholder="123" readOnly tabIndex={-1} />
+            <Input placeholder="123" />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -293,8 +293,6 @@ function ChatInput() {
       <input
         className="flex-1 text-sm border-0 outline-none bg-transparent placeholder:text-slate-400"
         placeholder="Send a message..."
-        readOnly
-        tabIndex={-1}
       />
       <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
         <SlidersHorizontal className="h-4 w-4" />
@@ -559,8 +557,6 @@ function TasksShowcase() {
           <Input
             placeholder="Filter tasks..."
             className="w-48 h-9"
-            readOnly
-            tabIndex={-1}
           />
           <Button variant="outline" size="sm">
             View
@@ -669,8 +665,6 @@ function AuthShowcase() {
               <Input
                 placeholder="m@example.com"
                 className="pl-9"
-                readOnly
-                tabIndex={-1}
               />
             </div>
           </div>
@@ -687,8 +681,6 @@ function AuthShowcase() {
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 className="pl-9 pr-9"
-                readOnly
-                tabIndex={-1}
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
@@ -735,24 +727,22 @@ function AuthShowcase() {
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label>First Name</Label>
-              <Input placeholder="Poyraz" readOnly tabIndex={-1} />
+              <Input placeholder="Poyraz" />
             </div>
             <div className="space-y-2">
               <Label>Last Name</Label>
-              <Input placeholder="Avsever" readOnly tabIndex={-1} />
+              <Input placeholder="Avsever" />
             </div>
           </div>
           <div className="space-y-2">
             <Label>Email</Label>
-            <Input placeholder="m@example.com" readOnly tabIndex={-1} />
+            <Input placeholder="m@example.com" />
           </div>
           <div className="space-y-2">
             <Label>Password</Label>
             <Input
               type="password"
               placeholder="••••••••"
-              readOnly
-              tabIndex={-1}
             />
           </div>
           <Button className="w-full">Create Account</Button>
@@ -871,26 +861,22 @@ export default function Home() {
 
             <TabsContent value="examples">
               {/* Component grid — shadcn-style */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Col 1 — Payment */}
-                <div className="space-y-4 lg:col-span-1">
+                <div className="space-y-6 lg:col-span-1">
                   <PaymentMethodCard />
+                  <CheckboxCard />
                 </div>
                 {/* Col 2 — Team + badges + chat */}
-                <div className="space-y-4 lg:col-span-1">
+                <div className="space-y-6 lg:col-span-1">
                   <TeamMembersCard />
                   <StatusBadges />
                   <ChatInput />
                 </div>
-                {/* Col 3 — Security + Appearance */}
-                <div className="space-y-4 lg:col-span-1">
+                {/* Col 3 — Security + Appearance + Actions */}
+                <div className="space-y-6 lg:col-span-1">
                   <SecurityCard />
                   <AppearanceCard />
-                </div>
-                {/* Col 4 — Actions */}
-                <div className="space-y-4 lg:col-span-1">
-                  <CopyInstallCommand />
-                  <CheckboxCard />
                   <PaginationDemo />
                 </div>
               </div>
