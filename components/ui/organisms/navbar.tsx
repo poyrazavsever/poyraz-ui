@@ -140,7 +140,7 @@ const NavbarTopBar = React.forwardRef<
     >
       <div
         className={cn(
-          "py-1.5",
+          "py-1",
           "flex items-center justify-between",
           containerClassName,
         )}
@@ -179,7 +179,7 @@ const NavbarMain = React.forwardRef<
     >
       <div
         className={cn(
-          "py-3",
+          "py-2",
           "flex items-center justify-between gap-4 sm:gap-6",
           containerClassName,
         )}
@@ -271,7 +271,7 @@ NavbarLinks.displayName = "NavbarLinks";
 /* ================================================================== */
 
 const navLinkStyles = [
-  "inline-flex items-center gap-1 px-3 py-2",
+  "inline-flex items-center gap-1 px-2.5 py-1.5",
   "text-sm font-medium tracking-wide",
   "rounded-sm transition-colors duration-150",
   "hover:bg-slate-100",
@@ -490,7 +490,7 @@ const NavbarMobileToggle = React.forwardRef<
       onClick={() => setMobileOpen((prev) => !prev)}
       className={cn(
         "inline-flex items-center justify-center",
-        "h-10 w-10",
+        "h-8 w-8",
         "border rounded-sm",
         "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
         "transition-colors duration-150",
@@ -500,7 +500,7 @@ const NavbarMobileToggle = React.forwardRef<
       )}
       {...props}
     >
-      {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
     </button>
   );
 });
@@ -603,7 +603,7 @@ const NavbarMobileLink = React.forwardRef<
   <a
     ref={ref}
     className={cn(
-      "block px-3 py-2.5",
+      "block px-2.5 py-2",
       "text-sm font-medium",
       "border border-transparent",
       "transition-colors duration-150",
@@ -704,7 +704,7 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
           placeholder={placeholder}
           onKeyDown={handleKeyDown}
           className={cn(
-            "h-8 w-40 lg:w-52 pl-8 pr-3",
+            "h-7 w-40 lg:w-52 pl-8 pr-3",
             "text-xs font-medium",
             "border rounded-sm",
             "bg-white border-slate-300 text-slate-950 placeholder:text-slate-400",
@@ -733,7 +733,7 @@ const NavbarDivider = React.forwardRef<
     role="separator"
     className={cn(
       "hidden lg:block",
-      "h-6 w-px",
+      "h-5 w-px",
       "border-l border-slate-200",
       "mx-2",
       className,

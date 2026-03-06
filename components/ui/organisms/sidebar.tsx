@@ -57,13 +57,13 @@ const sidebarVariants = cva(
   {
     variants: {
       variant: {
-        default: "w-64 bg-white text-slate-950 border-r border-slate-200",
+        default: "w-56 bg-white text-slate-950 border-r border-slate-200",
         collapsible: "bg-white text-slate-950 border-r border-slate-200",
         floating:
-          "fixed inset-y-0 left-0 z-50 w-72 bg-white text-slate-950 border-r border-slate-200",
+          "fixed inset-y-0 left-0 z-50 w-64 bg-white text-slate-950 border-r border-slate-200",
         mini: "w-16 bg-white text-slate-950 border-r border-slate-200",
-        dark: "w-64 bg-slate-950 text-slate-100 border-r border-slate-800",
-        bordered: "w-64 bg-white text-slate-950 border border-slate-300",
+        dark: "w-56 bg-slate-950 text-slate-100 border-r border-slate-800",
+        bordered: "w-56 bg-white text-slate-950 border border-slate-300",
       },
     },
     defaultVariants: { variant: "default" },
@@ -98,7 +98,7 @@ const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
 
     // Compute width for collapsible variant
     const collapsibleWidth =
-      resolvedVariant === "collapsible" ? (collapsed ? "w-16" : "w-64") : "";
+      resolvedVariant === "collapsible" ? (collapsed ? "w-16" : "w-56") : "";
 
     // Floating variant: hidden when mobile is not open
     if (resolvedVariant === "floating" && !mobileOpen) {
@@ -295,7 +295,7 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
         ref={ref}
         className={cn(
           "group relative flex items-center gap-3",
-          "px-3 py-2.5",
+          "px-2.5 py-2",
           "text-sm font-medium",
           "rounded-sm transition-colors duration-150",
           "cursor-pointer",
@@ -480,7 +480,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
         onClick={handleClick}
         className={cn(
           "inline-flex items-center justify-center",
-          "h-9 w-9",
+          "h-8 w-8",
           "border rounded-sm",
           dark
             ? "border-slate-600 hover:bg-slate-800 hover:border-slate-400 text-slate-300"
@@ -542,7 +542,7 @@ const SidebarSearch = React.forwardRef<HTMLInputElement, SidebarSearchProps>(
             placeholder={placeholder}
             onKeyDown={handleKeyDown}
             className={cn(
-              "w-full h-8 pl-8 pr-3",
+              "w-full h-7 pl-8 pr-3",
               "text-xs font-medium",
               "border rounded-sm",
               "transition-colors duration-150",
@@ -592,7 +592,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
           onClick={() => setOpen((p) => !p)}
           className={cn(
             "w-full flex items-center gap-3",
-            "px-3 py-2.5",
+            "px-2.5 py-2",
             "text-sm font-medium",
             "rounded-sm transition-colors duration-150",
             "cursor-pointer",
@@ -724,7 +724,7 @@ const SidebarUserProfile = React.forwardRef<
       {/* Avatar */}
       <div
         className={cn(
-          "shrink-0 w-9 h-9 flex items-center justify-center",
+          "shrink-0 w-8 h-8 flex items-center justify-center",
           "border rounded-sm overflow-hidden",
           "text-xs font-bold",
           dark

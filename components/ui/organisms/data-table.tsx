@@ -253,7 +253,7 @@ function DataTableInner<T>(
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="pl-9 h-9 text-sm"
+                className="pl-9 h-8 text-sm"
               />
             </div>
           )}
@@ -270,7 +270,7 @@ function DataTableInner<T>(
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-9 gap-1.5"
+                  className="h-8 gap-1.5"
                   onClick={() => setColToggleOpen((v) => !v)}
                 >
                   <SlidersHorizontal className="h-3.5 w-3.5" />
@@ -321,7 +321,7 @@ function DataTableInner<T>(
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50/80">
               {selectable && (
-                <th className="w-12 p-3 text-center">
+                <th className="w-12 p-2.5 text-center">
                   <Checkbox
                     checked={allPageSelected && rows.length > 0}
                     onCheckedChange={toggleAll}
@@ -336,7 +336,7 @@ function DataTableInner<T>(
                   <th
                     key={col.id}
                     className={cn(
-                      "text-left p-3 font-bold uppercase text-[11px] tracking-widest text-slate-500",
+                      "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-slate-500",
                       "whitespace-nowrap",
                       isSortable &&
                         "cursor-pointer select-none hover:text-slate-900 transition-colors",
@@ -387,7 +387,7 @@ function DataTableInner<T>(
                     )}
                   >
                     {selectable && (
-                      <td className="w-12 p-3 text-center">
+                      <td className="w-12 p-2.5 text-center">
                         <Checkbox
                           checked={isSelected}
                           onCheckedChange={() => toggleRow(id)}
@@ -398,7 +398,7 @@ function DataTableInner<T>(
                     {visibleColumns.map((col) => (
                       <td
                         key={col.id}
-                        className={cn("p-3 text-slate-700", col.className)}
+                        className={cn("p-2.5 text-slate-700", col.className)}
                       >
                         {col.cell
                           ? col.cell(row)
@@ -436,7 +436,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage(0)}
               aria-label="First page"
@@ -446,7 +446,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               aria-label="Previous page"
@@ -461,7 +461,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               aria-label="Next page"
@@ -471,7 +471,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage(totalPages - 1)}
               aria-label="Last page"

@@ -12,11 +12,11 @@ const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 const footerVariants = cva(["w-full", "border-t"].join(" "), {
   variants: {
     variant: {
-      full: "py-12 bg-white text-slate-950 border-slate-200",
-      compact: "py-4 bg-white text-slate-950 border-slate-200",
-      branded: "py-10 bg-white text-slate-950 border-slate-200",
-      centered: "py-12 text-center bg-white text-slate-950 border-slate-200",
-      dark: "py-12 bg-slate-950 text-slate-100 border-slate-800",
+      full: "py-10 bg-white text-slate-950 border-slate-200",
+      compact: "py-3 bg-white text-slate-950 border-slate-200",
+      branded: "py-8 bg-white text-slate-950 border-slate-200",
+      centered: "py-10 text-center bg-white text-slate-950 border-slate-200",
+      dark: "py-10 bg-slate-950 text-slate-100 border-slate-800",
     },
   },
   defaultVariants: { variant: "full" },
@@ -179,7 +179,7 @@ const FooterSocialLink = React.forwardRef<
     ref={ref}
     className={cn(
       "inline-flex items-center justify-center",
-      "h-9 w-9",
+      "h-8 w-8",
       "border border-slate-300 rounded-sm",
       "text-slate-500",
       "hover:bg-red-600 hover:text-white hover:border-red-800",
@@ -205,7 +205,7 @@ const FooterBottom = React.forwardRef<
     ref={ref}
     className={cn(
       "flex flex-col sm:flex-row items-center justify-between gap-4",
-      "pt-6 mt-8",
+      "pt-5 mt-6",
       "border-t border-slate-200",
       "text-xs text-slate-400",
       className,
@@ -290,7 +290,7 @@ function FooterNewsletterInner(
           placeholder={placeholder}
           required
           className={cn(
-            "flex-1 h-10 px-3 text-sm",
+            "flex-1 h-9 px-3 text-sm",
             "border border-slate-300 bg-white",
             "placeholder:text-slate-400",
             "focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-1",
@@ -300,7 +300,7 @@ function FooterNewsletterInner(
         <button
           type="submit"
           className={cn(
-            "h-10 px-5",
+            "h-9 px-5",
             "text-xs font-bold uppercase tracking-wide",
             "bg-red-600 text-white",
             "border border-red-800",
