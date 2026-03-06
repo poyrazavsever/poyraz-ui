@@ -1,33 +1,75 @@
 @import "tailwindcss";
+@import "../src/preset.css";
 
-@theme {
-  --font-sans: var(--font-sans);
-  --font-secondary: var(--font-secondary);
-  --color-primary: #dc2626; /* red-600 */
+/* ── Dark mode overrides ──────────────────────────────────────────
+ *  next-themes adds class="dark" on <html> when dark theme is active.
+ *  This sets all --poyraz-* variables to their dark palette values,
+ *  which automatically propagates through the preset.css token layer.
+ * ─────────────────────────────────────────────────────────────────── */
+.dark {
+  --poyraz-background: #020617;
+  --poyraz-foreground: #f8fafc;
+
+  --poyraz-primary: #ef4444;
+  --poyraz-primary-foreground: #ffffff;
+  --poyraz-primary-200: #450a0a;
+  --poyraz-primary-600: #dc2626;
+  --poyraz-primary-700: #b91c1c;
+  --poyraz-primary-800: #991b1b;
+  --poyraz-primary-900: #7f1d1d;
+  --poyraz-primary-hover: #dc2626;
+  --poyraz-primary-active: #b91c1c;
+  --poyraz-primary-dark: #991b1b;
+  --poyraz-primary-muted: #1c0a0a;
+  --poyraz-primary-muted-foreground: #fca5a5;
+
+  --poyraz-secondary: #0f172a;
+  --poyraz-secondary-foreground: #f8fafc;
+
+  --poyraz-muted: #0f172a;
+  --poyraz-muted-foreground: #94a3b8;
+
+  --poyraz-accent: #1e293b;
+  --poyraz-accent-hover: #334155;
+  --poyraz-accent-foreground: #f8fafc;
+
+  --poyraz-destructive: #dc2626;
+  --poyraz-destructive-foreground: #ffffff;
+  --poyraz-destructive-muted: #1c0a0a;
+  --poyraz-destructive-muted-foreground: #fca5a5;
+
+  --poyraz-border: #1e293b;
+  --poyraz-border-strong: #334155;
+  --poyraz-input: #475569;
+  --poyraz-ring: #ef4444;
+
+  --poyraz-overlay: rgba(0, 0, 0, 0.7);
+  --poyraz-overlay-light: rgba(0, 0, 0, 0.5);
+
+  --poyraz-placeholder: #475569;
+
+  --poyraz-inverted: #f8fafc;
+  --poyraz-inverted-foreground: #020617;
+
+  --poyraz-surface-50: #0f172a;
+  --poyraz-surface-100: #1e293b;
+  --poyraz-surface-200: #334155;
+
+  --poyraz-info: #0c1929;
+  --poyraz-info-foreground: #93c5fd;
+  --poyraz-info-border: #1e40af;
+  --poyraz-info-icon: #60a5fa;
+  --poyraz-info-solid: #3b82f6;
+
+  --poyraz-success: #052e16;
+  --poyraz-success-foreground: #86efac;
+  --poyraz-success-border: #166534;
+  --poyraz-success-icon: #4ade80;
+  --poyraz-success-solid: #22c55e;
+
+  --poyraz-warning: #1a1304;
+  --poyraz-warning-foreground: #fde68a;
+  --poyraz-warning-border: #854d0e;
+  --poyraz-warning-icon: #facc15;
+  --poyraz-warning-solid: #eab308;
 }
-
-@layer base {
-  body {
-    font-family: var(--font-sans);
-    @apply text-slate-950 bg-white;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-sans);
-    @apply font-bold tracking-tight;
-  }
-
-  /* Optional: Use secondary font for specific display headings if desired, 
-     or just keep it available via font-secondary utility */
-}
-
-@utility font-secondary {
-  font-family: var(--font-secondary);
-}
-
-/* decoration-dashed utility removed — no longer part of the design system */
