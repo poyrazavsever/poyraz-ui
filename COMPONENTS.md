@@ -2,7 +2,7 @@
 
 > **Minimal UI component library** — clean borders, subtle rounding, semantic design tokens with built-in dark mode.
 >
-> Version: `2.0.0` · License: MIT · [Live Docs](https://ui.poyrazavsever.com)
+> Version: `2.0.1` · License: MIT · [Live Docs](https://ui.poyrazavsever.com)
 
 ---
 
