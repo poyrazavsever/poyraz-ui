@@ -8,12 +8,12 @@ function VerticalDemo() {
   return (
     <ScrollArea
       maxHeight={200}
-      className="w-full max-w-sm border border-slate-200 rounded-sm bg-white p-4"
+      className="w-full max-w-sm border border-border rounded-sm bg-background p-4"
     >
       {Array.from({ length: 30 }, (_, i) => (
         <div
           key={i}
-          className="py-2 border-b border-slate-100 text-sm text-slate-700"
+          className="py-2 border-b border-border text-sm text-foreground"
         >
           Item {i + 1} — Scrollable content line
         </div>
@@ -27,13 +27,13 @@ function HorizontalDemo() {
     <ScrollArea
       maxHeight="auto"
       orientation="horizontal"
-      className="w-full max-w-sm border border-slate-200 rounded-sm bg-white p-4"
+      className="w-full max-w-sm border border-border rounded-sm bg-background p-4"
     >
       <div className="flex gap-3" style={{ width: "800px" }}>
         {Array.from({ length: 12 }, (_, i) => (
           <div
             key={i}
-            className="shrink-0 w-24 h-24 border border-slate-300 rounded-sm flex items-center justify-center text-xs font-bold text-slate-500"
+            className="shrink-0 w-24 h-24 border border-border rounded-sm flex items-center justify-center text-xs font-bold text-muted-foreground"
           >
             {i + 1}
           </div>
@@ -52,13 +52,13 @@ function SizeDemo() {
           key={size}
           maxHeight={150}
           scrollbarSize={size}
-          className="w-48 border border-slate-200 rounded-sm bg-white p-3"
+          className="w-48 border border-border rounded-sm bg-background p-3"
         >
-          <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+          <div className="text-[11px] font-bold uppercase tracking-widest text-placeholder mb-2">
             {size}
           </div>
           {Array.from({ length: 20 }, (_, i) => (
-            <div key={i} className="py-1 text-xs text-slate-600">
+            <div key={i} className="py-1 text-xs text-muted-foreground">
               Line {i + 1}
             </div>
           ))}

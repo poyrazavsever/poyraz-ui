@@ -64,14 +64,14 @@ const statusColor: Record<string, string> = {
 
 function DashboardPreview() {
   return (
-    <div className="bg-slate-50 border border-slate-200 rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden">
       {/* Top Bar */}
-      <div className="bg-white border-b border-slate-200 px-5 py-3 flex items-center justify-between">
+      <div className="bg-background border-b border-border px-5 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="h-6 w-6 bg-red-600 rounded-sm flex items-center justify-center">
             <span className="text-white text-[10px] font-bold">P</span>
           </div>
-          <Typography variant="small" className="font-bold text-slate-900">
+          <Typography variant="small" className="font-bold text-foreground">
             Dashboard
           </Typography>
         </div>
@@ -129,10 +129,10 @@ function DashboardPreview() {
                     className="flex-1 flex flex-col items-center gap-1"
                   >
                     <div
-                      className="w-full bg-red-600/80 rounded-sm transition-all hover:bg-red-600"
+                      className="w-full bg-red-600/80 rounded-sm transition-all hover:bg-primary"
                       style={{ height: `${h}%` }}
                     />
-                    <span className="text-[9px] text-slate-400">
+                    <span className="text-[9px] text-placeholder">
                       {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i]}
                     </span>
                   </div>
@@ -165,11 +165,11 @@ function DashboardPreview() {
                   <div key={i} className="flex items-start gap-2">
                     <div className="h-1.5 w-1.5 rounded-full bg-red-600 mt-1.5 shrink-0" />
                     <div>
-                      <p className="text-xs text-slate-700">
+                      <p className="text-xs text-foreground">
                         <span className="font-semibold">{a.user}</span>{" "}
                         {a.action}
                       </p>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-placeholder">
                         {a.time}
                       </span>
                     </div>
@@ -194,7 +194,7 @@ function DashboardPreview() {
             <div className="overflow-x-auto">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 text-left text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                  <tr className="border-b border-border text-left text-[10px] font-semibold uppercase tracking-wider text-placeholder">
                     <th className="px-4 py-2.5">Order</th>
                     <th className="px-4 py-2.5">Customer</th>
                     <th className="px-4 py-2.5">Amount</th>
@@ -206,15 +206,15 @@ function DashboardPreview() {
                   {recentOrders.map((order) => (
                     <tr
                       key={order.id}
-                      className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50 transition-colors"
+                      className="border-b border-border last:border-b-0 hover:bg-muted transition-colors"
                     >
-                      <td className="px-4 py-2.5 font-medium text-slate-900">
+                      <td className="px-4 py-2.5 font-medium text-foreground">
                         {order.id}
                       </td>
-                      <td className="px-4 py-2.5 text-slate-600">
+                      <td className="px-4 py-2.5 text-muted-foreground">
                         {order.customer}
                       </td>
-                      <td className="px-4 py-2.5 font-medium text-slate-900">
+                      <td className="px-4 py-2.5 font-medium text-foreground">
                         {order.amount}
                       </td>
                       <td className="px-4 py-2.5">
@@ -224,7 +224,7 @@ function DashboardPreview() {
                           {order.status}
                         </span>
                       </td>
-                      <td className="px-4 py-2.5 text-slate-400">
+                      <td className="px-4 py-2.5 text-placeholder">
                         {order.date}
                       </td>
                     </tr>
@@ -247,9 +247,9 @@ import { StatsCard } from "poyraz-ui/molecules";
 
 export function DashboardPage() {
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="bg-muted min-h-screen">
       {/* Top Bar */}
-      <div className="bg-white border-b border-slate-200 px-5 py-3 flex items-center justify-between">
+      <div className="bg-background border-b border-border px-5 py-3 flex items-center justify-between">
         <Typography variant="small" className="font-bold">Dashboard</Typography>
         <Avatar className="h-7 w-7">
           <AvatarImage src="/avatar.jpg" />

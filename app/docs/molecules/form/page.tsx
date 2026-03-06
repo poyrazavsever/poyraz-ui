@@ -24,7 +24,7 @@ export default function FormPage() {
       <section className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-lg font-bold">Usage</h2>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-muted-foreground">
             The Form component wraps React Hook Form and provides context for
             label, description, and error message components. Pair with Zod or
             other validation libraries for schema validation.

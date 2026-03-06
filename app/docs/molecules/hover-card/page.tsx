@@ -62,13 +62,13 @@ export default function HoverCardPage() {
               </Avatar>
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">@poyrazavsever</h4>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-muted-foreground">
                   Creator of Poyraz UI — Brutalist design system for the modern
                   web.
                 </p>
                 <div className="flex items-center pt-1">
                   <CalendarIcon className="mr-2 h-3 w-3 opacity-70" />
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-placeholder">
                     Joined December 2021
                   </span>
                 </div>

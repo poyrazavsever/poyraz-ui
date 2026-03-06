@@ -65,7 +65,7 @@ export default function ModalPage() {
                   Compact size for confirmations.
                 </ModalDescription>
               </ModalHeader>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-muted-foreground">
                 Are you sure you want to continue?
               </p>
               <ModalFooter>
@@ -122,7 +122,7 @@ export default function ModalPage() {
                   Extra room for complex content.
                 </ModalDescription>
               </ModalHeader>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-muted-foreground">
                 The large variant provides more room for tables, multi-step
                 forms, or detailed content.
               </p>

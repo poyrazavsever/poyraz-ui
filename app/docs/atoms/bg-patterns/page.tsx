@@ -22,9 +22,9 @@ function PatternPreview({
   label: string;
 }) {
   return (
-    <div className="relative h-48 border border-slate-200 rounded-sm bg-white overflow-hidden">
+    <div className="relative h-48 border border-border rounded-sm bg-background overflow-hidden">
       {children}
-      <div className="absolute bottom-3 left-3 z-10 text-xs font-semibold uppercase tracking-wide text-slate-500 bg-white/80 px-2 py-1">
+      <div className="absolute bottom-3 left-3 z-10 text-xs font-semibold uppercase tracking-wide text-muted-foreground bg-background/80 px-2 py-1">
         {label}
       </div>
     </div>
@@ -221,7 +221,7 @@ export default function BgPatternsPage() {
   </div>
 </section>`}
       >
-        <div className="relative h-48 bg-white border border-slate-200 rounded-sm overflow-hidden flex items-center justify-center">
+        <div className="relative h-48 bg-background border border-border rounded-sm overflow-hidden flex items-center justify-center">
           <PatternDots
             overlay
             size={28}
@@ -231,7 +231,7 @@ export default function BgPatternsPage() {
           />
           <div className="relative z-10 text-center">
             <h2 className="text-lg font-bold">Hero Title</h2>
-            <p className="text-sm text-slate-500">Content above the pattern</p>
+            <p className="text-sm text-muted-foreground">Content above the pattern</p>
           </div>
         </div>
       </DemoSection>

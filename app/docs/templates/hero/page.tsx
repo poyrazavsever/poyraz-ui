@@ -5,7 +5,7 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function HeroPreview() {
   return (
-    <div className="bg-white border border-slate-200 rounded-sm overflow-hidden">
+    <div className="bg-background border border-border rounded-sm overflow-hidden">
       {/* Hero */}
       <section className="relative px-6 py-16 text-center">
         {/* Subtle grid pattern */}
@@ -20,7 +20,7 @@ function HeroPreview() {
 
         <div className="relative max-w-lg mx-auto space-y-5">
           <Badge variant="outline" className="text-[10px]">
-            v1.0 — Now Available
+            v2.0 — Now Available
           </Badge>
 
           <Typography variant="h1">
@@ -29,7 +29,7 @@ function HeroPreview() {
             components
           </Typography>
 
-          <Typography variant="lead" className="text-slate-500">
+          <Typography variant="lead" className="text-muted-foreground">
             A clean, accessible React component library built with Tailwind CSS
             v4 and Radix UI. No shadows, no noise — just sharp interfaces.
           </Typography>
@@ -40,19 +40,19 @@ function HeroPreview() {
           </div>
 
           {/* Mini stats */}
-          <div className="flex items-center justify-center gap-6 pt-4 text-xs text-slate-400">
+          <div className="flex items-center justify-center gap-6 pt-4 text-xs text-placeholder">
             <div>
-              <span className="font-bold text-slate-700 text-sm">43+</span>{" "}
+              <span className="font-bold text-foreground text-sm">43+</span>{" "}
               Components
             </div>
             <Separator orientation="vertical" className="h-4" />
             <div>
-              <span className="font-bold text-slate-700 text-sm">MIT</span>{" "}
+              <span className="font-bold text-foreground text-sm">MIT</span>{" "}
               License
             </div>
             <Separator orientation="vertical" className="h-4" />
             <div>
-              <span className="font-bold text-slate-700 text-sm">v4</span>{" "}
+              <span className="font-bold text-foreground text-sm">v4</span>{" "}
               Tailwind
             </div>
           </div>
@@ -60,7 +60,7 @@ function HeroPreview() {
       </section>
 
       {/* Features grid */}
-      <section className="border-t border-slate-200 px-6 py-10">
+      <section className="border-t border-border px-6 py-10">
         <div className="max-w-lg mx-auto grid grid-cols-3 gap-4 text-center">
           {[
             { icon: "⚡", title: "Fast", desc: "Zero runtime overhead" },
@@ -77,8 +77,8 @@ function HeroPreview() {
           ].map((f) => (
             <div key={f.title} className="space-y-1.5">
               <div className="text-lg">{f.icon}</div>
-              <div className="text-xs font-bold text-slate-900">{f.title}</div>
-              <div className="text-[10px] text-slate-400">{f.desc}</div>
+              <div className="text-xs font-bold text-foreground">{f.title}</div>
+              <div className="text-[10px] text-placeholder">{f.desc}</div>
             </div>
           ))}
         </div>
@@ -94,7 +94,7 @@ export function HeroSection() {
     <section className="relative px-6 py-16 text-center">
       <div className="relative max-w-lg mx-auto space-y-5">
         <Badge variant="outline" className="text-[10px]">
-          v1.0 — Now Available
+          v2.0 — Now Available
         </Badge>
 
         <Typography variant="h1">
@@ -103,7 +103,7 @@ export function HeroSection() {
           components
         </Typography>
 
-        <Typography variant="lead" className="text-slate-500">
+        <Typography variant="lead" className="text-muted-foreground">
           A clean, accessible React component library built with
           Tailwind CSS v4 and Radix UI.
         </Typography>
@@ -113,17 +113,17 @@ export function HeroSection() {
           <Button variant="outline">View on GitHub</Button>
         </div>
 
-        <div className="flex items-center justify-center gap-6 pt-4 text-xs text-slate-400">
+        <div className="flex items-center justify-center gap-6 pt-4 text-xs text-placeholder">
           <div>
-            <span className="font-bold text-slate-700 text-sm">43+</span> Components
+            <span className="font-bold text-foreground text-sm">43+</span> Components
           </div>
           <Separator orientation="vertical" className="h-4" />
           <div>
-            <span className="font-bold text-slate-700 text-sm">MIT</span> License
+            <span className="font-bold text-foreground text-sm">MIT</span> License
           </div>
           <Separator orientation="vertical" className="h-4" />
           <div>
-            <span className="font-bold text-slate-700 text-sm">v4</span> Tailwind
+            <span className="font-bold text-foreground text-sm">v4</span> Tailwind
           </div>
         </div>
       </div>

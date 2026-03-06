@@ -6,7 +6,7 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function PricingPreview() {
   return (
-    <div className="bg-white border border-slate-200 rounded-sm overflow-hidden">
+    <div className="bg-background border border-border rounded-sm overflow-hidden">
       <section className="px-6 py-12">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
@@ -19,7 +19,7 @@ function PricingPreview() {
             </Typography>
             <Typography
               variant="p"
-              className="text-sm text-slate-500 max-w-md mx-auto"
+              className="text-sm text-muted-foreground max-w-md mx-auto"
             >
               No hidden fees. No surprises. Pick a plan that fits your needs and
               scale as you grow.
@@ -83,8 +83,8 @@ function PricingPreview() {
           </div>
 
           {/* FAQ mini */}
-          <div className="mt-10 pt-8 border-t border-slate-200 text-center">
-            <Typography variant="small" className="text-slate-400">
+          <div className="mt-10 pt-8 border-t border-border text-center">
+            <Typography variant="small" className="text-placeholder">
               All plans include 14-day free trial · No credit card required ·
               Cancel anytime
             </Typography>
@@ -107,7 +107,7 @@ export function PricingSection() {
           <Typography variant="h2">
             Simple, transparent <span className="text-red-600">pricing</span>
           </Typography>
-          <Typography variant="p" className="text-sm text-slate-500">
+          <Typography variant="p" className="text-sm text-muted-foreground">
             No hidden fees. Pick a plan that fits your needs.
           </Typography>
         </div>

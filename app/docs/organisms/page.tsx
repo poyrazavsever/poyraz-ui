@@ -55,12 +55,12 @@ export default function OrganismsPage() {
           <Link
             key={component.slug}
             href={`/docs/organisms/${component.slug}`}
-            className="group block p-5 border border-slate-200 rounded-sm hover:border-slate-400 transition-colors"
+            className="group block p-5 border border-border rounded-sm hover:border-foreground/30 transition-colors"
           >
             <h3 className="font-semibold text-sm group-hover:underline">
               {component.name}
             </h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               {component.description}
             </p>
           </Link>

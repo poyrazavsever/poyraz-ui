@@ -22,7 +22,7 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function LoginPreview() {
   return (
-    <div className="bg-slate-50 border border-slate-200 rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden">
       <div className="flex items-center justify-center px-6 py-12">
         <Card className="w-full max-w-xs">
           <CardHeader className="text-center">
@@ -61,7 +61,7 @@ function LoginPreview() {
               <Checkbox id="login-remember" />
               <label
                 htmlFor="login-remember"
-                className="text-xs text-slate-500 cursor-pointer"
+                className="text-xs text-muted-foreground cursor-pointer"
               >
                 Remember me
               </label>
@@ -70,7 +70,7 @@ function LoginPreview() {
 
             <div className="relative py-2">
               <Separator />
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[10px] text-slate-400">
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-[10px] text-placeholder">
                 or continue with
               </span>
             </div>
@@ -130,7 +130,7 @@ function LoginPreview() {
 
 function SignupPreview() {
   return (
-    <div className="bg-slate-50 border border-slate-200 rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden">
       <div className="flex items-center justify-center px-6 py-12">
         <Card className="w-full max-w-xs">
           <CardHeader className="text-center">
@@ -166,7 +166,7 @@ function SignupPreview() {
                 type="password"
                 placeholder="••••••••"
               />
-              <p className="text-[10px] text-slate-400">
+              <p className="text-[10px] text-placeholder">
                 At least 8 characters with one uppercase and one number.
               </p>
             </div>
@@ -174,7 +174,7 @@ function SignupPreview() {
               <Checkbox id="signup-terms" className="mt-0.5" />
               <label
                 htmlFor="signup-terms"
-                className="text-xs text-slate-500 cursor-pointer leading-relaxed"
+                className="text-xs text-muted-foreground cursor-pointer leading-relaxed"
               >
                 I agree to the{" "}
                 <a href="#" className="text-red-600 hover:underline">
@@ -190,7 +190,7 @@ function SignupPreview() {
 
             <div className="relative py-2">
               <Separator />
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[10px] text-slate-400">
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-[10px] text-placeholder">
                 or sign up with
               </span>
             </div>
@@ -255,7 +255,7 @@ const loginCode = `import {
 
 export function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-muted px-4">
       <Card className="w-full max-w-xs">
         <CardHeader className="text-center">
           <CardTitle>Welcome back</CardTitle>
@@ -272,7 +272,7 @@ export function LoginPage() {
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="remember" />
-            <label htmlFor="remember" className="text-xs text-slate-500">
+            <label htmlFor="remember" className="text-xs text-muted-foreground">
               Remember me
             </label>
           </div>
@@ -295,7 +295,7 @@ const signupCode = `import {
 
 export function SignupPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-muted px-4">
       <Card className="w-full max-w-xs">
         <CardHeader className="text-center">
           <CardTitle>Create an account</CardTitle>
@@ -322,7 +322,7 @@ export function SignupPage() {
           </div>
           <div className="flex items-start gap-2">
             <Checkbox id="terms" className="mt-0.5" />
-            <label htmlFor="terms" className="text-xs text-slate-500">
+            <label htmlFor="terms" className="text-xs text-muted-foreground">
               I agree to the Terms and Privacy Policy
             </label>
           </div>

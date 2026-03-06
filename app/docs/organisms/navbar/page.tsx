@@ -98,7 +98,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -175,7 +175,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarTopBar>
               <span className="text-xs">
@@ -242,7 +242,7 @@ export default function NavbarPage() {
   </NavbarMobileMenu>
 </Navbar>`}
       >
-        <div className="border border-slate-200 rounded-sm p-3 bg-slate-50">
+        <div className="border border-border rounded-sm p-3 bg-muted">
           <Navbar variant="bordered">
             <NavbarMain>
               <NavbarBrand>
@@ -286,7 +286,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -346,7 +346,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -418,7 +418,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -451,11 +451,11 @@ export default function NavbarPage() {
                       />
                     </NavbarMegaMenuLinks>
                     <NavbarMegaMenuFeatured>
-                      <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">
+                      <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-2">
                         What&apos;s New
                       </p>
                       <p className="text-sm font-medium">v2.0 Released</p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         New dashboard, faster builds, and 20+ new components.
                       </p>
                       <Button size="sm" className="mt-3">
@@ -488,7 +488,7 @@ export default function NavbarPage() {
   </NavbarMegaMenu>
 </NavbarDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -531,7 +531,7 @@ export default function NavbarPage() {
   </NavbarMain>
 </Navbar>`}
       >
-        <div className="border border-slate-200 rounded-sm bg-gradient-to-r from-slate-100 to-slate-200">
+        <div className="border border-border rounded-sm bg-gradient-to-r from-accent to-border">
           <Navbar variant="transparent">
             <NavbarMain>
               <NavbarBrand>
@@ -562,7 +562,7 @@ export default function NavbarPage() {
   </NavbarMain>
 </Navbar>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar variant="minimal">
             <NavbarMain>
               <NavbarBrand href="#">
@@ -588,7 +588,7 @@ export default function NavbarPage() {
   <NavbarPopoverDropdownItem href="#">Status</NavbarPopoverDropdownItem>
 </NavbarPopoverDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm overflow-visible">
+        <div className="border border-border rounded-sm overflow-visible">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -638,7 +638,7 @@ export default function NavbarPage() {
   />
 </NavbarPanelDropdown>`}
       >
-        <div className="border border-slate-200 rounded-sm overflow-visible">
+        <div className="border border-border rounded-sm overflow-visible">
           <Navbar>
             <NavbarMain>
               <NavbarBrand>
@@ -690,7 +690,7 @@ export default function NavbarPage() {
   <a href="#" className="underline">Learn more →</a>
 </NavbarTopBar>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarTopBar variant="announcement" dismissible>
               <span>🎉 v2.0 is live — check the changelog!</span>
@@ -730,7 +730,7 @@ export default function NavbarPage() {
   </NavbarTopBarSection>
 </NavbarTopBar>`}
       >
-        <div className="border border-slate-200 rounded-sm">
+        <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarTopBar variant="secondary">
               <NavbarTopBarSection>
@@ -784,9 +784,9 @@ export default function NavbarPage() {
   </NavbarMobileActions>
 </NavbarMobileMenu>`}
       >
-        <div className="border border-slate-200 rounded-sm max-w-xs mx-auto">
-          <div className="border-b border-slate-200 px-4 py-3 flex items-center justify-between">
-            <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+        <div className="border border-border rounded-sm max-w-xs mx-auto">
+          <div className="border-b border-border px-4 py-3 flex items-center justify-between">
+            <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
               Mobile Menu Preview
             </span>
           </div>
@@ -806,7 +806,7 @@ export default function NavbarPage() {
             </NavbarMobileDropdown>
             <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
           </div>
-          <div className="border-t border-slate-200 px-4 py-3 flex flex-col gap-2">
+          <div className="border-t border-border px-4 py-3 flex flex-col gap-2">
             <Button variant="outline" className="w-full" size="sm">
               Sign In
             </Button>
@@ -833,9 +833,9 @@ export default function NavbarPage() {
   </NavbarMobileDrillPanel>
 </NavbarMobileDrillMenu>`}
       >
-        <div className="border border-slate-200 rounded-sm max-w-xs mx-auto">
-          <div className="border-b border-slate-200 px-4 py-3 flex items-center justify-between">
-            <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+        <div className="border border-border rounded-sm max-w-xs mx-auto">
+          <div className="border-b border-border px-4 py-3 flex items-center justify-between">
+            <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
               Drill-Down Preview
             </span>
           </div>
@@ -934,15 +934,15 @@ import { mainNav } from "@/lib/navigation";
   ))}
 </NavbarLinks>`}
       >
-        <div className="border border-slate-200 rounded-sm p-6 bg-slate-50">
+        <div className="border border-border rounded-sm p-6 bg-muted">
           <div className="space-y-3">
-            <p className="text-sm font-medium text-slate-700">
+            <p className="text-sm font-medium text-foreground">
               Place your navigation config in{" "}
-              <code className="px-1.5 py-0.5 bg-white border border-slate-200 rounded-sm text-xs font-mono">
+              <code className="px-1.5 py-0.5 bg-background border border-border rounded-sm text-xs font-mono">
                 lib/navigation.ts
               </code>
             </p>
-            <ul className="text-sm text-slate-600 space-y-1 list-disc list-inside">
+            <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
               <li>
                 <strong>mainNav</strong> — Top-level links rendered by Navbar
               </li>
