@@ -821,7 +821,7 @@ export default function Home() {
               variant="outline"
               className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors"
             >
-              v0.3.0 — Open Source
+              v1.1.1 — Open Source
             </Badge>
           </Link>
 
