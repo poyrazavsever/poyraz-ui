@@ -159,3 +159,21 @@ export type {
   AutocompleteOption,
   AutocompleteProps,
 } from "@/components/ui/molecules/autocomplete";
+export {
+  ArticleCard,
+  ImageCard,
+  NewsCard,
+  StatsCard,
+  TestimonialCard,
+  PricingCard,
+  ProductCard,
+} from "@/components/ui/molecules/card-templates";
+export type {
+  ArticleCardProps,
+  ImageCardProps,
+  NewsCardProps,
+  StatsCardProps,
+  TestimonialCardProps,
+  PricingCardProps,
+  ProductCardProps,
+} from "@/components/ui/molecules/card-templates";
