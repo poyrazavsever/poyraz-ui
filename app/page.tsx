@@ -84,6 +84,7 @@ import {
   FooterSocials,
 } from "poyraz-ui/organisms";
 import { mainNav, mobileNav, footerNav, socialLinks } from "@/lib/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 /* ── Copy Install Command ───────────────────────────────────────── */
 
@@ -99,16 +100,16 @@ function CopyInstallCommand() {
   };
 
   return (
-    <div className="flex items-center gap-3 rounded-sm border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-700 w-full max-w-md">
-      <span className="text-slate-400">$</span>
+    <div className="flex items-center gap-3 rounded-sm border border-border bg-muted px-4 py-2.5 font-mono text-sm text-foreground w-full max-w-md">
+      <span className="text-placeholder">$</span>
       <span className="flex-1">{command}</span>
       <button
         onClick={handleCopy}
-        className="text-slate-400 hover:text-slate-900 cursor-pointer transition-colors"
+        className="text-placeholder hover:text-foreground cursor-pointer transition-colors"
         aria-label="Copy install command"
       >
         {copied ? (
-          <Check className="h-4 w-4 text-green-500" />
+          <Check className="h-4 w-4 text-success-solid" />
         ) : (
           <Copy className="h-4 w-4" />
         )}
@@ -179,22 +180,22 @@ function TeamMembersCard() {
     <Card className="w-full">
       <CardContent className="pt-6 flex flex-col items-center text-center space-y-4">
         <div className="flex -space-x-2">
-          <Avatar className="h-8 w-8 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-background">
             <AvatarImage src="https://i.pravatar.cc/40?img=1" />
             <AvatarFallback>A</AvatarFallback>
           </Avatar>
-          <Avatar className="h-8 w-8 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-background">
             <AvatarImage src="https://i.pravatar.cc/40?img=2" />
             <AvatarFallback>B</AvatarFallback>
           </Avatar>
-          <Avatar className="h-8 w-8 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-background">
             <AvatarImage src="https://i.pravatar.cc/40?img=3" />
             <AvatarFallback>C</AvatarFallback>
           </Avatar>
         </div>
         <div>
           <p className="font-semibold text-sm">No Team Members</p>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             Invite your team to collaborate on this project.
           </p>
         </div>
@@ -212,10 +213,10 @@ function SecurityCard() {
       <CardContent className="pt-6 space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Shield className="h-5 w-5 text-slate-600" />
+            <Shield className="h-5 w-5 text-muted-foreground" />
             <div>
               <p className="text-sm font-semibold">Two-factor authentication</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Verify via email or phone number.
               </p>
             </div>
@@ -227,10 +228,10 @@ function SecurityCard() {
         <Separator />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <CheckCircle className="h-5 w-5 text-green-600" />
+            <CheckCircle className="h-5 w-5 text-success-solid" />
             <p className="text-sm">Your profile has been verified.</p>
           </div>
-          <ChevronRight className="h-4 w-4 text-slate-400" />
+          <ChevronRight className="h-4 w-4 text-placeholder" />
         </div>
       </CardContent>
     </Card>
@@ -247,7 +248,7 @@ function AppearanceCard() {
         <div className="space-y-2">
           <Label>Compute Environment</Label>
           <RadioGroup defaultValue="kubernetes" className="space-y-2">
-            <div className="flex items-start gap-3 rounded-sm border border-slate-200 p-3">
+            <div className="flex items-start gap-3 rounded-sm border border-border p-3">
               <RadioGroupItem value="kubernetes" id="k8s" className="mt-0.5" />
               <div>
                 <Label
@@ -256,7 +257,7 @@ function AppearanceCard() {
                 >
                   Kubernetes
                 </Label>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-muted-foreground mt-0.5">
                   Run GPU workloads on a K8s configured cluster.
                 </p>
               </div>
@@ -286,12 +287,12 @@ function StatusBadges() {
 
 function ChatInput() {
   return (
-    <div className="flex items-center gap-2 rounded-sm border border-slate-200 px-3 py-2">
+    <div className="flex items-center gap-2 rounded-sm border border-border px-3 py-2">
       <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
         <span className="text-lg">+</span>
       </Button>
       <input
-        className="flex-1 text-sm border-0 outline-none bg-transparent placeholder:text-slate-400"
+        className="flex-1 text-sm border-0 outline-none bg-transparent placeholder:text-placeholder"
         placeholder="Send a message..."
       />
       <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
@@ -303,7 +304,7 @@ function ChatInput() {
 
 function CheckboxCard() {
   return (
-    <div className="flex items-center gap-2.5 rounded-sm border border-slate-200 px-4 py-3">
+    <div className="flex items-center gap-2.5 rounded-sm border border-border px-4 py-3">
       <Checkbox id="terms-home" defaultChecked />
       <Label htmlFor="terms-home" className="normal-case font-normal text-sm">
         I agree to the terms and conditions
@@ -354,16 +355,16 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Total Revenue
               </p>
               <p className="text-xl font-bold mt-1">$45,231</p>
-              <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
+              <p className="text-xs text-success-solid mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +20.1%
               </p>
             </div>
-            <div className="h-8 w-8 rounded-sm bg-red-50 flex items-center justify-center">
-              <BarChart3 className="h-4 w-4 text-red-600" />
+            <div className="h-8 w-8 rounded-sm bg-primary-muted flex items-center justify-center">
+              <BarChart3 className="h-4 w-4 text-primary" />
             </div>
           </div>
         </CardContent>
@@ -373,16 +374,16 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Subscriptions
               </p>
               <p className="text-xl font-bold mt-1">+2,350</p>
-              <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
+              <p className="text-xs text-success-solid mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +180.1%
               </p>
             </div>
-            <div className="h-8 w-8 rounded-sm bg-slate-100 flex items-center justify-center">
-              <Users className="h-4 w-4 text-slate-600" />
+            <div className="h-8 w-8 rounded-sm bg-accent flex items-center justify-center">
+              <Users className="h-4 w-4 text-muted-foreground" />
             </div>
           </div>
         </CardContent>
@@ -392,16 +393,16 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wide">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Active Now
               </p>
               <p className="text-xl font-bold mt-1">+573</p>
-              <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                 <Activity className="h-3 w-3" /> +201 since last hour
               </p>
             </div>
-            <div className="h-8 w-8 rounded-sm bg-green-50 flex items-center justify-center">
-              <Activity className="h-4 w-4 text-green-600" />
+            <div className="h-8 w-8 rounded-sm bg-success flex items-center justify-center">
+              <Activity className="h-4 w-4 text-success-solid" />
             </div>
           </div>
         </CardContent>
@@ -440,7 +441,7 @@ function DashboardShowcase() {
                 </Avatar>
                 <div>
                   <p className="text-sm font-medium">{sale.name}</p>
-                  <p className="text-xs text-slate-500">{sale.email}</p>
+                  <p className="text-xs text-muted-foreground">{sale.email}</p>
                 </div>
               </div>
               <span className="text-sm font-semibold">{sale.amount}</span>
@@ -459,12 +460,12 @@ function DashboardShowcase() {
             {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 50].map((h, i) => (
               <div
                 key={i}
-                className="flex-1 bg-red-600/80 rounded-t-sm transition-all hover:bg-red-600"
+                className="flex-1 bg-primary/80 rounded-t-sm transition-all hover:bg-primary"
                 style={{ height: `${h}%` }}
               />
             ))}
           </div>
-          <div className="flex justify-between mt-2 text-[10px] text-slate-400">
+          <div className="flex justify-between mt-2 text-[10px] text-placeholder">
             <span>Jan</span>
             <span>Feb</span>
             <span>Mar</span>
@@ -549,7 +550,7 @@ function TasksShowcase() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-base font-bold">Welcome back!</h3>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-muted-foreground">
             Here&apos;s a list of your tasks for this month!
           </p>
         </div>
@@ -566,20 +567,20 @@ function TasksShowcase() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-200">
+              <tr className="border-b border-border">
                 <th className="p-3 text-left w-10">
                   <Checkbox />
                 </th>
-                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                <th className="p-3 text-left text-xs font-semibold text-muted-foreground uppercase">
                   Task
                 </th>
-                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                <th className="p-3 text-left text-xs font-semibold text-muted-foreground uppercase">
                   Title
                 </th>
-                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                <th className="p-3 text-left text-xs font-semibold text-muted-foreground uppercase">
                   Status
                 </th>
-                <th className="p-3 text-left text-xs font-semibold text-slate-500 uppercase">
+                <th className="p-3 text-left text-xs font-semibold text-muted-foreground uppercase">
                   Priority
                 </th>
               </tr>
@@ -588,12 +589,12 @@ function TasksShowcase() {
               {tasks.map((task) => (
                 <tr
                   key={task.id}
-                  className="border-b border-slate-100 last:border-0"
+                  className="border-b border-border last:border-0"
                 >
                   <td className="p-3">
                     <Checkbox defaultChecked={task.checked} />
                   </td>
-                  <td className="p-3 font-mono text-xs text-slate-500">
+                  <td className="p-3 font-mono text-xs text-muted-foreground">
                     {task.label}
                   </td>
                   <td className="p-3 max-w-xs truncate">{task.title}</td>
@@ -607,10 +608,10 @@ function TasksShowcase() {
                     <span
                       className={`text-xs font-medium ${
                         task.priority === "High"
-                          ? "text-red-600"
+                          ? "text-primary"
                           : task.priority === "Medium"
-                            ? "text-yellow-600"
-                            : "text-slate-400"
+                            ? "text-warning-solid"
+                            : "text-placeholder"
                       }`}
                     >
                       {task.priority}
@@ -621,8 +622,8 @@ function TasksShowcase() {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-4 py-3 border-t border-slate-200">
-          <p className="text-xs text-slate-500">
+        <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+          <p className="text-xs text-muted-foreground">
             0 of {tasks.length} row(s) selected.
           </p>
           <div className="flex items-center gap-2">
@@ -658,19 +659,19 @@ function AuthShowcase() {
           <div className="space-y-2">
             <Label>Email</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-placeholder" />
               <Input placeholder="m@example.com" className="pl-9" />
             </div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label>Password</Label>
-              <button className="text-xs text-red-600 hover:underline cursor-pointer">
+              <button className="text-xs text-primary hover:underline cursor-pointer">
                 Forgot password?
               </button>
             </div>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-placeholder" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
@@ -678,7 +679,7 @@ function AuthShowcase() {
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-placeholder hover:text-muted-foreground cursor-pointer"
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -700,9 +701,9 @@ function AuthShowcase() {
           <Button className="w-full">Login</Button>
         </CardContent>
         <CardFooter className="justify-center">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <span className="text-red-600 font-medium cursor-pointer hover:underline">
+            <span className="text-primary font-medium cursor-pointer hover:underline">
               Sign up
             </span>
           </p>
@@ -739,7 +740,7 @@ function AuthShowcase() {
           <Button className="w-full">Create Account</Button>
           <div className="relative">
             <Separator />
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-xs text-slate-400">
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-xs text-placeholder">
               OR
             </span>
           </div>
@@ -756,7 +757,7 @@ function AuthShowcase() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* ─── NAVBAR ──────────────────────────────────────── */}
       <Navbar variant="default" sticky>
         <NavbarMain>
@@ -777,6 +778,7 @@ export default function Home() {
           </NavbarLinks>
 
           <NavbarActions>
+            <ThemeToggle />
             <Link href={socialLinks.website} target="_blank">
               <Button size="sm">Return Back</Button>
             </Link>
@@ -800,20 +802,20 @@ export default function Home() {
           <Link href={socialLinks.repo} target="_blank">
             <Badge
               variant="outline"
-              className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors"
+              className="bg-background px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-accent transition-colors"
             >
-              v1.1.3 — Open Source
+              v2.0.0 — Open Source
             </Badge>
           </Link>
 
           <Typography variant="h1">
-            <span className="font-secondary text-red-600">UI Kit</span> for
+            <span className="font-secondary text-primary">UI Kit</span> for
             Poyraz
           </Typography>
 
           <Typography variant="lead" className="max-w-2xl">
             Minimal design system for modern web applications.
-            <span className="block mt-2 font-medium text-slate-900">
+            <span className="block mt-2 font-medium text-foreground">
               Clean borders. Subtle rounding. Modern, functional design.
             </span>
           </Typography>
@@ -828,7 +830,7 @@ export default function Home() {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-white w-full sm:w-auto"
+                className="bg-background w-full sm:w-auto"
               >
                 <Github className="mr-2 h-4 w-4" /> GitHub
               </Button>
@@ -889,7 +891,7 @@ export default function Home() {
       </section>
 
       {/* ─── CTA ─────────────────────────────────────────── */}
-      <section className="px-6 py-20 bg-slate-50/80 border-y border-slate-200">
+      <section className="px-6 py-20 bg-muted/80 border-y border-border">
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <Typography variant="h2">Ready to Build?</Typography>
           <Typography variant="muted" className="max-w-lg mx-auto">
@@ -908,7 +910,7 @@ export default function Home() {
       </section>
 
       {/* ─── FOOTER ──────────────────────────────────────── */}
-      <Footer variant="branded" className="mt-auto border-t border-slate-200">
+      <Footer variant="branded" className="mt-auto border-t border-border">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <FooterBrand>
             <div className="flex items-center gap-3">
@@ -917,7 +919,7 @@ export default function Home() {
                 Poyraz UI
               </span>
             </div>
-            <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
               An open-source minimal UI component library for modern web
               applications.
             </p>
