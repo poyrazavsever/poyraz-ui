@@ -23,7 +23,7 @@ export default function DocsIntroPage() {
         </Badge>
         <Typography variant="h2">Introduction</Typography>
         <Typography variant="lead">
-          Poyraz UI is a brutalist design system built with React, Next.js,
+          Poyraz UI is a minimal design system built with React, Next.js,
           Tailwind CSS v4, and Radix UI.
         </Typography>
       </div>
@@ -41,9 +41,9 @@ export default function DocsIntroPage() {
         </Typography>
         <Typography variant="p">
           Unlike traditional UI libraries that rely on rounded corners, subtle
-          shadows, and soft gradients, Poyraz UI embraces a raw, unapologetic
-          design language. Every component is built with dashed borders, sharp
-          corners, and high-contrast color schemes.
+          shadows, and soft gradients, Poyraz UI embraces a clean, minimal
+          design language. Every component is built with solid borders, subtle
+          rounding, and high-contrast color schemes.
         </Typography>
       </section>
 
@@ -55,39 +55,39 @@ export default function DocsIntroPage() {
         </Typography>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="p-5 border-2 border-dashed border-slate-200 bg-white space-y-2">
+          <div className="p-5 border border-slate-200 rounded-sm bg-white space-y-2">
             <div className="flex items-center gap-2 text-red-600">
               <Paintbrush className="h-4 w-4" />
               <h3 className="font-bold text-sm uppercase tracking-wide text-slate-900">
-                Dashed Borders
+                Clean Borders
               </h3>
             </div>
             <p className="text-sm text-slate-500">
               <code className="text-xs bg-slate-100 px-1.5 py-0.5 border border-slate-200">
-                border-dashed
+                border
               </code>{" "}
               is the DNA of the system. Every interactive element, card, and
-              section uses dashed borders as its primary visual identifier.
+              section uses clean solid borders as its primary visual identifier.
             </p>
           </div>
 
-          <div className="p-5 border-2 border-dashed border-slate-200 bg-white space-y-2">
+          <div className="p-5 border border-slate-200 rounded-sm bg-white space-y-2">
             <div className="flex items-center gap-2 text-red-600">
               <Layers className="h-4 w-4" />
               <h3 className="font-bold text-sm uppercase tracking-wide text-slate-900">
-                No Rounding
+                Subtle Rounding
               </h3>
             </div>
             <p className="text-sm text-slate-500">
               <code className="text-xs bg-slate-100 px-1.5 py-0.5 border border-slate-200">
-                rounded-none
+                rounded-sm
               </code>{" "}
-              is applied everywhere. Sharp, intentional corners give each
-              element a raw, industrial feel.
+              is applied everywhere. Gentle, intentional corners give each
+              element a refined, modern feel.
             </p>
           </div>
 
-          <div className="p-5 border-2 border-dashed border-slate-200 bg-white space-y-2">
+          <div className="p-5 border border-slate-200 rounded-sm bg-white space-y-2">
             <div className="flex items-center gap-2 text-red-600">
               <Zap className="h-4 w-4" />
               <h3 className="font-bold text-sm uppercase tracking-wide text-slate-900">
@@ -103,7 +103,7 @@ export default function DocsIntroPage() {
             </p>
           </div>
 
-          <div className="p-5 border-2 border-dashed border-slate-200 bg-white space-y-2">
+          <div className="p-5 border border-slate-200 rounded-sm bg-white space-y-2">
             <div className="flex items-center gap-2 text-red-600">
               <ArrowRight className="h-4 w-4" />
               <h3 className="font-bold text-sm uppercase tracking-wide text-slate-900">
@@ -174,9 +174,9 @@ export default function DocsIntroPage() {
       <section className="space-y-4">
         <Typography variant="h2">Tech Stack</Typography>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-2 border-dashed border-slate-200">
+          <table className="w-full text-sm border border-slate-200 rounded-sm">
             <thead>
-              <tr className="border-b-2 border-dashed border-slate-200 bg-slate-50">
+              <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
                   Technology
                 </th>
@@ -196,10 +196,7 @@ export default function DocsIntroPage() {
                 ["tsup", "Library bundling (ESM + CJS)"],
                 ["TypeScript", "Type safety"],
               ].map(([tech, purpose]) => (
-                <tr
-                  key={tech}
-                  className="border-b border-dashed border-slate-100"
-                >
+                <tr key={tech} className="border-b border-slate-100">
                   <td className="p-3 font-medium">{tech}</td>
                   <td className="p-3 text-slate-500">{purpose}</td>
                 </tr>

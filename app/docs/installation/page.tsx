@@ -99,9 +99,9 @@ export default function InstallationPage() {
         </Typography>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-2 border-dashed border-slate-200">
+          <table className="w-full text-sm border border-slate-200 rounded-sm">
             <thead>
-              <tr className="border-b-2 border-dashed border-slate-200 bg-slate-50">
+              <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
                   Package
                 </th>
@@ -118,12 +118,8 @@ export default function InstallationPage() {
                 ["react", "≥ 18", "Yes"],
                 ["react-dom", "≥ 18", "Yes"],
                 ["tailwindcss", "≥ 4", "Yes"],
-                ["next", "≥ 14", "Optional"],
               ].map(([pkg, version, required]) => (
-                <tr
-                  key={pkg}
-                  className="border-b border-dashed border-slate-100"
-                >
+                <tr key={pkg} className="border-b border-slate-100">
                   <td className="p-3 font-mono text-xs">{pkg}</td>
                   <td className="p-3 text-slate-500">{version}</td>
                   <td className="p-3">
@@ -145,7 +141,9 @@ export default function InstallationPage() {
         <Typography variant="h2">3. Import CSS Preset</Typography>
         <Typography variant="p">
           Add the Poyraz UI CSS preset to your global stylesheet. The preset
-          includes design tokens (colors, fonts) and base layer styles.
+          includes design tokens (colors, fonts), base layer styles, and
+          automatically configures Tailwind to scan Poyraz UI components for
+          utility classes.
         </Typography>
 
         <CopyBlock

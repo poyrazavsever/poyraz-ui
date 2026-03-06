@@ -3,71 +3,46 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/poyrazavsever/poyraz-ui/refs/heads/master/public/logo/logo.jpeg" alt="Poyraz UI" width="80" height="80">
 
-**Brutalist UI component library for React**
+**Compact, minimal UI component library for React**
 
-No rounding. No shadows. Dashed borders. Bold, functional design.
+Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Design
 
-[![npm](https://img.shields.io/npm/v/poyraz-ui)](https://www.npmjs.com/package/poyraz-ui)
+[![npm version](https://img.shields.io/npm/v/poyraz-ui?color=dc2626&label=npm)](https://www.npmjs.com/package/poyraz-ui)
+[![npm downloads](https://img.shields.io/npm/dm/poyraz-ui?color=dc2626)](https://www.npmjs.com/package/poyraz-ui)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/poyraz-ui?color=dc2626)](https://bundlephobia.com/package/poyraz-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC)](https://tailwindcss.com/)
+
+[Documentation](https://ui.poyrazavsever.com) · [npm](https://www.npmjs.com/package/poyraz-ui) · [GitHub](https://github.com/poyrazavsever/poyraz-ui)
 
 </div>
 
 ---
 
-## Table of Contents
+## Highlights
 
-- [Overview](#overview)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Architecture](#architecture)
-- [Components](#components)
-  - [Atoms](#atoms)
-  - [Molecules](#molecules)
-  - [Organisms](#organisms)
-- [Navigation Config Pattern](#navigation-config-pattern)
-- [Theming and Design Tokens](#theming-and-design-tokens)
-- [Development](#development)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Browser Support](#browser-support)
-- [License](#license)
-
----
-
-## Overview
-
-Poyraz UI is an open-source component library built around a **brutalist design language**: dashed borders, zero border-radius, zero box-shadow, monospaced accents, and a red-600 primary palette. Every component is built on top of Radix UI primitives for accessibility, styled with Tailwind CSS v4, and managed with `class-variance-authority` for variant control.
-
-The library follows **Atomic Design** methodology, organizing 43+ components into three tiers:
-
-| Tier      | Count | Purpose                         |
-| --------- | ----- | ------------------------------- |
-| Atoms     | 17    | Primitive building blocks       |
-| Molecules | 21    | Composed groups of atoms        |
-| Organisms | 5     | Complex, page-level UI sections |
-
-All components are fully typed with TypeScript, tree-shakeable, and published as both ESM and CJS bundles.
+- **50+ Components** — 17 atoms, 28 molecules, 5 organisms
+- **Compact by Design** — Max heading 32px, tight spacing, small footprint
+- **Dual Font System** — Inter (primary) + Agbalumo (decorative)
+- **Accessible** — Built on Radix UI primitives with full keyboard & screen reader support
+- **Tree-Shakeable** — 4 entry points: `poyraz-ui`, `/atoms`, `/molecules`, `/organisms`
+- **Fully Typed** — TypeScript declarations for every component and prop
+- **7 Card Templates** — Article, Image, News, Stats, Testimonial, Pricing, Product
+- **4 Page Templates** — Hero, Pricing, Dashboard, Auth — ready to copy & customize
+- **ESM + CJS** — Works in every bundler and environment
 
 ---
 
 ## Installation
 
 ```bash
-# pnpm (recommended)
-pnpm add poyraz-ui
-
-# npm
-npm install poyraz-ui
-
-# yarn
-yarn add poyraz-ui
+pnpm add poyraz-ui        # recommended
+npm install poyraz-ui     # or npm
+yarn add poyraz-ui        # or yarn
 ```
 
 ### Peer Dependencies
-
-Poyraz UI requires the following peer dependencies:
 
 ```json
 {
@@ -77,376 +52,202 @@ Poyraz UI requires the following peer dependencies:
 }
 ```
 
-`next` (>=14) is an optional peer dependency -- only required if you use the `Logo` or `NavbarBrand` components that depend on `next/link` and `next/image`.
+> `next` (>=14) is optional — only required for `Logo` and `NavbarBrand` components.
 
 ### CSS Setup
 
-Import the preset stylesheet in your root layout or global CSS file:
+Import the preset in your root layout or global CSS:
 
 ```css
 @import "poyraz-ui/preset.css";
 ```
 
-This provides the base design tokens (colors, fonts, spacing) and the brutalist defaults (no rounding, dashed borders, no shadows).
+This loads base design tokens (colors, fonts, spacing) and the minimal defaults.
 
 ---
 
 ## Quick Start
 
 ```tsx
-import { Button, Badge, Input } from "poyraz-ui/atoms";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-} from "poyraz-ui/molecules";
-import {
-  Navbar,
-  NavbarMain,
-  NavbarBrand,
-  NavbarLinks,
-  NavbarLink,
-} from "poyraz-ui/organisms";
+import { Button, Badge, Input, Card, CardContent } from "poyraz-ui/atoms";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "poyraz-ui/molecules";
 
 function App() {
   return (
-    <>
-      <Navbar sticky>
-        <NavbarMain>
-          <NavbarBrand href="/">My App</NavbarBrand>
-          <NavbarLinks>
-            <NavbarLink href="/docs">Docs</NavbarLink>
-            <NavbarLink href="/components">Components</NavbarLink>
-          </NavbarLinks>
-        </NavbarMain>
-      </Navbar>
+    <main className="p-6 space-y-4">
+      <Badge variant="outline">v1.1</Badge>
+      <Input placeholder="Search components..." />
 
-      <main className="p-8 space-y-4">
-        <Badge variant="outline">v0.1.0</Badge>
-        <Input placeholder="Search components..." />
+      <Card variant="interactive">
+        <CardContent>
+          <p>Hover me — I lift up slightly.</p>
+        </CardContent>
+      </Card>
 
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>Open Dialog</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogTitle>Hello from Poyraz UI</DialogTitle>
-            <p>Brutalist design, accessible by default.</p>
-          </DialogContent>
-        </Dialog>
-      </main>
-    </>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Hello from Poyraz UI</DialogTitle>
+          <p>Minimal design, accessible by default.</p>
+        </DialogContent>
+      </Dialog>
+    </main>
   );
 }
 ```
 
 ---
 
-## Architecture
-
-### Import Paths
-
-The library exposes four entry points to enable tree-shaking at the tier level:
+## Import Paths
 
 ```ts
-// Everything
+// Everything (barrel)
 import { Button, Dialog, Navbar } from "poyraz-ui";
 
-// Tier-specific (recommended for smaller bundles)
+// Tier-specific — recommended for smaller bundles
 import { Button, Badge, Input } from "poyraz-ui/atoms";
-import { Dialog, Tabs, Select } from "poyraz-ui/molecules";
+import { Dialog, Tabs, PricingCard } from "poyraz-ui/molecules";
 import { Navbar, Footer, Sidebar } from "poyraz-ui/organisms";
+
+// Preset CSS
+import "poyraz-ui/preset.css";
 ```
-
-### Build Output
-
-The library is built with `tsup` and outputs:
-
-- **ESM** (`dist/*.js`) -- for modern bundlers
-- **CJS** (`dist/*.cjs`) -- for Node.js / legacy tooling
-- **Type declarations** (`dist/*.d.ts`) -- full TypeScript support
-
-Tree-shaking and code-splitting are enabled by default.
-
-### Design Principles
-
-1. **Brutalist Aesthetic** -- `rounded-none shadow-none border-2 border-dashed` on every component
-2. **Accessibility First** -- Radix UI primitives provide WCAG-compliant keyboard navigation, focus management, and ARIA attributes out of the box
-3. **Variant-Driven** -- `class-variance-authority` (cva) manages every visual variant, making customization predictable
-4. **Composition over Configuration** -- Components are small, composable pieces. A `Navbar` is assembled from `NavbarMain`, `NavbarBrand`, `NavbarLinks`, etc.
 
 ---
 
 ## Components
 
-### Atoms
+### Atoms (17)
 
-Fundamental building blocks -- single-responsibility UI elements.
+Primitive building blocks — single-responsibility UI elements.
 
-| Component       | Description                                                                                                      |
-| --------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Button**      | Primary, outline, ghost, link variants. Multiple sizes.                                                          |
-| **Input**       | Text input with dashed-border brutalist styling.                                                                 |
-| **Textarea**    | Multi-line text input.                                                                                           |
-| **Checkbox**    | Radix-based checkbox with indicator.                                                                             |
-| **Radio Group** | Radix-based radio buttons.                                                                                       |
-| **Switch**      | Toggle switch component.                                                                                         |
-| **Badge**       | Inline label with default, outline, destructive variants.                                                        |
-| **Avatar**      | Image + fallback avatar component.                                                                               |
-| **Card**        | Container with header, content, footer sections.                                                                 |
-| **Typography**  | Semantic heading and body text component (h1-h4, p, lead, blockquote, code, list).                               |
-| **Label**       | Form label with required indicator support.                                                                      |
-| **Separator**   | Horizontal or vertical divider.                                                                                  |
-| **Skeleton**    | Loading placeholder with pulse animation.                                                                        |
-| **Scroll Area** | Custom scrollbar viewport.                                                                                       |
-| **Form Fields** | Specialized inputs: NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput.                               |
-| **Logo**        | Brand logo component using next/image.                                                                           |
-| **BG Patterns** | SVG background patterns: dots, grid, lines, diagonal, cross, checkerboard, diamond, zigzag, dashed grid, radial. |
+| Component | Description |
+| --- | --- |
+| **Button** | Primary, outline, ghost, link variants. Sizes: sm, default, lg. |
+| **Input** | Clean minimal text input. |
+| **Textarea** | Multi-line text input. |
+| **Checkbox** | Radix-based checkbox with check indicator. |
+| **Radio Group** | Radix-based radio buttons. |
+| **Switch** | Toggle switch. |
+| **Badge** | Inline label — default, outline, destructive, secondary. |
+| **Avatar** | Image + fallback avatar. |
+| **Card** | 6 variants: default, bordered, elevated, highlight, ghost, **interactive**. |
+| **Typography** | Semantic text: h1–h4, p, lead, blockquote, code, list. |
+| **Label** | Form label with required indicator. |
+| **Separator** | Horizontal / vertical divider. |
+| **Skeleton** | Loading placeholder with pulse. |
+| **Scroll Area** | Custom scrollbar viewport. |
+| **Form Fields** | NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput. |
+| **Logo** | Brand logo with minimal hover opacity. |
+| **BG Patterns** | 10 SVG patterns: dots, grid, lines, diagonal, cross, checkerboard, diamond, zigzag, dashed grid, radial. |
 
-**Example:**
+### Molecules (28)
 
-```tsx
-import { Button } from "poyraz-ui/atoms";
+Composed groups of atoms forming discrete UI patterns.
 
-<Button variant="outline" size="lg">
-  View Documentation
-</Button>;
-```
+| Component | Description |
+| --- | --- |
+| **Accordion** | Collapsible content sections. |
+| **Alert** | Contextual feedback messages (info, success, warning, error). |
+| **Autocomplete** | Searchable input with filtered dropdown. |
+| **Breadcrumb** | Navigation trail with separator support. |
+| **Calendar** | Month/year grid with navigation. |
+| **Command Palette** | Searchable command menu (⌘K pattern). |
+| **Date Picker** | Calendar-based date selection in popover. |
+| **Dialog** | Modal dialog with overlay and close. |
+| **Drawer** | Slide-in panel from screen edge (vaul). |
+| **Dropdown Menu** | Context menu with keyboard navigation. |
+| **Form** | react-hook-form integration + validation. |
+| **Hover Card** | Popover card on hover. |
+| **Mermaid** | Mermaid diagram renderer. |
+| **Modal** | Centered/drawer modal — sm, md, lg sizes. |
+| **Pagination** | Page navigation with ellipsis. |
+| **Popover** | Floating content anchored to trigger. |
+| **Select** | Dropdown select with groups. |
+| **Sheet** | Side panel (top, right, bottom, left). |
+| **Sonner** | Toast notification system. |
+| **Tabs** | Tabbed content with keyboard support. |
+| **Tooltip** | Informational popover on hover/focus. |
 
-### Molecules
+**Card Templates** — 7 pre-built, composable card molecules:
 
-Composed groups of atoms that form discrete UI patterns.
+| Template | Use Case |
+| --- | --- |
+| **ArticleCard** | Blog posts, articles — image, category, author, date. |
+| **ImageCard** | Image-dominant card with gradient overlay text. |
+| **NewsCard** | Compact horizontal news items for feed layouts. |
+| **StatsCard** | Metric/KPI display with trend indicator (↑/↓). |
+| **TestimonialCard** | Customer quotes with avatar and star rating. |
+| **PricingCard** | Pricing tier with features list and CTA button. |
+| **ProductCard** | E-commerce product with price, rating, cart button. |
 
-| Component           | Description                                           |
-| ------------------- | ----------------------------------------------------- |
-| **Accordion**       | Collapsible content sections.                         |
-| **Alert**           | Contextual feedback messages.                         |
-| **Autocomplete**    | Searchable input with filtered dropdown suggestions.  |
-| **Breadcrumb**      | Navigation trail with separator support.              |
-| **Calendar**        | Month/year grid calendar with navigation.             |
-| **Command Palette** | Searchable command menu (Cmd+K pattern).              |
-| **Date Picker**     | Calendar-based date selection with popover.           |
-| **Dialog**          | Modal dialog with overlay.                            |
-| **Drawer**          | Slide-in panel from screen edge (vaul-based).         |
-| **Dropdown Menu**   | Context / action menu with keyboard navigation.       |
-| **Form**            | react-hook-form integration with validation messages. |
-| **Hover Card**      | Popover card that appears on hover.                   |
-| **Modal**           | Centered/drawer modal with size variants.             |
-| **Pagination**      | Page navigation with previous/next and ellipsis.      |
-| **Popover**         | Floating content anchored to a trigger.               |
-| **Select**          | Radix-based dropdown select with groups.              |
-| **Sheet**           | Slide-in side panel (top, right, bottom, left).       |
-| **Sonner**          | Toast notification system.                            |
-| **Tabs**            | Tabbed content with keyboard support.                 |
-| **Tooltip**         | Small informational popover on hover/focus.           |
+### Organisms (5)
 
-**Example:**
+Complex, page-level sections built from atoms and molecules.
 
-```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
+| Component | Variants | Description |
+| --- | --- | --- |
+| **Navbar** | default, minimal, transparent, bordered | Responsive nav with brand, links, mega menu, mobile panel, sticky auto-hide. |
+| **Sidebar** | default, collapsible, floating, mini, dark, bordered | Vertical nav with search, sub-menus, user profile, collapsible groups. |
+| **Footer** | full, compact, branded, centered, dark | Footer with grid sections, newsletter, social links, bottom bar. |
+| **Announcement Bar** | default + custom | Dismissible top-of-page notification. |
+| **Data Table** | — | Sortable, filterable table with column definitions. |
 
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview">...</TabsContent>
-  <TabsContent value="code">...</TabsContent>
-</Tabs>;
-```
+### Page Templates
 
-### Organisms
+Ready-to-use page sections in the documentation — copy and customize:
 
-Complex, page-level sections composed of multiple atoms and molecules.
-
-| Component            | Variants                                             | Description                                                                                              |
-| -------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Navbar**           | default, minimal, transparent, bordered              | Responsive navigation bar with brand, links, search, mega menu, mobile slide-in panel, sticky auto-hide. |
-| **Sidebar**          | default, collapsible, floating, mini, dark, bordered | Vertical navigation with search, sub-menus, user profile, collapsible groups.                            |
-| **Footer**           | full, compact, branded, centered, dark               | Page footer with grid sections, newsletter, social links, bottom bar.                                    |
-| **Announcement Bar** | default + custom variants                            | Dismissible top-of-page notification bar.                                                                |
-| **Data Table**       | --                                                   | Sortable, filterable table with column definitions.                                                      |
-
-**Example:**
-
-```tsx
-import {
-  Navbar,
-  NavbarMain,
-  NavbarBrand,
-  NavbarLinks,
-  NavbarLink,
-  NavbarActions,
-  NavbarMobileToggle,
-  NavbarMobileMenu,
-  NavbarMobileLink,
-} from "poyraz-ui/organisms";
-import { Button } from "poyraz-ui/atoms";
-
-<Navbar variant="bordered" sticky>
-  <NavbarMain>
-    <NavbarBrand href="/">
-      <img src="/logo.png" alt="Logo" width={28} height={28} />
-    </NavbarBrand>
-    <NavbarLinks>
-      <NavbarLink href="/docs">Docs</NavbarLink>
-      <NavbarLink href="/components">Components</NavbarLink>
-    </NavbarLinks>
-    <NavbarActions>
-      <Button size="sm">Get Started</Button>
-    </NavbarActions>
-    <NavbarMobileToggle />
-  </NavbarMain>
-  <NavbarMobileMenu>
-    <NavbarMobileLink href="/docs">Docs</NavbarMobileLink>
-    <NavbarMobileLink href="/components">Components</NavbarMobileLink>
-  </NavbarMobileMenu>
-</Navbar>;
-```
+| Template | Description |
+| --- | --- |
+| **Hero** | Landing page hero with gradient background, stats grid, feature cards. |
+| **Pricing** | 3-tier pricing layout using PricingCard molecule. |
+| **Dashboard** | Stats overview, bar chart, activity feed, orders table. |
+| **Auth** | Login + Signup forms with social auth (Google/GitHub). |
 
 ---
 
-## Navigation Config Pattern
+## Design Language
 
-Poyraz UI encourages a **centralized navigation config** so Navbar, Sidebar, and Footer all read from a single source of truth. Create a `lib/navigation.ts` file:
-
-```ts
-// lib/navigation.ts
-
-export interface NavItem {
-  label: string;
-  href: string;
-  external?: boolean;
-  children?: NavItem[];
-}
-
-export interface FooterSection {
-  heading: string;
-  links: NavItem[];
-}
-
-export interface ComponentGroup {
-  label: string;
-  basePath: string;
-  items: string[];
-}
-
-// Top-level navbar links
-export const mainNav: NavItem[] = [
-  { label: "Docs", href: "/docs" },
-  { label: "Components", href: "/docs/atoms" },
-  { label: "GitHub", href: "https://github.com/...", external: true },
-];
-
-// Footer grouped sections
-export const footerNav: FooterSection[] = [
-  {
-    heading: "Documentation",
-    links: [
-      { label: "Getting Started", href: "/docs" },
-      { label: "Installation", href: "/docs/installation" },
-    ],
-  },
-  {
-    heading: "Links",
-    links: [
-      { label: "GitHub", href: "https://github.com/...", external: true },
-      { label: "npm", href: "https://npmjs.com/package/...", external: true },
-    ],
-  },
-];
-
-// Sidebar component registry
-export const componentRegistry: ComponentGroup[] = [
-  {
-    label: "Atoms",
-    basePath: "/docs/atoms",
-    items: ["Button", "Input", "Badge", "Card"],
-  },
-  {
-    label: "Molecules",
-    basePath: "/docs/molecules",
-    items: ["Dialog", "Tabs", "Select"],
-  },
-];
-
-// Reusable external URLs
-export const socialLinks = {
-  github: "https://github.com/yourname",
-  repo: "https://github.com/yourname/your-repo",
-  website: "https://yoursite.com",
-};
-
-// Helper
-export function toSlug(name: string): string {
-  return name.toLowerCase().replace(/\s+/g, "-");
-}
+```
+rounded-sm  ·  shadow-none  ·  border  ·  red-600 primary
+max heading: 32px  ·  compact spacing  ·  Inter + Agbalumo fonts
 ```
 
-Then consume it in your pages:
+### Dual Font System
+
+| Token | Font | Usage |
+| --- | --- | --- |
+| `font-sans` | **Inter** | Body text, UI elements, headings |
+| `font-secondary` | **Agbalumo** | Decorative accents, hero sections, branding |
 
 ```tsx
-import { mainNav, footerNav } from "@/lib/navigation";
-
-// Navbar
-<NavbarLinks>
-  {mainNav.map((item) => (
-    <NavbarLink
-      key={item.href}
-      href={item.href}
-      {...(item.external ? { target: "_blank" } : {})}
-    >
-      {item.label}
-    </NavbarLink>
-  ))}
-</NavbarLinks>
-
-// Footer
-<FooterGrid>
-  {footerNav.map((section) => (
-    <FooterSection key={section.heading}>
-      <FooterHeading>{section.heading}</FooterHeading>
-      {section.links.map((link) => (
-        <FooterLink key={link.href} href={link.href}>{link.label}</FooterLink>
-      ))}
-    </FooterSection>
-  ))}
-</FooterGrid>
+<h1 className="font-secondary text-2xl">Welcome</h1>
+<p className="font-sans text-sm">Body text in Inter.</p>
 ```
 
-This pattern keeps navigation DRY across Navbar, Sidebar, Footer, and mobile menus.
+### Design Tokens
 
----
-
-## Theming and Design Tokens
-
-Poyraz UI uses Tailwind CSS v4 with `@theme` tokens. The brutalist defaults are:
-
-```css
-/* Core design language */
-border-radius: 0; /* rounded-none on all components */
-box-shadow: none; /* shadow-none everywhere */
-border: 2px dashed; /* border-2 border-dashed */
-
-/* Primary palette */
---color-primary: #dc2626; /* red-600 */
---color-background: #ffffff;
---color-foreground: #0f172a; /* slate-950 */
-
-/* Typography */
---font-primary: system-ui, sans-serif;
---font-secondary: serif; /* Used for accent headings */
---font-mono: monospace; /* Code blocks */
-```
-
-To customize, override Tailwind theme tokens in your own CSS or `tailwind.config`:
+Override any token in your CSS:
 
 ```css
 @theme {
-  --color-primary: #2563eb; /* Switch to blue-600 */
+  --color-primary: #2563eb;    /* switch to blue */
+  --font-sans: "Geist", sans-serif;
+  --font-secondary: "Pacifico", cursive;
 }
 ```
+
+Core defaults:
+
+| Token | Value |
+| --- | --- |
+| `--color-primary` | `#dc2626` (red-600) |
+| `--color-background` | `#ffffff` |
+| `--color-foreground` | `#0f172a` (slate-950) |
+| `--font-sans` | `"Inter", ui-sans-serif, system-ui, sans-serif` |
+| `--font-secondary` | `"Agbalumo", cursive` |
 
 ---
 
@@ -455,7 +256,7 @@ To customize, override Tailwind theme tokens in your own CSS or `tailwind.config
 ### Prerequisites
 
 - Node.js 18+
-- pnpm (recommended)
+- pnpm
 
 ### Setup
 
@@ -467,20 +268,20 @@ pnpm install
 
 ### Scripts
 
-| Command          | Description                                      |
-| ---------------- | ------------------------------------------------ |
-| `pnpm dev`       | Start Next.js dev server (documentation site)    |
-| `pnpm build`     | Build the documentation site for production      |
-| `pnpm build:lib` | Build the npm package (ESM + CJS + DTS via tsup) |
-| `pnpm start`     | Serve the production build locally               |
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start dev server (docs site) |
+| `pnpm build` | Build docs site for production |
+| `pnpm build:lib` | Build npm package (ESM + CJS + DTS) |
+| `pnpm start` | Serve production build locally |
 
-### Adding a New Component
+### Adding a Component
 
-1. Create the component in `components/ui/atoms/`, `molecules/`, or `organisms/`
-2. Export it from the corresponding barrel file in `src/atoms/index.ts`, `src/molecules/index.ts`, or `src/organisms/index.ts`
-3. Create a documentation page in `app/docs/<tier>/<component-name>/page.tsx`
-4. Add the component name to `lib/navigation.ts` in the `componentRegistry` array
-5. Run `pnpm build:lib` to verify the build passes
+1. Create the component in `components/ui/{atoms,molecules,organisms}/`
+2. Export from `src/{atoms,molecules,organisms}/index.ts`
+3. Add doc page at `app/docs/<tier>/<name>/page.tsx`
+4. Register in `lib/navigation.ts`
+5. Run `pnpm build:lib` to verify
 
 ---
 
@@ -488,77 +289,69 @@ pnpm install
 
 ```
 poyraz-ui/
-  app/                        # Next.js documentation site
-    page.tsx                  # Homepage
-    docs/
-      layout.tsx              # Docs layout (navbar + sidebar + footer)
-      page.tsx                # Introduction page
-      installation/           # Installation guide
-      atoms/                  # Atom component doc pages
-      molecules/              # Molecule component doc pages
-      organisms/              # Organism component doc pages
-  components/
-    ui/
-      atoms/                  # 17 atom components
-      molecules/              # 21 molecule components
-      organisms/              # 5 organism components
-    docs/
-      code-block.tsx          # Documentation page helpers
-  lib/
-    navigation.ts             # Centralized navigation config
-  src/
-    index.ts                  # Main package entry point
-    utils.ts                  # cn() utility (clsx + tailwind-merge)
-    preset.css                # Base design tokens and brutalist defaults
-    atoms/index.ts            # Atom barrel exports
-    molecules/index.ts        # Molecule barrel exports
-    organisms/index.ts        # Organism barrel exports
-  dist/                       # Built package output (ESM + CJS + DTS)
-  tsup.config.ts              # Library build configuration
-  tsconfig.lib.json           # TypeScript config for library build
+├── app/                      # Next.js documentation site
+│   ├── page.tsx              # Homepage
+│   └── docs/
+│       ├── atoms/            # Atom doc pages
+│       ├── molecules/        # Molecule doc pages
+│       ├── organisms/        # Organism doc pages
+│       └── templates/        # Page template demos
+├── components/ui/
+│   ├── atoms/                # 17 atom components
+│   ├── molecules/            # 28 molecule components
+│   └── organisms/            # 5 organism components
+├── src/
+│   ├── index.ts              # Main entry point
+│   ├── utils.ts              # cn() utility
+│   ├── preset.css            # Design tokens
+│   ├── atoms/index.ts        # Atom exports
+│   ├── molecules/index.ts    # Molecule exports
+│   └── organisms/index.ts    # Organism exports
+├── dist/                     # Built output (ESM + CJS + DTS)
+├── lib/navigation.ts         # Centralized nav config
+├── tsup.config.ts            # Build config
+└── tsconfig.lib.json         # Library TS config
 ```
 
 ---
 
 ## Tech Stack
 
-| Technology                   | Purpose                                        |
-| ---------------------------- | ---------------------------------------------- |
-| **Next.js 16**               | Documentation site framework (App Router)      |
-| **React 19**                 | UI rendering                                   |
-| **TypeScript 5**             | Type safety across all components              |
-| **Tailwind CSS 4**           | Utility-first styling with `@theme` tokens     |
-| **Radix UI**                 | Accessible, unstyled primitives (12+ packages) |
-| **class-variance-authority** | Type-safe component variant management         |
-| **tailwind-merge**           | Intelligent Tailwind class merging             |
-| **Lucide React**             | Icon library                                   |
-| **Vaul**                     | Drawer component primitive                     |
-| **Sonner**                   | Toast notification system                      |
-| **tsup**                     | Library bundler (ESM + CJS + DTS)              |
+| Technology | Purpose |
+| --- | --- |
+| **React 19** | UI rendering |
+| **Next.js 16** | Documentation site (App Router) |
+| **TypeScript 5** | Type safety |
+| **Tailwind CSS 4** | Utility-first styling + `@theme` tokens |
+| **Radix UI** | Accessible headless primitives |
+| **class-variance-authority** | Type-safe variant management |
+| **tailwind-merge** | Intelligent class merging |
+| **Lucide React** | Icons |
+| **tsup** | Library bundler |
 
 ---
 
 ## Browser Support
 
-| Browser | Minimum Version |
-| ------- | --------------- |
-| Chrome  | 90+             |
-| Firefox | 88+             |
-| Safari  | 14+             |
-| Edge    | 90+             |
+| Browser | Version |
+| --- | --- |
+| Chrome | 90+ |
+| Firefox | 88+ |
+| Safari | 14+ |
+| Edge | 90+ |
 
 ---
 
 ## License
 
-MIT License -- see [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENSE) for details.
 
 ---
 
-## Author
+<div align="center">
 
-**Poyraz Avsever**
+**Built by [Poyraz Avsever](https://poyrazavsever.com)**
 
-- Website: [poyrazavsever.com](https://poyrazavsever.com)
-- GitHub: [github.com/poyrazavsever](https://github.com/poyrazavsever)
-- LinkedIn: [linkedin.com/in/poyrazavsever](https://linkedin.com/in/poyrazavsever)
+[Website](https://poyrazavsever.com) · [GitHub](https://github.com/poyrazavsever) · [LinkedIn](https://linkedin.com/in/poyrazavsever)
+
+</div>

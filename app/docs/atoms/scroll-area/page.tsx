@@ -8,12 +8,12 @@ function VerticalDemo() {
   return (
     <ScrollArea
       maxHeight={200}
-      className="w-full max-w-sm border-2 border-dashed border-slate-200 bg-white p-4"
+      className="w-full max-w-sm border border-slate-200 rounded-sm bg-white p-4"
     >
       {Array.from({ length: 30 }, (_, i) => (
         <div
           key={i}
-          className="py-2 border-b border-dashed border-slate-100 text-sm text-slate-700"
+          className="py-2 border-b border-slate-100 text-sm text-slate-700"
         >
           Item {i + 1} — Scrollable content line
         </div>
@@ -27,13 +27,13 @@ function HorizontalDemo() {
     <ScrollArea
       maxHeight="auto"
       orientation="horizontal"
-      className="w-full max-w-sm border-2 border-dashed border-slate-200 bg-white p-4"
+      className="w-full max-w-sm border border-slate-200 rounded-sm bg-white p-4"
     >
       <div className="flex gap-3" style={{ width: "800px" }}>
         {Array.from({ length: 12 }, (_, i) => (
           <div
             key={i}
-            className="shrink-0 w-24 h-24 border-2 border-dashed border-slate-300 flex items-center justify-center text-xs font-bold text-slate-500"
+            className="shrink-0 w-24 h-24 border border-slate-300 rounded-sm flex items-center justify-center text-xs font-bold text-slate-500"
           >
             {i + 1}
           </div>
@@ -52,7 +52,7 @@ function SizeDemo() {
           key={size}
           maxHeight={150}
           scrollbarSize={size}
-          className="w-48 border-2 border-dashed border-slate-200 bg-white p-3"
+          className="w-48 border border-slate-200 rounded-sm bg-white p-3"
         >
           <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
             {size}
@@ -78,7 +78,7 @@ export default function ScrollAreaPage() {
       <DemoSection
         title="Vertical"
         description="Vertical scrollbar with dashed track."
-        code={`<ScrollArea maxHeight={200} className="border-2 border-dashed border-slate-200 p-4">
+        code={`<ScrollArea maxHeight={200} className="border border-slate-200 rounded-sm p-4">
   {items.map((item) => (
     <div key={item}>{item}</div>
   ))}
@@ -90,7 +90,7 @@ export default function ScrollAreaPage() {
       <DemoSection
         title="Horizontal"
         description="Horizontal scrollbar for wide content."
-        code={`<ScrollArea orientation="horizontal" className="border-2 border-dashed border-slate-200 p-4">
+        code={`<ScrollArea orientation="horizontal" className="border border-slate-200 rounded-sm p-4">
   <div className="flex gap-3" style={{ width: "800px" }}>
     {boxes.map((box) => (
       <div key={box} className="w-24 h-24" />

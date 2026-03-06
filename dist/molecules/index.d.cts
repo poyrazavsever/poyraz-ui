@@ -346,4 +346,74 @@ declare namespace Autocomplete {
     var displayName: string;
 }
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Alert, AlertDescription, AlertTitle, Autocomplete, type AutocompleteOption, type AutocompleteProps, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Calendar, CommandPalette, CommandPaletteContent, CommandPaletteEmpty, CommandPaletteFooter, CommandPaletteGroup, CommandPaletteInput, CommandPaletteItem, CommandPaletteList, CommandPaletteSeparator, CommandPaletteTrigger, DatePicker, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerPortal, DrawerTitle, DrawerTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, HoverCard, HoverCardContent, HoverCardTrigger, Modal, ModalClose, ModalContent, ModalDescription, ModalFooter, ModalHeader, ModalOverlay, ModalTitle, ModalTrigger, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Popover, PopoverContent, PopoverTrigger, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger, Tabs, TabsContent, TabsList, TabsTrigger, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, modalContentVariants, sheetContentVariants, useCommandPalette, useFormField };
+interface ArticleCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    image?: string;
+    category?: string;
+    title: string;
+    excerpt?: string;
+    author?: {
+        name: string;
+        avatar?: string;
+    };
+    date?: string;
+    readTime?: string;
+    href?: string;
+}
+declare const ArticleCard: React$1.ForwardRefExoticComponent<ArticleCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface ImageCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    image: string;
+    title: string;
+    description?: string;
+    badge?: string;
+    href?: string;
+}
+declare const ImageCard: React$1.ForwardRefExoticComponent<ImageCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface NewsCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    image?: string;
+    category?: string;
+    title: string;
+    date?: string;
+    href?: string;
+}
+declare const NewsCard: React$1.ForwardRefExoticComponent<NewsCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface StatsCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    icon?: React$1.ReactNode;
+    label: string;
+    value: string | number;
+    trend?: "up" | "down" | "neutral";
+    trendValue?: string;
+}
+declare const StatsCard: React$1.ForwardRefExoticComponent<StatsCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface TestimonialCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    quote: string;
+    author: string;
+    role?: string;
+    avatar?: string;
+    rating?: number;
+}
+declare const TestimonialCard: React$1.ForwardRefExoticComponent<TestimonialCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface PricingCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    title: string;
+    price: string;
+    period?: string;
+    description?: string;
+    features: string[];
+    highlighted?: boolean;
+    /** Pass a <Button> or any CTA element */
+    action?: React$1.ReactNode;
+}
+declare const PricingCard: React$1.ForwardRefExoticComponent<PricingCardProps & React$1.RefAttributes<HTMLDivElement>>;
+interface ProductCardProps extends React$1.HTMLAttributes<HTMLDivElement> {
+    image: string;
+    title: string;
+    price: string;
+    originalPrice?: string;
+    rating?: number;
+    badge?: string;
+    /** Pass a <Button> or any action element */
+    action?: React$1.ReactNode;
+    href?: string;
+}
+declare const ProductCard: React$1.ForwardRefExoticComponent<ProductCardProps & React$1.RefAttributes<HTMLDivElement>>;
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Alert, AlertDescription, AlertTitle, ArticleCard, type ArticleCardProps, Autocomplete, type AutocompleteOption, type AutocompleteProps, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Calendar, CommandPalette, CommandPaletteContent, CommandPaletteEmpty, CommandPaletteFooter, CommandPaletteGroup, CommandPaletteInput, CommandPaletteItem, CommandPaletteList, CommandPaletteSeparator, CommandPaletteTrigger, DatePicker, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerPortal, DrawerTitle, DrawerTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, HoverCard, HoverCardContent, HoverCardTrigger, ImageCard, type ImageCardProps, Modal, ModalClose, ModalContent, ModalDescription, ModalFooter, ModalHeader, ModalOverlay, ModalTitle, ModalTrigger, NewsCard, type NewsCardProps, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Popover, PopoverContent, PopoverTrigger, PricingCard, type PricingCardProps, ProductCard, type ProductCardProps, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger, StatsCard, type StatsCardProps, Tabs, TabsContent, TabsList, TabsTrigger, TestimonialCard, type TestimonialCardProps, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, modalContentVariants, sheetContentVariants, useCommandPalette, useFormField };

@@ -151,7 +151,7 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       <div
         ref={setRefs}
         className={cn(
-          "relative border-2 border-dashed border-slate-200 bg-white p-4",
+          "relative border border-slate-200 bg-white p-4",
           "overflow-x-auto",
           className,
         )}
@@ -159,14 +159,14 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       >
         {loading && (
           <div className="flex items-center justify-center py-8 gap-3 text-sm text-slate-400">
-            <div className="h-4 w-4 border-2 border-dashed border-red-600 border-t-transparent animate-spin" />
+            <div className="h-4 w-4 border border-red-600 border-t-transparent animate-spin" />
             Rendering diagram…
           </div>
         )}
 
         {error && !loading && (
           <div className="py-6 text-center">
-            <div className="inline-block px-3 py-2 border-2 border-dashed border-red-300 bg-red-50 text-xs text-red-700 font-mono">
+            <div className="inline-block px-3 py-2 border border-red-300 bg-red-50 text-xs text-red-700 font-mono">
               {error}
             </div>
           </div>

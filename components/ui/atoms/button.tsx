@@ -9,10 +9,10 @@ const buttonVariants = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     // Typography
     "text-sm font-semibold tracking-wide uppercase",
-    // Shape — brutalist: no rounding, no shadow, ever
-    "rounded-none shadow-none",
-    // Border — dashed is the DNA of this design system
-    "border-2 border-dashed",
+    // Shape — minimal
+    "rounded-sm shadow-none",
+    // Border
+    "border",
     // Interaction
     "cursor-pointer select-none",
     // Transitions
@@ -59,7 +59,7 @@ const buttonVariants = cva(
 
         link: [
           "bg-transparent text-red-600 border-red-600",
-          "decoration-dashed underline-offset-4",
+          "underline underline-offset-4",
           "hover:underline hover:text-red-700 hover:border-red-700",
           "active:text-red-800",
           // px-0 so the link variant sits naturally in text
@@ -67,10 +67,10 @@ const buttonVariants = cva(
         ].join(" "),
       },
       size: {
-        default: "h-11 px-6 py-2 text-sm",
-        sm: "h-9 px-4 py-1.5 text-xs",
-        lg: "h-14 px-10 py-3 text-base",
-        icon: "h-10 w-10 p-0",
+        default: "h-8 px-3.5 py-1.5 text-xs",
+        sm: "h-7 px-2.5 py-1 text-[11px]",
+        lg: "h-9 px-4 py-1.5 text-xs",
+        icon: "h-8 w-8 p-0",
       },
     },
     defaultVariants: {

@@ -46,7 +46,7 @@ export default function SkeletonPage() {
       <DemoSection
         title="Full Card Skeleton"
         description="A complete card loading state."
-        code={`<div className="border-2 border-dashed border-slate-200 p-6 space-y-4 max-w-sm">
+        code={`<div className="border border-slate-200 rounded-sm p-6 space-y-4 max-w-sm">
   <Skeleton className="h-40 w-full" />
   <Skeleton className="h-5 w-2/3" />
   <Skeleton className="h-4 w-full" />
@@ -54,7 +54,7 @@ export default function SkeletonPage() {
   <Skeleton className="h-9 w-24" />
 </div>`}
       >
-        <div className="border-2 border-dashed border-slate-200 p-6 space-y-4 max-w-sm bg-white">
+        <div className="border border-slate-200 rounded-sm p-6 space-y-4 max-w-sm bg-white">
           <Skeleton className="h-40 w-full" />
           <Skeleton className="h-5 w-2/3" />
           <Skeleton className="h-4 w-full" />

@@ -1,26 +1,70 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 import { toast } from "@/components/ui/molecules/sonner";
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { cn } from "@/components/ui/atoms/typography";
 
 /* ================================================================== */
-/*  CODE BLOCK — Copyable code snippet                                 */
+/*  Shiki highlighting helper (lazy-loaded)                            */
+/* ================================================================== */
+
+let highlighterPromise: Promise<
+  Awaited<ReturnType<(typeof import("shiki"))["createHighlighter"]>>
+> | null = null;
+
+function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = import("shiki").then((mod) =>
+      mod.createHighlighter({
+        themes: ["github-dark"],
+        langs: ["tsx", "typescript", "bash", "json", "css"],
+      }),
+    );
+  }
+  return highlighterPromise;
+}
+
+function useHighlightedCode(code: string, lang: string = "tsx") {
+  const [html, setHtml] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    getHighlighter().then((highlighter) => {
+      if (cancelled) return;
+      const result = highlighter.codeToHtml(code, {
+        lang,
+        theme: "github-dark",
+      });
+      setHtml(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [code, lang]);
+
+  return html;
+}
+
+/* ================================================================== */
+/*  CODE BLOCK — Copyable code snippet with syntax highlighting        */
 /* ================================================================== */
 
 export function CodeBlock({
   code,
+  lang = "tsx",
   children,
   className,
 }: {
   code: string;
+  lang?: string;
   children?: React.ReactNode;
   className?: string;
 }) {
   const [copied, setCopied] = useState(false);
+  const highlightedHtml = useHighlightedCode(code, lang);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
@@ -38,7 +82,7 @@ export function CodeBlock({
     >
       <button
         onClick={handleCopy}
-        className="absolute top-3 right-3 text-slate-500 hover:text-white cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
+        className="absolute top-3 right-3 z-10 text-slate-500 hover:text-white cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
         aria-label="Copy code"
       >
         {copied ? (
@@ -47,12 +91,15 @@ export function CodeBlock({
           <Copy className="h-4 w-4" />
         )}
       </button>
-      <CardContent className="p-4 font-mono text-sm leading-relaxed overflow-x-auto">
-        {children ?? (
-          <pre className="whitespace-pre-wrap">
-            <code>{code}</code>
-          </pre>
-        )}
+      <CardContent className="p-4 text-sm leading-relaxed overflow-x-auto [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:!m-0 [&_code]:!bg-transparent">
+        {children ??
+          (highlightedHtml ? (
+            <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+          ) : (
+            <pre className="whitespace-pre-wrap font-mono">
+              <code>{code}</code>
+            </pre>
+          ))}
       </CardContent>
     </Card>
   );
@@ -72,7 +119,7 @@ export function DemoBlock({
   return (
     <div
       className={cn(
-        "p-6 border-2 border-dashed border-slate-200 bg-white",
+        "p-6 border border-slate-200 rounded-sm bg-white",
         className,
       )}
     >
@@ -100,7 +147,7 @@ export function ComponentPage({
     <div className="space-y-10 pb-10">
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl font-black tracking-tight">{name}</h1>
+        <h1 className="text-2xl font-black tracking-tight">{name}</h1>
         <p className="text-base text-slate-500 leading-relaxed max-w-2xl">
           {description}
         </p>

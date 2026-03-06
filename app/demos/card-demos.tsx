@@ -10,11 +10,7 @@ import {
 } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "poyraz-ui/atoms";
+import { Avatar, AvatarFallback, AvatarImage } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
 import { Typography } from "poyraz-ui/atoms";
 
@@ -25,7 +21,7 @@ export function BlogCard() {
   return (
     <Card variant="elevated">
       <div className="flex flex-col md:flex-row">
-        <CardImage className="md:w-60 md:min-h-full md:border-b-0 md:border-r-2 md:border-dashed md:border-slate-300">
+        <CardImage className="md:w-60 md:min-h-full md:border-b-0 md:border-r md:border-slate-300">
           <Image
             src="https://picsum.photos/seed/blog/400/250"
             alt="Blog cover"
@@ -77,7 +73,7 @@ export function VideoCard() {
         />
         {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 group-hover/video:bg-black/50">
-          <div className="h-14 w-14 flex items-center justify-center bg-red-600 border-2 border-dashed border-red-900 transition-transform duration-300 group-hover/video:scale-110">
+          <div className="h-14 w-14 flex items-center justify-center bg-red-600 border border-red-900 rounded-sm transition-transform duration-300 group-hover/video:scale-110">
             <svg width="20" height="24" viewBox="0 0 20 24" fill="white">
               <polygon points="0,0 20,12 0,24" />
             </svg>
@@ -217,7 +213,7 @@ export function GhostCard() {
   return (
     <Card variant="ghost" className="max-w-xs p-5 cursor-pointer">
       <div className="flex items-start gap-4">
-        <div className="h-10 w-10 flex items-center justify-center bg-red-600 text-white text-lg font-bold shrink-0 border-2 border-dashed border-red-900">
+        <div className="h-10 w-10 flex items-center justify-center bg-red-600 text-white text-lg font-bold shrink-0 border border-red-900 rounded-sm">
           ⚡
         </div>
         <div>

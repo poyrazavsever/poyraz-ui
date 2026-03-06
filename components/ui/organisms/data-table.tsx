@@ -253,7 +253,7 @@ function DataTableInner<T>(
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="pl-9 h-9 text-sm"
+                className="pl-9 h-8 text-sm"
               />
             </div>
           )}
@@ -270,7 +270,7 @@ function DataTableInner<T>(
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-9 gap-1.5"
+                  className="h-8 gap-1.5"
                   onClick={() => setColToggleOpen((v) => !v)}
                 >
                   <SlidersHorizontal className="h-3.5 w-3.5" />
@@ -282,7 +282,7 @@ function DataTableInner<T>(
                       className="fixed inset-0 z-40"
                       onClick={() => setColToggleOpen(false)}
                     />
-                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-white border-2 border-dashed border-slate-200 p-2 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-white border border-slate-200 p-2 space-y-0.5">
                       {columns.map((col) => (
                         <button
                           key={col.id}
@@ -292,7 +292,7 @@ function DataTableInner<T>(
                         >
                           <span
                             className={cn(
-                              "h-4 w-4 border-2 border-dashed flex items-center justify-center shrink-0",
+                              "h-4 w-4 border flex items-center justify-center shrink-0",
                               hiddenCols.has(col.id)
                                 ? "border-slate-300"
                                 : "border-red-600 bg-red-600 text-white",
@@ -315,13 +315,13 @@ function DataTableInner<T>(
       )}
 
       {/* Table */}
-      <div className="border-2 border-dashed border-slate-200 overflow-x-auto">
+      <div className="border border-slate-200 overflow-x-auto">
         <table className="w-full text-sm">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
-            <tr className="border-b-2 border-dashed border-slate-200 bg-slate-50/80">
+            <tr className="border-b border-slate-200 bg-slate-50/80">
               {selectable && (
-                <th className="w-12 p-3 text-center">
+                <th className="w-12 p-2.5 text-center">
                   <Checkbox
                     checked={allPageSelected && rows.length > 0}
                     onCheckedChange={toggleAll}
@@ -336,7 +336,7 @@ function DataTableInner<T>(
                   <th
                     key={col.id}
                     className={cn(
-                      "text-left p-3 font-bold uppercase text-[11px] tracking-widest text-slate-500",
+                      "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-slate-500",
                       "whitespace-nowrap",
                       isSortable &&
                         "cursor-pointer select-none hover:text-slate-900 transition-colors",
@@ -381,13 +381,13 @@ function DataTableInner<T>(
                   <tr
                     key={id}
                     className={cn(
-                      "border-b border-dashed border-slate-100 transition-colors",
+                      "border-b border-slate-100 transition-colors",
                       "hover:bg-slate-50/50",
                       isSelected && "bg-red-50/50",
                     )}
                   >
                     {selectable && (
-                      <td className="w-12 p-3 text-center">
+                      <td className="w-12 p-2.5 text-center">
                         <Checkbox
                           checked={isSelected}
                           onCheckedChange={() => toggleRow(id)}
@@ -398,7 +398,7 @@ function DataTableInner<T>(
                     {visibleColumns.map((col) => (
                       <td
                         key={col.id}
-                        className={cn("p-3 text-slate-700", col.className)}
+                        className={cn("p-2.5 text-slate-700", col.className)}
                       >
                         {col.cell
                           ? col.cell(row)
@@ -436,7 +436,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage(0)}
               aria-label="First page"
@@ -446,7 +446,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               aria-label="Previous page"
@@ -461,7 +461,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               aria-label="Next page"
@@ -471,7 +471,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage(totalPages - 1)}
               aria-label="Last page"

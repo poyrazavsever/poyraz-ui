@@ -204,9 +204,9 @@ function Autocomplete({
       {/* Trigger */}
       <div
         className={cn(
-          "flex flex-wrap items-center gap-1.5 min-h-[44px] w-full",
-          "border-2 border-dashed border-slate-400 bg-white px-3 py-2",
-          "rounded-none shadow-none",
+          "flex flex-wrap items-center gap-1.5 min-h-[36px] w-full",
+          "border border-slate-400 bg-white px-3 py-2",
+          "rounded-sm shadow-none",
           "transition-all duration-200 ease-out",
           open && "border-red-600 ring-2 ring-red-600 ring-offset-2",
           disabled && "opacity-40 cursor-not-allowed",
@@ -225,7 +225,7 @@ function Autocomplete({
             return (
               <span
                 key={val}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border-2 border-dashed border-slate-300 bg-slate-50 text-slate-700"
+                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border border-slate-300 bg-slate-50 text-slate-700"
               >
                 {label}
                 <button
@@ -284,14 +284,14 @@ function Autocomplete({
           role="listbox"
           className={cn(
             "absolute z-50 mt-1 w-full max-h-[240px] overflow-y-auto",
-            "border-2 border-dashed border-slate-200 bg-white",
+            "border border-slate-200 bg-white",
             "shadow-none",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-150",
           )}
         >
           {loading && (
             <div className="flex items-center justify-center py-6">
-              <div className="h-4 w-4 border-2 border-dashed border-red-600 border-t-transparent animate-spin" />
+              <div className="h-4 w-4 border border-red-600 border-t-transparent animate-spin" />
             </div>
           )}
 
@@ -305,7 +305,7 @@ function Autocomplete({
             Array.from(grouped.entries()).map(([group, opts]) => (
               <div key={group || "__ungrouped"} role="group">
                 {group && (
-                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-dashed border-slate-100">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">
                     {group}
                   </div>
                 )}
@@ -321,8 +321,8 @@ function Autocomplete({
                       aria-selected={isSelected}
                       aria-disabled={opt.disabled}
                       className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 text-sm cursor-pointer select-none",
-                        "border-2 border-dashed border-transparent",
+                        "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
+                        "border border-transparent",
                         "transition-colors duration-100",
                         isHighlighted && "bg-slate-50 border-slate-200",
                         !isHighlighted &&

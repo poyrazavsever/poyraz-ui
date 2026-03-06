@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/atoms/button";
 
 const fieldWrapper = [
   "flex items-center w-full",
-  "border-2 border-dashed border-slate-400 bg-white",
-  "rounded-none shadow-none",
+  "border border-slate-400 bg-white",
+  "rounded-sm shadow-none",
   "transition-all duration-200 ease-out",
   "focus-within:border-red-600 focus-within:ring-2 focus-within:ring-red-600 focus-within:ring-offset-2",
 ].join(" ");
@@ -62,7 +62,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-none border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={decrement}
           disabled={disabled || (min !== undefined && (value ?? 0) <= min)}
           tabIndex={-1}
@@ -89,7 +89,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-none border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={increment}
           disabled={disabled || (max !== undefined && (value ?? 0) >= max)}
           tabIndex={-1}
@@ -160,7 +160,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
         <div className="pl-3 text-slate-400">
           <Phone className="h-4 w-4" />
         </div>
-        <span className="pl-2 pr-1 text-sm font-medium text-slate-600 select-none whitespace-nowrap border-r-2 border-dashed border-slate-300 pr-3">
+        <span className="pl-2 pr-3 text-sm font-medium text-slate-600 select-none whitespace-nowrap border-r border-slate-300">
           {countryCode}
         </span>
         <Input ref={ref} type="tel" className={cn(innerInput)} {...props} />
@@ -190,7 +190,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-none border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={() => setVisible((v) => !v)}
           tabIndex={-1}
           aria-label={visible ? "Hide password" : "Show password"}
@@ -218,7 +218,7 @@ const UrlInput = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="pl-3 text-slate-400">
           <Globe className="h-4 w-4" />
         </div>
-        <span className="pl-2 text-sm text-slate-400 select-none whitespace-nowrap border-r-2 border-dashed border-slate-300 pr-3">
+        <span className="pl-2 text-sm text-slate-400 select-none whitespace-nowrap border-r border-slate-300 pr-3">
           https://
         </span>
         <Input ref={ref} type="url" className={cn(innerInput)} {...props} />

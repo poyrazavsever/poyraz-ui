@@ -28,7 +28,7 @@ export default function CalendarPage() {
 
 <Calendar selected={date} onSelect={setDate} />`}
       >
-        <div className="border-2 border-dashed border-slate-200 bg-white w-fit">
+        <div className="border border-slate-200 rounded-sm bg-white w-fit">
           <CalendarDemo />
         </div>
       </DemoSection>
@@ -40,7 +40,7 @@ export default function CalendarPage() {
 
 <Calendar selected={date} onSelect={setDate} />`}
       >
-        <div className="border-2 border-dashed border-slate-200 bg-white w-fit">
+        <div className="border border-slate-200 rounded-sm bg-white w-fit">
           <CalendarRangeDemo />
         </div>
       </DemoSection>

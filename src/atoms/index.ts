@@ -8,11 +8,13 @@ export { Badge, badgeVariants } from "@/components/ui/atoms/badge";
 export { Button, buttonVariants } from "@/components/ui/atoms/button";
 export {
   Card,
+  CardImage,
   CardHeader,
   CardFooter,
   CardTitle,
   CardDescription,
   CardContent,
+  cardVariants,
 } from "@/components/ui/atoms/card";
 export { Checkbox } from "@/components/ui/atoms/checkbox";
 export { Input } from "@/components/ui/atoms/input";

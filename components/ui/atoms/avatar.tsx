@@ -13,9 +13,9 @@ const Avatar = React.forwardRef<
     className={cn(
       // Size
       "relative flex h-10 w-10 shrink-0 overflow-hidden",
-      // Shape — square, not circle (brutalist)
-      "rounded-none shadow-none",
-      "border-2 border-dashed border-slate-400",
+      // Shape — square
+      "rounded-sm shadow-none",
+      "border border-slate-400",
       className,
     )}
     {...props}

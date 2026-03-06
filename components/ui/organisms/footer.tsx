@@ -7,16 +7,17 @@ import { cn } from "@/components/ui/atoms/typography";
 /*  FOOTER ROOT                                                        */
 /* ================================================================== */
 
-const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto px-6";
 
-const footerVariants = cva(["w-full", "border-t-2 border-dashed"].join(" "), {
+const footerVariants = cva(["w-full", "border-t"].join(" "), {
   variants: {
     variant: {
-      full: "py-12 bg-white text-slate-950 border-slate-200",
-      compact: "py-4 bg-white text-slate-950 border-slate-200",
-      branded: "py-10 bg-white text-slate-950 border-slate-200",
-      centered: "py-12 text-center bg-white text-slate-950 border-slate-200",
-      dark: "py-12 bg-slate-950 text-slate-100 border-slate-800",
+      full: "py-10 bg-white text-slate-950 border-slate-200",
+      compact: "py-3 bg-white text-slate-950 border-slate-200",
+      branded: "py-8 bg-white text-slate-950 border-slate-200",
+      centered: "py-10 text-center bg-white text-slate-950 border-slate-200",
+      dark: "py-10 bg-slate-950 text-slate-100 border-slate-800",
+      minimal: "py-6 bg-white text-slate-950 border-slate-200",
     },
   },
   defaultVariants: { variant: "full" },
@@ -98,7 +99,7 @@ const FooterHeading = React.forwardRef<
       "text-xs font-bold uppercase tracking-[0.15em]",
       "text-slate-900",
       "pb-2",
-      "border-b-2 border-dashed border-slate-200",
+      "border-b border-slate-200",
       className,
     )}
     {...props}
@@ -179,8 +180,8 @@ const FooterSocialLink = React.forwardRef<
     ref={ref}
     className={cn(
       "inline-flex items-center justify-center",
-      "h-9 w-9",
-      "border-2 border-dashed border-slate-300 rounded-none",
+      "h-8 w-8",
+      "border border-slate-300 rounded-sm",
       "text-slate-500",
       "hover:bg-red-600 hover:text-white hover:border-red-800",
       "transition-colors duration-150",
@@ -205,8 +206,8 @@ const FooterBottom = React.forwardRef<
     ref={ref}
     className={cn(
       "flex flex-col sm:flex-row items-center justify-between gap-4",
-      "pt-6 mt-8",
-      "border-t-2 border-dashed border-slate-200",
+      "pt-5 mt-6",
+      "border-t border-slate-200",
       "text-xs text-slate-400",
       className,
     )}
@@ -272,7 +273,7 @@ function FooterNewsletterInner(
       ref={ref}
       className={cn(
         "py-6 px-6",
-        "border-2 border-dashed border-slate-200",
+        "border border-slate-200",
         "bg-slate-50",
         className,
       )}
@@ -290,24 +291,24 @@ function FooterNewsletterInner(
           placeholder={placeholder}
           required
           className={cn(
-            "flex-1 h-10 px-3 text-sm",
-            "border-2 border-dashed border-slate-300 bg-white",
+            "flex-1 h-9 px-3 text-sm",
+            "border border-slate-300 bg-white",
             "placeholder:text-slate-400",
             "focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-1",
-            "rounded-none shadow-none",
+            "rounded-sm shadow-none",
           )}
         />
         <button
           type="submit"
           className={cn(
-            "h-10 px-5",
+            "h-9 px-5",
             "text-xs font-bold uppercase tracking-wide",
             "bg-red-600 text-white",
-            "border-2 border-dashed border-red-800",
+            "border border-red-800",
             "hover:bg-red-700 hover:border-red-900",
             "active:bg-red-800 active:scale-[0.97]",
             "transition-all duration-150",
-            "rounded-none shadow-none cursor-pointer",
+            "rounded-sm shadow-none cursor-pointer",
           )}
         >
           {buttonText}
@@ -333,11 +334,158 @@ const FooterDivider = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <hr
     ref={ref}
-    className={cn("border-t-2 border-dashed border-slate-200 my-8", className)}
+    className={cn("border-t border-slate-200 my-8", className)}
     {...props}
   />
 ));
 FooterDivider.displayName = "FooterDivider";
+
+/* ================================================================== */
+/*  FOOTER DESCRIPTION (brand tagline text)                            */
+/* ================================================================== */
+
+const FooterDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, children, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn("text-sm text-slate-500 leading-relaxed", className)}
+    {...props}
+  >
+    {children}
+  </p>
+));
+FooterDescription.displayName = "FooterDescription";
+
+/* ================================================================== */
+/*  FOOTER BADGE (small label / version tag)                           */
+/* ================================================================== */
+
+const FooterBadge = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement>
+>(({ className, children, ...props }, ref) => (
+  <span
+    ref={ref}
+    className={cn(
+      "inline-flex items-center",
+      "px-2 py-0.5",
+      "text-[10px] font-bold uppercase tracking-wider",
+      "border border-slate-200 rounded-sm",
+      "text-slate-500 bg-slate-50",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </span>
+));
+FooterBadge.displayName = "FooterBadge";
+
+/* ================================================================== */
+/*  FOOTER LINK GROUP (horizontal inline links row)                    */
+/* ================================================================== */
+
+const FooterLinkGroup = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex flex-wrap items-center gap-x-6 gap-y-2",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </div>
+));
+FooterLinkGroup.displayName = "FooterLinkGroup";
+
+/* ================================================================== */
+/*  FOOTER CTA (call-to-action banner)                                 */
+/* ================================================================== */
+
+export interface FooterCTAProps extends React.HTMLAttributes<HTMLDivElement> {
+  heading?: string;
+  description?: string;
+}
+
+const FooterCTA = React.forwardRef<HTMLDivElement, FooterCTAProps>(
+  ({ className, heading, description, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
+        "py-5 px-6",
+        "border border-slate-200 rounded-sm",
+        "bg-slate-50",
+        className,
+      )}
+      {...props}
+    >
+      <div className="min-w-0">
+        {heading && (
+          <h4 className="text-sm font-semibold text-slate-900">{heading}</h4>
+        )}
+        {description && (
+          <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+        )}
+      </div>
+      <div className="flex items-center gap-2 shrink-0">{children}</div>
+    </div>
+  ),
+);
+FooterCTA.displayName = "FooterCTA";
+
+/* ================================================================== */
+/*  FOOTER APP (app store badges / download area)                      */
+/* ================================================================== */
+
+const FooterApp = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col gap-2", className)}
+    {...props}
+  >
+    <span className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400">
+      Download App
+    </span>
+    <div className="flex items-center gap-2">{children}</div>
+  </div>
+));
+FooterApp.displayName = "FooterApp";
+
+/* ================================================================== */
+/*  FOOTER APP LINK (single app store badge)                           */
+/* ================================================================== */
+
+const FooterAppLink = React.forwardRef<
+  HTMLAnchorElement,
+  React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(({ className, children, ...props }, ref) => (
+  <a
+    ref={ref}
+    className={cn(
+      "inline-flex items-center gap-2",
+      "px-3 py-2",
+      "border border-slate-300 rounded-sm",
+      "text-xs font-medium text-slate-700",
+      "hover:bg-slate-50 hover:border-slate-400",
+      "transition-colors duration-150",
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </a>
+));
+FooterAppLink.displayName = "FooterAppLink";
 
 /* ================================================================== */
 /*  EXPORTS                                                            */
@@ -356,5 +504,11 @@ export {
   FooterDivider,
   FooterBottom,
   FooterBottomLinks,
+  FooterDescription,
+  FooterBadge,
+  FooterLinkGroup,
+  FooterCTA,
+  FooterApp,
+  FooterAppLink,
   footerVariants,
 };

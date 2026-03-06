@@ -21,7 +21,7 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
             // Layout
             "flex items-start gap-3 w-full p-4",
             // Brutalist DNA
-            "border-2 border-dashed border-slate-300 rounded-none shadow-none",
+            "border border-slate-300 rounded-sm shadow-none",
             // Colors
             "bg-white text-slate-950",
             // Typography
@@ -32,7 +32,7 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
           actionButton: cn(
             "inline-flex items-center justify-center",
             "px-3 py-1.5 text-xs font-semibold uppercase tracking-wide",
-            "border-2 border-dashed border-slate-900 rounded-none shadow-none",
+            "border border-slate-900 rounded-sm shadow-none",
             "bg-slate-900 text-white",
             "hover:bg-slate-800 transition-colors",
             "cursor-pointer",
@@ -40,13 +40,13 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
           cancelButton: cn(
             "inline-flex items-center justify-center",
             "px-3 py-1.5 text-xs font-semibold uppercase tracking-wide",
-            "border-2 border-dashed border-slate-300 rounded-none shadow-none",
+            "border border-slate-300 rounded-sm shadow-none",
             "bg-white text-slate-600",
             "hover:bg-slate-50 transition-colors",
             "cursor-pointer",
           ),
           closeButton: cn(
-            "rounded-none border-2 border-dashed border-slate-300",
+            "rounded-sm border border-slate-300",
             "hover:border-slate-500 transition-colors",
           ),
           // Variant-specific styles

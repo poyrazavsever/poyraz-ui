@@ -18,11 +18,9 @@ const Separator = React.forwardRef<
       orientation={orientation}
       className={cn(
         "shrink-0",
-        // Dashed line — on-brand
-        "border-dashed border-slate-300",
-        orientation === "horizontal"
-          ? "w-full border-t-2"
-          : "h-full border-l-2",
+        // Solid line
+        "border-slate-300",
+        orientation === "horizontal" ? "w-full border-t" : "h-full border-l",
         className,
       )}
       {...props}
