@@ -3,12 +3,16 @@
 import {
   Sidebar,
   SidebarHeader,
+  SidebarBranding,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarSection,
   SidebarMenu,
   SidebarMenuItem,
+  SidebarMenuAction,
   SidebarSeparator,
+  SidebarBadge,
   SidebarFooter,
   SidebarTrigger,
   SidebarSearch,
@@ -31,6 +35,11 @@ import {
   Globe,
   Palette,
   Code,
+  MoreHorizontal,
+  Zap,
+  Box,
+  Trash2,
+  Star,
 } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
@@ -38,11 +47,12 @@ export default function SidebarPage() {
   return (
     <ComponentPage
       name="Sidebar"
-      description="Vertical navigation sidebar with groups, labels, search, sub-menus, user profile, header, footer, and collapse toggle. Supports default, collapsible, floating, mini, dark, and bordered variants."
+      description="Vertical navigation sidebar with groups, labels, search, sub-menus, user profile, branding, collapsible sections, badges, menu actions, header, footer, and collapse toggle. Supports default, collapsible, floating, mini, dark, bordered, and inset variants."
       importCode={`import {
-  Sidebar, SidebarHeader, SidebarContent,
-  SidebarGroup, SidebarGroupLabel, SidebarMenu,
-  SidebarMenuItem, SidebarSeparator, SidebarFooter,
+  Sidebar, SidebarHeader, SidebarBranding, SidebarContent,
+  SidebarGroup, SidebarGroupLabel, SidebarSection,
+  SidebarMenu, SidebarMenuItem, SidebarMenuAction,
+  SidebarSeparator, SidebarBadge, SidebarFooter,
   SidebarTrigger, SidebarSearch,
   SidebarSubMenu, SidebarSubMenuItem,
   SidebarUserProfile, useSidebar,
@@ -486,6 +496,320 @@ export default function SidebarPage() {
             <SidebarFooter>
               <span className="text-xs text-slate-400">Logged in as Maria</span>
             </SidebarFooter>
+          </Sidebar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 7. Inset Variant ────────────────────────── */}
+      <DemoSection
+        title="Inset Variant"
+        description="Rounded sidebar with subtle shadow, ideal for embedded layouts inside a page."
+        code={`<Sidebar variant="inset">
+  <SidebarHeader>
+    <SidebarBranding logo={<Zap className="h-4 w-4" />} title="Workspace" subtitle="Team Pro" />
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarMenu>
+      <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>Dashboard</SidebarMenuItem>
+      <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>Documents</SidebarMenuItem>
+      <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Members</SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarContent>
+  <SidebarFooter>
+    <span className="text-xs text-slate-400">Inset layout</span>
+  </SidebarFooter>
+</Sidebar>`}
+      >
+        <div className="h-[360px] overflow-hidden p-4 bg-white">
+          <Sidebar variant="inset">
+            <SidebarHeader>
+              <SidebarBranding
+                logo={<Zap className="h-4 w-4" />}
+                title="Workspace"
+                subtitle="Team Pro"
+              />
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarMenu>
+                <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
+                  Dashboard
+                </SidebarMenuItem>
+                <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>
+                  Documents
+                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
+                  Members
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarContent>
+            <SidebarFooter>
+              <span className="text-xs text-slate-400">Inset layout</span>
+            </SidebarFooter>
+          </Sidebar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 8. With Branding ────────────────────────── */}
+      <DemoSection
+        title="With Branding"
+        description="SidebarBranding provides a logo + title + subtitle combo in the header. Collapses to icon-only gracefully."
+        code={`<Sidebar variant="collapsible">
+  <SidebarHeader>
+    <SidebarBranding
+      logo={<Box className="h-4 w-4" />}
+      title="Poyraz UI"
+      subtitle="Component Library"
+    />
+    <SidebarTrigger />
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarMenu>
+      <SidebarMenuItem icon={<LayoutDashboard className="h-4 w-4" />} active>
+        Overview
+      </SidebarMenuItem>
+      <SidebarMenuItem icon={<Palette className="h-4 w-4" />}>Themes</SidebarMenuItem>
+      <SidebarMenuItem icon={<Code className="h-4 w-4" />}>Components</SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarContent>
+</Sidebar>`}
+      >
+        <div className="border border-slate-200 rounded-sm h-[340px] overflow-hidden">
+          <Sidebar variant="collapsible">
+            <SidebarHeader>
+              <SidebarBranding
+                logo={<Box className="h-4 w-4" />}
+                title="Poyraz UI"
+                subtitle="Component Library"
+              />
+              <SidebarTrigger />
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarMenu>
+                <SidebarMenuItem
+                  icon={<LayoutDashboard className="h-4 w-4" />}
+                  active
+                >
+                  Overview
+                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Palette className="h-4 w-4" />}>
+                  Themes
+                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Code className="h-4 w-4" />}>
+                  Components
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarContent>
+          </Sidebar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 9. Collapsible Sections ─────────────────── */}
+      <DemoSection
+        title="Collapsible Sections"
+        description="SidebarSection adds collapsible group titles with a chevron toggle. Click a section title to expand/collapse."
+        code={`<Sidebar>
+  <SidebarHeader>
+    <span className="font-bold text-lg">App</span>
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarSection title="Navigation" defaultOpen>
+      <SidebarMenu>
+        <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>Home</SidebarMenuItem>
+        <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />}>Analytics</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarSection>
+    <SidebarSeparator />
+    <SidebarSection title="Management" defaultOpen={false}>
+      <SidebarMenu>
+        <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Users</SidebarMenuItem>
+        <SidebarMenuItem icon={<ShieldCheck className="h-4 w-4" />}>Roles</SidebarMenuItem>
+        <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>Billing</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarSection>
+    <SidebarSeparator />
+    <SidebarSection title="System" collapsible={false}>
+      <SidebarMenu>
+        <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>Settings</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarSection>
+  </SidebarContent>
+</Sidebar>`}
+      >
+        <div className="border border-slate-200 rounded-sm h-[440px] overflow-hidden">
+          <Sidebar>
+            <SidebarHeader>
+              <span className="font-bold text-lg">App</span>
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarSection title="Navigation" defaultOpen>
+                <SidebarMenu>
+                  <SidebarMenuItem
+                    icon={<Home className="h-4 w-4" />}
+                    active
+                  >
+                    Home
+                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />}>
+                    Analytics
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarSection>
+              <SidebarSeparator />
+              <SidebarSection title="Management" defaultOpen={false}>
+                <SidebarMenu>
+                  <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
+                    Users
+                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<ShieldCheck className="h-4 w-4" />}>
+                    Roles
+                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>
+                    Billing
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarSection>
+              <SidebarSeparator />
+              <SidebarSection title="System" collapsible={false}>
+                <SidebarMenu>
+                  <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>
+                    Settings
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarSection>
+            </SidebarContent>
+          </Sidebar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 10. With Menu Actions ───────────────────── */}
+      <DemoSection
+        title="With Menu Actions"
+        description="SidebarMenuAction adds hover-visible action buttons to menu items. Pass via the action prop on SidebarMenuItem."
+        code={`<Sidebar>
+  <SidebarHeader>
+    <span className="font-bold text-lg">Projects</span>
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarMenu>
+      <SidebarMenuItem
+        icon={<FileText className="h-4 w-4" />}
+        active
+        action={<SidebarMenuAction><MoreHorizontal className="h-3.5 w-3.5" /></SidebarMenuAction>}
+      >
+        Design System
+      </SidebarMenuItem>
+      <SidebarMenuItem
+        icon={<FileText className="h-4 w-4" />}
+        badge={<SidebarBadge variant="dot" />}
+        action={<SidebarMenuAction><Star className="h-3.5 w-3.5" /></SidebarMenuAction>}
+      >
+        Marketing Site
+      </SidebarMenuItem>
+      <SidebarMenuItem
+        icon={<FileText className="h-4 w-4" />}
+        action={<SidebarMenuAction><Trash2 className="h-3.5 w-3.5" /></SidebarMenuAction>}
+      >
+        Legacy App
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarContent>
+</Sidebar>`}
+      >
+        <div className="border border-slate-200 rounded-sm h-[280px] overflow-hidden">
+          <Sidebar>
+            <SidebarHeader>
+              <span className="font-bold text-lg">Projects</span>
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarMenu>
+                <SidebarMenuItem
+                  icon={<FileText className="h-4 w-4" />}
+                  active
+                  action={
+                    <SidebarMenuAction>
+                      <MoreHorizontal className="h-3.5 w-3.5" />
+                    </SidebarMenuAction>
+                  }
+                >
+                  Design System
+                </SidebarMenuItem>
+                <SidebarMenuItem
+                  icon={<FileText className="h-4 w-4" />}
+                  badge={<SidebarBadge variant="dot" />}
+                  action={
+                    <SidebarMenuAction>
+                      <Star className="h-3.5 w-3.5" />
+                    </SidebarMenuAction>
+                  }
+                >
+                  Marketing Site
+                </SidebarMenuItem>
+                <SidebarMenuItem
+                  icon={<FileText className="h-4 w-4" />}
+                  action={
+                    <SidebarMenuAction>
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </SidebarMenuAction>
+                  }
+                >
+                  Legacy App
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarContent>
+          </Sidebar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 11. Badges ──────────────────────────────── */}
+      <DemoSection
+        title="Badges"
+        description="SidebarBadge supports default (filled), dot (notification indicator), and outline variants."
+        code={`<Sidebar>
+  <SidebarHeader>
+    <span className="font-bold text-lg">Notifications</span>
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarMenu>
+      <SidebarMenuItem icon={<Mail className="h-4 w-4" />} badge={<SidebarBadge>5</SidebarBadge>}>
+        Inbox
+      </SidebarMenuItem>
+      <SidebarMenuItem icon={<Bell className="h-4 w-4" />} badge={<SidebarBadge variant="dot" />}>
+        Alerts
+      </SidebarMenuItem>
+      <SidebarMenuItem icon={<Globe className="h-4 w-4" />} badge={<SidebarBadge variant="outline">New</SidebarBadge>}>
+        Updates
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarContent>
+</Sidebar>`}
+      >
+        <div className="border border-slate-200 rounded-sm h-[260px] overflow-hidden">
+          <Sidebar>
+            <SidebarHeader>
+              <span className="font-bold text-lg">Notifications</span>
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarMenu>
+                <SidebarMenuItem
+                  icon={<Mail className="h-4 w-4" />}
+                  badge={<SidebarBadge>5</SidebarBadge>}
+                >
+                  Inbox
+                </SidebarMenuItem>
+                <SidebarMenuItem
+                  icon={<Bell className="h-4 w-4" />}
+                  badge={<SidebarBadge variant="dot" />}
+                >
+                  Alerts
+                </SidebarMenuItem>
+                <SidebarMenuItem
+                  icon={<Globe className="h-4 w-4" />}
+                  badge={<SidebarBadge variant="outline">New</SidebarBadge>}
+                >
+                  Updates
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarContent>
           </Sidebar>
         </div>
       </DemoSection>

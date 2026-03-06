@@ -137,11 +137,11 @@ interface SidebarContextValue {
     setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     mobileOpen: boolean;
     setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    variant: "default" | "collapsible" | "floating" | "mini" | "dark" | "bordered";
+    variant: "default" | "collapsible" | "floating" | "mini" | "dark" | "bordered" | "inset";
 }
 declare const useSidebar: () => SidebarContextValue;
 declare const sidebarVariants: (props?: ({
-    variant?: "default" | "bordered" | "dark" | "collapsible" | "floating" | "mini" | null | undefined;
+    variant?: "default" | "bordered" | "inset" | "dark" | "collapsible" | "floating" | "mini" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface SidebarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof sidebarVariants> {
     /** Start in collapsed state (for collapsible variant) */
@@ -149,9 +149,27 @@ interface SidebarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<t
 }
 declare const Sidebar: React.ForwardRefExoticComponent<SidebarProps & React.RefAttributes<HTMLElement>>;
 declare const SidebarHeader: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface SidebarBrandingProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Logo / icon element */
+    logo?: React.ReactNode;
+    /** Application title */
+    title: string;
+    /** Subtitle / tagline */
+    subtitle?: string;
+}
+declare const SidebarBranding: React.ForwardRefExoticComponent<SidebarBrandingProps & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarGroup: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarGroupLabel: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Section title */
+    title: string;
+    /** Whether the section can be collapsed */
+    collapsible?: boolean;
+    /** Start open (when collapsible) */
+    defaultOpen?: boolean;
+}
+declare const SidebarSection: React.ForwardRefExoticComponent<SidebarSectionProps & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarMenu: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLUListElement> & React.RefAttributes<HTMLUListElement>>;
 interface SidebarMenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
     /** Whether this item is the active/current page */
@@ -160,11 +178,19 @@ interface SidebarMenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
     icon?: React.ReactNode;
     /** Badge content (e.g. notification count) */
     badge?: React.ReactNode;
+    /** Action element shown on hover (e.g. SidebarMenuAction) */
+    action?: React.ReactNode;
     /** Link href */
     href?: string;
 }
 declare const SidebarMenuItem: React.ForwardRefExoticComponent<SidebarMenuItemProps & React.RefAttributes<HTMLLIElement>>;
+declare const SidebarMenuAction: React.ForwardRefExoticComponent<React.ButtonHTMLAttributes<HTMLButtonElement> & React.RefAttributes<HTMLButtonElement>>;
 declare const SidebarSeparator: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHRElement> & React.RefAttributes<HTMLHRElement>>;
+interface SidebarBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+    /** Badge style variant */
+    variant?: "default" | "dot" | "outline";
+}
+declare const SidebarBadge: React.ForwardRefExoticComponent<SidebarBadgeProps & React.RefAttributes<HTMLSpanElement>>;
 declare const SidebarFooter: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 interface SidebarTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /** Which action: toggle collapse or toggle mobile */
@@ -305,4 +331,4 @@ declare const DataTable: <T>(props: DataTableProps<T> & {
     ref?: React.Ref<HTMLDivElement>;
 }) => React.ReactElement;
 
-export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarSearch, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };
+export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarBadge, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuItem, SidebarSearch, SidebarSection, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };

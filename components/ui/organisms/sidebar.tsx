@@ -27,7 +27,8 @@ interface SidebarContextValue {
     | "floating"
     | "mini"
     | "dark"
-    | "bordered";
+    | "bordered"
+    | "inset";
 }
 
 const SidebarContext = React.createContext<SidebarContextValue>({
@@ -64,6 +65,8 @@ const sidebarVariants = cva(
         mini: "w-16 bg-white text-slate-950 border-r border-slate-200",
         dark: "w-56 bg-slate-950 text-slate-100 border-r border-slate-800",
         bordered: "w-56 bg-white text-slate-950 border border-slate-300",
+        inset:
+          "w-56 bg-slate-50/80 text-slate-950 border border-slate-200 rounded-lg shadow-sm",
       },
     },
     defaultVariants: { variant: "default" },
@@ -191,6 +194,76 @@ const SidebarHeader = React.forwardRef<
 SidebarHeader.displayName = "SidebarHeader";
 
 /* ================================================================== */
+/*  SIDEBAR BRANDING                                                   */
+/* ================================================================== */
+
+export interface SidebarBrandingProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /** Logo / icon element */
+  logo?: React.ReactNode;
+  /** Application title */
+  title: string;
+  /** Subtitle / tagline */
+  subtitle?: string;
+}
+
+const SidebarBranding = React.forwardRef<HTMLDivElement, SidebarBrandingProps>(
+  ({ className, logo, title, subtitle, ...props }, ref) => {
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex items-center gap-3",
+          collapsed && "justify-center",
+          className,
+        )}
+        {...props}
+      >
+        {logo && (
+          <span
+            className={cn(
+              "shrink-0 w-8 h-8 flex items-center justify-center",
+              "border rounded-sm",
+              dark
+                ? "border-slate-700 bg-slate-900"
+                : "border-slate-200 bg-slate-50",
+            )}
+          >
+            {logo}
+          </span>
+        )}
+        {!collapsed && (
+          <div className="flex-1 min-w-0">
+            <div
+              className={cn(
+                "text-sm font-bold truncate",
+                dark ? "text-white" : "text-slate-900",
+              )}
+            >
+              {title}
+            </div>
+            {subtitle && (
+              <div
+                className={cn(
+                  "text-[10px] truncate",
+                  dark ? "text-slate-500" : "text-slate-400",
+                )}
+              >
+                {subtitle}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  },
+);
+SidebarBranding.displayName = "SidebarBranding";
+
+/* ================================================================== */
 /*  SIDEBAR CONTENT                                                    */
 /* ================================================================== */
 
@@ -257,6 +330,80 @@ const SidebarGroupLabel = React.forwardRef<
 SidebarGroupLabel.displayName = "SidebarGroupLabel";
 
 /* ================================================================== */
+/*  SIDEBAR SECTION (collapsible group with title)                     */
+/* ================================================================== */
+
+export interface SidebarSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /** Section title */
+  title: string;
+  /** Whether the section can be collapsed */
+  collapsible?: boolean;
+  /** Start open (when collapsible) */
+  defaultOpen?: boolean;
+}
+
+const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
+  (
+    {
+      className,
+      title,
+      collapsible = true,
+      defaultOpen = true,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const [open, setOpen] = React.useState(defaultOpen);
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
+
+    if (collapsed) return null;
+
+    return (
+      <div ref={ref} className={cn("mb-4", className)} {...props}>
+        {collapsible ? (
+          <button
+            type="button"
+            onClick={() => setOpen((p) => !p)}
+            className={cn(
+              "w-full flex items-center justify-between",
+              "px-3 mb-2",
+              "text-[10px] font-bold uppercase tracking-[0.15em]",
+              dark
+                ? "text-slate-500 hover:text-slate-400"
+                : "text-slate-400 hover:text-slate-600",
+              "cursor-pointer transition-colors duration-150",
+            )}
+          >
+            {title}
+            <ChevronDown
+              className={cn(
+                "h-3 w-3 transition-transform duration-200",
+                open && "rotate-180",
+              )}
+            />
+          </button>
+        ) : (
+          <div
+            className={cn(
+              "px-3 mb-2",
+              "text-[10px] font-bold uppercase tracking-[0.15em]",
+              dark ? "text-slate-500" : "text-slate-400",
+            )}
+          >
+            {title}
+          </div>
+        )}
+        {open && children}
+      </div>
+    );
+  },
+);
+SidebarSection.displayName = "SidebarSection";
+
+/* ================================================================== */
 /*  SIDEBAR MENU                                                       */
 /* ================================================================== */
 
@@ -281,12 +428,14 @@ export interface SidebarMenuItemProps extends React.LiHTMLAttributes<HTMLLIEleme
   icon?: React.ReactNode;
   /** Badge content (e.g. notification count) */
   badge?: React.ReactNode;
+  /** Action element shown on hover (e.g. SidebarMenuAction) */
+  action?: React.ReactNode;
   /** Link href */
   href?: string;
 }
 
 const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
-  ({ className, active, icon, badge, href, children, ...props }, ref) => {
+  ({ className, active, icon, badge, action, href, children, ...props }, ref) => {
     const { collapsed, variant } = useSidebar();
     const dark = isDarkVariant(variant);
 
@@ -358,6 +507,9 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
           </span>
         )}
 
+        {/* Action */}
+        {!collapsed && action}
+
         {/* Collapsed tooltip hint */}
         {collapsed && (
           <span
@@ -392,6 +544,42 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
 SidebarMenuItem.displayName = "SidebarMenuItem";
 
 /* ================================================================== */
+/*  SIDEBAR MENU ACTION                                                */
+/* ================================================================== */
+
+const SidebarMenuAction = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ className, children, ...props }, ref) => {
+  const { variant } = useSidebar();
+  const dark = isDarkVariant(variant);
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={cn(
+        "ml-auto shrink-0",
+        "inline-flex items-center justify-center",
+        "h-6 w-6",
+        "rounded-sm",
+        "opacity-0 group-hover:opacity-100",
+        "transition-all duration-150",
+        "cursor-pointer",
+        dark
+          ? "text-slate-500 hover:text-slate-300 hover:bg-slate-800"
+          : "text-slate-400 hover:text-slate-600 hover:bg-slate-100",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+});
+SidebarMenuAction.displayName = "SidebarMenuAction";
+
+/* ================================================================== */
 /*  SIDEBAR SEPARATOR                                                  */
 /* ================================================================== */
 
@@ -416,6 +604,69 @@ const SidebarSeparator = React.forwardRef<
   );
 });
 SidebarSeparator.displayName = "SidebarSeparator";
+
+/* ================================================================== */
+/*  SIDEBAR BADGE                                                      */
+/* ================================================================== */
+
+export interface SidebarBadgeProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Badge style variant */
+  variant?: "default" | "dot" | "outline";
+}
+
+const SidebarBadge = React.forwardRef<HTMLSpanElement, SidebarBadgeProps>(
+  (
+    { className, variant: badgeVariant = "default", children, ...props },
+    ref,
+  ) => {
+    const { variant } = useSidebar();
+    const dark = isDarkVariant(variant);
+
+    if (badgeVariant === "dot") {
+      return (
+        <span
+          ref={ref}
+          className={cn(
+            "inline-block w-2 h-2 rounded-full shrink-0",
+            dark ? "bg-red-500" : "bg-red-600",
+            className,
+          )}
+          {...props}
+        />
+      );
+    }
+
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          "inline-flex items-center justify-center",
+          "min-w-[20px] h-5 px-1.5",
+          "text-[10px] font-bold",
+          "rounded-sm",
+          badgeVariant === "outline"
+            ? [
+                "border",
+                dark
+                  ? "border-slate-600 text-slate-300"
+                  : "border-slate-300 text-slate-600",
+              ]
+            : [
+                dark
+                  ? "bg-red-950 text-red-400 border border-red-800"
+                  : "bg-red-50 text-red-700 border border-red-200",
+              ],
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </span>
+    );
+  },
+);
+SidebarBadge.displayName = "SidebarBadge";
 
 /* ================================================================== */
 /*  SIDEBAR FOOTER                                                     */
@@ -780,12 +1031,16 @@ SidebarUserProfile.displayName = "SidebarUserProfile";
 export {
   Sidebar,
   SidebarHeader,
+  SidebarBranding,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarSection,
   SidebarMenu,
   SidebarMenuItem,
+  SidebarMenuAction,
   SidebarSeparator,
+  SidebarBadge,
   SidebarFooter,
   SidebarTrigger,
   SidebarSearch,
