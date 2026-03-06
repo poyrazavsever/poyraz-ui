@@ -40,12 +40,12 @@ Subtle rounding. No shadows. Clean borders. Bold, functional design.
 
 Poyraz UI is an open-source component library built around a **minimal design language**: clean solid borders, subtle rounding (rounded-sm), shadow-none defaults, and a red-600 primary palette. Every component is built on top of Radix UI primitives for accessibility, styled with Tailwind CSS v4, and managed with `class-variance-authority` for variant control.
 
-The library follows **Atomic Design** methodology, organizing 43+ components into three tiers:
+The library follows **Atomic Design** methodology, organizing 50+ components into three tiers:
 
 | Tier      | Count | Purpose                         |
 | --------- | ----- | ------------------------------- |
 | Atoms     | 17    | Primitive building blocks       |
-| Molecules | 21    | Composed groups of atoms        |
+| Molecules | 28    | Composed groups of atoms        |
 | Organisms | 5     | Complex, page-level UI sections |
 
 All components are fully typed with TypeScript, tree-shakeable, and published as both ESM and CJS bundles.
@@ -171,7 +171,7 @@ Tree-shaking and code-splitting are enabled by default.
 
 ### Design Principles
 
-1. **Minimal Aesthetic** -- `rounded-sm shadow-none border` on every component
+1. **Compact & Minimal** -- Max heading 32px, small components, `rounded-sm shadow-none border`
 2. **Accessibility First** -- Radix UI primitives provide WCAG-compliant keyboard navigation, focus management, and ARIA attributes out of the box
 3. **Variant-Driven** -- `class-variance-authority` (cva) manages every visual variant, making customization predictable
 4. **Composition over Configuration** -- Components are small, composable pieces. A `Navbar` is assembled from `NavbarMain`, `NavbarBrand`, `NavbarLinks`, etc.
@@ -194,14 +194,14 @@ Fundamental building blocks -- single-responsibility UI elements.
 | **Switch**      | Toggle switch component.                                                                                         |
 | **Badge**       | Inline label with default, outline, destructive variants.                                                        |
 | **Avatar**      | Image + fallback avatar component.                                                                               |
-| **Card**        | Container with header, content, footer sections.                                                                 |
+| **Card**        | Container with 6 variants (default, bordered, elevated, highlight, ghost, interactive).                          |
 | **Typography**  | Semantic heading and body text component (h1-h4, p, lead, blockquote, code, list).                               |
 | **Label**       | Form label with required indicator support.                                                                      |
 | **Separator**   | Horizontal or vertical divider.                                                                                  |
 | **Skeleton**    | Loading placeholder with pulse animation.                                                                        |
 | **Scroll Area** | Custom scrollbar viewport.                                                                                       |
 | **Form Fields** | Specialized inputs: NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput.                               |
-| **Logo**        | Brand logo component using next/image.                                                                           |
+| **Logo**        | Minimal brand logo with hover opacity.                                                                           |
 | **BG Patterns** | SVG background patterns: dots, grid, lines, diagonal, cross, checkerboard, diamond, zigzag, dashed grid, radial. |
 
 **Example:**
@@ -240,6 +240,13 @@ Composed groups of atoms that form discrete UI patterns.
 | **Sonner**          | Toast notification system.                            |
 | **Tabs**            | Tabbed content with keyboard support.                 |
 | **Tooltip**         | Small informational popover on hover/focus.           |
+| **ArticleCard**     | Blog/article card with image, category, author.       |
+| **ImageCard**       | Image-dominant card with gradient overlay text.       |
+| **NewsCard**        | Compact horizontal news card for feed layouts.        |
+| **StatsCard**       | Metric/KPI card with trend indicator.                 |
+| **TestimonialCard** | Customer testimonial with quote and rating.           |
+| **PricingCard**     | Pricing tier with features list and CTA slot.         |
+| **ProductCard**     | E-commerce product card with price and rating.        |
 
 **Example:**
 
@@ -434,10 +441,11 @@ border: 1px solid; /* border */
 --color-background: #ffffff;
 --color-foreground: #0f172a; /* slate-950 */
 
-/* Typography */
---font-primary: system-ui, sans-serif;
---font-secondary: serif; /* Used for accent headings */
---font-mono: monospace; /* Code blocks */
+/* Typography — Dual font system */
+--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; /* Primary */
+--font-secondary: "Agbalumo", cursive; /* Decorative / accent */
+
+/* Max heading: 32px — compact by design */
 ```
 
 To customize, override Tailwind theme tokens in your own CSS or `tailwind.config`:
@@ -497,10 +505,11 @@ poyraz-ui/
       atoms/                  # Atom component doc pages
       molecules/              # Molecule component doc pages
       organisms/              # Organism component doc pages
+      templates/              # Page template examples (hero, pricing, dashboard, auth)
   components/
     ui/
       atoms/                  # 17 atom components
-      molecules/              # 21 molecule components
+      molecules/              # 28 molecule components (incl. card templates)
       organisms/              # 5 organism components
     docs/
       code-block.tsx          # Documentation page helpers
