@@ -36,7 +36,7 @@ export default function FooterPage() {
   return (
     <ComponentPage
       name="Footer"
-      description="Page footer with grid layout, brand section, social links, newsletter, CTA banner, app download badges, inline link groups, and bottom bar. Supports full, compact, branded, centered, dark, and minimal variants."
+      description="Page footer with grid layout, brand section, social links, newsletter, CTA banner, app download badges, inline link groups, and bottom bar. Supports full, compact, branded, centered, and minimal variants."
       importCode={`import {
   Footer, FooterGrid, FooterSection, FooterHeading,
   FooterLink, FooterBrand, FooterSocials, FooterSocialLink,
@@ -180,75 +180,6 @@ export default function FooterPage() {
       </DemoSection>
 
       <DemoSection
-        title="Dark Variant"
-        description="Dark-themed footer for contrast sections."
-        code={`<Footer variant="dark">
-  <FooterGrid>…</FooterGrid>
-  <FooterBottom>…</FooterBottom>
-</Footer>`}
-      >
-        <Footer variant="dark">
-          <FooterGrid>
-            <FooterSection>
-              <FooterBrand>
-                <span className="text-lg font-bold text-white">Poyraz UI</span>
-              </FooterBrand>
-              <p className="text-sm text-slate-400">
-                Minimal design for the modern web.
-              </p>
-            </FooterSection>
-            <FooterSection>
-              <FooterHeading className="text-slate-300 border-slate-700">
-                Links
-              </FooterHeading>
-              <FooterLink
-                className="text-slate-400 hover:text-red-400"
-                href="#"
-              >
-                Documentation
-              </FooterLink>
-              <FooterLink
-                className="text-slate-400 hover:text-red-400"
-                href="#"
-              >
-                Components
-              </FooterLink>
-              <FooterLink
-                className="text-slate-400 hover:text-red-400"
-                href="#"
-              >
-                GitHub
-              </FooterLink>
-            </FooterSection>
-            <FooterSection>
-              <FooterHeading className="text-slate-300 border-slate-700">
-                Social
-              </FooterHeading>
-              <FooterSocials>
-                <FooterSocialLink
-                  href="#"
-                  aria-label="GitHub"
-                  className="border-slate-700 text-slate-400 hover:bg-red-600 hover:text-white hover:border-red-800"
-                >
-                  <Github className="h-4 w-4" />
-                </FooterSocialLink>
-                <FooterSocialLink
-                  href="#"
-                  aria-label="Twitter"
-                  className="border-slate-700 text-slate-400 hover:bg-red-600 hover:text-white hover:border-red-800"
-                >
-                  <Twitter className="h-4 w-4" />
-                </FooterSocialLink>
-              </FooterSocials>
-            </FooterSection>
-          </FooterGrid>
-          <FooterBottom className="border-slate-800 text-slate-500">
-            <span>© 2026 Poyraz UI. All rights reserved.</span>
-          </FooterBottom>
-        </Footer>
-      </DemoSection>
-
-      <DemoSection
         title="Centered Variant"
         description="Centered footer for minimal pages."
         code={`<Footer variant="centered">
@@ -263,7 +194,7 @@ export default function FooterPage() {
         <Footer variant="centered">
           <div className="space-y-4 flex flex-col items-center">
             <span className="text-lg font-bold">Poyraz UI</span>
-            <p className="text-sm text-slate-500 max-w-md">
+            <p className="text-sm text-muted-foreground max-w-md">
               A minimal component library for React and Next.js applications.
             </p>
             <FooterSocials className="justify-center">
@@ -299,7 +230,9 @@ export default function FooterPage() {
       >
         <Footer variant="compact">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <span className="text-sm text-slate-500">© 2026 Poyraz UI</span>
+            <span className="text-sm text-muted-foreground">
+              © 2026 Poyraz UI
+            </span>
             <FooterBottomLinks>
               <FooterLink href="#">Privacy</FooterLink>
               <FooterLink href="#">Terms</FooterLink>
@@ -445,7 +378,7 @@ export default function FooterPage() {
                 <FooterAppLink href="#">
                   <Apple className="h-4 w-4" />
                   <div>
-                    <div className="text-[9px] text-slate-400 leading-none">
+                    <div className="text-[9px] text-placeholder leading-none">
                       Download on the
                     </div>
                     <div className="text-xs font-semibold leading-tight">
@@ -456,7 +389,7 @@ export default function FooterPage() {
                 <FooterAppLink href="#">
                   <Smartphone className="h-4 w-4" />
                   <div>
-                    <div className="text-[9px] text-slate-400 leading-none">
+                    <div className="text-[9px] text-placeholder leading-none">
                       Get it on
                     </div>
                     <div className="text-xs font-semibold leading-tight">
@@ -593,7 +526,7 @@ export default function FooterPage() {
                 <FooterLink href="#">Blog</FooterLink>
                 <FooterLink href="#">GitHub</FooterLink>
               </FooterLinkGroup>
-              <span className="text-xs text-slate-400">© 2026 Poyraz UI</span>
+              <span className="text-xs text-placeholder">© 2026 Poyraz UI</span>
             </div>
           </div>
         </Footer>

@@ -47,7 +47,7 @@ export default function SidebarPage() {
   return (
     <ComponentPage
       name="Sidebar"
-      description="Vertical navigation sidebar with groups, labels, search, sub-menus, user profile, branding, collapsible sections, badges, menu actions, header, footer, and collapse toggle. Supports default, collapsible, floating, mini, dark, bordered, and inset variants."
+      description="Vertical navigation sidebar with groups, labels, search, sub-menus, user profile, branding, collapsible sections, badges, menu actions, header, footer, and collapse toggle. Supports default, collapsible, floating, mini, bordered, and inset variants."
       importCode={`import {
   Sidebar, SidebarHeader, SidebarBranding, SidebarContent,
   SidebarGroup, SidebarGroupLabel, SidebarSection,
@@ -114,7 +114,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[520px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[520px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <span className="font-bold text-lg">Poyraz UI</span>
@@ -204,7 +204,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[360px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[360px] overflow-hidden">
           <Sidebar variant="collapsible">
             <SidebarHeader>
               <div className="flex items-center justify-between w-full">
@@ -237,104 +237,7 @@ export default function SidebarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 3. Dark Variant ─────────────────────────── */}
-      <DemoSection
-        title="Dark Variant"
-        description="Dark-themed sidebar with contrasting borders and adapted colors."
-        code={`<Sidebar variant="dark">
-  <SidebarHeader>
-    <span className="font-bold text-lg text-white">Admin</span>
-  </SidebarHeader>
-  <SidebarContent>
-    <SidebarSearch placeholder="Search…" />
-    <SidebarGroup>
-      <SidebarGroupLabel>Overview</SidebarGroupLabel>
-      <SidebarMenu>
-        <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
-          Dashboard
-        </SidebarMenuItem>
-        <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />} badge="5">
-          Reports
-        </SidebarMenuItem>
-        <SidebarSubMenu label="Security" icon={<ShieldCheck className="h-4 w-4" />}>
-          <SidebarSubMenuItem>Roles</SidebarSubMenuItem>
-          <SidebarSubMenuItem active>Permissions</SidebarSubMenuItem>
-          <SidebarSubMenuItem>Audit Log</SidebarSubMenuItem>
-        </SidebarSubMenu>
-      </SidebarMenu>
-    </SidebarGroup>
-    <SidebarSeparator />
-    <SidebarGroup>
-      <SidebarGroupLabel>Account</SidebarGroupLabel>
-      <SidebarMenu>
-        <SidebarMenuItem icon={<Bell className="h-4 w-4" />}>
-          Notifications
-        </SidebarMenuItem>
-        <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>
-          Billing
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
-  </SidebarContent>
-  <SidebarFooter>
-    <SidebarUserProfile name="Alex Smith" role="Developer" initials="AS" />
-  </SidebarFooter>
-</Sidebar>`}
-      >
-        <div className="border border-slate-200 rounded-sm h-[520px] overflow-hidden">
-          <Sidebar variant="dark">
-            <SidebarHeader>
-              <span className="font-bold text-lg text-white">Admin</span>
-            </SidebarHeader>
-            <SidebarContent>
-              <SidebarSearch placeholder="Search…" />
-              <SidebarGroup>
-                <SidebarGroupLabel>Overview</SidebarGroupLabel>
-                <SidebarMenu>
-                  <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
-                    Dashboard
-                  </SidebarMenuItem>
-                  <SidebarMenuItem
-                    icon={<BarChart3 className="h-4 w-4" />}
-                    badge="5"
-                  >
-                    Reports
-                  </SidebarMenuItem>
-                  <SidebarSubMenu
-                    label="Security"
-                    icon={<ShieldCheck className="h-4 w-4" />}
-                  >
-                    <SidebarSubMenuItem>Roles</SidebarSubMenuItem>
-                    <SidebarSubMenuItem active>Permissions</SidebarSubMenuItem>
-                    <SidebarSubMenuItem>Audit Log</SidebarSubMenuItem>
-                  </SidebarSubMenu>
-                </SidebarMenu>
-              </SidebarGroup>
-              <SidebarSeparator />
-              <SidebarGroup>
-                <SidebarGroupLabel>Account</SidebarGroupLabel>
-                <SidebarMenu>
-                  <SidebarMenuItem icon={<Bell className="h-4 w-4" />}>
-                    Notifications
-                  </SidebarMenuItem>
-                  <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>
-                    Billing
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroup>
-            </SidebarContent>
-            <SidebarFooter>
-              <SidebarUserProfile
-                name="Alex Smith"
-                role="Developer"
-                initials="AS"
-              />
-            </SidebarFooter>
-          </Sidebar>
-        </div>
-      </DemoSection>
-
-      {/* ─── 4. Bordered Variant ─────────────────────── */}
+      {/* ─── 3. Bordered Variant ─────────────────────── */}
       <DemoSection
         title="Bordered Variant"
         description="Sidebar with all-around dashed borders, suited for standalone panels."
@@ -363,7 +266,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="h-[340px] overflow-hidden p-3 bg-slate-50">
+        <div className="h-[340px] overflow-hidden p-3 bg-muted">
           <Sidebar variant="bordered">
             <SidebarHeader>
               <span className="font-bold text-lg">Studio</span>
@@ -388,13 +291,13 @@ export default function SidebarPage() {
               </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
-              <span className="text-xs text-slate-400">v2.1.0</span>
+              <span className="text-xs text-placeholder">v2.1.0</span>
             </SidebarFooter>
           </Sidebar>
         </div>
       </DemoSection>
 
-      {/* ─── 5. Mini Variant ─────────────────────────── */}
+      {/* ─── 4. Mini Variant ─────────────────────────── */}
       <DemoSection
         title="Mini Variant"
         description="Icon-only sidebar for compact layouts with hover tooltips."
@@ -417,7 +320,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[280px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[280px] overflow-hidden">
           <Sidebar variant="mini">
             <SidebarContent>
               <SidebarMenu>
@@ -439,7 +342,7 @@ export default function SidebarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 6. With User Profile ────────────────────── */}
+      {/* ─── 5. With User Profile ────────────────────── */}
       <DemoSection
         title="With User Profile"
         description="User profile in the header with avatar initials and role description."
@@ -465,7 +368,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[350px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[350px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <SidebarUserProfile
@@ -494,13 +397,15 @@ export default function SidebarPage() {
               </SidebarMenu>
             </SidebarContent>
             <SidebarFooter>
-              <span className="text-xs text-slate-400">Logged in as Maria</span>
+              <span className="text-xs text-placeholder">
+                Logged in as Maria
+              </span>
             </SidebarFooter>
           </Sidebar>
         </div>
       </DemoSection>
 
-      {/* ─── 7. Inset Variant ────────────────────────── */}
+      {/* ─── 6. Inset Variant ────────────────────────── */}
       <DemoSection
         title="Inset Variant"
         description="Rounded sidebar with subtle shadow, ideal for embedded layouts inside a page."
@@ -520,7 +425,7 @@ export default function SidebarPage() {
   </SidebarFooter>
 </Sidebar>`}
       >
-        <div className="h-[360px] overflow-hidden p-4 bg-white">
+        <div className="h-[360px] overflow-hidden p-4 bg-background">
           <Sidebar variant="inset">
             <SidebarHeader>
               <SidebarBranding
@@ -543,13 +448,13 @@ export default function SidebarPage() {
               </SidebarMenu>
             </SidebarContent>
             <SidebarFooter>
-              <span className="text-xs text-slate-400">Inset layout</span>
+              <span className="text-xs text-placeholder">Inset layout</span>
             </SidebarFooter>
           </Sidebar>
         </div>
       </DemoSection>
 
-      {/* ─── 8. With Branding ────────────────────────── */}
+      {/* ─── 7. With Branding ────────────────────────── */}
       <DemoSection
         title="With Branding"
         description="SidebarBranding provides a logo + title + subtitle combo in the header. Collapses to icon-only gracefully."
@@ -573,7 +478,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[340px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[340px] overflow-hidden">
           <Sidebar variant="collapsible">
             <SidebarHeader>
               <SidebarBranding
@@ -603,7 +508,7 @@ export default function SidebarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 9. Collapsible Sections ─────────────────── */}
+      {/* ─── 8. Collapsible Sections ─────────────────── */}
       <DemoSection
         title="Collapsible Sections"
         description="SidebarSection adds collapsible group titles with a chevron toggle. Click a section title to expand/collapse."
@@ -635,7 +540,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[440px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[440px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <span className="font-bold text-lg">App</span>
@@ -643,10 +548,7 @@ export default function SidebarPage() {
             <SidebarContent>
               <SidebarSection title="Navigation" defaultOpen>
                 <SidebarMenu>
-                  <SidebarMenuItem
-                    icon={<Home className="h-4 w-4" />}
-                    active
-                  >
+                  <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
                     Home
                   </SidebarMenuItem>
                   <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />}>
@@ -681,7 +583,7 @@ export default function SidebarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 10. With Menu Actions ───────────────────── */}
+      {/* ─── 9. With Menu Actions ───────────────────── */}
       <DemoSection
         title="With Menu Actions"
         description="SidebarMenuAction adds hover-visible action buttons to menu items. Pass via the action prop on SidebarMenuItem."
@@ -715,7 +617,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[280px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[280px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <span className="font-bold text-lg">Projects</span>
@@ -760,7 +662,7 @@ export default function SidebarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 11. Badges ──────────────────────────────── */}
+      {/* ─── 10. Badges ──────────────────────────────── */}
       <DemoSection
         title="Badges"
         description="SidebarBadge supports default (filled), dot (notification indicator), and outline variants."
@@ -783,7 +685,7 @@ export default function SidebarPage() {
   </SidebarContent>
 </Sidebar>`}
       >
-        <div className="border border-slate-200 rounded-sm h-[260px] overflow-hidden">
+        <div className="border border-border rounded-sm h-[260px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
               <span className="font-bold text-lg">Notifications</span>
