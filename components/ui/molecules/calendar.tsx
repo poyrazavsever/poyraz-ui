@@ -169,7 +169,7 @@ function Calendar({
           disabled={disabled}
           onClick={() => onSelect?.(date)}
           className={cn(
-            "h-9 w-9 text-sm font-medium transition-colors duration-150 cursor-pointer",
+            "h-8 w-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
             "flex items-center justify-center",
             "hover:bg-slate-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
@@ -190,7 +190,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={prevMonth}
             aria-label="Previous month"
           >
@@ -210,7 +210,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={nextMonth}
             aria-label="Next month"
           >
@@ -223,7 +223,7 @@ function Calendar({
           {DAYS.map((d) => (
             <div
               key={d}
-              className="h-9 w-9 flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-slate-400"
+              className="h-8 w-8 flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-slate-400"
             >
               {d}
             </div>
@@ -247,7 +247,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={() => setViewYear((y) => y - 1)}
             aria-label="Previous year"
           >
@@ -270,7 +270,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={() => setViewYear((y) => y + 1)}
             aria-label="Next year"
           >
@@ -296,7 +296,7 @@ function Calendar({
                   setView("days");
                 }}
                 className={cn(
-                  "h-10 text-sm font-medium transition-colors duration-150 cursor-pointer",
+                  "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
                   "flex items-center justify-center",
                   "hover:bg-slate-100",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
@@ -325,7 +325,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={() => setDecadeStart((d) => d - 12)}
             aria-label="Previous decade"
           >
@@ -337,7 +337,7 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-7 w-7"
             onClick={() => setDecadeStart((d) => d + 12)}
             aria-label="Next decade"
           >
@@ -359,7 +359,7 @@ function Calendar({
                   setView("months");
                 }}
                 className={cn(
-                  "h-10 text-sm font-medium transition-colors duration-150 cursor-pointer",
+                  "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
                   "flex items-center justify-center",
                   "hover:bg-slate-100",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",

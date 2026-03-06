@@ -126,7 +126,7 @@ const CommandPaletteInput = React.forwardRef<
           onValueChange?.(e.target.value);
         }}
         className={cn(
-          "flex h-12 w-full bg-transparent py-3",
+          "flex h-10 w-full bg-transparent py-2",
           "text-sm text-slate-900 placeholder:text-slate-400",
           "outline-none",
           "disabled:opacity-40 disabled:cursor-not-allowed",
@@ -198,7 +198,7 @@ const CommandPaletteItem = React.forwardRef<
     role="option"
     aria-disabled={disabled}
     className={cn(
-      "flex items-center gap-3 px-3 py-2.5 text-sm cursor-pointer select-none",
+      "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
       "border border-transparent",
       "transition-colors duration-100",
       "hover:bg-slate-50 hover:border-slate-200",

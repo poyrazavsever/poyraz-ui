@@ -16,7 +16,7 @@ import { cn } from "@/components/ui/atoms/typography";
 
 const alertVariants = cva(
   [
-    "relative w-full border p-4",
+    "relative w-full border p-3",
     "rounded-sm shadow-none",
     // Icon positioning
     "[&>svg~*]:pl-8 [&>svg+div]:translate-y-[-3px]",

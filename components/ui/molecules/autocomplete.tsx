@@ -204,7 +204,7 @@ function Autocomplete({
       {/* Trigger */}
       <div
         className={cn(
-          "flex flex-wrap items-center gap-1.5 min-h-[44px] w-full",
+          "flex flex-wrap items-center gap-1.5 min-h-[36px] w-full",
           "border border-slate-400 bg-white px-3 py-2",
           "rounded-sm shadow-none",
           "transition-all duration-200 ease-out",
@@ -321,7 +321,7 @@ function Autocomplete({
                       aria-selected={isSelected}
                       aria-disabled={opt.disabled}
                       className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 text-sm cursor-pointer select-none",
+                        "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
                         "border border-transparent",
                         "transition-colors duration-100",
                         isHighlighted && "bg-slate-50 border-slate-200",

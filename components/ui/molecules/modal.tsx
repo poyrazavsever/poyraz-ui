@@ -17,7 +17,7 @@ import { cn } from "@/components/ui/atoms/typography";
 
 const modalContentVariants = cva(
   [
-    "fixed z-50 grid gap-4 bg-white p-6",
+    "fixed z-50 grid gap-4 bg-white p-5",
     "border border-slate-200",
     "rounded-sm shadow-none",
     "duration-200",
@@ -28,10 +28,10 @@ const modalContentVariants = cva(
   {
     variants: {
       size: {
-        sm: "w-full max-w-sm",
-        default: "w-full max-w-lg",
-        lg: "w-full max-w-2xl",
-        xl: "w-full max-w-4xl",
+        sm: "w-full max-w-xs",
+        default: "w-full max-w-sm",
+        lg: "w-full max-w-lg",
+        xl: "w-full max-w-2xl",
         full: "w-[calc(100vw-2rem)] h-[calc(100vh-2rem)]",
       },
       position: {
@@ -146,7 +146,7 @@ const ModalTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "text-base font-semibold leading-none tracking-tight",
       className,
     )}
     {...props}
