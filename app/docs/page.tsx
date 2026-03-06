@@ -19,7 +19,7 @@ export default function DocsIntroPage() {
       {/* Header */}
       <div className="space-y-4">
         <Badge variant="outline" className="text-xs">
-          v2.0.0
+          v2.0.1
         </Badge>
         <Typography variant="h2">Introduction</Typography>
         <Typography variant="lead">
@@ -209,7 +209,7 @@ export default function DocsIntroPage() {
 
       {/* v2.0.0 â€” Theming */}
       <section className="space-y-6">
-        <Typography variant="h2">v2.0.0 â€” Theming & CLI</Typography>
+        <Typography variant="h2">v2.0.1 â€” Theming & CLI</Typography>
         <Typography variant="p">
           Poyraz UI v2 introduces a semantic token system powered by CSS custom
           properties. All components now use{" "}

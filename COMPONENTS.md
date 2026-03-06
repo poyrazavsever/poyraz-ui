@@ -126,7 +126,7 @@ Utility classes added: `font-secondary`, `decoration-dashed`.
 
 ### Dark Mode
 
-Poyraz UI v2.0.0 ships with 40+ semantic CSS custom properties (`--poyraz-*`) that automatically adapt to dark mode.
+Poyraz UI v2.0.1 ships with 40+ semantic CSS custom properties (`--poyraz-*`) that automatically adapt to dark mode.
 
 Add the dark overrides after the preset import:
 

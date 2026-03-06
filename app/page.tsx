@@ -804,7 +804,7 @@ export default function Home() {
               variant="outline"
               className="bg-background px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-accent transition-colors"
             >
-              v2.0.0 — Open Source
+              v2.0.1 — Open Source
             </Badge>
           </Link>
 
