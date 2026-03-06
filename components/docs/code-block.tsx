@@ -11,7 +11,9 @@ import { cn } from "@/components/ui/atoms/typography";
 /*  Shiki highlighting helper (lazy-loaded)                            */
 /* ================================================================== */
 
-let highlighterPromise: Promise<Awaited<ReturnType<typeof import("shiki")["createHighlighter"]>>> | null = null;
+let highlighterPromise: Promise<
+  Awaited<ReturnType<(typeof import("shiki"))["createHighlighter"]>>
+> | null = null;
 
 function getHighlighter() {
   if (!highlighterPromise) {
@@ -145,7 +147,7 @@ export function ComponentPage({
     <div className="space-y-10 pb-10">
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl font-black tracking-tight">{name}</h1>
+        <h1 className="text-2xl font-black tracking-tight">{name}</h1>
         <p className="text-base text-slate-500 leading-relaxed max-w-2xl">
           {description}
         </p>

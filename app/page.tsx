@@ -179,15 +179,15 @@ function TeamMembersCard() {
     <Card className="w-full">
       <CardContent className="pt-6 flex flex-col items-center text-center space-y-4">
         <div className="flex -space-x-2">
-          <Avatar className="h-10 w-10 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-white">
             <AvatarImage src="https://i.pravatar.cc/40?img=1" />
             <AvatarFallback>A</AvatarFallback>
           </Avatar>
-          <Avatar className="h-10 w-10 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-white">
             <AvatarImage src="https://i.pravatar.cc/40?img=2" />
             <AvatarFallback>B</AvatarFallback>
           </Avatar>
-          <Avatar className="h-10 w-10 border-2 border-white">
+          <Avatar className="h-8 w-8 border-2 border-white">
             <AvatarImage src="https://i.pravatar.cc/40?img=3" />
             <AvatarFallback>C</AvatarFallback>
           </Avatar>
@@ -359,13 +359,13 @@ function DashboardShowcase() {
               <p className="text-xs text-slate-500 uppercase tracking-wide">
                 Total Revenue
               </p>
-              <p className="text-2xl font-bold mt-1">$45,231</p>
+              <p className="text-xl font-bold mt-1">$45,231</p>
               <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +20.1%
               </p>
             </div>
-            <div className="h-10 w-10 rounded-sm bg-red-50 flex items-center justify-center">
-              <BarChart3 className="h-5 w-5 text-red-600" />
+            <div className="h-8 w-8 rounded-sm bg-red-50 flex items-center justify-center">
+              <BarChart3 className="h-4 w-4 text-red-600" />
             </div>
           </div>
         </CardContent>
@@ -378,13 +378,13 @@ function DashboardShowcase() {
               <p className="text-xs text-slate-500 uppercase tracking-wide">
                 Subscriptions
               </p>
-              <p className="text-2xl font-bold mt-1">+2,350</p>
+              <p className="text-xl font-bold mt-1">+2,350</p>
               <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +180.1%
               </p>
             </div>
-            <div className="h-10 w-10 rounded-sm bg-slate-100 flex items-center justify-center">
-              <Users className="h-5 w-5 text-slate-600" />
+            <div className="h-8 w-8 rounded-sm bg-slate-100 flex items-center justify-center">
+              <Users className="h-4 w-4 text-slate-600" />
             </div>
           </div>
         </CardContent>
@@ -397,13 +397,13 @@ function DashboardShowcase() {
               <p className="text-xs text-slate-500 uppercase tracking-wide">
                 Active Now
               </p>
-              <p className="text-2xl font-bold mt-1">+573</p>
+              <p className="text-xl font-bold mt-1">+573</p>
               <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
                 <Activity className="h-3 w-3" /> +201 since last hour
               </p>
             </div>
-            <div className="h-10 w-10 rounded-sm bg-green-50 flex items-center justify-center">
-              <Activity className="h-5 w-5 text-green-600" />
+            <div className="h-8 w-8 rounded-sm bg-green-50 flex items-center justify-center">
+              <Activity className="h-4 w-4 text-green-600" />
             </div>
           </div>
         </CardContent>
@@ -550,7 +550,7 @@ function TasksShowcase() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-bold">Welcome back!</h3>
+          <h3 className="text-base font-bold">Welcome back!</h3>
           <p className="text-sm text-slate-500">
             Here&apos;s a list of your tasks for this month!
           </p>
@@ -656,7 +656,7 @@ function AuthShowcase() {
       {/* Login Card */}
       <Card className="w-full">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Login</CardTitle>
+          <CardTitle className="text-lg">Login</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
@@ -726,7 +726,7 @@ function AuthShowcase() {
       {/* Create Account Card */}
       <Card className="w-full">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create Account</CardTitle>
+          <CardTitle className="text-lg">Create Account</CardTitle>
           <CardDescription>
             Enter your information to create an account
           </CardDescription>
@@ -839,17 +839,17 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full justify-center">
             <Link href="/docs">
-              <Button size="lg" className="h-14 px-8 text-lg w-full sm:w-auto">
-                Get Started <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="w-full sm:w-auto">
+                Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href={socialLinks.repo} target="_blank">
               <Button
                 variant="outline"
                 size="lg"
-                className="h-14 px-8 text-lg bg-white w-full sm:w-auto"
+                className="bg-white w-full sm:w-auto"
               >
-                <Github className="mr-2 h-5 w-5" /> GitHub
+                <Github className="mr-2 h-4 w-4" /> GitHub
               </Button>
             </Link>
           </div>
@@ -936,7 +936,7 @@ export default function Home() {
           <FooterBrand>
             <div className="flex items-center gap-3">
               <Logo width={40} height={40} />
-              <span className="text-xl font-bold tracking-tight">
+              <span className="text-lg font-bold tracking-tight">
                 Poyraz UI
               </span>
             </div>

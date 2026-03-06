@@ -46,6 +46,30 @@ export default function TypographyPage() {
       </DemoSection>
 
       <DemoSection
+        title="Secondary Font"
+        description="Use the secondaryFont prop to apply the secondary font (Agbalumo by default). Great for decorative headings and brand text."
+        code={`<Typography variant="h1" secondaryFont>Decorative Heading</Typography>
+<Typography variant="h2" secondaryFont>Secondary Font H2</Typography>
+<Typography variant="h3" secondaryFont>Secondary Font H3</Typography>
+<Typography variant="p" secondaryFont>Paragraph with secondary font.</Typography>`}
+      >
+        <div className="space-y-4">
+          <Typography variant="h1" secondaryFont>
+            Decorative Heading
+          </Typography>
+          <Typography variant="h2" secondaryFont>
+            Secondary Font H2
+          </Typography>
+          <Typography variant="h3" secondaryFont>
+            Secondary Font H3
+          </Typography>
+          <Typography variant="p" secondaryFont>
+            Paragraph with secondary font.
+          </Typography>
+        </div>
+      </DemoSection>
+
+      <DemoSection
         title="Blockquote"
         code={`<Typography variant="blockquote">
   Design is not just what it looks like — design is how it works.

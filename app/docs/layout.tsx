@@ -232,12 +232,12 @@ export default function DocsLayout({
       {/* ─── BODY ─────────────────────────────────────────── */}
       <div className="flex flex-1">
         {/* Desktop Sidebar — fixed */}
-        <div className="hidden lg:block w-64 shrink-0">
+        <div className="hidden lg:block w-56 shrink-0">
           <Sidebar
             variant="default"
-            className="fixed top-[57px] left-0 w-64 h-[calc(100vh-57px)] border-r border-slate-200 overflow-y-auto"
+            className="fixed top-[57px] left-0 w-56 h-[calc(100vh-57px)] border-r border-slate-200 overflow-y-auto"
           >
-            <SidebarHeader className="h-14">
+            <SidebarHeader className="h-12">
               <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
                 Docs
               </span>
