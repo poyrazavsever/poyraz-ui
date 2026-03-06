@@ -28,7 +28,7 @@ export default defineConfig({
     "organisms/index": "src/organisms/index.ts",
   },
   format: ["esm", "cjs"],
-  dts: { tsconfig: "tsconfig.lib.json" },
+  dts: true,
   splitting: true,
   treeshake: true,
   clean: true,

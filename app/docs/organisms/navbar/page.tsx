@@ -3,6 +3,7 @@
 import {
   Navbar,
   NavbarTopBar,
+  NavbarTopBarSection,
   NavbarMain,
   NavbarBrand,
   NavbarLinks,
@@ -12,31 +13,54 @@ import {
   NavbarMegaMenuLinks,
   NavbarMegaMenuFeatured,
   NavbarMegaMenuItem,
+  NavbarPopoverDropdown,
+  NavbarPopoverDropdownItem,
+  NavbarPanelDropdown,
+  NavbarPanelDropdownItem,
   NavbarActions,
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
   NavbarMobileGroup,
   NavbarMobileActions,
+  NavbarMobileDropdown,
+  NavbarMobileDrillMenu,
+  NavbarMobileDrillTrigger,
+  NavbarMobileDrillPanel,
   NavbarSearch,
   NavbarDivider,
 } from "poyraz-ui/organisms";
 import { Button } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
+import {
+  BookOpen,
+  Layers,
+  Zap,
+  Globe,
+  Package,
+  Code,
+  FileText,
+  Users,
+} from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function NavbarPage() {
   return (
     <ComponentPage
       name="Navbar"
-      description="Responsive navigation bar with brand, links, actions, search, mobile menu with groups and CTA, and sticky auto-hide. Supports default, minimal, transparent, and bordered variants."
+      description="Responsive navigation bar with brand, links, mega menu, popover & panel dropdowns, search, mobile accordion & drill-down, top bar variants, and sticky auto-hide. Supports default, minimal, transparent, and bordered variants."
       importCode={`import {
-  Navbar, NavbarTopBar, NavbarMain, NavbarBrand,
-  NavbarLinks, NavbarLink, NavbarDropdown,
-  NavbarMegaMenu, NavbarMegaMenuItem,
+  Navbar, NavbarTopBar, NavbarTopBarSection,
+  NavbarMain, NavbarBrand, NavbarLinks, NavbarLink,
+  NavbarDropdown, NavbarMegaMenu, NavbarMegaMenuItem,
+  NavbarMegaMenuLinks, NavbarMegaMenuFeatured,
+  NavbarPopoverDropdown, NavbarPopoverDropdownItem,
+  NavbarPanelDropdown, NavbarPanelDropdownItem,
   NavbarActions, NavbarMobileToggle,
   NavbarMobileMenu, NavbarMobileLink,
   NavbarMobileGroup, NavbarMobileActions,
+  NavbarMobileDropdown, NavbarMobileDrillMenu,
+  NavbarMobileDrillTrigger, NavbarMobileDrillPanel,
   NavbarSearch, NavbarDivider,
 } from "poyraz-ui/organisms";`}
     >
@@ -195,7 +219,7 @@ export default function NavbarPage() {
       {/* ─── 3. Bordered Variant ─────────────────────── */}
       <DemoSection
         title="Bordered Variant"
-        description="Navbar with prominent dashed borders — a boxed, brutalist feel."
+        description="Navbar with prominent borders — a boxed feel."
         code={`<Navbar variant="bordered">
   <NavbarMain>
     <NavbarBrand>
@@ -553,7 +577,302 @@ export default function NavbarPage() {
         </div>
       </DemoSection>
 
-      {/* ─── 7. Navigation Config Pattern ─────────────── */}
+      {/* ─── 7. Popover Dropdown ────────────────── */}
+      <DemoSection
+        title="Popover Dropdown"
+        description="Small link-anchored dropdown for simple navigation lists. Uses Radix Popover."
+        code={`<NavbarPopoverDropdown label="Resources" align="start">
+  <NavbarPopoverDropdownItem href="#">Documentation</NavbarPopoverDropdownItem>
+  <NavbarPopoverDropdownItem href="#">Blog</NavbarPopoverDropdownItem>
+  <NavbarPopoverDropdownItem href="#">Changelog</NavbarPopoverDropdownItem>
+  <NavbarPopoverDropdownItem href="#">Status</NavbarPopoverDropdownItem>
+</NavbarPopoverDropdown>`}
+      >
+        <div className="border border-slate-200 rounded-sm overflow-visible">
+          <Navbar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarPopoverDropdown label="Resources" align="start">
+                  <NavbarPopoverDropdownItem href="#">
+                    Documentation
+                  </NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">
+                    Blog
+                  </NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">
+                    Changelog
+                  </NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">
+                    Status
+                  </NavbarPopoverDropdownItem>
+                </NavbarPopoverDropdown>
+                <NavbarLink href="#">Pricing</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 8. Panel Dropdown ─────────────────────── */}
+      <DemoSection
+        title="Panel Dropdown"
+        description="Medium panel dropdown with icon, title, and description for each item."
+        code={`<NavbarPanelDropdown label="Products" width="380px" align="start">
+  <NavbarPanelDropdownItem
+    href="#" title="Analytics"
+    description="Real-time data dashboards"
+    icon={<BarChart />}
+  />
+  <NavbarPanelDropdownItem
+    href="#" title="Automation"
+    description="Workflow automation tools"
+    icon={<Zap />}
+  />
+</NavbarPanelDropdown>`}
+      >
+        <div className="border border-slate-200 rounded-sm overflow-visible">
+          <Navbar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarPanelDropdown
+                  label="Products"
+                  width="380px"
+                  align="start"
+                >
+                  <NavbarPanelDropdownItem
+                    href="#"
+                    title="Analytics"
+                    description="Real-time data dashboards and insights"
+                    icon={<Layers className="h-4 w-4" />}
+                  />
+                  <NavbarPanelDropdownItem
+                    href="#"
+                    title="Automation"
+                    description="Workflow automation tools"
+                    icon={<Zap className="h-4 w-4" />}
+                  />
+                  <NavbarPanelDropdownItem
+                    href="#"
+                    title="Integrations"
+                    description="Connect all your favorite tools"
+                    icon={<Globe className="h-4 w-4" />}
+                  />
+                </NavbarPanelDropdown>
+                <NavbarLink href="#">Pricing</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 9. Top Bar — Announcement ─────────────── */}
+      <DemoSection
+        title="Top Bar — Announcement"
+        description="Red announcement bar with dismissible option. Great for launches, updates, or promotions."
+        code={`<NavbarTopBar variant="announcement" dismissible>
+  <span>🎉 v2.0 is live — check the changelog!</span>
+  <a href="#" className="underline">Learn more →</a>
+</NavbarTopBar>`}
+      >
+        <div className="border border-slate-200 rounded-sm">
+          <Navbar>
+            <NavbarTopBar variant="announcement" dismissible>
+              <span>🎉 v2.0 is live — check the changelog!</span>
+              <a href="#" className="underline ml-2">
+                Learn more →
+              </a>
+            </NavbarTopBar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarLink href="#">Docs</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Get Started</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 10. Top Bar — Secondary ───────────────── */}
+      <DemoSection
+        title="Top Bar — Secondary"
+        description="Subtle secondary bar with sections for contact info, language, or utility links."
+        code={`<NavbarTopBar variant="secondary">
+  <NavbarTopBarSection>
+    <span>📞 +1 (555) 000-0000</span>
+    <span>✉️ hello@example.com</span>
+  </NavbarTopBarSection>
+  <NavbarTopBarSection align="end">
+    <a href="#">Help</a>
+    <a href="#">Account</a>
+  </NavbarTopBarSection>
+</NavbarTopBar>`}
+      >
+        <div className="border border-slate-200 rounded-sm">
+          <Navbar>
+            <NavbarTopBar variant="secondary">
+              <NavbarTopBarSection>
+                <span>📞 +1 (555) 000-0000</span>
+                <span>✉️ hello@example.com</span>
+              </NavbarTopBarSection>
+              <NavbarTopBarSection align="end">
+                <a href="#" className="hover:underline">
+                  Help
+                </a>
+                <a href="#" className="hover:underline">
+                  Account
+                </a>
+              </NavbarTopBarSection>
+            </NavbarTopBar>
+            <NavbarMain>
+              <NavbarBrand>
+                <Logo width={28} height={28} />
+              </NavbarBrand>
+              <NavbarLinks>
+                <NavbarLink href="#">Home</NavbarLink>
+                <NavbarLink href="#">Shop</NavbarLink>
+                <NavbarLink href="#">Contact</NavbarLink>
+              </NavbarLinks>
+              <NavbarActions>
+                <Button size="sm">Sign In</Button>
+              </NavbarActions>
+              <NavbarMobileToggle />
+            </NavbarMain>
+          </Navbar>
+        </div>
+      </DemoSection>
+
+      {/* ─── 11. Mobile Accordion Dropdown ─────────── */}
+      <DemoSection
+        title="Mobile Accordion Dropdown"
+        description="Accordion-style nested navigation for mobile menus with animated expand/collapse."
+        code={`<NavbarMobileMenu>
+  <NavbarMobileLink href="#" active>Home</NavbarMobileLink>
+  <NavbarMobileDropdown label="Products">
+    <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
+    <NavbarMobileLink href="#">Automation</NavbarMobileLink>
+    <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
+  </NavbarMobileDropdown>
+  <NavbarMobileDropdown label="Resources">
+    <NavbarMobileLink href="#">Blog</NavbarMobileLink>
+    <NavbarMobileLink href="#">Docs</NavbarMobileLink>
+  </NavbarMobileDropdown>
+  <NavbarMobileActions>
+    <Button className="w-full">Sign Up</Button>
+  </NavbarMobileActions>
+</NavbarMobileMenu>`}
+      >
+        <div className="border border-slate-200 rounded-sm max-w-xs mx-auto">
+          <div className="border-b border-slate-200 px-4 py-3 flex items-center justify-between">
+            <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+              Mobile Menu Preview
+            </span>
+          </div>
+          <div className="px-2 py-3">
+            <NavbarMobileLink href="#" active>
+              Home
+            </NavbarMobileLink>
+            <NavbarMobileDropdown label="Products">
+              <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
+              <NavbarMobileLink href="#">Automation</NavbarMobileLink>
+              <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
+            </NavbarMobileDropdown>
+            <NavbarMobileDropdown label="Resources">
+              <NavbarMobileLink href="#">Blog</NavbarMobileLink>
+              <NavbarMobileLink href="#">Documentation</NavbarMobileLink>
+              <NavbarMobileLink href="#">Changelog</NavbarMobileLink>
+            </NavbarMobileDropdown>
+            <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
+          </div>
+          <div className="border-t border-slate-200 px-4 py-3 flex flex-col gap-2">
+            <Button variant="outline" className="w-full" size="sm">
+              Sign In
+            </Button>
+            <Button className="w-full" size="sm">
+              Get Started
+            </Button>
+          </div>
+        </div>
+      </DemoSection>
+
+      {/* ─── 12. Mobile Drill-Down ─────────────────── */}
+      <DemoSection
+        title="Mobile Drill-Down"
+        description="Multi-level drill-down navigation with animated panel transitions. Ideal for deep navigation hierarchies."
+        code={`<NavbarMobileDrillMenu>
+  <NavbarMobileLink href="#">Home</NavbarMobileLink>
+  <NavbarMobileDrillTrigger panelId="products">
+    Products
+  </NavbarMobileDrillTrigger>
+  <NavbarMobileDrillPanel panelId="products" backLabel="Back">
+    <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
+    <NavbarMobileLink href="#">Automation</NavbarMobileLink>
+    <NavbarMobileLink href="#">API</NavbarMobileLink>
+  </NavbarMobileDrillPanel>
+</NavbarMobileDrillMenu>`}
+      >
+        <div className="border border-slate-200 rounded-sm max-w-xs mx-auto">
+          <div className="border-b border-slate-200 px-4 py-3 flex items-center justify-between">
+            <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+              Drill-Down Preview
+            </span>
+          </div>
+          <div className="h-56 overflow-hidden">
+            <NavbarMobileDrillMenu className="h-full">
+              <div className="px-2 py-3 flex flex-col gap-0.5">
+                <NavbarMobileLink href="#" active>
+                  Home
+                </NavbarMobileLink>
+                <NavbarMobileDrillTrigger panelId="drill-products">
+                  Products
+                </NavbarMobileDrillTrigger>
+                <NavbarMobileDrillTrigger panelId="drill-resources">
+                  Resources
+                </NavbarMobileDrillTrigger>
+                <NavbarMobileLink href="#">Pricing</NavbarMobileLink>
+              </div>
+              <NavbarMobileDrillPanel panelId="drill-products" backLabel="Back">
+                <NavbarMobileLink href="#">Analytics</NavbarMobileLink>
+                <NavbarMobileLink href="#">Automation</NavbarMobileLink>
+                <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
+                <NavbarMobileLink href="#">API</NavbarMobileLink>
+              </NavbarMobileDrillPanel>
+              <NavbarMobileDrillPanel
+                panelId="drill-resources"
+                backLabel="Back"
+              >
+                <NavbarMobileLink href="#">Blog</NavbarMobileLink>
+                <NavbarMobileLink href="#">Documentation</NavbarMobileLink>
+                <NavbarMobileLink href="#">Changelog</NavbarMobileLink>
+              </NavbarMobileDrillPanel>
+            </NavbarMobileDrillMenu>
+          </div>
+        </div>
+      </DemoSection>
+
+      {/* ─── 13. Navigation Config Pattern ─────────────── */}
       <DemoSection
         title="Navigation Config Pattern"
         description="Create a centralized navigation.ts file to manage all links in one place. Navbar, Sidebar, and Footer all read from the same config."
