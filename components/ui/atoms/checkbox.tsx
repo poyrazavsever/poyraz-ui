@@ -12,7 +12,7 @@ const Checkbox = React.forwardRef<
     ref={ref}
     className={cn(
       // Size
-      "h-5 w-5 shrink-0",
+      "h-4 w-4 shrink-0",
       // Shape — minimal: square
       "rounded-sm shadow-none",
       "border border-slate-400",
@@ -34,8 +34,8 @@ const Checkbox = React.forwardRef<
   >
     <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
       <svg
-        width="12"
-        height="12"
+        width="10"
+        height="10"
         viewBox="0 0 12 12"
         fill="none"
         stroke="currentColor"

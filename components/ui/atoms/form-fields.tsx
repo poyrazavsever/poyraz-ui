@@ -62,7 +62,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-sm border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={decrement}
           disabled={disabled || (min !== undefined && (value ?? 0) <= min)}
           tabIndex={-1}
@@ -89,7 +89,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-sm border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={increment}
           disabled={disabled || (max !== undefined && (value ?? 0) >= max)}
           tabIndex={-1}
@@ -190,7 +190,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           type="button"
           variant="ghost"
           size="icon"
-          className="h-10 w-10 shrink-0 rounded-sm border-0"
+          className="h-8 w-8 shrink-0 rounded-sm border-0"
           onClick={() => setVisible((v) => !v)}
           tabIndex={-1}
           aria-label={visible ? "Hide password" : "Show password"}

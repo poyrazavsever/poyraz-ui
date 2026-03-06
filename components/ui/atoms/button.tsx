@@ -67,10 +67,10 @@ const buttonVariants = cva(
         ].join(" "),
       },
       size: {
-        default: "h-11 px-6 py-2 text-sm",
-        sm: "h-9 px-4 py-1.5 text-xs",
-        lg: "h-14 px-10 py-3 text-base",
-        icon: "h-10 w-10 p-0",
+        default: "h-8 px-3.5 py-1.5 text-xs",
+        sm: "h-7 px-2.5 py-1 text-[11px]",
+        lg: "h-9 px-4 py-1.5 text-xs",
+        icon: "h-8 w-8 p-0",
       },
     },
     defaultVariants: {

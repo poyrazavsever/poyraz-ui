@@ -24,7 +24,7 @@ const RadioGroupItem = React.forwardRef<
     ref={ref}
     className={cn(
       // Size — square, not circle (brutalist)
-      "h-5 w-5 shrink-0",
+      "h-4 w-4 shrink-0",
       // Shape
       "rounded-sm shadow-none",
       "border border-slate-400",
@@ -45,7 +45,7 @@ const RadioGroupItem = React.forwardRef<
     {...props}
   >
     <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <div className="h-2.5 w-2.5 bg-red-600" />
+      <div className="h-2 w-2 bg-red-600" />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ));
