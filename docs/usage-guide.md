@@ -10,6 +10,7 @@
 - [Genel Bakış](#genel-bakış)
 - [Kurulum](#kurulum)
 - [CSS Yapılandırması](#css-yapılandırması)
+- [Dark Mode (v2.0.0)](#dark-mode-v200)
 - [Import Yolları](#import-yolları)
 - [Atoms (Temel Yapı Taşları)](#atoms-temel-yapı-taşları)
 - [Molecules (Bileşik Bileşenler)](#molecules-bileşik-bileşenler)
@@ -26,7 +27,7 @@
 | Özellik                | Detay                                             |
 | ---------------------- | ------------------------------------------------- |
 | **Mimari**             | Atomic Design (Atoms → Molecules → Organisms)     |
-| **Toplam Bileşen**     | 43+                                               |
+| **Toplam Bileşen**     | 43+ (17 atom, 21 molecule, 5 organism)            |
 | **Temel Teknolojiler** | React 19, TypeScript 5, Tailwind CSS v4, Radix UI |
 | **Varyant Yönetimi**   | `class-variance-authority` (cva)                  |
 | **Sınıf Birleştirme**  | `clsx` + `tailwind-merge` (`cn()` utility)        |
@@ -44,6 +45,23 @@
 ---
 
 ## Kurulum
+
+### Hızlı Başlangıç (CLI)
+
+Mevcut projenize Poyraz UI'yi en hızlı şekilde eklemek için:
+
+```bash
+npx poyraz-ui init
+```
+
+İnteraktif sihirbaz şunları yapar:
+
+1. Paket yöneticinizi (npm/pnpm/yarn) otomatik algılar
+2. `poyraz-ui` (+ opsiyonel `reactive-switcher`) kurar
+3. Preset CSS import’unu global stylesheet’inize ekler
+4. İsteğe bağlı olarak `ThemeProvider` yapılandırması oluşturur
+
+### Manuel Kurulum
 
 ```bash
 # pnpm (önerilen)
@@ -74,6 +92,7 @@ yarn add poyraz-ui
 | `@hookform/resolvers` ≥3 | Zod validasyonu ile form kullanırken                               |
 | `zod` ≥3                 | Form şema validasyonu için                                         |
 | `next` ≥14               | `Logo` veya `NavbarBrand` bileşenleri için (next/link, next/image) |
+| `reactive-switcher` ≥1   | Dinamik tema geçişi (dark/light toggle) için                       |
 
 ---
 
@@ -93,6 +112,7 @@ Bu preset şunları sağlar:
 - **Birincil Renk:** `--color-primary: #dc2626` (red-600)
 - **Base Stiller:** Başlıklar için `font-bold tracking-tight`
 - **Kompakt Boyutlar:** En büyük başlık 32px, tüm bileşenler orantılı olarak küçültülmüş
+- **Semantik Token’lar:** 40+ CSS custom property (`--poyraz-*`) ile otomatik dark mode desteği
 
 ### Font Kullanımı
 
@@ -130,11 +150,46 @@ Projenizin CSS dosyasında `@theme` bloğu ile varsayılan fontları override ed
 
 > **İpucu:** Preset CSS otomatik olarak `dist/` klasörünü tarar, böylece Tailwind bileşenlerin kullandığı utility sınıflarını üretir.
 
+### Dark Mode (v2.0.0)
+
+Poyraz UI v2.0.0 ile birlikte **semantik CSS token sistemi** geldi. Tüm bileşenler `--poyraz-*` custom property'lerini kullanır ve dark mode'da otomatik olarak uyum sağlar.
+
+Dark mode override'larını preset import'unuzun ardından ekleyin:
+
+```css
+@import "tailwindcss";
+@import "poyraz-ui/preset.css";
+
+.dark {
+  --poyraz-background: #09090b;
+  --poyraz-foreground: #fafafa;
+  --poyraz-border: #27272a;
+  --poyraz-border-strong: #3f3f46;
+  --poyraz-muted: #27272a;
+  --poyraz-muted-foreground: #a1a1aa;
+  /* … tüm token'lar için preset.css'e bakın */
+}
+```
+
+Dark mode'u etkinleştirmek için `<html>` elementine `class="dark"` ekleyin. Dinamik geçiş için `reactive-switcher` veya `next-themes` gibi class tabanlı tema sağlayıcıları kullanabilirsiniz:
+
+```tsx
+import { poyrazLightTheme, poyrazDarkTheme } from "poyraz-ui/themes";
+
+// reactive-switcher ile
+import { ThemeSwitcher } from "reactive-switcher";
+<ThemeSwitcher themes={[poyrazLightTheme, poyrazDarkTheme]} />;
+```
+
+> **Not:** Eski `dark` varyantları (Sidebar, Footer) hâlâ mevcuttur ancak v2.0.0 ile birlikte
+> semantik token sistemi sayesinde tüm bileşenler otomatik olarak dark mode'a uyum sağlar.
+> Global dark mode kullanmanız önerilir.
+
 ---
 
 ## Import Yolları
 
-Poyraz UI, tree-shaking desteği ile **dört giriş noktası** sunar:
+Poyraz UI, tree-shaking desteği ile **beş giriş noktası** sunar:
 
 ```tsx
 // Tümünü tek seferde import et
@@ -144,6 +199,9 @@ import { Button, Dialog, Navbar } from "poyraz-ui";
 import { Button, Badge, Input } from "poyraz-ui/atoms";
 import { Dialog, Tabs, Select } from "poyraz-ui/molecules";
 import { Navbar, Footer, Sidebar } from "poyraz-ui/organisms";
+
+// Tema presetleri
+import { poyrazLightTheme, poyrazDarkTheme } from "poyraz-ui/themes";
 ```
 
 ### Utility Fonksiyonu
@@ -1029,10 +1087,10 @@ import {
 </Sidebar>;
 ```
 
-| Prop               | Tip                                                              | Varsayılan |
-| ------------------ | ---------------------------------------------------------------- | ---------- |
-| `variant`          | `default \| collapsible \| floating \| mini \| dark \| bordered` | `default`  |
-| `defaultCollapsed` | `boolean`                                                        | `false`    |
+| Prop               | Tip                                                               | Varsayılan |
+| ------------------ | ----------------------------------------------------------------- | ---------- |
+| `variant`          | `default \| collapsible \| floating \| mini \| bordered \| inset` | `default`  |
+| `defaultCollapsed` | `boolean`                                                         | `false`    |
 
 **Hook:** `useSidebar()` — `collapsed`, `setCollapsed`, `mobileOpen`, `setMobileOpen`, `variant` erişimi.
 
@@ -1089,10 +1147,10 @@ import {
 </Footer>;
 ```
 
-| Prop                 | Tip                                              | Varsayılan            |
-| -------------------- | ------------------------------------------------ | --------------------- |
-| `variant`            | `full \| compact \| branded \| centered \| dark` | `full`                |
-| `containerClassName` | `string`                                         | `"max-w-5xl mx-auto"` |
+| Prop                 | Tip                                                 | Varsayılan            |
+| -------------------- | --------------------------------------------------- | --------------------- |
+| `variant`            | `full \| compact \| branded \| centered \| minimal` | `full`                |
+| `containerClassName` | `string`                                            | `"max-w-5xl mx-auto"` |
 
 ---
 
@@ -1269,6 +1327,8 @@ import { mainNav, footerNav } from "@/lib/navigation";
 
 ## Tema Özelleştirme
 
+### Tailwind Token Override
+
 Projelerinizin CSS dosyasında Tailwind `@theme` token'larını override edin:
 
 ```css
@@ -1284,6 +1344,36 @@ Projelerinizin CSS dosyasında Tailwind `@theme` token'larını override edin:
 }
 ```
 
+### Semantik Token Sistemi (v2.0.0)
+
+v2.0.0 ile birlikte tüm bileşenler `--poyraz-*` semantik token'larını kullanır. Bu token'ları override ederek hem light hem dark temayı tamamen özelleştirebilirsiniz:
+
+```css
+:root {
+  --poyraz-background: #ffffff;
+  --poyraz-foreground: #09090b;
+  --poyraz-primary: #dc2626;
+  --poyraz-primary-foreground: #ffffff;
+  --poyraz-border: #e4e4e7;
+  --poyraz-border-strong: #a1a1aa;
+  --poyraz-muted: #f4f4f5;
+  --poyraz-muted-foreground: #71717a;
+  --poyraz-accent: #f4f4f5;
+  --poyraz-accent-foreground: #18181b;
+  /* … tüm token'lar için src/preset.css'e bakın */
+}
+
+.dark {
+  --poyraz-background: #09090b;
+  --poyraz-foreground: #fafafa;
+  --poyraz-primary: #dc2626;
+  --poyraz-border: #27272a;
+  --poyraz-muted: #27272a;
+  --poyraz-muted-foreground: #a1a1aa;
+  /* … */
+}
+```
+
 ### Varsayılan Font Token'ları
 
 | Token              | Varsayılan Değer                                | Kullanım                                       |
@@ -1292,10 +1382,21 @@ Projelerinizin CSS dosyasında Tailwind `@theme` token'larını override edin:
 | `--font-secondary` | `"Agbalumo", cursive`                           | `font-secondary` utility, `secondaryFont` prop |
 | `--color-primary`  | `#dc2626` (red-600)                             | Birincil aksan rengi                           |
 
-> **Not:** Bileşenler doğrudan `red-600` gibi Tailwind renklerini kullandığından, renk şemasını
-> tamamen değiştirmek için bileşenleri de özelleştirmeniz gerekebilir. `--color-primary` token'ı
-> preset'teki ana rengi belirlerken, `focus-visible:ring-red-600` gibi değerler bileşen kodlarında
-> hardcoded olarak kullanılmaktadır.
+### Tema Presetleri
+
+`poyraz-ui/themes` entry point'undan hazır tema objeleri import edebilirsiniz:
+
+```tsx
+import { poyrazLightTheme, poyrazDarkTheme } from "poyraz-ui/themes";
+
+// reactive-switcher ile birlikte kullanım
+import { ThemeSwitcher } from "reactive-switcher";
+<ThemeSwitcher themes={[poyrazLightTheme, poyrazDarkTheme]} />;
+```
+
+> **Not:** v2.0.0 öncesi bileşenler doğrudan `red-600` gibi Tailwind renklerini kullanıyordu.
+> Artık tüm renkler semantik token'lar üzerinden yönetilmektedir. Token'ları override ederek
+> tüm bileşenlerin rengini tek noktadan değiştirebilirsiniz.
 
 ---
 
@@ -1330,11 +1431,14 @@ Projelerinizin CSS dosyasında Tailwind `@theme` token'larını override edin:
 poyraz-ui/
 ├── app/                        # Next.js dökümantasyon sitesi
 │   ├── page.tsx                # Ana sayfa
-│   ├── globals.css             # Global CSS
-│   ├── layout.tsx              # Root layout
+│   ├── globals.css             # Global CSS + dark mode token override'ları
+│   ├── layout.tsx              # Root layout (ThemeProvider)
 │   ├── demos/                  # Demo bileşenleri
 │   └── docs/                   # Bileşen dökümantasyon sayfaları
+├── bin/
+│   └── cli.mjs                 # `npx poyraz-ui init` CLI sihirbazı
 ├── components/
+│   ├── theme-provider.tsx      # next-themes ThemeProvider wrapper
 │   ├── ui/
 │   │   ├── atoms/              # 17 atom bileşen
 │   │   ├── molecules/          # 21 molecule bileşen
@@ -1345,10 +1449,11 @@ poyraz-ui/
 ├── src/
 │   ├── index.ts                # Ana paket giriş noktası
 │   ├── utils.ts                # cn() utility
-│   ├── preset.css              # Temel tasarım token'ları
+│   ├── preset.css              # Temel tasarım token'ları + semantik CSS değişkenleri
 │   ├── atoms/index.ts          # Atom barrel exports
 │   ├── molecules/index.ts      # Molecule barrel exports
-│   └── organisms/index.ts      # Organism barrel exports
+│   ├── organisms/index.ts      # Organism barrel exports
+│   └── themes/index.ts         # poyrazLightTheme + poyrazDarkTheme presetleri
 ├── dist/                       # Build çıktısı
 ├── tsup.config.ts              # Kütüphane build yapılandırması
 ├── tsconfig.lib.json           # Kütüphane TS yapılandırması

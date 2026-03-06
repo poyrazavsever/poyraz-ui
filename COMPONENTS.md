@@ -1,8 +1,8 @@
 # Poyraz UI — Component Documentation
 
-> **Brutalist UI component library** — dashed borders, no rounding, no shadows.
+> **Minimal UI component library** — clean borders, subtle rounding, semantic design tokens with built-in dark mode.
 >
-> Version: `0.2.0` · License: MIT · [Live Docs](https://ui.poyrazavsever.com)
+> Version: `2.0.0` · License: MIT · [Live Docs](https://ui.poyrazavsever.com)
 
 ---
 
@@ -75,18 +75,36 @@ yarn add poyraz-ui
 
 ### Peer Dependencies
 
-| Package               | Version | Required            |
-| --------------------- | ------- | ------------------- |
-| `react`               | `>=18`  | Yes                 |
-| `react-dom`           | `>=18`  | Yes                 |
-| `tailwindcss`         | `>=4`   | Yes                 |
-| `react-hook-form`     | `>=7`   | Optional (for Form) |
-| `@hookform/resolvers` | `>=3`   | Optional (for Form) |
-| `zod`                 | `>=3`   | Optional (for Form) |
+| Package               | Version | Required                |
+| --------------------- | ------- | ----------------------- |
+| `react`               | `>=18`  | Yes                     |
+| `react-dom`           | `>=18`  | Yes                     |
+| `tailwindcss`         | `>=4`   | Yes                     |
+| `react-hook-form`     | `>=7`   | Optional (for Form)     |
+| `@hookform/resolvers` | `>=3`   | Optional (for Form)     |
+| `zod`                 | `>=3`   | Optional (for Form)     |
+| `reactive-switcher`   | `>=1`   | Optional (theme toggle) |
 
 ---
 
 ## Setup
+
+### Quick Start (CLI)
+
+The fastest way to set up Poyraz UI in an existing project:
+
+```bash
+npx poyraz-ui init
+```
+
+The interactive wizard will:
+
+1. Detect your package manager
+2. Install `poyraz-ui` (+ optional `reactive-switcher`)
+3. Inject preset CSS import into your global stylesheet
+4. Optionally scaffold a `ThemeProvider` for dark/light mode
+
+### Manual Setup
 
 Import the Poyraz UI preset CSS in your project's global stylesheet:
 
@@ -106,11 +124,31 @@ This applies the following design tokens:
 
 Utility classes added: `font-secondary`, `decoration-dashed`.
 
+### Dark Mode
+
+Poyraz UI v2.0.0 ships with 40+ semantic CSS custom properties (`--poyraz-*`) that automatically adapt to dark mode.
+
+Add the dark overrides after the preset import:
+
+```css
+@import "tailwindcss";
+@import "poyraz-ui/preset.css";
+
+.dark {
+  --poyraz-background: #09090b;
+  --poyraz-foreground: #fafafa;
+  --poyraz-border: #27272a;
+  /* … see preset.css for all tokens */
+}
+```
+
+Toggle dark mode by adding `class="dark"` to `<html>`. Use `reactive-switcher` or any class-based theme provider (e.g. `next-themes`).
+
 ---
 
 ## Import Paths
 
-Poyraz UI provides 4 import entry points:
+Poyraz UI provides 5 import entry points:
 
 ```ts
 // Everything
@@ -124,6 +162,9 @@ import { Accordion, Dialog, Modal } from "poyraz-ui/molecules";
 
 // Only organisms
 import { Navbar, Sidebar, Footer } from "poyraz-ui/organisms";
+
+// Theme presets
+import { poyrazLightTheme, poyrazDarkTheme } from "poyraz-ui/themes";
 ```
 
 Tree-shaking is fully supported. Use sub-path imports for smaller bundles.
@@ -2125,10 +2166,10 @@ import {
 
 ### Sidebar Props
 
-| Prop               | Type                                                                         | Default     | Description             |
-| ------------------ | ---------------------------------------------------------------------------- | ----------- | ----------------------- |
-| `variant`          | `"default" \| "collapsible" \| "floating" \| "mini" \| "dark" \| "bordered"` | `"default"` | Visual style & behavior |
-| `defaultCollapsed` | `boolean`                                                                    | `false`     | Initial collapsed state |
+| Prop               | Type                                                                          | Default     | Description             |
+| ------------------ | ----------------------------------------------------------------------------- | ----------- | ----------------------- |
+| `variant`          | `"default" \| "collapsible" \| "floating" \| "mini" \| "bordered" \| "inset"` | `"default"` | Visual style & behavior |
+| `defaultCollapsed` | `boolean`                                                                     | `false`     | Initial collapsed state |
 
 ### Variants
 
@@ -2138,8 +2179,8 @@ import {
 | `collapsible` | 256px ↔ 64px   | Toggle between full and icon-only         |
 | `floating`    | 288px (`w-72`) | Fixed overlay with backdrop               |
 | `mini`        | 64px (`w-16`)  | Always icon-only                          |
-| `dark`        | 256px          | Dark theme (`bg-slate-950`)               |
 | `bordered`    | 256px          | Full dashed border on all sides           |
+| `inset`       | 256px          | Muted background with rounded border      |
 
 ### Sub-components
 
@@ -2243,10 +2284,10 @@ import {
 
 ### Footer Props
 
-| Prop                 | Type                                                       | Default               | Description      |
-| -------------------- | ---------------------------------------------------------- | --------------------- | ---------------- |
-| `variant`            | `"full" \| "compact" \| "branded" \| "centered" \| "dark"` | `"full"`              | Visual style     |
-| `containerClassName` | `string`                                                   | `"max-w-5xl mx-auto"` | Width constraint |
+| Prop                 | Type                                                          | Default               | Description      |
+| -------------------- | ------------------------------------------------------------- | --------------------- | ---------------- |
+| `variant`            | `"full" \| "compact" \| "branded" \| "centered" \| "minimal"` | `"full"`              | Visual style     |
+| `containerClassName` | `string`                                                      | `"max-w-5xl mx-auto"` | Width constraint |
 
 ### Variants
 
@@ -2256,7 +2297,7 @@ import {
 | `compact`  | Minimal height footer                   |
 | `branded`  | Brand-focused layout                    |
 | `centered` | All text centered                       |
-| `dark`     | Dark theme (`bg-slate-950`)             |
+| `minimal`  | Compact with minimal padding            |
 
 ### Sub-components
 
