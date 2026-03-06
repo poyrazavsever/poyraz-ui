@@ -21,7 +21,7 @@ interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<
 declare function Badge({ className, variant, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
 
 declare const cardVariants: (props?: ({
-    variant?: "default" | "ghost" | "bordered" | "elevated" | "highlight" | null | undefined;
+    variant?: "default" | "ghost" | "bordered" | "elevated" | "highlight" | "interactive" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
 }
