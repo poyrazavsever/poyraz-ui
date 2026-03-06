@@ -13,10 +13,10 @@ import { Button } from "@/components/ui/atoms/button";
 
 const fieldWrapper = [
   "flex items-center w-full",
-  "border border-slate-400 bg-white",
+  "border border-input bg-background",
   "rounded-sm shadow-none",
   "transition-all duration-200 ease-out",
-  "focus-within:border-red-600 focus-within:ring-2 focus-within:ring-red-600 focus-within:ring-offset-2",
+  "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 ring-offset-background",
 ].join(" ");
 
 const innerInput = [
@@ -128,7 +128,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
 
     return (
       <div className={cn(fieldWrapper, className)}>
-        <div className="pl-3 text-slate-400">
+        <div className="pl-3 text-placeholder">
           <Search className="h-4 w-4" />
         </div>
         <Input
@@ -157,10 +157,10 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
   ({ className, countryCode = "+1", ...props }, ref) => {
     return (
       <div className={cn(fieldWrapper, className)}>
-        <div className="pl-3 text-slate-400">
+        <div className="pl-3 text-placeholder">
           <Phone className="h-4 w-4" />
         </div>
-        <span className="pl-2 pr-3 text-sm font-medium text-slate-600 select-none whitespace-nowrap border-r border-slate-300">
+        <span className="pl-2 pr-3 text-sm font-medium text-muted-foreground select-none whitespace-nowrap border-r border-border-strong">
           {countryCode}
         </span>
         <Input ref={ref} type="tel" className={cn(innerInput)} {...props} />
@@ -215,10 +215,10 @@ const UrlInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
       <div className={cn(fieldWrapper, className)}>
-        <div className="pl-3 text-slate-400">
+        <div className="pl-3 text-placeholder">
           <Globe className="h-4 w-4" />
         </div>
-        <span className="pl-2 text-sm text-slate-400 select-none whitespace-nowrap border-r border-slate-300 pr-3">
+        <span className="pl-2 text-sm text-placeholder select-none whitespace-nowrap border-r border-border-strong pr-3">
           https://
         </span>
         <Input ref={ref} type="url" className={cn(innerInput)} {...props} />

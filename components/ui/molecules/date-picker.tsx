@@ -63,7 +63,7 @@ function DatePicker({
           disabled={disabled}
           className={cn(
             "w-full justify-start text-left font-normal",
-            !selected && "text-slate-400",
+            !selected && "text-placeholder",
             className,
           )}
         >

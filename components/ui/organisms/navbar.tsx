@@ -4,7 +4,14 @@ import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDown, ChevronRight, ChevronLeft, Menu, Search, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  ChevronLeft,
+  Menu,
+  Search,
+  X,
+} from "lucide-react";
 
 import { cn } from "@/components/ui/atoms/typography";
 
@@ -37,10 +44,10 @@ const useNavbar = () => React.useContext(NavbarContext);
 const navbarVariants = cva("w-full", {
   variants: {
     variant: {
-      default: "bg-white text-slate-950",
-      minimal: "bg-white text-slate-950",
-      transparent: "bg-transparent text-slate-950",
-      bordered: "bg-white text-slate-950 border-b border-slate-300",
+      default: "bg-background text-foreground",
+      minimal: "bg-background text-foreground",
+      transparent: "bg-transparent text-foreground",
+      bordered: "bg-background text-foreground border-b border-border-strong",
     },
   },
   defaultVariants: { variant: "default" },
@@ -127,9 +134,10 @@ const topBarVariants = cva(
   {
     variants: {
       variant: {
-        announcement: "bg-red-600 text-white border-b border-red-800",
-        info: "bg-slate-100 text-slate-700 border-b border-slate-200",
-        secondary: "bg-slate-50 text-slate-600 border-b border-slate-200",
+        announcement:
+          "bg-primary text-primary-foreground border-b border-primary-800",
+        info: "bg-accent text-secondary-foreground border-b border-border",
+        secondary: "bg-muted text-muted-foreground border-b border-border",
       },
     },
     defaultVariants: { variant: "announcement" },
@@ -137,14 +145,24 @@ const topBarVariants = cva(
 );
 
 export interface NavbarTopBarProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof topBarVariants> {
   /** Show a dismiss / close button */
   dismissible?: boolean;
 }
 
 const NavbarTopBar = React.forwardRef<HTMLDivElement, NavbarTopBarProps>(
-  ({ className, variant = "announcement", dismissible = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = "announcement",
+      dismissible = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const { containerClassName } = useNavbar();
     const [dismissed, setDismissed] = React.useState(false);
 
@@ -163,7 +181,9 @@ const NavbarTopBar = React.forwardRef<HTMLDivElement, NavbarTopBarProps>(
             containerClassName,
           )}
         >
-          <div className="flex items-center gap-4 flex-1 min-w-0">{children}</div>
+          <div className="flex items-center gap-4 flex-1 min-w-0">
+            {children}
+          </div>
           {dismissible && (
             <button
               type="button"
@@ -174,8 +194,8 @@ const NavbarTopBar = React.forwardRef<HTMLDivElement, NavbarTopBarProps>(
                 "h-5 w-5 rounded-sm ml-2",
                 "transition-colors duration-150 cursor-pointer",
                 variant === "announcement"
-                  ? "hover:bg-red-700 text-white/80 hover:text-white"
-                  : "hover:bg-slate-200 text-slate-400 hover:text-slate-600",
+                  ? "hover:bg-primary-600 text-primary-foreground/80 hover:text-primary-foreground"
+                  : "hover:bg-accent text-placeholder hover:text-muted-foreground",
               )}
             >
               <X className="h-3 w-3" />
@@ -234,8 +254,8 @@ const NavbarMain = React.forwardRef<
         variant === "transparent"
           ? "border-white/30"
           : variant === "bordered"
-            ? "border-slate-300"
-            : "border-slate-200",
+            ? "border-border-strong"
+            : "border-border",
         className,
       )}
       {...props}
@@ -313,8 +333,8 @@ const NavbarLinks = React.forwardRef<
           <NavigationMenuPrimitive.Viewport
             className={cn(
               "relative w-full overflow-hidden",
-              "bg-white",
-              "border border-slate-200 border-t-0",
+              "bg-background",
+              "border border-border border-t-0",
               "rounded-sm shadow-none",
               "h-[var(--radix-navigation-menu-viewport-height)]",
               "transition-[width,height] duration-200",
@@ -337,9 +357,9 @@ const navLinkStyles = [
   "inline-flex items-center gap-1 px-2.5 py-1.5",
   "text-sm font-medium tracking-wide",
   "rounded-sm transition-colors duration-150",
-  "hover:bg-slate-100",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-  "data-[active]:border-b data-[active]:border-red-600",
+  "hover:bg-accent",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+  "data-[active]:border-b data-[active]:border-primary",
 ].join(" ");
 
 const NavbarLink = React.forwardRef<
@@ -471,7 +491,7 @@ const NavbarMegaMenuFeatured = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("border border-slate-200 p-4", "bg-slate-50", className)}
+    className={cn("border border-border p-4", "bg-muted", className)}
     {...props}
   >
     {children}
@@ -497,15 +517,15 @@ const NavbarMegaMenuItem = React.forwardRef<
         "block select-none p-3",
         "border border-transparent",
         "rounded-sm transition-colors",
-        "hover:bg-slate-50 hover:border-slate-200",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
+        "hover:bg-muted hover:border-border",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
       {...props}
     >
       <div className="text-sm font-medium leading-none">{title}</div>
       {description && (
-        <p className="mt-1.5 text-xs text-slate-500 leading-snug">
+        <p className="mt-1.5 text-xs text-muted-foreground leading-snug">
           {description}
         </p>
       )}
@@ -555,7 +575,7 @@ const NavbarMobileToggle = React.forwardRef<
         "inline-flex items-center justify-center",
         "h-8 w-8",
         "border rounded-sm",
-        "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
+        "border-border-strong hover:bg-accent hover:border-input",
         "transition-colors duration-150",
         "lg:hidden",
         "cursor-pointer",
@@ -610,8 +630,8 @@ const NavbarMobileMenu = React.forwardRef<
         ref={ref}
         className={cn(
           "lg:hidden fixed top-0 right-0 z-[999] h-full w-[75%] max-w-sm",
-          "bg-white",
-          "border-l border-slate-200",
+          "bg-background",
+          "border-l border-border",
           "shadow-none",
           "transition-transform duration-300 ease-in-out",
           mobileOpen ? "translate-x-0" : "translate-x-full",
@@ -620,8 +640,8 @@ const NavbarMobileMenu = React.forwardRef<
         {...props}
       >
         {/* Panel header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
-          <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+          <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
             Menu
           </span>
           <button
@@ -632,7 +652,7 @@ const NavbarMobileMenu = React.forwardRef<
               "inline-flex items-center justify-center",
               "h-8 w-8",
               "border rounded-sm",
-              "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
+              "border-border-strong hover:bg-accent hover:border-input",
               "transition-colors duration-150",
               "cursor-pointer",
             )}
@@ -671,8 +691,8 @@ const NavbarMobileLink = React.forwardRef<
       "border border-transparent",
       "transition-colors duration-150",
       active
-        ? "bg-red-50 text-red-700 border-red-200 font-semibold"
-        : "hover:bg-slate-50 hover:border-slate-200",
+        ? "bg-primary-muted text-primary-muted-foreground border-primary-200 font-semibold"
+        : "hover:bg-muted hover:border-border",
       className,
     )}
     {...props}
@@ -696,7 +716,7 @@ const NavbarMobileGroup = React.forwardRef<
 >(({ className, label, children, ...props }, ref) => (
   <div ref={ref} className={cn("mb-3", className)} {...props}>
     {label && (
-      <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">
+      <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-placeholder">
         {label}
       </div>
     )}
@@ -717,7 +737,7 @@ const NavbarMobileActions = React.forwardRef<
     ref={ref}
     className={cn(
       "mt-auto px-4 py-4",
-      "border-t border-slate-200",
+      "border-t border-border",
       "flex flex-col gap-2",
       className,
     )}
@@ -760,7 +780,7 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
       <div
         className={cn("relative hidden sm:flex items-center", wrapperClassName)}
       >
-        <Search className="absolute left-2.5 h-3.5 w-3.5 text-slate-400" />
+        <Search className="absolute left-2.5 h-3.5 w-3.5 text-placeholder" />
         <input
           ref={ref}
           type="text"
@@ -770,9 +790,9 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
             "h-7 w-40 lg:w-52 pl-8 pr-3",
             "text-xs font-medium",
             "border rounded-sm",
-            "bg-white border-slate-300 text-slate-950 placeholder:text-slate-400",
+            "bg-background border-border-strong text-foreground placeholder:text-placeholder",
             "transition-colors duration-150",
-            "focus:outline-none focus:ring-2 focus:ring-red-600",
+            "focus:outline-none focus:ring-2 focus:ring-ring",
             className,
           )}
           {...props}
@@ -797,7 +817,7 @@ const NavbarDivider = React.forwardRef<
     className={cn(
       "hidden lg:block",
       "h-5 w-px",
-      "border-l border-slate-200",
+      "border-l border-border",
       "mx-2",
       className,
     )}
@@ -853,8 +873,8 @@ function NavbarPopoverDropdown({
             sideOffset={8}
             className={cn(
               "z-[70] min-w-[180px]",
-              "bg-white",
-              "border border-slate-200",
+              "bg-background",
+              "border border-border",
               "rounded-sm shadow-sm",
               "py-1",
               "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
@@ -885,10 +905,10 @@ const NavbarPopoverDropdownItem = React.forwardRef<
     ref={ref}
     className={cn(
       "block px-3 py-1.5",
-      "text-sm font-medium text-slate-700",
+      "text-sm font-medium text-secondary-foreground",
       "transition-colors duration-150",
-      "hover:bg-slate-50 hover:text-slate-950",
-      "focus-visible:outline-none focus-visible:bg-slate-50",
+      "hover:bg-muted hover:text-foreground",
+      "focus-visible:outline-none focus-visible:bg-muted",
       className,
     )}
     {...props}
@@ -945,8 +965,8 @@ function NavbarPanelDropdown({
             sideOffset={8}
             className={cn(
               "z-[70]",
-              "bg-white",
-              "border border-slate-200",
+              "bg-background",
+              "border border-border",
               "rounded-sm shadow-sm",
               "p-3",
               "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
@@ -969,8 +989,7 @@ NavbarPanelDropdown.displayName = "NavbarPanelDropdown";
 /*  PANEL DROPDOWN ITEM (icon + title + description)                   */
 /* ================================================================== */
 
-interface NavbarPanelDropdownItemProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface NavbarPanelDropdownItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   title: string;
   description?: string;
   icon?: React.ReactNode;
@@ -985,21 +1004,25 @@ const NavbarPanelDropdownItem = React.forwardRef<
     className={cn(
       "flex items-start gap-3 p-2.5",
       "rounded-sm transition-colors duration-150",
-      "hover:bg-slate-50",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
+      "hover:bg-muted",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       className,
     )}
     {...props}
   >
     {icon && (
-      <span className="flex items-center justify-center h-8 w-8 rounded-sm bg-slate-100 text-slate-600 shrink-0 mt-0.5">
+      <span className="flex items-center justify-center h-8 w-8 rounded-sm bg-accent text-muted-foreground shrink-0 mt-0.5">
         {icon}
       </span>
     )}
     <div className="min-w-0">
-      <div className="text-sm font-medium leading-none text-slate-900">{title}</div>
+      <div className="text-sm font-medium leading-none text-foreground">
+        {title}
+      </div>
       {description && (
-        <p className="mt-1 text-xs text-slate-500 leading-snug">{description}</p>
+        <p className="mt-1 text-xs text-muted-foreground leading-snug">
+          {description}
+        </p>
       )}
       {children}
     </div>
@@ -1041,14 +1064,14 @@ const NavbarMobileDropdown = React.forwardRef<
           "text-sm font-medium",
           "border border-transparent",
           "transition-colors duration-150",
-          "hover:bg-slate-50 hover:border-slate-200",
+          "hover:bg-muted hover:border-border",
           "cursor-pointer",
         )}
       >
         {label}
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-slate-400 transition-transform duration-200",
+            "h-4 w-4 text-placeholder transition-transform duration-200",
             open && "rotate-180",
           )}
           aria-hidden
@@ -1094,7 +1117,8 @@ const NavbarMobileDrillMenu = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const [panelStack, setPanelStack] = React.useState<string[]>([]);
 
-  const activePanel = panelStack.length > 0 ? panelStack[panelStack.length - 1] : null;
+  const activePanel =
+    panelStack.length > 0 ? panelStack[panelStack.length - 1] : null;
 
   const pushPanel = React.useCallback((id: string) => {
     setPanelStack((prev) => [...prev, id]);
@@ -1106,7 +1130,11 @@ const NavbarMobileDrillMenu = React.forwardRef<
 
   return (
     <DrillDownContext.Provider value={{ activePanel, pushPanel, popPanel }}>
-      <div ref={ref} className={cn("relative overflow-hidden", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("relative overflow-hidden", className)}
+        {...props}
+      >
         {/* Main panel */}
         <div
           className={cn(
@@ -1126,8 +1154,7 @@ NavbarMobileDrillMenu.displayName = "NavbarMobileDrillMenu";
 /*  MOBILE DRILL-DOWN TRIGGER                                          */
 /* ================================================================== */
 
-interface NavbarMobileDrillTriggerProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+interface NavbarMobileDrillTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Unique panel ID this trigger opens */
   panelId: string;
 }
@@ -1149,13 +1176,13 @@ const NavbarMobileDrillTrigger = React.forwardRef<
         "text-sm font-medium",
         "border border-transparent",
         "transition-colors duration-150",
-        "hover:bg-slate-50 hover:border-slate-200",
+        "hover:bg-muted hover:border-border",
         "cursor-pointer",
       )}
       {...props}
     >
       {children}
-      <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden />
+      <ChevronRight className="h-4 w-4 text-placeholder" aria-hidden />
     </button>
   );
 });
@@ -1165,8 +1192,7 @@ NavbarMobileDrillTrigger.displayName = "NavbarMobileDrillTrigger";
 /*  MOBILE DRILL-DOWN PANEL (sub-page that slides in)                  */
 /* ================================================================== */
 
-interface NavbarMobileDrillPanelProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface NavbarMobileDrillPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Unique ID matching the trigger's panelId */
   panelId: string;
   /** Back button label */
@@ -1198,10 +1224,10 @@ const NavbarMobileDrillPanel = React.forwardRef<
         className={cn(
           "flex items-center gap-1 w-full",
           "px-2.5 py-2 mb-1",
-          "text-sm font-medium text-slate-500",
-          "border-b border-slate-100",
+          "text-sm font-medium text-muted-foreground",
+          "border-b border-accent",
           "transition-colors duration-150",
-          "hover:bg-slate-50 hover:text-slate-700",
+          "hover:bg-muted hover:text-secondary-foreground",
           "cursor-pointer",
         )}
       >

@@ -27,15 +27,15 @@ const RadioGroupItem = React.forwardRef<
       "h-4 w-4 shrink-0",
       // Shape
       "rounded-sm shadow-none",
-      "border border-slate-400",
+      "border border-input",
       // Background
-      "bg-white",
+      "bg-background",
       // Transitions
       "transition-all duration-200 ease-out",
       // Focus
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background",
       // Checked
-      "data-[state=checked]:border-red-600",
+      "data-[state=checked]:border-primary",
       // Disabled
       "disabled:opacity-40 disabled:cursor-not-allowed",
       // Cursor
@@ -45,7 +45,7 @@ const RadioGroupItem = React.forwardRef<
     {...props}
   >
     <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <div className="h-2 w-2 bg-red-600" />
+      <div className="h-2 w-2 bg-primary" />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ));

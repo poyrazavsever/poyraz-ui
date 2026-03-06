@@ -20,12 +20,12 @@ const announcementBarVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-slate-900 text-white border-slate-700",
+        default: "bg-inverted text-inverted-foreground border-inverted",
         info: "bg-blue-600 text-white border-blue-800",
         success: "bg-emerald-600 text-white border-emerald-800",
         warning: "bg-amber-500 text-black border-amber-700",
-        danger: "bg-red-600 text-white border-red-800",
-        branded: "bg-red-600 text-white border-red-800",
+        danger: "bg-destructive text-destructive-foreground border-destructive",
+        branded: "bg-primary text-primary-foreground border-primary-800",
       },
     },
     defaultVariants: {

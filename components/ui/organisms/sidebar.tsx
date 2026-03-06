@@ -58,15 +58,16 @@ const sidebarVariants = cva(
   {
     variants: {
       variant: {
-        default: "w-56 bg-white text-slate-950 border-r border-slate-200",
-        collapsible: "bg-white text-slate-950 border-r border-slate-200",
+        default: "w-56 bg-background text-foreground border-r border-border",
+        collapsible: "bg-background text-foreground border-r border-border",
         floating:
-          "fixed inset-y-0 left-0 z-50 w-64 bg-white text-slate-950 border-r border-slate-200",
-        mini: "w-16 bg-white text-slate-950 border-r border-slate-200",
+          "fixed inset-y-0 left-0 z-50 w-64 bg-background text-foreground border-r border-border",
+        mini: "w-16 bg-background text-foreground border-r border-border",
         dark: "w-56 bg-slate-950 text-slate-100 border-r border-slate-800",
-        bordered: "w-56 bg-white text-slate-950 border border-slate-300",
+        bordered:
+          "w-56 bg-background text-foreground border border-border-strong",
         inset:
-          "w-56 bg-slate-50/80 text-slate-950 border border-slate-200 rounded-lg shadow-sm",
+          "w-56 bg-muted/80 text-foreground border border-border rounded-lg shadow-sm",
       },
     },
     defaultVariants: { variant: "default" },
@@ -177,7 +178,7 @@ const SidebarHeader = React.forwardRef<
         "flex items-center gap-3 shrink-0",
         "px-4 py-4",
         "border-b",
-        dark ? "border-slate-800" : "border-slate-200",
+        dark ? "border-slate-800" : "border-border",
         collapsed &&
           variant !== "default" &&
           variant !== "dark" &&
@@ -197,8 +198,7 @@ SidebarHeader.displayName = "SidebarHeader";
 /*  SIDEBAR BRANDING                                                   */
 /* ================================================================== */
 
-export interface SidebarBrandingProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface SidebarBrandingProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Logo / icon element */
   logo?: React.ReactNode;
   /** Application title */
@@ -227,9 +227,7 @@ const SidebarBranding = React.forwardRef<HTMLDivElement, SidebarBrandingProps>(
             className={cn(
               "shrink-0 w-8 h-8 flex items-center justify-center",
               "border rounded-sm",
-              dark
-                ? "border-slate-700 bg-slate-900"
-                : "border-slate-200 bg-slate-50",
+              dark ? "border-slate-700 bg-slate-900" : "border-border bg-muted",
             )}
           >
             {logo}
@@ -240,7 +238,7 @@ const SidebarBranding = React.forwardRef<HTMLDivElement, SidebarBrandingProps>(
             <div
               className={cn(
                 "text-sm font-bold truncate",
-                dark ? "text-white" : "text-slate-900",
+                dark ? "text-white" : "text-foreground",
               )}
             >
               {title}
@@ -249,7 +247,7 @@ const SidebarBranding = React.forwardRef<HTMLDivElement, SidebarBrandingProps>(
               <div
                 className={cn(
                   "text-[10px] truncate",
-                  dark ? "text-slate-500" : "text-slate-400",
+                  dark ? "text-slate-500" : "text-placeholder",
                 )}
               >
                 {subtitle}
@@ -318,7 +316,7 @@ const SidebarGroupLabel = React.forwardRef<
       className={cn(
         "px-3 mb-2",
         "text-[10px] font-bold uppercase tracking-[0.15em]",
-        dark ? "text-slate-500" : "text-slate-400",
+        dark ? "text-slate-500" : "text-placeholder",
         className,
       )}
       {...props}
@@ -333,8 +331,7 @@ SidebarGroupLabel.displayName = "SidebarGroupLabel";
 /*  SIDEBAR SECTION (collapsible group with title)                     */
 /* ================================================================== */
 
-export interface SidebarSectionProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Section title */
   title: string;
   /** Whether the section can be collapsed */
@@ -373,7 +370,7 @@ const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
               "text-[10px] font-bold uppercase tracking-[0.15em]",
               dark
                 ? "text-slate-500 hover:text-slate-400"
-                : "text-slate-400 hover:text-slate-600",
+                : "text-placeholder hover:text-muted-foreground",
               "cursor-pointer transition-colors duration-150",
             )}
           >
@@ -390,7 +387,7 @@ const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
             className={cn(
               "px-3 mb-2",
               "text-[10px] font-bold uppercase tracking-[0.15em]",
-              dark ? "text-slate-500" : "text-slate-400",
+              dark ? "text-slate-500" : "text-placeholder",
             )}
           >
             {title}
@@ -435,7 +432,10 @@ export interface SidebarMenuItemProps extends React.LiHTMLAttributes<HTMLLIEleme
 }
 
 const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
-  ({ className, active, icon, badge, action, href, children, ...props }, ref) => {
+  (
+    { className, active, icon, badge, action, href, children, ...props },
+    ref,
+  ) => {
     const { collapsed, variant } = useSidebar();
     const dark = isDarkVariant(variant);
 
@@ -453,14 +453,14 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
             ? [
                 dark
                   ? "bg-red-950 text-red-400 font-semibold"
-                  : "bg-red-50 text-red-700 font-semibold",
-                "border-l-[3px] border-solid border-red-600",
+                  : "bg-primary-muted text-primary-muted-foreground font-semibold",
+                "border-l-[3px] border-solid border-primary",
                 "pl-[calc(0.75rem-3px)]",
               ].join(" ")
             : [
                 dark
                   ? "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-950",
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 "border-l-[3px] border-solid border-transparent",
                 "pl-[calc(0.75rem-3px)]",
               ].join(" "),
@@ -475,10 +475,10 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
             className={cn(
               "shrink-0 w-5 h-5 flex items-center justify-center",
               active
-                ? "text-red-600"
+                ? "text-primary"
                 : dark
                   ? "text-slate-500 group-hover:text-slate-300"
-                  : "text-slate-400 group-hover:text-slate-600",
+                  : "text-placeholder group-hover:text-muted-foreground",
             )}
           >
             {icon}
@@ -497,10 +497,10 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
               "text-[10px] font-bold",
               "border rounded-sm",
               active
-                ? "bg-red-600 text-white border-red-800"
+                ? "bg-primary text-primary-foreground border-primary-800"
                 : dark
                   ? "bg-slate-800 text-slate-300 border-slate-600"
-                  : "bg-slate-100 text-slate-600 border-slate-300",
+                  : "bg-accent text-muted-foreground border-border-strong",
             )}
           >
             {badge}
@@ -568,7 +568,7 @@ const SidebarMenuAction = React.forwardRef<
         "cursor-pointer",
         dark
           ? "text-slate-500 hover:text-slate-300 hover:bg-slate-800"
-          : "text-slate-400 hover:text-slate-600 hover:bg-slate-100",
+          : "text-placeholder hover:text-muted-foreground hover:bg-accent",
         className,
       )}
       {...props}
@@ -595,7 +595,7 @@ const SidebarSeparator = React.forwardRef<
       ref={ref}
       className={cn(
         "border-t",
-        dark ? "border-slate-800" : "border-slate-200",
+        dark ? "border-slate-800" : "border-border",
         "my-3 mx-3",
         className,
       )}
@@ -609,8 +609,7 @@ SidebarSeparator.displayName = "SidebarSeparator";
 /*  SIDEBAR BADGE                                                      */
 /* ================================================================== */
 
-export interface SidebarBadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+export interface SidebarBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Badge style variant */
   variant?: "default" | "dot" | "outline";
 }
@@ -629,7 +628,7 @@ const SidebarBadge = React.forwardRef<HTMLSpanElement, SidebarBadgeProps>(
           ref={ref}
           className={cn(
             "inline-block w-2 h-2 rounded-full shrink-0",
-            dark ? "bg-red-500" : "bg-red-600",
+            dark ? "bg-red-500" : "bg-primary",
             className,
           )}
           {...props}
@@ -650,12 +649,12 @@ const SidebarBadge = React.forwardRef<HTMLSpanElement, SidebarBadgeProps>(
                 "border",
                 dark
                   ? "border-slate-600 text-slate-300"
-                  : "border-slate-300 text-slate-600",
+                  : "border-border-strong text-muted-foreground",
               ]
             : [
                 dark
                   ? "bg-red-950 text-red-400 border border-red-800"
-                  : "bg-red-50 text-red-700 border border-red-200",
+                  : "bg-primary-muted text-primary-muted-foreground border border-primary-200",
               ],
           className,
         )}
@@ -686,7 +685,7 @@ const SidebarFooter = React.forwardRef<
         "shrink-0",
         "px-4 py-3",
         "border-t",
-        dark ? "border-slate-800" : "border-slate-200",
+        dark ? "border-slate-800" : "border-border",
         collapsed && "px-2 flex justify-center",
         className,
       )}
@@ -735,7 +734,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
           "border rounded-sm",
           dark
             ? "border-slate-600 hover:bg-slate-800 hover:border-slate-400 text-slate-300"
-            : "border-slate-300 hover:bg-slate-100 hover:border-slate-500",
+            : "border-border-strong hover:bg-accent hover:border-input",
           "transition-colors duration-150",
           "cursor-pointer",
           className,
@@ -784,7 +783,7 @@ const SidebarSearch = React.forwardRef<HTMLInputElement, SidebarSearchProps>(
           <Search
             className={cn(
               "absolute left-2.5 h-3.5 w-3.5",
-              dark ? "text-slate-500" : "text-slate-400",
+              dark ? "text-slate-500" : "text-placeholder",
             )}
           />
           <input
@@ -797,10 +796,10 @@ const SidebarSearch = React.forwardRef<HTMLInputElement, SidebarSearchProps>(
               "text-xs font-medium",
               "border rounded-sm",
               "transition-colors duration-150",
-              "focus:outline-none focus:ring-2 focus:ring-red-600",
+              "focus:outline-none focus:ring-2 focus:ring-ring",
               dark
                 ? "bg-slate-900 border-slate-700 text-slate-200 placeholder:text-slate-500"
-                : "bg-white border-slate-300 text-slate-950 placeholder:text-slate-400",
+                : "bg-background border-border-strong text-foreground placeholder:text-placeholder",
               className,
             )}
             {...props}
@@ -849,7 +848,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
             "cursor-pointer",
             dark
               ? "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
-              : "text-slate-600 hover:bg-slate-50 hover:text-slate-950",
+              : "text-muted-foreground hover:bg-muted hover:text-foreground",
             "border-l-[3px] border-solid border-transparent",
             "pl-[calc(0.75rem-3px)]",
           )}
@@ -858,7 +857,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
             <span
               className={cn(
                 "shrink-0 w-5 h-5 flex items-center justify-center",
-                dark ? "text-slate-500" : "text-slate-400",
+                dark ? "text-slate-500" : "text-placeholder",
               )}
             >
               {icon}
@@ -869,7 +868,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
             className={cn(
               "h-3.5 w-3.5 transition-transform duration-200",
               open && "rotate-180",
-              dark ? "text-slate-500" : "text-slate-400",
+              dark ? "text-slate-500" : "text-placeholder",
             )}
           />
         </button>
@@ -878,7 +877,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
             className={cn(
               "ml-5 pl-3",
               "border-l",
-              dark ? "border-slate-800" : "border-slate-200",
+              dark ? "border-slate-800" : "border-border",
             )}
           >
             {children}
@@ -917,10 +916,10 @@ const SidebarSubMenuItem = React.forwardRef<
         active
           ? dark
             ? "text-red-400 font-semibold"
-            : "text-red-700 font-semibold"
+            : "text-primary-muted-foreground font-semibold"
           : dark
             ? "text-slate-400 hover:text-slate-200"
-            : "text-slate-500 hover:text-slate-950",
+            : "text-muted-foreground hover:text-foreground",
         className,
       )}
       {...props}
@@ -980,7 +979,7 @@ const SidebarUserProfile = React.forwardRef<
           "text-xs font-bold",
           dark
             ? "border-slate-600 bg-slate-800 text-slate-200"
-            : "border-slate-300 bg-slate-100 text-slate-600",
+            : "border-border-strong bg-accent text-muted-foreground",
         )}
       >
         {avatarUrl ? (
@@ -1000,7 +999,7 @@ const SidebarUserProfile = React.forwardRef<
           <div
             className={cn(
               "text-sm font-semibold truncate",
-              dark ? "text-slate-100" : "text-slate-900",
+              dark ? "text-slate-100" : "text-foreground",
             )}
           >
             {name}
@@ -1009,7 +1008,7 @@ const SidebarUserProfile = React.forwardRef<
             <div
               className={cn(
                 "text-xs truncate",
-                dark ? "text-slate-500" : "text-slate-400",
+                dark ? "text-slate-500" : "text-placeholder",
               )}
             >
               {role}

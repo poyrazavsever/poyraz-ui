@@ -20,7 +20,7 @@ function StarRating({ rating, max = 5 }: { rating: number; max?: number }) {
           key={i}
           className={cn(
             "h-3 w-3",
-            i < Math.round(rating) ? "text-yellow-500" : "text-slate-200",
+            i < Math.round(rating) ? "text-yellow-500" : "text-border",
           )}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -79,7 +79,7 @@ const ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(
         )}
         <CardHeader>
           {category && (
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-red-600">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
               {category}
             </span>
           )}
@@ -88,7 +88,7 @@ const ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(
         </CardHeader>
         {(author || date || readTime) && (
           <CardFooter>
-            <div className="flex items-center gap-2 w-full text-xs text-slate-500">
+            <div className="flex items-center gap-2 w-full text-xs text-muted-foreground">
               {author?.avatar && (
                 <img
                   src={author.avatar}
@@ -97,7 +97,7 @@ const ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(
                 />
               )}
               {author && (
-                <span className="font-medium text-slate-700">
+                <span className="font-medium text-secondary-foreground">
                   {author.name}
                 </span>
               )}
@@ -143,7 +143,7 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(
       <Card
         ref={ref}
         className={cn(
-          "group/img relative overflow-hidden border-slate-300 cursor-pointer aspect-[4/3]",
+          "group/img relative overflow-hidden border-border-strong cursor-pointer aspect-[4/3]",
           className,
         )}
         {...props}
@@ -154,7 +154,7 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
         />
         {badge && (
-          <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-red-600 text-white px-2 py-0.5 rounded-sm">
+          <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-sm">
             {badge}
           </span>
         )}
@@ -205,7 +205,7 @@ const NewsCard = React.forwardRef<HTMLDivElement, NewsCardProps>(
       >
         <div className="flex">
           {image && (
-            <div className="relative w-24 min-h-[80px] shrink-0 border-r border-slate-300">
+            <div className="relative w-24 min-h-[80px] shrink-0 border-r border-border-strong">
               <img
                 src={image}
                 alt={title}
@@ -215,14 +215,16 @@ const NewsCard = React.forwardRef<HTMLDivElement, NewsCardProps>(
           )}
           <div className="flex flex-col justify-center gap-1 p-3 min-w-0">
             {category && (
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-red-600">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">
                 {category}
               </span>
             )}
-            <h3 className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
+            <h3 className="text-xs font-bold text-foreground leading-snug line-clamp-2">
               {title}
             </h3>
-            {date && <span className="text-[10px] text-slate-400">{date}</span>}
+            {date && (
+              <span className="text-[10px] text-placeholder">{date}</span>
+            )}
           </div>
         </div>
       </Card>
@@ -254,17 +256,17 @@ const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
   ({ className, icon, label, value, trend, trendValue, ...props }, ref) => (
     <Card
       ref={ref}
-      className={cn("bg-white border border-slate-300", className)}
+      className={cn("bg-background border border-border-strong", className)}
       {...props}
     >
       <CardContent className="p-4">
         <div className="flex items-start justify-between mb-2">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
             {label}
           </span>
-          {icon && <span className="text-slate-400">{icon}</span>}
+          {icon && <span className="text-placeholder">{icon}</span>}
         </div>
-        <div className="text-xl font-bold text-slate-900 tracking-tight">
+        <div className="text-xl font-bold text-foreground tracking-tight">
           {value}
         </div>
         {trend && trendValue && (
@@ -272,8 +274,8 @@ const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
             className={cn(
               "flex items-center gap-1 mt-1.5 text-[11px] font-medium",
               trend === "up" && "text-green-600",
-              trend === "down" && "text-red-600",
-              trend === "neutral" && "text-slate-400",
+              trend === "down" && "text-destructive",
+              trend === "neutral" && "text-placeholder",
             )}
           >
             {trend === "up" && (
@@ -330,16 +332,18 @@ const TestimonialCard = React.forwardRef<HTMLDivElement, TestimonialCardProps>(
   ({ className, quote, author, role, avatar, rating, ...props }, ref) => (
     <Card
       ref={ref}
-      className={cn("bg-white border border-slate-300", className)}
+      className={cn("bg-background border border-border-strong", className)}
       {...props}
     >
       <CardContent className="p-4">
         {/* Decorative quote mark */}
-        <span className="block text-2xl leading-none text-red-600 font-secondary mb-2">
+        <span className="block text-2xl leading-none text-primary font-secondary mb-2">
           &ldquo;
         </span>
-        <p className="text-xs text-slate-700 leading-relaxed mb-3">{quote}</p>
-        <div className="border-t border-slate-200 pt-3 flex items-center gap-2.5">
+        <p className="text-xs text-secondary-foreground leading-relaxed mb-3">
+          {quote}
+        </p>
+        <div className="border-t border-border pt-3 flex items-center gap-2.5">
           {avatar && (
             <img
               src={avatar}
@@ -348,11 +352,13 @@ const TestimonialCard = React.forwardRef<HTMLDivElement, TestimonialCardProps>(
             />
           )}
           <div className="min-w-0">
-            <div className="text-xs font-semibold text-slate-900 truncate">
+            <div className="text-xs font-semibold text-foreground truncate">
               {author}
             </div>
             {role && (
-              <div className="text-[10px] text-slate-400 truncate">{role}</div>
+              <div className="text-[10px] text-placeholder truncate">
+                {role}
+              </div>
             )}
           </div>
           {rating != null && (
@@ -398,16 +404,18 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
     <Card
       ref={ref}
       variant={highlighted ? "highlight" : "default"}
-      className={cn(highlighted && "border-red-600 border-l-4", className)}
+      className={cn(highlighted && "border-primary border-l-4", className)}
       {...props}
     >
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-bold text-slate-900 tracking-tight">
+          <span className="text-2xl font-bold text-foreground tracking-tight">
             {price}
           </span>
-          {period && <span className="text-xs text-slate-400">/{period}</span>}
+          {period && (
+            <span className="text-xs text-placeholder">/{period}</span>
+          )}
         </div>
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
@@ -416,10 +424,10 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           {features.map((feature) => (
             <li
               key={feature}
-              className="flex items-start gap-2 text-xs text-slate-700"
+              className="flex items-start gap-2 text-xs text-secondary-foreground"
             >
               <svg
-                className="h-3.5 w-3.5 text-red-600 shrink-0 mt-0.5"
+                className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -482,7 +490,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
         <CardImage className="relative">
           <img src={image} alt={title} className="w-full h-full object-cover" />
           {badge && (
-            <span className="absolute top-2 right-2 text-[10px] font-semibold uppercase tracking-wider bg-red-600 text-white px-2 py-0.5 rounded-sm">
+            <span className="absolute top-2 right-2 text-[10px] font-semibold uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-sm">
               {badge}
             </span>
           )}
@@ -491,9 +499,9 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           <CardTitle className="line-clamp-1">{title}</CardTitle>
           {rating != null && <StarRating rating={rating} />}
           <div className="flex items-baseline gap-2">
-            <span className="text-sm font-bold text-slate-900">{price}</span>
+            <span className="text-sm font-bold text-foreground">{price}</span>
             {originalPrice && (
-              <span className="text-xs text-slate-400 line-through">
+              <span className="text-xs text-placeholder line-through">
                 {originalPrice}
               </span>
             )}

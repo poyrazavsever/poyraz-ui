@@ -18,7 +18,7 @@ const buttonVariants = cva(
     // Transitions
     "transition-all duration-200 ease-out",
     // Focus
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-40 disabled:cursor-not-allowed",
     // Active press
@@ -28,40 +28,40 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-red-600 text-white border-red-900",
-          "hover:bg-red-700 hover:border-red-950",
-          "active:bg-red-800",
+          "bg-primary text-primary-foreground border-primary-dark",
+          "hover:bg-primary-hover hover:border-primary-dark",
+          "active:bg-primary-active",
         ].join(" "),
 
         secondary: [
-          "bg-white text-slate-900 border-slate-400",
-          "hover:bg-slate-50 hover:border-slate-900 hover:text-slate-950",
-          "active:bg-slate-100",
+          "bg-background text-foreground border-input",
+          "hover:bg-muted hover:border-foreground hover:text-foreground",
+          "active:bg-accent",
         ].join(" "),
 
         outline: [
-          "bg-transparent text-slate-900 border-slate-900",
-          "hover:bg-slate-900 hover:text-white hover:border-slate-900",
-          "active:bg-slate-800",
+          "bg-transparent text-foreground border-foreground",
+          "hover:bg-inverted hover:text-inverted-foreground hover:border-foreground",
+          "active:bg-inverted/90",
         ].join(" "),
 
         destructive: [
-          "bg-red-500 text-white border-red-800",
-          "hover:bg-red-600 hover:border-red-900",
-          "active:bg-red-700",
+          "bg-destructive text-destructive-foreground border-destructive/80",
+          "hover:bg-destructive/90 hover:border-destructive",
+          "active:bg-destructive/80",
         ].join(" "),
 
         ghost: [
-          "bg-transparent text-slate-700 border-transparent",
-          "hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300",
-          "active:bg-slate-200",
+          "bg-transparent text-foreground/70 border-transparent",
+          "hover:bg-accent hover:text-foreground hover:border-border-strong",
+          "active:bg-accent-hover",
         ].join(" "),
 
         link: [
-          "bg-transparent text-red-600 border-red-600",
+          "bg-transparent text-primary border-primary",
           "underline underline-offset-4",
-          "hover:underline hover:text-red-700 hover:border-red-700",
-          "active:text-red-800",
+          "hover:underline hover:text-primary-hover hover:border-primary-hover",
+          "active:text-primary-active",
           // px-0 so the link variant sits naturally in text
           "px-0 h-auto",
         ].join(" "),

@@ -205,10 +205,10 @@ function Autocomplete({
       <div
         className={cn(
           "flex flex-wrap items-center gap-1.5 min-h-[36px] w-full",
-          "border border-slate-400 bg-white px-3 py-2",
+          "border border-input bg-background px-3 py-2",
           "rounded-sm shadow-none",
           "transition-all duration-200 ease-out",
-          open && "border-red-600 ring-2 ring-red-600 ring-offset-2",
+          open && "border-primary ring-2 ring-ring ring-offset-2",
           disabled && "opacity-40 cursor-not-allowed",
         )}
         onClick={() => {
@@ -225,12 +225,12 @@ function Autocomplete({
             return (
               <span
                 key={val}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border border-slate-300 bg-slate-50 text-slate-700"
+                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border border-border-strong bg-muted text-secondary-foreground"
               >
                 {label}
                 <button
                   type="button"
-                  className="ml-0.5 hover:text-red-600 transition-colors cursor-pointer"
+                  className="ml-0.5 hover:text-primary transition-colors cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleRemove(val);
@@ -244,7 +244,7 @@ function Autocomplete({
           })}
 
         <div className="flex flex-1 items-center gap-2 min-w-[80px]">
-          <Search className="h-4 w-4 shrink-0 text-slate-400" />
+          <Search className="h-4 w-4 shrink-0 text-placeholder" />
           <input
             ref={inputRef}
             type="text"
@@ -257,7 +257,7 @@ function Autocomplete({
             }
             disabled={disabled}
             className={cn(
-              "flex-1 bg-transparent text-sm text-slate-900 placeholder:text-slate-400",
+              "flex-1 bg-transparent text-sm text-foreground placeholder:text-placeholder",
               "outline-none border-none p-0",
               "disabled:cursor-not-allowed",
             )}
@@ -271,7 +271,7 @@ function Autocomplete({
 
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200",
+            "h-4 w-4 shrink-0 text-placeholder transition-transform duration-200",
             open && "rotate-180",
           )}
         />
@@ -284,19 +284,19 @@ function Autocomplete({
           role="listbox"
           className={cn(
             "absolute z-50 mt-1 w-full max-h-[240px] overflow-y-auto",
-            "border border-slate-200 bg-white",
+            "border border-border bg-background",
             "shadow-none",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-150",
           )}
         >
           {loading && (
             <div className="flex items-center justify-center py-6">
-              <div className="h-4 w-4 border border-red-600 border-t-transparent animate-spin" />
+              <div className="h-4 w-4 border border-primary border-t-transparent animate-spin" />
             </div>
           )}
 
           {!loading && flatFiltered.length === 0 && (
-            <div className="px-3 py-6 text-center text-sm text-slate-400">
+            <div className="px-3 py-6 text-center text-sm text-placeholder">
               {emptyText}
             </div>
           )}
@@ -305,7 +305,7 @@ function Autocomplete({
             Array.from(grouped.entries()).map(([group, opts]) => (
               <div key={group || "__ungrouped"} role="group">
                 {group && (
-                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-placeholder border-b border-accent">
                     {group}
                   </div>
                 )}
@@ -324,9 +324,8 @@ function Autocomplete({
                         "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
                         "border border-transparent",
                         "transition-colors duration-100",
-                        isHighlighted && "bg-slate-50 border-slate-200",
-                        !isHighlighted &&
-                          "hover:bg-slate-50 hover:border-slate-200",
+                        isHighlighted && "bg-muted border-border",
+                        !isHighlighted && "hover:bg-muted hover:border-border",
                         opt.disabled && "pointer-events-none opacity-40",
                       )}
                       onClick={() => {
@@ -336,7 +335,7 @@ function Autocomplete({
                     >
                       <span className="flex-1 truncate">{opt.label}</span>
                       {isSelected && (
-                        <Check className="h-4 w-4 shrink-0 text-red-600" />
+                        <Check className="h-4 w-4 shrink-0 text-primary" />
                       )}
                     </div>
                   );

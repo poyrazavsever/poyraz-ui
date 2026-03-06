@@ -171,10 +171,10 @@ function Calendar({
           className={cn(
             "h-8 w-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
             "flex items-center justify-center",
-            "hover:bg-slate-100",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-            today && !sel && "border border-red-600",
-            sel && "bg-red-600 text-white hover:bg-red-700",
+            "hover:bg-accent",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            today && !sel && "border border-primary",
+            sel && "bg-primary text-primary-foreground hover:bg-primary-600",
             disabled && "opacity-30 cursor-not-allowed hover:bg-transparent",
           )}
         >
@@ -201,8 +201,8 @@ function Calendar({
             onClick={() => setView("months")}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-slate-100 transition-colors",
-              "border-b border-transparent hover:border-slate-300",
+              "px-2 py-1 hover:bg-accent transition-colors",
+              "border-b border-transparent hover:border-border-strong",
             )}
           >
             {MONTHS[viewMonth]} {viewYear}
@@ -223,7 +223,7 @@ function Calendar({
           {DAYS.map((d) => (
             <div
               key={d}
-              className="h-8 w-8 flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-slate-400"
+              className="h-8 w-8 flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-placeholder"
             >
               {d}
             </div>
@@ -261,8 +261,8 @@ function Calendar({
             }}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-slate-100 transition-colors",
-              "border-b border-transparent hover:border-slate-300",
+              "px-2 py-1 hover:bg-accent transition-colors",
+              "border-b border-transparent hover:border-border-strong",
             )}
           >
             {viewYear}
@@ -298,10 +298,11 @@ function Calendar({
                 className={cn(
                   "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
                   "flex items-center justify-center",
-                  "hover:bg-slate-100",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-                  isCurrent && !isSelected && "border border-red-600",
-                  isSelected && "bg-red-600 text-white hover:bg-red-700",
+                  "hover:bg-accent",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  isCurrent && !isSelected && "border border-primary",
+                  isSelected &&
+                    "bg-primary text-primary-foreground hover:bg-primary-600",
                 )}
               >
                 {m}
@@ -361,10 +362,11 @@ function Calendar({
                 className={cn(
                   "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
                   "flex items-center justify-center",
-                  "hover:bg-slate-100",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600",
-                  isCurrent && !isSelected && "border border-red-600",
-                  isSelected && "bg-red-600 text-white hover:bg-red-700",
+                  "hover:bg-accent",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  isCurrent && !isSelected && "border border-primary",
+                  isSelected &&
+                    "bg-primary text-primary-foreground hover:bg-primary-600",
                 )}
               >
                 {y}

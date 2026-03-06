@@ -14,31 +14,31 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white border border-slate-300",
+        default: "bg-background border border-border-strong",
 
         // Bold border — high contrast
-        bordered: "bg-white border border-slate-900",
+        bordered: "bg-background border border-foreground",
 
         // Red offset box behind (like Logo component) — the flagship card
-        elevated: "bg-white border border-slate-900",
+        elevated: "bg-background border border-foreground",
 
         // Red left accent stripe
         highlight: [
-          "bg-white border border-slate-300",
-          "border-l-4 border-l-red-600",
+          "bg-background border border-border-strong",
+          "border-l-4 border-l-primary",
         ].join(" "),
 
         // Minimal — no border, just hover-reveal
         ghost: [
           "bg-transparent border border-transparent",
-          "hover:border-slate-300 hover:bg-white",
+          "hover:border-border-strong hover:bg-background",
         ].join(" "),
 
         // Clickable — subtle lift on hover
         interactive: [
-          "bg-white border border-slate-300",
+          "bg-background border border-border-strong",
           "cursor-pointer",
-          "hover:-translate-y-0.5 hover:border-slate-400",
+          "hover:-translate-y-0.5 hover:border-input",
         ].join(" "),
       },
     },
@@ -63,7 +63,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div
             className={cn(
               "absolute inset-0",
-              "bg-red-600 border border-red-900",
+              "bg-primary border border-primary-dark",
               "rounded-sm",
               "translate-x-2 translate-y-2",
               "transition-transform duration-300 ease-out",
@@ -113,7 +113,7 @@ const CardImage = React.forwardRef<HTMLDivElement, CardImageProps>(
       ref={ref}
       className={cn(
         "relative overflow-hidden",
-        "border-b border-slate-300",
+        "border-b border-border-strong",
         aspect,
         className,
       )}
@@ -148,7 +148,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base font-bold tracking-tight leading-tight text-slate-900",
+      "text-base font-bold tracking-tight leading-tight text-foreground",
       className,
     )}
     {...props}
@@ -164,7 +164,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-slate-500 leading-relaxed", className)}
+    className={cn("text-sm text-muted-foreground leading-relaxed", className)}
     {...props}
   />
 ));
@@ -190,7 +190,7 @@ const CardFooter = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-center gap-3 px-4 py-3",
-      "border-t border-slate-200",
+      "border-t border-border",
       "mt-auto",
       className,
     )}

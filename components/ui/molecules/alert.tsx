@@ -26,28 +26,28 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-white text-slate-950 border-slate-300",
-          "[&>svg]:text-slate-950",
+          "bg-background text-foreground border-border-strong",
+          "[&>svg]:text-foreground",
         ].join(" "),
 
         info: [
-          "bg-blue-50 text-blue-800 border-blue-400",
-          "[&>svg]:text-blue-600",
+          "bg-info text-info-foreground border-info-border",
+          "[&>svg]:text-info-icon",
         ].join(" "),
 
         success: [
-          "bg-green-50 text-green-800 border-green-400",
-          "[&>svg]:text-green-600",
+          "bg-success text-success-foreground border-success-border",
+          "[&>svg]:text-success-icon",
         ].join(" "),
 
         warning: [
-          "bg-yellow-50 text-yellow-800 border-yellow-400",
-          "[&>svg]:text-yellow-600",
+          "bg-warning text-warning-foreground border-warning-border",
+          "[&>svg]:text-warning-icon",
         ].join(" "),
 
         destructive: [
-          "bg-red-50 text-red-800 border-red-400",
-          "[&>svg]:text-red-600",
+          "bg-destructive-muted text-destructive-muted-foreground border-destructive",
+          "[&>svg]:text-destructive",
         ].join(" "),
       },
     },

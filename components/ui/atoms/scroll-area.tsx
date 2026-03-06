@@ -69,7 +69,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
 /* ── Modern standard ─────────────────────────────── */
 .poyraz-scroll-area {
   scrollbar-width: thin;
-  scrollbar-color: #94a3b8 transparent;
+  scrollbar-color: var(--color-input, #94a3b8) transparent;
 }
 
 /* ── Webkit (Chrome, Safari, Edge) ───────────────── */
@@ -83,10 +83,10 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     180deg,
     transparent 0px,
     transparent 3px,
-    #e2e8f0 3px,
-    #e2e8f0 4px
+    var(--color-border, #e2e8f0) 3px,
+    var(--color-border, #e2e8f0) 4px
   );
-  border-left: 1px solid #cbd5e1;
+  border-left: 1px solid var(--color-border-strong, #cbd5e1);
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-track:horizontal {
@@ -94,31 +94,31 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     90deg,
     transparent 0px,
     transparent 3px,
-    #e2e8f0 3px,
-    #e2e8f0 4px
+    var(--color-border, #e2e8f0) 3px,
+    var(--color-border, #e2e8f0) 4px
   );
   border-left: none;
-  border-top: 1px solid #cbd5e1;
+  border-top: 1px solid var(--color-border-strong, #cbd5e1);
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border: 1px solid #475569;
+  background: var(--color-input, #94a3b8);
+  border: 1px solid var(--color-muted-foreground, #64748b);
   min-height: 32px;
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
-  border-color: #334155;
+  background: var(--color-muted-foreground, #64748b);
+  border-color: var(--color-foreground, #334155);
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-thumb:active {
-  background: #475569;
+  background: var(--color-muted-foreground, #475569);
 }
 
 .poyraz-scroll-area::-webkit-scrollbar-corner {
   background: transparent;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border, #e2e8f0);
 }
 `,
           }}

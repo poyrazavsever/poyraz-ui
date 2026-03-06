@@ -8,22 +8,108 @@
  * @import "poyraz-ui/preset.css";
  * ```
  *
- * Or manually copy these tokens into your globals.css.
+ * Works standalone (light mode) or with reactive-switcher for multi-theme support.
  */
 
 /* Scan poyraz-ui dist files so Tailwind generates the utility classes used by components */
 @source "../dist";
 
 @theme {
+  /* ── Typography ─────────────────────────────────────────────── */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-secondary: "Agbalumo", cursive;
-  --color-primary: #dc2626;
+
+  /* ── Core Palette ───────────────────────────────────────────── */
+  --color-background: var(--poyraz-background, #ffffff);
+  --color-foreground: var(--poyraz-foreground, #0f172a);
+
+  /* Primary */
+  --color-primary: var(--poyraz-primary, #dc2626);
+  --color-primary-foreground: var(--poyraz-primary-foreground, #ffffff);
+  --color-primary-200: var(--poyraz-primary-200, #fecaca);
+  --color-primary-600: var(--poyraz-primary-600, #b91c1c);
+  --color-primary-700: var(--poyraz-primary-700, #991b1b);
+  --color-primary-800: var(--poyraz-primary-800, #7f1d1d);
+  --color-primary-900: var(--poyraz-primary-900, #450a0a);
+  --color-primary-hover: var(--poyraz-primary-hover, #b91c1c);
+  --color-primary-active: var(--poyraz-primary-active, #991b1b);
+  --color-primary-dark: var(--poyraz-primary-dark, #7f1d1d);
+  --color-primary-muted: var(--poyraz-primary-muted, #fef2f2);
+  --color-primary-muted-foreground: var(
+    --poyraz-primary-muted-foreground,
+    #b91c1c
+  );
+
+  /* Secondary */
+  --color-secondary: var(--poyraz-secondary, #f8fafc);
+  --color-secondary-foreground: var(--poyraz-secondary-foreground, #0f172a);
+
+  /* Muted */
+  --color-muted: var(--poyraz-muted, #f8fafc);
+  --color-muted-foreground: var(--poyraz-muted-foreground, #64748b);
+
+  /* Accent */
+  --color-accent: var(--poyraz-accent, #f1f5f9);
+  --color-accent-hover: var(--poyraz-accent-hover, #e2e8f0);
+  --color-accent-foreground: var(--poyraz-accent-foreground, #0f172a);
+
+  /* Destructive */
+  --color-destructive: var(--poyraz-destructive, #ef4444);
+  --color-destructive-foreground: var(--poyraz-destructive-foreground, #ffffff);
+  --color-destructive-muted: var(--poyraz-destructive-muted, #fef2f2);
+  --color-destructive-muted-foreground: var(
+    --poyraz-destructive-muted-foreground,
+    #991b1b
+  );
+
+  /* Border & Input */
+  --color-border: var(--poyraz-border, #e2e8f0);
+  --color-border-strong: var(--poyraz-border-strong, #cbd5e1);
+  --color-input: var(--poyraz-input, #94a3b8);
+  --color-ring: var(--poyraz-ring, #dc2626);
+
+  /* Overlay */
+  --color-overlay: var(--poyraz-overlay, rgba(0, 0, 0, 0.4));
+  --color-overlay-light: var(--poyraz-overlay-light, rgba(255, 255, 255, 0.8));
+
+  /* Placeholder */
+  --color-placeholder: var(--poyraz-placeholder, #94a3b8);
+
+  /* Inverted (dark surfaces in light mode) */
+  --color-inverted: var(--poyraz-inverted, #020617);
+  --color-inverted-foreground: var(--poyraz-inverted-foreground, #f8fafc);
+
+  /* Surface scale */
+  --color-surface-50: var(--poyraz-surface-50, #f8fafc);
+  --color-surface-100: var(--poyraz-surface-100, #f1f5f9);
+  --color-surface-200: var(--poyraz-surface-200, #e2e8f0);
+
+  /* Status — Info */
+  --color-info: var(--poyraz-info, #eff6ff);
+  --color-info-foreground: var(--poyraz-info-foreground, #1e40af);
+  --color-info-border: var(--poyraz-info-border, #60a5fa);
+  --color-info-icon: var(--poyraz-info-icon, #2563eb);
+  --color-info-solid: var(--poyraz-info-solid, #2563eb);
+
+  /* Status — Success */
+  --color-success: var(--poyraz-success, #f0fdf4);
+  --color-success-foreground: var(--poyraz-success-foreground, #166534);
+  --color-success-border: var(--poyraz-success-border, #4ade80);
+  --color-success-icon: var(--poyraz-success-icon, #16a34a);
+  --color-success-solid: var(--poyraz-success-solid, #059669);
+
+  /* Status — Warning */
+  --color-warning: var(--poyraz-warning, #fffbeb);
+  --color-warning-foreground: var(--poyraz-warning-foreground, #854d0e);
+  --color-warning-border: var(--poyraz-warning-border, #facc15);
+  --color-warning-icon: var(--poyraz-warning-icon, #ca8a04);
+  --color-warning-solid: var(--poyraz-warning-solid, #f59e0b);
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
-    @apply text-slate-950 bg-white;
+    @apply bg-background text-foreground;
   }
 
   h1,
@@ -40,5 +126,3 @@
 @utility font-secondary {
   font-family: var(--font-secondary);
 }
-
-/* decoration-dashed utility removed — no longer part of the design system */

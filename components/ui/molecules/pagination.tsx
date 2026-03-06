@@ -58,7 +58,7 @@ const PaginationLink = ({
       // Override for brutalist "active" state explicitly if needed, but button variant handles it.
       // However, outline button has border-slate-900.
       // Let's ensure active state is distinct.
-      isActive && "bg-slate-100 border-slate-900", // Optional override
+      isActive && "bg-accent border-foreground", // Optional override
       className,
     )}
     {...props}

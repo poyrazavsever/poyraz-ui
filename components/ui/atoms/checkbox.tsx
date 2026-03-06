@@ -15,15 +15,15 @@ const Checkbox = React.forwardRef<
       "h-4 w-4 shrink-0",
       // Shape — minimal: square
       "rounded-sm shadow-none",
-      "border border-slate-400",
+      "border border-input",
       // Background
-      "bg-white",
+      "bg-background",
       // Transitions
       "transition-all duration-200 ease-out",
       // Focus
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background",
       // Checked
-      "data-[state=checked]:bg-red-600 data-[state=checked]:border-red-900 data-[state=checked]:text-white",
+      "data-[state=checked]:bg-primary data-[state=checked]:border-primary-dark data-[state=checked]:text-primary-foreground",
       // Disabled
       "disabled:opacity-40 disabled:cursor-not-allowed",
       // Cursor

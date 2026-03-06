@@ -63,7 +63,7 @@ const CommandPaletteContent = React.forwardRef<
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay
       className={cn(
-        "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm",
+        "fixed inset-0 z-50 bg-overlay backdrop-blur-sm",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       )}
@@ -72,8 +72,8 @@ const CommandPaletteContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed left-[50%] top-[20%] z-50 w-full max-w-lg translate-x-[-50%]",
-        "bg-white",
-        "border border-slate-200",
+        "bg-background",
+        "border border-border",
         "rounded-sm shadow-none",
         "overflow-hidden",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
@@ -112,12 +112,9 @@ const CommandPaletteInput = React.forwardRef<
 
   return (
     <div
-      className={cn(
-        "flex items-center gap-2 px-4",
-        "border-b border-slate-200",
-      )}
+      className={cn("flex items-center gap-2 px-4", "border-b border-border")}
     >
-      <Search className="h-4 w-4 shrink-0 text-slate-400" />
+      <Search className="h-4 w-4 shrink-0 text-placeholder" />
       <input
         ref={ref}
         value={search}
@@ -127,7 +124,7 @@ const CommandPaletteInput = React.forwardRef<
         }}
         className={cn(
           "flex h-10 w-full bg-transparent py-2",
-          "text-sm text-slate-900 placeholder:text-slate-400",
+          "text-sm text-foreground placeholder:text-placeholder",
           "outline-none",
           "disabled:opacity-40 disabled:cursor-not-allowed",
           className,
@@ -170,7 +167,7 @@ const CommandPaletteGroup = React.forwardRef<
 >(({ className, heading, children, ...props }, ref) => (
   <div ref={ref} className={cn("py-1", className)} role="group" {...props}>
     {heading && (
-      <div className="px-2 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+      <div className="px-2 py-1.5 text-[11px] font-bold uppercase tracking-widest text-placeholder">
         {heading}
       </div>
     )}
@@ -201,18 +198,18 @@ const CommandPaletteItem = React.forwardRef<
       "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
       "border border-transparent",
       "transition-colors duration-100",
-      "hover:bg-slate-50 hover:border-slate-200",
-      "focus:bg-slate-50 focus:border-slate-200 focus:outline-none",
+      "hover:bg-muted hover:border-border",
+      "focus:bg-muted focus:border-border focus:outline-none",
       disabled && "pointer-events-none opacity-40",
       className,
     )}
     tabIndex={disabled ? -1 : 0}
     {...props}
   >
-    {icon && <span className="text-slate-400 shrink-0">{icon}</span>}
+    {icon && <span className="text-placeholder shrink-0">{icon}</span>}
     <span className="flex-1 truncate">{children}</span>
     {shortcut && (
-      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-slate-400 border border-slate-200 px-1.5 py-0.5">
+      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5">
         {shortcut}
       </kbd>
     )}
@@ -228,7 +225,7 @@ const CommandPaletteEmpty = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("py-8 text-center text-sm text-slate-400", className)}
+    className={cn("py-8 text-center text-sm text-placeholder", className)}
     {...props}
   />
 ));
@@ -242,7 +239,7 @@ const CommandPaletteSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("h-px bg-slate-100 my-1 -mx-2", className)}
+    className={cn("h-px bg-accent my-1 -mx-2", className)}
     {...props}
   />
 ));
@@ -258,8 +255,8 @@ const CommandPaletteFooter = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-center gap-4 px-4 py-2",
-      "border-t border-slate-200",
-      "text-[11px] text-slate-400",
+      "border-t border-border",
+      "text-[11px] text-placeholder",
       className,
     )}
     {...props}

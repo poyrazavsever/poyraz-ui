@@ -248,7 +248,7 @@ function DataTableInner<T>(
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           {searchable && (
             <div className="relative w-full sm:max-w-xs">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-placeholder" />
               <Input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -282,20 +282,20 @@ function DataTableInner<T>(
                       className="fixed inset-0 z-40"
                       onClick={() => setColToggleOpen(false)}
                     />
-                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-white border border-slate-200 p-2 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-background border border-border p-2 space-y-0.5">
                       {columns.map((col) => (
                         <button
                           key={col.id}
                           type="button"
-                          className="flex items-center gap-2 w-full px-2 py-1.5 text-sm hover:bg-slate-50 cursor-pointer transition-colors"
+                          className="flex items-center gap-2 w-full px-2 py-1.5 text-sm hover:bg-muted cursor-pointer transition-colors"
                           onClick={() => toggleColumn(col.id)}
                         >
                           <span
                             className={cn(
                               "h-4 w-4 border flex items-center justify-center shrink-0",
                               hiddenCols.has(col.id)
-                                ? "border-slate-300"
-                                : "border-red-600 bg-red-600 text-white",
+                                ? "border-border-strong"
+                                : "border-primary bg-primary text-primary-foreground",
                             )}
                           >
                             {!hiddenCols.has(col.id) && (
@@ -315,11 +315,11 @@ function DataTableInner<T>(
       )}
 
       {/* Table */}
-      <div className="border border-slate-200 overflow-x-auto">
+      <div className="border border-border overflow-x-auto">
         <table className="w-full text-sm">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50/80">
+            <tr className="border-b border-border bg-muted/80">
               {selectable && (
                 <th className="w-12 p-2.5 text-center">
                   <Checkbox
@@ -336,10 +336,10 @@ function DataTableInner<T>(
                   <th
                     key={col.id}
                     className={cn(
-                      "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-slate-500",
+                      "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-muted-foreground",
                       "whitespace-nowrap",
                       isSortable &&
-                        "cursor-pointer select-none hover:text-slate-900 transition-colors",
+                        "cursor-pointer select-none hover:text-foreground transition-colors",
                       col.className,
                     )}
                     onClick={isSortable ? () => handleSort(col.id) : undefined}
@@ -347,11 +347,11 @@ function DataTableInner<T>(
                     <span className="inline-flex items-center gap-1.5">
                       {col.header}
                       {isSortable && (
-                        <span className="text-slate-300">
+                        <span className="text-border">
                           {isActive && sortDir === "asc" ? (
-                            <ArrowUp className="h-3.5 w-3.5 text-red-600" />
+                            <ArrowUp className="h-3.5 w-3.5 text-primary" />
                           ) : isActive && sortDir === "desc" ? (
-                            <ArrowDown className="h-3.5 w-3.5 text-red-600" />
+                            <ArrowDown className="h-3.5 w-3.5 text-primary" />
                           ) : (
                             <ArrowUpDown className="h-3.5 w-3.5" />
                           )}
@@ -368,7 +368,7 @@ function DataTableInner<T>(
               <tr>
                 <td
                   colSpan={visibleColumns.length + (selectable ? 1 : 0)}
-                  className="p-10 text-center text-sm text-slate-400"
+                  className="p-10 text-center text-sm text-placeholder"
                 >
                   {emptyMessage}
                 </td>
@@ -381,9 +381,9 @@ function DataTableInner<T>(
                   <tr
                     key={id}
                     className={cn(
-                      "border-b border-slate-100 transition-colors",
-                      "hover:bg-slate-50/50",
-                      isSelected && "bg-red-50/50",
+                      "border-b border-accent transition-colors",
+                      "hover:bg-muted/50",
+                      isSelected && "bg-primary-muted/50",
                     )}
                   >
                     {selectable && (
@@ -398,7 +398,10 @@ function DataTableInner<T>(
                     {visibleColumns.map((col) => (
                       <td
                         key={col.id}
-                        className={cn("p-2.5 text-slate-700", col.className)}
+                        className={cn(
+                          "p-2.5 text-secondary-foreground",
+                          col.className,
+                        )}
                       >
                         {col.cell
                           ? col.cell(row)
@@ -416,17 +419,17 @@ function DataTableInner<T>(
       {/* Pagination */}
       {pagination && sorted.length > 0 && (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-placeholder">
             Showing{" "}
-            <span className="font-semibold text-slate-600">
+            <span className="font-semibold text-muted-foreground">
               {page * pageSize + 1}
             </span>
             –
-            <span className="font-semibold text-slate-600">
+            <span className="font-semibold text-muted-foreground">
               {Math.min((page + 1) * pageSize, sorted.length)}
             </span>{" "}
             of{" "}
-            <span className="font-semibold text-slate-600">
+            <span className="font-semibold text-muted-foreground">
               {sorted.length}
             </span>{" "}
             results
@@ -454,7 +457,7 @@ function DataTableInner<T>(
               <ChevronLeft className="h-3.5 w-3.5" />
             </Button>
 
-            <span className="px-3 text-xs font-semibold text-slate-600">
+            <span className="px-3 text-xs font-semibold text-muted-foreground">
               {page + 1} / {totalPages}
             </span>
 

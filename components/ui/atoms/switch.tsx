@@ -15,15 +15,15 @@ const Switch = React.forwardRef<
       "peer inline-flex h-5 w-9 shrink-0 items-center",
       // Shape — minimal
       "rounded-sm shadow-none",
-      "border border-slate-400",
+      "border border-input",
       // Background
-      "bg-slate-200",
+      "bg-surface-200",
       // Transitions
       "transition-all duration-200 ease-out",
       // Focus
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background",
       // Checked
-      "data-[state=checked]:bg-red-600 data-[state=checked]:border-red-900",
+      "data-[state=checked]:bg-primary data-[state=checked]:border-primary-dark",
       // Disabled
       "disabled:opacity-40 disabled:cursor-not-allowed",
       // Cursor
@@ -35,9 +35,9 @@ const Switch = React.forwardRef<
     <SwitchPrimitive.Thumb
       className={cn(
         // Square thumb
-        "block h-3 w-3 bg-white",
+        "block h-3 w-3 bg-background",
         "rounded-sm shadow-none",
-        "border border-slate-300",
+        "border border-border-strong",
         // Transitions
         "transition-transform duration-200 ease-out",
         // Position

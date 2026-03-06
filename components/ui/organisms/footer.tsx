@@ -12,12 +12,12 @@ const DEFAULT_CONTAINER = "max-w-5xl mx-auto px-6";
 const footerVariants = cva(["w-full", "border-t"].join(" "), {
   variants: {
     variant: {
-      full: "py-10 bg-white text-slate-950 border-slate-200",
-      compact: "py-3 bg-white text-slate-950 border-slate-200",
-      branded: "py-8 bg-white text-slate-950 border-slate-200",
-      centered: "py-10 text-center bg-white text-slate-950 border-slate-200",
-      dark: "py-10 bg-slate-950 text-slate-100 border-slate-800",
-      minimal: "py-6 bg-white text-slate-950 border-slate-200",
+      full: "py-10 bg-background text-foreground border-border",
+      compact: "py-3 bg-background text-foreground border-border",
+      branded: "py-8 bg-background text-foreground border-border",
+      centered: "py-10 text-center bg-background text-foreground border-border",
+      dark: "py-10 bg-inverted text-inverted-foreground border-slate-800",
+      minimal: "py-6 bg-background text-foreground border-border",
     },
   },
   defaultVariants: { variant: "full" },
@@ -97,9 +97,9 @@ const FooterHeading = React.forwardRef<
     ref={ref}
     className={cn(
       "text-xs font-bold uppercase tracking-[0.15em]",
-      "text-slate-900",
+      "text-foreground",
       "pb-2",
-      "border-b border-slate-200",
+      "border-b border-border",
       className,
     )}
     {...props}
@@ -120,8 +120,8 @@ const FooterLink = React.forwardRef<
   <a
     ref={ref}
     className={cn(
-      "text-sm text-slate-500",
-      "hover:text-red-600 hover:underline",
+      "text-sm text-muted-foreground",
+      "hover:text-primary hover:underline",
       "transition-colors duration-150",
       className,
     )}
@@ -181,9 +181,9 @@ const FooterSocialLink = React.forwardRef<
     className={cn(
       "inline-flex items-center justify-center",
       "h-8 w-8",
-      "border border-slate-300 rounded-sm",
-      "text-slate-500",
-      "hover:bg-red-600 hover:text-white hover:border-red-800",
+      "border border-border-strong rounded-sm",
+      "text-muted-foreground",
+      "hover:bg-primary hover:text-primary-foreground hover:border-primary-800",
       "transition-colors duration-150",
       className,
     )}
@@ -207,8 +207,8 @@ const FooterBottom = React.forwardRef<
     className={cn(
       "flex flex-col sm:flex-row items-center justify-between gap-4",
       "pt-5 mt-6",
-      "border-t border-slate-200",
-      "text-xs text-slate-400",
+      "border-t border-border",
+      "text-xs text-placeholder",
       className,
     )}
     {...props}
@@ -271,18 +271,13 @@ function FooterNewsletterInner(
   return (
     <div
       ref={ref}
-      className={cn(
-        "py-6 px-6",
-        "border border-slate-200",
-        "bg-slate-50",
-        className,
-      )}
+      className={cn("py-6 px-6", "border border-border", "bg-muted", className)}
       {...props}
     >
       <h4 className="text-sm font-bold uppercase tracking-wide mb-1">
         {heading}
       </h4>
-      <p className="text-xs text-slate-500 mb-4">{description}</p>
+      <p className="text-xs text-muted-foreground mb-4">{description}</p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"
@@ -292,9 +287,9 @@ function FooterNewsletterInner(
           required
           className={cn(
             "flex-1 h-9 px-3 text-sm",
-            "border border-slate-300 bg-white",
-            "placeholder:text-slate-400",
-            "focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-1",
+            "border border-border-strong bg-background",
+            "placeholder:text-placeholder",
+            "focus:outline-none focus:border-primary focus:ring-2 focus:ring-ring focus:ring-offset-1",
             "rounded-sm shadow-none",
           )}
         />
@@ -303,10 +298,10 @@ function FooterNewsletterInner(
           className={cn(
             "h-9 px-5",
             "text-xs font-bold uppercase tracking-wide",
-            "bg-red-600 text-white",
-            "border border-red-800",
-            "hover:bg-red-700 hover:border-red-900",
-            "active:bg-red-800 active:scale-[0.97]",
+            "bg-primary text-primary-foreground",
+            "border border-primary-800",
+            "hover:bg-primary-600 hover:border-primary-900",
+            "active:bg-primary-700 active:scale-[0.97]",
             "transition-all duration-150",
             "rounded-sm shadow-none cursor-pointer",
           )}
@@ -334,7 +329,7 @@ const FooterDivider = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <hr
     ref={ref}
-    className={cn("border-t border-slate-200 my-8", className)}
+    className={cn("border-t border-border my-8", className)}
     {...props}
   />
 ));
@@ -350,7 +345,7 @@ const FooterDescription = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-slate-500 leading-relaxed", className)}
+    className={cn("text-sm text-muted-foreground leading-relaxed", className)}
     {...props}
   >
     {children}
@@ -372,8 +367,8 @@ const FooterBadge = React.forwardRef<
       "inline-flex items-center",
       "px-2 py-0.5",
       "text-[10px] font-bold uppercase tracking-wider",
-      "border border-slate-200 rounded-sm",
-      "text-slate-500 bg-slate-50",
+      "border border-border rounded-sm",
+      "text-muted-foreground bg-muted",
       className,
     )}
     {...props}
@@ -393,10 +388,7 @@ const FooterLinkGroup = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "flex flex-wrap items-center gap-x-6 gap-y-2",
-      className,
-    )}
+    className={cn("flex flex-wrap items-center gap-x-6 gap-y-2", className)}
     {...props}
   >
     {children}
@@ -420,18 +412,18 @@ const FooterCTA = React.forwardRef<HTMLDivElement, FooterCTAProps>(
       className={cn(
         "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
         "py-5 px-6",
-        "border border-slate-200 rounded-sm",
-        "bg-slate-50",
+        "border border-border rounded-sm",
+        "bg-muted",
         className,
       )}
       {...props}
     >
       <div className="min-w-0">
         {heading && (
-          <h4 className="text-sm font-semibold text-slate-900">{heading}</h4>
+          <h4 className="text-sm font-semibold text-foreground">{heading}</h4>
         )}
         {description && (
-          <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
         )}
       </div>
       <div className="flex items-center gap-2 shrink-0">{children}</div>
@@ -448,12 +440,8 @@ const FooterApp = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col gap-2", className)}
-    {...props}
-  >
-    <span className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400">
+  <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props}>
+    <span className="text-xs font-bold uppercase tracking-[0.15em] text-placeholder">
       Download App
     </span>
     <div className="flex items-center gap-2">{children}</div>
@@ -474,9 +462,9 @@ const FooterAppLink = React.forwardRef<
     className={cn(
       "inline-flex items-center gap-2",
       "px-3 py-2",
-      "border border-slate-300 rounded-sm",
-      "text-xs font-medium text-slate-700",
-      "hover:bg-slate-50 hover:border-slate-400",
+      "border border-border-strong rounded-sm",
+      "text-xs font-medium text-secondary-foreground",
+      "hover:bg-muted hover:border-input",
       "transition-colors duration-150",
       className,
     )}
