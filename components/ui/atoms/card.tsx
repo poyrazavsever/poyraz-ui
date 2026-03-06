@@ -33,6 +33,13 @@ const cardVariants = cva(
           "bg-transparent border border-transparent",
           "hover:border-slate-300 hover:bg-white",
         ].join(" "),
+
+        // Clickable — subtle lift on hover
+        interactive: [
+          "bg-white border border-slate-300",
+          "cursor-pointer",
+          "hover:-translate-y-0.5 hover:border-slate-400",
+        ].join(" "),
       },
     },
     defaultVariants: {
@@ -126,7 +133,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col gap-1.5 p-5", className)}
+    className={cn("flex flex-col gap-1.5 p-4", className)}
     {...props}
   />
 ));
@@ -141,7 +148,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-lg font-bold tracking-tight leading-tight text-slate-900",
+      "text-base font-bold tracking-tight leading-tight text-slate-900",
       className,
     )}
     {...props}
@@ -169,7 +176,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("px-5 pb-4", className)} {...props} />
+  <div ref={ref} className={cn("px-4 pb-3", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -182,7 +189,7 @@ const CardFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex items-center gap-3 px-5 py-4",
+      "flex items-center gap-3 px-4 py-3",
       "border-t border-slate-200",
       "mt-auto",
       className,
