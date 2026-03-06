@@ -26,6 +26,7 @@ export default defineConfig({
     "atoms/index": "src/atoms/index.ts",
     "molecules/index": "src/molecules/index.ts",
     "organisms/index": "src/organisms/index.ts",
+    "themes/index": "src/themes/index.ts",
   },
   format: ["esm", "cjs"],
   dts: true,
