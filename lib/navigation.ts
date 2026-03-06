@@ -50,6 +50,7 @@ export const docsMobileNav: NavItem[] = [
   { label: "Atoms", href: "/docs/atoms" },
   { label: "Molecules", href: "/docs/molecules" },
   { label: "Organisms", href: "/docs/organisms" },
+  { label: "Templates", href: "/docs/templates" },
 ];
 
 /* ── Component Registry (Sidebar) ─────────────────────────────────── */
@@ -108,6 +109,11 @@ export const componentRegistry: ComponentGroup[] = [
     label: "Organisms",
     basePath: "/docs/organisms",
     items: ["Announcement Bar", "Data Table", "Footer", "Navbar", "Sidebar"],
+  },
+  {
+    label: "Templates",
+    basePath: "/docs/templates",
+    items: ["Hero", "Pricing", "Dashboard", "Auth"],
   },
 ];
 
