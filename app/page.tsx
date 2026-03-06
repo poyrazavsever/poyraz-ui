@@ -554,10 +554,7 @@ function TasksShowcase() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Input
-            placeholder="Filter tasks..."
-            className="w-48 h-9"
-          />
+          <Input placeholder="Filter tasks..." className="w-48 h-9" />
           <Button variant="outline" size="sm">
             View
           </Button>
@@ -662,10 +659,7 @@ function AuthShowcase() {
             <Label>Email</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-              <Input
-                placeholder="m@example.com"
-                className="pl-9"
-              />
+              <Input placeholder="m@example.com" className="pl-9" />
             </div>
           </div>
           <div className="space-y-2">
@@ -740,10 +734,7 @@ function AuthShowcase() {
           </div>
           <div className="space-y-2">
             <Label>Password</Label>
-            <Input
-              type="password"
-              placeholder="••••••••"
-            />
+            <Input type="password" placeholder="••••••••" />
           </div>
           <Button className="w-full">Create Account</Button>
           <div className="relative">
@@ -811,7 +802,7 @@ export default function Home() {
               variant="outline"
               className="bg-white px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors"
             >
-              v1.1.1 — Open Source
+              v1.1.3 — Open Source
             </Badge>
           </Link>
 
