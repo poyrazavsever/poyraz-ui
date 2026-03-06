@@ -119,7 +119,7 @@ export function DemoBlock({
   return (
     <div
       className={cn(
-        "p-6 border border-slate-200 rounded-sm bg-white",
+        "p-6 border border-border rounded-sm bg-background",
         className,
       )}
     >
@@ -148,14 +148,14 @@ export function ComponentPage({
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-2xl font-black tracking-tight">{name}</h1>
-        <p className="text-base text-slate-500 leading-relaxed max-w-2xl">
+        <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
           {description}
         </p>
       </div>
 
       {/* Import */}
       <section className="space-y-3">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-400">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-placeholder">
           Import
         </h2>
         <CodeBlock code={importCode} />
@@ -186,7 +186,9 @@ export function DemoSection({
     <section className="space-y-4">
       <div className="space-y-1">
         <h2 className="text-lg font-bold">{title}</h2>
-        {description && <p className="text-sm text-slate-500">{description}</p>}
+        {description && (
+          <p className="text-sm text-muted-foreground">{description}</p>
+        )}
       </div>
       <DemoBlock>{children}</DemoBlock>
       {code && <CodeBlock code={code} />}

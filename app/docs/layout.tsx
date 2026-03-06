@@ -40,6 +40,7 @@ import {
   socialLinks,
   toSlug,
 } from "@/lib/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 /* ── Collapsible sidebar group ────────────────────────────────────── */
 
@@ -63,7 +64,7 @@ function SidebarSection({
       <div
         className={cn(
           "flex items-center justify-between w-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest",
-          "text-slate-400 hover:text-slate-600 transition-colors",
+          "text-placeholder hover:text-muted-foreground transition-colors",
         )}
       >
         <Link
@@ -71,15 +72,15 @@ function SidebarSection({
           className={cn(
             "flex-1 no-underline cursor-pointer transition-colors",
             pathname === basePath || pathname.startsWith(basePath + "/")
-              ? "text-slate-700"
-              : "text-slate-400 hover:text-slate-600",
+              ? "text-foreground"
+              : "text-placeholder hover:text-muted-foreground",
           )}
         >
           {label}
         </Link>
         <button
           onClick={onToggle}
-          className="cursor-pointer p-0.5 text-slate-400 hover:text-slate-600 transition-colors"
+          className="cursor-pointer p-0.5 text-placeholder hover:text-muted-foreground transition-colors"
           aria-label={isOpen ? "Collapse section" : "Expand section"}
         >
           <ChevronDown
@@ -103,8 +104,8 @@ function SidebarSection({
                     "block px-4 py-1.5 text-[13px] transition-colors no-underline",
                     "border-l-[3px] border-solid",
                     active
-                      ? "border-red-600 bg-red-50 text-red-700 font-semibold"
-                      : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50",
+                      ? "border-primary bg-primary-muted text-primary-muted-foreground font-semibold"
+                      : "border-transparent text-muted-foreground hover:text-foreground hover:bg-accent",
                   )}
                 >
                   {item}
@@ -210,6 +211,7 @@ export default function DocsLayout({
           </NavbarLinks>
 
           <NavbarActions>
+            <ThemeToggle />
             <Link href={socialLinks.repo} target="_blank">
               <Button size="icon" variant="ghost">
                 <Github className="h-4 w-4" />
@@ -235,10 +237,10 @@ export default function DocsLayout({
         <div className="hidden lg:block w-56 shrink-0">
           <Sidebar
             variant="default"
-            className="fixed top-[57px] left-0 w-56 h-[calc(100vh-57px)] border-r border-slate-200 overflow-y-auto"
+            className="fixed top-[57px] left-0 w-56 h-[calc(100vh-57px)] border-r border-border overflow-y-auto"
           >
             <SidebarHeader className="h-12">
-              <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+              <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
                 Docs
               </span>
             </SidebarHeader>
@@ -249,7 +251,7 @@ export default function DocsLayout({
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-auto bg-slate-50/50">
+        <main className="flex-1 overflow-auto bg-muted/50">
           <div className="max-w-4xl mx-auto py-10 px-6 md:px-10">
             {children}
           </div>
@@ -257,7 +259,7 @@ export default function DocsLayout({
           {/* Docs Footer (compact) */}
           <Footer variant="compact" containerClassName="max-w-4xl mx-auto">
             <FooterBottom className="mt-0 pt-0 border-t-0">
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-placeholder">
                 &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
               </span>
               <FooterSocials>

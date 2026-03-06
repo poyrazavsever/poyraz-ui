@@ -27,14 +27,14 @@ function CopyBlock({
   };
 
   return (
-    <Card className="bg-slate-950 text-slate-50 border-slate-800 relative group">
+    <Card className="bg-inverted text-inverted-foreground border-inverted relative group">
       <button
         onClick={handleCopy}
-        className="absolute top-3 right-3 text-slate-500 hover:text-white cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
+        className="absolute top-3 right-3 text-muted-foreground hover:text-inverted-foreground cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
         aria-label="Copy code"
       >
         {copied ? (
-          <Check className="h-4 w-4 text-green-400" />
+          <Check className="h-4 w-4 text-success-solid" />
         ) : (
           <Copy className="h-4 w-4" />
         )}
@@ -68,13 +68,13 @@ export default function InstallationPage() {
 
         <div className="space-y-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               pnpm
             </p>
             <CopyBlock code="pnpm add poyraz-ui">pnpm add poyraz-ui</CopyBlock>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               npm
             </p>
             <CopyBlock code="npm install poyraz-ui">
@@ -82,7 +82,7 @@ export default function InstallationPage() {
             </CopyBlock>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               yarn
             </p>
             <CopyBlock code="yarn add poyraz-ui">yarn add poyraz-ui</CopyBlock>
@@ -99,9 +99,9 @@ export default function InstallationPage() {
         </Typography>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border border-slate-200 rounded-sm">
+          <table className="w-full text-sm border border-border rounded-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
+              <tr className="border-b border-border bg-muted">
                 <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
                   Package
                 </th>
@@ -119,12 +119,12 @@ export default function InstallationPage() {
                 ["react-dom", "≥ 18", "Yes"],
                 ["tailwindcss", "≥ 4", "Yes"],
               ].map(([pkg, version, required]) => (
-                <tr key={pkg} className="border-b border-slate-100">
+                <tr key={pkg} className="border-b border-border">
                   <td className="p-3 font-mono text-xs">{pkg}</td>
-                  <td className="p-3 text-slate-500">{version}</td>
+                  <td className="p-3 text-muted-foreground">{version}</td>
                   <td className="p-3">
                     <span
-                      className={`text-xs font-semibold ${required === "Yes" ? "text-red-600" : "text-slate-400"}`}
+                      className={`text-xs font-semibold ${required === "Yes" ? "text-primary" : "text-placeholder"}`}
                     >
                       {required}
                     </span>
@@ -141,9 +141,19 @@ export default function InstallationPage() {
         <Typography variant="h2">3. Import CSS Preset</Typography>
         <Typography variant="p">
           Add the Poyraz UI CSS preset to your global stylesheet. The preset
-          includes design tokens (colors, fonts), base layer styles, and
-          automatically configures Tailwind to scan Poyraz UI components for
+          includes semantic design tokens (colors, fonts), base layer styles,
+          and automatically configures Tailwind to scan Poyraz UI components for
           utility classes.
+        </Typography>
+
+        <Typography variant="p">
+          You can set this up automatically with the CLI:
+        </Typography>
+
+        <CopyBlock code="npx poyraz-ui init">npx poyraz-ui init</CopyBlock>
+
+        <Typography variant="muted">
+          Or manually add the import to your CSS file:
         </Typography>
 
         <CopyBlock
@@ -250,6 +260,63 @@ export default function InstallationPage() {
           <div className="pl-4">);</div>
           <div>{"}"}</div>
         </CopyBlock>
+      </section>
+
+      {/* Step 6: Theming (Optional) */}
+      <section className="space-y-4">
+        <Typography variant="h2">6. Theme Support (Optional)</Typography>
+        <Typography variant="p">
+          Poyraz UI v2 uses semantic CSS tokens that can be overridden for full
+          theme customization. For dynamic theme switching, install{" "}
+          <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
+            reactive-switcher
+          </code>{" "}
+          and use the built-in theme presets:
+        </Typography>
+
+        <div className="space-y-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
+              Install reactive-switcher
+            </p>
+            <CopyBlock code="pnpm add reactive-switcher">
+              pnpm add reactive-switcher
+            </CopyBlock>
+          </div>
+
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
+              Configure themes
+            </p>
+            <CopyBlock
+              code={`import { ThemeProvider } from "reactive-switcher";\nimport { poyrazLightTheme, poyrazDarkTheme } from "poyraz-ui/themes";\n\nconst themes = [\n  { name: "light", variables: poyrazLightTheme.variables },\n  { name: "dark", variables: poyrazDarkTheme.variables },\n];\n\nexport default function Layout({ children }) {\n  return (\n    <ThemeProvider themes={themes} defaultTheme="light">\n      {children}\n    </ThemeProvider>\n  );\n}`}
+            >
+              <div className="space-y-1">
+                <div>
+                  <span className="text-sky-300">import</span>{" "}
+                  {"{ ThemeProvider }"}{" "}
+                  <span className="text-sky-300">from</span>{" "}
+                  <span className="text-green-300">
+                    {'"reactive-switcher"'}
+                  </span>
+                  ;
+                </div>
+                <div>
+                  <span className="text-sky-300">import</span>{" "}
+                  {"{ poyrazLightTheme, poyrazDarkTheme }"}{" "}
+                  <span className="text-sky-300">from</span>{" "}
+                  <span className="text-green-300">{'"poyraz-ui/themes"'}</span>
+                  ;
+                </div>
+              </div>
+            </CopyBlock>
+          </div>
+        </div>
+
+        <Typography variant="muted">
+          The CLI wizard (<code className="text-xs">npx poyraz-ui init</code>)
+          can scaffold this configuration automatically.
+        </Typography>
       </section>
 
       {/* Next */}
