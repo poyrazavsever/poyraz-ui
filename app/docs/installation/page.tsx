@@ -27,10 +27,10 @@ function CopyBlock({
   };
 
   return (
-    <Card className="bg-inverted text-inverted-foreground border-inverted relative group">
+    <Card className="bg-slate-950 text-slate-50 border-slate-800 relative group">
       <button
         onClick={handleCopy}
-        className="absolute top-3 right-3 text-muted-foreground hover:text-inverted-foreground cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
+        className="absolute top-3 right-3 text-slate-500 hover:text-slate-100 cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
         aria-label="Copy code"
       >
         {copied ? (
