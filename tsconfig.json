@@ -19,10 +19,11 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "poyraz-ui": ["./dist/index"],
-      "poyraz-ui/atoms": ["./dist/atoms/index"],
-      "poyraz-ui/molecules": ["./dist/molecules/index"],
-      "poyraz-ui/organisms": ["./dist/organisms/index"]
+      "poyraz-ui": ["./src/index"],
+      "poyraz-ui/atoms": ["./src/atoms/index"],
+      "poyraz-ui/molecules": ["./src/molecules/index"],
+      "poyraz-ui/organisms": ["./src/organisms/index"],
+      "poyraz-ui/themes": ["./src/themes/index"]
     },
     "incremental": true
   },
