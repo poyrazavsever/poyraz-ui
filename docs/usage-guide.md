@@ -3,7 +3,7 @@
 Bu dokuman, `d:/Poyraz/kodlama/poyraz-ui` reposunun guncel kaynak kodu uzerinden hazirlandi.
 Hedef: UI kitin hem kullanici (consumer) tarafini hem de bu repoyu gelistirme tarafini tek yerde toplamak.
 
-Versiyon referansi: `2.0.1`
+Versiyon referansi: `2.1.0`
 
 ---
 
@@ -92,7 +92,7 @@ Root global stylesheet dosyana ekle:
 @import "poyraz-ui/preset.css";
 ```
 
-`preset.css` olmadan renk/font tokenlari dogru resolve edilmez.
+`preset.css` olmadan renk/font tokenlari ve molecule animasyonlari dogru resolve edilmez.
 
 ### 3.4 Hemen kullanim
 
@@ -175,6 +175,38 @@ export function AppTheme({ children }: { children: React.ReactNode }) {
   return <ThemeProvider themes={poyrazThemes}>{children}</ThemeProvider>;
 }
 ```
+
+---
+
+## 5.4) Motion Sistemi
+
+Motion sistemi de `src/preset.css` uzerinden gelir. Bu nedenle consumer app tarafinda `@import "poyraz-ui/preset.css";` satiri sadece tema icin degil, animasyonlar icin de zorunludur.
+
+Motion zinciri su sekilde calisir:
+
+1. Molecule componentleri Radix attribute'lari (`data-state`, `data-side`) ile durum bilgisini alir.
+2. Component classlari `animate-in`, `fade-in-0`, `zoom-in-95`, `slide-in-*`, `animate-accordion-down` gibi utility'leri kullanir.
+3. `src/preset.css`, bu utility'leri Poyraz motion keyframe'lerine ve tokenlarina baglar.
+4. `prefers-reduced-motion` aktifse animasyon sureleri otomatik olarak kisaltilir.
+
+Public API degismez. Kullanici yeni prop eklemeden mevcut componentleri kullanmaya devam eder.
+
+Motion tokenlari:
+
+- `--poyraz-motion-duration-fast`
+- `--poyraz-motion-duration-base`
+- `--poyraz-motion-duration-slow`
+- `--poyraz-motion-ease-out`
+- `--poyraz-motion-ease-in`
+- `--poyraz-motion-ease-standard`
+
+Ilk motion kapsaminda su molecule gruplari iyilestirildi:
+
+- Accordion, DropdownMenu, Select
+- Popover, Tooltip, HoverCard
+- Dialog, Modal, Sheet, Drawer, CommandPalette
+- DatePicker, Autocomplete
+- Tabs, Calendar, Pagination, Breadcrumb, Alert, Form
 
 ---
 
@@ -378,6 +410,7 @@ Manual kurulum yerine hizli onboarding icin ideal.
 2. `componentRegistry` molecules listesi ile molecules landing page listesi tam birebir degil (sidebar listesinde Mermaid yok).
 3. Template sayfalari (Hero/Pricing/Dashboard/Auth) paket exportu degil; kopyala-ozellestir modeli.
 4. Rehber ve README metinlerinde bilesen sayilari bazen farkli geciyor; son karar noktasi her zaman `src/*/index.ts` export mapidir.
+5. Motion sistemi `preset.css` uzerinden gelir; consumer app bu importu atlamamalidir.
 
 ---
 

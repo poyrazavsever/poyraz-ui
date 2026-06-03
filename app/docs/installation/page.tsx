@@ -142,8 +142,14 @@ export default function InstallationPage() {
         <Typography variant="p">
           Add the Poyraz UI CSS preset to your global stylesheet. The preset
           includes semantic design tokens (colors, fonts), base layer styles,
-          and automatically configures Tailwind to scan Poyraz UI components for
-          utility classes.
+          motion utilities for molecule animations, and automatically
+          configures Tailwind to scan Poyraz UI components for utility classes.
+        </Typography>
+
+        <Typography variant="muted">
+          This import is required for animated Accordion, Dropdown Menu,
+          Select, Popover, Tooltip, Dialog, Sheet, and other molecule
+          interactions.
         </Typography>
 
         <Typography variant="p">

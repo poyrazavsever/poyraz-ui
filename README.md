@@ -24,6 +24,7 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 - **50+ Components** — 17 atoms, 21 molecules, 5 organisms
 - **Semantic Token System** — 40+ CSS custom properties (`var(--poyraz-*)`) with sensible fallbacks
+- **Built-in Motion Layer** — CSS-only animations for Radix states, overlays, accordions, and micro-interactions
 - **Dark Mode Ready** — All components respond to theme changes via CSS variables
 - **Theming Support** — Optional `reactive-switcher` integration with pre-built light/dark themes
 - **CLI Setup Wizard** — `npx poyraz-ui init` scaffolds CSS imports and theme configuration
@@ -67,7 +68,7 @@ Import the preset in your root layout or global CSS:
 @import "poyraz-ui/preset.css";
 ```
 
-This loads the semantic token system (40+ CSS custom properties) and the minimal defaults.
+This loads the semantic token system (40+ CSS custom properties), motion utilities, and the minimal defaults.
 
 ### Quick Setup via CLI
 
@@ -277,6 +278,16 @@ All components use `var(--poyraz-*, fallback)` CSS custom properties. Override t
 }
 ```
 
+### Motion System
+
+The preset also ships the motion layer used by molecules and overlays:
+
+- `animate-poyraz-*` utilities for fade, scale, slide, and accordion motion
+- compatibility aliases for existing `animate-in`, `animate-out`, `fade-in-0`, `zoom-in-95`, `slide-in-*`, and `animate-accordion-*` classes
+- `prefers-reduced-motion` support for accessible reduced animation
+
+No component API changes are required. Importing `poyraz-ui/preset.css` is enough.
+
 ### Theming with reactive-switcher
 
 ```tsx
@@ -358,7 +369,7 @@ poyraz-ui/
 ├── src/
 │   ├── index.ts              # Main entry point
 │   ├── utils.ts              # cn() utility
-│   ├── preset.css            # Semantic token definitions (40+ CSS vars)
+│   ├── preset.css            # Semantic tokens + motion utilities
 │   ├── themes/index.ts       # Light + Dark theme configs for reactive-switcher
 │   ├── atoms/index.ts        # Atom exports
 │   ├── molecules/index.ts    # Molecule exports

@@ -19,7 +19,7 @@ export default function DocsIntroPage() {
       {/* Header */}
       <div className="space-y-4">
         <Badge variant="outline" className="text-xs">
-          v2.0.1
+          v2.1.0
         </Badge>
         <Typography variant="h2">Introduction</Typography>
         <Typography variant="lead">
@@ -207,9 +207,29 @@ export default function DocsIntroPage() {
         </div>
       </section>
 
-      {/* v2.0.0 â€” Theming */}
+      {/* v2.1.0 - Motion System */}
       <section className="space-y-6">
-        <Typography variant="h2">v2.0.1 â€” Theming & CLI</Typography>
+        <Typography variant="h2">v2.1.0 - Motion System</Typography>
+        <Typography variant="p">
+          Poyraz UI v2.1 adds a centralized motion layer for molecule and
+          overlay components. Accordion, Dropdown Menu, Select, Popover,
+          Tooltip, Hover Card, Dialog, Modal, Sheet, Command Palette, Date
+          Picker, Autocomplete, Tabs, Calendar and related interaction states
+          now use the shared motion utilities from{" "}
+          <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
+            poyraz-ui/preset.css
+          </code>
+          .
+        </Typography>
+        <Typography variant="p">
+          No component API changes are required. Existing JSX, props and import
+          paths continue to work after updating the package.
+        </Typography>
+      </section>
+
+      {/* v2.0.1 - Theming */}
+      <section className="space-y-6">
+        <Typography variant="h2">v2.0.1 - Theming & CLI</Typography>
         <Typography variant="p">
           Poyraz UI v2 introduces a semantic token system powered by CSS custom
           properties. All components now use{" "}
