@@ -225,7 +225,7 @@ function Autocomplete({
             return (
               <span
                 key={val}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border border-border-strong bg-muted text-secondary-foreground"
+                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide border border-border-strong bg-muted text-secondary-foreground animate-poyraz-scale-in"
               >
                 {label}
                 <button
@@ -271,7 +271,7 @@ function Autocomplete({
 
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-placeholder transition-transform duration-200",
+            "h-4 w-4 shrink-0 text-placeholder transition-transform duration-200 ease-out",
             open && "rotate-180",
           )}
         />
@@ -286,7 +286,7 @@ function Autocomplete({
             "absolute z-50 mt-1 w-full max-h-[240px] overflow-y-auto",
             "border border-border bg-background",
             "shadow-none",
-            "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-150",
+            "origin-top animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
           )}
         >
           {loading && (
@@ -323,7 +323,7 @@ function Autocomplete({
                       className={cn(
                         "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
                         "border border-transparent",
-                        "transition-colors duration-100",
+                        "transition-colors duration-100 ease-out",
                         isHighlighted && "bg-muted border-border",
                         !isHighlighted && "hover:bg-muted hover:border-border",
                         opt.disabled && "pointer-events-none opacity-40",

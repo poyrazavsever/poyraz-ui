@@ -62,12 +62,13 @@ function DatePicker({
           variant="outline"
           disabled={disabled}
           className={cn(
-            "w-full justify-start text-left font-normal",
+            "group w-full justify-start text-left font-normal",
             !selected && "text-placeholder",
+            open && "border-primary ring-2 ring-ring ring-offset-2",
             className,
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
+          <CalendarIcon className="mr-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:scale-105" />
           {selected ? formatDate(selected) : placeholder}
         </Button>
       </PopoverTrigger>

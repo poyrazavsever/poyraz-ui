@@ -65,7 +65,7 @@ const CommandPaletteContent = React.forwardRef<
       className={cn(
         "fixed inset-0 z-50 bg-overlay backdrop-blur-sm",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
-        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
       )}
     />
     <DialogPrimitive.Content
@@ -77,11 +77,10 @@ const CommandPaletteContent = React.forwardRef<
         "rounded-sm shadow-none",
         "overflow-hidden",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
-        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-        "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-        "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[2%]",
+        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+        "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
         "data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[2%]",
-        "duration-200",
+        "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[2%]",
         className,
       )}
       {...props}
@@ -131,7 +130,7 @@ const CommandPaletteInput = React.forwardRef<
         )}
         {...props}
       />
-      <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+      <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 transition-all duration-150 ease-out hover:opacity-100 hover:bg-accent cursor-pointer">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -197,7 +196,7 @@ const CommandPaletteItem = React.forwardRef<
     className={cn(
       "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
       "border border-transparent",
-      "transition-colors duration-100",
+      "transition-colors duration-100 ease-out",
       "hover:bg-muted hover:border-border",
       "focus:bg-muted focus:border-border focus:outline-none",
       disabled && "pointer-events-none opacity-40",

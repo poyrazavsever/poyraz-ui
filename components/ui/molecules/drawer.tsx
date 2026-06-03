@@ -32,7 +32,12 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
-    className={cn("fixed inset-0 z-50 bg-black/40", className)}
+    className={cn(
+      "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm",
+      "data-[state=open]:animate-in data-[state=closed]:animate-out",
+      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+      className,
+    )}
     {...props}
   />
 ));
@@ -51,12 +56,13 @@ const DrawerContent = React.forwardRef<
         "bg-background",
         "border-t border-border",
         "rounded-sm shadow-none",
+        "will-change-transform",
         className,
       )}
       {...props}
     >
       {/* Drag handle */}
-      <div className="mx-auto mt-4 h-1.5 w-[60px] bg-border-strong" />
+      <div className="mx-auto mt-4 h-1.5 w-[60px] bg-border-strong transition-colors duration-150 ease-out" />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
