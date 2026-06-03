@@ -104,6 +104,14 @@
   --color-warning-border: var(--poyraz-warning-border, #facc15);
   --color-warning-icon: var(--poyraz-warning-icon, #ca8a04);
   --color-warning-solid: var(--poyraz-warning-solid, #f59e0b);
+
+  /* Motion */
+  --poyraz-motion-duration-fast: 120ms;
+  --poyraz-motion-duration-base: 180ms;
+  --poyraz-motion-duration-slow: 260ms;
+  --poyraz-motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --poyraz-motion-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --poyraz-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
 @layer base {
@@ -125,4 +133,344 @@
 
 @utility font-secondary {
   font-family: var(--font-secondary);
+}
+
+@utility animate-poyraz-fade-in {
+  animation: poyraz-fade-in var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-fade-out {
+  animation: poyraz-fade-out var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+@utility animate-poyraz-scale-in {
+  animation: poyraz-scale-in var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-scale-out {
+  animation: poyraz-scale-out var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+@utility animate-poyraz-slide-in-from-top {
+  animation: poyraz-slide-in-from-top
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-slide-in-from-bottom {
+  animation: poyraz-slide-in-from-bottom
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-slide-in-from-left {
+  animation: poyraz-slide-in-from-left
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-slide-in-from-right {
+  animation: poyraz-slide-in-from-right
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-accordion-down {
+  animation: poyraz-accordion-down
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-accordion-up {
+  animation: poyraz-accordion-up var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+/* Compatibility aliases for existing shadcn/tailwindcss-animate class names. */
+@utility animate-in {
+  animation-name: poyraz-enter;
+  animation-duration: var(--poyraz-motion-duration-base, 180ms);
+  animation-timing-function: var(
+    --poyraz-motion-ease-out,
+    cubic-bezier(0.16, 1, 0.3, 1)
+  );
+  animation-fill-mode: both;
+}
+
+@utility animate-out {
+  animation-name: poyraz-exit;
+  animation-duration: var(--poyraz-motion-duration-fast, 120ms);
+  animation-timing-function: var(
+    --poyraz-motion-ease-in,
+    cubic-bezier(0.7, 0, 0.84, 0)
+  );
+  animation-fill-mode: both;
+}
+
+@utility fade-in {
+  --poyraz-enter-opacity: 0;
+}
+
+@utility fade-in-0 {
+  --poyraz-enter-opacity: 0;
+}
+
+@utility fade-out {
+  --poyraz-exit-opacity: 0;
+}
+
+@utility fade-out-0 {
+  --poyraz-exit-opacity: 0;
+}
+
+@utility zoom-in-95 {
+  --poyraz-enter-scale: 0.95;
+}
+
+@utility zoom-out-95 {
+  --poyraz-exit-scale: 0.95;
+}
+
+@utility slide-in-from-top {
+  --poyraz-enter-translate-y: -100%;
+}
+
+@utility slide-in-from-bottom {
+  --poyraz-enter-translate-y: 100%;
+}
+
+@utility slide-in-from-left {
+  --poyraz-enter-translate-x: -100%;
+}
+
+@utility slide-in-from-right {
+  --poyraz-enter-translate-x: 100%;
+}
+
+@utility slide-out-to-top {
+  --poyraz-exit-translate-y: -100%;
+}
+
+@utility slide-out-to-bottom {
+  --poyraz-exit-translate-y: 100%;
+}
+
+@utility slide-out-to-left {
+  --poyraz-exit-translate-x: -100%;
+}
+
+@utility slide-out-to-right {
+  --poyraz-exit-translate-x: 100%;
+}
+
+@utility slide-in-from-top-2 {
+  --poyraz-enter-translate-y: -0.5rem;
+}
+
+@utility slide-in-from-bottom-2 {
+  --poyraz-enter-translate-y: 0.5rem;
+}
+
+@utility slide-in-from-left-2 {
+  --poyraz-enter-translate-x: -0.5rem;
+}
+
+@utility slide-in-from-right-2 {
+  --poyraz-enter-translate-x: 0.5rem;
+}
+
+@utility slide-out-to-top-2 {
+  --poyraz-exit-translate-y: -0.5rem;
+}
+
+@utility slide-out-to-bottom-2 {
+  --poyraz-exit-translate-y: 0.5rem;
+}
+
+@utility slide-out-to-left-2 {
+  --poyraz-exit-translate-x: -0.5rem;
+}
+
+@utility slide-out-to-right-2 {
+  --poyraz-exit-translate-x: 0.5rem;
+}
+
+@utility animate-accordion-down {
+  animation: poyraz-accordion-down
+    var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-accordion-up {
+  animation: poyraz-accordion-up var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+@layer utilities {
+  .slide-in-from-left-1\/2 {
+    --poyraz-enter-translate-x: -50%;
+  }
+
+  .slide-in-from-top-\[2\%\] {
+    --poyraz-enter-translate-y: -2%;
+  }
+
+  .slide-in-from-top-\[48\%\] {
+    --poyraz-enter-translate-y: -48%;
+  }
+
+  .slide-in-from-right-52 {
+    --poyraz-enter-translate-x: 13rem;
+  }
+
+  .slide-in-from-left-52 {
+    --poyraz-enter-translate-x: -13rem;
+  }
+
+  .slide-out-to-left-1\/2 {
+    --poyraz-exit-translate-x: -50%;
+  }
+
+  .slide-out-to-top-\[2\%\] {
+    --poyraz-exit-translate-y: -2%;
+  }
+
+  .slide-out-to-top-\[5\%\] {
+    --poyraz-exit-translate-y: -5%;
+  }
+
+  .slide-out-to-top-\[48\%\] {
+    --poyraz-exit-translate-y: -48%;
+  }
+
+  .slide-out-to-right-52 {
+    --poyraz-exit-translate-x: 13rem;
+  }
+
+  .slide-out-to-left-52 {
+    --poyraz-exit-translate-x: -13rem;
+  }
+}
+
+@keyframes poyraz-enter {
+  from {
+    opacity: var(--poyraz-enter-opacity, 1);
+    transform: translate3d(
+        var(--poyraz-enter-translate-x, 0),
+        var(--poyraz-enter-translate-y, 0),
+        0
+      )
+      scale3d(
+        var(--poyraz-enter-scale, 1),
+        var(--poyraz-enter-scale, 1),
+        var(--poyraz-enter-scale, 1)
+      );
+  }
+}
+
+@keyframes poyraz-exit {
+  to {
+    opacity: var(--poyraz-exit-opacity, 1);
+    transform: translate3d(
+        var(--poyraz-exit-translate-x, 0),
+        var(--poyraz-exit-translate-y, 0),
+        0
+      )
+      scale3d(
+        var(--poyraz-exit-scale, 1),
+        var(--poyraz-exit-scale, 1),
+        var(--poyraz-exit-scale, 1)
+      );
+  }
+}
+
+@keyframes poyraz-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes poyraz-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes poyraz-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes poyraz-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes poyraz-slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes poyraz-slide-in-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes poyraz-slide-in-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+}
+
+@keyframes poyraz-slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(0.5rem);
+  }
+}
+
+@keyframes poyraz-accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes poyraz-accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
 }
