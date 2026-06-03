@@ -242,7 +242,7 @@ function DataTableInner<T>(
 
   /* ── Render ──────────────────────────────────────────────────────── */
   return (
-    <div ref={ref} className={cn("w-full space-y-4", className)}>
+    <div ref={ref} className={cn("w-full space-y-4 animate-poyraz-fade-in", className)}>
       {/* Toolbar */}
       {(searchable || columnToggle || (selectable && selectedIds.size > 0)) && (
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
@@ -260,7 +260,7 @@ function DataTableInner<T>(
 
           <div className="flex items-center gap-2 ml-auto">
             {selectable && selectedIds.size > 0 && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-xs animate-poyraz-scale-in">
                 {selectedIds.size} selected
               </Badge>
             )}
@@ -270,7 +270,7 @@ function DataTableInner<T>(
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 gap-1.5"
+                  className="h-8 gap-1.5 transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[0.98]"
                   onClick={() => setColToggleOpen((v) => !v)}
                 >
                   <SlidersHorizontal className="h-3.5 w-3.5" />
@@ -282,24 +282,24 @@ function DataTableInner<T>(
                       className="fixed inset-0 z-40"
                       onClick={() => setColToggleOpen(false)}
                     />
-                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-background border border-border p-2 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-background border border-border p-2 space-y-0.5 origin-top-right animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-[var(--poyraz-motion-duration-base)]">
                       {columns.map((col) => (
                         <button
                           key={col.id}
                           type="button"
-                          className="flex items-center gap-2 w-full px-2 py-1.5 text-sm hover:bg-muted cursor-pointer transition-colors"
+                          className="flex items-center gap-2 w-full px-2 py-1.5 text-sm hover:bg-muted cursor-pointer transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5"
                           onClick={() => toggleColumn(col.id)}
                         >
                           <span
                             className={cn(
-                              "h-4 w-4 border flex items-center justify-center shrink-0",
+                              "h-4 w-4 border flex items-center justify-center shrink-0 transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
                               hiddenCols.has(col.id)
-                                ? "border-border-strong"
-                                : "border-primary bg-primary text-primary-foreground",
+                                ? "border-border-strong scale-95"
+                                : "border-primary bg-primary text-primary-foreground scale-100",
                             )}
                           >
                             {!hiddenCols.has(col.id) && (
-                              <Check className="h-3 w-3" />
+                              <Check className="h-3 w-3 animate-poyraz-scale-in" />
                             )}
                           </span>
                           {col.header}
@@ -339,7 +339,7 @@ function DataTableInner<T>(
                       "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-muted-foreground",
                       "whitespace-nowrap",
                       isSortable &&
-                        "cursor-pointer select-none hover:text-foreground transition-colors",
+                        "cursor-pointer select-none hover:text-foreground transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
                       col.className,
                     )}
                     onClick={isSortable ? () => handleSort(col.id) : undefined}
@@ -347,13 +347,13 @@ function DataTableInner<T>(
                     <span className="inline-flex items-center gap-1.5">
                       {col.header}
                       {isSortable && (
-                        <span className="text-border">
+                        <span className="text-border inline-flex transition-[color,transform,opacity] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
                           {isActive && sortDir === "asc" ? (
-                            <ArrowUp className="h-3.5 w-3.5 text-primary" />
+                            <ArrowUp className="h-3.5 w-3.5 text-primary animate-poyraz-scale-in" />
                           ) : isActive && sortDir === "desc" ? (
-                            <ArrowDown className="h-3.5 w-3.5 text-primary" />
+                            <ArrowDown className="h-3.5 w-3.5 text-primary animate-poyraz-scale-in" />
                           ) : (
-                            <ArrowUpDown className="h-3.5 w-3.5" />
+                            <ArrowUpDown className="h-3.5 w-3.5 opacity-70 transition-opacity duration-[var(--poyraz-motion-duration-fast)]" />
                           )}
                         </span>
                       )}
@@ -368,7 +368,7 @@ function DataTableInner<T>(
               <tr>
                 <td
                   colSpan={visibleColumns.length + (selectable ? 1 : 0)}
-                  className="p-10 text-center text-sm text-placeholder"
+                  className="p-10 text-center text-sm text-placeholder animate-poyraz-fade-in"
                 >
                   {emptyMessage}
                 </td>
@@ -381,7 +381,7 @@ function DataTableInner<T>(
                   <tr
                     key={id}
                     className={cn(
-                      "border-b border-accent transition-colors",
+                      "border-b border-accent transition-[background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
                       "hover:bg-muted/50",
                       isSelected && "bg-primary-muted/50",
                     )}
@@ -439,7 +439,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:-translate-x-0.5"
               disabled={page === 0}
               onClick={() => setPage(0)}
               aria-label="First page"
@@ -449,7 +449,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:-translate-x-0.5"
               disabled={page === 0}
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               aria-label="Previous page"
@@ -464,7 +464,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:translate-x-0.5"
               disabled={page >= totalPages - 1}
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               aria-label="Next page"
@@ -474,7 +474,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:translate-x-0.5"
               disabled={page >= totalPages - 1}
               onClick={() => setPage(totalPages - 1)}
               aria-label="Last page"

@@ -54,7 +54,11 @@ function isDarkVariant(v: SidebarContextValue["variant"]) {
 /* ================================================================== */
 
 const sidebarVariants = cva(
-  ["flex flex-col", "transition-all duration-300 ease-out", "h-full"].join(" "),
+  [
+    "flex flex-col",
+    "transition-[width,transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
+    "h-full",
+  ].join(" "),
   {
     variants: {
       variant: {
@@ -137,7 +141,7 @@ const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
         {/* Floating backdrop */}
         {resolvedVariant === "floating" && mobileOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black/40"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] animate-poyraz-fade-in"
             onClick={() => setMobileOpen(false)}
           />
         )}
@@ -147,7 +151,8 @@ const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
           className={cn(
             sidebarVariants({ variant: resolvedVariant }),
             collapsibleWidth,
-            resolvedVariant === "floating" && "shadow-none",
+            resolvedVariant === "floating" &&
+              "shadow-none animate-poyraz-slide-in-from-left will-change-transform",
             className,
           )}
           {...props}
@@ -371,13 +376,13 @@ const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
               dark
                 ? "text-slate-500 hover:text-slate-400"
                 : "text-placeholder hover:text-muted-foreground",
-              "cursor-pointer transition-colors duration-150",
+              "cursor-pointer transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
             )}
           >
             {title}
             <ChevronDown
               className={cn(
-                "h-3 w-3 transition-transform duration-200",
+                "h-3 w-3 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
                 open && "rotate-180",
               )}
             />
@@ -393,7 +398,14 @@ const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
             {title}
           </div>
         )}
-        {open && children}
+        <div
+          className={cn(
+            "grid overflow-hidden transition-[grid-template-rows,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+            open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+          )}
+        >
+          <div className="min-h-0 overflow-hidden">{children}</div>
+        </div>
       </div>
     );
   },
@@ -446,7 +458,7 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
           "group relative flex items-center gap-3",
           "px-2.5 py-2",
           "text-sm font-medium",
-          "rounded-sm transition-colors duration-150",
+          "rounded-sm transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
           "cursor-pointer",
           // Active state
           active
@@ -521,7 +533,8 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
               "border border-slate-700",
               "opacity-0 pointer-events-none",
               "group-hover:opacity-100",
-              "transition-opacity duration-150",
+              "transition-[opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+              "group-hover:translate-x-1",
             )}
           >
             {children}
@@ -564,7 +577,7 @@ const SidebarMenuAction = React.forwardRef<
         "h-6 w-6",
         "rounded-sm",
         "opacity-0 group-hover:opacity-100",
-        "transition-all duration-150",
+        "transition-[color,background-color,opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
         "cursor-pointer",
         dark
           ? "text-slate-500 hover:text-slate-300 hover:bg-slate-800"
@@ -735,7 +748,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
           dark
             ? "border-slate-600 hover:bg-slate-800 hover:border-slate-400 text-slate-300"
             : "border-border-strong hover:bg-accent hover:border-input",
-          "transition-colors duration-150",
+          "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-95",
           "cursor-pointer",
           className,
         )}
@@ -795,7 +808,7 @@ const SidebarSearch = React.forwardRef<HTMLInputElement, SidebarSearchProps>(
               "w-full h-7 pl-8 pr-3",
               "text-xs font-medium",
               "border rounded-sm",
-              "transition-colors duration-150",
+              "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
               "focus:outline-none focus:ring-2 focus:ring-ring",
               dark
                 ? "bg-slate-900 border-slate-700 text-slate-200 placeholder:text-slate-500"
@@ -844,7 +857,7 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
             "w-full flex items-center gap-3",
             "px-2.5 py-2",
             "text-sm font-medium",
-            "rounded-sm transition-colors duration-150",
+            "rounded-sm transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
             "cursor-pointer",
             dark
               ? "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
@@ -866,23 +879,28 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
           <span className="flex-1 truncate text-left">{label}</span>
           <ChevronDown
             className={cn(
-              "h-3.5 w-3.5 transition-transform duration-200",
+              "h-3.5 w-3.5 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
               open && "rotate-180",
               dark ? "text-slate-500" : "text-placeholder",
             )}
           />
         </button>
-        {open && (
+        <div
+          className={cn(
+            "grid overflow-hidden transition-[grid-template-rows,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+            open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+          )}
+        >
           <div
             className={cn(
-              "ml-5 pl-3",
+              "min-h-0 overflow-hidden ml-5 pl-3",
               "border-l",
               dark ? "border-slate-800" : "border-border",
             )}
           >
             {children}
           </div>
-        )}
+        </div>
       </div>
     );
   },
@@ -911,7 +929,7 @@ const SidebarSubMenuItem = React.forwardRef<
       className={cn(
         "px-3 py-2",
         "text-sm",
-        "rounded-sm transition-colors duration-150",
+        "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
         "cursor-pointer",
         active
           ? dark

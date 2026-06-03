@@ -122,7 +122,7 @@ const FooterLink = React.forwardRef<
     className={cn(
       "text-sm text-muted-foreground",
       "hover:text-primary hover:underline",
-      "transition-colors duration-150",
+      "transition-[color,text-decoration-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5",
       className,
     )}
     {...props}
@@ -184,7 +184,7 @@ const FooterSocialLink = React.forwardRef<
       "border border-border-strong rounded-sm",
       "text-muted-foreground",
       "hover:bg-primary hover:text-primary-foreground hover:border-primary-800",
-      "transition-colors duration-150",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105 active:scale-95",
       className,
     )}
     {...props}
@@ -271,7 +271,13 @@ function FooterNewsletterInner(
   return (
     <div
       ref={ref}
-      className={cn("py-6 px-6", "border border-border", "bg-muted", className)}
+      className={cn(
+        "py-6 px-6",
+        "border border-border",
+        "bg-muted",
+        "transition-[background-color,border-color] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+        className,
+      )}
       {...props}
     >
       <h4 className="text-sm font-bold uppercase tracking-wide mb-1">
@@ -291,6 +297,7 @@ function FooterNewsletterInner(
             "placeholder:text-placeholder",
             "focus:outline-none focus:border-primary focus:ring-2 focus:ring-ring focus:ring-offset-1",
             "rounded-sm shadow-none",
+            "transition-[border-color,box-shadow,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
           )}
         />
         <button
@@ -302,7 +309,7 @@ function FooterNewsletterInner(
             "border border-primary-800",
             "hover:bg-primary-600 hover:border-primary-900",
             "active:bg-primary-700 active:scale-[0.97]",
-            "transition-all duration-150",
+            "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
             "rounded-sm shadow-none cursor-pointer",
           )}
         >
@@ -369,6 +376,7 @@ const FooterBadge = React.forwardRef<
       "text-[10px] font-bold uppercase tracking-wider",
       "border border-border rounded-sm",
       "text-muted-foreground bg-muted",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5",
       className,
     )}
     {...props}
@@ -414,6 +422,7 @@ const FooterCTA = React.forwardRef<HTMLDivElement, FooterCTAProps>(
         "py-5 px-6",
         "border border-border rounded-sm",
         "bg-muted",
+        "transition-[background-color,border-color,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
         className,
       )}
       {...props}
@@ -465,7 +474,7 @@ const FooterAppLink = React.forwardRef<
       "border border-border-strong rounded-sm",
       "text-xs font-medium text-secondary-foreground",
       "hover:bg-muted hover:border-input",
-      "transition-colors duration-150",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5 active:scale-[0.98]",
       className,
     )}
     {...props}

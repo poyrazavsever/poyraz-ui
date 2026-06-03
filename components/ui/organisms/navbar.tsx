@@ -111,7 +111,8 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
           className={cn(
             navbarVariants({ variant }),
             sticky && "sticky top-0 z-50",
-            autoHide && "transition-transform duration-300",
+            autoHide &&
+              "transition-transform duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
             hidden && "-translate-y-full",
             className,
           )}
@@ -332,14 +333,14 @@ const NavbarLinks = React.forwardRef<
         <div className={cn(containerClassName)}>
           <NavigationMenuPrimitive.Viewport
             className={cn(
-              "relative w-full overflow-hidden",
+              "relative w-full overflow-hidden transform-gpu origin-top",
               "bg-background",
               "border border-border border-t-0",
               "rounded-sm shadow-none",
               "h-[var(--radix-navigation-menu-viewport-height)]",
-              "transition-[width,height] duration-200",
-              "data-[state=open]:animate-in data-[state=open]:fade-in",
-              "data-[state=closed]:animate-out data-[state=closed]:fade-out",
+              "transition-[width,height,opacity,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2",
             )}
           />
         </div>
@@ -356,7 +357,7 @@ NavbarLinks.displayName = "NavbarLinks";
 const navLinkStyles = [
   "inline-flex items-center gap-1 px-2.5 py-1.5",
   "text-sm font-medium tracking-wide",
-  "rounded-sm transition-colors duration-150",
+  "rounded-sm transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
   "hover:bg-accent",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
   "data-[active]:border-b data-[active]:border-primary",
@@ -393,7 +394,7 @@ const NavbarDropdownTrigger = React.forwardRef<
   >
     {children}
     <ChevronDown
-      className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180"
+      className="h-3.5 w-3.5 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] group-data-[state=open]:rotate-180"
       aria-hidden
     />
   </NavigationMenuPrimitive.Trigger>
@@ -414,9 +415,9 @@ const NavbarDropdown = React.forwardRef<
     <NavbarDropdownTrigger>{label}</NavbarDropdownTrigger>
     <NavigationMenuPrimitive.Content
       className={cn(
-        "absolute left-0 top-0 w-full",
-        "data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in",
-        "data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out",
+        "absolute left-0 top-0 w-full transform-gpu",
+        "data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=from-]:zoom-in-95",
+        "data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out data-[motion^=to-]:zoom-out-95",
         "data-[motion=from-end]:slide-in-from-right-52",
         "data-[motion=from-start]:slide-in-from-left-52",
         "data-[motion=to-end]:slide-out-to-right-52",
@@ -491,7 +492,12 @@ const NavbarMegaMenuFeatured = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("border border-border p-4", "bg-muted", className)}
+    className={cn(
+      "border border-border p-4",
+      "bg-muted",
+      "transition-[background-color,border-color,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+      className,
+    )}
     {...props}
   >
     {children}
@@ -516,8 +522,8 @@ const NavbarMegaMenuItem = React.forwardRef<
       className={cn(
         "block select-none p-3",
         "border border-transparent",
-        "rounded-sm transition-colors",
-        "hover:bg-muted hover:border-border",
+        "rounded-sm transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+        "hover:bg-muted hover:border-border hover:translate-x-0.5",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
@@ -616,7 +622,7 @@ const NavbarMobileMenu = React.forwardRef<
       {/* Backdrop */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-[998] bg-black/40 transition-opacity duration-300",
+          "lg:hidden fixed inset-0 z-[998] bg-black/40 backdrop-blur-[1px] transition-[opacity,backdrop-filter] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
@@ -632,8 +638,8 @@ const NavbarMobileMenu = React.forwardRef<
           "lg:hidden fixed top-0 right-0 z-[999] h-full w-[75%] max-w-sm",
           "bg-background",
           "border-l border-border",
-          "shadow-none",
-          "transition-transform duration-300 ease-in-out",
+          "shadow-none transform-gpu will-change-transform",
+          "transition-transform duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
           mobileOpen ? "translate-x-0" : "translate-x-full",
           className,
         )}
@@ -653,7 +659,7 @@ const NavbarMobileMenu = React.forwardRef<
               "h-8 w-8",
               "border rounded-sm",
               "border-border-strong hover:bg-accent hover:border-input",
-              "transition-colors duration-150",
+              "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-95",
               "cursor-pointer",
             )}
           >
@@ -662,7 +668,7 @@ const NavbarMobileMenu = React.forwardRef<
         </div>
 
         {/* Panel links */}
-        <nav className="flex flex-col gap-1 px-4 py-4 overflow-y-auto h-[calc(100%-57px)]">
+        <nav className="flex flex-col gap-1 px-4 py-4 overflow-y-auto h-[calc(100%-57px)] animate-poyraz-fade-in">
           {children}
         </nav>
       </div>
@@ -689,7 +695,7 @@ const NavbarMobileLink = React.forwardRef<
       "block px-2.5 py-2",
       "text-sm font-medium",
       "border border-transparent",
-      "transition-colors duration-150",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       active
         ? "bg-primary-muted text-primary-muted-foreground border-primary-200 font-semibold"
         : "hover:bg-muted hover:border-border",
@@ -860,7 +866,7 @@ function NavbarPopoverDropdown({
             {label}
             <ChevronDown
               className={cn(
-                "h-3.5 w-3.5 transition-transform duration-200",
+                "h-3.5 w-3.5 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
                 open && "rotate-180",
               )}
               aria-hidden
@@ -875,11 +881,11 @@ function NavbarPopoverDropdown({
               "z-[70] min-w-[180px]",
               "bg-background",
               "border border-border",
-              "rounded-sm shadow-sm",
+              "rounded-sm shadow-sm origin-[var(--radix-popover-content-transform-origin)]",
               "py-1",
-              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
-              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-top-2",
-              "duration-150",
+              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2",
+              "duration-[var(--poyraz-motion-duration-base)]",
               className,
             )}
             style={width ? { width } : undefined}
@@ -906,7 +912,7 @@ const NavbarPopoverDropdownItem = React.forwardRef<
     className={cn(
       "block px-3 py-1.5",
       "text-sm font-medium text-secondary-foreground",
-      "transition-colors duration-150",
+      "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "hover:bg-muted hover:text-foreground",
       "focus-visible:outline-none focus-visible:bg-muted",
       className,
@@ -952,7 +958,7 @@ function NavbarPanelDropdown({
             {label}
             <ChevronDown
               className={cn(
-                "h-3.5 w-3.5 transition-transform duration-200",
+                "h-3.5 w-3.5 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
                 open && "rotate-180",
               )}
               aria-hidden
@@ -967,11 +973,11 @@ function NavbarPanelDropdown({
               "z-[70]",
               "bg-background",
               "border border-border",
-              "rounded-sm shadow-sm",
+              "rounded-sm shadow-sm origin-[var(--radix-popover-content-transform-origin)]",
               "p-3",
-              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
-              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-top-2",
-              "duration-150",
+              "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2",
+              "duration-[var(--poyraz-motion-duration-base)]",
               className,
             )}
             style={{ width }}
@@ -1003,8 +1009,8 @@ const NavbarPanelDropdownItem = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-start gap-3 p-2.5",
-      "rounded-sm transition-colors duration-150",
-      "hover:bg-muted",
+      "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+      "hover:bg-muted hover:translate-x-0.5",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       className,
     )}
@@ -1063,7 +1069,7 @@ const NavbarMobileDropdown = React.forwardRef<
           "px-2.5 py-2",
           "text-sm font-medium",
           "border border-transparent",
-          "transition-colors duration-150",
+          "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
           "hover:bg-muted hover:border-border",
           "cursor-pointer",
         )}
@@ -1071,7 +1077,7 @@ const NavbarMobileDropdown = React.forwardRef<
         {label}
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-placeholder transition-transform duration-200",
+            "h-4 w-4 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
             open && "rotate-180",
           )}
           aria-hidden
@@ -1079,7 +1085,10 @@ const NavbarMobileDropdown = React.forwardRef<
       </button>
       <div
         ref={contentRef}
-        className="overflow-hidden transition-[max-height] duration-200 ease-in-out"
+        className={cn(
+          "overflow-hidden transition-[max-height,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+          open ? "opacity-100" : "opacity-0",
+        )}
         style={{ maxHeight: open ? `${height}px` : "0px" }}
       >
         <div className="pl-3 pb-1 flex flex-col gap-0.5">{children}</div>
@@ -1138,8 +1147,9 @@ const NavbarMobileDrillMenu = React.forwardRef<
         {/* Main panel */}
         <div
           className={cn(
-            "transition-transform duration-300 ease-in-out",
+            "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
             activePanel ? "-translate-x-full" : "translate-x-0",
+            activePanel ? "opacity-0" : "opacity-100",
           )}
         >
           {children}
@@ -1175,14 +1185,17 @@ const NavbarMobileDrillTrigger = React.forwardRef<
         "px-2.5 py-2",
         "text-sm font-medium",
         "border border-transparent",
-        "transition-colors duration-150",
+        "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group",
         "hover:bg-muted hover:border-border",
         "cursor-pointer",
       )}
       {...props}
     >
       {children}
-      <ChevronRight className="h-4 w-4 text-placeholder" aria-hidden />
+      <ChevronRight
+        className="h-4 w-4 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5"
+        aria-hidden
+      />
     </button>
   );
 });
@@ -1212,8 +1225,9 @@ const NavbarMobileDrillPanel = React.forwardRef<
       className={cn(
         "absolute inset-0 h-full",
         "bg-white",
-        "transition-transform duration-300 ease-in-out",
+        "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
         isActive ? "translate-x-0" : "translate-x-full",
+        isActive ? "opacity-100" : "opacity-0",
         className,
       )}
       {...props}
@@ -1226,7 +1240,7 @@ const NavbarMobileDrillPanel = React.forwardRef<
           "px-2.5 py-2 mb-1",
           "text-sm font-medium text-muted-foreground",
           "border-b border-accent",
-          "transition-colors duration-150",
+          "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
           "hover:bg-muted hover:text-secondary-foreground",
           "cursor-pointer",
         )}

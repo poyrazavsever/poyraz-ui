@@ -499,7 +499,26 @@ No component API changes are required.
 
 ## 10) Faz 7 - Organisms Motion Genisletmesi
 
-Durum: Planlandi.
+Durum: Tamamlandi.
+
+Uygulanan dosyalar:
+
+- `components/ui/organisms/navbar.tsx`
+- `components/ui/organisms/sidebar.tsx`
+- `components/ui/organisms/announcement-bar.tsx`
+- `components/ui/organisms/data-table.tsx`
+- `components/ui/organisms/footer.tsx`
+- `docs/motion-roadmap.md`
+
+Not:
+
+- Navbar desktop viewport, mega menu item, popover/panel dropdown ve mobile panel motion'i merkezi duration/easing tokenlariyla hizalandi.
+- Navbar mobile dropdown ve drill-down panel gecisleri opacity/transform transitionlariyla yumusatildi.
+- Sidebar floating backdrop/panel, collapse width, nested section ve submenu acilis/kapanislari daha kontrollu hale getirildi.
+- AnnouncementBar mount, icon/action ve dismiss affordance'i merkezi motion utility'leriyle iyilestirildi.
+- DataTable toolbar, column toggle dropdown, sort icon, selected badge, empty state, row state ve pagination icon hareketleri polish aldi.
+- Footer link, social, newsletter, CTA, badge ve app link etkilesimleri kisa token tabanli transition'larla hizalandi.
+- Public API, prop'lar ve import path'leri degismedi.
 
 Hedef: Molecule katmanindan sonra, kullanicinin sayfa navigasyonu ve layout davranisinda en cok gordugu organism componentlerine motion polish eklemek.
 
