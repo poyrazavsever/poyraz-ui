@@ -151,7 +151,7 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(
         <img
           src={image}
           alt={title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover/img:scale-105"
         />
         {badge && (
           <span className="absolute top-3 left-3 z-10 text-[10px] font-semibold uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-sm">

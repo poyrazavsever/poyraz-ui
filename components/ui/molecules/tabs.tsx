@@ -17,6 +17,7 @@ const TabsList = React.forwardRef<
       "inline-flex h-auto min-h-[36px] items-center p-0 text-muted-foreground",
       "w-full overflow-x-auto scrollbar-none",
       "flex-wrap sm:flex-nowrap",
+      "transition-colors duration-150 ease-out",
       className,
     )}
     {...props}
@@ -31,7 +32,9 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap px-4 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "inline-flex items-center justify-center whitespace-nowrap px-4 py-1.5 text-sm font-medium ring-offset-background",
+      "transition-all duration-150 ease-out",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       // Brutalist state
       "border-2 border-transparent border-b-2 border-b-transparent", // Base
       "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:border data-[state=active]:border-border-strong data-[state=active]:border-b-transparent data-[state=active]:shadow-none",
@@ -56,6 +59,7 @@ const TabsContent = React.forwardRef<
     className={cn(
       "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       "p-4 border border-border", // Wrap content in a box? Or just let it be.
+      "data-[state=active]:animate-poyraz-fade-in",
       // User asked for "Molecules". Tabs Content usually contains other things.
       // I'll add a default border to the content area to make it distinct.
       className,

@@ -169,8 +169,9 @@ function Calendar({
           disabled={disabled}
           onClick={() => onSelect?.(date)}
           className={cn(
-            "h-8 w-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
+            "h-8 w-8 text-sm font-medium cursor-pointer",
             "flex items-center justify-center",
+            "transition-all duration-150 ease-out active:scale-95",
             "hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             today && !sel && "border border-primary",
@@ -201,7 +202,7 @@ function Calendar({
             onClick={() => setView("months")}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-colors",
+              "px-2 py-1 hover:bg-accent transition-colors duration-150 ease-out",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
@@ -231,7 +232,7 @@ function Calendar({
         </div>
 
         {/* Day grid */}
-        <div className="grid grid-cols-7">{cells}</div>
+        <div className="grid grid-cols-7 animate-poyraz-fade-in">{cells}</div>
       </>
     );
   };
@@ -261,7 +262,7 @@ function Calendar({
             }}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-colors",
+              "px-2 py-1 hover:bg-accent transition-colors duration-150 ease-out",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
@@ -279,7 +280,7 @@ function Calendar({
         </div>
 
         {/* Month grid: 4×3 */}
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-3 gap-1 animate-poyraz-fade-in">
           {MONTHS_SHORT.map((m, i) => {
             const isCurrent =
               i === now.getMonth() && viewYear === now.getFullYear();
@@ -296,8 +297,9 @@ function Calendar({
                   setView("days");
                 }}
                 className={cn(
-                  "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
+                  "h-8 text-sm font-medium cursor-pointer",
                   "flex items-center justify-center",
+                  "transition-all duration-150 ease-out active:scale-95",
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
@@ -347,7 +349,7 @@ function Calendar({
         </div>
 
         {/* Year grid: 4×3 */}
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-3 gap-1 animate-poyraz-fade-in">
           {years.map((y) => {
             const isCurrent = y === now.getFullYear();
             const isSelected = selected && y === selected.getFullYear();
@@ -360,8 +362,9 @@ function Calendar({
                   setView("months");
                 }}
                 className={cn(
-                  "h-8 text-sm font-medium transition-colors duration-150 cursor-pointer",
+                  "h-8 text-sm font-medium cursor-pointer",
                   "flex items-center justify-center",
+                  "transition-all duration-150 ease-out active:scale-95",
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",

@@ -18,6 +18,8 @@ const alertVariants = cva(
   [
     "relative w-full border p-3",
     "rounded-sm shadow-none",
+    "animate-poyraz-slide-in-from-top",
+    "transition-colors duration-150 ease-out",
     // Icon positioning
     "[&>svg~*]:pl-8 [&>svg+div]:translate-y-[-3px]",
     "[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4",
@@ -92,7 +94,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         className={cn(alertVariants({ variant }), className)}
         {...props}
       >
-        {icon !== undefined ? icon : <IconComponent className="h-4 w-4" />}
+        {icon !== undefined ? (
+          icon
+        ) : (
+          <IconComponent className="h-4 w-4 animate-poyraz-scale-in" />
+        )}
         {children}
       </div>
     );
