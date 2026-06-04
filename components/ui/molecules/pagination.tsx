@@ -22,7 +22,7 @@ const PaginationContent = React.forwardRef<
     ref={ref}
     className={cn(
       "flex flex-row flex-wrap items-center justify-center gap-1",
-      "transition-colors duration-150 ease-out",
+      "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}
@@ -59,8 +59,8 @@ const PaginationLink = ({
       // Override for brutalist "active" state explicitly if needed, but button variant handles it.
       // However, outline button has border-slate-900.
       // Let's ensure active state is distinct.
-      "transition-all duration-150 ease-out",
-      isActive && "bg-accent border-foreground scale-[1.02]", // Optional override
+      "transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px active:translate-y-0",
+      isActive && "bg-accent border-foreground scale-[1.02] animate-poyraz-scale-in", // Optional override
       className,
     )}
     {...props}
@@ -78,7 +78,7 @@ const PaginationPrevious = ({
     className={cn("group gap-1 pl-2.5", className)}
     {...props}
   >
-    <ChevronLeft className="h-4 w-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5" />
+    <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
     <span className="hidden sm:inline">Previous</span>
   </PaginationLink>
 );
@@ -95,7 +95,7 @@ const PaginationNext = ({
     {...props}
   >
     <span className="hidden sm:inline">Next</span>
-    <ChevronRight className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5" />
+    <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
   </PaginationLink>
 );
 PaginationNext.displayName = "PaginationNext";
@@ -108,12 +108,12 @@ const PaginationEllipsis = ({
     aria-hidden
     className={cn(
       "flex h-8 w-8 items-center justify-center text-placeholder",
-      "transition-colors duration-150 ease-out",
+      "transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="h-4 w-4 animate-poyraz-fade-in" />
     <span className="sr-only">More pages</span>
   </span>
 );

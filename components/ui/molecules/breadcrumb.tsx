@@ -19,7 +19,7 @@ const BreadcrumbList = React.forwardRef<
     ref={ref}
     className={cn(
       "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
-      "transition-colors duration-150 ease-out",
+      "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}
@@ -51,7 +51,7 @@ const BreadcrumbLink = React.forwardRef<
     <Comp
       ref={ref}
       className={cn(
-        "transition-colors duration-150 ease-out hover:text-foreground",
+        "transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:text-foreground hover:-translate-y-px",
         className,
       )}
       {...props}
@@ -69,7 +69,10 @@ const BreadcrumbPage = React.forwardRef<
     role="link"
     aria-disabled="true"
     aria-current="page"
-    className={cn("font-normal text-foreground animate-poyraz-fade-in", className)}
+    className={cn(
+      "font-normal text-foreground animate-poyraz-fade-in",
+      className,
+    )}
     {...props}
   />
 ));
@@ -84,7 +87,7 @@ const BreadcrumbSeparator = ({
     role="presentation"
     aria-hidden="true"
     className={cn(
-      "text-placeholder transition-colors duration-150 ease-out [&>svg]:size-3.5",
+      "text-placeholder transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] [&>svg]:size-3.5 [&>svg]:transition-transform [&>svg]:duration-[var(--poyraz-motion-duration-fast)]",
       className,
     )}
     {...props}
@@ -102,12 +105,12 @@ const BreadcrumbEllipsis = ({
     role="presentation"
     aria-hidden="true"
     className={cn(
-      "flex h-9 w-9 items-center justify-center text-placeholder transition-colors duration-150 ease-out",
+      "flex h-9 w-9 items-center justify-center text-placeholder transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="h-4 w-4 animate-poyraz-fade-in" />
     <span className="sr-only">More</span>
   </span>
 );

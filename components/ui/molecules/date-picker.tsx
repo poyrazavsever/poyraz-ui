@@ -63,12 +63,14 @@ function DatePicker({
           disabled={disabled}
           className={cn(
             "group w-full justify-start text-left font-normal",
+            "transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+            "hover:-translate-y-px active:translate-y-0",
             !selected && "text-placeholder",
             open && "border-primary ring-2 ring-ring ring-offset-2",
             className,
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-data-[state=open]:scale-105" />
+          <CalendarIcon className="mr-2 h-4 w-4 shrink-0 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] group-data-[state=open]:scale-110" />
           {selected ? formatDate(selected) : placeholder}
         </Button>
       </PopoverTrigger>

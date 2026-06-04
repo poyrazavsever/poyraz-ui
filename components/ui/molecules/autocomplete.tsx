@@ -207,7 +207,7 @@ function Autocomplete({
           "flex flex-wrap items-center gap-1.5 min-h-[36px] w-full",
           "border border-input bg-background px-3 py-2",
           "rounded-sm shadow-none",
-          "transition-all duration-200 ease-out",
+          "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
           open && "border-primary ring-2 ring-ring ring-offset-2",
           disabled && "opacity-40 cursor-not-allowed",
         )}
@@ -230,7 +230,7 @@ function Autocomplete({
                 {label}
                 <button
                   type="button"
-                  className="ml-0.5 hover:text-primary transition-colors cursor-pointer"
+                  className="ml-0.5 hover:text-primary transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-110 active:scale-95 cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleRemove(val);
@@ -286,24 +286,28 @@ function Autocomplete({
             "absolute z-50 mt-1 w-full max-h-[240px] overflow-y-auto",
             "border border-border bg-background",
             "shadow-none",
-            "origin-top animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
+            "origin-top animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
           )}
         >
           {loading && (
-            <div className="flex items-center justify-center py-6">
+            <div className="flex items-center justify-center py-6 animate-poyraz-fade-in">
               <div className="h-4 w-4 border border-primary border-t-transparent animate-spin" />
             </div>
           )}
 
           {!loading && flatFiltered.length === 0 && (
-            <div className="px-3 py-6 text-center text-sm text-placeholder">
+            <div className="px-3 py-6 text-center text-sm text-placeholder animate-poyraz-fade-in">
               {emptyText}
             </div>
           )}
 
           {!loading &&
             Array.from(grouped.entries()).map(([group, opts]) => (
-              <div key={group || "__ungrouped"} role="group">
+              <div
+                key={group || "__ungrouped"}
+                role="group"
+                className="animate-poyraz-fade-in"
+              >
                 {group && (
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-placeholder border-b border-accent">
                     {group}
@@ -323,9 +327,10 @@ function Autocomplete({
                       className={cn(
                         "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
                         "border border-transparent",
-                        "transition-colors duration-100 ease-out",
-                        isHighlighted && "bg-muted border-border",
-                        !isHighlighted && "hover:bg-muted hover:border-border",
+                        "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+                        isHighlighted && "bg-muted border-border translate-x-0.5",
+                        !isHighlighted &&
+                          "hover:bg-muted hover:border-border hover:translate-x-0.5",
                         opt.disabled && "pointer-events-none opacity-40",
                       )}
                       onClick={() => {
@@ -335,7 +340,7 @@ function Autocomplete({
                     >
                       <span className="flex-1 truncate">{opt.label}</span>
                       {isSelected && (
-                        <Check className="h-4 w-4 shrink-0 text-primary" />
+                        <Check className="h-4 w-4 shrink-0 text-primary animate-poyraz-scale-in" />
                       )}
                     </div>
                   );

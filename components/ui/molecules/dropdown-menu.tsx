@@ -28,15 +28,16 @@ const DropdownMenuSubTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       "group flex cursor-default select-none items-center px-2 py-1.5 text-sm outline-none",
-      "transition-colors duration-150 ease-out",
+      "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+      "focus:translate-x-0.5 data-[state=open]:translate-x-0.5",
       inset && "pl-8",
       className,
     )}
     {...props}
   >
     {children}
-    <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-150 ease-out group-data-[state=open]:translate-x-0.5" />
+    <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-data-[state=open]:translate-x-0.5" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName =
@@ -96,8 +97,9 @@ const DropdownMenuItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center px-2 py-1.5 text-sm outline-none",
-      "transition-colors duration-100 ease-out",
+      "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:translate-x-0.5",
       inset && "pl-8",
       className,
     )}
@@ -114,8 +116,9 @@ const DropdownMenuCheckboxItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center py-1.5 pl-8 pr-2 text-sm outline-none",
-      "transition-colors duration-100 ease-out",
+      "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:translate-x-0.5",
       className,
     )}
     checked={checked}
@@ -123,7 +126,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Check className="h-4 w-4" />
+        <Check className="h-4 w-4 animate-poyraz-scale-in" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -140,15 +143,16 @@ const DropdownMenuRadioItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center py-1.5 pl-8 pr-2 text-sm outline-none",
-      "transition-colors duration-100 ease-out",
+      "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:translate-x-0.5",
       className,
     )}
     {...props}
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Circle className="h-2 w-2 fill-current" />
+        <Circle className="h-2 w-2 fill-current animate-poyraz-scale-in" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}

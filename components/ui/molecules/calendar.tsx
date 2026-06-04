@@ -191,18 +191,18 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
             onClick={prevMonth}
             aria-label="Previous month"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
           </Button>
           <button
             type="button"
             onClick={() => setView("months")}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-colors duration-150 ease-out",
+              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
@@ -211,11 +211,11 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
             onClick={nextMonth}
             aria-label="Next month"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
           </Button>
         </div>
 
@@ -232,7 +232,9 @@ function Calendar({
         </div>
 
         {/* Day grid */}
-        <div className="grid grid-cols-7 animate-poyraz-fade-in">{cells}</div>
+        <div className="grid grid-cols-7 animate-poyraz-slide-in-from-bottom">
+          {cells}
+        </div>
       </>
     );
   };
@@ -248,11 +250,11 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
             onClick={() => setViewYear((y) => y - 1)}
             aria-label="Previous year"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
           </Button>
           <button
             type="button"
@@ -262,7 +264,7 @@ function Calendar({
             }}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-colors duration-150 ease-out",
+              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
@@ -271,16 +273,16 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
             onClick={() => setViewYear((y) => y + 1)}
             aria-label="Next year"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
           </Button>
         </div>
 
         {/* Month grid: 4×3 */}
-        <div className="grid grid-cols-3 gap-1 animate-poyraz-fade-in">
+        <div className="grid grid-cols-3 gap-1 animate-poyraz-slide-in-from-bottom">
           {MONTHS_SHORT.map((m, i) => {
             const isCurrent =
               i === now.getMonth() && viewYear === now.getFullYear();
@@ -328,11 +330,11 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
             onClick={() => setDecadeStart((d) => d - 12)}
             aria-label="Previous decade"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
           </Button>
           <span className="text-sm font-bold uppercase tracking-wide">
             {decadeStart} – {decadeStart + 11}
@@ -340,16 +342,16 @@ function Calendar({
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7"
+            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
             onClick={() => setDecadeStart((d) => d + 12)}
             aria-label="Next decade"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
           </Button>
         </div>
 
         {/* Year grid: 4×3 */}
-        <div className="grid grid-cols-3 gap-1 animate-poyraz-fade-in">
+        <div className="grid grid-cols-3 gap-1 animate-poyraz-slide-in-from-bottom">
           {years.map((y) => {
             const isCurrent = y === now.getFullYear();
             const isSelected = selected && y === selected.getFullYear();
@@ -382,7 +384,7 @@ function Calendar({
   };
 
   return (
-    <div className={cn("p-3 select-none", className)}>
+    <div className={cn("p-3 select-none animate-poyraz-fade-in", className)}>
       {view === "days" && renderDays()}
       {view === "months" && renderMonths()}
       {view === "years" && renderYears()}

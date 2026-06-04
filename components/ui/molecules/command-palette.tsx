@@ -111,9 +111,12 @@ const CommandPaletteInput = React.forwardRef<
 
   return (
     <div
-      className={cn("flex items-center gap-2 px-4", "border-b border-border")}
+      className={cn(
+        "flex items-center gap-2 px-4",
+        "border-b border-border transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+      )}
     >
-      <Search className="h-4 w-4 shrink-0 text-placeholder" />
+      <Search className="h-4 w-4 shrink-0 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]" />
       <input
         ref={ref}
         value={search}
@@ -130,7 +133,7 @@ const CommandPaletteInput = React.forwardRef<
         )}
         {...props}
       />
-      <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 transition-all duration-150 ease-out hover:opacity-100 hover:bg-accent cursor-pointer">
+      <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 transition-[opacity,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:opacity-100 hover:bg-accent hover:scale-105 active:scale-95 cursor-pointer">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -147,7 +150,10 @@ const CommandPaletteList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("max-h-[300px] overflow-y-auto p-2", className)}
+    className={cn(
+      "max-h-[300px] overflow-y-auto p-2 animate-poyraz-fade-in",
+      className,
+    )}
     role="listbox"
     {...props}
   />
@@ -164,7 +170,12 @@ const CommandPaletteGroup = React.forwardRef<
   HTMLDivElement,
   CommandPaletteGroupProps
 >(({ className, heading, children, ...props }, ref) => (
-  <div ref={ref} className={cn("py-1", className)} role="group" {...props}>
+  <div
+    ref={ref}
+    className={cn("py-1 animate-poyraz-fade-in", className)}
+    role="group"
+    {...props}
+  >
     {heading && (
       <div className="px-2 py-1.5 text-[11px] font-bold uppercase tracking-widest text-placeholder">
         {heading}
@@ -196,19 +207,23 @@ const CommandPaletteItem = React.forwardRef<
     className={cn(
       "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
       "border border-transparent",
-      "transition-colors duration-100 ease-out",
-      "hover:bg-muted hover:border-border",
-      "focus:bg-muted focus:border-border focus:outline-none",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+      "hover:bg-muted hover:border-border hover:translate-x-0.5",
+      "focus:bg-muted focus:border-border focus:translate-x-0.5 focus:outline-none",
       disabled && "pointer-events-none opacity-40",
       className,
     )}
     tabIndex={disabled ? -1 : 0}
     {...props}
   >
-    {icon && <span className="text-placeholder shrink-0">{icon}</span>}
+    {icon && (
+      <span className="text-placeholder shrink-0 transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
+        {icon}
+      </span>
+    )}
     <span className="flex-1 truncate">{children}</span>
     {shortcut && (
-      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5">
+      <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5 transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
         {shortcut}
       </kbd>
     )}
@@ -224,7 +239,10 @@ const CommandPaletteEmpty = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("py-8 text-center text-sm text-placeholder", className)}
+    className={cn(
+      "py-8 text-center text-sm text-placeholder animate-poyraz-fade-in",
+      className,
+    )}
     {...props}
   />
 ));
