@@ -677,7 +677,31 @@ Ek QA:
 
 ## 11) Faz 8 - Template ve Page-Level Motion
 
-Durum: Planlandi.
+Durum: Tamamlandi.
+
+Uygulanan dosyalar:
+
+- `app/docs/templates/auth/page.tsx`
+- `app/docs/templates/dashboard/page.tsx`
+- `app/docs/templates/hero/page.tsx`
+- `app/docs/templates/pricing/page.tsx`
+- `components/demos/molecules-demo.tsx`
+- `components/demos/organisms-demo.tsx`
+- `app/demos/card-demos.tsx`
+- `app/demos/checkbox-demo.tsx`
+- `app/demos/radio-demo.tsx`
+- `app/demos/switch-demo.tsx`
+- `docs/motion-roadmap.md`
+
+Not:
+
+- Auth preview kartlari, logo, sosyal auth butonlari ve link affordance'lari mount/scale/hover motion aldi.
+- Dashboard preview icinde top bar, stats kartlari, chart barlari, activity listesi, status badge'leri ve tablo row state'leri polish aldi.
+- Hero preview icinde hero content girisi, CTA butonlari, stats ve feature grid hover hareketleri eklendi.
+- Pricing preview icinde header, plan kartlari ve FAQ mini alanlari page-level motion ile hizalandi.
+- Molecules/organisms demo wrapper'lari ve kucuk atom demo preview'lari mount/micro motion aldi.
+- Kod snippet'leri degistirilmedi; consumer'a yeni zorunlu animation class'i ogretilmedi.
+- Public API, prop'lar ve import path'leri degismedi.
 
 Hedef: Hazir template'lerde ve docs demo sayfalarinda component motion sistemini gosteren, ancak consumer API'sini degistirmeyen sayfa seviyesinde polish saglamak.
 
@@ -782,7 +806,7 @@ Ek QA:
 
 ## 12) Faz 9 - Advanced Molecule State Motion
 
-Durum: Planlandi.
+Durum: Tamamlandi.
 
 Hedef: Ilk motion gecisleri eklenmis molecule componentlerinde daha anlamli state gecisleri saglamak. Bu faz, "var/yok animasyonu"ndan ziyade aktif state, indicator ve panel gecisi uzerine odaklanir.
 
@@ -861,6 +885,44 @@ pnpm build
 Ek QA:
 
 - Keyboard navigation.
+
+Uygulananlar:
+
+- `components/ui/molecules/tabs.tsx`
+  - Active trigger state'i border/translate transition ile daha belirgin hale getirildi.
+  - Tab content gecisi fade yerine small slide-in hissi veren motion utility ile hizalandi.
+- `components/ui/molecules/accordion.tsx`
+  - Open item border gecisi, trigger hover/focus polish ve content ic fade eklendi.
+- `components/ui/molecules/dropdown-menu.tsx`
+  - Sub trigger, item, checkbox item ve radio item highlight gecisleri ayni duration/easing ile hizalandi.
+  - Checkbox/radio indicator ikonlarina scale-in girisi eklendi.
+- `components/ui/molecules/select.tsx`
+  - Trigger open icon state'i scale/rotate ile guclendirildi.
+  - Select item focus hareketi ve selected check indicator scale-in eklendi.
+- `components/ui/molecules/command-palette.tsx`
+  - Liste, grup ve empty state mount animasyonlari eklendi.
+  - Item hover/focus state'leri translate + border/background transition ile hizalandi.
+  - Close button, shortcut ve icon state'leri token tabanli transition aldi.
+- `components/ui/molecules/autocomplete.tsx`
+  - Trigger, dropdown, loading, empty, group ve highlighted item state'leri motion tokenlariyla hizalandi.
+  - Multiple tag remove button ve selected check indicator micro motion aldi.
+- `components/ui/molecules/calendar.tsx`
+  - Days/months/years grid gecisleri slide-in utility ile hizalandi.
+  - Prev/next navigation button ve icon hareketleri eklendi.
+  - Root calendar mount fade ile uyumlu hale getirildi.
+- `components/ui/molecules/date-picker.tsx`
+  - Trigger open/hover state ve calendar icon scale transition eklendi.
+- `components/ui/molecules/pagination.tsx`
+  - Active page, prev/next icon ve ellipsis feedback motion tokenlariyla hizalandi.
+- `components/ui/molecules/breadcrumb.tsx`
+  - Link, separator, current page ve ellipsis state'leri token tabanli transition ile guclendirildi.
+- `components/ui/molecules/form.tsx`
+  - Field wrapper, label/description ve validation message motion tokenlariyla hizalandi.
+
+Notlar:
+
+- Component API'lerinde degisiklik yapilmadi; mevcut kullanimlar npm update ile calismaya devam eder.
+- Radix state attribute'lari ve mevcut internal state kullanildi; ekstra public prop veya yeni React state eklenmedi.
 - Screen reader semantics.
 - Reduced motion.
 - Radix close/unmount timing.
@@ -869,7 +931,18 @@ Ek QA:
 
 ## 13) Faz 10 - Motion QA Matrisi ve Ornek Senaryolar
 
-Durum: Planlandi.
+Durum: Tamamlandi.
+
+Uygulanan dosyalar:
+
+- `docs/motion-roadmap.md`
+- `docs/usage-guide.md`
+
+Not:
+
+- Motion QA matrisi component gruplarina, docs route'larina ve beklenen state davranislarina gore netlestirildi.
+- Reduced motion, keyboard navigation, viewport ve public API kontrol adimlari faz sonu checklist olarak tanimlandi.
+- Faz sonu dogrulama formati standardize edildi; her yeni motion fazinda ayni QA basliklari doldurulacak.
 
 Hedef: Motion sistemi genisledikce component bazli manuel QA'nin kaybolmamasini saglamak.
 
@@ -899,6 +972,64 @@ Dogrulama hedefleri:
 - `/docs/templates/auth`
 - `/docs/templates/dashboard`
 - `/docs/templates/pricing`
+
+### Motion QA Matrisi
+
+Bu matris, her motion degisikliginden sonra hizli manuel kontrol icin kullanilacak ana kontrol listesidir. Build'in gecmesi zorunlu, route uzerinden gorsel/etkilesimli kontrol ise ilgili faz kapsamindaki componentler icin uygulanir.
+
+| Alan | Docs route | Kontrol edilecek motion | Klavye/semantik kontrol | Viewport kontrolu |
+| --- | --- | --- | --- | --- |
+| Tabs | `/docs/molecules/tabs` | Active tab border/indicator gecisi, content slide/fade, trigger hover/focus | Tablist/tabpanel semantigi, arrow/tab navigasyonu | Mobile yatay overflow ve desktop inline layout |
+| Accordion | `/docs/molecules/accordion` | Open/closed height, trigger chevron rotate, nested content fade | Trigger focus ring, Enter/Space toggle | Dar ekranda content padding ve layout shift |
+| DropdownMenu | `/docs/molecules/dropdown-menu` | Content fade/scale/slide, item focus translate, checkbox/radio indicator scale | Arrow navigation, Escape close, item roles | Mobile touch hedefleri ve portal hizasi |
+| Select | `/docs/molecules/select` | Trigger icon rotate/scale, content open/close, selected check scale | Native-like select keyboard flow, disabled item skip | Popper width, mobile scroll buttonlari |
+| CommandPalette | `/docs/molecules/command-palette` | Overlay/content open, result list fade, item focus translate, empty state fade | Dialog focus trap, Escape close, input focus | Mobile max-width ve top offset |
+| Autocomplete | `/docs/molecules/autocomplete` | Dropdown mount, loading/empty fade, tag scale, selected check scale | Combobox aria, arrow navigation, Enter select, Escape close | Dropdown width, tag wrapping |
+| Calendar | `/docs/molecules/calendar` | Month/year grid slide, prev/next icon motion, selected/today state | Button labels, focus ring, disabled date skip | Calendar grid compact layout |
+| DatePicker | `/docs/molecules/date-picker` | Trigger open state, popover open, calendar icon scale | Trigger button semantics, date select close | Popover alignment and overflow |
+| Pagination | `/docs/molecules/pagination` | Active page scale, prev/next icon translate, ellipsis fade | Anchor semantics, aria-current | Hidden text behavior on mobile |
+| Breadcrumb | `/docs/molecules/breadcrumb` | Link hover, current page fade, separator/ellipsis state | aria-current page, nav label | Wrapping and separator spacing |
+| Form | `/docs/molecules/form` | Validation message slide, label/descriptive text color transition | aria-describedby, aria-invalid | Error text wrapping |
+| Navbar | `/docs/organisms/navbar` | Mega menu/dropdown open, mobile panel slide, drill-down transition | Menu button labels, Escape/back behavior | Desktop menu and mobile panel breakpoints |
+| Sidebar | `/docs/organisms/sidebar` | Backdrop fade, panel slide, collapse width, nested submenu motion | Toggle button label, focusable links | Collapsed rail and mobile overlay |
+| AnnouncementBar | `/docs/organisms/announcement-bar` | Mount slide, icon scale, action hover, dismiss affordance | Dismiss button label, link semantics | Single-line and wrapping behavior |
+| DataTable | `/docs/organisms/data-table` | Row hover, sort icon, selected badge, empty state, pagination icons | Table semantics, checkbox labels, keyboard focus | Horizontal overflow and toolbar wrapping |
+| Footer | `/docs/organisms/footer` | Link/social/action hover, newsletter CTA state | Link/button semantics | Column wrapping and dense mobile layout |
+| Auth template | `/docs/templates/auth` | Card mount/scale, social button hover, password/action affordance | Form labels, submit button focus | Centered card and mobile spacing |
+| Dashboard template | `/docs/templates/dashboard` | Stats cards, chart bars, activity rows, table/status state | Interactive buttons and links retain focus | Grid collapse and chart readability |
+| Hero template | `/docs/templates/hero` | Hero content entrance, CTA hover, stats/features motion | CTA link/button semantics | First viewport content and next-section hint |
+| Pricing template | `/docs/templates/pricing` | Header entrance, plan card hover, FAQ fade | Plan CTA focus, badge readability | Pricing grid collapse |
+
+### Faz Sonu QA Formati
+
+Her motion fazinin sonunda roadmap icine su formatla sonuc yazilacak:
+
+```txt
+QA:
+- build: pnpm build:lib, pnpm build
+- routes: kontrol edilen docs route'lari
+- keyboard: kontrol edilen temel klavye akislari
+- reduced-motion: prefers-reduced-motion altinda sert/uzun animasyon yok
+- api: public prop, import path ve consumer JSX degismedi
+- risk: kalan bilinen risk veya manuel kontrol notu
+```
+
+### Reduced Motion Kontrolu
+
+- `prefers-reduced-motion: reduce` aktifken animasyon sureleri `src/preset.css` guard'i ile kisaltilir.
+- Motion tamamen bilgi tasiyan tek kanal olmamali; active/selected/open state renk, border veya text ile de okunabilmelidir.
+- Scale/translate hareketleri kisa kalmali; bounce/spring/overshoot eklenmemelidir.
+
+### Viewport Kontrolu
+
+- Mobile: 375px genislikte panel/dropdown/popover tasmasi, text overlap ve yatay kayma kontrol edilir.
+- Tablet: navigation, sidebar ve pricing/dashboard grid gecisleri kontrol edilir.
+- Desktop: portal hizalamalari, mega menu genisligi ve table/footer yogun layout kontrol edilir.
+
+QA:
+
+- `pnpm build:lib` ve `pnpm build` bu faz sonunda yeniden calistirilacak.
+- Bu faz dokumantasyon agirlikli oldugu icin public component API degisimi yoktur.
 
 ---
 

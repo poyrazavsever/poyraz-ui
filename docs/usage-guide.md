@@ -200,13 +200,25 @@ Motion tokenlari:
 - `--poyraz-motion-ease-in`
 - `--poyraz-motion-ease-standard`
 
-Ilk motion kapsaminda su molecule gruplari iyilestirildi:
+Motion kapsaminda su component gruplari iyilestirildi:
 
 - Accordion, DropdownMenu, Select
 - Popover, Tooltip, HoverCard
 - Dialog, Modal, Sheet, Drawer, CommandPalette
 - DatePicker, Autocomplete
 - Tabs, Calendar, Pagination, Breadcrumb, Alert, Form
+- Navbar, Sidebar, AnnouncementBar, DataTable, Footer
+- Auth, Dashboard, Hero ve Pricing template preview'lari
+
+Motion QA icin kisa kontrol:
+
+- `pnpm build:lib` ve `pnpm build` gecmeli.
+- Ilgili docs route'unda open/closed, active, selected, hover ve focus state'leri kontrol edilmeli.
+- Keyboard navigation ve focus ring gorunurlugu korunmali.
+- `prefers-reduced-motion` aktifken hareketler kisa ve rahatsiz etmeyecek seviyede kalmali.
+- Public prop'lar, import path'leri ve consumer JSX ornekleri degismemeli.
+
+Detayli component bazli QA matrisi icin `docs/motion-roadmap.md` icindeki Faz 10 bolumune bak.
 
 ---
 
