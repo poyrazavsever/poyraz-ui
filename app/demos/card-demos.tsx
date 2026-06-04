@@ -19,7 +19,7 @@ import { Typography } from "poyraz-ui/atoms";
 // ═══════════════════════════════════════════════════════════════
 export function BlogCard() {
   return (
-    <Card variant="elevated">
+    <Card variant="elevated" className="animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
       <div className="flex flex-col md:flex-row">
         <CardImage className="md:w-60 md:min-h-full md:border-b-0 md:border-r md:border-slate-300">
           <Image
@@ -63,7 +63,7 @@ export function BlogCard() {
 // ═══════════════════════════════════════════════════════════════
 export function VideoCard() {
   return (
-    <Card variant="bordered" className="group/video cursor-pointer max-w-sm">
+    <Card variant="bordered" className="group/video cursor-pointer max-w-sm animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
       <CardImage>
         <Image
           src="https://picsum.photos/seed/video/400/225"
@@ -113,7 +113,7 @@ export function VideoCard() {
 // ═══════════════════════════════════════════════════════════════
 export function CourseCard() {
   return (
-    <Card variant="highlight" className="max-w-xs">
+    <Card variant="highlight" className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
       <CardHeader>
         <Badge variant="destructive" className="w-fit">
           Popüler
@@ -163,7 +163,7 @@ export function CourseCard() {
 // ═══════════════════════════════════════════════════════════════
 export function ProfileCard() {
   return (
-    <Card variant="default" className="max-w-xs">
+    <Card variant="default" className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
       <CardHeader className="items-center text-center pt-8">
         <Avatar className="h-20 w-20 mb-2">
           <AvatarImage src="https://i.pravatar.cc/100?img=3" alt="Poyraz" />
@@ -211,7 +211,7 @@ export function ProfileCard() {
 // ═══════════════════════════════════════════════════════════════
 export function GhostCard() {
   return (
-    <Card variant="ghost" className="max-w-xs p-5 cursor-pointer">
+    <Card variant="ghost" className="max-w-xs p-5 cursor-pointer animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
       <div className="flex items-start gap-4">
         <div className="h-10 w-10 flex items-center justify-center bg-red-600 text-white text-lg font-bold shrink-0 border border-red-900 rounded-sm">
           ⚡

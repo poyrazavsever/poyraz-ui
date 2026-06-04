@@ -64,11 +64,11 @@ const statusColor: Record<string, string> = {
 
 function DashboardPreview() {
   return (
-    <div className="bg-muted border border-border rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden animate-poyraz-fade-in">
       {/* Top Bar */}
-      <div className="bg-background border-b border-border px-5 py-3 flex items-center justify-between">
+      <div className="bg-background border-b border-border px-5 py-3 flex items-center justify-between animate-poyraz-slide-in-from-top">
         <div className="flex items-center gap-3">
-          <div className="h-6 w-6 bg-red-600 rounded-sm flex items-center justify-center">
+          <div className="h-6 w-6 bg-red-600 rounded-sm flex items-center justify-center transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105">
             <span className="text-white text-[10px] font-bold">P</span>
           </div>
           <Typography variant="small" className="font-bold text-foreground">
@@ -89,30 +89,38 @@ function DashboardPreview() {
       <div className="p-5 space-y-5">
         {/* Stats Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <StatsCard
-            label="Revenue"
-            value="$12,345"
-            trend="up"
-            trendValue="+12.5%"
-          />
-          <StatsCard label="Orders" value="89" trend="up" trendValue="+4.3%" />
-          <StatsCard
-            label="Customers"
-            value="1,234"
-            trend="down"
-            trendValue="-2.1%"
-          />
-          <StatsCard
-            label="Conversion"
-            value="3.2%"
-            trend="neutral"
-            trendValue="0%"
-          />
+          <div className="animate-poyraz-slide-in-from-bottom">
+            <StatsCard
+              label="Revenue"
+              value="$12,345"
+              trend="up"
+              trendValue="+12.5%"
+            />
+          </div>
+          <div className="animate-poyraz-slide-in-from-bottom">
+            <StatsCard label="Orders" value="89" trend="up" trendValue="+4.3%" />
+          </div>
+          <div className="animate-poyraz-slide-in-from-bottom">
+            <StatsCard
+              label="Customers"
+              value="1,234"
+              trend="down"
+              trendValue="-2.1%"
+            />
+          </div>
+          <div className="animate-poyraz-slide-in-from-bottom">
+            <StatsCard
+              label="Conversion"
+              value="3.2%"
+              trend="neutral"
+              trendValue="0%"
+            />
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-4">
           {/* Chart Placeholder */}
-          <Card className="lg:col-span-2">
+          <Card className="lg:col-span-2 animate-poyraz-fade-in">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Revenue Overview</CardTitle>
@@ -129,7 +137,7 @@ function DashboardPreview() {
                     className="flex-1 flex flex-col items-center gap-1"
                   >
                     <div
-                      className="w-full bg-red-600/80 rounded-sm transition-all hover:bg-primary"
+                      className="w-full bg-red-600/80 rounded-sm transition-[height,background-color,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:bg-primary hover:-translate-y-1"
                       style={{ height: `${h}%` }}
                     />
                     <span className="text-[9px] text-placeholder">
@@ -142,7 +150,7 @@ function DashboardPreview() {
           </Card>
 
           {/* Activity Feed */}
-          <Card>
+          <Card className="animate-poyraz-fade-in">
             <CardHeader>
               <CardTitle>Recent Activity</CardTitle>
             </CardHeader>
@@ -162,8 +170,11 @@ function DashboardPreview() {
                   },
                   { user: "Burak S.", action: "signed up", time: "3h ago" },
                 ].map((a, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-red-600 mt-1.5 shrink-0" />
+                  <div
+                    key={i}
+                    className="group flex items-start gap-2 rounded-sm transition-[background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:bg-muted/70 hover:translate-x-0.5"
+                  >
+                    <div className="h-1.5 w-1.5 rounded-full bg-red-600 mt-1.5 shrink-0 transition-transform duration-[var(--poyraz-motion-duration-fast)] group-hover:scale-125" />
                     <div>
                       <p className="text-xs text-foreground">
                         <span className="font-semibold">{a.user}</span>{" "}
@@ -181,7 +192,7 @@ function DashboardPreview() {
         </div>
 
         {/* Orders Table */}
-        <Card>
+        <Card className="animate-poyraz-fade-in">
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>Recent Orders</CardTitle>
@@ -206,7 +217,7 @@ function DashboardPreview() {
                   {recentOrders.map((order) => (
                     <tr
                       key={order.id}
-                      className="border-b border-border last:border-b-0 hover:bg-muted transition-colors"
+                      className="border-b border-border last:border-b-0 hover:bg-muted transition-[background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5"
                     >
                       <td className="px-4 py-2.5 font-medium text-foreground">
                         {order.id}
@@ -219,7 +230,7 @@ function DashboardPreview() {
                       </td>
                       <td className="px-4 py-2.5">
                         <span
-                          className={`inline-block px-1.5 py-0.5 text-[10px] font-medium rounded-sm border ${statusColor[order.status]}`}
+                          className={`inline-block px-1.5 py-0.5 text-[10px] font-medium rounded-sm border transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105 ${statusColor[order.status]}`}
                         >
                           {order.status}
                         </span>

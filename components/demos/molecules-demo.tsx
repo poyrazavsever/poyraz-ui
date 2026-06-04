@@ -150,7 +150,7 @@ function DatePickerDemo() {
 
 export function MoleculesDemo() {
   return (
-    <div className="space-y-16 w-full">
+    <div className="space-y-16 w-full animate-poyraz-fade-in [&>section]:animate-poyraz-fade-in">
       {/* ALERT */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Alert</h3>

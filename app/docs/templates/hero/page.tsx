@@ -5,12 +5,12 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function HeroPreview() {
   return (
-    <div className="bg-background border border-border rounded-sm overflow-hidden">
+    <div className="bg-background border border-border rounded-sm overflow-hidden animate-poyraz-fade-in">
       {/* Hero */}
       <section className="relative px-6 py-16 text-center">
         {/* Subtle grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.03] transition-opacity duration-[var(--poyraz-motion-duration-slow)]"
           style={{
             backgroundImage:
               "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
@@ -18,8 +18,8 @@ function HeroPreview() {
           }}
         />
 
-        <div className="relative max-w-lg mx-auto space-y-5">
-          <Badge variant="outline" className="text-[10px]">
+        <div className="relative max-w-lg mx-auto space-y-5 animate-poyraz-slide-in-from-bottom">
+          <Badge variant="outline" className="text-[10px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
             v2.0 — Now Available
           </Badge>
 
@@ -35,23 +35,30 @@ function HeroPreview() {
           </Typography>
 
           <div className="flex items-center justify-center gap-3 pt-2">
-            <Button>Get Started</Button>
-            <Button variant="outline">View on GitHub</Button>
+            <Button className="transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
+              Get Started
+            </Button>
+            <Button
+              variant="outline"
+              className="transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5"
+            >
+              View on GitHub
+            </Button>
           </div>
 
           {/* Mini stats */}
           <div className="flex items-center justify-center gap-6 pt-4 text-xs text-placeholder">
-            <div>
+            <div className="transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
               <span className="font-bold text-foreground text-sm">43+</span>{" "}
               Components
             </div>
             <Separator orientation="vertical" className="h-4" />
-            <div>
+            <div className="transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
               <span className="font-bold text-foreground text-sm">MIT</span>{" "}
               License
             </div>
             <Separator orientation="vertical" className="h-4" />
-            <div>
+            <div className="transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
               <span className="font-bold text-foreground text-sm">v4</span>{" "}
               Tailwind
             </div>
@@ -75,8 +82,13 @@ function HeroPreview() {
               desc: "CSS variables for full control",
             },
           ].map((f) => (
-            <div key={f.title} className="space-y-1.5">
-              <div className="text-lg">{f.icon}</div>
+            <div
+              key={f.title}
+              className="group space-y-1.5 rounded-sm transition-[background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:bg-muted hover:-translate-y-0.5"
+            >
+              <div className="text-lg transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:scale-110">
+                {f.icon}
+              </div>
               <div className="text-xs font-bold text-foreground">{f.title}</div>
               <div className="text-[10px] text-placeholder">{f.desc}</div>
             </div>

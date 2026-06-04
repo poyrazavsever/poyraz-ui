@@ -6,12 +6,12 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function PricingPreview() {
   return (
-    <div className="bg-background border border-border rounded-sm overflow-hidden">
+    <div className="bg-background border border-border rounded-sm overflow-hidden animate-poyraz-fade-in">
       <section className="px-6 py-12">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="text-center space-y-3 mb-10">
-            <Badge variant="outline" className="text-[10px]">
+          <div className="text-center space-y-3 mb-10 animate-poyraz-slide-in-from-bottom">
+            <Badge variant="outline" className="text-[10px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
               Pricing
             </Badge>
             <Typography variant="h2">
@@ -28,62 +28,68 @@ function PricingPreview() {
 
           {/* Plans */}
           <div className="grid sm:grid-cols-3 gap-4">
-            <PricingCard
-              title="Starter"
-              price="$0"
-              period="month"
-              description="For individuals and side projects."
-              features={[
-                "3 projects",
-                "1 GB storage",
-                "Community support",
-                "Basic analytics",
-              ]}
-              action={
-                <Button variant="outline" className="w-full">
-                  Start Free
-                </Button>
-              }
-            />
-            <PricingCard
-              title="Pro"
-              price="$29"
-              period="month"
-              description="For growing teams and products."
-              features={[
-                "Unlimited projects",
-                "50 GB storage",
-                "Priority support",
-                "Advanced analytics",
-                "API access",
-                "Custom domains",
-              ]}
-              highlighted
-              action={<Button className="w-full">Get Started</Button>}
-            />
-            <PricingCard
-              title="Enterprise"
-              price="$99"
-              period="month"
-              description="For large organizations."
-              features={[
-                "Everything in Pro",
-                "Unlimited storage",
-                "Dedicated support",
-                "SSO / SAML",
-                "Custom SLA",
-                "Audit logs",
-              ]}
-              action={
-                <Button variant="outline" className="w-full">
-                  Contact Sales
-                </Button>
-              }
-            />
+            <div className="animate-poyraz-slide-in-from-bottom transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+              <PricingCard
+                title="Starter"
+                price="$0"
+                period="month"
+                description="For individuals and side projects."
+                features={[
+                  "3 projects",
+                  "1 GB storage",
+                  "Community support",
+                  "Basic analytics",
+                ]}
+                action={
+                  <Button variant="outline" className="w-full">
+                    Start Free
+                  </Button>
+                }
+              />
+            </div>
+            <div className="animate-poyraz-slide-in-from-bottom transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+              <PricingCard
+                title="Pro"
+                price="$29"
+                period="month"
+                description="For growing teams and products."
+                features={[
+                  "Unlimited projects",
+                  "50 GB storage",
+                  "Priority support",
+                  "Advanced analytics",
+                  "API access",
+                  "Custom domains",
+                ]}
+                highlighted
+                action={<Button className="w-full">Get Started</Button>}
+              />
+            </div>
+            <div className="animate-poyraz-slide-in-from-bottom transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+              <PricingCard
+                title="Enterprise"
+                price="$99"
+                period="month"
+                description="For large organizations."
+                features={[
+                  "Everything in Pro",
+                  "Unlimited storage",
+                  "Dedicated support",
+                  "SSO / SAML",
+                  "Custom SLA",
+                  "Audit logs",
+                ]}
+                action={
+                  <Button variant="outline" className="w-full">
+                    Contact Sales
+                  </Button>
+                }
+              />
+            </div>
           </div>
 
           {/* FAQ mini */}
-          <div className="mt-10 pt-8 border-t border-border text-center">
+          <div className="mt-10 pt-8 border-t border-border text-center animate-poyraz-fade-in">
             <Typography variant="small" className="text-placeholder">
               All plans include 14-day free trial · No credit card required ·
               Cancel anytime

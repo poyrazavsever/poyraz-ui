@@ -481,7 +481,7 @@ function DataTableFullDemo() {
 
 export function OrganismsDemo() {
   return (
-    <div className="space-y-16 w-full">
+    <div className="space-y-16 w-full animate-poyraz-fade-in [&>section]:animate-poyraz-fade-in">
       {/* ──────────────────────────────────────────── */}
       {/* NAVBAR SECTION                               */}
       {/* ──────────────────────────────────────────── */}

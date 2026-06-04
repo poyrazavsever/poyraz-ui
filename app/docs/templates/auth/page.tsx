@@ -22,11 +22,11 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function LoginPreview() {
   return (
-    <div className="bg-muted border border-border rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden animate-poyraz-fade-in">
       <div className="flex items-center justify-center px-6 py-12">
-        <Card className="w-full max-w-xs">
+        <Card className="w-full max-w-xs animate-poyraz-scale-in">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-2 h-8 w-8 bg-red-600 rounded-sm flex items-center justify-center">
+            <div className="mx-auto mb-2 h-8 w-8 bg-red-600 rounded-sm flex items-center justify-center transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105">
               <span className="text-white text-xs font-bold">P</span>
             </div>
             <CardTitle>Welcome back</CardTitle>
@@ -46,7 +46,7 @@ function LoginPreview() {
                 <Label htmlFor="login-password">Password</Label>
                 <a
                   href="#"
-                  className="text-[10px] text-red-600 hover:underline"
+                  className="text-[10px] text-red-600 hover:underline transition-colors duration-[var(--poyraz-motion-duration-fast)]"
                 >
                   Forgot?
                 </a>
@@ -76,7 +76,7 @@ function LoginPreview() {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <Button variant="outline" size="sm" className="text-[11px]">
+              <Button variant="outline" size="sm" className="text-[11px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
                 <svg className="h-3 w-3 mr-1.5" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -97,7 +97,7 @@ function LoginPreview() {
                 </svg>
                 Google
               </Button>
-              <Button variant="outline" size="sm" className="text-[11px]">
+              <Button variant="outline" size="sm" className="text-[11px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
                 <svg
                   className="h-3 w-3 mr-1.5"
                   fill="currentColor"
@@ -114,7 +114,7 @@ function LoginPreview() {
               Don&apos;t have an account?{" "}
               <a
                 href="#"
-                className="text-red-600 font-semibold hover:underline"
+                className="text-red-600 font-semibold hover:underline transition-colors duration-[var(--poyraz-motion-duration-fast)]"
               >
                 Sign up
               </a>
@@ -130,11 +130,11 @@ function LoginPreview() {
 
 function SignupPreview() {
   return (
-    <div className="bg-muted border border-border rounded-sm overflow-hidden">
+    <div className="bg-muted border border-border rounded-sm overflow-hidden animate-poyraz-fade-in">
       <div className="flex items-center justify-center px-6 py-12">
-        <Card className="w-full max-w-xs">
+        <Card className="w-full max-w-xs animate-poyraz-scale-in">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-2 h-8 w-8 bg-red-600 rounded-sm flex items-center justify-center">
+            <div className="mx-auto mb-2 h-8 w-8 bg-red-600 rounded-sm flex items-center justify-center transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105">
               <span className="text-white text-xs font-bold">P</span>
             </div>
             <CardTitle>Create an account</CardTitle>
@@ -177,11 +177,11 @@ function SignupPreview() {
                 className="text-xs text-muted-foreground cursor-pointer leading-relaxed"
               >
                 I agree to the{" "}
-                <a href="#" className="text-red-600 hover:underline">
+                <a href="#" className="text-red-600 hover:underline transition-colors duration-[var(--poyraz-motion-duration-fast)]">
                   Terms of Service
                 </a>{" "}
                 and{" "}
-                <a href="#" className="text-red-600 hover:underline">
+                <a href="#" className="text-red-600 hover:underline transition-colors duration-[var(--poyraz-motion-duration-fast)]">
                   Privacy Policy
                 </a>
               </label>
@@ -196,7 +196,7 @@ function SignupPreview() {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <Button variant="outline" size="sm" className="text-[11px]">
+              <Button variant="outline" size="sm" className="text-[11px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
                 <svg className="h-3 w-3 mr-1.5" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -217,7 +217,7 @@ function SignupPreview() {
                 </svg>
                 Google
               </Button>
-              <Button variant="outline" size="sm" className="text-[11px]">
+              <Button variant="outline" size="sm" className="text-[11px] transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5">
                 <svg
                   className="h-3 w-3 mr-1.5"
                   fill="currentColor"
@@ -234,7 +234,7 @@ function SignupPreview() {
               Already have an account?{" "}
               <a
                 href="#"
-                className="text-red-600 font-semibold hover:underline"
+                className="text-red-600 font-semibold hover:underline transition-colors duration-[var(--poyraz-motion-duration-fast)]"
               >
                 Sign in
               </a>
