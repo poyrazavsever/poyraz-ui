@@ -84,13 +84,6 @@
     "src/preset.css",
     "bin"
   ],
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "@tailwindcss/oxide",
-      "sharp"
-    ]
-  },
   "sideEffects": false,
   "scripts": {
     "dev": "next dev",
