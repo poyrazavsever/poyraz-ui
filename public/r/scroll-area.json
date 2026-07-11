@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass scroll-area component.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/scroll-area.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/* ================================================================== */\n/*  SCROLL AREA — Semantic, theme-aware scrollbar wrapper              */\n/* ================================================================== */\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Maximum height before scrolling kicks in */\n  maxHeight?: string | number;\n  /** Orientation of the scrollbar */\n  orientation?: \"vertical\" | \"horizontal\" | \"both\";\n  /** Scrollbar size: track + thumb width / height */\n  scrollbarSize?: \"sm\" | \"md\" | \"lg\";\n}\n\n/**\n * Theme-aware scroll area with a soft scrollbar track and thumb.\n *\n * Uses pure CSS `scrollbar-*` properties (supported in Chrome 121+ / Firefox 64+)\n * with a fallback for webkit browsers.\n */\nconst ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(\n  (\n    {\n      className,\n      children,\n      maxHeight = 320,\n      orientation = \"vertical\",\n      scrollbarSize = \"md\",\n      style,\n      ...props\n    },\n    ref,\n  ) => {\n    const sizeMap = { sm: 6, md: 10, lg: 14 };\n    const sz = sizeMap[scrollbarSize];\n\n    const overflowClass =\n      orientation === \"horizontal\"\n        ? \"overflow-x-auto overflow-y-hidden\"\n        : orientation === \"both\"\n          ? \"overflow-auto\"\n          : \"overflow-y-auto overflow-x-hidden\";\n\n    return (\n      <div\n        ref={ref}\n        data-slot=\"scroll-area\"\n        data-orientation={orientation}\n        data-scrollbar-size={scrollbarSize}\n        className={cn(\"poyraz-scroll-area relative\", overflowClass, className)}\n        style={\n          {\n            maxHeight:\n              typeof maxHeight === \"number\" ? `${maxHeight}px` : maxHeight,\n            \"--sb-size\": `${sz}px`,\n            ...style,\n          } as React.CSSProperties\n        }\n        {...props}\n      >\n        {children}\n\n        {/* Inline style block — scoped to this instance via the class name */}\n        <style\n          dangerouslySetInnerHTML={{\n            __html: `\n/* ── Modern standard ─────────────────────────────── */\n.poyraz-scroll-area {\n  scrollbar-width: thin;\n  scrollbar-color: var(--poyraz-input) transparent;\n}\n\n/* ── Webkit (Chrome, Safari, Edge) ───────────────── */\n.poyraz-scroll-area::-webkit-scrollbar {\n  width: var(--sb-size, 10px);\n  height: var(--sb-size, 10px);\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-track {\n  background: var(--poyraz-surface-subtle);\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-track:horizontal {\n  background: var(--poyraz-surface-subtle);\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-thumb {\n  background: var(--poyraz-input);\n  border: 2px solid var(--poyraz-surface-subtle);\n  border-radius: var(--poyraz-radius-full);\n  min-height: 32px;\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-thumb:hover {\n  background: var(--poyraz-muted-foreground);\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-thumb:active {\n  background: var(--poyraz-foreground);\n}\n\n.poyraz-scroll-area::-webkit-scrollbar-corner {\n  background: transparent;\n  border: 1px solid var(--poyraz-border);\n}\n`,\n          }}\n        />\n      </div>\n    );\n  },\n);\nScrollArea.displayName = \"ScrollArea\";\n\nexport { ScrollArea };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/scroll-area.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
