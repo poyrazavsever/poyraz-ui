@@ -69,7 +69,11 @@ export async function buildRegistryThemeCssVars({ cwd = process.cwd() } = {}) {
 
   return {
     theme: Object.fromEntries([
-      ["font-sans", "Inter, ui-sans-serif, system-ui, sans-serif"],
+      ["poyraz-font-primary", "Inter, ui-sans-serif, system-ui, sans-serif"],
+      ["poyraz-font-secondary", "Agbalumo, ui-serif, Georgia, cursive"],
+      ["font-sans", "var(--poyraz-font-primary)"],
+      ["font-primary", "var(--poyraz-font-primary)"],
+      ["font-secondary", "var(--poyraz-font-secondary)"],
       ...primitiveEntries,
       ...sharedEntries,
     ]),

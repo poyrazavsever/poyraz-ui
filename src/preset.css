@@ -308,10 +308,16 @@
 
 /* @poyraz-tokens:end */
 
+:root {
+  --poyraz-font-primary: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --poyraz-font-secondary: "Agbalumo", ui-serif, Georgia, cursive;
+}
+
 @theme {
   /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-secondary: "Agbalumo", cursive;
+  --font-sans: var(--poyraz-font-primary);
+  --font-primary: var(--poyraz-font-primary);
+  --font-secondary: var(--poyraz-font-secondary);
 
   --text-poyraz-caption: var(--poyraz-typography-caption-size);
   --text-poyraz-caption--line-height: var(
@@ -630,6 +636,83 @@
   .poyraz-button[data-effect="border-draw"]:hover::before {
     animation: poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out) forwards;
   }
+
+  .poyraz-text-hand-drawn {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--poyraz-text-effect);
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.22em;
+  }
+
+  .poyraz-text-shimmer {
+    color: transparent;
+    background-image: linear-gradient(
+      105deg,
+      var(--poyraz-text-effect) 10%,
+      var(--poyraz-primary-foreground) 35%,
+      var(--poyraz-text-effect) 55%,
+      var(--poyraz-text-effect) 100%
+    );
+    background-size: 220% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: poyraz-text-shimmer 2.4s linear infinite;
+  }
+
+  .poyraz-text-marker::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 54% -0.08em 0.02em;
+    border-radius: 0.2em 0.35em 0.18em 0.3em;
+    background: var(--poyraz-text-effect-soft);
+    transform: rotate(-1.2deg) skewX(-5deg);
+  }
+
+  .poyraz-text-outline {
+    --poyraz-outline-fill: var(--poyraz-text-effect);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--poyraz-text-effect);
+    transition: color var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out);
+  }
+
+  .poyraz-text-outline:hover {
+    color: var(--poyraz-outline-fill);
+  }
+
+  .poyraz-logo-shine::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -55%;
+    bottom: -55%;
+    left: -45%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.78), transparent);
+    filter: blur(1px);
+    transform: translateX(-180%) skewX(-18deg);
+    pointer-events: none;
+  }
+
+  .poyraz-logo-shine:hover::after,
+  .poyraz-logo-shine-loop::after {
+    animation: poyraz-logo-shine 1.15s var(--poyraz-motion-ease-out);
+  }
+
+  .poyraz-logo-shine-loop::after {
+    animation-iteration-count: infinite;
+    animation-delay: 1.4s;
+  }
+
+  .poyraz-glass-field {
+    background-color: var(--poyraz-glass-fallback);
+  }
+
+  .poyraz-card [data-slot="card"] {
+    border-radius: var(--poyraz-radius-lg);
+  }
 }
 
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
@@ -656,6 +739,12 @@
     -webkit-backdrop-filter: blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass));
     backdrop-filter: blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass));
   }
+
+  .poyraz-glass-field {
+    background-color: var(--poyraz-glass-background);
+    -webkit-backdrop-filter: blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass));
+    backdrop-filter: blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass));
+  }
 }
 
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
@@ -666,6 +755,36 @@
 
   .poyraz-button-glass {
     background-color: var(--poyraz-glass-fallback);
+  }
+
+
+  .poyraz-glass-field {
+    background-color: var(--poyraz-glass-fallback);
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--poyraz-foreground);
+  caret-color: var(--poyraz-foreground);
+  box-shadow: 0 0 0 1000px var(--poyraz-surface) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+@media (forced-colors: active) {
+  [data-slot="checkbox"],
+  [data-slot="radio-group-item"],
+  [data-slot="switch"] {
+    border: 1px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+
+  [data-slot="checkbox"][data-state="checked"],
+  [data-slot="radio-group-item"][data-state="checked"],
+  [data-slot="switch"][data-state="checked"] {
+    background: Highlight;
+    color: HighlightText;
   }
 }
 
@@ -1092,6 +1211,21 @@
   }
 }
 
+@keyframes poyraz-text-shimmer {
+  to {
+    background-position: -220% center;
+  }
+}
+
+@keyframes poyraz-logo-shine {
+  from {
+    transform: translateX(-180%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(700%) skewX(-18deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --poyraz-motion-duration-instant: 1ms;
@@ -1111,6 +1245,16 @@
     animation: none !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+
+  .poyraz-text-shimmer {
+    animation: none !important;
+    color: var(--poyraz-text-effect);
+  }
+
+  .poyraz-logo-shine::after {
+    animation: none !important;
+    display: none;
   }
 }
 
@@ -1133,10 +1277,27 @@
   transition-duration: 1ms !important;
 }
 
+[data-poyraz-motion="reduced"] .poyraz-text-shimmer {
+  animation: none !important;
+  color: var(--poyraz-text-effect);
+}
+
+[data-poyraz-motion="reduced"] .poyraz-logo-shine::after {
+  animation: none !important;
+  display: none;
+}
+
 @media (prefers-reduced-transparency: reduce) {
   .poyraz-glass {
     background-color: var(--poyraz-glass-fallback);
     box-shadow: var(--poyraz-shadow-sm);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+
+  .poyraz-glass-field {
+    background-color: var(--poyraz-glass-fallback);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
