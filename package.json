@@ -101,6 +101,7 @@
     "registry:check-files": "node scripts/registry/check-registry-files.mjs",
     "registry:check-graph": "node scripts/registry/check-registry-graph.mjs",
     "registry:check": "pnpm registry:validate && pnpm registry:check-files && pnpm registry:check-graph",
+    "test:button": "node scripts/test-button-contract.mjs && node scripts/test-button-fixture.mjs",
     "start": "next start",
     "prepublishOnly": "pnpm build:lib"
   },
