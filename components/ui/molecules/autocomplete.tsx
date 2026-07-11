@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Check, ChevronDown, X, Search } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  AUTOCOMPLETE — Searchable combobox / typeahead                     */
