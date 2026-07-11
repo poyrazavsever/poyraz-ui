@@ -1,0 +1,64 @@
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20.19
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify theme contract
+        run: pnpm theme:check
+
+      - name: Build registry
+        run: pnpm registry:build
+
+      - name: Verify registry schema and graph
+        run: pnpm registry:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Production build
+        run: pnpm build
+
+      - name: Upload registry and v2 baseline evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: poyraz-quality-artifacts
+          path: |
+            public/r
+            docs/v3/baselines/v2-build-summary.txt
+          if-no-files-found: error
+          retention-days: 14
+
