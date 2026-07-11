@@ -1,10 +1,5 @@
 import * as React from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from "@/lib/utils";
 
 const variantMap = {
   h1: "scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-[32px]",
