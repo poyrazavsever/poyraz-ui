@@ -6,7 +6,7 @@ import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as _radix_ui_react_slot from '@radix-ui/react-slot';
-import { a as LabelProps, c as ButtonProps } from '../label-BzWkLfNj.js';
+import { h as LabelProps, e as ButtonProps } from '../label-oRrP78t-.js';
 import * as react_hook_form from 'react-hook-form';
 import { FieldValues, FieldPath, ControllerProps } from 'react-hook-form';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
@@ -289,7 +289,7 @@ declare const SheetClose: React$1.ForwardRefExoticComponent<DialogPrimitive.Dial
 declare const SheetPortal: React$1.FC<DialogPrimitive.DialogPortalProps>;
 declare const SheetOverlay: React$1.ForwardRefExoticComponent<Omit<DialogPrimitive.DialogOverlayProps & React$1.RefAttributes<HTMLDivElement>, "ref"> & React$1.RefAttributes<HTMLDivElement>>;
 declare const sheetContentVariants: (props?: ({
-    side?: "left" | "right" | "bottom" | "top" | null | undefined;
+    side?: "right" | "left" | "bottom" | "top" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface SheetContentProps extends React$1.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>, VariantProps<typeof sheetContentVariants> {
 }
