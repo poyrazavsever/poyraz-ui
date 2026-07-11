@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "poyraz-utils",
+  "title": "Poyraz Utilities",
+  "author": "Poyraz Avsever",
+  "description": "Shared class-name composition utility for Poyraz UI registry components.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.4.1"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/lib/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n",
+      "type": "registry:lib",
+      "target": "@lib/utils.ts"
+    }
+  ],
+  "meta": {
+    "category": "foundation",
+    "phase": "alpha"
+  },
+  "type": "registry:lib"
+}
