@@ -47,7 +47,7 @@ declare const NavbarDropdown: React.ForwardRefExoticComponent<Omit<NavigationMen
     label: string;
 } & React.RefAttributes<HTMLLIElement>>;
 declare const megaMenuVariants: (props?: ({
-    layout?: "list" | "full" | "columns" | "featured" | null | undefined;
+    layout?: "full" | "list" | "columns" | "featured" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface NavbarMegaMenuProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof megaMenuVariants> {
 }
