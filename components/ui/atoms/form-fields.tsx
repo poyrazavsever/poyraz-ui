@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Minus, Plus, Search, Eye, EyeOff, Phone, Globe } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 import { Input, type InputProps } from "@/components/ui/atoms/input";
 import { Button } from "@/components/ui/atoms/button";
 
