@@ -9,7 +9,11 @@
       "author": "Poyraz Avsever",
       "cssVars": {
         "theme": {
-          "font-sans": "Inter, ui-sans-serif, system-ui, sans-serif",
+          "poyraz-font-primary": "Inter, ui-sans-serif, system-ui, sans-serif",
+          "poyraz-font-secondary": "Agbalumo, ui-serif, Georgia, cursive",
+          "font-sans": "var(--poyraz-font-primary)",
+          "font-primary": "var(--poyraz-font-primary)",
+          "font-secondary": "var(--poyraz-font-secondary)",
           "poyraz-brand-red-50": "#fef2f2",
           "poyraz-brand-red-100": "#fee2e2",
           "poyraz-brand-red-200": "#fecaca",
