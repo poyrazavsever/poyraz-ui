@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass separator component.",
+  "dependencies": [
+    "@radix-ui/react-separator@^1.1.8"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/separator.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\";\nimport { cn } from \"@/lib/utils\";\n\nconst Separator = React.forwardRef<\n  React.ComponentRef<typeof SeparatorPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>\n>(\n  (\n    { className, orientation = \"horizontal\", decorative = true, ...props },\n    ref,\n  ) => (\n    <SeparatorPrimitive.Root\n      ref={ref}\n      data-slot=\"separator\"\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0\",\n        \"border-border\",\n        orientation === \"horizontal\" ? \"w-full border-t\" : \"h-full border-l\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nSeparator.displayName = SeparatorPrimitive.Root.displayName;\n\nexport { Separator };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/separator.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
