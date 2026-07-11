@@ -5,7 +5,18 @@ export {
   AvatarFallback,
 } from "@/components/ui/atoms/avatar";
 export { Badge, badgeVariants } from "@/components/ui/atoms/badge";
-export { Button, buttonVariants } from "@/components/ui/atoms/button";
+export {
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+  buttonVariants,
+} from "@/components/ui/atoms/button";
+export type {
+  ButtonEffect,
+  ButtonFillDirection,
+  ButtonProps,
+  ButtonSwapTarget,
+} from "@/components/ui/atoms/button";
 export {
   Card,
   CardImage,
