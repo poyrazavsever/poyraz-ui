@@ -1,0 +1,6 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "poyraz",
+  "homepage": "https://ui.poyrazavsever.com",
+  "include": ["registry/poyraz/registry.json"]
+}
