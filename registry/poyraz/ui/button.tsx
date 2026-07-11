@@ -1,64 +1,165 @@
+"use client";
+
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-150 ease-out focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border text-sm font-semibold outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:shadow-none disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border aria-disabled:shadow-none active:scale-[0.975] [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "border border-primary/80 bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+          "border-primary/80 bg-primary text-primary-foreground shadow-[0_8px_22px_-10px_var(--poyraz-primary)] hover:bg-primary-hover hover:shadow-[0_12px_28px_-12px_var(--poyraz-primary)]",
         secondary:
-          "border border-border/80 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "border-border-strong/70 bg-secondary text-secondary-foreground shadow-sm hover:border-border-strong hover:bg-accent",
+        soft: "border-primary/15 bg-primary-muted text-primary-muted-foreground shadow-xs hover:border-primary/25 hover:bg-primary/15",
         outline:
-          "border border-border bg-background/60 text-foreground shadow-sm backdrop-blur-sm hover:bg-accent hover:text-accent-foreground",
+          "border-primary/55 bg-background/60 text-primary shadow-xs hover:border-primary hover:bg-primary-muted",
+        glass:
+          "poyraz-button-glass border-glass-border-outer text-foreground shadow-[var(--poyraz-glass-shadow)] hover:border-glass-border hover:bg-glass-strong",
         ghost:
-          "border border-transparent bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground",
+          "border-transparent bg-transparent text-foreground/75 hover:bg-accent hover:text-foreground",
         destructive:
-          "border border-destructive/80 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        link: "h-auto rounded-none px-0 text-primary underline-offset-4 hover:underline",
+          "border-destructive/80 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        link: "h-auto overflow-visible rounded-none border-transparent bg-transparent px-0 text-primary shadow-none underline-offset-4 hover:underline active:scale-100",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-lg px-6",
-        icon: "size-9",
+        xs: "h-7 gap-1.5 px-2.5 text-xs [&_svg]:size-3.5",
+        sm: "h-8 gap-1.5 px-3 text-xs [&_svg]:size-3.5",
+        default: "h-10 px-4 [&_svg]:size-4",
+        lg: "h-11 px-6 text-base [&_svg]:size-4.5",
+        "icon-sm": "size-8 p-0 [&_svg]:size-3.5",
+        icon: "size-10 p-0 [&_svg]:size-4",
+        "icon-lg": "size-11 p-0 [&_svg]:size-5",
+      },
+      radius: {
+        none: "rounded-none",
+        xs: "rounded-xs",
+        sm: "rounded-sm",
+        md: "rounded-md",
+        lg: "rounded-lg",
+        xl: "rounded-xl",
+        "2xl": "rounded-2xl",
+        full: "rounded-full",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      radius: "md",
     },
   },
 );
 
-type ButtonProps = React.ComponentProps<"button"> &
+type ButtonEffect = "none" | "shine" | "fill" | "swap" | "border-draw";
+type ButtonFillDirection = "right" | "up";
+type ButtonSwapTarget = "icon" | "label" | "both";
+
+type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
   VariantProps<typeof buttonVariants> & {
+    /** Render the button styles and behavior on the single child element. */
     asChild?: boolean;
+    /** Keep the label in-flow while showing a centered busy indicator. */
+    loading?: boolean;
+    /** Optional decorative hover motion; semantic state remains unchanged. */
+    effect?: ButtonEffect;
+    /** Axis used by the fill effect. */
+    fillDirection?: ButtonFillDirection;
+    /** Anatomy animated by the swap effect. Raw text is treated as content. */
+    swapTarget?: ButtonSwapTarget;
   };
 
-function Button({
-  className,
-  variant = "default",
-  size = "default",
-  asChild = false,
-  ...props
-}: ButtonProps) {
-  const Component = asChild ? Slot : "button";
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      asChild = false,
+      children,
+      className,
+      disabled = false,
+      effect = "none",
+      fillDirection = "right",
+      loading = false,
+      onClick,
+      radius = "md",
+      size = "default",
+      swapTarget = "both",
+      type,
+      variant = "default",
+      ...props
+    },
+    ref,
+  ) => {
+    const isDisabled = disabled || loading;
+    const sharedProps = {
+      "aria-busy": loading || undefined,
+      "aria-disabled": asChild && isDisabled ? true : undefined,
+      "data-effect": effect,
+      "data-fill-direction": fillDirection,
+      "data-loading": loading ? "" : undefined,
+      "data-radius": radius,
+      "data-size": size,
+      "data-slot": "button",
+      "data-swap-target": swapTarget,
+      "data-variant": variant,
+      className: cn(buttonVariants({ variant, size, radius }), className),
+      onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (isDisabled) {
+          event.preventDefault();
+          return;
+        }
+        onClick?.(event);
+      },
+    };
 
-  return (
-    <Component
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
+    const spinner = (
+      <span data-slot="button-spinner" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+          <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeLinecap="round" strokeWidth="3" />
+        </svg>
+      </span>
+    );
+
+    if (asChild) {
+      return (
+        <Slot ref={ref} {...sharedProps} {...props}>
+          {spinner}
+          <Slottable>{children}</Slottable>
+        </Slot>
+      );
+    }
+
+    return (
+      <button
+        ref={ref}
+        type={type ?? "button"}
+        disabled={isDisabled}
+        {...sharedProps}
+        {...props}
+      >
+        {spinner}
+        <span data-slot="button-content">{children}</span>
+      </button>
+    );
+  },
+);
+Button.displayName = "Button";
+
+function ButtonIcon({ className, ...props }: React.ComponentPropsWithoutRef<"span">) {
+  return <span data-slot="button-icon" className={cn("inline-flex", className)} {...props} />;
 }
 
-export { Button, buttonVariants };
-export type { ButtonProps };
+function ButtonLabel({ className, ...props }: React.ComponentPropsWithoutRef<"span">) {
+  return <span data-slot="button-label" className={cn("inline-flex", className)} {...props} />;
+}
+
+export { Button, ButtonIcon, ButtonLabel, buttonVariants };
+export type {
+  ButtonEffect,
+  ButtonFillDirection,
+  ButtonProps,
+  ButtonSwapTarget,
+};
