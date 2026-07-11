@@ -32,7 +32,11 @@
       "description": "The semantic light and dark color foundation for the Poyraz Soft Glass design language.",
       "cssVars": {
         "theme": {
-          "font-sans": "Inter, ui-sans-serif, system-ui, sans-serif",
+          "poyraz-font-primary": "Inter, ui-sans-serif, system-ui, sans-serif",
+          "poyraz-font-secondary": "Agbalumo, ui-serif, Georgia, cursive",
+          "font-sans": "var(--poyraz-font-primary)",
+          "font-primary": "var(--poyraz-font-primary)",
+          "font-secondary": "var(--poyraz-font-secondary)",
           "poyraz-brand-red-50": "#fef2f2",
           "poyraz-brand-red-100": "#fee2e2",
           "poyraz-brand-red-200": "#fecaca",
@@ -400,7 +404,7 @@
         {
           "path": "registry/poyraz/ui/button.tsx",
           "type": "registry:ui",
-          "target": "@ui/button.tsx"
+          "target": "@ui/atoms/button.tsx"
         }
       ],
       "css": {
@@ -566,6 +570,586 @@
       "meta": {
         "category": "actions",
         "phase": "alpha"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "poyraz-recipes",
+      "title": "Poyraz Recipes",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass poyraz-recipes component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/recipes.ts",
+          "type": "registry:ui",
+          "target": "@ui/recipes.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass label component.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/label.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass separator component.",
+      "dependencies": [
+        "@radix-ui/react-separator@^1.1.8"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/separator.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass skeleton component.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/skeleton.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass input component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/input.tsx"
+        }
+      ],
+      "css": {
+        ".poyraz-glass-field": {
+          "background-color": "var(--glass-fallback)"
+        },
+        "@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))": {
+          ".poyraz-glass-field": {
+            "background-color": "var(--glass-background)",
+            "-webkit-backdrop-filter": "blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass))",
+            "backdrop-filter": "blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass))"
+          }
+        },
+        "input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus": {
+          "-webkit-text-fill-color": "var(--foreground)",
+          "caret-color": "var(--foreground)",
+          "box-shadow": "0 0 0 1000px var(--background) inset"
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass textarea component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/textarea.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass checkbox component.",
+      "dependencies": [
+        "@radix-ui/react-checkbox@^1.3.3"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/checkbox.tsx"
+        }
+      ],
+      "css": {
+        "@media (forced-colors: active)": {
+          "[data-slot=\"checkbox\"]": {
+            "forced-color-adjust": "auto"
+          },
+          "[data-slot=\"checkbox\"][data-state=\"checked\"]": {
+            "background": "Highlight",
+            "color": "HighlightText"
+          }
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass radio-group component.",
+      "dependencies": [
+        "@radix-ui/react-radio-group@^1.3.8"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/radio-group.tsx"
+        }
+      ],
+      "css": {
+        "@media (forced-colors: active)": {
+          "[data-slot=\"radio-group-item\"]": {
+            "forced-color-adjust": "auto"
+          },
+          "[data-slot=\"radio-group-item\"][data-state=\"checked\"]": {
+            "background": "Highlight",
+            "color": "HighlightText"
+          }
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass switch component.",
+      "dependencies": [
+        "@radix-ui/react-switch@^1.2.6"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/switch.tsx"
+        }
+      ],
+      "css": {
+        "@media (forced-colors: active)": {
+          "[data-slot=\"switch\"]": {
+            "forced-color-adjust": "auto"
+          },
+          "[data-slot=\"switch\"][data-state=\"checked\"]": {
+            "background": "Highlight",
+            "color": "HighlightText"
+          }
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass badge component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/badge.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass avatar component.",
+      "dependencies": [
+        "@radix-ui/react-avatar@^1.1.11",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/avatar.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass card component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/card.tsx"
+        }
+      ],
+      "css": {
+        ".poyraz-card [data-slot=\"card\"]": {
+          "border-radius": "var(--poyraz-radius-lg)"
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "card-variants",
+      "title": "Card Variants",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass card-variants component.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/card-variants.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/card-variants.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "typography",
+      "title": "Typography",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass typography component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/typography.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/typography.tsx"
+        }
+      ],
+      "css": {
+        ".poyraz-text-hand-drawn": {
+          "text-decoration-line": "underline",
+          "text-decoration-style": "wavy",
+          "text-decoration-color": "var(--poyraz-text-effect)",
+          "text-decoration-thickness": "0.12em",
+          "text-underline-offset": "0.22em"
+        },
+        ".poyraz-text-shimmer": {
+          "color": "transparent",
+          "background-image": "linear-gradient(105deg, var(--poyraz-text-effect) 10%, white 35%, var(--poyraz-text-effect) 55%, var(--poyraz-text-effect) 100%)",
+          "background-size": "220% auto",
+          "background-clip": "text",
+          "-webkit-background-clip": "text",
+          "animation": "poyraz-text-shimmer 2.4s linear infinite"
+        },
+        ".poyraz-text-marker::before": {
+          "content": "\"\"",
+          "position": "absolute",
+          "z-index": "-1",
+          "inset": "54% -0.08em 0.02em",
+          "border-radius": "0.2em 0.35em 0.18em 0.3em",
+          "background": "var(--poyraz-text-effect-soft)",
+          "transform": "rotate(-1.2deg) skewX(-5deg)"
+        },
+        ".poyraz-text-outline": {
+          "color": "transparent",
+          "-webkit-text-stroke": "1px var(--poyraz-text-effect)",
+          "transition": "color var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out)"
+        },
+        ".poyraz-text-outline:hover": {
+          "color": "var(--poyraz-text-effect)"
+        },
+        "@keyframes poyraz-text-shimmer": {
+          "to": {
+            "background-position": "-220% center"
+          }
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          ".poyraz-text-shimmer": {
+            "animation": "none !important",
+            "color": "var(--poyraz-text-effect)"
+          }
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-area",
+      "title": "Scroll Area",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass scroll-area component.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/scroll-area.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "form-fields",
+      "title": "Form Fields",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass form-fields component.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/input",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/form-fields.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/form-fields.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "logo",
+      "title": "Logo",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass logo component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/logo.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/logo.tsx"
+        }
+      ],
+      "css": {
+        ".poyraz-logo-shine::after": {
+          "content": "\"\"",
+          "position": "absolute",
+          "z-index": "1",
+          "inset": "-55% auto -55% -45%",
+          "width": "30%",
+          "background": "linear-gradient(90deg, transparent, rgb(255 255 255 / 0.78), transparent)",
+          "filter": "blur(1px)",
+          "transform": "translateX(-180%) skewX(-18deg)",
+          "pointer-events": "none"
+        },
+        ".poyraz-logo-shine:hover::after, .poyraz-logo-shine-loop::after": {
+          "animation": "poyraz-logo-shine 1.15s var(--poyraz-motion-ease-out)"
+        },
+        "@keyframes poyraz-logo-shine": {
+          "from": {
+            "transform": "translateX(-180%) skewX(-18deg)"
+          },
+          "to": {
+            "transform": "translateX(700%) skewX(-18deg)"
+          }
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          ".poyraz-logo-shine::after": {
+            "animation": "none !important",
+            "display": "none"
+          }
+        }
+      },
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "bg-pattern",
+      "title": "Bg Pattern",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass bg-pattern component.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase5/atoms/bg-pattern.tsx",
+          "type": "registry:ui",
+          "target": "@ui/atoms/bg-pattern.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-5-foundation",
+        "phase": "beta"
       },
       "type": "registry:ui"
     }
