@@ -87,8 +87,20 @@
   "sideEffects": false,
   "scripts": {
     "dev": "next dev",
-    "build": "tsup --tsconfig tsconfig.lib.json && next build",
-    "build:lib": "tsup --tsconfig tsconfig.lib.json",
+    "build": "pnpm theme:check && tsup --tsconfig tsconfig.lib.json && next build",
+    "build:lib": "pnpm theme:check && tsup --tsconfig tsconfig.lib.json",
+    "typecheck": "tsc --noEmit",
+    "audit:v2:source": "node scripts/audit-v2-source.mjs",
+    "audit:v2:a11y": "node scripts/audit-v2-a11y-static.mjs",
+    "audit:v2:build": "node scripts/audit-v2-build-output.mjs",
+    "theme:generate": "node scripts/generate-theme-tokens.mjs",
+    "theme:check": "node scripts/generate-theme-tokens.mjs --check && node scripts/check-theme-contrast.mjs && node scripts/check-theme-contract.mjs",
+    "registry:sync-theme": "node scripts/registry/sync-theme-registry.mjs",
+    "registry:build": "pnpm registry:sync-theme && shadcn build",
+    "registry:validate": "node scripts/registry/validate-registry.mjs",
+    "registry:check-files": "node scripts/registry/check-registry-files.mjs",
+    "registry:check-graph": "node scripts/registry/check-registry-graph.mjs",
+    "registry:check": "pnpm registry:validate && pnpm registry:check-files && pnpm registry:check-graph",
     "start": "next start",
     "prepublishOnly": "pnpm build:lib"
   },
@@ -97,9 +109,9 @@
     "react": ">=18",
     "react-dom": ">=18",
     "react-hook-form": ">=7",
+    "reactive-switcher": ">=1",
     "tailwindcss": ">=4",
-    "zod": ">=3",
-    "reactive-switcher": ">=1"
+    "zod": ">=3"
   },
   "peerDependenciesMeta": {
     "react-hook-form": {
@@ -152,6 +164,7 @@
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-hook-form": "^7.71.1",
+    "shadcn": "^4.13.0",
     "shiki": "^4.0.1",
     "tailwindcss": "^4",
     "tsup": "^8.5.0",
