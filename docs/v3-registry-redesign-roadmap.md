@@ -658,27 +658,27 @@ Componentler tek tek taşınmadan önce ortak kodlama ve customization sözleşm
 
 ### Atomik görevler
 
-- [ ] `P3-001` Component template dosyası oluştur.
-- [ ] `P3-002` `data-slot` isimlendirme standardını yaz.
-- [ ] `P3-003` `data-variant` ve `data-size` kullanım standardını yaz.
-- [ ] `P3-004` `className` merge sırasını standartlaştır.
-- [ ] `P3-005` CVA recipe export standardını yaz.
-- [ ] `P3-006` Variant adlandırma sözlüğünü sabitle.
-- [ ] `P3-007` Size adlandırma sözlüğünü sabitle.
-- [ ] `P3-008` `asChild` kullanım kriterlerini belirle.
-- [ ] `P3-009` Ref forwarding yaklaşımını desteklenen React sürümleriyle doğrula.
-- [ ] `P3-010` Controlled/uncontrolled component checklist'i oluştur.
-- [ ] `P3-011` Loading state davranış standardını yaz.
-- [ ] `P3-012` Invalid/error state davranış standardını yaz.
-- [ ] `P3-013` Icon-only control accessibility standardını yaz.
-- [ ] `P3-014` Focus-visible standardını yaz.
-- [ ] `P3-015` Portal container override standardını değerlendir.
-- [ ] `P3-016` Overlay scroll locking politikasını belirle.
-- [ ] `P3-017` Direction/RTL uyumluluğu için class ve icon kontrollerini tanımla.
-- [ ] `P3-018` Client component sınırını component bazında belgeye ekle.
-- [ ] `P3-019` Her component için README metadata şablonu oluştur.
-- [ ] `P3-020` Registry dependency metadata checklist'i oluştur.
-- [ ] `P3-021` Component review pull request template'i oluştur.
+- [x] `P3-001` Component template dosyası oluştur.
+- [x] `P3-002` `data-slot` isimlendirme standardını yaz.
+- [x] `P3-003` `data-variant` ve `data-size` kullanım standardını yaz.
+- [x] `P3-004` `className` merge sırasını standartlaştır.
+- [x] `P3-005` CVA recipe export standardını yaz.
+- [x] `P3-006` Variant adlandırma sözlüğünü sabitle.
+- [x] `P3-007` Size adlandırma sözlüğünü sabitle.
+- [x] `P3-008` `asChild` kullanım kriterlerini belirle.
+- [x] `P3-009` Ref forwarding yaklaşımını desteklenen React sürümleriyle doğrula.
+- [x] `P3-010` Controlled/uncontrolled component checklist'i oluştur.
+- [x] `P3-011` Loading state davranış standardını yaz.
+- [x] `P3-012` Invalid/error state davranış standardını yaz.
+- [x] `P3-013` Icon-only control accessibility standardını yaz.
+- [x] `P3-014` Focus-visible standardını yaz.
+- [x] `P3-015` Portal container override standardını değerlendir.
+- [x] `P3-016` Overlay scroll locking politikasını belirle.
+- [x] `P3-017` Direction/RTL uyumluluğu için class ve icon kontrollerini tanımla.
+- [x] `P3-018` Client component sınırını component bazında belgeye ekle.
+- [x] `P3-019` Her component için README metadata şablonu oluştur.
+- [x] `P3-020` Registry dependency metadata checklist'i oluştur.
+- [x] `P3-021` Component review pull request template'i oluştur.
 
 ### Çıkış kriteri
 
@@ -717,38 +717,49 @@ Yeni mimari, tasarım, motion ve registry yaklaşımını tek bir yüksek görü
 - `icon`
 - `icon-lg`
 
+Radius seçenekleri size'dan bağımsızdır: `none`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `full`. Varsayılan `md`; pill/circle görünümü yalnız `full` açıkça seçildiğinde oluşur.
+
 ### Atomik görevler
 
-- [ ] `P4-001` Button anatomy ve prop sözleşmesini yaz.
-- [ ] `P4-002` `buttonVariants` CVA recipe'sini oluştur.
-- [ ] `P4-003` `default` varyantını uygula.
-- [ ] `P4-004` `secondary` varyantını uygula.
-- [ ] `P4-005` `soft` varyantını uygula.
-- [ ] `P4-006` `outline` varyantını uygula.
-- [ ] `P4-007` `glass` varyantını uygula.
-- [ ] `P4-008` `ghost` varyantını uygula.
-- [ ] `P4-009` `destructive` varyantını uygula.
-- [ ] `P4-010` `link` varyantını uygula.
-- [ ] `P4-011` Tüm size recipe'lerini uygula.
-- [ ] `P4-012` `asChild` davranışını uygula.
-- [ ] `P4-013` Native button props ve ref davranışını doğrula.
-- [ ] `P4-014` Loading state ve spinner anatomy'sini uygula.
-- [ ] `P4-015` Loading sırasında width shift politikasını belirle.
-- [ ] `P4-016` Left/right icon spacing için child selector veya `data-icon` standardını uygula.
-- [ ] `P4-017` Icon-only button için accessible-name testini ekle.
-- [ ] `P4-018` Hover state motion'ını ekle.
-- [ ] `P4-019` Press state motion'ını ekle.
-- [ ] `P4-020` Focus-visible state'ini ekle.
-- [ ] `P4-021` Disabled state contrast ve pointer davranışını doğrula.
-- [ ] `P4-022` Reduced-motion altında scale/translation'ı kapat.
-- [ ] `P4-023` Glass varyantını açık düz zeminde test et.
-- [ ] `P4-024` Glass varyantını koyu fotoğraf/gradient üzerinde test et.
-- [ ] `P4-025` Tüm varyantları light/dark theme'de görsel teste al.
-- [ ] `P4-026` Button registry item dependency'lerini doğrula.
-- [ ] `P4-027` Temiz fixture'a Button kurulum testi ekle.
-- [ ] `P4-028` Button dokümantasyonunu variants/sizes/states/asChild/loading bölümleriyle yenile.
-- [ ] `P4-029` V2→V3 Button variant mapping tablosu yaz.
+- [x] `P4-001` Button anatomy ve prop sözleşmesini yaz.
+- [x] `P4-002` `buttonVariants` CVA recipe'sini oluştur.
+- [x] `P4-003` `default` varyantını uygula.
+- [x] `P4-004` `secondary` varyantını uygula.
+- [x] `P4-005` `soft` varyantını uygula.
+- [x] `P4-006` `outline` varyantını uygula.
+- [x] `P4-007` `glass` varyantını uygula.
+- [x] `P4-008` `ghost` varyantını uygula.
+- [x] `P4-009` `destructive` varyantını uygula.
+- [x] `P4-010` `link` varyantını uygula.
+- [x] `P4-011` Tüm size recipe'lerini uygula.
+- [x] `P4-012` `asChild` davranışını uygula.
+- [x] `P4-013` Native button props ve ref davranışını doğrula.
+- [x] `P4-014` Loading state ve spinner anatomy'sini uygula.
+- [x] `P4-015` Loading sırasında width shift politikasını belirle.
+- [x] `P4-016` Left/right icon spacing için child selector veya `data-icon` standardını uygula.
+- [x] `P4-017` Icon-only button için accessible-name testini ekle.
+- [x] `P4-018` Hover state motion'ını ekle.
+- [x] `P4-019` Press state motion'ını ekle.
+- [x] `P4-020` Focus-visible state'ini ekle.
+- [x] `P4-021` Disabled state contrast ve pointer davranışını doğrula.
+- [x] `P4-022` Reduced-motion altında scale/translation'ı kapat.
+- [x] `P4-023` Glass varyantını açık düz zeminde test et.
+- [x] `P4-024` Glass varyantını koyu fotoğraf/gradient üzerinde test et.
+- [x] `P4-025` Tüm varyantları light/dark theme'de görsel teste al.
+- [x] `P4-026` Button registry item dependency'lerini doğrula.
+- [x] `P4-027` Temiz fixture'a Button kurulum testi ekle.
+- [x] `P4-028` Button dokümantasyonunu variants/sizes/states/asChild/loading bölümleriyle yenile.
+- [x] `P4-029` V2→V3 Button variant mapping tablosu yaz.
 - [ ] `P4-030` Button pilotu için tasarım onayı al.
+
+### Faz 4 doğrulama kaydı — 2026-07-11
+
+- `pnpm test:button`: 8 variant, 7 size, 8 radius, 4 effect ve icon-only accessible-name sözleşmesi geçti.
+- Temiz geçici fixture, üretilmiş `public/r/button.json` ve `poyraz-utils.json` dosyalarından kuruldu; consumer usage typecheck'i geçti.
+- `pnpm registry:build` ve `pnpm registry:check` geçti; Button item kod, dependency ve effect CSS metadata'sını birlikte yayımlıyor.
+- `pnpm theme:check`, `pnpm typecheck`, `pnpm build:lib` ve production `pnpm build` geçti.
+- Light/dark production baseline'ları `docs/v3/baselines/v3-button-light.png` ve `docs/v3/baselines/v3-button-dark.png` altında kaydedildi. Açık ve koyu gradient glass senaryoları aynı matriste doğrulandı.
+- `P4-030`, repository sahibi görsel tasarım onayı verene kadar bilinçli olarak açık bırakıldı.
 
 ### Button çıkış kapısı
 
