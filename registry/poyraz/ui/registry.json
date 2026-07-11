@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A composable button primitive and variant recipe for the Poyraz Soft Glass design language.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-slot@^1.2.4",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ],
+      "meta": {
+        "category": "actions",
+        "phase": "alpha"
+      }
+    }
+  ]
+}
