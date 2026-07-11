@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass switch component.",
+  "dependencies": [
+    "@radix-ui/react-switch@^1.2.6"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\nimport { cn } from \"@/lib/utils\";\n\nconst Switch = React.forwardRef<\n  React.ComponentRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    data-slot=\"switch\"\n    className={cn(\n      \"peer relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-input bg-surface-200 shadow-inner\",\n      \"after:absolute after:-inset-y-2 after:-inset-x-1 after:content-['']\",\n      \"transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]\",\n      \"focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/25\",\n      \"data-[state=checked]:border-primary data-[state=checked]:bg-primary\",\n      \"disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled disabled:opacity-100\",\n      className,\n    )}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb\n      data-slot=\"switch-thumb\"\n      className={cn(\n        \"pointer-events-none block size-5 translate-x-px rounded-full border border-border bg-surface shadow-sm\",\n        \"transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-spring)]\",\n        \"data-[state=checked]:translate-x-5 data-[state=checked]:border-primary-foreground/40 data-[state=checked]:bg-primary-foreground\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = SwitchPrimitive.Root.displayName;\n\nexport { Switch };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/switch.tsx"
+    }
+  ],
+  "css": {
+    "@media (forced-colors: active)": {
+      "[data-slot=\"switch\"]": {
+        "forced-color-adjust": "auto"
+      },
+      "[data-slot=\"switch\"][data-state=\"checked\"]": {
+        "background": "Highlight",
+        "color": "HighlightText"
+      }
+    }
+  },
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
