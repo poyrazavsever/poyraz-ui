@@ -1,74 +1,166 @@
 "use client";
 
-import { Button } from "poyraz-ui/atoms";
+import { ArrowRight, Bell, Download, Heart, Sparkles } from "lucide-react";
+
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
+import {
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+} from "@/components/ui/atoms/button";
+
+const variants = [
+  "default",
+  "secondary",
+  "soft",
+  "outline",
+  "glass",
+  "ghost",
+  "destructive",
+  "link",
+] as const;
+
+const effects = [
+  ["shine", "Shine sweep"],
+  ["fill", "Fill right"],
+  ["swap", "Swap content"],
+  ["border-draw", "Border draw"],
+] as const;
 
 export default function ButtonPage() {
   return (
     <ComponentPage
       name="Button"
-      description="The primary interactive element. Supports 6 variants and 4 sizes with the signature brutalist dashed-border style."
-      importCode={`import { Button } from "poyraz-ui/atoms";`}
+      description="A soft, rounded action primitive with composable anatomy, eight visual variants, seven sizes, loading behavior and optional hover motion recipes."
+      importCode={`import {
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+  buttonVariants,
+} from "@/components/ui/button";`}
     >
       <DemoSection
         title="Variants"
-        description="Six visual variants for different contexts."
-        code={`<Button>Default</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>`}
-      >
-        <div className="flex flex-wrap gap-3">
-          <Button>Default</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="outline">Outline</Button>
-          <Button variant="destructive">Destructive</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="link">Link</Button>
-        </div>
-      </DemoSection>
-
-      <DemoSection
-        title="Sizes"
-        description="Four sizes: sm, default, lg, and icon."
-        code={`<Button size="sm">Small</Button>
-<Button size="default">Default</Button>
-<Button size="lg">Large</Button>
-<Button size="icon">🔔</Button>`}
+        description="Brand red remains the primary action; neutral, tinted, outline and translucent treatments provide quieter hierarchy."
+        code={variants.map((variant) => `<Button variant="${variant}">${variant}</Button>`).join("\n")}
       >
         <div className="flex flex-wrap items-center gap-3">
-          <Button size="sm">Small</Button>
-          <Button size="default">Default</Button>
-          <Button size="lg">Large</Button>
-          <Button size="icon">🔔</Button>
+          {variants.map((variant) => (
+            <Button key={variant} variant={variant}>
+              {variant}
+            </Button>
+          ))}
         </div>
       </DemoSection>
 
       <DemoSection
-        title="Disabled"
-        description="Buttons can be disabled to prevent interaction."
-        code={`<Button disabled>Disabled</Button>
-<Button variant="outline" disabled>Disabled Outline</Button>`}
+        title="Sizes and radius"
+        description="Size and corner radius are independent. Choose none through full; icon controls always need an accessible name."
+        code={`<Button size="xs">Extra small</Button>
+<Button size="sm">Small</Button>
+<Button>Default</Button>
+<Button size="lg" radius="full">Large pill</Button>
+<Button size="icon-sm" aria-label="Favorite"><Heart /></Button>
+<Button size="icon" radius="full" aria-label="Notifications"><Bell /></Button>
+<Button size="icon-lg" aria-label="Download"><Download /></Button>`}
       >
-        <div className="flex flex-wrap gap-3">
-          <Button disabled>Disabled</Button>
-          <Button variant="outline" disabled>
-            Disabled Outline
+        <div className="flex flex-wrap items-center gap-3">
+          <Button size="xs">Extra small</Button>
+          <Button size="sm">Small</Button>
+          <Button>Default</Button>
+          <Button size="lg" radius="full">Large pill</Button>
+          <Button size="icon-sm" aria-label="Favorite"><Heart /></Button>
+          <Button size="icon" radius="full" aria-label="Notifications"><Bell /></Button>
+          <Button size="icon-lg" aria-label="Download"><Download /></Button>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          {(["none", "xs", "sm", "md", "lg", "xl", "2xl", "full"] as const).map((radius) => (
+            <Button key={radius} radius={radius} variant="outline">
+              {radius}
+            </Button>
+          ))}
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="Hover effects"
+        description="Motion is opt-in and independent from visual variant. Fill also supports fillDirection=up; swap can target icon, label or both."
+        code={`<Button effect="shine">Shine sweep</Button>
+<Button effect="fill">Fill right</Button>
+<Button effect="fill" fillDirection="up">Fill up</Button>
+<Button effect="swap" swapTarget="both">
+  <ButtonLabel>Swap content</ButtonLabel>
+  <ButtonIcon><ArrowRight /></ButtonIcon>
+</Button>
+<Button effect="border-draw">Border draw</Button>`}
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          {effects.map(([effect, label]) => (
+            <Button key={effect} effect={effect} variant={effect === "border-draw" ? "outline" : "default"}>
+              <ButtonLabel>{label}</ButtonLabel>
+              <ButtonIcon><ArrowRight /></ButtonIcon>
+            </Button>
+          ))}
+          <Button effect="fill" fillDirection="up" variant="soft">Fill up</Button>
+          <Button effect="swap" swapTarget="icon" variant="secondary">
+            Icon only swap
+            <ButtonIcon><ArrowRight /></ButtonIcon>
+          </Button>
+          <Button effect="swap" swapTarget="label" variant="ghost">
+            <ButtonLabel>Label only swap</ButtonLabel>
+            <ArrowRight />
           </Button>
         </div>
       </DemoSection>
 
       <DemoSection
-        title="As Child"
-        description="Use asChild to render as a different element (e.g. a link)."
-        code={`<Button asChild>
-  <a href="/docs">Go to Docs</a>
+        title="Glass on light and dark surfaces"
+        description="The same glass recipe uses semantic transparency and a solid fallback when backdrop filtering is unavailable or reduced."
+        code={`<Button variant="glass"><Sparkles /> AI Generate</Button>`}
+      >
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-2xl border border-white/70 bg-gradient-to-br from-red-100 via-white to-slate-200 p-8 shadow-inner">
+            <Button variant="glass" effect="shine" radius="full">
+              <Sparkles /> AI Generate
+            </Button>
+          </div>
+          <div className="rounded-2xl border border-white/15 bg-[radial-gradient(circle_at_20%_20%,#7f1d1d_0%,#251719_36%,#0b0e12_100%)] p-8 text-white shadow-xl">
+            <Button variant="glass" effect="shine" radius="full" className="text-white">
+              <Sparkles /> AI Generate
+            </Button>
+          </div>
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="States"
+        description="Loading keeps the label in flow to prevent width shift, exposes aria-busy and blocks repeated actions."
+        code={`<Button loading>Saving changes</Button>
+<Button disabled>Disabled</Button>
+<Button variant="outline" className="w-full sm:w-auto">Consumer override</Button>`}
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <Button loading>Saving changes</Button>
+          <Button disabled>Disabled</Button>
+          <Button variant="outline" className="w-full sm:w-auto">Consumer override</Button>
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="As child"
+        description="Use asChild when link navigation needs Button styling while preserving anchor semantics."
+        code={`<Button asChild effect="swap" radius="full">
+  <a href="/docs">
+    <ButtonLabel>Explore docs</ButtonLabel>
+    <ButtonIcon><ArrowRight /></ButtonIcon>
+  </a>
 </Button>`}
       >
-        <Button asChild>
-          <a href="/docs">Go to Docs</a>
+        <Button asChild effect="swap" radius="full">
+          <a href="/docs">
+            <ButtonLabel>Explore docs</ButtonLabel>
+            <ButtonIcon><ArrowRight /></ButtonIcon>
+          </a>
         </Button>
       </DemoSection>
     </ComponentPage>
