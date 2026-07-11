@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Label } from "poyraz-ui/atoms";
+import { Label } from "@/components/ui/atoms/label";
 import {
   NumberInput,
   SearchInput,
   PhoneInput,
   PasswordInput,
   UrlInput,
-} from "poyraz-ui/atoms";
+} from "@/components/ui/atoms/form-fields";
 import {
   ComponentPage,
   DemoSection,
@@ -23,7 +23,7 @@ export default function FormFieldsPage() {
   return (
     <ComponentPage
       name="Form Fields"
-      description="Specialized input variants — number stepper, search, phone, password toggle, and URL prefix. Built on top of the base Input atom."
+      description="Specialized InputGroup compositions with one shared focus ring across editable input, icons, prefixes and actions."
       importCode={`import {
   NumberInput,
   SearchInput,
@@ -57,7 +57,7 @@ export default function FormFieldsPage() {
       >
         <div className="max-w-sm space-y-2">
           <Label>Search</Label>
-          <SearchInput placeholder="Search components..." />
+          <SearchInput variant="glass" radius="xl" placeholder="Search components..." />
         </div>
       </DemoSection>
 
