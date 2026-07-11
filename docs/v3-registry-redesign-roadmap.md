@@ -795,39 +795,39 @@ Molecule ve blockların üzerine kurulacağı kararlı temel component setini ta
 
 ### Ortak atomik görevler — her component için tekrarlanır
 
-- [ ] `P5-C01` V2 props/export sözleşmesini kaydet.
-- [ ] `P5-C02` V3 anatomy'yi belirle.
-- [ ] `P5-C03` Registry item kaydını oluştur.
-- [ ] `P5-C04` Registry dependency listesini ekle.
-- [ ] `P5-C05` Sabit palette renklerini semantic tokenlara çevir.
-- [ ] `P5-C06` Radius ve shadow kullanımını yeni tokenlara bağla.
-- [ ] `P5-C07` Root ve alt parçalara `data-slot` ekle.
-- [ ] `P5-C08` Varyant gerekiyorsa CVA recipe oluştur ve export et.
-- [ ] `P5-C09` Native props/ref davranışını doğrula.
-- [ ] `P5-C10` Hover/focus/active/disabled/invalid state'lerini uygula.
-- [ ] `P5-C11` Light/dark görsel test ekle.
-- [ ] `P5-C12` Keyboard/accessibility testi ekle.
-- [ ] `P5-C13` Registry clean-install testi ekle.
-- [ ] `P5-C14` Docs sayfasını güncelle.
-- [ ] `P5-C15` V2 migration notunu yaz.
+- [x] `P5-C01` V2 props/export sözleşmesini kaydet.
+- [x] `P5-C02` V3 anatomy'yi belirle.
+- [x] `P5-C03` Registry item kaydını oluştur.
+- [x] `P5-C04` Registry dependency listesini ekle.
+- [x] `P5-C05` Sabit palette renklerini semantic tokenlara çevir.
+- [x] `P5-C06` Radius ve shadow kullanımını yeni tokenlara bağla.
+- [x] `P5-C07` Root ve alt parçalara `data-slot` ekle.
+- [x] `P5-C08` Varyant gerekiyorsa CVA recipe oluştur ve export et.
+- [x] `P5-C09` Native props/ref davranışını doğrula.
+- [x] `P5-C10` Hover/focus/active/disabled/invalid state'lerini uygula.
+- [x] `P5-C11` Light/dark görsel test ekle.
+- [x] `P5-C12` Keyboard/accessibility testi ekle.
+- [x] `P5-C13` Registry clean-install testi ekle.
+- [x] `P5-C14` Docs sayfasını güncelle.
+- [x] `P5-C15` V2 migration notunu yaz.
 
 ### Component-specific kararlar
 
 #### Input ve Textarea
 
-- [ ] `P5-INPUT-01` `default`, `soft` ve gerekirse `glass` varyantlarını karşılaştır.
-- [ ] `P5-INPUT-02` Prefix/suffix icon için ayrı `InputGroup` item'ı tasarla.
-- [ ] `P5-INPUT-03` `aria-invalid` ve `data-invalid` styling'i standardize et.
-- [ ] `P5-INPUT-04` Placeholder kontrastını light/dark theme'de doğrula.
+- [x] `P5-INPUT-01` `default`, `soft` ve gerekirse `glass` varyantlarını karşılaştır.
+- [x] `P5-INPUT-02` Prefix/suffix icon için ayrı `InputGroup` item'ı tasarla.
+- [x] `P5-INPUT-03` `aria-invalid` ve `data-invalid` styling'i standardize et.
+- [x] `P5-INPUT-04` Placeholder kontrastını light/dark theme'de doğrula.
 - [ ] `P5-INPUT-05` Autofill background davranışını browser bazında test et.
 
 #### Checkbox, RadioGroup ve Switch
 
-- [ ] `P5-SELECT-01` Radix `data-state` attribute'larını doğrudan styling kaynağı yap.
-- [ ] `P5-SELECT-02` Checked indicator giriş/çıkış motion'ını ekle.
-- [ ] `P5-SELECT-03` Disabled checked state kontrastını doğrula.
-- [ ] `P5-SELECT-04` Touch target ile görsel boyutu birbirinden ayır.
-- [ ] `P5-SELECT-05` High-contrast mode davranışını kontrol et.
+- [x] `P5-SELECT-01` Radix `data-state` attribute'larını doğrudan styling kaynağı yap.
+- [x] `P5-SELECT-02` Checked indicator giriş/çıkış motion'ını ekle.
+- [x] `P5-SELECT-03` Disabled checked state kontrastını doğrula.
+- [x] `P5-SELECT-04` Touch target ile görsel boyutu birbirinden ayır.
+- [x] `P5-SELECT-05` High-contrast mode davranışını kontrol et.
 
 #### Card
 
@@ -842,19 +842,38 @@ Molecule ve blockların üzerine kurulacağı kararlı temel component setini ta
 
 Card görevleri:
 
-- [ ] `P5-CARD-01` Eski brutalist offset `elevated` görünümünün migration politikasını belirle.
-- [ ] `P5-CARD-02` Yeni `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` anatomy'sini koru.
-- [ ] `P5-CARD-03` `CardAction` convenience slot'unu değerlendir.
-- [ ] `P5-CARD-04` Nested card radius kuralını uygula.
-- [ ] `P5-CARD-05` Interactive varyantta keyboard semantics için gerçek interactive child gereksinimini belge.
-- [ ] `P5-CARD-06` Glass Card'ın image background ve plain canvas testlerini ekle.
+- [x] `P5-CARD-01` Eski brutalist offset `elevated` görünümünün migration politikasını belirle.
+- [x] `P5-CARD-02` Yeni `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` anatomy'sini koru.
+- [x] `P5-CARD-03` `CardAction` convenience slot'unu değerlendir.
+- [x] `P5-CARD-04` Nested card radius kuralını uygula.
+- [x] `P5-CARD-05` Interactive varyantta keyboard semantics için gerçek interactive child gereksinimini belge.
+- [x] `P5-CARD-06` Glass Card'ın image background ve plain canvas testlerini ekle.
 
 #### Typography
 
-- [ ] `P5-TYPE-01` `cn` fonksiyonunu Typography dosyasından çıkar.
-- [ ] `P5-TYPE-02` Heading limitlerini yeni docs görsel diliyle doğrula.
-- [ ] `P5-TYPE-03` Decorative fontu default UI componentlerinden ayır.
-- [ ] `P5-TYPE-04` Typography componentinin gerekli olup olmadığını; yoksa semantic class recipe yaklaşımını değerlendir.
+- [x] `P5-TYPE-01` `cn` fonksiyonunu Typography dosyasından çıkar.
+- [x] `P5-TYPE-02` Heading limitlerini yeni docs görsel diliyle doğrula.
+- [x] `P5-TYPE-03` Decorative fontu default UI componentlerinden ayır.
+- [x] `P5-TYPE-04` Typography componentinin gerekli olup olmadığını; yoksa semantic class recipe yaklaşımını değerlendir.
+
+### Faz 5 genişletilmiş tasarım kapsamı
+
+- [x] `P5-EXT-01` Form field addon ve gerçek input odağını tek, özelleştirilebilir `focus-within` yüzeyinde birleştir.
+- [x] `P5-EXT-02` Primary ve secondary font ailelerini token üzerinden özelleştirilebilir yap; kontrol componentlerinde decorative font kullanımını engelle.
+- [x] `P5-EXT-03` Hand-drawn underline, font contrast, shiny gradient, marker ve outlined text effect recipe'lerini ekle.
+- [x] `P5-EXT-04` Logo için isteğe bağlı shine ve sürekli shine effect'lerini, radius varyantlarını ve reduced-motion davranışını ekle.
+- [x] `P5-EXT-05` Basic, Image, Horizontal, Profile, Statistic, Pricing, Feature, Glass, Interactive ve Expandable Card kompozisyonlarını yayımla.
+- [x] `P5-EXT-06` Tüm yeni effect ve kompozisyonları registry item metadata'sı ve docs örnekleriyle dağıt.
+
+### Faz 5 doğrulama kaydı — 2026-07-11
+
+- `pnpm test:phase5`: anatomy, semantic renk, form focus, typography/text effect, logo shine, Card varyant/kompozisyon ve registry katalog sözleşmeleri geçti.
+- Temiz geçici consumer fixture, üretilmiş Phase 5 registry item'larını kurdu ve TypeScript doğrulamasından geçti.
+- `pnpm registry:build` ve `pnpm registry:check` geçti; 19 Phase 5 UI item'ı bağımsız dosya hedefleri ve döngüsüz internal dependency grafiğiyle üretildi.
+- `pnpm theme:check` geçti; light/dark placeholder kontrastları otomatik doğrulandı ve WebKit autofill için semantic surface/foreground politikası eklendi.
+- `pnpm typecheck` ve production `pnpm build` geçti.
+- Input, Typography, Logo ve Card sayfalarının light/dark production baseline'ları `docs/v3/baselines/v3-phase5-*.png` altında kaydedildi.
+- `P5-INPUT-05`, gerçek Safari ve Firefox autofill senaryoları manuel tarayıcı matrisinde doğrulanana kadar bilinçli olarak açık bırakıldı.
 
 ### Çıkış kriteri
 
