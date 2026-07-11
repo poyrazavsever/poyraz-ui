@@ -500,24 +500,24 @@ Mevcut v2 davranışını ölçülebilir bir baseline olarak sabitlemek ve v3 ka
 
 ### Atomik görevler
 
-- [ ] `P0-001` V2 public export listesini script ile çıkar.
-- [ ] `P0-002` Her export'u atom, molecule, organism, hook, utility veya theme olarak sınıflandır.
-- [ ] `P0-003` Her componentin zorunlu ve opsiyonel dependency listesini çıkar.
-- [ ] `P0-004` Her componentte `"use client"` gerekip gerekmediğini belirle.
-- [ ] `P0-005` Sabit Tailwind palette rengi ve hex kullanan tüm satırları raporla.
-- [ ] `P0-006` Tüm `--poyraz-*` tokenlarını ve tekrarlandıkları dosyaları listele.
-- [ ] `P0-007` CVA kullanılan ve kullanılmayan componentleri sınıflandır.
-- [ ] `P0-008` `className`, `asChild`, `ref`, controlled state ve loading desteğini component bazında matrise dök.
-- [ ] `P0-009` V2 docs sayfalarının light/dark desktop ekran görüntülerini baseline olarak kaydet.
-- [ ] `P0-010` V2 docs sayfalarının mobile viewport baseline'ını kaydet.
-- [ ] `P0-011` `pnpm build:lib` çıktısını ve entry point boyutlarını kaydet.
-- [ ] `P0-012` `pnpm build` çıktısını baseline CI artifact olarak sakla.
-- [ ] `P0-013` Mevcut accessibility eksiklerini otomatik ve manuel olarak raporla.
-- [ ] `P0-014` “Registry-first” kararını ADR olarak yaz.
-- [ ] `P0-015` “npm runtime component package” için v3 sonrası destek politikasını ADR olarak yaz.
-- [ ] `P0-016` Desteklenecek React, Tailwind ve framework matrisini belirle.
-- [ ] `P0-017` Browser destek matrisini ve glass fallback politikasını belirle.
-- [ ] `P0-018` V3 anti-goal listesini ekip onayına sun.
+- [x] `P0-001` V2 public export listesini script ile çıkar.
+- [x] `P0-002` Her export'u atom, molecule, organism, hook, utility veya theme olarak sınıflandır.
+- [x] `P0-003` Her componentin zorunlu ve opsiyonel dependency listesini çıkar.
+- [x] `P0-004` Her componentte `"use client"` gerekip gerekmediğini belirle.
+- [x] `P0-005` Sabit Tailwind palette rengi ve hex kullanan tüm satırları raporla.
+- [x] `P0-006` Tüm `--poyraz-*` tokenlarını ve tekrarlandıkları dosyaları listele.
+- [x] `P0-007` CVA kullanılan ve kullanılmayan componentleri sınıflandır.
+- [x] `P0-008` `className`, `asChild`, `ref`, controlled state ve loading desteğini component bazında matrise dök.
+- [x] `P0-009` V2 docs sayfalarının light/dark desktop ekran görüntülerini baseline olarak kaydet.
+- [x] `P0-010` V2 docs sayfalarının mobile viewport baseline'ını kaydet.
+- [x] `P0-011` `pnpm build:lib` çıktısını ve entry point boyutlarını kaydet.
+- [x] `P0-012` `pnpm build` çıktısını baseline CI artifact olarak sakla.
+- [x] `P0-013` Mevcut accessibility eksiklerini otomatik ve manuel olarak raporla.
+- [x] `P0-014` “Registry-first” kararını ADR olarak yaz.
+- [x] `P0-015` “npm runtime component package” için v3 sonrası destek politikasını ADR olarak yaz.
+- [x] `P0-016` Desteklenecek React, Tailwind ve framework matrisini belirle.
+- [x] `P0-017` Browser destek matrisini ve glass fallback politikasını belirle.
+- [x] `P0-018` V3 anti-goal listesini ekip onayına sun.
 
 ### Çıkış kriteri
 
@@ -536,34 +536,42 @@ Tek bir pilot componenti temiz bir consumer projeye source olarak kurabilen uçt
 
 ### Atomik görevler
 
-- [ ] `P1-001` Root `registry.json` oluştur.
-- [ ] `P1-002` Root metadata içinde schema, name ve homepage alanlarını tanımla.
-- [ ] `P1-003` Büyük registry için `include` tabanlı parçalı yapı seçimini uygula.
-- [ ] `P1-004` `registry/poyraz/registry.json` oluştur.
-- [ ] `P1-005` `registry/poyraz/ui` dizinini oluştur.
-- [ ] `P1-006` `registry/poyraz/lib` dizinini oluştur.
-- [ ] `P1-007` `registry/poyraz/hooks` dizinini oluştur.
-- [ ] `P1-008` `registry/poyraz/styles` dizinini oluştur.
-- [ ] `P1-009` `registry/poyraz/blocks` dizinini oluştur.
-- [ ] `P1-010` `cn` utility'sini tek kaynak haline getir ve registry item olarak tanımla.
-- [ ] `P1-011` İlk `poyraz-theme` registry item'ını tanımla.
-- [ ] `P1-012` Pilot `button` registry item'ını placeholder içerikle tanımla.
-- [ ] `P1-013` Button item'ına `registryDependencies` üzerinden utils/theme ilişkisini ekle.
-- [ ] `P1-014` Harici package dependency'lerini registry metadata içinde tanımla.
-- [ ] `P1-015` `shadcn build` scriptini package scripts içine ekle.
-- [ ] `P1-016` Registry çıktısını `public/r` altına üret.
-- [ ] `P1-017` Üretilen JSON dosyalarını schema ile doğrula.
-- [ ] `P1-018` Aynı registry item adının tekrar edilmesini CI'da engelle.
-- [ ] `P1-019` Registry item içindeki her kaynak dosyanın varlığını doğrulayan script yaz.
-- [ ] `P1-020` Dependency graph'ta cycle tespiti ekle.
+- [x] `P1-001` Root `registry.json` oluştur.
+- [x] `P1-002` Root metadata içinde schema, name ve homepage alanlarını tanımla.
+- [x] `P1-003` Büyük registry için `include` tabanlı parçalı yapı seçimini uygula.
+- [x] `P1-004` `registry/poyraz/registry.json` oluştur.
+- [x] `P1-005` `registry/poyraz/ui` dizinini oluştur.
+- [x] `P1-006` `registry/poyraz/lib` dizinini oluştur.
+- [x] `P1-007` `registry/poyraz/hooks` dizinini oluştur.
+- [x] `P1-008` `registry/poyraz/styles` dizinini oluştur.
+- [x] `P1-009` `registry/poyraz/blocks` dizinini oluştur.
+- [x] `P1-010` `cn` utility'sini tek kaynak haline getir ve registry item olarak tanımla.
+- [x] `P1-011` İlk `poyraz-theme` registry item'ını tanımla.
+- [x] `P1-012` Pilot `button` registry item'ını placeholder içerikle tanımla.
+- [x] `P1-013` Button item'ına `registryDependencies` üzerinden utils/theme ilişkisini ekle.
+- [x] `P1-014` Harici package dependency'lerini registry metadata içinde tanımla.
+- [x] `P1-015` `shadcn build` scriptini package scripts içine ekle.
+- [x] `P1-016` Registry çıktısını `public/r` altına üret.
+- [x] `P1-017` Üretilen JSON dosyalarını schema ile doğrula.
+- [x] `P1-018` Aynı registry item adının tekrar edilmesini CI'da engelle.
+- [x] `P1-019` Registry item içindeki her kaynak dosyanın varlığını doğrulayan script yaz.
+- [x] `P1-020` Dependency graph'ta cycle tespiti ekle.
 - [ ] `P1-021` Local URL üzerinden temiz Next.js fixture'a Button kur.
 - [ ] `P1-022` Local URL üzerinden temiz Vite fixture'a Button kur.
 - [ ] `P1-023` Kurulum sonucunda dosyanın `components/ui/button.tsx` altına geldiğini doğrula.
 - [ ] `P1-024` Kurulum sonucunda dependency'lerin package manifestine doğru eklendiğini doğrula.
 - [ ] `P1-025` `--dry-run`, `--diff` ve overwrite davranışlarını manuel test et.
-- [ ] `P1-026` Namespace örneğini `components.json` dokümantasyonuna ekle.
+- [x] `P1-026` Namespace örneğini `components.json` dokümantasyonuna ekle.
 - [ ] `P1-027` GitHub repository item address ile kurulum akışını test et.
-- [ ] `P1-028` Registry build çıktısının elle düzenlenmemesi kuralını CONTRIBUTING'e ekle.
+- [x] `P1-028` Registry build çıktısının elle düzenlenmemesi kuralını CONTRIBUTING'e ekle.
+
+> **11 Temmuz 2026 doğrulama notu:** Registry source/build/schema/file/graph
+> hattı tamamlandı. Üretilen Button ve Utils kaynakları temiz bir Next.js
+> fixture içinde typecheck ve production build'den geçti. P1-021–P1-025 yerel
+> HTTP registry erişimi çalışma ortamının processler arası localhost iznine,
+> P1-022 ayrıca Vite dependency indirmesine, P1-027 ise registry değişikliklerinin
+> GitHub'a push edilmesine bağlı olduğu için açık tutuldu. Bu maddeler gerçek
+> shadcn install kanıtı üretilmeden tamamlanmış sayılmayacaktır.
 
 ### CLI kararı
 
@@ -600,36 +608,36 @@ Yeni görsel dilin tüm componentlerden önce ortak ve test edilebilir bir temel
 
 ### Atomik görevler
 
-- [ ] `P2-001` Brand red primitive palette'i eksiksiz tanımla.
-- [ ] `P2-002` Neutral light palette'i tanımla.
-- [ ] `P2-003` Neutral dark palette'i tanımla.
-- [ ] `P2-004` Status palette'lerini brand palette'ten ayır.
-- [ ] `P2-005` Light semantic token map'i oluştur.
-- [ ] `P2-006` Dark semantic token map'i oluştur.
-- [ ] `P2-007` Surface ve elevated surface rollerini tanımla.
-- [ ] `P2-008` Glass light tokenlarını tanımla.
-- [ ] `P2-009` Glass dark tokenlarını tanımla.
-- [ ] `P2-010` Radius scale'i tanımla.
-- [ ] `P2-011` Shadow scale'i tanımla.
-- [ ] `P2-012` Blur ve saturation tokenlarını tanımla.
-- [ ] `P2-013` Spacing/density kararlarını belgeye bağla.
-- [ ] `P2-014` Typography scale ve line-height'ları tanımla.
-- [ ] `P2-015` Motion duration/easing setini normalize et.
-- [ ] `P2-016` Z-index katmanlarını isimlendir: base, sticky, dropdown, overlay, modal, toast.
-- [ ] `P2-017` Focus ring recipe'sini tek standarda bağla.
-- [ ] `P2-018` Selection, disabled ve invalid state tokenlarını tanımla.
-- [ ] `P2-019` Tailwind v4 `@theme` mapping'ini yeni semantic tokenlara bağla.
-- [ ] `P2-020` Base CSS reset'in sınırlarını belirle; consumer elementlerini gereksiz biçimde değiştirme.
-- [ ] `P2-021` `.poyraz-glass` veya eşdeğer recipe'yi oluştur.
-- [ ] `P2-022` `@supports(backdrop-filter)` fallback'ini ekle.
-- [ ] `P2-023` `prefers-reduced-transparency` için mümkün olan progressive enhancement politikasını değerlendir.
-- [ ] `P2-024` `prefers-reduced-motion` override'ını yeni motion tokenlarıyla doğrula.
-- [ ] `P2-025` Light/dark token kontrast testlerini çalıştır.
-- [ ] `P2-026` Tokenların tek bir kaynak dosyadan üretilip üretilemeyeceğini kararlaştır.
-- [ ] `P2-027` CSS ve TypeScript theme tekrarını kaldır.
-- [ ] `P2-028` Docs için token gallery sayfası hazırla.
-- [ ] `P2-029` Glass yüzey performansını düşük güçlü cihaz senaryosunda kontrol et.
-- [ ] `P2-030` Nested glass yüzeyler için maksimum blur katmanı kuralı belirle.
+- [x] `P2-001` Brand red primitive palette'i eksiksiz tanımla.
+- [x] `P2-002` Neutral light palette'i tanımla.
+- [x] `P2-003` Neutral dark palette'i tanımla.
+- [x] `P2-004` Status palette'lerini brand palette'ten ayır.
+- [x] `P2-005` Light semantic token map'i oluştur.
+- [x] `P2-006` Dark semantic token map'i oluştur.
+- [x] `P2-007` Surface ve elevated surface rollerini tanımla.
+- [x] `P2-008` Glass light tokenlarını tanımla.
+- [x] `P2-009` Glass dark tokenlarını tanımla.
+- [x] `P2-010` Radius scale'i tanımla.
+- [x] `P2-011` Shadow scale'i tanımla.
+- [x] `P2-012` Blur ve saturation tokenlarını tanımla.
+- [x] `P2-013` Spacing/density kararlarını belgeye bağla.
+- [x] `P2-014` Typography scale ve line-height'ları tanımla.
+- [x] `P2-015` Motion duration/easing setini normalize et.
+- [x] `P2-016` Z-index katmanlarını isimlendir: base, sticky, dropdown, overlay, modal, toast.
+- [x] `P2-017` Focus ring recipe'sini tek standarda bağla.
+- [x] `P2-018` Selection, disabled ve invalid state tokenlarını tanımla.
+- [x] `P2-019` Tailwind v4 `@theme` mapping'ini yeni semantic tokenlara bağla.
+- [x] `P2-020` Base CSS reset'in sınırlarını belirle; consumer elementlerini gereksiz biçimde değiştirme.
+- [x] `P2-021` `.poyraz-glass` veya eşdeğer recipe'yi oluştur.
+- [x] `P2-022` `@supports(backdrop-filter)` fallback'ini ekle.
+- [x] `P2-023` `prefers-reduced-transparency` için mümkün olan progressive enhancement politikasını değerlendir.
+- [x] `P2-024` `prefers-reduced-motion` override'ını yeni motion tokenlarıyla doğrula.
+- [x] `P2-025` Light/dark token kontrast testlerini çalıştır.
+- [x] `P2-026` Tokenların tek bir kaynak dosyadan üretilip üretilemeyeceğini kararlaştır.
+- [x] `P2-027` CSS ve TypeScript theme tekrarını kaldır.
+- [x] `P2-028` Docs için token gallery sayfası hazırla.
+- [x] `P2-029` Glass yüzey performansını düşük güçlü cihaz senaryosunda kontrol et.
+- [x] `P2-030` Nested glass yüzeyler için maksimum blur katmanı kuralı belirle.
 
 ### Görsel kabul kriterleri
 
