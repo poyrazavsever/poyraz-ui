@@ -47,6 +47,7 @@ export const mobileNav: NavItem[] = [
 export const docsMobileNav: NavItem[] = [
   { label: "Introduction", href: "/docs" },
   { label: "Installation", href: "/docs/installation" },
+  { label: "Theme", href: "/docs/theme" },
   { label: "Atoms", href: "/docs/atoms" },
   { label: "Molecules", href: "/docs/molecules" },
   { label: "Organisms", href: "/docs/organisms" },
@@ -125,6 +126,7 @@ export const footerNav: FooterSection[] = [
     links: [
       { label: "Getting Started", href: "/docs" },
       { label: "Installation", href: "/docs/installation" },
+      { label: "Theme", href: "/docs/theme" },
       { label: "Components", href: "/docs/atoms" },
     ],
   },
