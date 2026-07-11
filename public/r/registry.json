@@ -403,6 +403,166 @@
           "target": "@ui/button.tsx"
         }
       ],
+      "css": {
+        ".poyraz-button": {
+          "--poyraz-button-effect-color": "var(--primary-hover)",
+          "--poyraz-button-spinner-color": "currentColor"
+        },
+        ".poyraz-button[data-variant=\"default\"], .poyraz-button[data-variant=\"destructive\"]": {
+          "--poyraz-button-effect-color": "rgb(255 255 255 / 0.16)"
+        },
+        ".poyraz-button-glass": {
+          "background-color": "var(--glass-background)",
+          "backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))",
+          "-webkit-backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))"
+        },
+        ".poyraz-button > [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
+          "position": "relative",
+          "z-index": "1"
+        },
+        ".poyraz-button > [data-slot=\"button-content\"]": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "gap": "inherit"
+        },
+        ".poyraz-button [data-slot=\"button-spinner\"]": {
+          "position": "absolute",
+          "inset": "50% auto auto 50%",
+          "z-index": "2",
+          "display": "inline-flex",
+          "width": "1rem",
+          "height": "1rem",
+          "color": "var(--poyraz-button-spinner-color)",
+          "opacity": "0",
+          "transform": "translate(-50%, -50%)",
+          "pointer-events": "none"
+        },
+        ".poyraz-button [data-slot=\"button-spinner\"] svg": {
+          "width": "100%",
+          "height": "100%",
+          "animation": "poyraz-button-spin var(--poyraz-motion-duration-slow) linear infinite"
+        },
+        ".poyraz-button[data-loading] > :not([data-slot=\"button-spinner\"])": {
+          "visibility": "hidden"
+        },
+        ".poyraz-button[data-loading] [data-slot=\"button-spinner\"]": {
+          "opacity": "1",
+          "visibility": "visible"
+        },
+        ".poyraz-button[data-effect=\"shine\"]::before, .poyraz-button[data-effect=\"fill\"]::before, .poyraz-button[data-effect=\"border-draw\"]::before": {
+          "content": "\"\"",
+          "position": "absolute",
+          "z-index": "0",
+          "pointer-events": "none"
+        },
+        ".poyraz-button[data-effect=\"shine\"]::before": {
+          "top": "-60%",
+          "bottom": "-60%",
+          "left": "-45%",
+          "width": "28%",
+          "background": "linear-gradient(90deg, transparent, rgb(255 255 255 / 0.62), transparent)",
+          "filter": "blur(1px)",
+          "transform": "translateX(-180%) skewX(-18deg)"
+        },
+        ".poyraz-button[data-effect=\"shine\"]:hover::before": {
+          "animation": "poyraz-button-shine var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out)"
+        },
+        ".poyraz-button[data-effect=\"fill\"]::before": {
+          "inset": "0",
+          "background": "var(--poyraz-button-effect-color)",
+          "transform": "scaleX(0)",
+          "transform-origin": "left center",
+          "transition": "transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-out)"
+        },
+        ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"up\"]::before": {
+          "transform": "scaleY(0)",
+          "transform-origin": "center bottom"
+        },
+        ".poyraz-button[data-effect=\"fill\"]:hover::before": {
+          "transform": "scaleX(1)"
+        },
+        ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"up\"]:hover::before": {
+          "transform": "scaleY(1)"
+        },
+        ".poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-content\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-label\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-content\"] > svg, .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"label\"] [data-slot=\"button-label\"]": {
+          "animation": "poyraz-button-swap var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out)"
+        },
+        ".poyraz-button[data-effect=\"border-draw\"]::before": {
+          "inset": "-1px",
+          "border": "2px solid currentColor",
+          "border-radius": "inherit",
+          "opacity": "0"
+        },
+        ".poyraz-button[data-effect=\"border-draw\"]:hover::before": {
+          "animation": "poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out) forwards"
+        },
+        "@keyframes poyraz-button-spin": {
+          "to": {
+            "transform": "rotate(360deg)"
+          }
+        },
+        "@keyframes poyraz-button-shine": {
+          "from": {
+            "transform": "translateX(-180%) skewX(-18deg)"
+          },
+          "to": {
+            "transform": "translateX(720%) skewX(-18deg)"
+          }
+        },
+        "@keyframes poyraz-button-swap": {
+          "0%": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          },
+          "32%": {
+            "opacity": "1",
+            "transform": "translateY(35%)"
+          },
+          "49%": {
+            "opacity": "0",
+            "transform": "translateY(115%)"
+          },
+          "50%": {
+            "opacity": "0",
+            "transform": "translateY(-115%)"
+          },
+          "68%": {
+            "opacity": "1",
+            "transform": "translateY(-35%)"
+          },
+          "100%": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
+        },
+        "@keyframes poyraz-button-border-draw": {
+          "0%": {
+            "opacity": "1",
+            "clip-path": "polygon(0 0, 0 0, 0 0, 0 0)"
+          },
+          "35%": {
+            "clip-path": "polygon(0 0, 100% 0, 100% 0, 0 0)"
+          },
+          "65%": {
+            "clip-path": "polygon(0 0, 100% 0, 100% 100%, 100% 100%)"
+          },
+          "100%": {
+            "opacity": "1",
+            "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0 100%)"
+          }
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          ".poyraz-button, .poyraz-button::before, .poyraz-button [data-slot=\"button-spinner\"] svg, .poyraz-button [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
+            "animation": "none !important",
+            "transition-duration": "1ms !important"
+          }
+        },
+        "[data-poyraz-motion=\"reduced\"] .poyraz-button, [data-poyraz-motion=\"reduced\"] .poyraz-button::before, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-spinner\"] svg, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-content\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-label\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-icon\"]": {
+          "animation": "none !important",
+          "transition-duration": "1ms !important"
+        }
+      },
       "meta": {
         "category": "actions",
         "phase": "alpha"
