@@ -14,7 +14,7 @@ import {
   Check,
 } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/atoms/button";
 import { Input } from "@/components/ui/atoms/input";
 import { Checkbox } from "@/components/ui/atoms/checkbox";

@@ -4,7 +4,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  ANNOUNCEMENT BAR — Dismissable top-of-page notification strip      */
