@@ -3,6 +3,7 @@ export {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  avatarVariants,
 } from "@/components/ui/atoms/avatar";
 export { Badge, badgeVariants } from "@/components/ui/atoms/badge";
 export {
@@ -22,21 +23,40 @@ export {
   CardImage,
   CardHeader,
   CardFooter,
+  CardAction,
   CardTitle,
   CardDescription,
   CardContent,
   cardVariants,
 } from "@/components/ui/atoms/card";
+export {
+  BasicContentCard,
+  ExpandableCard,
+  FeatureCard,
+  GlassCard,
+  HorizontalCard,
+  ImageContentCard,
+  InteractiveCard,
+  PricingPlanCard,
+  ProfileCard,
+  StatisticCard,
+} from "@/components/ui/atoms/card-variants";
 export { Checkbox } from "@/components/ui/atoms/checkbox";
 export { Input } from "@/components/ui/atoms/input";
+export { InputGroup, InputGroupAddon, fieldVariants } from "@/components/ui/atoms/input";
 export { Label } from "@/components/ui/atoms/label";
-export { Logo } from "@/components/ui/atoms/logo";
+export { Logo, logoVariants } from "@/components/ui/atoms/logo";
 export { RadioGroup, RadioGroupItem } from "@/components/ui/atoms/radio-group";
 export { Separator } from "@/components/ui/atoms/separator";
 export { Skeleton } from "@/components/ui/atoms/skeleton";
 export { Switch } from "@/components/ui/atoms/switch";
 export { Textarea } from "@/components/ui/atoms/textarea";
-export { Typography } from "@/components/ui/atoms/typography";
+export {
+  TextEffect,
+  Typography,
+  textEffectVariants,
+  typographyVariants,
+} from "@/components/ui/atoms/typography";
 export {
   NumberInput,
   SearchInput,
