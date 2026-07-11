@@ -5,7 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search, X } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  COMMAND PALETTE — Cmd+K global search / command overlay            */
