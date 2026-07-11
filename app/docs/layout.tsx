@@ -3,7 +3,14 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FileText, Home, Download, ChevronDown, Github } from "lucide-react";
+import {
+  FileText,
+  Home,
+  Download,
+  ChevronDown,
+  Github,
+  Palette,
+} from "lucide-react";
 
 import { cn } from "poyraz-ui";
 import { Logo } from "poyraz-ui/atoms";
@@ -166,6 +173,13 @@ function DocsSidebarContent() {
             active={pathname === "/docs/installation"}
           >
             Installation
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            href="/docs/theme"
+            icon={<Palette className="h-4 w-4" />}
+            active={pathname === "/docs/theme"}
+          >
+            Theme
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
