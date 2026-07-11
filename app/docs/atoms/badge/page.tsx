@@ -1,18 +1,18 @@
 "use client";
 
-import { Badge } from "poyraz-ui/atoms";
+import { Badge } from "@/components/ui/atoms/badge";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function BadgePage() {
   return (
     <ComponentPage
       name="Badge"
-      description="Small status indicators and labels. Supports 4 variants with the brutalist square, no-rounded design."
+      description="Soft labels and semantic status indicators with independent surface, size and radius variants."
       importCode={`import { Badge } from "poyraz-ui/atoms";`}
     >
       <DemoSection
         title="Variants"
-        description="Four visual variants for different contexts."
+        description="Brand, neutral, glass and semantic status variants."
         code={`<Badge>Default</Badge>
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="outline">Outline</Badge>
@@ -23,6 +23,10 @@ export default function BadgePage() {
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
           <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="info">Info</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="glass">Glass</Badge>
         </div>
       </DemoSection>
 
