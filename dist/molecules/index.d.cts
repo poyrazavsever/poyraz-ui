@@ -6,7 +6,7 @@ import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as _radix_ui_react_slot from '@radix-ui/react-slot';
-import { h as LabelProps, e as ButtonProps } from '../label-oRrP78t-.cjs';
+import { h as LabelProps, e as ButtonProps } from '../label-DSn-swSp.cjs';
 import * as react_hook_form from 'react-hook-form';
 import { FieldValues, FieldPath, ControllerProps } from 'react-hook-form';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
@@ -25,7 +25,7 @@ declare const AccordionTrigger: React$1.ForwardRefExoticComponent<Omit<Accordion
 declare const AccordionContent: React$1.ForwardRefExoticComponent<Omit<AccordionPrimitive.AccordionContentProps & React$1.RefAttributes<HTMLDivElement>, "ref"> & React$1.RefAttributes<HTMLDivElement>>;
 
 declare const alertVariants: (props?: ({
-    variant?: "default" | "destructive" | "info" | "success" | "warning" | null | undefined;
+    variant?: "default" | "info" | "success" | "warning" | "destructive" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface AlertProps extends React$1.HTMLAttributes<HTMLDivElement>, VariantProps<typeof alertVariants> {
     /** Override the default icon for the variant */
@@ -225,7 +225,7 @@ declare const DrawerTitle: React$1.ForwardRefExoticComponent<Omit<DialogPrimitiv
 declare const DrawerDescription: React$1.ForwardRefExoticComponent<Omit<DialogPrimitive.DialogDescriptionProps & React$1.RefAttributes<HTMLParagraphElement>, "ref"> & React$1.RefAttributes<HTMLParagraphElement>>;
 
 declare const modalContentVariants: (props?: ({
-    size?: "default" | "sm" | "lg" | "xl" | "full" | null | undefined;
+    size?: "sm" | "default" | "lg" | "xl" | "full" | null | undefined;
     position?: "center" | "top" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare const Modal: React$1.FC<DialogPrimitive.DialogProps>;
