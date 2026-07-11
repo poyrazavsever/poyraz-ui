@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  BG PATTERNS — Soft, minimal, customizable background patterns      */
