@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 import { toast } from "@/components/ui/molecules/sonner";
 import { Card, CardContent } from "@/components/ui/atoms/card";
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  Shiki highlighting helper (lazy-loaded)                            */
