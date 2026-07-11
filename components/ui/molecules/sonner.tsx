@@ -2,7 +2,7 @@
 
 import { Toaster as Sonner, toast } from "sonner";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
 /*  Toaster – Provider component (place once in layout.tsx)           */
