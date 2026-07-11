@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "title": "Textarea",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass textarea component.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/poyraz-recipes"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/textarea.tsx",
+      "content": "import * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { fieldVariants } from \"@/components/ui/recipes\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,\n    VariantProps<typeof fieldVariants> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, radius, variant, ...props }, ref) => (\n    <textarea\n      ref={ref}\n      data-slot=\"textarea\"\n      data-variant={variant ?? \"default\"}\n      data-radius={radius ?? \"md\"}\n      data-invalid={props[\"aria-invalid\"] ? \"\" : undefined}\n      className={cn(\n        fieldVariants({ variant, radius }),\n        \"min-h-24 resize-y px-3 py-2.5\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/textarea.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
