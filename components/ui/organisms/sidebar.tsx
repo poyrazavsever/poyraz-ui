@@ -10,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 
-import { cn } from "@/components/ui/atoms/typography";
+import { cn } from "@/lib/utils";
 
 /* ================================================================== */
 /*  CONTEXT                                                            */
