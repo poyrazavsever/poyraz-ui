@@ -57,6 +57,8 @@ const checks = [
   ["foreground", "surfaceElevated", 7],
   ["mutedForeground", "background", 4.5],
   ["mutedForeground", "muted", 4.5],
+  ["placeholder", "background", 3],
+  ["placeholder", "surface", 3],
   ["primaryForeground", "primary", 4.5],
   ["primaryMutedForeground", "primaryMuted", 4.5],
   ["secondaryForeground", "secondary", 7],
@@ -86,4 +88,3 @@ for (const [themeName, theme] of Object.entries(source.themes)) {
 }
 
 if (failed) process.exitCode = 1;
-
