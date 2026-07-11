@@ -228,7 +228,7 @@ interface SidebarUserProfileProps extends React.HTMLAttributes<HTMLDivElement> {
 declare const SidebarUserProfile: React.ForwardRefExoticComponent<SidebarUserProfileProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const footerVariants: (props?: ({
-    variant?: "dark" | "compact" | "full" | "minimal" | "branded" | "centered" | null | undefined;
+    variant?: "full" | "dark" | "compact" | "minimal" | "branded" | "centered" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface FooterProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof footerVariants> {
     /** Class name applied to inner container for width constraint */
