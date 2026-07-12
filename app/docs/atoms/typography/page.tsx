@@ -3,7 +3,7 @@
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 import { TextEffect, Typography } from "@/components/ui/atoms/typography";
 
-const effects = ["hand-drawn", "contrast", "shimmer", "marker", "outline"] as const;
+const effects = ["hand-drawn", "contrast", "shimmer", "marker", "outline", "gradient", "glow", "boxed", "strike"] as const;
 
 export default function TypographyPage() {
   return (

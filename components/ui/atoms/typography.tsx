@@ -38,11 +38,15 @@ const textEffectVariants = cva("relative inline-block", {
   variants: {
     effect: {
       none: "",
-      "hand-drawn": "poyraz-text-hand-drawn",
+      "hand-drawn": "poyraz-text-hand-drawn z-0",
       contrast: "font-secondary italic text-primary",
       shimmer: "poyraz-text-shimmer",
       marker: "poyraz-text-marker z-0 px-1",
       outline: "poyraz-text-outline",
+      gradient: "poyraz-text-gradient",
+      glow: "poyraz-text-glow",
+      boxed: "poyraz-text-boxed px-[0.28em]",
+      strike: "poyraz-text-strike",
     },
     tone: {
       primary: "[--poyraz-text-effect:var(--color-primary)] [--poyraz-text-effect-soft:var(--color-primary-muted)]",
