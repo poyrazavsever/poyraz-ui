@@ -14,7 +14,7 @@ const cardVariants = cva(
         outline: "border-border-strong bg-transparent shadow-none",
         glass: "border-glass-border-outer bg-glass shadow-[var(--poyraz-glass-shadow)] backdrop-blur-glass",
         elevated: "border-border/80 bg-surface-elevated shadow-lg",
-        interactive: "border-border bg-surface shadow-sm hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md",
+        interactive: "border-border bg-surface shadow-sm hover:border-primary/25 hover:shadow-md",
         bordered: "border-border-strong bg-surface shadow-none",
         highlight: "border-border border-l-4 border-l-primary bg-surface shadow-xs",
         ghost: "border-transparent bg-transparent shadow-none hover:border-border hover:bg-surface-subtle",
