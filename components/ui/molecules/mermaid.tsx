@@ -13,72 +13,65 @@ export interface MermaidProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Chart id prefix */
   chartId?: string;
   children?: React.ReactNode;
+  surface?: "solid" | "soft" | "glass";
+  radius?: "none" | "sm" | "md" | "lg" | "xl";
+  diagramStyle?: "soft" | "minimal" | "technical";
+  loadingContent?: React.ReactNode;
+  errorContent?: (error: string) => React.ReactNode;
 }
 
-let mermaidInitialized = false;
 let mermaidReady: Promise<typeof import("mermaid")> | null = null;
 
 function getMermaid() {
   if (!mermaidReady) {
-    mermaidReady = import("mermaid").then((mod) => {
-      if (!mermaidInitialized) {
-        mod.default.initialize({
-          startOnLoad: false,
-          theme: "base",
-          themeVariables: {
-            // Brutalist — flat, dashed feel
-            primaryColor: "#fee2e2",
-            primaryBorderColor: "#dc2626",
-            primaryTextColor: "#0f172a",
-            secondaryColor: "#f1f5f9",
-            secondaryBorderColor: "#94a3b8",
-            secondaryTextColor: "#334155",
-            tertiaryColor: "#fef3c7",
-            tertiaryBorderColor: "#d97706",
-            tertiaryTextColor: "#78350f",
-            lineColor: "#64748b",
-            textColor: "#0f172a",
-            mainBkg: "#ffffff",
-            nodeBorder: "#dc2626",
-            clusterBkg: "#f8fafc",
-            clusterBorder: "#cbd5e1",
-            titleColor: "#0f172a",
-            edgeLabelBackground: "#ffffff",
-            // Fonts
-            fontFamily:
-              "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-            fontSize: "13px",
-            // Flowchart
-            nodeTextColor: "#0f172a",
-          },
-          flowchart: {
-            htmlLabels: true,
-            curve: "basis",
-            padding: 12,
-          },
-          sequence: {
-            actorMargin: 60,
-            boxMargin: 8,
-            noteMargin: 10,
-            messageMargin: 30,
-          },
-        });
-        mermaidInitialized = true;
-      }
-      return mod;
-    });
+    mermaidReady = import("mermaid");
   }
   return mermaidReady;
+}
+
+function resolveColor(container: HTMLElement, variable: string, fallback: string) {
+  const probe = document.createElement("span");
+  probe.style.cssText = `position:absolute;visibility:hidden;color:var(${variable},${fallback})`;
+  container.appendChild(probe);
+  const color = getComputedStyle(probe).color || fallback;
+  probe.remove();
+  return color;
+}
+
+function resolveMermaidTheme(container: HTMLElement) {
+  return {
+    primaryColor: resolveColor(container, "--poyraz-primary-muted", "rgb(254 226 226)"),
+    primaryBorderColor: resolveColor(container, "--poyraz-primary", "rgb(220 38 38)"),
+    primaryTextColor: resolveColor(container, "--poyraz-foreground", "rgb(15 23 42)"),
+    secondaryColor: resolveColor(container, "--poyraz-surface-subtle", "rgb(241 245 249)"),
+    secondaryBorderColor: resolveColor(container, "--poyraz-border-strong", "rgb(148 163 184)"),
+    secondaryTextColor: resolveColor(container, "--poyraz-foreground", "rgb(51 65 85)"),
+    tertiaryColor: resolveColor(container, "--poyraz-warning", "rgb(254 243 199)"),
+    tertiaryBorderColor: resolveColor(container, "--poyraz-warning-border", "rgb(217 119 6)"),
+    tertiaryTextColor: resolveColor(container, "--poyraz-warning-foreground", "rgb(120 53 15)"),
+    lineColor: resolveColor(container, "--poyraz-muted-foreground", "rgb(100 116 139)"),
+    textColor: resolveColor(container, "--poyraz-foreground", "rgb(15 23 42)"),
+    mainBkg: resolveColor(container, "--poyraz-surface", "rgb(255 255 255)"),
+    nodeBorder: resolveColor(container, "--poyraz-primary", "rgb(220 38 38)"),
+    clusterBkg: resolveColor(container, "--poyraz-surface-subtle", "rgb(248 250 252)"),
+    clusterBorder: resolveColor(container, "--poyraz-border", "rgb(203 213 225)"),
+    titleColor: resolveColor(container, "--poyraz-foreground", "rgb(15 23 42)"),
+    edgeLabelBackground: resolveColor(container, "--poyraz-surface", "rgb(255 255 255)"),
+    nodeTextColor: resolveColor(container, "--poyraz-foreground", "rgb(15 23 42)"),
+    fontFamily: "var(--poyraz-font-primary), ui-sans-serif, system-ui, sans-serif",
+    fontSize: "13px",
+  };
 }
 
 let idCounter = 0;
 
 const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
-  ({ className, code, chartId, children, ...props }, ref) => {
+  ({ className, code, chartId, children, diagramStyle = "soft", errorContent, loadingContent, radius = "lg", surface = "solid", ...props }, ref) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [svg, setSvg] = React.useState<string>("");
     const [error, setError] = React.useState<string>("");
     const [loading, setLoading] = React.useState(true);
+    const [themeRevision, setThemeRevision] = React.useState(0);
 
     // Resolve mermaid code from children or code prop
     const mermaidCode = React.useMemo(() => {
@@ -86,6 +79,18 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       if (typeof children === "string") return children.trim();
       return "";
     }, [code, children]);
+
+    React.useEffect(() => {
+      const update = () => setThemeRevision((revision) => revision + 1);
+      const observer = new MutationObserver(update);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-poyraz-theme", "style"] });
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      media.addEventListener("change", update);
+      return () => {
+        observer.disconnect();
+        media.removeEventListener("change", update);
+      };
+    }, []);
 
     React.useEffect(() => {
       if (!mermaidCode) {
@@ -104,6 +109,16 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
         .then(async (mod) => {
           if (cancelled) return;
           try {
+            const container = containerRef.current;
+            if (!container) return;
+            mod.default.initialize({
+              startOnLoad: false,
+              securityLevel: "strict",
+              theme: "base",
+              themeVariables: resolveMermaidTheme(container),
+              flowchart: { htmlLabels: true, curve: diagramStyle === "technical" ? "linear" : "basis", padding: 12 },
+              sequence: { actorMargin: 60, boxMargin: 8, noteMargin: 10, messageMargin: 30 },
+            });
             const { svg: rendered } = await mod.default.render(id, mermaidCode);
             if (!cancelled) {
               setSvg(rendered);
@@ -132,7 +147,7 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       return () => {
         cancelled = true;
       };
-    }, [mermaidCode, chartId]);
+    }, [mermaidCode, chartId, diagramStyle, themeRevision]);
 
     // Combine refs
     const setRefs = React.useCallback(
@@ -151,30 +166,36 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       <div
         ref={setRefs}
         className={cn(
-          "relative border border-slate-200 bg-white p-4",
-          "overflow-x-auto",
+          "relative overflow-x-auto border p-4 transition-[background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)]",
+          surface === "solid" && "border-border bg-surface",
+          surface === "soft" && "border-transparent bg-surface-subtle",
+          surface === "glass" && "border-glass-border-outer bg-glass shadow-md backdrop-blur-glass",
+          radius === "none" && "rounded-none",
+          radius === "sm" && "rounded-sm",
+          radius === "md" && "rounded-md",
+          radius === "lg" && "rounded-lg",
+          radius === "xl" && "rounded-xl",
           className,
         )}
         {...props}
       >
         {loading && (
-          <div className="flex items-center justify-center py-8 gap-3 text-sm text-slate-400">
-            <div className="h-4 w-4 border border-red-600 border-t-transparent animate-spin" />
-            Rendering diagram…
+          <div role="status" className="flex items-center justify-center py-8 gap-3 text-sm text-muted-foreground animate-poyraz-fade-in">
+            {loadingContent ?? <><div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin motion-reduce:animate-none" />Rendering diagram…</>}
           </div>
         )}
 
         {error && !loading && (
-          <div className="py-6 text-center">
-            <div className="inline-block px-3 py-2 border border-red-300 bg-red-50 text-xs text-red-700 font-mono">
-              {error}
+          <div className="py-6 text-center animate-poyraz-fade-in">
+            <div role="alert" className="inline-block rounded-md border border-invalid-border bg-invalid-muted px-3 py-2 text-xs text-destructive-muted-foreground font-mono">
+              {errorContent ? errorContent(error) : error}
             </div>
           </div>
         )}
 
         {svg && !loading && (
           <div
-            className="mermaid-output flex justify-center [&_svg]:max-w-full"
+            className="mermaid-output flex justify-center animate-poyraz-scale-in motion-reduce:animate-none [&_svg]:max-w-full"
             dangerouslySetInnerHTML={{ __html: svg }}
           />
         )}
@@ -183,28 +204,23 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
         <style
           dangerouslySetInnerHTML={{
             __html: `
-.mermaid-output .node rect,
+${diagramStyle === "technical" ? `.mermaid-output .node rect,
 .mermaid-output .node circle,
 .mermaid-output .node ellipse,
 .mermaid-output .node polygon {
   stroke-dasharray: 6, 3;
   stroke-width: 2px;
-}
+}` : ""}
 .mermaid-output .cluster rect {
-  stroke-dasharray: 8, 4;
+  ${diagramStyle === "technical" ? "stroke-dasharray: 8, 4;" : ""}
   stroke-width: 1.5px;
-  rx: 0;
-  ry: 0;
+  rx: ${diagramStyle === "minimal" ? "2" : "10"};
+  ry: ${diagramStyle === "minimal" ? "2" : "10"};
 }
 .mermaid-output .edgePath .path {
   stroke-width: 1.5px;
 }
-.mermaid-output text {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-}
-.mermaid-output .label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-}
+.mermaid-output text, .mermaid-output .label { font-family: var(--poyraz-font-primary), ui-sans-serif, system-ui, sans-serif !important; }
 `,
           }}
         />
