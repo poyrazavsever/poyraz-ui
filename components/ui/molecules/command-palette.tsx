@@ -219,7 +219,7 @@ const CommandPaletteItem = React.forwardRef<
     aria-disabled={disabled}
     className={cn(
       floatingItemVariants({ size, radius }),
-      "cursor-pointer border border-transparent hover:translate-x-0.5 hover:border-border hover:bg-accent",
+      "cursor-pointer border border-transparent hover:border-border hover:bg-accent",
       disabled && "pointer-events-none opacity-40",
       className,
     )}
