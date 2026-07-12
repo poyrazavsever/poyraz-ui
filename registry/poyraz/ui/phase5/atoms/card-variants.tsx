@@ -201,7 +201,7 @@ function InteractiveCard({ actions, children, className, ...props }: Interactive
   return (
     <Card data-slot="interactive-card" variant="interactive" className={cn("group", className)} {...props}>
       {children}
-      {actions && <div data-slot="interactive-card-actions" className="absolute inset-x-4 bottom-4 translate-y-2 opacity-0 transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">{actions}</div>}
+      {actions && <div data-slot="interactive-card-actions" className="absolute inset-x-4 bottom-4 opacity-0 transition-opacity duration-[var(--poyraz-motion-duration-fast)] group-hover:opacity-100 group-focus-within:opacity-100">{actions}</div>}
     </Card>
   );
 }
