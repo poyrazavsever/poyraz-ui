@@ -584,11 +584,23 @@
       ],
       "css": {
         ".poyraz-text-hand-drawn": {
-          "text-decoration-line": "underline",
-          "text-decoration-style": "wavy",
-          "text-decoration-color": "var(--poyraz-text-effect)",
-          "text-decoration-thickness": "0.12em",
-          "text-underline-offset": "0.22em"
+          "position": "relative",
+          "padding-bottom": "0.08em",
+          "color": "inherit",
+          "text-decoration": "none"
+        },
+        ".poyraz-text-hand-drawn::after": {
+          "content": "\"\"",
+          "position": "absolute",
+          "z-index": "-1",
+          "right": "-0.08em",
+          "bottom": "-0.1em",
+          "left": "-0.08em",
+          "height": "0.24em",
+          "background": "var(--poyraz-text-effect)",
+          "clip-path": "polygon(0 58%, 7% 43%, 15% 52%, 24% 38%, 34% 49%, 45% 35%, 57% 48%, 68% 34%, 78% 46%, 89% 32%, 100% 43%, 99% 68%, 90% 59%, 79% 70%, 68% 58%, 57% 73%, 45% 60%, 34% 75%, 23% 62%, 14% 77%, 6% 66%, 0 80%)",
+          "opacity": "0.9",
+          "transform": "rotate(-1.2deg) skewX(-7deg)"
         },
         ".poyraz-text-shimmer": {
           "color": "transparent",
@@ -609,11 +621,45 @@
         },
         ".poyraz-text-outline": {
           "color": "transparent",
-          "-webkit-text-stroke": "1px var(--poyraz-text-effect)",
-          "transition": "color var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out)"
+          "font-weight": "800",
+          "letter-spacing": "0.015em",
+          "paint-order": "stroke fill",
+          "-webkit-text-stroke": "clamp(1px, 0.035em, 2px) var(--poyraz-text-effect)",
+          "text-shadow": "0 0 0.01px var(--poyraz-text-effect)",
+          "transition": "color var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out), text-shadow var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out)"
         },
         ".poyraz-text-outline:hover": {
-          "color": "var(--poyraz-text-effect)"
+          "color": "var(--poyraz-text-effect)",
+          "text-shadow": "none"
+        },
+        ".poyraz-text-gradient": {
+          "color": "transparent",
+          "background-image": "linear-gradient(110deg, var(--poyraz-text-effect), color-mix(in srgb, var(--poyraz-text-effect) 48%, white), var(--poyraz-primary-hover))",
+          "background-clip": "text",
+          "-webkit-background-clip": "text"
+        },
+        ".poyraz-text-glow": {
+          "color": "var(--poyraz-text-effect)",
+          "text-shadow": "0 0 0.35em color-mix(in srgb, var(--poyraz-text-effect) 42%, transparent), 0 0 0.8em color-mix(in srgb, var(--poyraz-text-effect) 24%, transparent)"
+        },
+        ".poyraz-text-boxed": {
+          "border": "1px solid color-mix(in srgb, var(--poyraz-text-effect) 45%, transparent)",
+          "border-radius": "0.32em",
+          "background": "var(--poyraz-text-effect-soft)",
+          "color": "var(--poyraz-text-effect)",
+          "box-decoration-break": "clone",
+          "-webkit-box-decoration-break": "clone"
+        },
+        ".poyraz-text-strike::after": {
+          "content": "\"\"",
+          "position": "absolute",
+          "right": "-0.08em",
+          "top": "52%",
+          "left": "-0.08em",
+          "height": "0.12em",
+          "border-radius": "999px 40% 999px 35%",
+          "background": "var(--poyraz-text-effect)",
+          "transform": "rotate(-2deg) skewX(-9deg)"
         },
         "@keyframes poyraz-text-shimmer": {
           "to": {
@@ -764,6 +810,823 @@
       ],
       "meta": {
         "category": "phase-5-foundation",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Poyraz Soft Glass tooltip component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-tooltip@^1.2.8"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/tooltip.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Poyraz Soft Glass popover component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-popover@^1.1.15"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/popover.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/popover.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Poyraz Soft Glass hover-card component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-hover-card@^1.1.15"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/hover-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Poyraz Soft Glass dropdown-menu component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu@^2.1.16",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/dropdown-menu.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Poyraz Soft Glass select component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-select@^2.2.6",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/select.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/select.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Poyraz Soft Glass dialog component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-dialog@^1.1.15",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/dialog.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Poyraz Soft Glass modal component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-dialog@^1.1.15",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/modal.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/modal.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Poyraz Soft Glass sheet component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-dialog@^1.1.15",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/sheet.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Poyraz Soft Glass drawer component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "vaul@^1.1.2"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/drawer.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:ui",
+      "title": "Command Palette",
+      "description": "Poyraz Soft Glass command-palette component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-dialog@^1.1.15",
+        "@radix-ui/react-visually-hidden@^1.2.4",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/command-palette.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/command-palette.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Poyraz Soft Glass accordion component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-accordion@^1.2.12",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/accordion.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Poyraz Soft Glass tabs component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-tabs@^1.1.13"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/tabs.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Poyraz Soft Glass breadcrumb component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/breadcrumb.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Poyraz Soft Glass pagination component with standardized floating and overlay behavior.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "phase6/molecules/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/pagination.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-6-interactive",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Poyraz Soft Glass alert with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/alert.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/alert.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Poyraz Soft Glass sonner with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "sonner@^2.0.7"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/sonner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/sonner.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "Poyraz Soft Glass form with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "@radix-ui/react-slot@^1.2.4",
+        "react-hook-form@^7.71.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/label"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/form.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/form.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta",
+        "optionalInstall": true
+      }
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Poyraz Soft Glass calendar with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Poyraz Soft Glass date-picker with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/calendar",
+        "@poyraz/popover",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/date-picker.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "autocomplete",
+      "type": "registry:ui",
+      "title": "Autocomplete",
+      "description": "Poyraz Soft Glass autocomplete with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "data-table-core",
+      "type": "registry:ui",
+      "title": "Data Table Core",
+      "description": "Poyraz Soft Glass data-table-core with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/checkbox"
+      ],
+      "files": [
+        {
+          "path": "phase7/organisms/data-table-core.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/data-table-core.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Poyraz Soft Glass data-table with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/input",
+        "@poyraz/badge",
+        "@poyraz/data-table-core"
+      ],
+      "files": [
+        {
+          "path": "phase7/organisms/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/data-table.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "mermaid",
+      "type": "registry:ui",
+      "title": "Mermaid",
+      "description": "Poyraz Soft Glass mermaid with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "mermaid@^11.12.3"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase7/molecules/mermaid.tsx",
+          "type": "registry:ui",
+          "target": "@ui/molecules/mermaid.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "star-rating",
+      "type": "registry:component",
+      "title": "Star Rating",
+      "description": "Poyraz Soft Glass star-rating with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/star-rating.tsx",
+          "type": "registry:component",
+          "target": "@ui/blocks/card-templates/star-rating.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-composite",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "article-card",
+      "type": "registry:block",
+      "title": "Article Card",
+      "description": "Poyraz Soft Glass article-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/article-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/article-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "image-card",
+      "type": "registry:block",
+      "title": "Image Card",
+      "description": "Poyraz Soft Glass image-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/image-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/image-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "news-card",
+      "type": "registry:block",
+      "title": "News Card",
+      "description": "Poyraz Soft Glass news-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/news-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/news-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "stats-card",
+      "type": "registry:block",
+      "title": "Stats Card",
+      "description": "Poyraz Soft Glass stats-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/stats-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/stats-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "testimonial-card",
+      "type": "registry:block",
+      "title": "Testimonial Card",
+      "description": "Poyraz Soft Glass testimonial-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/star-rating"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/testimonial-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/testimonial-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "pricing-card",
+      "type": "registry:block",
+      "title": "Pricing Card",
+      "description": "Poyraz Soft Glass pricing-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/pricing-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/pricing-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
+        "phase": "beta"
+      }
+    },
+    {
+      "name": "product-card",
+      "type": "registry:block",
+      "title": "Product Card",
+      "description": "Poyraz Soft Glass product-card with semantic states and composable variants.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/card",
+        "@poyraz/badge",
+        "@poyraz/star-rating"
+      ],
+      "files": [
+        {
+          "path": "phase7/blocks/card-templates/product-card.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/card-templates/product-card.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-7-card-block",
         "phase": "beta"
       }
     }
