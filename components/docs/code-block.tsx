@@ -118,8 +118,9 @@ export function DemoBlock({
 }) {
   return (
     <div
+      data-slot="docs-demo"
       className={cn(
-        "p-6 border border-border rounded-sm bg-background",
+        "@container/demo relative min-w-0 overflow-visible rounded-lg border border-border bg-background p-3 @sm/demo:p-4 @lg/demo:p-6",
         className,
       )}
     >

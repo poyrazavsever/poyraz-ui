@@ -1,19 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Agbalumo } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "poyraz-ui/molecules";
 import { ThemeProvider } from "@/components/theme-provider";
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const agbalumo = Agbalumo({
-  variable: "--font-secondary",
-  weight: "400",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Poyraz Avsever's UI Kit - Poyraz UI - Minimal React Components",
@@ -29,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${agbalumo.variable} antialiased`}>
+      <body className="antialiased">
         <ThemeProvider>
           {children}
           <Toaster />
