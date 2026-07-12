@@ -6,6 +6,14 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import {
+  floatingItemVariants,
+  overlaySurfaceVariants,
+  overlayVariants,
+  type FloatingItemProps,
+  type OverlayProps,
+  type OverlaySurfaceProps,
+} from "@/components/ui/recipes";
 
 /* ================================================================== */
 /*  COMMAND PALETTE — Cmd+K global search / command overlay            */
@@ -58,29 +66,30 @@ const CommandPaletteTrigger = DialogPrimitive.Trigger;
 
 const CommandPaletteContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> &
+    OverlaySurfaceProps & {
+      overlayTone?: NonNullable<OverlayProps["tone"]>;
+      overlayClassName?: string;
+      mobile?: "floating" | "fullscreen";
+    }
+>(({ className, children, surface, radius, overlayTone, overlayClassName, mobile = "floating", ...props }, ref) => (
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay
-      className={cn(
-        "fixed inset-0 z-50 bg-overlay backdrop-blur-sm",
-        "data-[state=open]:animate-in data-[state=closed]:animate-out",
-        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-      )}
+      className={cn(overlayVariants({ tone: overlayTone }), overlayClassName)}
     />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
+        overlaySurfaceVariants({ surface, radius }),
         "fixed left-[50%] top-[20%] z-50 w-full max-w-lg translate-x-[-50%]",
-        "bg-background",
-        "border border-border",
-        "rounded-sm shadow-none",
         "overflow-hidden",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-        "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+        "data-[state=open]:[--poyraz-enter-scale:0.98] data-[state=closed]:[--poyraz-exit-scale:0.98]",
         "data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[2%]",
         "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[2%]",
+        "motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-exit-scale:1] motion-reduce:[--poyraz-enter-translate-x:0] motion-reduce:[--poyraz-enter-translate-y:0] motion-reduce:duration-100",
+        mobile === "fullscreen" && "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:rounded-none",
         className,
       )}
       {...props}
@@ -194,34 +203,39 @@ interface CommandPaletteItemProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   /** Icon element */
   icon?: React.ReactNode;
+  description?: React.ReactNode;
+  media?: React.ReactNode;
+  size?: NonNullable<FloatingItemProps["size"]>;
+  radius?: NonNullable<FloatingItemProps["radius"]>;
 }
 
 const CommandPaletteItem = React.forwardRef<
   HTMLDivElement,
   CommandPaletteItemProps
->(({ className, children, shortcut, disabled, icon, ...props }, ref) => (
+>(({ className, children, shortcut, disabled, icon, description, media, size, radius, ...props }, ref) => (
   <div
     ref={ref}
     role="option"
     aria-disabled={disabled}
     className={cn(
-      "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
-      "border border-transparent",
-      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-      "hover:bg-muted hover:border-border hover:translate-x-0.5",
-      "focus:bg-muted focus:border-border focus:translate-x-0.5 focus:outline-none",
+      floatingItemVariants({ size, radius }),
+      "cursor-pointer border border-transparent hover:translate-x-0.5 hover:border-border hover:bg-accent",
       disabled && "pointer-events-none opacity-40",
       className,
     )}
     tabIndex={disabled ? -1 : 0}
     {...props}
   >
+    {media && <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">{media}</span>}
     {icon && (
       <span className="text-placeholder shrink-0 transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
         {icon}
       </span>
     )}
-    <span className="flex-1 truncate">{children}</span>
+    <span className="min-w-0 flex-1">
+      <span className="block truncate font-medium">{children}</span>
+      {description && <span className="mt-0.5 block truncate text-xs text-muted-foreground">{description}</span>}
+    </span>
     {shortcut && (
       <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5 transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
         {shortcut}
