@@ -76,7 +76,7 @@ const PaginationPrevious = ({
     className={cn("group gap-1 pl-2.5", className)}
     {...props}
   >
-    <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
+    <ChevronLeft className="h-4 w-4" />
     <span className="hidden sm:inline">Previous</span>
   </PaginationLink>
 );
@@ -93,7 +93,7 @@ const PaginationNext = ({
     {...props}
   >
     <span className="hidden sm:inline">Next</span>
-    <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
+    <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 );
 PaginationNext.displayName = "PaginationNext";
