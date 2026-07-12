@@ -21,8 +21,11 @@ for (const slot of ["input", "input-group", "input-group-addon"]) requireText("f
 requireText("single focus group", input, "focus-within:ring-[3px]");
 requireText("inner focus suppression", input, "[&_[data-slot=input]]:ring-0");
 requireText("form field composition", fields, "<InputGroup");
+requireText("generic input mask", fields, "function applyInputMask");
+requireText("phone input mask", fields, 'mask = "(###) ### ## ##"');
+requireText("url normalization", fields, "normalizeUrl");
 
-for (const effect of ["hand-drawn", "contrast", "shimmer", "marker", "outline"]) {
+for (const effect of ["hand-drawn", "contrast", "shimmer", "marker", "outline", "gradient", "glow", "boxed", "strike"]) {
   if (!typography.includes(`${effect}:`) && !typography.includes(`"${effect}":`)) failures.push(`text effect: missing ${effect}`);
 }
 requireText("primary font token", preset, "--poyraz-font-primary");

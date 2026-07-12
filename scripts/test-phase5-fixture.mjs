@@ -33,6 +33,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/atoms/card";
 import { ExpandableCard, GlassCard } from "@/components/ui/atoms/card-variants";
 import { TextEffect, Typography } from "@/components/ui/atoms/typography";
 import { Logo } from "@/components/ui/atoms/logo";
+import { MaskedInput, PhoneInput, UrlInput } from "@/components/ui/atoms/form-fields";
 
 export const fixture = <>
   <Input variant="glass" radius="xl" aria-invalid />
@@ -43,6 +44,7 @@ export const fixture = <>
   <GlassCard /><ExpandableCard summary="More">Details</ExpandableCard>
   <Typography variant="display">Modern <TextEffect effect="shimmer">UI</TextEffect></Typography>
   <Logo effect="shine" radius="full" />
+  <MaskedInput mask="AA-####" /><PhoneInput countryCode="+90" mask="(###) ### ## ##" /><UrlInput protocol="https://" />
 </>;
 `);
 await writeFile(resolve(fixture, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, noEmit: true, target: "ES2020", lib: ["DOM", "ES2020"], module: "ESNext", moduleResolution: "Bundler", jsx: "react-jsx", esModuleInterop: true, skipLibCheck: true, baseUrl: ".", paths: { "@/*": ["./*"] } }, include: ["**/*.ts", "**/*.tsx"] }, null, 2));
@@ -54,4 +56,3 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1);
 }
 console.log(`Phase 5 clean fixture typecheck passed (${fixture}).`);
-
