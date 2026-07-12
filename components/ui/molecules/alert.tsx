@@ -20,7 +20,7 @@ const alertVariants = cva(
         outline: "border-[var(--alert-border)] bg-transparent text-[var(--alert-fg)] [&>svg]:text-[var(--alert-icon)]",
         filled: "border-transparent bg-[var(--alert-solid)] text-primary-foreground shadow-sm [&>svg]:text-current",
         glass: "border-[var(--alert-border)] bg-glass text-[var(--alert-fg)] shadow-md backdrop-blur-glass [&>svg]:text-[var(--alert-icon)]",
-        inline: "border-transparent border-l-[3px] border-l-[var(--alert-icon)] bg-transparent px-3 py-2 text-[var(--alert-fg)] [&>svg]:text-[var(--alert-icon)]",
+        inline: "border-[var(--alert-border)] border-l-4 border-l-[var(--alert-icon)] bg-[var(--alert-bg)] px-4 py-3 text-[var(--alert-fg)] shadow-xs [&>svg]:text-[var(--alert-icon)]",
       },
       radius: {
         none: "rounded-none",

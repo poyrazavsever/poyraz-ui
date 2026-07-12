@@ -21,7 +21,7 @@ const logoVariants = cva(
         full: "rounded-full",
       },
       interactive: {
-        true: "cursor-pointer hover:-translate-y-px hover:shadow-md active:translate-y-0",
+        true: "cursor-pointer hover:shadow-md active:scale-[0.99]",
         false: "",
       },
     },
