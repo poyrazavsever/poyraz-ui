@@ -90,7 +90,7 @@ interface DropdownMenuProps extends React$1.ComponentPropsWithoutRef<typeof Drop
     /** Grace period while the pointer travels from trigger to content. */
     closeDelay?: number;
 }
-declare function DropdownMenu({ interaction, closeDelay, open: controlledOpen, defaultOpen, onOpenChange, children, ...props }: DropdownMenuProps): react_jsx_runtime.JSX.Element;
+declare function DropdownMenu({ interaction, closeDelay, open: controlledOpen, defaultOpen, onOpenChange, modal, children, ...props }: DropdownMenuProps): react_jsx_runtime.JSX.Element;
 declare const DropdownMenuTrigger: React$1.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuTriggerProps & React$1.RefAttributes<HTMLButtonElement>, "ref"> & React$1.RefAttributes<HTMLButtonElement>>;
 declare const DropdownMenuGroup: React$1.ForwardRefExoticComponent<DropdownMenuPrimitive.DropdownMenuGroupProps & React$1.RefAttributes<HTMLDivElement>>;
 declare const DropdownMenuPortal: React$1.FC<DropdownMenuPrimitive.DropdownMenuPortalProps>;
