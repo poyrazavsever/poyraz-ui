@@ -4,6 +4,12 @@ import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "@/lib/utils";
+import {
+  overlaySurfaceVariants,
+  overlayVariants,
+  type OverlayProps,
+  type OverlaySurfaceProps,
+} from "@/components/ui/recipes";
 
 /* ================================================================== */
 /*  DRAWER (vaul-based)                                                */
@@ -28,16 +34,11 @@ const DrawerClose = DrawerPrimitive.Close;
 
 const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay> & OverlayProps
+>(({ className, tone, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm",
-      "data-[state=open]:animate-in data-[state=closed]:animate-out",
-      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-      className,
-    )}
+    className={cn(overlayVariants({ tone }), className)}
     {...props}
   />
 ));
@@ -45,24 +46,28 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> &
+    OverlaySurfaceProps & {
+      overlayTone?: NonNullable<OverlayProps["tone"]>;
+      overlayClassName?: string;
+      handle?: boolean;
+    }
+>(({ className, children, surface, radius, overlayTone, overlayClassName, handle = true, ...props }, ref) => (
   <DrawerPortal>
-    <DrawerOverlay />
+    <DrawerOverlay tone={overlayTone} className={overlayClassName} />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
+        overlaySurfaceVariants({ surface, radius }),
         "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
-        "bg-background",
-        "border-t border-border",
-        "rounded-sm shadow-none",
+        "border-b-0",
         "will-change-transform",
         className,
       )}
       {...props}
     >
       {/* Drag handle */}
-      <div className="mx-auto mt-4 h-1.5 w-[60px] bg-border-strong transition-colors duration-150 ease-out" />
+      {handle && <div className="mx-auto mt-4 h-1.5 w-[60px] rounded-full bg-border-strong transition-colors duration-150 ease-out" />}
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
