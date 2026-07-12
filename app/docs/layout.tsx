@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Github, Sparkles } from "lucide-react";
+import { ChevronDown, Github } from "lucide-react";
 
 import { cn } from "poyraz-ui";
 import { Button, Logo } from "poyraz-ui/atoms";
@@ -29,7 +29,6 @@ import {
 import docsCatalog from "@/src/docs-registry.json";
 import { socialLinks } from "@/lib/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { PreviewProvider } from "@/components/docs/preview-context";
 
 type DocsLink = { title: string; href: string };
 
@@ -154,8 +153,13 @@ const mobileLinks = [
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar variant="minimal" sticky className="border-b border-border/80 bg-background/90 backdrop-blur-lg">
-        <NavbarMain className="mx-auto max-w-[1440px] px-5 lg:px-8">
+      <Navbar
+        variant="minimal"
+        sticky
+        containerClassName="mx-auto max-w-[1440px] px-5 lg:px-8"
+        className="border-b border-border/80 bg-background/90 backdrop-blur-lg"
+      >
+        <NavbarMain>
           <NavbarBrand href="/">
             <Logo width={30} height={30} />
           </NavbarBrand>
@@ -181,19 +185,12 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </NavbarMobileMenu>
       </Navbar>
 
-      <PreviewProvider>
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-0 px-5 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10 lg:px-8 xl:gap-14">
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 px-5 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:px-8 xl:gap-12">
         <aside className="hidden lg:block">
           <div className="sticky top-[73px] h-[calc(100dvh-89px)] py-4">
-            <Sidebar variant="default" className="h-full w-full rounded-lg border border-border bg-surface/95">
-              <SidebarHeader className="h-auto border-b border-border px-5 py-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-semibold text-foreground">Poyraz UI</p>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground">V3 registry docs</p>
-                  </div>
-                  <Sparkles className="size-4 text-primary" aria-hidden="true" />
-                </div>
+            <Sidebar variant="default" className="h-full w-full border-0 border-r border-border bg-background">
+              <SidebarHeader className="h-auto border-0 px-3 pb-3 pt-2">
+                <p className="text-sm font-semibold text-foreground">Poyraz UI</p>
               </SidebarHeader>
               <SidebarContent scrollMode="fade" className="px-3">
                 <DocsSidebarNavigation />
@@ -218,7 +215,6 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </Footer>
         </main>
       </div>
-      </PreviewProvider>
     </div>
   );
 }

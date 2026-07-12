@@ -1,10 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { Check, Copy, FileCode2, Package, ShieldCheck, SlidersHorizontal } from "lucide-react";
+import { FileCode2, Package, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import docsCatalog from "@/src/docs-registry.json";
+import { CodeBlock } from "@/components/docs/code-snippet";
 import { cn } from "@/lib/utils";
 
 type RegistryItem = (typeof docsCatalog.items)[number];
@@ -17,24 +18,6 @@ const variantNames = ["default", "secondary", "soft", "outline", "glass", "ghost
 const sizeNames = ["xs", "sm", "default", "lg", "icon-sm", "icon", "icon-lg"];
 const radiusNames = ["none", "xs", "sm", "md", "lg", "xl", "2xl", "full"];
 const stateNames = ["open", "closed", "checked", "unchecked", "active", "disabled", "loading", "invalid", "selected", "empty", "error"];
-
-function CopyButton({ value, label = "Copy" }: { value: string; label?: string }) {
-  const [copied, setCopied] = React.useState(false);
-  return (
-    <button
-      type="button"
-      className="flex h-8 items-center gap-1.5 rounded-sm px-2 text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-      onClick={async () => {
-        await navigator.clipboard.writeText(value);
-        setCopied(true);
-        window.setTimeout(() => setCopied(false), 1600);
-      }}
-    >
-      {copied ? <Check className="size-3.5 text-success-icon" /> : <Copy className="size-3.5" />}
-      {copied ? "Copied" : label}
-    </button>
-  );
-}
 
 function valuesPresent(source: string, values: string[]) {
   return values.filter((value) => new RegExp(`["']${value}["']|data-\\[state=${value}\\]|data-${value}`).test(source));
@@ -72,11 +55,8 @@ export function RegistryDetails({ name }: { name: string }) {
   ];
 
   return (
-    <section className="space-y-3 border-y border-border py-5" data-slot="registry-details">
-      <div className="flex min-w-0 items-center gap-2 rounded-md border border-border bg-surface px-2 py-1.5">
-        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-2 text-xs text-foreground">{command}</code>
-        <CopyButton value={command} label="Install" />
-      </div>
+    <section className="space-y-3 pt-2" data-slot="registry-details">
+      <CodeBlock code={command} lang="bash" />
 
       <div className="flex gap-1 overflow-x-auto border-b border-border" role="tablist" aria-label={`${name} registry details`}>
         {tabs.map(({ value, label, icon: Icon }) => (
@@ -114,10 +94,7 @@ export function RegistryDetails({ name }: { name: string }) {
       )}
 
       {tab === "source" && (
-        <div className="relative max-h-[32rem] overflow-auto rounded-md bg-[#0b0e12] p-4 text-slate-100">
-          <div className="absolute right-2 top-2"><CopyButton value={source} /></div>
-          <pre className="pr-16 text-xs leading-5"><code>{source || "Loading source..."}</code></pre>
-        </div>
+        <CodeBlock code={source || "Loading source..."} className="max-h-[32rem] overflow-auto" />
       )}
 
       {tab === "api" && (
