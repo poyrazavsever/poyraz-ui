@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border font-sans text-sm font-semibold outline-none transition-[color,background-color,border-color,transform] duration-200 ease-out data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border active:scale-[0.975] [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border font-sans text-sm font-semibold outline-none transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border active:scale-[var(--poyraz-button-press-scale)] motion-reduce:transition-none motion-reduce:active:scale-100 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -27,13 +27,13 @@ const buttonVariants = cva(
         link: "h-auto overflow-visible rounded-none border-transparent bg-transparent px-0 text-primary underline-offset-4 hover:underline active:scale-100",
       },
       size: {
-        xs: "h-7 gap-1.5 px-2.5 text-xs [&_svg]:size-3.5",
-        sm: "h-8 gap-1.5 px-3 text-xs [&_svg]:size-3.5",
-        default: "h-10 px-4 [&_svg]:size-4",
-        lg: "h-11 px-6 text-base [&_svg]:size-4.5",
-        "icon-sm": "size-8 p-0 [&_svg]:size-3.5",
-        icon: "size-10 p-0 [&_svg]:size-4",
-        "icon-lg": "size-11 p-0 [&_svg]:size-5",
+        xs: "h-7 gap-1.5 px-2.5 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
+        sm: "h-8 gap-1.5 px-3 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
+        default: "h-10 px-4 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4",
+        lg: "h-11 px-6 text-base [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-4.5",
+        "icon-sm": "size-8 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
+        icon: "size-10 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4",
+        "icon-lg": "size-11 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-5",
       },
       radius: {
         none: "rounded-none",

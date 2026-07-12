@@ -8,6 +8,7 @@ import {
   ButtonIcon,
   ButtonLabel,
 } from "@/components/ui/atoms/button";
+import { ButtonPlayground } from "@/components/demos/button-playground";
 
 const variants = [
   "default",
@@ -32,6 +33,13 @@ export default function ButtonPage() {
   buttonVariants,
 } from "@/components/ui/button";`}
     >
+      <DemoSection
+        title="Playground"
+        description="Compose the public Button props and copy the resulting JSX. Global preview controls above remain active."
+      >
+        <ButtonPlayground />
+      </DemoSection>
+
       <DemoSection
         title="Variants"
         description="Brand red remains the primary action; neutral, tinted, outline and translucent treatments provide quieter hierarchy."
