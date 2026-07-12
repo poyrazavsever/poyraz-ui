@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner",
+  "title": "Sonner",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass sonner with semantic states and composable variants.",
+  "dependencies": [
+    "sonner@^2.0.7"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/molecules/sonner.tsx",
+      "content": "\"use client\";\n\nimport { Toaster as Sonner, toast } from \"sonner\";\n\nimport { cn } from \"@/lib/utils\";\n\n/* ------------------------------------------------------------------ */\n/*  Toaster – Provider component (place once in layout.tsx)           */\n/* ------------------------------------------------------------------ */\n\nexport type ToasterProps = React.ComponentProps<typeof Sonner> & {\n  surface?: \"solid\" | \"soft\" | \"glass\";\n  radius?: \"sm\" | \"md\" | \"lg\" | \"xl\";\n  motion?: \"spring\" | \"slide\" | \"fade\";\n};\n\nconst Toaster = ({ className, motion = \"spring\", radius = \"xl\", surface = \"glass\", ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className={cn(\"toaster group\", className)}\n      toastOptions={{\n        unstyled: true,\n        classNames: {\n          toast: cn(\n            \"poyraz-toast relative flex min-h-16 w-full items-start gap-3 overflow-hidden p-4\",\n            \"border border-border text-foreground shadow-lg\",\n            surface === \"solid\" && \"bg-surface\",\n            surface === \"soft\" && \"bg-surface-subtle/95\",\n            surface === \"glass\" && \"border-glass-border-outer bg-glass backdrop-blur-xl\",\n            radius === \"sm\" && \"rounded-sm\",\n            radius === \"md\" && \"rounded-md\",\n            radius === \"lg\" && \"rounded-lg\",\n            radius === \"xl\" && \"rounded-xl\",\n            motion === \"spring\" && \"ease-[var(--poyraz-motion-ease-spring)]\",\n            motion === \"slide\" && \"ease-[var(--poyraz-motion-ease-out)]\",\n            motion === \"fade\" && \"data-[mounted=false]:translate-y-0 data-[removed=true]:translate-y-0\",\n            \"data-[swiping=true]:transition-none data-[swiped=true]:transition-none motion-reduce:duration-[1ms]\",\n            \"text-sm font-medium\",\n          ),\n          content: \"min-w-0 flex-1 pt-0.5\",\n          icon: \"relative mt-0.5 flex size-5 shrink-0 items-center justify-center text-muted-foreground [&>svg]:size-4\",\n          loader: \"text-primary\",\n          loading: \"!border-primary/20\",\n          title: \"text-sm font-semibold leading-5\",\n          description: \"mt-0.5 text-sm leading-5 text-muted-foreground\",\n          actionButton: cn(\n            \"inline-flex items-center justify-center\",\n            \"px-3 py-1.5 text-xs font-semibold\",\n            \"rounded-md border border-primary/20 shadow-none\",\n            \"bg-primary text-primary-foreground\",\n            \"hover:bg-primary-hover transition-colors\",\n            \"cursor-pointer\",\n          ),\n          cancelButton: cn(\n            \"inline-flex items-center justify-center\",\n            \"px-3 py-1.5 text-xs font-semibold uppercase tracking-wide\",\n            \"rounded-md border border-border shadow-none\",\n            \"bg-surface-subtle text-muted-foreground\",\n            \"hover:bg-muted transition-colors\",\n            \"cursor-pointer\",\n          ),\n          closeButton: cn(\n            \"rounded-md border border-border bg-surface\",\n            \"hover:border-input transition-colors\",\n          ),\n          // Variant-specific styles\n          success:\n            \"!border-success-border !bg-success !text-success-foreground [&_[data-icon]]:!text-success-icon\",\n          error:\n            \"!border-destructive !bg-destructive-muted !text-destructive-muted-foreground [&_[data-icon]]:!text-destructive\",\n          warning:\n            \"!border-warning-border !bg-warning !text-warning-foreground [&_[data-icon]]:!text-warning-icon\",\n          info: \"!border-info-border !bg-info !text-info-foreground [&_[data-icon]]:!text-info-icon\",\n        },\n      }}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster, toast };\n",
+      "type": "registry:ui",
+      "target": "@ui/molecules/sonner.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-composite",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
