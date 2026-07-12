@@ -189,7 +189,7 @@ const DropdownMenuContent = React.forwardRef<
             className={cn(
               floatingSurfaceVariants({ surface, radius }),
               floatingMotion,
-              "z-50 min-w-40 p-1.5",
+              "z-50 w-max min-w-40 max-w-[var(--radix-dropdown-menu-content-available-width)] p-1.5",
               className,
             )}
             {...props}
@@ -209,6 +209,7 @@ const DropdownMenuSubContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
   DropdownMenuSubContentProps
 >(({ className, surface, radius, sideOffset = 6, collisionPadding = 8, style, ...props }, ref) => (
+  <DropdownMenuPortal>
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     sideOffset={sideOffset}
@@ -222,11 +223,12 @@ const DropdownMenuSubContent = React.forwardRef<
     className={cn(
       floatingSurfaceVariants({ surface, radius }),
       floatingMotion,
-      "z-[60] min-w-40 p-1.5",
+      "z-[60] w-max min-w-40 max-w-[var(--radix-dropdown-menu-content-available-width)] p-1.5",
       className,
     )}
     {...props}
   />
+  </DropdownMenuPortal>
 ));
 DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
 
@@ -253,7 +255,7 @@ const DropdownMenuItem = React.forwardRef<
           size: size ?? defaults.size,
           radius: radius ?? defaults.radius,
         }),
-        "cursor-default",
+        "cursor-default whitespace-nowrap",
         className,
       )}
       {...props}
@@ -289,13 +291,13 @@ const DropdownMenuSubTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         floatingItemVariants({ inset, size: size ?? defaults.size, radius: radius ?? defaults.radius }),
-        "group cursor-default data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+        "group cursor-default whitespace-nowrap data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronRight className="ml-auto size-4 transition-transform group-data-[state=open]:translate-x-0.5" />
+      <ChevronRight className="ml-auto size-4" />
     </DropdownMenuPrimitive.SubTrigger>
   );
 });
@@ -371,7 +373,7 @@ const DropdownMenuSeparator = React.forwardRef<
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
 
 const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span className={cn("ml-auto text-xs tracking-wider text-muted-foreground", className)} {...props} />
+  <span className={cn("ml-auto shrink-0 whitespace-nowrap pl-6 text-xs tracking-wider text-muted-foreground", className)} {...props} />
 );
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 

@@ -40,7 +40,7 @@ export default function DropdownMenuPage() {
   <DropdownMenuTrigger asChild>
     <Button variant="outline">Open Menu</Button>
   </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
+  <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
@@ -73,7 +73,7 @@ export default function DropdownMenuPage() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Open Menu</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
@@ -185,7 +185,7 @@ export default function DropdownMenuPage() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Menu with Sub</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          <DropdownMenuContent>
             <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem>Duplicate</DropdownMenuItem>
             <DropdownMenuSeparator />

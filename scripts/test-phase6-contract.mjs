@@ -31,6 +31,7 @@ requireText("stable hover mode", dropdown, 'modal={interaction === "hover" ? fal
 requireText("hover click guard", dropdown, "event.preventDefault()");
 requireText("collision padding", dropdown, "collisionPadding = 8");
 requireText("nested layer", dropdown, '"z-[60]');
+for (const expected of ["<DropdownMenuPortal>", "w-max", "whitespace-nowrap", "shrink-0 whitespace-nowrap"]) requireText("dropdown sizing and submenu", dropdown, expected);
 
 for (const name of ["tooltip", "popover", "hover-card", "select"]) {
   const content = await read(`components/ui/molecules/${name}.tsx`);
@@ -54,8 +55,9 @@ const tabs = await read("components/ui/molecules/tabs.tsx");
 for (const variant of ['"line"', '"soft"', '"glass"']) requireText("tabs variant", tabs, variant);
 requireText("tabs stable indicator", tabs, 'data-slot="tabs-indicator"');
 requireText("tabs sliding indicator", tabs, "MutationObserver");
-requireText("tabs bounded indicator", tabs, "transition-[left,width,opacity]");
-forbidText("tabs scroll-safe indicator", tabs, "translateX(${indicator.left}px)");
+requireText("tabs bounded indicator", tabs, "transition-[transform,width,opacity]");
+requireText("tabs scroll-safe indicator", tabs, "translate3d(${indicator.left}px, 0, 0)");
+requireText("tabs hidden scrollbar", tabs, "[&::-webkit-scrollbar]:hidden");
 requireText("breadcrumb collapse semantics", await read("components/ui/molecules/breadcrumb.tsx"), "More breadcrumb items");
 const pagination = await read("components/ui/molecules/pagination.tsx");
 for (const label of ["Go to previous page", "Go to next page"]) requireText("pagination accessible name", pagination, label);
