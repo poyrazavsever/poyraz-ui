@@ -12,6 +12,9 @@ import {
   CardDescription,
   CardContent,
 } from "poyraz-ui/atoms";
+import docsCatalog from "@/src/docs-registry.json";
+
+const sectionCounts = Object.fromEntries(docsCatalog.navigation.map((group) => [group.section, group.items.length]));
 
 export default function DocsIntroPage() {
   return (
@@ -19,7 +22,7 @@ export default function DocsIntroPage() {
       {/* Header */}
       <div className="space-y-4">
         <Badge variant="outline" className="text-xs">
-          v2.1.0
+          V3 Registry
         </Badge>
         <Typography variant="h2">Introduction</Typography>
         <Typography variant="lead">
@@ -129,7 +132,7 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-primary">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Atoms</CardTitle>
-              <CardDescription>17 components</CardDescription>
+              <CardDescription>{sectionCounts.Atoms} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">
@@ -143,7 +146,7 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-foreground">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Molecules</CardTitle>
-              <CardDescription>21 components</CardDescription>
+              <CardDescription>{sectionCounts.Molecules} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">
@@ -158,7 +161,7 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-placeholder">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Organisms</CardTitle>
-              <CardDescription>5 components</CardDescription>
+              <CardDescription>{sectionCounts.Organisms} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">

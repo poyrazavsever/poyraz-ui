@@ -5,6 +5,7 @@ import { Typography } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
+import docsCatalog from "@/src/docs-registry.json";
 
 const organisms = [
   {
@@ -40,7 +41,7 @@ export default function OrganismsPage() {
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          {organisms.length} components
+          {docsCatalog.navigation.find((group) => group.section === "Organisms")?.items.length ?? 0} registry components
         </Badge>
         <Typography variant="h1">Organisms</Typography>
         <Typography variant="lead">

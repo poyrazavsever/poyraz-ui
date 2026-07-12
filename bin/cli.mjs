@@ -57,7 +57,7 @@ const cyan = (t) => `\x1b[36m${t}\x1b[0m`;
 function banner() {
   console.log("");
   console.log(bold(red("  ╔═══════════════════════════════╗")));
-  console.log(bold(red("  ║        ") + "POYRAZ UI v2" + red("          ║")));
+  console.log(bold(red("  ║      ") + "POYRAZ UI V3 REGISTRY" + red("      ║")));
   console.log(bold(red("  ╚═══════════════════════════════╝")));
   console.log(dim("  Minimal • Brutalist • Themeable"));
   console.log("");
@@ -247,7 +247,9 @@ async function init(args) {
   // 4. Done
   console.log(green(bold("  ✓ Setup complete!")));
   console.log("");
-  console.log(dim("  Docs: https://ui.poyrazavsever.com/docs"));
+  console.log(dim("  V3 install: pnpm dlx shadcn@latest add @poyraz/button"));
+  console.log(dim("  Docs: https://ui.poyrazavsever.com/docs/installation"));
+  console.log(dim("  Help: https://ui.poyrazavsever.com/docs/troubleshooting"));
   console.log("");
 
   rl.close();
