@@ -96,6 +96,19 @@ const CardHeader = React.forwardRef<
 ));
 CardHeader.displayName = "CardHeader";
 
+const CardHeading = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="card-heading"
+    className={cn("col-start-1 min-w-0 space-y-1.5", className)}
+    {...props}
+  />
+));
+CardHeading.displayName = "CardHeading";
+
 // ─── Card Title ─────────────────────────────────────────────────────────────
 
 const CardTitle = React.forwardRef<
@@ -176,6 +189,7 @@ export {
   Card,
   CardImage,
   CardHeader,
+  CardHeading,
   CardTitle,
   CardDescription,
   CardContent,
