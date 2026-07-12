@@ -38,21 +38,34 @@ export default function InputPage() {
       >
         <div className="max-w-md space-y-4">
           <InputGroup variant="glass" radius="xl">
-            <InputGroupAddon position="start" className="border-0 pr-0"><Search /></InputGroupAddon>
+            <InputGroupAddon position="start" className="border-0 pr-0">
+              <Search />
+            </InputGroupAddon>
             <Input aria-label="Search" placeholder="Search everything..." />
             <InputGroupAddon position="end">⌘K</InputGroupAddon>
           </InputGroup>
           <InputGroup variant="soft" radius="lg">
-            <InputGroupAddon position="start" className="border-0 pr-0"><Mail /></InputGroupAddon>
+            <InputGroupAddon position="start" className="border-0 pr-0">
+              <Mail />
+            </InputGroupAddon>
             <Input aria-label="Email" type="email" placeholder="name@example.com" />
-            <InputGroupAddon position="end" className="text-success-icon"><Check /></InputGroupAddon>
+            <InputGroupAddon position="end" className="text-success-icon">
+              <Check />
+            </InputGroupAddon>
           </InputGroup>
         </div>
       </DemoSection>
 
-      <DemoSection title="Invalid and disabled" code={`<Input aria-invalid placeholder="Invalid value" />\n<Input disabled value="Disabled" readOnly />`}>
+      <DemoSection
+        title="Invalid and disabled"
+        code={`<Input aria-invalid placeholder="Invalid value" />\n<Input disabled value="Disabled" readOnly />`}
+      >
         <div className="max-w-sm space-y-4">
-          <div className="space-y-2"><Label htmlFor="invalid-email">Email</Label><Input id="invalid-email" aria-invalid placeholder="Invalid value" /><p className="text-xs text-destructive">Enter a valid email address.</p></div>
+          <div className="space-y-2">
+            <Label htmlFor="invalid-email">Email</Label>
+            <Input id="invalid-email" aria-invalid placeholder="Invalid value" />
+            <p className="text-xs text-destructive">Enter a valid email address.</p>
+          </div>
           <Input disabled value="Disabled" readOnly />
         </div>
       </DemoSection>

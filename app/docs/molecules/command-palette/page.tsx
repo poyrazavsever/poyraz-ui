@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  CalendarIcon,
-  Smile,
-  Calculator,
-  User,
-  CreditCard,
-  Settings,
-} from "lucide-react";
+import { CalendarIcon, Smile, Calculator, User, CreditCard, Settings } from "lucide-react";
 import { Button } from "poyraz-ui/atoms";
 import {
   CommandPalette,
@@ -91,16 +84,10 @@ export default function CommandPalettePage() {
             <CommandPaletteInput placeholder="Type a command or search..." />
             <CommandPaletteList>
               <CommandPaletteGroup heading="Suggestions">
-                <CommandPaletteItem
-                  icon={<CalendarIcon className="h-4 w-4" />}
-                  shortcut="⌘D"
-                >
+                <CommandPaletteItem icon={<CalendarIcon className="h-4 w-4" />} shortcut="⌘D">
                   Calendar
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<Smile className="h-4 w-4" />}
-                  shortcut="⌘E"
-                >
+                <CommandPaletteItem icon={<Smile className="h-4 w-4" />} shortcut="⌘E">
                   Search Emoji
                 </CommandPaletteItem>
                 <CommandPaletteItem icon={<Calculator className="h-4 w-4" />}>
@@ -109,22 +96,13 @@ export default function CommandPalettePage() {
               </CommandPaletteGroup>
               <CommandPaletteSeparator />
               <CommandPaletteGroup heading="Settings">
-                <CommandPaletteItem
-                  icon={<User className="h-4 w-4" />}
-                  shortcut="⌘P"
-                >
+                <CommandPaletteItem icon={<User className="h-4 w-4" />} shortcut="⌘P">
                   Profile
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<CreditCard className="h-4 w-4" />}
-                  shortcut="⌘B"
-                >
+                <CommandPaletteItem icon={<CreditCard className="h-4 w-4" />} shortcut="⌘B">
                   Billing
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<Settings className="h-4 w-4" />}
-                  shortcut="⌘S"
-                >
+                <CommandPaletteItem icon={<Settings className="h-4 w-4" />} shortcut="⌘S">
                   Settings
                 </CommandPaletteItem>
               </CommandPaletteGroup>

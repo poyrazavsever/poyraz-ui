@@ -61,13 +61,9 @@ export default function ModalPage() {
             <ModalContent size="sm">
               <ModalHeader>
                 <ModalTitle>Small Modal</ModalTitle>
-                <ModalDescription>
-                  Compact size for confirmations.
-                </ModalDescription>
+                <ModalDescription>Compact size for confirmations.</ModalDescription>
               </ModalHeader>
-              <p className="text-sm text-muted-foreground">
-                Are you sure you want to continue?
-              </p>
+              <p className="text-sm text-muted-foreground">Are you sure you want to continue?</p>
               <ModalFooter>
                 <ModalClose asChild>
                   <Button variant="outline" size="sm">
@@ -95,11 +91,7 @@ export default function ModalPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="mdl-email">Email</Label>
-                  <Input
-                    id="mdl-email"
-                    type="email"
-                    placeholder="hello@example.com"
-                  />
+                  <Input id="mdl-email" type="email" placeholder="hello@example.com" />
                 </div>
               </div>
               <ModalFooter>
@@ -118,13 +110,11 @@ export default function ModalPage() {
             <ModalContent size="lg">
               <ModalHeader>
                 <ModalTitle>Large Modal</ModalTitle>
-                <ModalDescription>
-                  Extra room for complex content.
-                </ModalDescription>
+                <ModalDescription>Extra room for complex content.</ModalDescription>
               </ModalHeader>
               <p className="text-sm text-muted-foreground">
-                The large variant provides more room for tables, multi-step
-                forms, or detailed content.
+                The large variant provides more room for tables, multi-step forms, or detailed
+                content.
               </p>
               <ModalFooter>
                 <ModalClose asChild>

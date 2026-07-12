@@ -20,10 +20,7 @@ export function CheckboxDemo() {
       </div>
       <div className="flex items-center gap-3 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5">
         <Checkbox id="disabled-check" disabled />
-        <Label
-          htmlFor="disabled-check"
-          className="normal-case font-normal text-sm opacity-40"
-        >
+        <Label htmlFor="disabled-check" className="normal-case font-normal text-sm opacity-40">
           Disabled
         </Label>
       </div>

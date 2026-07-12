@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "@/components/ui/atoms/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/atoms/avatar";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function AvatarPage() {

@@ -21,7 +21,10 @@ export default function TextareaPage() {
         </div>
       </DemoSection>
 
-      <DemoSection title="Variants" code={`<Textarea variant="soft" />\n<Textarea variant="glass" radius="xl" />`}>
+      <DemoSection
+        title="Variants"
+        code={`<Textarea variant="soft" />\n<Textarea variant="glass" radius="xl" />`}
+      >
         <div className="grid max-w-lg gap-3 rounded-2xl bg-gradient-to-br from-red-100 to-slate-200 p-5 dark:from-red-950 dark:to-slate-900">
           <Textarea variant="soft" placeholder="Soft textarea" />
           <Textarea variant="glass" radius="xl" placeholder="Glass textarea" />
@@ -40,10 +43,7 @@ export default function TextareaPage() {
         </div>
       </DemoSection>
 
-      <DemoSection
-        title="Disabled"
-        code={`<Textarea placeholder="Cannot type here" disabled />`}
-      >
+      <DemoSection title="Disabled" code={`<Textarea placeholder="Cannot type here" disabled />`}>
         <div className="max-w-sm">
           <Textarea placeholder="Cannot type here" disabled />
         </div>

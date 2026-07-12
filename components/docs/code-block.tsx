@@ -8,7 +8,13 @@ import { cn } from "@/lib/utils";
 
 export { CodeBlock } from "@/components/docs/code-snippet";
 
-export function DemoBlock({ children, className }: { children: React.ReactNode; className?: string }) {
+export function DemoBlock({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div
       data-slot="docs-demo"
@@ -22,7 +28,12 @@ export function DemoBlock({ children, className }: { children: React.ReactNode; 
   );
 }
 
-export function ComponentPage({ name, description, importCode, children }: {
+export function ComponentPage({
+  name,
+  description,
+  importCode,
+  children,
+}: {
   name: string;
   description: string;
   importCode: string;
@@ -30,21 +41,26 @@ export function ComponentPage({ name, description, importCode, children }: {
 }) {
   return (
     <div className="min-w-0 space-y-10 pb-10">
-        <div className="space-y-3">
-          <h1 className="text-2xl font-black tracking-tight">{name}</h1>
-          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{description}</p>
-        </div>
-        <section className="space-y-3">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-placeholder">Import</h2>
-          <CodeBlock code={importCode} />
-        </section>
-        {children}
-        <RegistryDetails name={name} />
+      <div className="space-y-3">
+        <h1 className="text-2xl font-black tracking-tight">{name}</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{description}</p>
+      </div>
+      <section className="space-y-3">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-placeholder">Import</h2>
+        <CodeBlock code={importCode} />
+      </section>
+      {children}
+      <RegistryDetails name={name} />
     </div>
   );
 }
 
-export function DemoSection({ title, description, code, children }: {
+export function DemoSection({
+  title,
+  description,
+  code,
+  children,
+}: {
   title: string;
   description?: string;
   code?: string;

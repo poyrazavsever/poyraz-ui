@@ -75,7 +75,9 @@ export default function MermaidPage() {
     D --> B
     C --> E[Ship it]\`}</Mermaid>`}
       >
-        <Mermaid surface="glass" radius="xl" diagramStyle="soft">{flowchartCode}</Mermaid>
+        <Mermaid surface="glass" radius="xl" diagramStyle="soft">
+          {flowchartCode}
+        </Mermaid>
       </DemoSection>
 
       <DemoSection
@@ -85,8 +87,12 @@ export default function MermaidPage() {
 <Mermaid surface="glass" diagramStyle="technical">{code}</Mermaid>`}
       >
         <div className="grid gap-4 lg:grid-cols-2">
-          <Mermaid surface="soft" diagramStyle="minimal">{flowchartCode}</Mermaid>
-          <Mermaid surface="glass" diagramStyle="technical">{flowchartCode}</Mermaid>
+          <Mermaid surface="soft" diagramStyle="minimal">
+            {flowchartCode}
+          </Mermaid>
+          <Mermaid surface="glass" diagramStyle="technical">
+            {flowchartCode}
+          </Mermaid>
         </div>
       </DemoSection>
 

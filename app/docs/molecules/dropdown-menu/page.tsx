@@ -153,7 +153,11 @@ export default function DropdownMenuPage() {
       >
         <div className="flex flex-wrap gap-3">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild><Button variant="outline" size="sm">Compact</Button></DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                Compact
+              </Button>
+            </DropdownMenuTrigger>
             <DropdownMenuContent surface="soft" itemSize="sm" radius="md">
               <DropdownMenuItem>Overview</DropdownMenuItem>
               <DropdownMenuItem>Analytics</DropdownMenuItem>
@@ -161,10 +165,22 @@ export default function DropdownMenuPage() {
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild><Button variant="outline">Rich content</Button></DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Rich content</Button>
+            </DropdownMenuTrigger>
             <DropdownMenuContent surface="solid" itemSize="lg" itemRadius="lg" className="w-72">
-              <DropdownMenuItem media={<span className="font-semibold text-primary">PA</span>} description="Product designer · Istanbul">Poyraz Avsever</DropdownMenuItem>
-              <DropdownMenuItem media={<CreditCard className="size-4" />} description="Plan, invoices and payment methods">Billing</DropdownMenuItem>
+              <DropdownMenuItem
+                media={<span className="font-semibold text-primary">PA</span>}
+                description="Product designer · Istanbul"
+              >
+                Poyraz Avsever
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                media={<CreditCard className="size-4" />}
+                description="Plan, invoices and payment methods"
+              >
+                Billing
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -38,6 +38,7 @@ const primarySections = [
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
+      { title: "V3 release", href: "/docs/releases" },
       { title: "Troubleshooting", href: "/docs/troubleshooting" },
     ],
   },
@@ -92,7 +93,9 @@ function DocsNavSection({
   pathname: string;
   defaultOpen?: boolean;
 }) {
-  const containsActive = items.some(({ href }) => pathname === href || pathname.startsWith(`${href}/`));
+  const containsActive = items.some(
+    ({ href }) => pathname === href || pathname.startsWith(`${href}/`),
+  );
   const [open, setOpen] = React.useState(defaultOpen || containsActive);
 
   React.useEffect(() => {
@@ -180,7 +183,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </NavbarMain>
         <NavbarMobileMenu>
           {mobileLinks.map((item) => (
-            <NavbarMobileLink key={item.href} href={item.href}>{item.title}</NavbarMobileLink>
+            <NavbarMobileLink key={item.href} href={item.href}>
+              {item.title}
+            </NavbarMobileLink>
           ))}
         </NavbarMobileMenu>
       </Navbar>
@@ -188,7 +193,10 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 px-5 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:px-8 xl:gap-12">
         <aside className="hidden lg:block">
           <div className="sticky top-[73px] h-[calc(100dvh-89px)] py-4">
-            <Sidebar variant="default" className="h-full w-full border-0 border-r border-border bg-background">
+            <Sidebar
+              variant="default"
+              className="h-full w-full border-0 border-r border-border bg-background"
+            >
               <SidebarHeader className="h-auto border-0 px-3 pb-3 pt-2">
                 <p className="text-sm font-semibold text-foreground">Poyraz UI</p>
               </SidebarHeader>
@@ -205,7 +213,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </div>
           <Footer variant="compact" containerClassName="max-w-[68rem] px-0">
             <FooterBottom className="mt-0 border-t border-border py-6">
-              <span className="text-xs text-placeholder">&copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.</span>
+              <span className="text-xs text-placeholder">
+                &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
+              </span>
               <FooterSocials>
                 <FooterSocialLink href={socialLinks.github} aria-label="GitHub" className="size-7">
                   <Github className="size-3" />

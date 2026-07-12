@@ -2,16 +2,8 @@
 
 import { CalendarIcon } from "lucide-react";
 import { Button } from "poyraz-ui/atoms";
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "poyraz-ui/atoms";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "poyraz-ui/molecules";
+import { Avatar, AvatarImage, AvatarFallback } from "poyraz-ui/atoms";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function HoverCardPage() {
@@ -63,14 +55,11 @@ export default function HoverCardPage() {
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">@poyrazavsever</h4>
                 <p className="text-sm text-muted-foreground">
-                  Creator of Poyraz UI — Brutalist design system for the modern
-                  web.
+                  Creator of Poyraz UI — Brutalist design system for the modern web.
                 </p>
                 <div className="flex items-center pt-1">
                   <CalendarIcon className="mr-2 h-3 w-3 opacity-70" />
-                  <span className="text-xs text-placeholder">
-                    Joined December 2021
-                  </span>
+                  <span className="text-xs text-placeholder">Joined December 2021</span>
                 </div>
               </div>
             </div>

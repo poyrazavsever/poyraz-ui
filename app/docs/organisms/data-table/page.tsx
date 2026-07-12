@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  DataTable,
-  DataTableCore,
-  type DataTableColumnDef,
-} from "poyraz-ui/organisms";
+import { DataTable, DataTableCore, type DataTableColumnDef } from "poyraz-ui/organisms";
 import { Badge } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
@@ -127,9 +123,7 @@ const columns: DataTableColumnDef<User>[] = [
     accessorKey: "status",
     sortable: true,
     cell: (row) => (
-      <Badge variant={row.status === "active" ? "default" : "outline"}>
-        {row.status}
-      </Badge>
+      <Badge variant={row.status === "active" ? "default" : "outline"}>{row.status}</Badge>
     ),
   },
 ];
@@ -220,11 +214,29 @@ import type { DataTableColumnDef } from "poyraz-ui/organisms";`}
 <DataTableCore columns={columns} data={[]} state="error" />`}
       >
         <div className="grid gap-4">
-          <DataTableCore columns={columns} data={users.slice(0, 3)} getRowId={(row) => row.id} state="populated" surface="glass" stickyHeader maxHeight={240} />
+          <DataTableCore
+            columns={columns}
+            data={users.slice(0, 3)}
+            getRowId={(row) => row.id}
+            state="populated"
+            surface="glass"
+            stickyHeader
+            maxHeight={240}
+          />
           <div className="grid gap-4 md:grid-cols-3">
             <DataTableCore columns={productColumns} data={[]} state="loading" loadingRows={3} />
-            <DataTableCore columns={productColumns} data={[]} state="empty" emptyContent="No products match the filters." />
-            <DataTableCore columns={productColumns} data={[]} state="error" errorContent="Products could not be loaded." />
+            <DataTableCore
+              columns={productColumns}
+              data={[]}
+              state="empty"
+              emptyContent="No products match the filters."
+            />
+            <DataTableCore
+              columns={productColumns}
+              data={[]}
+              state="error"
+              errorContent="Products could not be loaded."
+            />
           </div>
         </div>
       </DemoSection>

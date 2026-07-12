@@ -7,14 +7,17 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function DatePickerDemo() {
   const [date, setDate] = React.useState<Date | undefined>();
-  return (
-    <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />
-  );
+  return <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />;
 }
 
 function DatePickerPreselected() {
   return (
-    <DatePicker defaultSelected={new Date()} clearable popoverSurface="glass" placeholder="Pick a date" />
+    <DatePicker
+      defaultSelected={new Date()}
+      clearable
+      popoverSurface="glass"
+      placeholder="Pick a date"
+    />
   );
 }
 

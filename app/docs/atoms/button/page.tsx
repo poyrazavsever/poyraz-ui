@@ -3,11 +3,7 @@
 import { ArrowRight, Bell, Download, Heart, Sparkles } from "lucide-react";
 
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
-import {
-  Button,
-  ButtonIcon,
-  ButtonLabel,
-} from "@/components/ui/atoms/button";
+import { Button, ButtonIcon, ButtonLabel } from "@/components/ui/atoms/button";
 import { ButtonPlayground } from "@/components/demos/button-playground";
 
 const variants = [
@@ -43,7 +39,9 @@ export default function ButtonPage() {
       <DemoSection
         title="Variants"
         description="Brand red remains the primary action; neutral, tinted, outline and translucent treatments provide quieter hierarchy."
-        code={variants.map((variant) => `<Button variant="${variant}">${variant}</Button>`).join("\n")}
+        code={variants
+          .map((variant) => `<Button variant="${variant}">${variant}</Button>`)
+          .join("\n")}
       >
         <div className="flex flex-wrap items-center gap-3">
           {variants.map((variant) => (
@@ -69,10 +67,18 @@ export default function ButtonPage() {
           <Button size="xs">Extra small</Button>
           <Button size="sm">Small</Button>
           <Button>Default</Button>
-          <Button size="lg" radius="full">Large pill</Button>
-          <Button size="icon-sm" aria-label="Favorite"><Heart /></Button>
-          <Button size="icon" radius="full" aria-label="Notifications"><Bell /></Button>
-          <Button size="icon-lg" aria-label="Download"><Download /></Button>
+          <Button size="lg" radius="full">
+            Large pill
+          </Button>
+          <Button size="icon-sm" aria-label="Favorite">
+            <Heart />
+          </Button>
+          <Button size="icon" radius="full" aria-label="Notifications">
+            <Bell />
+          </Button>
+          <Button size="icon-lg" aria-label="Download">
+            <Download />
+          </Button>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           {(["none", "xs", "sm", "md", "lg", "xl", "2xl", "full"] as const).map((radius) => (
@@ -106,12 +112,18 @@ export default function ButtonPage() {
           ))}
           <Button effect="swap" swapTarget="both">
             <ButtonLabel>Swap content</ButtonLabel>
-            <ButtonIcon><ArrowRight /></ButtonIcon>
+            <ButtonIcon>
+              <ArrowRight />
+            </ButtonIcon>
           </Button>
-          <Button effect="border-draw" variant="outline">Border draw</Button>
+          <Button effect="border-draw" variant="outline">
+            Border draw
+          </Button>
           <Button effect="swap" swapTarget="icon" variant="secondary">
             Icon only swap
-            <ButtonIcon><ArrowRight /></ButtonIcon>
+            <ButtonIcon>
+              <ArrowRight />
+            </ButtonIcon>
           </Button>
           <Button effect="swap" swapTarget="label" variant="ghost">
             <ButtonLabel>Label only swap</ButtonLabel>
@@ -149,7 +161,9 @@ export default function ButtonPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Button loading>Saving changes</Button>
           <Button disabled>Disabled</Button>
-          <Button variant="outline" className="w-full sm:w-auto">Consumer override</Button>
+          <Button variant="outline" className="w-full sm:w-auto">
+            Consumer override
+          </Button>
         </div>
       </DemoSection>
 
@@ -166,7 +180,9 @@ export default function ButtonPage() {
         <Button asChild effect="swap" radius="full">
           <a href="/docs">
             <ButtonLabel>Explore docs</ButtonLabel>
-            <ButtonIcon><ArrowRight /></ButtonIcon>
+            <ButtonIcon>
+              <ArrowRight />
+            </ButtonIcon>
           </a>
         </Button>
       </DemoSection>

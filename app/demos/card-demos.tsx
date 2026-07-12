@@ -19,7 +19,10 @@ import { Typography } from "poyraz-ui/atoms";
 // ═══════════════════════════════════════════════════════════════
 export function BlogCard() {
   return (
-    <Card variant="elevated" className="animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+    <Card
+      variant="elevated"
+      className="animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1"
+    >
       <div className="flex flex-col md:flex-row">
         <CardImage className="md:w-60 md:min-h-full md:border-b-0 md:border-r md:border-slate-300">
           <Image
@@ -36,12 +39,11 @@ export function BlogCard() {
               <Badge variant="secondary">Tutorial</Badge>
             </div>
             <CardTitle>
-              O&apos;dan <span className="text-red-600 italic">React</span>{" "}
-              Dersleri - React 101
+              O&apos;dan <span className="text-red-600 italic">React</span> Dersleri - React 101
             </CardTitle>
             <CardDescription>
-              A comprehensive journey through the modern web stack. Learn React,
-              State Management, Hooks...
+              A comprehensive journey through the modern web stack. Learn React, State Management,
+              Hooks...
             </CardDescription>
           </CardHeader>
           <CardFooter>
@@ -63,7 +65,10 @@ export function BlogCard() {
 // ═══════════════════════════════════════════════════════════════
 export function VideoCard() {
   return (
-    <Card variant="bordered" className="group/video cursor-pointer max-w-sm animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+    <Card
+      variant="bordered"
+      className="group/video cursor-pointer max-w-sm animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1"
+    >
       <CardImage>
         <Image
           src="https://picsum.photos/seed/video/400/225"
@@ -85,9 +90,7 @@ export function VideoCard() {
         </div>
       </CardImage>
       <CardHeader>
-        <CardTitle className="text-base">
-          Next.js 16 — Yenilikler ve Değişiklikler
-        </CardTitle>
+        <CardTitle className="text-base">Next.js 16 — Yenilikler ve Değişiklikler</CardTitle>
         <CardDescription>
           Next.js 16 ile gelen tüm yenilikleri detaylıca inceliyoruz.
         </CardDescription>
@@ -113,18 +116,20 @@ export function VideoCard() {
 // ═══════════════════════════════════════════════════════════════
 export function CourseCard() {
   return (
-    <Card variant="highlight" className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+    <Card
+      variant="highlight"
+      className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1"
+    >
       <CardHeader>
         <Badge variant="destructive" className="w-fit">
           Popüler
         </Badge>
         <CardTitle>
-          O&apos;dan <span className="text-red-600 italic">React</span> Dersleri
-          - React 101
+          O&apos;dan <span className="text-red-600 italic">React</span> Dersleri - React 101
         </CardTitle>
         <CardDescription>
-          A comprehensive journey through the modern web stack. Learn React,
-          State Management, Hooks...
+          A comprehensive journey through the modern web stack. Learn React, State Management,
+          Hooks...
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -133,10 +138,7 @@ export function CourseCard() {
           <div className="flex -space-x-2">
             {[1, 2, 3, 4].map((i) => (
               <Avatar key={i} className="h-8 w-8 border-2 border-white">
-                <AvatarImage
-                  src={`https://i.pravatar.cc/40?img=${i + 10}`}
-                  alt="Student"
-                />
+                <AvatarImage src={`https://i.pravatar.cc/40?img=${i + 10}`} alt="Student" />
                 <AvatarFallback>S{i}</AvatarFallback>
               </Avatar>
             ))}
@@ -147,9 +149,7 @@ export function CourseCard() {
             <span className="text-slate-400">/5</span>
           </div>
         </div>
-        <div className="text-xs text-slate-400">
-          24 ders · 6 saat · 1.200+ öğrenci
-        </div>
+        <div className="text-xs text-slate-400">24 ders · 6 saat · 1.200+ öğrenci</div>
       </CardContent>
       <CardFooter>
         <Button className="w-full">Satın Al</Button>
@@ -163,7 +163,10 @@ export function CourseCard() {
 // ═══════════════════════════════════════════════════════════════
 export function ProfileCard() {
   return (
-    <Card variant="default" className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+    <Card
+      variant="default"
+      className="max-w-xs animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1"
+    >
       <CardHeader className="items-center text-center pt-8">
         <Avatar className="h-20 w-20 mb-2">
           <AvatarImage src="https://i.pravatar.cc/100?img=3" alt="Poyraz" />
@@ -176,23 +179,17 @@ export function ProfileCard() {
         <div className="flex justify-center gap-6 text-sm">
           <div>
             <div className="font-bold text-slate-900">42</div>
-            <div className="text-xs text-slate-400 uppercase tracking-wide">
-              Posts
-            </div>
+            <div className="text-xs text-slate-400 uppercase tracking-wide">Posts</div>
           </div>
           <Separator orientation="vertical" className="h-10" />
           <div>
             <div className="font-bold text-slate-900">1.2K</div>
-            <div className="text-xs text-slate-400 uppercase tracking-wide">
-              Followers
-            </div>
+            <div className="text-xs text-slate-400 uppercase tracking-wide">Followers</div>
           </div>
           <Separator orientation="vertical" className="h-10" />
           <div>
             <div className="font-bold text-slate-900">89</div>
-            <div className="text-xs text-slate-400 uppercase tracking-wide">
-              Projects
-            </div>
+            <div className="text-xs text-slate-400 uppercase tracking-wide">Projects</div>
           </div>
         </div>
       </CardContent>
@@ -211,7 +208,10 @@ export function ProfileCard() {
 // ═══════════════════════════════════════════════════════════════
 export function GhostCard() {
   return (
-    <Card variant="ghost" className="max-w-xs p-5 cursor-pointer animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1">
+    <Card
+      variant="ghost"
+      className="max-w-xs p-5 cursor-pointer animate-poyraz-fade-in transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-1"
+    >
       <div className="flex items-start gap-4">
         <div className="h-10 w-10 flex items-center justify-center bg-red-600 text-white text-lg font-bold shrink-0 border border-red-900 rounded-sm">
           ⚡
@@ -219,8 +219,7 @@ export function GhostCard() {
         <div>
           <CardTitle className="text-base mb-1">Hızlı İpuçları</CardTitle>
           <CardDescription>
-            Günlük geliştirme rutininizi hızlandıracak kısa notlar ve püf
-            noktaları.
+            Günlük geliştirme rutininizi hızlandıracak kısa notlar ve püf noktaları.
           </CardDescription>
         </div>
       </div>

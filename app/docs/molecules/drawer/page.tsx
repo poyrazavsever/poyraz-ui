@@ -71,8 +71,7 @@ export default function DrawerPage() {
               <DrawerHeader>
                 <DrawerTitle>Edit Profile</DrawerTitle>
                 <DrawerDescription>
-                  Make changes to your profile. Click save when you&apos;re
-                  done.
+                  Make changes to your profile. Click save when you&apos;re done.
                 </DrawerDescription>
               </DrawerHeader>
               <div className="p-4 space-y-4">
@@ -82,11 +81,7 @@ export default function DrawerPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="drw-email">Email</Label>
-                  <Input
-                    id="drw-email"
-                    type="email"
-                    placeholder="hello@example.com"
-                  />
+                  <Input id="drw-email" type="email" placeholder="hello@example.com" />
                 </div>
               </div>
               <DrawerFooter>

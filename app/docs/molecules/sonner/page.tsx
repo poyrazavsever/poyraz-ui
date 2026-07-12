@@ -24,9 +24,7 @@ import { toast } from "sonner";
   Show Toast
 </Button>`}
       >
-        <Button onClick={() => toast("Event has been created")}>
-          Show Toast
-        </Button>
+        <Button onClick={() => toast("Event has been created")}>Show Toast</Button>
       </DemoSection>
 
       <DemoSection
@@ -56,13 +54,8 @@ toast.warning("Your session is about to expire.");
 toast.info("A new update is available.");`}
       >
         <div className="flex flex-wrap gap-3">
-          <Button onClick={() => toast.success("Profile saved successfully!")}>
-            Success
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => toast.error("Something went wrong.")}
-          >
+          <Button onClick={() => toast.success("Profile saved successfully!")}>Success</Button>
+          <Button variant="destructive" onClick={() => toast.error("Something went wrong.")}>
             Error
           </Button>
           <Button
@@ -71,10 +64,7 @@ toast.info("A new update is available.");`}
           >
             Warning
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => toast.info("A new update is available.")}
-          >
+          <Button variant="secondary" onClick={() => toast.info("A new update is available.")}>
             Info
           </Button>
         </div>

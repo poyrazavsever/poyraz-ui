@@ -29,7 +29,11 @@ const molecules = [
     description: "Navigation path indicator.",
   },
   { name: "Calendar", slug: "calendar", description: "Date selection grid." },
-  { name: "Card Templates", slug: "card-templates", description: "Independent article, product, stats and pricing blocks." },
+  {
+    name: "Card Templates",
+    slug: "card-templates",
+    description: "Independent article, product, stats and pricing blocks.",
+  },
   {
     name: "Command Palette",
     slug: "command-palette",
@@ -90,12 +94,12 @@ export default function MoleculesPage() {
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          {docsCatalog.navigation.find((group) => group.section === "Molecules")?.items.length ?? 0} registry components
+          {docsCatalog.navigation.find((group) => group.section === "Molecules")?.items.length ?? 0}{" "}
+          registry components
         </Badge>
         <Typography variant="h1">Molecules</Typography>
         <Typography variant="lead">
-          Combinations of atoms that form functional UI units — dialogs, tabs,
-          forms, and more.
+          Combinations of atoms that form functional UI units — dialogs, tabs, forms, and more.
         </Typography>
       </div>
       <Separator />
@@ -108,12 +112,8 @@ export default function MoleculesPage() {
             href={`/docs/molecules/${component.slug}`}
             className="group block p-5 border border-border rounded-sm hover:border-foreground/30 transition-colors"
           >
-            <h3 className="font-semibold text-sm group-hover:underline">
-              {component.name}
-            </h3>
-            <p className="text-xs text-muted-foreground mt-1">
-              {component.description}
-            </p>
+            <h3 className="font-semibold text-sm group-hover:underline">{component.name}</h3>
+            <p className="text-xs text-muted-foreground mt-1">{component.description}</p>
           </Link>
         ))}
       </div>
@@ -123,11 +123,7 @@ export default function MoleculesPage() {
         <Separator />
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <Link href="/docs/atoms">
-            <Button
-              variant="outline"
-              size="lg"
-              className="gap-2 w-full sm:w-auto"
-            >
+            <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
               <ArrowRight className="h-4 w-4 rotate-180" /> Atoms
             </Button>
           </Link>

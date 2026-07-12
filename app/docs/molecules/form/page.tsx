@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ComponentPage,
-  DemoSection,
-  CodeBlock,
-} from "@/components/docs/code-block";
+import { ComponentPage, DemoSection, CodeBlock } from "@/components/docs/code-block";
 
 export default function FormPage() {
   return (
@@ -25,9 +21,9 @@ export default function FormPage() {
         <div className="space-y-1">
           <h2 className="text-lg font-bold">Usage</h2>
           <p className="text-sm text-muted-foreground">
-            The Form component wraps React Hook Form and provides context for
-            label, description, and error message components. Pair with Zod or
-            other validation libraries for schema validation.
+            The Form component wraps React Hook Form and provides context for label, description,
+            and error message components. Pair with Zod or other validation libraries for schema
+            validation.
           </p>
         </div>
         <CodeBlock

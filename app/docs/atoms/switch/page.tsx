@@ -25,10 +25,7 @@ export default function SwitchPage() {
         </div>
       </DemoSection>
 
-      <DemoSection
-        title="Checked by Default"
-        code={`<Switch id="notifications" defaultChecked />`}
-      >
+      <DemoSection title="Checked by Default" code={`<Switch id="notifications" defaultChecked />`}>
         <div className="flex items-center gap-3">
           <Switch id="notif-demo" defaultChecked />
           <Label htmlFor="notif-demo">Notifications</Label>

@@ -96,12 +96,12 @@ export default function AtomsPage() {
       {/* Header */}
       <div className="space-y-2">
         <Badge variant="outline" className="text-xs">
-          {docsCatalog.navigation.find((group) => group.section === "Atoms")?.items.length ?? 0} registry components
+          {docsCatalog.navigation.find((group) => group.section === "Atoms")?.items.length ?? 0}{" "}
+          registry components
         </Badge>
         <Typography variant="h1">Atoms</Typography>
         <Typography variant="lead">
-          Fundamental building blocks of the interface. The smallest,
-          indivisible units.
+          Fundamental building blocks of the interface. The smallest, indivisible units.
         </Typography>
       </div>
       <Separator />
@@ -114,12 +114,8 @@ export default function AtomsPage() {
             href={`/docs/atoms/${component.slug}`}
             className="group block p-5 border border-border rounded-sm hover:border-foreground/30 transition-colors"
           >
-            <h3 className="font-semibold text-sm group-hover:underline">
-              {component.name}
-            </h3>
-            <p className="text-xs text-muted-foreground mt-1">
-              {component.description}
-            </p>
+            <h3 className="font-semibold text-sm group-hover:underline">{component.name}</h3>
+            <p className="text-xs text-muted-foreground mt-1">{component.description}</p>
           </Link>
         ))}
       </div>

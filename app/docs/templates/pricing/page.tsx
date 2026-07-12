@@ -10,8 +10,20 @@ export default function PricingPage() {
 
 export default function PricingTemplatePage() {
   return (
-    <ComponentPage name="Pricing" description="A three-tier pricing block with semantic accents and data separated from rendering." importCode={`import { PricingBlock } from "@/components/ui/blocks/pricing-block";`}>
-      <DemoSection title="Responsive Plans" description="Cards stack in a narrow docs panel and become three columns only when their own container has enough room." code={code}><BlockPreview><PricingBlock /></BlockPreview></DemoSection>
+    <ComponentPage
+      name="Pricing"
+      description="A three-tier pricing block with semantic accents and data separated from rendering."
+      importCode={`import { PricingBlock } from "@/components/ui/blocks/pricing-block";`}
+    >
+      <DemoSection
+        title="Responsive Plans"
+        description="Cards stack in a narrow docs panel and become three columns only when their own container has enough room."
+        code={code}
+      >
+        <BlockPreview>
+          <PricingBlock />
+        </BlockPreview>
+      </DemoSection>
     </ComponentPage>
   );
 }

@@ -17,7 +17,10 @@ export function BlockPreview({ children }: { children: React.ReactNode }) {
   return (
     <div className="space-y-3" data-slot="block-preview">
       <div className="flex justify-end">
-        <div className="flex rounded-md border border-border bg-surface p-0.5" aria-label="Block viewport">
+        <div
+          className="flex rounded-md border border-border bg-surface p-0.5"
+          aria-label="Block viewport"
+        >
           {Object.entries(viewports).map(([value, config]) => {
             const Icon = config.icon;
             return (
@@ -51,4 +54,3 @@ export function BlockPreview({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-

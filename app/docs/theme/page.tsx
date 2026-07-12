@@ -17,9 +17,7 @@ function Section({
     <section className="space-y-4">
       <div className="space-y-1">
         <h2 className="text-poyraz-title font-semibold">{title}</h2>
-        <p className="max-w-3xl text-poyraz-body-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="max-w-3xl text-poyraz-body-sm text-muted-foreground">{description}</p>
       </div>
       {children}
     </section>
@@ -40,10 +38,7 @@ function Palette({
       <h3 className="text-sm font-semibold">{title}</h3>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-6">
         {Object.entries(scale).map(([step, value]) => (
-          <div
-            key={step}
-            className="overflow-hidden rounded-sm border border-border bg-surface"
-          >
+          <div key={step} className="overflow-hidden rounded-sm border border-border bg-surface">
             <div
               className="h-16 border-b border-border"
               style={{
@@ -79,19 +74,11 @@ const statusColors = [
   ["Information", "info", "info-foreground", "info-border"],
   ["Success", "success", "success-foreground", "success-border"],
   ["Warning", "warning", "warning-foreground", "warning-border"],
-  [
-    "Destructive",
-    "destructive-muted",
-    "destructive-muted-foreground",
-    "invalid-border",
-  ],
+  ["Destructive", "destructive-muted", "destructive-muted-foreground", "invalid-border"],
 ] as const;
 
 const typography = Object.entries(tokenSource.shared.typography) as Array<
-  [
-    string,
-    { size: string; lineHeight: string; letterSpacing: string },
-  ]
+  [string, { size: string; lineHeight: string; letterSpacing: string }]
 >;
 
 export default function ThemePage() {
@@ -103,9 +90,8 @@ export default function ThemePage() {
         </p>
         <h1 className="text-poyraz-heading font-semibold">Poyraz Soft Glass</h1>
         <p className="max-w-3xl text-poyraz-body text-muted-foreground">
-          Minimal, soft and lightly rounded surfaces with an optional glass
-          enhancement. Brand red remains the primary identity; status colors
-          are independent semantic signals.
+          Minimal, soft and lightly rounded surfaces with an optional glass enhancement. Brand red
+          remains the primary identity; status colors are independent semantic signals.
         </p>
       </header>
 
@@ -147,9 +133,7 @@ export default function ThemePage() {
               }}
             >
               <p className="font-semibold">{label}</p>
-              <code className="text-poyraz-caption opacity-75">
-                --poyraz-{background}
-              </code>
+              <code className="text-poyraz-caption opacity-75">--poyraz-{background}</code>
             </div>
           ))}
         </div>
@@ -194,9 +178,8 @@ export default function ThemePage() {
               Optional depth, stable readability
             </h3>
             <p className="mt-2 text-poyraz-body-sm text-muted-foreground">
-              The outer panel owns the backdrop pass. A nested glass surface
-              keeps its tint and border but automatically disables another
-              blur operation.
+              The outer panel owns the backdrop pass. A nested glass surface keeps its tint and
+              border but automatically disables another blur operation.
             </p>
             <div className="poyraz-glass mt-5 p-4 text-poyraz-body-sm">
               Nested glass — no additional backdrop blur.
@@ -205,10 +188,9 @@ export default function ThemePage() {
         </div>
         <div className="rounded-md border border-border bg-surface p-4 text-poyraz-body-sm text-muted-foreground">
           Set <code>data-poyraz-transparency=&quot;reduced&quot;</code> or{" "}
-          <code>data-poyraz-performance=&quot;low&quot;</code> on an ancestor to force
-          the opaque fallback. Native{" "}
-          <code>prefers-reduced-transparency</code> is progressively enhanced
-          when the browser supports it.
+          <code>data-poyraz-performance=&quot;low&quot;</code> on an ancestor to force the opaque
+          fallback. Native <code>prefers-reduced-transparency</code> is progressively enhanced when
+          the browser supports it.
         </div>
       </Section>
 
@@ -251,10 +233,7 @@ export default function ThemePage() {
       >
         <div className="divide-y divide-border overflow-hidden rounded-md border border-border bg-surface">
           {typography.map(([name, token]) => (
-            <div
-              key={name}
-              className="grid gap-2 p-4 sm:grid-cols-[9rem_1fr] sm:items-baseline"
-            >
+            <div key={name} className="grid gap-2 p-4 sm:grid-cols-[9rem_1fr] sm:items-baseline">
               <div className="text-poyraz-caption text-muted-foreground">
                 <p className="font-semibold text-foreground">{name}</p>
                 <code>
@@ -285,26 +264,19 @@ export default function ThemePage() {
             ["Default", "defaultControl", "defaultGap"],
             ["Spacious", "spaciousControl", "spaciousGap"],
           ].map(([label, control, gap]) => (
-            <div
-              key={label}
-              className="rounded-md border border-border bg-surface p-4"
-            >
+            <div key={label} className="rounded-md border border-border bg-surface p-4">
               <p className="font-semibold">{label}</p>
               <dl className="mt-3 space-y-2 text-poyraz-body-sm">
                 <div className="flex justify-between gap-4">
                   <dt className="text-muted-foreground">Control</dt>
                   <dd>
-                    {tokenSource.shared.density[
-                      control as keyof typeof tokenSource.shared.density
-                    ]}
+                    {tokenSource.shared.density[control as keyof typeof tokenSource.shared.density]}
                   </dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-muted-foreground">Gap</dt>
                   <dd>
-                    {tokenSource.shared.density[
-                      gap as keyof typeof tokenSource.shared.density
-                    ]}
+                    {tokenSource.shared.density[gap as keyof typeof tokenSource.shared.density]}
                   </dd>
                 </div>
               </dl>
@@ -327,17 +299,15 @@ export default function ThemePage() {
           <div className="rounded-md border border-border bg-surface p-4">
             <h3 className="font-semibold">Durations</h3>
             <div className="mt-3 space-y-2">
-              {Object.entries(tokenSource.shared.motion.duration).map(
-                ([name, value]) => (
-                  <div
-                    key={name}
-                    className="flex items-center justify-between gap-4 text-poyraz-body-sm"
-                  >
-                    <span className="text-muted-foreground">{name}</span>
-                    <code>{value}</code>
-                  </div>
-                ),
-              )}
+              {Object.entries(tokenSource.shared.motion.duration).map(([name, value]) => (
+                <div
+                  key={name}
+                  className="flex items-center justify-between gap-4 text-poyraz-body-sm"
+                >
+                  <span className="text-muted-foreground">{name}</span>
+                  <code>{value}</code>
+                </div>
+              ))}
             </div>
           </div>
           <div className="rounded-md border border-border bg-surface p-4">
@@ -372,9 +342,9 @@ export default function ThemePage() {
 <main data-poyraz-performance="low">...</main>`}</code>
         </pre>
         <p className="text-poyraz-caption text-muted-foreground">
-          Canonical source: <code>src/theme-tokens.json</code>. Generated CSS
-          guard: <code>node scripts/generate-theme-tokens.mjs --check</code>.
-          Contrast guard: <code>node scripts/check-theme-contrast.mjs</code>.
+          Canonical source: <code>src/theme-tokens.json</code>. Generated CSS guard:{" "}
+          <code>node scripts/generate-theme-tokens.mjs --check</code>. Contrast guard:{" "}
+          <code>node scripts/check-theme-contrast.mjs</code>.
         </p>
       </Section>
     </div>

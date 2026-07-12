@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "poyraz-ui/molecules";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "poyraz-ui/molecules";
 import { Button } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 

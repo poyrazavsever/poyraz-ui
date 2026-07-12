@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "poyraz-ui/molecules";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "poyraz-ui/molecules";
 import { Button } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
@@ -105,24 +100,16 @@ export default function TabsPage() {
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
           </TabsList>
           <TabsContent value="overview">
-            <p className="text-sm text-muted-foreground">
-              Dashboard overview with key metrics.
-            </p>
+            <p className="text-sm text-muted-foreground">Dashboard overview with key metrics.</p>
           </TabsContent>
           <TabsContent value="analytics">
-            <p className="text-sm text-muted-foreground">
-              Track engagement and user activity.
-            </p>
+            <p className="text-sm text-muted-foreground">Track engagement and user activity.</p>
           </TabsContent>
           <TabsContent value="reports">
-            <p className="text-sm text-muted-foreground">
-              Download weekly and monthly reports.
-            </p>
+            <p className="text-sm text-muted-foreground">Download weekly and monthly reports.</p>
           </TabsContent>
           <TabsContent value="notifications">
-            <p className="text-sm text-muted-foreground">
-              Configure notification preferences.
-            </p>
+            <p className="text-sm text-muted-foreground">Configure notification preferences.</p>
           </TabsContent>
         </Tabs>
       </DemoSection>

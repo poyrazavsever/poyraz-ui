@@ -6,7 +6,13 @@ import { ArrowRight } from "lucide-react";
 import { CodeBlock } from "@/components/docs/code-snippet";
 import { Button, ButtonIcon, ButtonLabel } from "@/components/ui/atoms/button";
 import { Checkbox } from "@/components/ui/atoms/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/molecules/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/molecules/select";
 
 const options = {
   variant: ["default", "secondary", "soft", "outline", "glass", "ghost", "destructive", "link"],
@@ -53,17 +59,31 @@ export function ButtonPlayground() {
               value={state[key] as string}
               onValueChange={(value) => update(key, value as never)}
             >
-              <SelectTrigger size="sm" className="w-full" disabled={key === "fillDirection" && state.effect !== "fill"}>
+              <SelectTrigger
+                aria-label={key}
+                size="sm"
+                className="w-full"
+                disabled={key === "fillDirection" && state.effect !== "fill"}
+              >
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>{options[key].map((value) => <SelectItem key={value} value={value} size="sm">{value}</SelectItem>)}</SelectContent>
+              <SelectContent>
+                {options[key].map((value) => (
+                  <SelectItem key={value} value={value} size="sm">
+                    {value}
+                  </SelectItem>
+                ))}
+              </SelectContent>
             </Select>
           </div>
         ))}
         <div className="flex gap-4">
           {(["loading", "disabled"] as const).map((key) => (
             <label key={key} className="flex items-center gap-2 text-sm capitalize">
-              <Checkbox checked={state[key]} onCheckedChange={(checked) => update(key, checked === true)} />
+              <Checkbox
+                checked={state[key]}
+                onCheckedChange={(checked) => update(key, checked === true)}
+              />
               {key}
             </label>
           ))}
@@ -82,7 +102,18 @@ export function ButtonPlayground() {
             disabled={state.disabled}
             aria-label={iconOnly ? "Continue" : undefined}
           >
-            {iconOnly ? <ArrowRight /> : state.effect === "swap" ? <><ButtonLabel>Continue</ButtonLabel><ButtonIcon><ArrowRight /></ButtonIcon></> : "Continue"}
+            {iconOnly ? (
+              <ArrowRight />
+            ) : state.effect === "swap" ? (
+              <>
+                <ButtonLabel>Continue</ButtonLabel>
+                <ButtonIcon>
+                  <ArrowRight />
+                </ButtonIcon>
+              </>
+            ) : (
+              "Continue"
+            )}
           </Button>
         </div>
         <CodeBlock code={code} />

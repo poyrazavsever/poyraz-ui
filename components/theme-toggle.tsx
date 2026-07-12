@@ -18,7 +18,10 @@ export function ThemeToggle() {
   ] as const;
 
   return (
-    <div className="flex items-center rounded-md border border-border bg-surface p-0.5" aria-label="Color theme">
+    <div
+      className="flex items-center rounded-md border border-border bg-surface p-0.5"
+      aria-label="Color theme"
+    >
       {modes.map(({ value, label, icon: Icon }) => (
         <button
           key={value}

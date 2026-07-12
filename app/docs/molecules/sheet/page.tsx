@@ -190,9 +190,7 @@ export default function SheetPage() {
             <SheetContent side="bottom">
               <SheetHeader>
                 <SheetTitle>Cookie Consent</SheetTitle>
-                <SheetDescription>
-                  We use cookies to improve your experience.
-                </SheetDescription>
+                <SheetDescription>We use cookies to improve your experience.</SheetDescription>
               </SheetHeader>
               <div className="flex gap-2 pt-4">
                 <Button>Accept All</Button>

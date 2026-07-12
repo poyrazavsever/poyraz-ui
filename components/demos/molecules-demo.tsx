@@ -23,12 +23,7 @@ import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
 import { Avatar, AvatarImage, AvatarFallback } from "poyraz-ui/atoms";
 import { Alert, AlertDescription, AlertTitle } from "poyraz-ui/molecules";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "poyraz-ui/molecules";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "poyraz-ui/molecules";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "poyraz-ui/molecules";
 import {
   Breadcrumb,
@@ -57,12 +52,7 @@ import {
   DialogTrigger,
 } from "poyraz-ui/molecules";
 import { Popover, PopoverContent, PopoverTrigger } from "poyraz-ui/molecules";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "poyraz-ui/molecules";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "poyraz-ui/molecules";
 import {
   Select,
   SelectContent,
@@ -86,11 +76,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "poyraz-ui/molecules";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "poyraz-ui/molecules";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "poyraz-ui/molecules";
 import { Calendar } from "poyraz-ui/molecules";
 import { DatePicker } from "poyraz-ui/molecules";
 import {
@@ -143,9 +129,7 @@ function CalendarDemo() {
 
 function DatePickerDemo() {
   const [date, setDate] = React.useState<Date | undefined>();
-  return (
-    <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />
-  );
+  return <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />;
 }
 
 export function MoleculesDemo() {
@@ -157,33 +141,23 @@ export function MoleculesDemo() {
         <div className="grid gap-3">
           <Alert>
             <AlertTitle>Default</AlertTitle>
-            <AlertDescription>
-              You can add components to your app using the cli.
-            </AlertDescription>
+            <AlertDescription>You can add components to your app using the cli.</AlertDescription>
           </Alert>
           <Alert variant="info">
             <AlertTitle>Info</AlertTitle>
-            <AlertDescription>
-              Your account has been updated with new permissions.
-            </AlertDescription>
+            <AlertDescription>Your account has been updated with new permissions.</AlertDescription>
           </Alert>
           <Alert variant="success">
             <AlertTitle>Success</AlertTitle>
-            <AlertDescription>
-              Your changes have been saved successfully.
-            </AlertDescription>
+            <AlertDescription>Your changes have been saved successfully.</AlertDescription>
           </Alert>
           <Alert variant="warning">
             <AlertTitle>Warning</AlertTitle>
-            <AlertDescription>
-              Your free trial is expiring in 3 days.
-            </AlertDescription>
+            <AlertDescription>Your free trial is expiring in 3 days.</AlertDescription>
           </Alert>
           <Alert variant="destructive">
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              Your session has expired. Please log in again.
-            </AlertDescription>
+            <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
           </Alert>
         </div>
       </section>
@@ -192,10 +166,7 @@ export function MoleculesDemo() {
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Toast / Sonner</h3>
         <div className="flex flex-wrap gap-3">
-          <Button
-            variant="outline"
-            onClick={() => toast("Event has been created")}
-          >
+          <Button variant="outline" onClick={() => toast("Event has been created")}>
             Default
           </Button>
           <Button
@@ -204,22 +175,13 @@ export function MoleculesDemo() {
           >
             Info
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => toast.success("Changes saved successfully.")}
-          >
+          <Button variant="outline" onClick={() => toast.success("Changes saved successfully.")}>
             Success
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => toast.warning("Your trial is expiring soon.")}
-          >
+          <Button variant="outline" onClick={() => toast.warning("Your trial is expiring soon.")}>
             Warning
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => toast.error("Something went wrong.")}
-          >
+          <Button variant="outline" onClick={() => toast.error("Something went wrong.")}>
             Error
           </Button>
           <Button
@@ -239,14 +201,11 @@ export function MoleculesDemo() {
           <Button
             variant="outline"
             onClick={() => {
-              toast.promise(
-                new Promise((resolve) => setTimeout(resolve, 2000)),
-                {
-                  loading: "Loading...",
-                  success: "Data loaded successfully!",
-                  error: "Failed to load data.",
-                },
-              );
+              toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
+                loading: "Loading...",
+                success: "Data loaded successfully!",
+                error: "Failed to load data.",
+              });
             }}
           >
             Promise
@@ -262,9 +221,7 @@ export function MoleculesDemo() {
             <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="password">Password</TabsTrigger>
           </TabsList>
-          <TabsContent value="account">
-            Make changes to your account here.
-          </TabsContent>
+          <TabsContent value="account">Make changes to your account here.</TabsContent>
           <TabsContent value="password">Change your password here.</TabsContent>
         </Tabs>
       </section>
@@ -275,15 +232,12 @@ export function MoleculesDemo() {
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
+            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>Is it styled?</AccordionTrigger>
             <AccordionContent>
-              Yes. It comes with default styles that matches the other
-              components&apos; aesthetic.
+              Yes. It comes with default styles that matches the other components&apos; aesthetic.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -349,8 +303,7 @@ export function MoleculesDemo() {
             <DialogHeader>
               <DialogTitle>Edit profile</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
+                Make changes to your profile here. Click save when you&apos;re done.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -358,21 +311,13 @@ export function MoleculesDemo() {
                 <label htmlFor="name" className="text-right text-sm">
                   Name
                 </label>
-                <Input
-                  id="name"
-                  defaultValue="Pedro Duarte"
-                  className="col-span-3"
-                />
+                <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <label htmlFor="username" className="text-right text-sm">
                   Username
                 </label>
-                <Input
-                  id="username"
-                  defaultValue="@peduarte"
-                  className="col-span-3"
-                />
+                <Input id="username" defaultValue="@peduarte" className="col-span-3" />
               </div>
             </div>
             <DialogFooter>
@@ -393,9 +338,7 @@ export function MoleculesDemo() {
             <div className="grid gap-4">
               <div className="space-y-2">
                 <h4 className="font-medium leading-none">Dimensions</h4>
-                <p className="text-sm text-slate-500">
-                  Set the dimensions for the layer.
-                </p>
+                <p className="text-sm text-slate-500">Set the dimensions for the layer.</p>
               </div>
             </div>
           </PopoverContent>
@@ -497,14 +440,11 @@ export function MoleculesDemo() {
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">@poyrazavsever</h4>
                 <p className="text-sm text-slate-500">
-                  Creator of Poyraz UI — Brutalist design system for the modern
-                  web.
+                  Creator of Poyraz UI — Brutalist design system for the modern web.
                 </p>
                 <div className="flex items-center pt-1">
                   <CalendarIcon className="mr-2 h-3 w-3 opacity-70" />
-                  <span className="text-xs text-slate-400">
-                    Joined December 2021
-                  </span>
+                  <span className="text-xs text-slate-400">Joined December 2021</span>
                 </div>
               </div>
             </div>
@@ -541,8 +481,7 @@ export function MoleculesDemo() {
               <DrawerHeader>
                 <DrawerTitle>Edit Profile</DrawerTitle>
                 <DrawerDescription>
-                  Make changes to your profile. Click save when you&apos;re
-                  done.
+                  Make changes to your profile. Click save when you&apos;re done.
                 </DrawerDescription>
               </DrawerHeader>
               <div className="p-4 space-y-4">
@@ -552,11 +491,7 @@ export function MoleculesDemo() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="drawer-email">Email</Label>
-                  <Input
-                    id="drawer-email"
-                    type="email"
-                    placeholder="hello@example.com"
-                  />
+                  <Input id="drawer-email" type="email" placeholder="hello@example.com" />
                 </div>
               </div>
               <DrawerFooter>
@@ -574,8 +509,7 @@ export function MoleculesDemo() {
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Modal</h3>
         <p className="text-sm text-slate-500">
-          Opinionated dialog with size variants (sm, default, lg, xl, full) and
-          position options.
+          Opinionated dialog with size variants (sm, default, lg, xl, full) and position options.
         </p>
         <div className="flex flex-wrap gap-3">
           <Modal>
@@ -585,9 +519,7 @@ export function MoleculesDemo() {
             <ModalContent size="sm">
               <ModalHeader>
                 <ModalTitle>Small Modal</ModalTitle>
-                <ModalDescription>
-                  This is the small size variant.
-                </ModalDescription>
+                <ModalDescription>This is the small size variant.</ModalDescription>
               </ModalHeader>
               <p className="text-sm text-slate-600">
                 Compact modal for confirmations and quick actions.
@@ -610,9 +542,7 @@ export function MoleculesDemo() {
             <ModalContent>
               <ModalHeader>
                 <ModalTitle>Default Modal</ModalTitle>
-                <ModalDescription>
-                  Standard size for forms and content.
-                </ModalDescription>
+                <ModalDescription>Standard size for forms and content.</ModalDescription>
               </ModalHeader>
               <div className="space-y-4 py-2">
                 <div className="space-y-2">
@@ -621,11 +551,7 @@ export function MoleculesDemo() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="modal-email">Email</Label>
-                  <Input
-                    id="modal-email"
-                    type="email"
-                    placeholder="hello@example.com"
-                  />
+                  <Input id="modal-email" type="email" placeholder="hello@example.com" />
                 </div>
               </div>
               <ModalFooter>
@@ -644,13 +570,11 @@ export function MoleculesDemo() {
             <ModalContent size="lg">
               <ModalHeader>
                 <ModalTitle>Large Modal</ModalTitle>
-                <ModalDescription>
-                  Extra space for complex content.
-                </ModalDescription>
+                <ModalDescription>Extra space for complex content.</ModalDescription>
               </ModalHeader>
               <p className="text-sm text-slate-600">
-                The large variant provides more room for tables, multi-step
-                forms, or detailed content layouts.
+                The large variant provides more room for tables, multi-step forms, or detailed
+                content layouts.
               </p>
               <ModalFooter>
                 <ModalClose asChild>
@@ -681,16 +605,10 @@ export function MoleculesDemo() {
             <CommandPaletteInput placeholder="Type a command or search..." />
             <CommandPaletteList>
               <CommandPaletteGroup heading="Suggestions">
-                <CommandPaletteItem
-                  icon={<CalendarIcon className="h-4 w-4" />}
-                  shortcut="⌘D"
-                >
+                <CommandPaletteItem icon={<CalendarIcon className="h-4 w-4" />} shortcut="⌘D">
                   Calendar
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<Smile className="h-4 w-4" />}
-                  shortcut="⌘E"
-                >
+                <CommandPaletteItem icon={<Smile className="h-4 w-4" />} shortcut="⌘E">
                   Search Emoji
                 </CommandPaletteItem>
                 <CommandPaletteItem icon={<Calculator className="h-4 w-4" />}>
@@ -699,22 +617,13 @@ export function MoleculesDemo() {
               </CommandPaletteGroup>
               <CommandPaletteSeparator />
               <CommandPaletteGroup heading="Settings">
-                <CommandPaletteItem
-                  icon={<User className="h-4 w-4" />}
-                  shortcut="⌘P"
-                >
+                <CommandPaletteItem icon={<User className="h-4 w-4" />} shortcut="⌘P">
                   Profile
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<CreditCard className="h-4 w-4" />}
-                  shortcut="⌘B"
-                >
+                <CommandPaletteItem icon={<CreditCard className="h-4 w-4" />} shortcut="⌘B">
                   Billing
                 </CommandPaletteItem>
-                <CommandPaletteItem
-                  icon={<Settings className="h-4 w-4" />}
-                  shortcut="⌘S"
-                >
+                <CommandPaletteItem icon={<Settings className="h-4 w-4" />} shortcut="⌘S">
                   Settings
                 </CommandPaletteItem>
               </CommandPaletteGroup>
@@ -734,8 +643,7 @@ export function MoleculesDemo() {
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Sheet</h3>
         <p className="text-sm text-slate-500">
-          Full-height side panel from left, right, top, or bottom. Built on
-          Radix Dialog.
+          Full-height side panel from left, right, top, or bottom. Built on Radix Dialog.
         </p>
         <div className="flex flex-wrap gap-3">
           <Sheet>
@@ -758,11 +666,7 @@ export function MoleculesDemo() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="sheet-email">Email</Label>
-                  <Input
-                    id="sheet-email"
-                    type="email"
-                    placeholder="hello@example.com"
-                  />
+                  <Input id="sheet-email" type="email" placeholder="hello@example.com" />
                 </div>
               </div>
               <SheetFooter>
@@ -786,17 +690,11 @@ export function MoleculesDemo() {
                 <SheetDescription>Browse pages and sections.</SheetDescription>
               </SheetHeader>
               <nav className="flex flex-col gap-2 py-6">
-                {["Dashboard", "Projects", "Team", "Settings", "Help"].map(
-                  (item) => (
-                    <Button
-                      key={item}
-                      variant="ghost"
-                      className="justify-start"
-                    >
-                      {item}
-                    </Button>
-                  ),
-                )}
+                {["Dashboard", "Projects", "Team", "Settings", "Help"].map((item) => (
+                  <Button key={item} variant="ghost" className="justify-start">
+                    {item}
+                  </Button>
+                ))}
               </nav>
             </SheetContent>
           </Sheet>
@@ -810,9 +708,7 @@ export function MoleculesDemo() {
             <SheetContent side="top">
               <SheetHeader>
                 <SheetTitle>Search</SheetTitle>
-                <SheetDescription>
-                  Find anything in your workspace.
-                </SheetDescription>
+                <SheetDescription>Find anything in your workspace.</SheetDescription>
               </SheetHeader>
               <div className="py-4">
                 <Input placeholder="Search..." className="max-w-md" />
@@ -829,9 +725,7 @@ export function MoleculesDemo() {
             <SheetContent side="bottom">
               <SheetHeader>
                 <SheetTitle>Notifications</SheetTitle>
-                <SheetDescription>
-                  Your recent activity and alerts.
-                </SheetDescription>
+                <SheetDescription>Your recent activity and alerts.</SheetDescription>
               </SheetHeader>
               <div className="py-4 space-y-3">
                 {[

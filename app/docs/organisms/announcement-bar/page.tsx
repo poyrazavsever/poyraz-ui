@@ -32,11 +32,7 @@ export default function AnnouncementBarPage() {
             🚀 Poyraz UI v1.0 is now available!
           </AnnouncementBar>
         ) : (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowDefault(true)}
-          >
+          <Button variant="outline" size="sm" onClick={() => setShowDefault(true)}>
             Show again
           </Button>
         )}
@@ -71,11 +67,7 @@ export default function AnnouncementBarPage() {
             New components added this week!
           </AnnouncementBar>
         ) : (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowBranded(true)}
-          >
+          <Button variant="outline" size="sm" onClick={() => setShowBranded(true)}>
             Show again
           </Button>
         )}
@@ -93,26 +85,17 @@ export default function AnnouncementBarPage() {
       >
         <div className="flex flex-col gap-2 w-full">
           {showDefault ? (
-            <AnnouncementBar
-              variant="default"
-              onDismiss={() => setShowDefault(false)}
-            >
+            <AnnouncementBar variant="default" onDismiss={() => setShowDefault(false)}>
               Default
             </AnnouncementBar>
           ) : null}
           {showInfo ? (
-            <AnnouncementBar
-              variant="info"
-              onDismiss={() => setShowInfo(false)}
-            >
+            <AnnouncementBar variant="info" onDismiss={() => setShowInfo(false)}>
               Info update
             </AnnouncementBar>
           ) : null}
           {showSuccess ? (
-            <AnnouncementBar
-              variant="success"
-              onDismiss={() => setShowSuccess(false)}
-            >
+            <AnnouncementBar variant="success" onDismiss={() => setShowSuccess(false)}>
               Operation successful!
             </AnnouncementBar>
           ) : null}
@@ -126,10 +109,7 @@ export default function AnnouncementBarPage() {
             </AnnouncementBar>
           ) : null}
           {showDanger ? (
-            <AnnouncementBar
-              variant="danger"
-              onDismiss={() => setShowDanger(false)}
-            >
+            <AnnouncementBar variant="danger" onDismiss={() => setShowDanger(false)}>
               Critical security update
             </AnnouncementBar>
           ) : null}
@@ -161,10 +141,7 @@ export default function AnnouncementBarPage() {
   This bar cannot be dismissed.
 </AnnouncementBar>`}
       >
-        <AnnouncementBar
-          dismissible={false}
-          icon={<Megaphone className="h-4 w-4" />}
-        >
+        <AnnouncementBar dismissible={false} icon={<Megaphone className="h-4 w-4" />}>
           This bar cannot be dismissed.
         </AnnouncementBar>
       </DemoSection>

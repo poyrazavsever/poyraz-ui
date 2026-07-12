@@ -10,9 +10,24 @@ import { cn } from "@/lib/utils";
 
 const samples = [
   { name: "Fade", className: "animate-poyraz-fade-in", slot: "fade", detail: "Opacity: 0 to 1" },
-  { name: "Scale", className: "animate-poyraz-scale-in", slot: "scale", detail: "Scale: 0.96 to 1" },
-  { name: "From top", className: "animate-poyraz-slide-in-from-top", slot: "top", detail: "Y: -8px to 0" },
-  { name: "From right", className: "animate-poyraz-slide-in-from-right", slot: "right", detail: "X: +8px to 0" },
+  {
+    name: "Scale",
+    className: "animate-poyraz-scale-in",
+    slot: "scale",
+    detail: "Scale: 0.96 to 1",
+  },
+  {
+    name: "From top",
+    className: "animate-poyraz-slide-in-from-top",
+    slot: "top",
+    detail: "Y: -8px to 0",
+  },
+  {
+    name: "From right",
+    className: "animate-poyraz-slide-in-from-right",
+    slot: "right",
+    detail: "X: +8px to 0",
+  },
 ] as const;
 
 const inspectStyle = {
@@ -39,7 +54,10 @@ export function MotionDemo() {
       style={speed === "inspect" ? inspectStyle : undefined}
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-md border border-border bg-surface p-1" aria-label="Preview speed">
+        <div
+          className="inline-flex rounded-md border border-border bg-surface p-1"
+          aria-label="Preview speed"
+        >
           {(["inspect", "actual"] as const).map((value) => (
             <Button
               key={value}
@@ -62,13 +80,13 @@ export function MotionDemo() {
         </label>
       </div>
 
-      <Tabs value={sample.slot} onValueChange={(value) => selectSample(samples.findIndex((item) => item.slot === value))}>
+      <Tabs
+        value={sample.slot}
+        onValueChange={(value) => selectSample(samples.findIndex((item) => item.slot === value))}
+      >
         <TabsList aria-label="Motion family">
           {samples.map((item, index) => (
-            <TabsTrigger
-              key={item.name}
-              value={item.slot}
-            >
+            <TabsTrigger key={item.name} value={item.slot}>
               {item.name}
             </TabsTrigger>
           ))}
@@ -104,7 +122,9 @@ export function MotionDemo() {
       <div className="space-y-3 border-t border-border pt-5">
         <div>
           <h3 className="text-sm font-semibold">Continuous feedback</h3>
-          <p className="mt-1 text-xs text-muted-foreground">Reserved for active progress; reduced motion stops repetition.</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Reserved for active progress; reduced motion stops repetition.
+          </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="flex min-h-20 items-center gap-4 rounded-md border border-border bg-surface px-4">
@@ -115,7 +135,10 @@ export function MotionDemo() {
             </div>
           </div>
           <div className="flex min-h-20 items-center gap-4 rounded-md border border-border bg-surface px-4">
-            <span className="size-5 rounded-full bg-primary animate-poyraz-pulse" aria-hidden="true" />
+            <span
+              className="size-5 rounded-full bg-primary animate-poyraz-pulse"
+              aria-hidden="true"
+            />
             <div>
               <p className="text-sm font-medium">Pulse</p>
               <p className="text-xs text-muted-foreground">Background activity</p>

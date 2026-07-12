@@ -8,7 +8,9 @@ export function InstallCommand({ name }: { name: string }) {
   const command = `pnpm dlx shadcn@latest add @poyraz/${name}`;
   return (
     <div className="flex min-w-0 items-center rounded-md border border-border bg-surface px-2 py-1.5">
-      <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-2 text-xs">{command}</code>
+      <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-2 text-xs">
+        {command}
+      </code>
       <button
         type="button"
         title="Copy install command"
@@ -25,4 +27,3 @@ export function InstallCommand({ name }: { name: string }) {
     </div>
   );
 }
-

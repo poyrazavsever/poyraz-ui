@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "poyraz-ui/molecules";
+import { Alert, AlertDescription, AlertTitle } from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function AlertPage() {
@@ -45,33 +41,23 @@ export default function AlertPage() {
         <div className="grid gap-3">
           <Alert>
             <AlertTitle>Default</AlertTitle>
-            <AlertDescription>
-              General information for the user.
-            </AlertDescription>
+            <AlertDescription>General information for the user.</AlertDescription>
           </Alert>
           <Alert variant="info">
             <AlertTitle>Info</AlertTitle>
-            <AlertDescription>
-              Your account has been updated with new permissions.
-            </AlertDescription>
+            <AlertDescription>Your account has been updated with new permissions.</AlertDescription>
           </Alert>
           <Alert variant="success">
             <AlertTitle>Success</AlertTitle>
-            <AlertDescription>
-              Your changes have been saved successfully.
-            </AlertDescription>
+            <AlertDescription>Your changes have been saved successfully.</AlertDescription>
           </Alert>
           <Alert variant="warning">
             <AlertTitle>Warning</AlertTitle>
-            <AlertDescription>
-              Your free trial is expiring in 3 days.
-            </AlertDescription>
+            <AlertDescription>Your free trial is expiring in 3 days.</AlertDescription>
           </Alert>
           <Alert variant="destructive">
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              Your session has expired. Please log in again.
-            </AlertDescription>
+            <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
           </Alert>
         </div>
       </DemoSection>
@@ -84,9 +70,18 @@ export default function AlertPage() {
 <Alert variant="warning" appearance="inline" dismissible />`}
       >
         <div className="grid gap-3 rounded-2xl bg-[radial-gradient(circle_at_top,var(--color-info),var(--color-background))] p-5">
-          <Alert variant="info" appearance="glass" radius="xl" motion="scale"><AlertTitle>Glass information</AlertTitle><AlertDescription>Semantic color with translucent elevation.</AlertDescription></Alert>
-          <Alert variant="success" appearance="filled" motion="fade"><AlertTitle>Published</AlertTitle><AlertDescription>The release is now available.</AlertDescription></Alert>
-          <Alert variant="warning" appearance="inline" dismissible><AlertTitle>Review required</AlertTitle><AlertDescription>Check the migration notes before continuing.</AlertDescription></Alert>
+          <Alert variant="info" appearance="glass" radius="xl" motion="scale">
+            <AlertTitle>Glass information</AlertTitle>
+            <AlertDescription>Semantic color with translucent elevation.</AlertDescription>
+          </Alert>
+          <Alert variant="success" appearance="filled" motion="fade">
+            <AlertTitle>Published</AlertTitle>
+            <AlertDescription>The release is now available.</AlertDescription>
+          </Alert>
+          <Alert variant="warning" appearance="inline" dismissible>
+            <AlertTitle>Review required</AlertTitle>
+            <AlertDescription>Check the migration notes before continuing.</AlertDescription>
+          </Alert>
         </div>
       </DemoSection>
     </ComponentPage>

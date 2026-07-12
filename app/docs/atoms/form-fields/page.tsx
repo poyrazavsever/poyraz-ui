@@ -10,10 +10,7 @@ import {
   PasswordInput,
   UrlInput,
 } from "@/components/ui/atoms/form-fields";
-import {
-  ComponentPage,
-  DemoSection,
-} from "@/components/docs/code-block";
+import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function NumberInputDemo() {
   const [value, setValue] = React.useState(5);
