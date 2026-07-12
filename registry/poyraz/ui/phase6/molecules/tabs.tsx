@@ -54,7 +54,7 @@ const TabsList = React.forwardRef<
       <TabsPrimitive.List
       ref={listRef}
       className={cn(
-        "relative inline-flex min-h-10 max-w-full items-center overflow-x-auto p-1 text-muted-foreground scrollbar-none",
+        "relative inline-flex min-h-10 max-w-full items-center overflow-x-auto overflow-y-hidden p-1 text-muted-foreground scrollbar-none",
         "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)]",
         variant === "line" && "gap-1 border-b border-border bg-transparent px-0 pb-0",
         variant === "soft" && "gap-1 bg-surface-subtle",
@@ -73,11 +73,11 @@ const TabsList = React.forwardRef<
         <span
           aria-hidden="true"
           data-slot="tabs-indicator"
-          className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-primary transition-[width,transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-spring)] motion-reduce:duration-[1ms]"
+          className="pointer-events-none absolute bottom-0 h-0.5 rounded-full bg-primary transition-[left,width,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-spring)] motion-reduce:duration-[1ms]"
           style={{
+            left: indicator.left,
             width: indicator.width,
             opacity: indicator.visible ? 1 : 0,
-            transform: `translateX(${indicator.left}px)`,
           }}
         />
       )}

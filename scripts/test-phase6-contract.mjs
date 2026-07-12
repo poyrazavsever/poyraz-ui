@@ -7,6 +7,9 @@ const read = (path) => readFile(path, "utf8");
 const requireText = (label, content, expected) => {
   if (!content.includes(expected)) failures.push(`${label}: missing ${expected}`);
 };
+const forbidText = (label, content, forbidden) => {
+  if (content.includes(forbidden)) failures.push(`${label}: contains forbidden ${forbidden}`);
+};
 
 const recipes = await read("components/ui/recipes.ts");
 for (const recipe of ["floatingSurfaceVariants", "floatingMotion", "floatingItemVariants", "overlayVariants", "overlaySurfaceVariants"]) {
@@ -21,6 +24,8 @@ for (const api of ['"click" | "hover"', "closeDelay", "itemSize", "itemRadius", 
   requireText("dropdown variants", dropdown, api);
 }
 requireText("touch fallback", dropdown, 'event.pointerType === "mouse"');
+requireText("stable hover mode", dropdown, 'modal={interaction === "hover" ? false : modal}');
+requireText("hover click guard", dropdown, "event.preventDefault()");
 requireText("collision padding", dropdown, "collisionPadding = 8");
 requireText("nested layer", dropdown, '"z-[60]');
 
@@ -46,8 +51,12 @@ const tabs = await read("components/ui/molecules/tabs.tsx");
 for (const variant of ['"line"', '"soft"', '"glass"']) requireText("tabs variant", tabs, variant);
 requireText("tabs stable indicator", tabs, 'data-slot="tabs-indicator"');
 requireText("tabs sliding indicator", tabs, "MutationObserver");
+requireText("tabs bounded indicator", tabs, "transition-[left,width,opacity]");
+forbidText("tabs scroll-safe indicator", tabs, "translateX(${indicator.left}px)");
 requireText("breadcrumb collapse semantics", await read("components/ui/molecules/breadcrumb.tsx"), "More breadcrumb items");
-for (const label of ["Go to previous page", "Go to next page"]) requireText("pagination accessible name", await read("components/ui/molecules/pagination.tsx"), label);
+const pagination = await read("components/ui/molecules/pagination.tsx");
+for (const label of ["Go to previous page", "Go to next page"]) requireText("pagination accessible name", pagination, label);
+forbidText("pagination vertical hover", pagination, "hover:-translate-y");
 
 const policy = await read("docs/v3/phase-6-interaction-and-overlay-policy.md");
 for (const policyName of ["initial focus", "Escape", "return focus", "outside interaction", "body scroll lock", "Nested overlay"]) {
