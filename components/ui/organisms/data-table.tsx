@@ -2,9 +2,6 @@
 
 import * as React from "react";
 import {
-  ArrowUpDown,
-  ArrowUp,
-  ArrowDown,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -17,8 +14,15 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/atoms/button";
 import { Input } from "@/components/ui/atoms/input";
-import { Checkbox } from "@/components/ui/atoms/checkbox";
 import { Badge } from "@/components/ui/atoms/badge";
+import {
+  DataTableCore,
+  getDataTableCellValue,
+  stringifyDataTableValue,
+  type DataTableColumnDef,
+  type DataTableState,
+  type SortDirection,
+} from "@/components/ui/organisms/data-table-core";
 
 /* ================================================================== */
 /*  DATA TABLE — Full-featured table with sort, filter, pagination     */
@@ -26,32 +30,9 @@ import { Badge } from "@/components/ui/atoms/badge";
 
 /* ── Types ────────────────────────────────────────────────────────── */
 
-export type SortDirection = "asc" | "desc" | null;
-
-export interface ColumnDef<T> {
-  /** Unique key for the column (matches object key or custom) */
-  id: string;
-  /** Column header label */
-  header: string;
-  /** Accessor function to get cell value */
-  accessorFn?: (row: T) => unknown;
-  /** Key of T to access directly */
-  accessorKey?: keyof T;
-  /** Custom cell renderer */
-  cell?: (row: T) => React.ReactNode;
-  /** Enable sorting (default: true) */
-  sortable?: boolean;
-  /** Enable filtering on this column */
-  filterable?: boolean;
-  /** Column width class */
-  className?: string;
-  /** Hidden by default */
-  hidden?: boolean;
-}
-
 export interface DataTableProps<T> {
   /** Column definitions */
-  columns: ColumnDef<T>[];
+  columns: DataTableColumnDef<T>[];
   /** Data rows */
   data: T[];
   /** Unique key extractor for each row */
@@ -76,22 +57,14 @@ export interface DataTableProps<T> {
   caption?: string;
   /** Empty state message */
   emptyMessage?: string;
-}
-
-/* ── Helpers ──────────────────────────────────────────────────────── */
-
-function getCellValue<T>(row: T, col: ColumnDef<T>): unknown {
-  if (col.accessorFn) return col.accessorFn(row);
-  if (col.accessorKey)
-    return (row as Record<string, unknown>)[col.accessorKey as string];
-  return (row as Record<string, unknown>)[col.id];
-}
-
-function stringify(val: unknown): string {
-  if (val == null) return "";
-  if (typeof val === "string") return val;
-  if (typeof val === "number" || typeof val === "boolean") return String(val);
-  return JSON.stringify(val);
+  loading?: boolean;
+  error?: React.ReactNode;
+  stickyHeader?: boolean;
+  tableMaxHeight?: string | number;
+  density?: "compact" | "default" | "spacious";
+  surface?: "solid" | "soft" | "glass";
+  radius?: "none" | "sm" | "md" | "lg" | "xl";
+  toolbar?: React.ReactNode;
 }
 
 /* ================================================================== */
@@ -113,6 +86,14 @@ function DataTableInner<T>(
     className,
     caption,
     emptyMessage = "No results found.",
+    loading = false,
+    error,
+    stickyHeader = false,
+    tableMaxHeight,
+    density = "default",
+    surface = "solid",
+    radius = "lg",
+    toolbar,
   }: DataTableProps<T>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
@@ -136,8 +117,8 @@ function DataTableInner<T>(
     const q = search.toLowerCase();
     return data.filter((row) =>
       columns.some((col) => {
-        const val = getCellValue(row, col);
-        return stringify(val).toLowerCase().includes(q);
+        const val = getDataTableCellValue(row, col);
+        return stringifyDataTableValue(val).toLowerCase().includes(q);
       }),
     );
   }, [data, search, columns]);
@@ -148,10 +129,10 @@ function DataTableInner<T>(
     const col = columns.find((c) => c.id === sortCol);
     if (!col) return filtered;
     return [...filtered].sort((a, b) => {
-      const aVal = getCellValue(a, col);
-      const bVal = getCellValue(b, col);
-      const aStr = stringify(aVal);
-      const bStr = stringify(bVal);
+      const aVal = getDataTableCellValue(a, col);
+      const bVal = getDataTableCellValue(b, col);
+      const aStr = stringifyDataTableValue(aVal);
+      const bStr = stringifyDataTableValue(bVal);
       const aNum = Number(aStr);
       const bNum = Number(bStr);
       // Numeric comparison if both are numbers
@@ -314,107 +295,30 @@ function DataTableInner<T>(
         </div>
       )}
 
+      {toolbar}
+
       {/* Table */}
-      <div className="border border-border overflow-x-auto">
-        <table className="w-full text-sm">
-          {caption && <caption className="sr-only">{caption}</caption>}
-          <thead>
-            <tr className="border-b border-border bg-muted/80">
-              {selectable && (
-                <th className="w-12 p-2.5 text-center">
-                  <Checkbox
-                    checked={allPageSelected && rows.length > 0}
-                    onCheckedChange={toggleAll}
-                    aria-label="Select all"
-                  />
-                </th>
-              )}
-              {visibleColumns.map((col) => {
-                const isSortable = col.sortable !== false;
-                const isActive = sortCol === col.id;
-                return (
-                  <th
-                    key={col.id}
-                    className={cn(
-                      "text-left p-2.5 font-bold uppercase text-[11px] tracking-widest text-muted-foreground",
-                      "whitespace-nowrap",
-                      isSortable &&
-                        "cursor-pointer select-none hover:text-foreground transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-                      col.className,
-                    )}
-                    onClick={isSortable ? () => handleSort(col.id) : undefined}
-                  >
-                    <span className="inline-flex items-center gap-1.5">
-                      {col.header}
-                      {isSortable && (
-                        <span className="text-border inline-flex transition-[color,transform,opacity] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
-                          {isActive && sortDir === "asc" ? (
-                            <ArrowUp className="h-3.5 w-3.5 text-primary animate-poyraz-scale-in" />
-                          ) : isActive && sortDir === "desc" ? (
-                            <ArrowDown className="h-3.5 w-3.5 text-primary animate-poyraz-scale-in" />
-                          ) : (
-                            <ArrowUpDown className="h-3.5 w-3.5 opacity-70 transition-opacity duration-[var(--poyraz-motion-duration-fast)]" />
-                          )}
-                        </span>
-                      )}
-                    </span>
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={visibleColumns.length + (selectable ? 1 : 0)}
-                  className="p-10 text-center text-sm text-placeholder animate-poyraz-fade-in"
-                >
-                  {emptyMessage}
-                </td>
-              </tr>
-            ) : (
-              rows.map((row, i) => {
-                const id = rowId(row, page * pageSize + i);
-                const isSelected = selectedIds.has(id);
-                return (
-                  <tr
-                    key={id}
-                    className={cn(
-                      "border-b border-accent transition-[background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-                      "hover:bg-muted/50",
-                      isSelected && "bg-primary-muted/50",
-                    )}
-                  >
-                    {selectable && (
-                      <td className="w-12 p-2.5 text-center">
-                        <Checkbox
-                          checked={isSelected}
-                          onCheckedChange={() => toggleRow(id)}
-                          aria-label={`Select row ${i + 1}`}
-                        />
-                      </td>
-                    )}
-                    {visibleColumns.map((col) => (
-                      <td
-                        key={col.id}
-                        className={cn(
-                          "p-2.5 text-secondary-foreground",
-                          col.className,
-                        )}
-                      >
-                        {col.cell
-                          ? col.cell(row)
-                          : stringify(getCellValue(row, col))}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
-      </div>
+      <DataTableCore
+        columns={visibleColumns}
+        data={rows}
+        getRowId={(row, index) => rowId(row, page * pageSize + index)}
+        state={(loading ? "loading" : error ? "error" : rows.length ? "populated" : "empty") satisfies DataTableState}
+        emptyContent={emptyMessage}
+        errorContent={error}
+        selectable={selectable}
+        selectedIds={selectedIds}
+        onToggleRow={(id) => toggleRow(id)}
+        onToggleAll={toggleAll}
+        sortColumn={sortCol}
+        sortDirection={sortDir}
+        onSort={handleSort}
+        caption={caption}
+        stickyHeader={stickyHeader}
+        maxHeight={tableMaxHeight}
+        density={density}
+        surface={surface}
+        radius={radius}
+      />
 
       {/* Pagination */}
       {pagination && sorted.length > 0 && (
@@ -494,4 +398,4 @@ const DataTable = React.forwardRef(DataTableInner) as <T>(
 ) => React.ReactElement;
 
 export { DataTable };
-export type { ColumnDef as DataTableColumnDef };
+export type { DataTableColumnDef } from "@/components/ui/organisms/data-table-core";
