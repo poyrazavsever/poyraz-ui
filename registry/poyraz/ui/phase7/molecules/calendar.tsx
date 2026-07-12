@@ -281,7 +281,7 @@ function Calendar(props: CalendarProps) {
             onClick={() => setView("months")}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px",
+              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
@@ -343,7 +343,7 @@ function Calendar(props: CalendarProps) {
             }}
             className={cn(
               "text-sm font-bold uppercase tracking-wide cursor-pointer",
-              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px",
+              "px-2 py-1 hover:bg-accent transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
               "border-b border-transparent hover:border-border-strong",
             )}
           >
