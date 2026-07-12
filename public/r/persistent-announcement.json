@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "persistent-announcement",
+  "title": "Persistent Announcement",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Persistent Announcement with container-responsive layout and semantic tokens.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/hooks/phase8/use-persistent-announcement.ts",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nexport interface UsePersistentAnnouncementOptions {\n  storage?: Pick<Storage, \"getItem\" | \"setItem\">;\n  defaultOpen?: boolean;\n}\n\nfunction usePersistentAnnouncement(\n  id: string,\n  { storage, defaultOpen = true }: UsePersistentAnnouncementOptions = {},\n) {\n  const [open, setOpenState] = React.useState(defaultOpen);\n\n  React.useEffect(() => {\n    const target = storage ?? window.localStorage;\n    setOpenState(target.getItem(id) !== \"dismissed\");\n  }, [id, storage]);\n\n  const setOpen = React.useCallback(\n    (nextOpen: boolean) => {\n      setOpenState(nextOpen);\n      const target = storage ?? window.localStorage;\n      target.setItem(id, nextOpen ? \"open\" : \"dismissed\");\n    },\n    [id, storage],\n  );\n\n  return [open, setOpen] as const;\n}\n\nexport { usePersistentAnnouncement };\n",
+      "type": "registry:hook",
+      "target": "@ui/hooks/use-persistent-announcement.ts"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-hook",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:hook"
+}

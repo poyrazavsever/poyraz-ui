@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "smart-dashboard-block",
+  "title": "Smart Dashboard Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/badge",
+    "@poyraz/button",
+    "@poyraz/card"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/smart-dashboard-block.tsx",
+      "content": "import { ArrowUpRight, MoreHorizontal } from \"lucide-react\";\n\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { Button } from \"@/components/ui/atoms/button\";\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/atoms/card\";\nimport { dashboardActivity, dashboardChart, dashboardStats } from \"@/components/ui/blocks/phase8/dashboard-data\";\n\nexport interface SmartDashboardBlockProps {\n  stats?: typeof dashboardStats;\n  activity?: typeof dashboardActivity;\n  chart?: number[];\n}\n\nfunction SmartDashboardBlock({ stats = dashboardStats, activity = dashboardActivity, chart = dashboardChart }: SmartDashboardBlockProps) {\n  return (\n    <section data-slot=\"smart-dashboard-block\" className=\"@container/dashboard min-w-0 space-y-4\">\n      <header className=\"flex flex-col gap-3 @sm/dashboard:flex-row @sm/dashboard:items-end @sm/dashboard:justify-between\"><div><Badge variant=\"glass\">Live workspace</Badge><h2 className=\"mt-2 text-xl font-semibold\">Performance overview</h2><p className=\"text-sm text-muted-foreground\">A compact view of product health.</p></div><Button variant=\"outline\" size=\"sm\">View report <ArrowUpRight className=\"size-4\" /></Button></header>\n      <div className=\"grid grid-cols-1 gap-3 @sm/dashboard:grid-cols-2 @xl/dashboard:grid-cols-4\">{stats.map(({ label, value, change, icon: Icon }) => <Card key={label} variant=\"glass\"><CardHeader className=\"p-4\"><div><CardDescription>{label}</CardDescription><CardTitle className=\"mt-1 text-xl\">{value}</CardTitle></div><span className=\"flex size-8 items-center justify-center rounded-md bg-primary-muted text-primary\"><Icon className=\"size-4\" /></span></CardHeader><CardContent className=\"px-4 pb-4\"><Badge variant=\"success\" size=\"sm\">{change}</Badge></CardContent></Card>)}</div>\n      <div className=\"grid gap-4 @lg/dashboard:grid-cols-[minmax(0,1.6fr)_minmax(15rem,1fr)]\">\n        <Card variant=\"default\"><CardHeader><div><CardTitle>Usage trend</CardTitle><CardDescription>Last 12 reporting periods</CardDescription></div><Button variant=\"ghost\" size=\"icon-sm\" aria-label=\"Chart options\"><MoreHorizontal className=\"size-4\" /></Button></CardHeader><CardContent><div className=\"flex h-44 items-end gap-1.5\" aria-label=\"Usage trend chart\">{chart.map((value, index) => <div key={index} className=\"min-w-1 flex-1 rounded-t-sm bg-primary-muted\" style={{ height: `${value}%` }}><span className=\"sr-only\">Period {index + 1}: {value}</span></div>)}</div></CardContent></Card>\n        <Card variant=\"soft\"><CardHeader><div><CardTitle>Recent activity</CardTitle><CardDescription>Workspace events</CardDescription></div></CardHeader><CardContent><ul className=\"divide-y divide-border\">{activity.map((item) => <li key={`${item.title}-${item.time}`} className=\"py-3 first:pt-0 last:pb-0\"><div className=\"flex justify-between gap-3\"><p className=\"text-sm font-medium\">{item.title}</p><time className=\"shrink-0 text-xs text-muted-foreground\">{item.time}</time></div><p className=\"mt-1 text-xs text-muted-foreground\">{item.detail}</p></li>)}</ul></CardContent></Card>\n      </div>\n    </section>\n  );\n}\n\nexport { SmartDashboardBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/smart-dashboard-block.tsx"
+    },
+    {
+      "path": "registry/poyraz/blocks/phase8/dashboard-data.ts",
+      "content": "import { Activity, CreditCard, Users, Zap } from \"lucide-react\";\n\nexport const dashboardStats = [\n  { label: \"Active users\", value: \"12,480\", change: \"+8.2%\", icon: Users },\n  { label: \"Revenue\", value: \"$84,240\", change: \"+12.4%\", icon: CreditCard },\n  { label: \"Conversion\", value: \"6.8%\", change: \"+1.1%\", icon: Activity },\n  { label: \"Automation\", value: \"1,284\", change: \"+18.7%\", icon: Zap },\n];\n\nexport const dashboardActivity = [\n  { title: \"Workspace upgraded\", detail: \"Growth plan\", time: \"2 min\" },\n  { title: \"New team member\", detail: \"Product design\", time: \"18 min\" },\n  { title: \"Report exported\", detail: \"Q3 performance\", time: \"1 hr\" },\n];\n\nexport const dashboardChart = [44, 58, 48, 72, 64, 82, 76, 91, 84, 96, 88, 100];\n",
+      "type": "registry:file",
+      "target": "@ui/blocks/phase8/dashboard-data.ts"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

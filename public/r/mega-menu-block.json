@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mega-menu-block",
+  "title": "Mega Menu Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Mega Menu Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/navbar"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/mega-menu-block.tsx",
+      "content": "\"use client\";\n\nimport { Boxes, Code2, LayoutDashboard, Sparkles } from \"lucide-react\";\n\nimport {\n  Navbar,\n  NavbarBrand,\n  NavbarDropdown,\n  NavbarLinks,\n  NavbarMain,\n  NavbarMegaMenu,\n  NavbarMegaMenuItem,\n  NavbarMobileDropdown,\n  NavbarMobileMenu,\n  NavbarMobileToggle,\n} from \"@/components/ui/organisms/navbar\";\n\nconst products = [\n  { title: \"UI components\", description: \"Accessible building blocks\", icon: Boxes },\n  { title: \"Application blocks\", description: \"Responsive product layouts\", icon: LayoutDashboard },\n  { title: \"Source registry\", description: \"Own and adapt every file\", icon: Code2 },\n];\n\nfunction MegaMenuBlock() {\n  return (\n    <Navbar data-slot=\"mega-menu-block\" variant=\"glass\" className=\"rounded-lg\">\n      <NavbarMain>\n        <NavbarBrand href=\"#\" className=\"font-semibold\">\n          <Sparkles className=\"size-5 text-primary\" /> Poyraz UI\n        </NavbarBrand>\n        <NavbarLinks aria-label=\"Product navigation\">\n          <NavbarDropdown label=\"Products\">\n            <NavbarMegaMenu layout=\"full\">\n              {products.map(({ title, description, icon: Icon }) => (\n                <NavbarMegaMenuItem key={title} href=\"#\" title={title} description={description}><Icon className=\"mt-2 size-4 text-primary\" /></NavbarMegaMenuItem>\n              ))}\n            </NavbarMegaMenu>\n          </NavbarDropdown>\n        </NavbarLinks>\n        <NavbarMobileToggle />\n      </NavbarMain>\n      <NavbarMobileMenu>\n        <NavbarMobileDropdown label=\"Products\">\n          {products.map(({ title }) => <a key={title} href=\"#\" className=\"block px-3 py-2 text-sm\">{title}</a>)}\n        </NavbarMobileDropdown>\n      </NavbarMobileMenu>\n    </Navbar>\n  );\n}\n\nexport { MegaMenuBlock, products as megaMenuProducts };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/mega-menu-block.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

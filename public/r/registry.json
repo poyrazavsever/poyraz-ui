@@ -412,15 +412,26 @@
       "css": {
         ".poyraz-button": {
           "--poyraz-button-effect-color": "var(--primary-hover)",
-          "--poyraz-button-spinner-color": "currentColor"
+          "--poyraz-button-spinner-color": "currentColor",
+          "--poyraz-button-shine-color": "rgb(255 255 255 / 0.62)"
         },
         ".poyraz-button[data-variant=\"default\"], .poyraz-button[data-variant=\"destructive\"]": {
           "--poyraz-button-effect-color": "rgb(255 255 255 / 0.16)"
         },
         ".poyraz-button-glass": {
+          "--poyraz-button-glass-border-hover": "var(--border-strong)",
+          "--poyraz-button-shine-color": "color-mix(in srgb, var(--primary) 34%, transparent)",
           "background-color": "var(--glass-background)",
           "backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))",
           "-webkit-backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))"
+        },
+        ".poyraz-button-glass:hover": {
+          "border-color": "var(--poyraz-button-glass-border-hover)",
+          "background-color": "var(--glass-background-strong)"
+        },
+        ".dark .poyraz-button-glass, [data-poyraz-theme=\"dark\"] .poyraz-button-glass": {
+          "--poyraz-button-glass-border-hover": "var(--glass-border)",
+          "--poyraz-button-shine-color": "rgb(255 255 255 / 0.62)"
         },
         ".poyraz-button > [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
           "position": "relative",
@@ -456,7 +467,7 @@
           "opacity": "1",
           "visibility": "visible"
         },
-        ".poyraz-button[data-effect=\"shine\"]::before, .poyraz-button[data-effect=\"fill\"]::before, .poyraz-button[data-effect=\"border-draw\"]::before": {
+        ".poyraz-button[data-effect=\"shine\"]::before, .poyraz-button[data-effect=\"fill\"]::before, .poyraz-button[data-effect=\"border-draw\"]::after": {
           "content": "\"\"",
           "position": "absolute",
           "z-index": "0",
@@ -467,7 +478,7 @@
           "bottom": "-60%",
           "left": "-45%",
           "width": "28%",
-          "background": "linear-gradient(90deg, transparent, rgb(255 255 255 / 0.62), transparent)",
+          "background": "linear-gradient(90deg, transparent, var(--poyraz-button-shine-color), transparent)",
           "filter": "blur(1px)",
           "transform": "translateX(-180%) skewX(-18deg)"
         },
@@ -475,38 +486,52 @@
           "animation": "poyraz-button-shine var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out)"
         },
         ".poyraz-button[data-effect=\"fill\"]::before": {
-          "inset": "0",
+          "inset": "-1px",
           "background": "var(--poyraz-button-effect-color)",
-          "transform": "scaleX(0)",
-          "transform-origin": "left center",
-          "transition": "transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-out)"
+          "transform": "translate3d(-101%, 0, 0)",
+          "transition": "transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard)",
+          "will-change": "transform"
+        },
+        ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"left\"]::before": {
+          "transform": "translate3d(101%, 0, 0)"
         },
         ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"up\"]::before": {
-          "transform": "scaleY(0)",
-          "transform-origin": "center bottom"
+          "transform": "translate3d(0, 101%, 0)"
+        },
+        ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"down\"]::before": {
+          "transform": "translate3d(0, -101%, 0)"
         },
         ".poyraz-button[data-effect=\"fill\"]:hover::before": {
-          "transform": "scaleX(1)"
+          "transform": "translate3d(0, 0, 0)"
         },
-        ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"up\"]:hover::before": {
-          "transform": "scaleY(1)"
+        ".poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] > [data-slot=\"button-content\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-content\"] > svg, .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"label\"] [data-slot=\"button-label\"]": {
+          "animation": "poyraz-button-swap var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard)",
+          "will-change": "transform, opacity"
         },
-        ".poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-content\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-label\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-content\"] > svg, .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"label\"] [data-slot=\"button-label\"]": {
-          "animation": "poyraz-button-swap var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out)"
-        },
-        ".poyraz-button[data-effect=\"border-draw\"]::before": {
+        ".poyraz-button[data-effect=\"border-draw\"]::after": {
+          "--poyraz-button-border-progress": "0deg",
           "inset": "-1px",
-          "border": "2px solid currentColor",
           "border-radius": "inherit",
+          "padding": "2px",
+          "background": "conic-gradient(from -90deg, currentColor 0deg, currentColor var(--poyraz-button-border-progress), transparent var(--poyraz-button-border-progress), transparent 360deg)",
+          "-webkit-mask": "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          "mask": "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          "-webkit-mask-composite": "xor",
+          "mask-composite": "exclude",
           "opacity": "0"
         },
-        ".poyraz-button[data-effect=\"border-draw\"]:hover::before": {
-          "animation": "poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out) forwards"
+        ".poyraz-button[data-effect=\"border-draw\"]:hover::after": {
+          "animation": "poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) linear forwards"
         },
         "@keyframes poyraz-button-spin": {
           "to": {
             "transform": "rotate(360deg)"
           }
+        },
+        "@property --poyraz-button-border-progress": {
+          "syntax": "\"<angle>\"",
+          "inherits": "false",
+          "initial-value": "0deg"
         },
         "@keyframes poyraz-button-shine": {
           "from": {
@@ -519,52 +544,38 @@
         "@keyframes poyraz-button-swap": {
           "0%": {
             "opacity": "1",
-            "transform": "translateY(0)"
+            "transform": "translate3d(0, 0, 0)"
           },
-          "32%": {
-            "opacity": "1",
-            "transform": "translateY(35%)"
-          },
-          "49%": {
+          "45%": {
             "opacity": "0",
-            "transform": "translateY(115%)"
+            "transform": "translate3d(0, 105%, 0)"
           },
-          "50%": {
+          "55%": {
             "opacity": "0",
-            "transform": "translateY(-115%)"
-          },
-          "68%": {
-            "opacity": "1",
-            "transform": "translateY(-35%)"
+            "transform": "translate3d(0, -105%, 0)"
           },
           "100%": {
             "opacity": "1",
-            "transform": "translateY(0)"
+            "transform": "translate3d(0, 0, 0)"
           }
         },
         "@keyframes poyraz-button-border-draw": {
           "0%": {
-            "opacity": "1",
-            "clip-path": "polygon(0 0, 0 0, 0 0, 0 0)"
-          },
-          "35%": {
-            "clip-path": "polygon(0 0, 100% 0, 100% 0, 0 0)"
-          },
-          "65%": {
-            "clip-path": "polygon(0 0, 100% 0, 100% 100%, 100% 100%)"
+            "--poyraz-button-border-progress": "0deg",
+            "opacity": "0"
           },
           "100%": {
-            "opacity": "1",
-            "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0 100%)"
+            "--poyraz-button-border-progress": "360deg",
+            "opacity": "1"
           }
         },
         "@media (prefers-reduced-motion: reduce)": {
-          ".poyraz-button, .poyraz-button::before, .poyraz-button [data-slot=\"button-spinner\"] svg, .poyraz-button [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
+          ".poyraz-button, .poyraz-button::before, .poyraz-button::after, .poyraz-button [data-slot=\"button-spinner\"] svg, .poyraz-button [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
             "animation": "none !important",
             "transition-duration": "1ms !important"
           }
         },
-        "[data-poyraz-motion=\"reduced\"] .poyraz-button, [data-poyraz-motion=\"reduced\"] .poyraz-button::before, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-spinner\"] svg, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-content\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-label\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-icon\"]": {
+        "[data-poyraz-motion=\"reduced\"] .poyraz-button, [data-poyraz-motion=\"reduced\"] .poyraz-button::before, [data-poyraz-motion=\"reduced\"] .poyraz-button::after, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-spinner\"] svg, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-content\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-label\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-icon\"]": {
           "animation": "none !important",
           "transition-duration": "1ms !important"
         }
@@ -2015,6 +2026,557 @@
       "meta": {
         "category": "phase-7-card-block",
         "phase": "beta"
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-provider",
+      "title": "Sidebar Provider",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Sidebar Provider with container-responsive layout and semantic tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/sidebar-provider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/sidebar-provider.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar",
+      "title": "Navbar",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Navbar with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "@radix-ui/react-navigation-menu@^1.2.14",
+        "@radix-ui/react-popover@^1.1.15",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/navbar-auto-hide"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/navbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/navbar.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Sidebar with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/sidebar-provider"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/sidebar.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Footer with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/footer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/footer.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-newsletter",
+      "title": "Footer Newsletter",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Footer Newsletter with container-responsive layout and semantic tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/input"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/footer-newsletter.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/footer-newsletter.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "announcement-bar",
+      "title": "Announcement Bar",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Announcement Bar with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/ui/phase8/announcement-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/organisms/announcement-bar.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-organism",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-auto-hide",
+      "title": "Navbar Auto Hide",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Navbar Auto Hide with container-responsive layout and semantic tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/hooks/phase8/use-navbar-auto-hide.ts",
+          "type": "registry:hook",
+          "target": "@ui/hooks/use-navbar-auto-hide.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-hook",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:hook"
+    },
+    {
+      "name": "persistent-announcement",
+      "title": "Persistent Announcement",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Persistent Announcement with container-responsive layout and semantic tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/hooks/phase8/use-persistent-announcement.ts",
+          "type": "registry:hook",
+          "target": "@ui/hooks/use-persistent-announcement.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-hook",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:hook"
+    },
+    {
+      "name": "navigation-block",
+      "title": "Navigation Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Navigation Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/navigation-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/navigation-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "mobile-navigation-block",
+      "title": "Mobile Navigation Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Mobile Navigation Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/sheet",
+        "@poyraz/navigation-block"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/mobile-navigation-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mobile-navigation-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "mega-menu-block",
+      "title": "Mega Menu Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Mega Menu Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/mega-menu-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mega-menu-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "mobile-sidebar-block",
+      "title": "Mobile Sidebar Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Mobile Sidebar Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/sheet",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/mobile-sidebar-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mobile-sidebar-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-blocks",
+      "title": "Footer Blocks",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Footer Blocks with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/footer",
+        "@poyraz/footer-newsletter"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/footer-blocks.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/footer-blocks.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-shell-block",
+      "title": "Dashboard Shell Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Dashboard Shell Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/avatar",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card",
+        "@poyraz/input",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/dashboard-shell-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/dashboard-shell-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "glass-app-shell-block",
+      "title": "Glass App Shell Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Glass App Shell Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/navigation-block",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/glass-app-shell-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/glass-app-shell-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-card-block",
+      "title": "Auth Card Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Auth Card Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/card",
+        "@poyraz/input",
+        "@poyraz/label"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/auth-card-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/auth-card-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-block",
+      "title": "Pricing Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Pricing Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/pricing-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/pricing-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "brand-hero-block",
+      "title": "Brand Hero Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Brand Hero Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/brand-hero-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/brand-hero-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "smart-dashboard-block",
+      "title": "Smart Dashboard Block",
+      "author": "Poyraz Avsever",
+      "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card"
+      ],
+      "files": [
+        {
+          "path": "registry/poyraz/blocks/phase8/smart-dashboard-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/smart-dashboard-block.tsx"
+        },
+        {
+          "path": "registry/poyraz/blocks/phase8/dashboard-data.ts",
+          "type": "registry:file",
+          "target": "@ui/blocks/phase8/dashboard-data.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
       },
       "type": "registry:block"
     }

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-block",
+  "title": "Pricing Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Pricing Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/badge",
+    "@poyraz/button",
+    "@poyraz/card"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/pricing-block.tsx",
+      "content": "import { Check } from \"lucide-react\";\n\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { Button } from \"@/components/ui/atoms/button\";\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/atoms/card\";\n\nexport interface PricingPlan {\n  name: string;\n  price: string;\n  description: string;\n  features: string[];\n  featured?: boolean;\n}\n\nexport const pricingPlans: PricingPlan[] = [\n  { name: \"Starter\", price: \"$0\", description: \"For personal projects.\", features: [\"3 projects\", \"Community support\", \"Core blocks\"] },\n  { name: \"Pro\", price: \"$29\", description: \"For product teams.\", features: [\"Unlimited projects\", \"Priority support\", \"All registry blocks\"], featured: true },\n  { name: \"Scale\", price: \"$99\", description: \"For organizations.\", features: [\"Everything in Pro\", \"SSO\", \"Design system review\"] },\n];\n\nfunction PricingBlock({ plans = pricingPlans }: { plans?: PricingPlan[] }) {\n  return (\n    <section data-slot=\"pricing-block\" className=\"@container/pricing px-3 py-10 @sm/pricing:px-6\">\n      <div className=\"mx-auto max-w-5xl\">\n        <div className=\"mx-auto mb-8 max-w-xl text-center\"><Badge variant=\"outline\">Pricing</Badge><h2 className=\"mt-3 text-2xl font-semibold\">Plans that grow with your product</h2><p className=\"mt-2 text-sm text-muted-foreground\">Clear limits, source-owned components, no runtime lock-in.</p></div>\n        <div className=\"grid gap-4 @lg/pricing:grid-cols-3\">\n          {plans.map((plan) => (\n            <Card key={plan.name} variant={plan.featured ? \"glass\" : \"default\"} className={plan.featured ? \"border-primary/30\" : undefined}>\n              <CardHeader><div><CardTitle>{plan.name}</CardTitle><CardDescription>{plan.description}</CardDescription></div>{plan.featured && <Badge>Popular</Badge>}</CardHeader>\n              <CardContent className=\"flex-1\"><p className=\"mb-5 text-3xl font-semibold\">{plan.price}<span className=\"text-sm font-normal text-muted-foreground\"> / month</span></p><ul className=\"space-y-2\">{plan.features.map((feature) => <li key={feature} className=\"flex gap-2 text-sm\"><Check className=\"mt-0.5 size-4 shrink-0 text-success-icon\" />{feature}</li>)}</ul></CardContent>\n              <CardFooter><Button variant={plan.featured ? \"default\" : \"outline\"} className=\"w-full\">Choose {plan.name}</Button></CardFooter>\n            </Card>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n\nexport { PricingBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/pricing-block.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}
