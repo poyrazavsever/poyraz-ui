@@ -127,7 +127,7 @@ const FooterLink = React.forwardRef<
     className={cn(
       "text-sm text-muted-foreground",
       "hover:text-primary hover:underline",
-      "transition-[color,text-decoration-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5",
+      "transition-[color,text-decoration-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}

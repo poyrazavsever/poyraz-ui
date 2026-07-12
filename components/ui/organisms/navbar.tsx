@@ -517,7 +517,7 @@ const NavbarMegaMenuItem = React.forwardRef<
         "block select-none p-3",
         "border border-transparent",
         "rounded-sm transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-        "hover:bg-muted hover:border-border hover:translate-x-0.5",
+        "hover:bg-muted hover:border-border",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
@@ -1005,7 +1005,7 @@ const NavbarPanelDropdownItem = React.forwardRef<
     className={cn(
       "flex items-start gap-3 p-2.5",
       "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-      "hover:bg-muted hover:translate-x-0.5",
+      "hover:bg-muted",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       className,
     )}
@@ -1211,7 +1211,7 @@ const NavbarMobileDrillTrigger = React.forwardRef<
     >
       {children}
       <ChevronRight
-        className="h-4 w-4 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5"
+        className="h-4 w-4 text-placeholder"
         aria-hidden
       />
     </button>

@@ -475,7 +475,6 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
               "opacity-0 pointer-events-none",
               "group-hover:opacity-100 group-focus-within:opacity-100",
               "transition-[opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-              "group-hover:translate-x-1",
             )}
           >
             {children}

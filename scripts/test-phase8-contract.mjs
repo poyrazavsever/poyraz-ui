@@ -23,7 +23,7 @@ requireText("sidebar provider split", organisms.sidebar, "sidebar-provider");
 requireText("sidebar provider state", await read("components/ui/organisms/sidebar-provider.tsx"), "SidebarContext.Provider");
 forbid("footer server boundary", organisms.footer, /useState|"use client"/, "interactive newsletter state remains in Footer core");
 for (const expected of ["\"use client\"", "data-slot=\"footer-newsletter\"", "@sm/footer:flex-row"]) requireText("footer newsletter", await read("components/ui/organisms/footer-newsletter.tsx"), expected);
-for (const expected of ["bg-info", "bg-warning", "open?: boolean", "onOpenChange", "grid-rows-[0fr]", "data-state={open"]) requireText("announcement", organisms.announcement, expected);
+for (const expected of ["bg-info", "bg-warning", "open?: boolean", "onOpenChange", "grid-rows-[0fr]", "data-state={open", "finishExit", "-translate-y-2", "grid-template-rows"]) requireText("announcement", organisms.announcement, expected);
 for (const expected of ["const panels =", "const mainContent =", "{panels}", "data-slot=\"navbar-mobile-drill-back\"", "pointer-events-none"]) requireText("navbar drill-down", organisms.navbar, expected);
 for (const expected of ["Poyraz Inter", "Poyraz Agbalumo", "inter-latin-ext.woff2", "font-display: swap"]) requireText("docs self-hosted fonts", await read("app/globals.css"), expected);
 forbid("docs font network", await read("app/layout.tsx"), /next\/font\/google/, "Google font runtime dependency found");

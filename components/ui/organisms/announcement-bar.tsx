@@ -16,7 +16,7 @@ const announcementBarVariants = cva(
     "text-sm font-medium tracking-wide",
     "border-b",
     "animate-poyraz-slide-in-from-top",
-    "transition-[color,background-color,border-color,opacity,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+    "transition-[color,background-color,border-color,grid-template-rows,opacity,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
   ].join(" "),
   {
     variants: {
@@ -76,17 +76,34 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
     const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
     const open = controlledOpen ?? internalOpen;
     const [present, setPresent] = React.useState(open);
+    const dismissPending = React.useRef(false);
+
+    const finishExit = React.useCallback(() => {
+      setPresent(false);
+      if (dismissPending.current) {
+        dismissPending.current = false;
+        onDismiss?.();
+      }
+    }, [onDismiss]);
 
     React.useEffect(() => {
-      if (open) setPresent(true);
-    }, [open]);
+      if (open) {
+        dismissPending.current = false;
+        setPresent(true);
+        return;
+      }
+      if (!present) return;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const timer = window.setTimeout(finishExit, reducedMotion ? 0 : 240);
+      return () => window.clearTimeout(timer);
+    }, [finishExit, open, present]);
 
     if (!present) return null;
 
     const handleDismiss = () => {
+      dismissPending.current = true;
       if (controlledOpen === undefined) setInternalOpen(false);
       onOpenChange?.(false);
-      onDismiss?.();
     };
 
     return (
@@ -98,12 +115,12 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
         data-state={open ? "open" : "closed"}
         onTransitionEnd={(event) => {
           onTransitionEnd?.(event);
-          if (!open && event.currentTarget === event.target) setPresent(false);
+          if (!open && event.currentTarget === event.target && event.propertyName === "opacity") finishExit();
         }}
         className={cn(
           announcementBarVariants({ variant }),
           "grid motion-reduce:transition-none",
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+          open ? "grid-rows-[1fr] translate-y-0 opacity-100" : "grid-rows-[0fr] -translate-y-2 opacity-0",
           className,
         )}
         {...props}
@@ -111,7 +128,7 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
         <div data-slot="announcement-bar-content" className="@container/announcement mx-auto flex min-h-0 w-full max-w-5xl flex-wrap items-center justify-center gap-x-3 gap-y-1 overflow-hidden px-10 py-2 @sm/announcement:flex-nowrap">
           {icon && <span data-slot="announcement-bar-icon" className="shrink-0 animate-poyraz-scale-in motion-reduce:animate-none">{icon}</span>}
           <span data-slot="announcement-bar-message" className="min-w-0 text-center text-xs @sm/announcement:text-sm">{children}</span>
-          {action && <span data-slot="announcement-bar-action" className="shrink-0 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:transition-none hover:translate-x-0.5">{action}</span>}
+          {action && <span data-slot="announcement-bar-action" className="shrink-0">{action}</span>}
           {dismissible && (
             <button
               type="button"
