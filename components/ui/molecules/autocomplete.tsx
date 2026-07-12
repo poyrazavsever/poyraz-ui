@@ -284,7 +284,7 @@ function Autocomplete({
           size === "sm" && "min-h-8 py-1",
           size === "md" && "min-h-9 py-1.5",
           size === "lg" && "min-h-11 py-2",
-          "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+          "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
           open && "border-primary ring-2 ring-ring ring-offset-2",
           disabled && "opacity-40 cursor-not-allowed",
         )}
@@ -370,7 +370,7 @@ function Autocomplete({
         >
           {resolvedState === "loading" && (
             <div role="status" aria-live="polite" className="flex items-center justify-center gap-2 py-6 text-sm text-muted-foreground animate-poyraz-fade-in">
-              <div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin motion-reduce:animate-none" />
+              <div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-poyraz-spin" />
               {loadingText}
             </div>
           )}

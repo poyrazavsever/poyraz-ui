@@ -246,7 +246,7 @@ function Calendar(props: CalendarProps) {
             size === "default" && "h-8 w-8",
             size === "spacious" && "h-10 w-10",
             "flex items-center justify-center",
-            "transition-all duration-150 ease-out active:scale-95",
+            "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[var(--poyraz-motion-scale-press-small)]",
             "hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             today && !sel && !rangeMiddle && "ring-1 ring-inset ring-primary/45 text-primary",
@@ -380,7 +380,7 @@ function Calendar(props: CalendarProps) {
                 className={cn(
                   "h-8 text-sm font-medium cursor-pointer",
                   "flex items-center justify-center",
-                  "transition-all duration-150 ease-out active:scale-95",
+                  "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[var(--poyraz-motion-scale-press-small)]",
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
@@ -445,7 +445,7 @@ function Calendar(props: CalendarProps) {
                 className={cn(
                   "h-8 text-sm font-medium cursor-pointer",
                   "flex items-center justify-center",
-                  "transition-all duration-150 ease-out active:scale-95",
+                  "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[var(--poyraz-motion-scale-press-small)]",
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
