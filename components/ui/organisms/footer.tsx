@@ -376,7 +376,7 @@ const FooterBadge = React.forwardRef<
       "text-[10px] font-bold uppercase tracking-wider",
       "border border-border rounded-sm",
       "text-muted-foreground bg-muted",
-      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5",
+      "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
     {...props}
@@ -474,7 +474,7 @@ const FooterAppLink = React.forwardRef<
       "border border-border-strong rounded-sm",
       "text-xs font-medium text-secondary-foreground",
       "hover:bg-muted hover:border-input",
-      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-0.5 active:scale-[0.98]",
+      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[0.98]",
       className,
     )}
     {...props}
