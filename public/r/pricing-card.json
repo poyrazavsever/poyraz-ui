@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-card",
+  "title": "Pricing Card",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass pricing-card with semantic states and composable variants.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/card",
+    "@poyraz/badge"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/blocks/card-templates/pricing-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Check } from \"lucide-react\";\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardHeading, CardTitle, type CardProps } from \"@/components/ui/atoms/card\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PricingCardProps extends Omit<CardProps, \"title\"> { name?: string; title?: string; price: string; period?: string; description?: string; features: string[]; action?: React.ReactNode; popular?: boolean; highlighted?: boolean; }\nconst PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(({ action, className, description, features, highlighted, name, period, popular, price, title, ...props }, ref) => {\n  const featured = popular ?? highlighted ?? false;\n  return <Card ref={ref} variant={featured ? \"interactive\" : \"default\"} className={cn(featured && \"border-primary/35 shadow-md\", className)} {...props}><CardHeader><CardHeading><div className=\"flex items-center gap-2\"><CardTitle>{name ?? title ?? \"Plan\"}</CardTitle>{featured && <Badge>Popular</Badge>}</div><div className=\"mt-3 flex items-baseline gap-1\"><span className=\"text-3xl font-bold\">{price}</span>{period && <span className=\"text-xs text-muted-foreground\">/{period}</span>}</div>{description && <CardDescription>{description}</CardDescription>}</CardHeading></CardHeader><CardContent><ul className=\"space-y-2.5\">{features.map((feature) => <li key={feature} className=\"flex items-start gap-2 text-sm\"><Check className=\"mt-0.5 size-4 shrink-0 text-success-icon\" />{feature}</li>)}</ul></CardContent>{action && <CardFooter>{action}</CardFooter>}</Card>;\n});\nPricingCard.displayName = \"PricingCard\";\nexport { PricingCard };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/card-templates/pricing-card.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-card-block",
+    "phase": "beta"
+  },
+  "type": "registry:block"
+}
