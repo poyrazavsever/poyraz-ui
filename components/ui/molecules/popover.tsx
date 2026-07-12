@@ -4,6 +4,11 @@ import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 import { cn } from "@/lib/utils";
+import {
+  floatingMotion,
+  floatingSurfaceVariants,
+  type FloatingSurfaceProps,
+} from "@/components/ui/recipes";
 
 const Popover = PopoverPrimitive.Root;
 
@@ -11,20 +16,29 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &
+    FloatingSurfaceProps & { padding?: "none" | "sm" | "md" | "lg" }
+>(({ className, align = "center", sideOffset = 6, collisionPadding = 8, surface, radius, padding = "md", style, ...props }, ref) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
       ref={ref}
       align={align}
       sideOffset={sideOffset}
+      collisionPadding={collisionPadding}
+      style={{
+        "--poyraz-floating-transform-origin":
+          "var(--radix-popover-content-transform-origin)",
+        "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
+        ...style,
+      } as React.CSSProperties}
       className={cn(
-        "z-50 w-72 border border-border bg-background p-4 text-foreground shadow-none outline-none",
-        "origin-[var(--radix-popover-content-transform-origin)]",
-        "data-[state=open]:animate-in data-[state=closed]:animate-out",
-        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-        "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
-        "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        floatingSurfaceVariants({ surface, radius }),
+        floatingMotion,
+        "z-50 w-72",
+        padding === "none" && "p-0",
+        padding === "sm" && "p-2",
+        padding === "md" && "p-4",
+        padding === "lg" && "p-6",
         className,
       )}
       {...props}
