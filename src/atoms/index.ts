@@ -22,6 +22,7 @@ export {
   Card,
   CardImage,
   CardHeader,
+  CardHeading,
   CardFooter,
   CardAction,
   CardTitle,
@@ -59,11 +60,14 @@ export {
 } from "@/components/ui/atoms/typography";
 export {
   NumberInput,
+  MaskedInput,
   SearchInput,
   PhoneInput,
   PasswordInput,
   UrlInput,
+  applyInputMask,
 } from "@/components/ui/atoms/form-fields";
+export type { MaskedInputProps, PhoneInputProps, UrlInputProps } from "@/components/ui/atoms/form-fields";
 export {
   PatternDots,
   PatternGrid,
