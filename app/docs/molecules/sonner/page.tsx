@@ -8,7 +8,7 @@ export default function SonnerPage() {
   return (
     <ComponentPage
       name="Sonner (Toast)"
-      description="Toast notification system powered by Sonner. Drop-in replacement for traditional toasts with brutalist styling."
+      description="Semantic animated toast system powered by Sonner, with solid, soft and glass surfaces plus native promise/swipe states."
       importCode={`import { Toaster } from "poyraz-ui/molecules";
 import { toast } from "sonner";
 
@@ -116,6 +116,7 @@ toast.info("A new update is available.");`}
     loading: "Loading...",
     success: "Data loaded!",
     error: "Failed to load data.",
+    description: "Syncing the latest workspace data.",
   },
 );`}
       >
@@ -126,6 +127,7 @@ toast.info("A new update is available.");`}
               loading: "Loading...",
               success: "Data loaded!",
               error: "Failed to load data.",
+              description: "Syncing the latest workspace data.",
             })
           }
         >
