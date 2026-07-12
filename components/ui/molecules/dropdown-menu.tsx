@@ -43,6 +43,7 @@ function DropdownMenu({
   open: controlledOpen,
   defaultOpen,
   onOpenChange,
+  modal,
   children,
   ...props
 }: DropdownMenuProps) {
@@ -90,6 +91,7 @@ function DropdownMenu({
       <DropdownMenuPrimitive.Root
         open={open}
         onOpenChange={setOpen}
+        modal={interaction === "hover" ? false : modal}
         {...props}
       >
         {children}
@@ -101,7 +103,7 @@ function DropdownMenu({
 const DropdownMenuTrigger = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger>
->(({ onPointerEnter, onPointerLeave, ...props }, ref) => {
+>(({ onPointerDown, onPointerEnter, onPointerLeave, ...props }, ref) => {
   const hover = React.useContext(DropdownMenuContext);
   return (
     <DropdownMenuPrimitive.Trigger
@@ -113,6 +115,12 @@ const DropdownMenuTrigger = React.forwardRef<
       onPointerLeave={(event) => {
         hover.scheduleClose(event);
         onPointerLeave?.(event);
+      }}
+      onPointerDown={(event) => {
+        if (hover.interaction === "hover" && event.pointerType === "mouse") {
+          event.preventDefault();
+        }
+        onPointerDown?.(event);
       }}
       {...props}
     />

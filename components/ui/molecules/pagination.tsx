@@ -57,7 +57,7 @@ const PaginationLink = ({
         size,
         radius: "md",
       }),
-      "transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px active:translate-y-0",
+      "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       isActive && "border border-primary/25 bg-primary-muted text-primary shadow-sm hover:border-primary/35 hover:bg-primary-muted hover:text-primary",
       className,
     )}
