@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const fieldVariants = cva(
   "flex w-full border text-sm text-foreground outline-none transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] placeholder:text-placeholder focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/20 disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:opacity-100 aria-invalid:border-invalid aria-invalid:ring-[3px] aria-invalid:ring-invalid/15",
@@ -7,7 +7,7 @@ const fieldVariants = cva(
       variant: {
         default: "border-input bg-surface shadow-xs",
         soft: "border-transparent bg-surface-subtle shadow-none hover:border-border-strong",
-        glass: "poyraz-glass-field border-glass-border-outer bg-glass text-foreground shadow-sm backdrop-blur-glass",
+        glass: "poyraz-glass-field border-glass-border-outer bg-glass !text-foreground placeholder:!text-muted-foreground caret-foreground shadow-sm backdrop-blur-glass",
       },
       radius: {
         none: "rounded-none",
@@ -22,4 +22,122 @@ const fieldVariants = cva(
   },
 );
 
-export { fieldVariants };
+const floatingSurfaceVariants = cva(
+  "poyraz-floating-surface overflow-hidden border text-foreground outline-none transition-[background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)]",
+  {
+    variants: {
+      surface: {
+        solid: "border-border bg-background shadow-lg",
+        soft: "border-border/80 bg-surface-subtle shadow-md",
+        glass:
+          "border-glass-border-outer bg-glass shadow-lg backdrop-blur-glass supports-[backdrop-filter]:bg-glass",
+      },
+      radius: {
+        none: "rounded-none",
+        sm: "rounded-sm",
+        md: "rounded-md",
+        lg: "rounded-lg",
+        xl: "rounded-xl",
+      },
+    },
+    defaultVariants: { surface: "solid", radius: "lg" },
+  },
+);
+
+const floatingMotion = [
+  "origin-[var(--poyraz-floating-transform-origin)]",
+  "data-[state=open]:animate-in data-[state=closed]:animate-out",
+  "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+  "data-[state=open]:[--poyraz-enter-scale:0.98] data-[state=closed]:[--poyraz-exit-scale:0.98]",
+  "data-[side=bottom]:[--poyraz-enter-translate-y:calc(var(--poyraz-floating-slide)*-1)]",
+  "data-[side=left]:[--poyraz-enter-translate-x:var(--poyraz-floating-slide)]",
+  "data-[side=right]:[--poyraz-enter-translate-x:calc(var(--poyraz-floating-slide)*-1)]",
+  "data-[side=top]:[--poyraz-enter-translate-y:var(--poyraz-floating-slide)]",
+  "motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-exit-scale:1] motion-reduce:[--poyraz-enter-translate-x:0] motion-reduce:[--poyraz-enter-translate-y:0]",
+].join(" ");
+
+const floatingItemVariants = cva(
+  "relative flex w-full select-none items-center outline-none transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] data-[disabled]:pointer-events-none data-[disabled]:opacity-45 focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+  {
+    variants: {
+      size: {
+        sm: "min-h-8 gap-2 px-2 py-1 text-xs",
+        md: "min-h-9 gap-2.5 px-2.5 py-1.5 text-sm",
+        lg: "min-h-11 gap-3 px-3 py-2 text-sm",
+      },
+      radius: {
+        none: "rounded-none",
+        sm: "rounded-sm",
+        md: "rounded-md",
+        lg: "rounded-lg",
+      },
+      inset: { true: "pl-8", false: null },
+      interactiveMotion: {
+        none: null,
+        shift: "focus:translate-x-0.5 data-[highlighted]:translate-x-0.5",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      radius: "md",
+      inset: false,
+      interactiveMotion: "shift",
+    },
+  },
+);
+
+const overlayVariants = cva(
+  "fixed inset-0 z-50 backdrop-blur-[var(--poyraz-overlay-blur,6px)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 motion-reduce:duration-100",
+  {
+    variants: {
+      tone: {
+        dim: "bg-overlay",
+        soft: "bg-overlay/80",
+        glass: "bg-overlay-light/80 backdrop-saturate-150",
+      },
+    },
+    defaultVariants: { tone: "dim" },
+  },
+);
+
+const overlaySurfaceVariants = cva(
+  "border text-foreground outline-none",
+  {
+    variants: {
+      surface: {
+        solid: "border-border bg-background shadow-xl",
+        soft: "border-border/80 bg-surface-subtle shadow-xl",
+        glass:
+          "border-glass-border-outer bg-glass shadow-xl backdrop-blur-glass supports-[backdrop-filter]:bg-glass",
+      },
+      radius: {
+        none: "rounded-none",
+        sm: "rounded-sm",
+        md: "rounded-md",
+        lg: "rounded-lg",
+        xl: "rounded-xl",
+      },
+    },
+    defaultVariants: { surface: "solid", radius: "xl" },
+  },
+);
+
+type FloatingSurfaceProps = VariantProps<typeof floatingSurfaceVariants>;
+type FloatingItemProps = VariantProps<typeof floatingItemVariants>;
+type OverlayProps = VariantProps<typeof overlayVariants>;
+type OverlaySurfaceProps = VariantProps<typeof overlaySurfaceVariants>;
+
+export {
+  fieldVariants,
+  floatingSurfaceVariants,
+  floatingMotion,
+  floatingItemVariants,
+  overlayVariants,
+  overlaySurfaceVariants,
+};
+export type {
+  FloatingSurfaceProps,
+  FloatingItemProps,
+  OverlayProps,
+  OverlaySurfaceProps,
+};
