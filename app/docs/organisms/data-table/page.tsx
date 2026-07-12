@@ -2,6 +2,7 @@
 
 import {
   DataTable,
+  DataTableCore,
   type DataTableColumnDef,
 } from "poyraz-ui/organisms";
 import { Badge } from "poyraz-ui/atoms";
@@ -208,6 +209,24 @@ import type { DataTableColumnDef } from "poyraz-ui/organisms";`}
           columnToggle
           searchPlaceholder="Search users..."
         />
+      </DemoSection>
+
+      <DemoSection
+        title="Core States"
+        description="DataTableCore is dependency-light and renders populated, empty, loading and error states without toolbar or pagination policy."
+        code={`<DataTableCore columns={columns} data={users} state="populated" stickyHeader />
+<DataTableCore columns={columns} data={[]} state="loading" />
+<DataTableCore columns={columns} data={[]} state="empty" />
+<DataTableCore columns={columns} data={[]} state="error" />`}
+      >
+        <div className="grid gap-4">
+          <DataTableCore columns={columns} data={users.slice(0, 3)} getRowId={(row) => row.id} state="populated" surface="glass" stickyHeader maxHeight={240} />
+          <div className="grid gap-4 md:grid-cols-3">
+            <DataTableCore columns={productColumns} data={[]} state="loading" loadingRows={3} />
+            <DataTableCore columns={productColumns} data={[]} state="empty" emptyContent="No products match the filters." />
+            <DataTableCore columns={productColumns} data={[]} state="error" errorContent="Products could not be loaded." />
+          </div>
+        </div>
       </DemoSection>
 
       <DemoSection

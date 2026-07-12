@@ -83,3 +83,5 @@ export {
 } from "@/components/ui/organisms/announcement-bar";
 export { DataTable } from "@/components/ui/organisms/data-table";
 export type { DataTableColumnDef } from "@/components/ui/organisms/data-table";
+export { DataTableCore } from "@/components/ui/organisms/data-table-core";
+export type { DataTableCoreProps, DataTableState } from "@/components/ui/organisms/data-table-core";
