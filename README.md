@@ -20,6 +20,30 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 ---
 
+## V3 Registry Quick Start
+
+Poyraz UI V3 installs components as source through the shadcn registry. Add the namespace to `components.json`:
+
+```json
+{
+  "registries": {
+    "@poyraz": "https://ui.poyrazavsever.com/r/{name}.json"
+  }
+}
+```
+
+Install a component and its theme/dependency graph:
+
+```bash
+pnpm dlx shadcn@latest add @poyraz/button
+```
+
+The component is copied into your configured `aliases.ui` directory. Theme variables, motion utilities and registry dependencies are resolved automatically. See the [installation guide](https://ui.poyrazavsever.com/docs/installation) or [troubleshooting](https://ui.poyrazavsever.com/docs/troubleshooting).
+
+The npm package remains available for V2 projects. Its stable reference is kept under [V2 legacy docs](https://ui.poyrazavsever.com/docs/legacy/v2).
+
+---
+
 ## Highlights
 
 - **50+ Components** — 17 atoms, 21 molecules, 5 organisms
@@ -39,7 +63,7 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 ---
 
-## Installation
+## V2 Package Installation
 
 ```bash
 pnpm add poyraz-ui        # recommended
