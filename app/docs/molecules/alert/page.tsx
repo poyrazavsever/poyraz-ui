@@ -75,6 +75,20 @@ export default function AlertPage() {
           </Alert>
         </div>
       </DemoSection>
+
+      <DemoSection
+        title="Appearance and Motion"
+        description="Status role is independent from surface, radius and entrance motion."
+        code={`<Alert variant="info" appearance="glass" radius="xl" motion="scale" />
+<Alert variant="success" appearance="filled" />
+<Alert variant="warning" appearance="inline" dismissible />`}
+      >
+        <div className="grid gap-3 rounded-2xl bg-[radial-gradient(circle_at_top,var(--color-info),var(--color-background))] p-5">
+          <Alert variant="info" appearance="glass" radius="xl" motion="scale"><AlertTitle>Glass information</AlertTitle><AlertDescription>Semantic color with translucent elevation.</AlertDescription></Alert>
+          <Alert variant="success" appearance="filled" motion="fade"><AlertTitle>Published</AlertTitle><AlertDescription>The release is now available.</AlertDescription></Alert>
+          <Alert variant="warning" appearance="inline" dismissible><AlertTitle>Review required</AlertTitle><AlertDescription>Check the migration notes before continuing.</AlertDescription></Alert>
+        </div>
+      </DemoSection>
     </ComponentPage>
   );
 }
