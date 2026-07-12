@@ -89,8 +89,7 @@ function DatePicker(props: DatePickerProps) {
             disabled={disabled}
             className={cn(
               "group flex-1 justify-start text-left font-normal",
-              "transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
-              "hover:-translate-y-px active:translate-y-0",
+              "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
               !selected && "text-placeholder",
               open && "border-primary ring-2 ring-ring/25",
             )}
