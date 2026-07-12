@@ -20,6 +20,65 @@ const innerInput = [
   "min-w-0 border-0 bg-transparent shadow-none outline-none ring-0 ring-offset-0 focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0",
 ].join(" ");
 
+type MaskToken = "#" | "A" | "*";
+const maskRules: Record<MaskToken, RegExp> = {
+  "#": /\d/,
+  A: /[a-zA-Z]/,
+  "*": /[a-zA-Z0-9]/,
+};
+
+function applyInputMask(value: string, mask: string) {
+  const source = value.replace(/[^a-zA-Z0-9]/g, "");
+  let sourceIndex = 0;
+  let result = "";
+
+  for (const character of mask) {
+    const rule = maskRules[character as MaskToken];
+    if (!rule) {
+      if (source.length > 0 && (sourceIndex > 0 || result.length === 0)) result += character;
+      continue;
+    }
+
+    while (sourceIndex < source.length && !rule.test(source[sourceIndex])) sourceIndex += 1;
+    if (sourceIndex >= source.length) break;
+    result += source[sourceIndex];
+    sourceIndex += 1;
+  }
+
+  return result;
+}
+
+export interface MaskedInputProps extends Omit<InputProps, "value" | "defaultValue"> {
+  mask: string;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (formattedValue: string, rawValue: string) => void;
+}
+
+const MaskedInput = React.forwardRef<HTMLInputElement, MaskedInputProps>(
+  ({ defaultValue, mask, onChange, onValueChange, value, ...props }, ref) => {
+    const format = (input: string) => applyInputMask(input, mask);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const formatted = format(event.currentTarget.value);
+      event.currentTarget.value = formatted;
+      onValueChange?.(formatted, formatted.replace(/[^a-zA-Z0-9]/g, ""));
+      onChange?.(event);
+    };
+
+    return (
+      <Input
+        ref={ref}
+        value={value === undefined ? undefined : format(value)}
+        defaultValue={defaultValue === undefined ? undefined : format(defaultValue)}
+        maxLength={mask.length}
+        onChange={handleChange}
+        {...props}
+      />
+    );
+  },
+);
+MaskedInput.displayName = "MaskedInput";
+
 /* ================================================================== */
 /*  NUMBER INPUT                                                       */
 /* ================================================================== */
@@ -153,13 +212,18 @@ SearchInput.displayName = "SearchInput";
 /*  PHONE INPUT                                                        */
 /* ================================================================== */
 
-export interface PhoneInputProps extends InputProps {
+export interface PhoneInputProps extends Omit<InputProps, "value" | "defaultValue"> {
   /** Country code prefix, e.g. "+90" */
   countryCode?: string;
+  /** `#` digit, `A` letter and `*` alphanumeric mask tokens. */
+  mask?: string | false;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (formattedValue: string, rawDigits: string) => void;
 }
 
 const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ className, countryCode = "+1", radius, variant, ...props }, ref) => {
+  ({ className, countryCode = "+1", defaultValue, mask = "(###) ### ## ##", onValueChange, placeholder, value, radius, variant, ...props }, ref) => {
     return (
       <InputGroup data-slot="phone-input" radius={radius} variant={variant} className={className}>
         <InputGroupAddon position="start" className="border-0 pr-0">
@@ -168,7 +232,22 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
         <span data-slot="phone-prefix" className="select-none whitespace-nowrap border-r border-border px-2 text-sm font-medium text-muted-foreground">
           {countryCode}
         </span>
-        <Input ref={ref} type="tel" className={cn(innerInput)} {...props} />
+        {mask ? (
+          <MaskedInput
+            ref={ref}
+            type="tel"
+            inputMode="tel"
+            mask={mask}
+            value={value}
+            defaultValue={defaultValue}
+            onValueChange={onValueChange}
+            placeholder={placeholder ?? mask.replace(/#/g, "0")}
+            className={cn(innerInput)}
+            {...props}
+          />
+        ) : (
+          <Input ref={ref} type="tel" inputMode="tel" value={value} defaultValue={defaultValue} placeholder={placeholder} className={cn(innerInput)} {...props} />
+        )}
       </InputGroup>
     );
   },
@@ -217,17 +296,43 @@ PasswordInput.displayName = "PasswordInput";
 /*  URL INPUT                                                          */
 /* ================================================================== */
 
-const UrlInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, radius, variant, ...props }, ref) => {
+export interface UrlInputProps extends Omit<InputProps, "value" | "defaultValue"> {
+  protocol?: "https://" | "http://" | "";
+  normalize?: boolean;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string, absoluteUrl: string) => void;
+}
+
+const UrlInput = React.forwardRef<HTMLInputElement, UrlInputProps>(
+  ({ className, defaultValue, normalize = true, onChange, onValueChange, protocol = "https://", value, radius, variant, ...props }, ref) => {
+    const normalizeUrl = (input: string) => normalize
+      ? input.trim().replace(/^https?:\/\//i, "").replace(/^\/\//, "").replace(/\s+/g, "")
+      : input;
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const normalized = normalizeUrl(event.currentTarget.value);
+      event.currentTarget.value = normalized;
+      onValueChange?.(normalized, `${protocol}${normalized}`);
+      onChange?.(event);
+    };
     return (
       <InputGroup data-slot="url-input" radius={radius} variant={variant} className={className}>
         <InputGroupAddon position="start" className="border-0 pr-0">
           <Globe className="h-4 w-4" />
         </InputGroupAddon>
-        <span data-slot="url-prefix" className="select-none whitespace-nowrap border-r border-border px-2 text-sm text-placeholder">
-          https://
-        </span>
-        <Input ref={ref} type="url" className={cn(innerInput)} {...props} />
+        {protocol && <span data-slot="url-prefix" className="select-none whitespace-nowrap border-r border-border px-2 text-sm text-muted-foreground">
+          {protocol}
+        </span>}
+        <Input
+          ref={ref}
+          type="text"
+          inputMode="url"
+          value={value === undefined ? undefined : normalizeUrl(value)}
+          defaultValue={defaultValue === undefined ? undefined : normalizeUrl(defaultValue)}
+          onChange={handleChange}
+          className={cn(innerInput)}
+          {...props}
+        />
       </InputGroup>
     );
   },
@@ -238,4 +343,4 @@ UrlInput.displayName = "UrlInput";
 /*  EXPORTS                                                            */
 /* ================================================================== */
 
-export { NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput };
+export { applyInputMask, MaskedInput, NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput };
