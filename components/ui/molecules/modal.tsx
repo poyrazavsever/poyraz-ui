@@ -6,6 +6,12 @@ import { X } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import {
+  overlaySurfaceVariants,
+  overlayVariants,
+  type OverlayProps,
+  type OverlaySurfaceProps,
+} from "@/components/ui/recipes";
 
 /* ================================================================== */
 /*  MODAL — opinionated wrapper around Radix Dialog                    */
@@ -17,12 +23,11 @@ import { cn } from "@/lib/utils";
 
 const modalContentVariants = cva(
   [
-    "fixed z-50 grid gap-4 bg-background p-5",
-    "border border-border",
-    "rounded-sm shadow-none",
+    "fixed z-50 grid gap-4 p-5",
     "data-[state=open]:animate-in data-[state=closed]:animate-out",
     "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-    "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+    "data-[state=open]:[--poyraz-enter-scale:0.98] data-[state=closed]:[--poyraz-exit-scale:0.98]",
+    "motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-exit-scale:1] motion-reduce:[--poyraz-enter-translate-x:0] motion-reduce:[--poyraz-enter-translate-y:0] motion-reduce:duration-100",
   ].join(" "),
   {
     variants: {
@@ -58,16 +63,11 @@ const ModalClose = DialogPrimitive.Close;
 
 const ModalOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> & OverlayProps
+>(({ className, tone, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm",
-      "data-[state=open]:animate-in data-[state=closed]:animate-out",
-      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-      className,
-    )}
+    className={cn(overlayVariants({ tone }), className)}
     {...props}
   />
 ));
@@ -78,9 +78,12 @@ ModalOverlay.displayName = "ModalOverlay";
 export interface ModalContentProps
   extends
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof modalContentVariants> {
+    VariantProps<typeof modalContentVariants>, OverlaySurfaceProps {
   /** Hide the default close (X) button */
   hideClose?: boolean;
+  mobile?: "floating" | "fullscreen";
+  overlayTone?: NonNullable<OverlayProps["tone"]>;
+  overlayClassName?: string;
 }
 
 const ModalContent = React.forwardRef<
@@ -88,19 +91,24 @@ const ModalContent = React.forwardRef<
   ModalContentProps
 >(
   (
-    { className, children, size, position, hideClose = false, ...props },
+    { className, children, size, position, surface, radius, hideClose = false, mobile = "floating", overlayTone, overlayClassName, ...props },
     ref,
   ) => (
     <DialogPrimitive.Portal>
-      <ModalOverlay />
+      <ModalOverlay tone={overlayTone} className={overlayClassName} />
       <DialogPrimitive.Content
         ref={ref}
-        className={cn(modalContentVariants({ size, position }), className)}
+        className={cn(
+          overlaySurfaceVariants({ surface, radius }),
+          modalContentVariants({ size, position }),
+          mobile === "fullscreen" && "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-none",
+          className,
+        )}
         {...props}
       >
         {children}
         {!hideClose && (
-          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-all duration-150 ease-out hover:opacity-100 hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none cursor-pointer">
+          <DialogPrimitive.Close className="absolute right-4 top-4 cursor-pointer rounded-md p-1 opacity-70 ring-offset-background transition-all duration-150 ease-out hover:bg-accent hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
             <X className="h-4 w-4" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
