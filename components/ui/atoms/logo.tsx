@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const logoVariants = cva(
-  "poyraz-logo group relative isolate inline-flex overflow-hidden outline-none transition-[opacity,transform,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] focus-visible:ring-[3px] focus-visible:ring-ring/25",
+  "poyraz-logo group relative isolate inline-flex overflow-hidden outline-none transition-[opacity,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] focus-visible:ring-[3px] focus-visible:ring-ring/25",
   {
     variants: {
       effect: {

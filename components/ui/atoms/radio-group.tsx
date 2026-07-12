@@ -27,7 +27,7 @@ const RadioGroupItem = React.forwardRef<
     className={cn(
       "group relative size-5 shrink-0 cursor-pointer rounded-full border border-input bg-surface shadow-xs",
       "after:absolute after:-inset-2 after:content-['']",
-      "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)]",
+      "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)]",
       "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/25",
       "data-[state=checked]:border-primary",
       "disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled disabled:opacity-100",

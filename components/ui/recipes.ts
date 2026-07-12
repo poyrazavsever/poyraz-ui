@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 const fieldVariants = cva(
-  "flex w-full border text-sm text-foreground outline-none transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] placeholder:text-placeholder focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/20 disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:opacity-100 aria-invalid:border-invalid aria-invalid:ring-[3px] aria-invalid:ring-invalid/15",
+  "flex w-full border text-sm text-foreground outline-none transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] placeholder:text-placeholder focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/20 disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:opacity-100 aria-invalid:border-invalid aria-invalid:ring-[3px] aria-invalid:ring-invalid/15",
   {
     variants: {
       variant: {
@@ -23,7 +23,7 @@ const fieldVariants = cva(
 );
 
 const floatingSurfaceVariants = cva(
-  "poyraz-floating-surface overflow-hidden border text-foreground outline-none transition-[background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)]",
+  "poyraz-floating-surface overflow-hidden border text-foreground outline-none transition-[background-color,border-color] duration-[var(--poyraz-motion-duration-fast)]",
   {
     variants: {
       surface: {
@@ -46,15 +46,20 @@ const floatingSurfaceVariants = cva(
 
 const floatingMotion = [
   "origin-[var(--poyraz-floating-transform-origin)]",
-  "data-[state=open]:animate-in data-[state=closed]:animate-out",
-  "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-  "data-[state=open]:[--poyraz-enter-scale:0.98] data-[state=closed]:[--poyraz-exit-scale:0.98]",
-  "data-[side=bottom]:[--poyraz-enter-translate-y:calc(var(--poyraz-floating-slide)*-1)]",
-  "data-[side=left]:[--poyraz-enter-translate-x:var(--poyraz-floating-slide)]",
-  "data-[side=right]:[--poyraz-enter-translate-x:calc(var(--poyraz-floating-slide)*-1)]",
-  "data-[side=top]:[--poyraz-enter-translate-y:var(--poyraz-floating-slide)]",
-  "motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-exit-scale:1] motion-reduce:[--poyraz-enter-translate-x:0] motion-reduce:[--poyraz-enter-translate-y:0]",
+  "data-[state=open]:animate-poyraz-floating-in data-[state=closed]:animate-poyraz-floating-out",
 ].join(" ");
+
+const controlMotion =
+  "transition-[color,background-color,border-color,opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[var(--poyraz-motion-scale-press-medium)] motion-reduce:transition-none motion-reduce:active:scale-100";
+
+const iconMotion =
+  "transition-[color,opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-[var(--poyraz-motion-distance-micro)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0";
+
+const accordionMotion =
+  "data-[state=open]:animate-poyraz-accordion-down data-[state=closed]:animate-poyraz-accordion-up";
+
+const toastMotion =
+  "poyraz-toast-motion data-[swiping=true]:transition-none data-[swiped=true]:transition-none motion-reduce:transition-none";
 
 const floatingItemVariants = cva(
   "relative flex w-full select-none items-center outline-none transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] data-[disabled]:pointer-events-none data-[disabled]:opacity-45 focus:bg-accent focus:text-accent-foreground data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
@@ -87,7 +92,7 @@ const floatingItemVariants = cva(
 );
 
 const overlayVariants = cva(
-  "fixed inset-0 z-50 backdrop-blur-[var(--poyraz-overlay-blur,6px)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 motion-reduce:duration-100",
+  "fixed inset-0 z-50 backdrop-blur-[var(--poyraz-overlay-blur,6px)] data-[state=open]:animate-poyraz-overlay-in data-[state=closed]:animate-poyraz-overlay-out",
   {
     variants: {
       tone: {
@@ -131,6 +136,10 @@ export {
   fieldVariants,
   floatingSurfaceVariants,
   floatingMotion,
+  controlMotion,
+  iconMotion,
+  accordionMotion,
+  toastMotion,
   floatingItemVariants,
   overlayVariants,
   overlaySurfaceVariants,
