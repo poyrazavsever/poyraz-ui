@@ -4,6 +4,13 @@ import * as React from "react";
 import { Check, ChevronDown, X, Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import {
+  fieldVariants,
+  floatingItemVariants,
+  floatingSurfaceVariants,
+  type FloatingItemProps,
+  type FloatingSurfaceProps,
+} from "@/components/ui/recipes";
 
 /* ================================================================== */
 /*  AUTOCOMPLETE — Searchable combobox / typeahead                     */
@@ -18,6 +25,8 @@ export interface AutocompleteOption {
   disabled?: boolean;
   /** Optional group name */
   group?: string;
+  description?: string;
+  media?: React.ReactNode;
 }
 
 export interface AutocompleteProps {
@@ -25,8 +34,12 @@ export interface AutocompleteProps {
   options: AutocompleteOption[];
   /** Currently selected value(s) */
   value?: string | string[];
+  defaultValue?: string | string[];
   /** Called when selection changes */
   onValueChange?: (value: string | string[]) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
   /** Placeholder for the input */
   placeholder?: string;
   /** Allow multiple selections */
@@ -39,12 +52,22 @@ export interface AutocompleteProps {
   onSearchChange?: (query: string) => void;
   /** Show a loading spinner */
   loading?: boolean;
+  state?: "ready" | "loading" | "error";
+  loadingText?: React.ReactNode;
+  errorText?: React.ReactNode;
   /** Disabled state */
   disabled?: boolean;
   /** Empty state text */
   emptyText?: string;
+  emptyContent?: React.ReactNode;
   /** Additional class for the wrapper */
   className?: string;
+  variant?: "default" | "soft" | "glass";
+  radius?: "none" | "sm" | "md" | "lg" | "xl" | "full";
+  size?: "sm" | "md" | "lg";
+  dropdownSurface?: NonNullable<FloatingSurfaceProps["surface"]>;
+  dropdownRadius?: NonNullable<FloatingSurfaceProps["radius"]>;
+  itemSize?: NonNullable<FloatingItemProps["size"]>;
 }
 
 function defaultFilter(option: AutocompleteOption, query: string) {
@@ -54,29 +77,54 @@ function defaultFilter(option: AutocompleteOption, query: string) {
 function Autocomplete({
   options,
   value,
+  defaultValue,
   onValueChange,
+  open: controlledOpen,
+  defaultOpen = false,
+  onOpenChange,
   placeholder = "Search…",
   multiple = false,
   freeSolo = false,
   filterFn = defaultFilter,
   onSearchChange,
   loading = false,
+  state = "ready",
+  loadingText = "Searching…",
+  errorText = "Unable to load options.",
   disabled = false,
   emptyText = "No results found.",
+  emptyContent,
   className,
+  variant,
+  radius,
+  size = "md",
+  dropdownSurface,
+  dropdownRadius,
+  itemSize = "md",
 }: AutocompleteProps) {
-  const [open, setOpen] = React.useState(false);
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
+  const [internalValue, setInternalValue] = React.useState<string | string[] | undefined>(defaultValue);
   const [query, setQuery] = React.useState("");
   const [highlightIndex, setHighlightIndex] = React.useState(-1);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const listRef = React.useRef<HTMLDivElement>(null);
+  const listboxId = React.useId();
+  const open = controlledOpen ?? internalOpen;
+  const valueControlled = value !== undefined;
+  const resolvedValue = valueControlled ? value : internalValue;
+  const resolvedState = loading || state === "loading" ? "loading" : state;
+
+  const setOpen = React.useCallback((next: boolean) => {
+    if (controlledOpen === undefined) setInternalOpen(next);
+    onOpenChange?.(next);
+  }, [controlledOpen, onOpenChange]);
 
   // Normalize value to array for internal use
   const selectedValues = React.useMemo(() => {
-    if (!value) return [];
-    return Array.isArray(value) ? value : [value];
-  }, [value]);
+    if (!resolvedValue) return [];
+    return Array.isArray(resolvedValue) ? resolvedValue : [resolvedValue];
+  }, [resolvedValue]);
 
   // Filtered options
   const filtered = React.useMemo(() => {
@@ -138,8 +186,10 @@ function Autocomplete({
       const next = selectedValues.includes(optionValue)
         ? selectedValues.filter((v) => v !== optionValue)
         : [...selectedValues, optionValue];
+      if (!valueControlled) setInternalValue(next);
       onValueChange?.(next);
     } else {
+      if (!valueControlled) setInternalValue(optionValue);
       onValueChange?.(optionValue);
       const label =
         options.find((o) => o.value === optionValue)?.label ?? optionValue;
@@ -150,7 +200,9 @@ function Autocomplete({
 
   const handleRemove = (val: string) => {
     if (multiple) {
-      onValueChange?.(selectedValues.filter((v) => v !== val));
+      const next = selectedValues.filter((v) => v !== val);
+      if (!valueControlled) setInternalValue(next);
+      onValueChange?.(next);
     }
   };
 
@@ -161,24 +213,44 @@ function Autocomplete({
     if (!open) setOpen(true);
   };
 
+  const findEnabled = (start: number, direction: 1 | -1) => {
+    if (!flatFiltered.length) return -1;
+    let index = start;
+    for (let count = 0; count < flatFiltered.length; count += 1) {
+      index = (index + direction + flatFiltered.length) % flatFiltered.length;
+      if (!flatFiltered[index]?.disabled) return index;
+    }
+    return -1;
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setHighlightIndex((i) => Math.min(i + 1, flatFiltered.length - 1));
+      setHighlightIndex((i) => findEnabled(i, 1));
       if (!open) setOpen(true);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setHighlightIndex((i) => Math.max(i - 1, 0));
+      setHighlightIndex((i) => findEnabled(i < 0 ? 0 : i, -1));
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setHighlightIndex(findEnabled(-1, 1));
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setHighlightIndex(findEnabled(0, -1));
     } else if (e.key === "Enter") {
       e.preventDefault();
       if (highlightIndex >= 0 && flatFiltered[highlightIndex]) {
         const opt = flatFiltered[highlightIndex];
         if (!opt.disabled) handleSelect(opt.value);
       } else if (freeSolo && query) {
-        onValueChange?.(multiple ? [...selectedValues, query] : query);
+        const next = multiple ? [...selectedValues, query] : query;
+        if (!valueControlled) setInternalValue(next);
+        onValueChange?.(next);
         if (!multiple) setOpen(false);
       }
     } else if (e.key === "Escape") {
+      setOpen(false);
+    } else if (e.key === "Tab") {
       setOpen(false);
     } else if (
       e.key === "Backspace" &&
@@ -187,7 +259,9 @@ function Autocomplete({
       selectedValues.length > 0
     ) {
       // Remove last tag
-      onValueChange?.(selectedValues.slice(0, -1));
+      const next = selectedValues.slice(0, -1);
+      if (!valueControlled) setInternalValue(next);
+      onValueChange?.(next);
     }
   };
 
@@ -200,13 +274,16 @@ function Autocomplete({
   }, [selectedValues, multiple, open, options]);
 
   return (
-    <div ref={wrapperRef} className={cn("relative w-full", className)}>
+    <div ref={wrapperRef} data-slot="autocomplete" data-state={resolvedState} className={cn("relative w-full", className)}>
       {/* Trigger */}
       <div
         className={cn(
+          fieldVariants({ variant, radius }),
           "flex flex-wrap items-center gap-1.5 min-h-[36px] w-full",
-          "border border-input bg-background px-3 py-2",
-          "rounded-sm shadow-none",
+          "px-3",
+          size === "sm" && "min-h-8 py-1",
+          size === "md" && "min-h-9 py-1.5",
+          size === "lg" && "min-h-11 py-2",
           "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
           open && "border-primary ring-2 ring-ring ring-offset-2",
           disabled && "opacity-40 cursor-not-allowed",
@@ -265,6 +342,8 @@ function Autocomplete({
             aria-expanded={open}
             aria-haspopup="listbox"
             aria-autocomplete="list"
+            aria-controls={open ? listboxId : undefined}
+            aria-activedescendant={highlightIndex >= 0 ? `${listboxId}-option-${highlightIndex}` : undefined}
             autoComplete="off"
           />
         </div>
@@ -281,27 +360,34 @@ function Autocomplete({
       {open && (
         <div
           ref={listRef}
+          id={listboxId}
           role="listbox"
           className={cn(
+            floatingSurfaceVariants({ surface: dropdownSurface, radius: dropdownRadius }),
             "absolute z-50 mt-1 w-full max-h-[240px] overflow-y-auto",
-            "border border-border bg-background",
-            "shadow-none",
-            "origin-top animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+            "origin-top animate-in fade-in-0 slide-in-from-top-2 [--poyraz-enter-scale:0.98] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-enter-translate-y:0]",
           )}
         >
-          {loading && (
-            <div className="flex items-center justify-center py-6 animate-poyraz-fade-in">
-              <div className="h-4 w-4 border border-primary border-t-transparent animate-spin" />
+          {resolvedState === "loading" && (
+            <div role="status" aria-live="polite" className="flex items-center justify-center gap-2 py-6 text-sm text-muted-foreground animate-poyraz-fade-in">
+              <div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin motion-reduce:animate-none" />
+              {loadingText}
             </div>
           )}
 
-          {!loading && flatFiltered.length === 0 && (
+          {resolvedState === "error" && (
+            <div role="alert" className="px-3 py-6 text-center text-sm text-destructive-muted-foreground animate-poyraz-fade-in">
+              {errorText}
+            </div>
+          )}
+
+          {resolvedState === "ready" && flatFiltered.length === 0 && (
             <div className="px-3 py-6 text-center text-sm text-placeholder animate-poyraz-fade-in">
-              {emptyText}
+              {emptyContent ?? emptyText}
             </div>
           )}
 
-          {!loading &&
+          {resolvedState === "ready" &&
             Array.from(grouped.entries()).map(([group, opts]) => (
               <div
                 key={group || "__ungrouped"}
@@ -320,14 +406,14 @@ function Autocomplete({
                   return (
                     <div
                       key={opt.value}
+                      id={`${listboxId}-option-${flatIdx}`}
                       data-autocomplete-item
                       role="option"
                       aria-selected={isSelected}
                       aria-disabled={opt.disabled}
                       className={cn(
-                        "flex items-center gap-3 px-2.5 py-2 text-sm cursor-pointer select-none",
-                        "border border-transparent",
-                        "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+                        floatingItemVariants({ size: itemSize, radius: "md" }),
+                        "cursor-pointer border border-transparent",
                         isHighlighted && "bg-muted border-border translate-x-0.5",
                         !isHighlighted &&
                           "hover:bg-muted hover:border-border hover:translate-x-0.5",
@@ -338,7 +424,11 @@ function Autocomplete({
                       }}
                       onMouseEnter={() => setHighlightIndex(flatIdx)}
                     >
-                      <span className="flex-1 truncate">{opt.label}</span>
+                      {opt.media && <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">{opt.media}</span>}
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate font-medium">{opt.label}</span>
+                        {opt.description && <span className="mt-0.5 block truncate text-xs text-muted-foreground">{opt.description}</span>}
+                      </span>
                       {isSelected && (
                         <Check className="h-4 w-4 shrink-0 text-primary animate-poyraz-scale-in" />
                       )}

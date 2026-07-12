@@ -111,6 +111,20 @@ export default function AutocompletePage() {
       </DemoSection>
 
       <DemoSection
+        title="Async States"
+        description="Loading, empty and error states preserve the same combobox anatomy and live-region semantics."
+        code={`<Autocomplete options={[]} state="loading" loadingText="Searching…" />
+<Autocomplete options={[]} state="ready" emptyContent="No matching technologies." />
+<Autocomplete options={[]} state="error" errorText="Could not load technologies." />`}
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          <Autocomplete options={[]} state="loading" defaultOpen loadingText="Searching…" variant="glass" />
+          <Autocomplete options={[]} state="ready" defaultOpen emptyContent="No matching technologies." variant="soft" />
+          <Autocomplete options={[]} state="error" defaultOpen errorText="Could not load technologies." />
+        </div>
+      </DemoSection>
+
+      <DemoSection
         title="Multiple Select"
         description="Select multiple options with tag-style chips."
         code={`const [value, setValue] = useState<string[]>([]);
