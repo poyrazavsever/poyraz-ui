@@ -15,8 +15,8 @@ const announcementBarVariants = cva(
     "relative w-full",
     "text-sm font-medium tracking-wide",
     "border-b",
-    "animate-poyraz-slide-in-from-top",
-    "transition-[color,background-color,border-color,grid-template-rows,opacity,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+    "data-[state=open]:animate-poyraz-slide-in-from-top",
+    "transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
   ].join(" "),
   {
     variants: {
@@ -65,6 +65,7 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
       open: controlledOpen,
       defaultOpen = true,
       onOpenChange,
+      onAnimationEnd,
       onTransitionEnd,
       children,
       ...props
@@ -92,7 +93,7 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
       }
       if (!present) return;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const timer = window.setTimeout(finishExit, reducedMotion ? 0 : 240);
+      const timer = window.setTimeout(finishExit, reducedMotion ? 0 : 320);
       return () => window.clearTimeout(timer);
     }, [finishExit, open, present]);
 
@@ -111,17 +112,19 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
         data-slot="announcement-bar"
         data-variant={variant ?? "default"}
         data-state={open ? "open" : "closed"}
+        onAnimationEnd={(event) => {
+          onAnimationEnd?.(event);
+          if (!open && event.currentTarget === event.target) finishExit();
+        }}
         onTransitionEnd={(event) => {
           onTransitionEnd?.(event);
-          if (!open && event.currentTarget === event.target && event.propertyName === "opacity")
-            finishExit();
         }}
         className={cn(
           announcementBarVariants({ variant }),
-          "grid motion-reduce:transition-none",
+          "motion-reduce:transition-none motion-reduce:data-[state=closed]:animate-none",
           open
-            ? "grid-rows-[1fr] translate-y-0 opacity-100"
-            : "grid-rows-[0fr] -translate-y-2 opacity-0",
+            ? "opacity-100"
+            : "animate-poyraz-fade-out duration-[var(--poyraz-motion-duration-slow)]",
           className,
         )}
         {...props}

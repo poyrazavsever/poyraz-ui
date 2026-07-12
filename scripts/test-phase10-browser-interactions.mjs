@@ -152,10 +152,26 @@ const announcement = await evaluate(`(async () => {
   close?.click();
   await new Promise((resolve) => requestAnimationFrame(resolve));
   const closedState = bar?.getAttribute('data-state') === 'closed';
+  const exitStyle = bar ? getComputedStyle(bar) : null;
+  const opacityOnly = Boolean(
+    exitStyle &&
+    exitStyle.transform === 'none' &&
+    exitStyle.animationName === 'poyraz-fade-out' &&
+    parseFloat(exitStyle.animationDuration) > 0
+  );
   await new Promise((resolve) => setTimeout(resolve, 80));
   const presentDuringExit = document.contains(bar);
+  const opacityDuringExit = bar ? Number(getComputedStyle(bar).opacity) : 0;
+  const hasIntermediateFrame = opacityDuringExit > 0 && opacityDuringExit < 1;
   await new Promise((resolve) => setTimeout(resolve, 260));
-  return { close: Boolean(close), closedState, presentDuringExit, removedAfterExit: !document.contains(bar) };
+  return {
+    close: Boolean(close),
+    closedState,
+    opacityOnly,
+    hasIntermediateFrame,
+    presentDuringExit,
+    removedAfterExit: !document.contains(bar),
+  };
 })()`);
 
 await navigate("/docs/blocks/auth-card-block");

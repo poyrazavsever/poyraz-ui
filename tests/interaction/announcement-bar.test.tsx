@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -15,11 +15,11 @@ describe("AnnouncementBar", () => {
     await user.click(screen.getByRole("button", { name: "Dismiss" }));
 
     expect(bar).toHaveAttribute("data-state", "closed");
+    expect(bar).toHaveClass("animate-poyraz-fade-out");
+    expect(bar).not.toHaveClass("-translate-y-2", "grid-rows-[0fr]");
     expect(screen.getByText("Scheduled maintenance")).toBeInTheDocument();
 
-    fireEvent.transitionEnd(bar, { propertyName: "opacity" });
-
-    expect(screen.queryByRole("banner")).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole("banner")).not.toBeInTheDocument());
     expect(onDismiss).toHaveBeenCalledOnce();
   });
 });
