@@ -1172,6 +1172,8 @@ Dokümantasyonu package kataloğundan registry ürünü anlatan interaktif bir s
 - [x] `P10-023` COMPONENTS.md içindeki eski ölçü ve varyant bilgilerini registry metadata ile senkronla.
 - [x] `P10-024` CLI çıktısındaki link ve komutları yeni docs'a yönlendir.
 
+Revizyon notu: `P10-012` ve `P10-014` ile eklenen global background/radius/density/motion kontrolleri component API'leriyle tutarlı bir kullanım sözleşmesi üretmediği ve docs arayüzünü gereksiz karmaşıklaştırdığı için kaldırıldı. Docs preview alanları varsayılan semantic gradient yüzeyi kullanır; özel dark-image örnekleri yalnızca ilgili demonun kendi yapısında kalır.
+
 ### Çıkış kriteri
 
 - Kullanıcı docs üzerinden componenti bulup tek komutla kurabilmeli.
