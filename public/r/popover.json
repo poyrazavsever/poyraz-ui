@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "title": "Popover",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass popover component with standardized floating and overlay behavior.",
+  "dependencies": [
+    "@radix-ui/react-popover@^1.1.15"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/poyraz-recipes"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase6/molecules/popover.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  floatingMotion,\n  floatingSurfaceVariants,\n  type FloatingSurfaceProps,\n} from \"@/components/ui/recipes\";\n\nconst Popover = PopoverPrimitive.Root;\n\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> &\n    FloatingSurfaceProps & { padding?: \"none\" | \"sm\" | \"md\" | \"lg\" }\n>(({ className, align = \"center\", sideOffset = 6, collisionPadding = 8, surface, radius, padding = \"md\", style, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      collisionPadding={collisionPadding}\n      style={{\n        \"--poyraz-floating-transform-origin\":\n          \"var(--radix-popover-content-transform-origin)\",\n        \"--poyraz-floating-slide\": \"var(--poyraz-floating-slide-distance, 0.5rem)\",\n        ...style,\n      } as React.CSSProperties}\n      className={cn(\n        floatingSurfaceVariants({ surface, radius }),\n        floatingMotion,\n        \"z-50 w-72\",\n        padding === \"none\" && \"p-0\",\n        padding === \"sm\" && \"p-2\",\n        padding === \"md\" && \"p-4\",\n        padding === \"lg\" && \"p-6\",\n        className,\n      )}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/molecules/popover.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-6-interactive",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}
