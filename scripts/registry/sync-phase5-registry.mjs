@@ -88,11 +88,12 @@ const itemCss = {
     },
     ".poyraz-text-shimmer": {
       "color": "transparent",
-      "background-image": "linear-gradient(105deg, var(--poyraz-text-effect) 10%, white 35%, var(--poyraz-text-effect) 55%, var(--poyraz-text-effect) 100%)",
-      "background-size": "220% auto",
+      "background-image": "linear-gradient(100deg, var(--poyraz-text-effect) 0%, var(--poyraz-text-effect) 42%, white 50%, var(--poyraz-text-effect) 58%, var(--poyraz-text-effect) 100%)",
+      "background-size": "260% 100%",
+      "background-position": "120% center",
       "background-clip": "text",
       "-webkit-background-clip": "text",
-      "animation": "poyraz-text-shimmer 2.4s linear infinite",
+      "animation": "poyraz-text-shimmer 2.8s var(--poyraz-motion-ease-standard) infinite",
     },
     ".poyraz-text-marker::before": {
       "content": "\"\"",
@@ -110,9 +111,7 @@ const itemCss = {
       "paint-order": "stroke fill",
       "-webkit-text-stroke": "clamp(1px, 0.035em, 2px) var(--poyraz-text-effect)",
       "text-shadow": "0 0 0.01px var(--poyraz-text-effect)",
-      "transition": "color var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out), text-shadow var(--poyraz-motion-duration-base) var(--poyraz-motion-ease-out)",
     },
-    ".poyraz-text-outline:hover": { "color": "var(--poyraz-text-effect)", "text-shadow": "none" },
     ".poyraz-text-gradient": {
       "color": "transparent",
       "background-image": "linear-gradient(110deg, var(--poyraz-text-effect), color-mix(in srgb, var(--poyraz-text-effect) 48%, white), var(--poyraz-primary-hover))",
@@ -143,7 +142,8 @@ const itemCss = {
       "transform": "rotate(-2deg) skewX(-9deg)",
     },
     "@keyframes poyraz-text-shimmer": {
-      "to": { "background-position": "-220% center" },
+      "0%, 14%": { "background-position": "120% center" },
+      "72%, 100%": { "background-position": "-120% center" },
     },
     "@media (prefers-reduced-motion: reduce)": {
       ".poyraz-text-shimmer": {

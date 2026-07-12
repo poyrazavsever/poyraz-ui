@@ -53,7 +53,7 @@ const controlMotion =
   "transition-[color,background-color,border-color,opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-[var(--poyraz-motion-scale-press-medium)] motion-reduce:transition-none motion-reduce:active:scale-100";
 
 const iconMotion =
-  "transition-[color,opacity,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-[var(--poyraz-motion-distance-micro)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0";
+  "transition-[color,opacity] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:transition-none";
 
 const accordionMotion =
   "data-[state=open]:animate-poyraz-accordion-down data-[state=closed]:animate-poyraz-accordion-up";
@@ -77,10 +77,7 @@ const floatingItemVariants = cva(
         lg: "rounded-lg",
       },
       inset: { true: "pl-8", false: null },
-      interactiveMotion: {
-        none: null,
-        shift: "focus:translate-x-0.5 data-[highlighted]:translate-x-0.5",
-      },
+      interactiveMotion: { none: null, shift: null },
     },
     defaultVariants: {
       size: "md",

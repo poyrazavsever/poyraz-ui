@@ -31,6 +31,9 @@ for (const effect of ["hand-drawn", "contrast", "shimmer", "marker", "outline", 
 requireText("primary font token", preset, "--poyraz-font-primary");
 requireText("secondary font token", preset, "--poyraz-font-secondary");
 requireText("reduced text motion", preset, '[data-poyraz-motion="reduced"] .poyraz-text-shimmer');
+requireText("seamless shimmer start", preset, "0%, 14%");
+requireText("seamless shimmer rest", preset, "72%, 100%");
+if (preset.includes(".poyraz-text-outline:hover")) failures.push("text effect: outline must remain stable on hover");
 
 for (const effect of ["shine", "shine-loop"]) {
   if (!logo.includes(`${effect}:`) && !logo.includes(`"${effect}":`)) failures.push(`logo effect: missing ${effect}`);
