@@ -5,7 +5,11 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { accordionMotion, floatingSurfaceVariants, type FloatingSurfaceProps } from "@/components/ui/recipes";
+import {
+  accordionMotion,
+  floatingSurfaceVariants,
+  type FloatingSurfaceProps,
+} from "@/components/ui/recipes";
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -57,13 +61,15 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className={cn(
-      "overflow-hidden text-sm",
-      accordionMotion,
-    )}
+    className={cn("overflow-hidden text-sm", accordionMotion)}
     {...props}
   >
-    <div className={cn("pb-4 pt-0 data-[state=open]:animate-poyraz-fade-in motion-reduce:animate-none", className)}>
+    <div
+      className={cn(
+        "pb-4 pt-0 data-[state=open]:animate-poyraz-fade-in motion-reduce:animate-none",
+        className,
+      )}
+    >
       {children}
     </div>
   </AccordionPrimitive.Content>

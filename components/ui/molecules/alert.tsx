@@ -9,18 +9,26 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: "[--alert-bg:var(--poyraz-surface-subtle)] [--alert-border:var(--poyraz-border)] [--alert-fg:var(--poyraz-foreground)] [--alert-icon:var(--poyraz-muted-foreground)] [--alert-solid:var(--poyraz-foreground)]",
+        default:
+          "[--alert-bg:var(--poyraz-surface-subtle)] [--alert-border:var(--poyraz-border)] [--alert-fg:var(--poyraz-foreground)] [--alert-icon:var(--poyraz-muted-foreground)] [--alert-solid:var(--poyraz-foreground)]",
         info: "[--alert-bg:var(--poyraz-info)] [--alert-border:var(--poyraz-info-border)] [--alert-fg:var(--poyraz-info-foreground)] [--alert-icon:var(--poyraz-info-icon)] [--alert-solid:var(--poyraz-info-solid)]",
-        success: "[--alert-bg:var(--poyraz-success)] [--alert-border:var(--poyraz-success-border)] [--alert-fg:var(--poyraz-success-foreground)] [--alert-icon:var(--poyraz-success-icon)] [--alert-solid:var(--poyraz-success-solid)]",
-        warning: "[--alert-bg:var(--poyraz-warning)] [--alert-border:var(--poyraz-warning-border)] [--alert-fg:var(--poyraz-warning-foreground)] [--alert-icon:var(--poyraz-warning-icon)] [--alert-solid:var(--poyraz-warning-solid)]",
-        destructive: "[--alert-bg:var(--poyraz-destructive-muted)] [--alert-border:var(--poyraz-invalid-border)] [--alert-fg:var(--poyraz-destructive-muted-foreground)] [--alert-icon:var(--poyraz-destructive)] [--alert-solid:var(--poyraz-destructive)]",
+        success:
+          "[--alert-bg:var(--poyraz-success)] [--alert-border:var(--poyraz-success-border)] [--alert-fg:var(--poyraz-success-foreground)] [--alert-icon:var(--poyraz-success-icon)] [--alert-solid:var(--poyraz-success-solid)]",
+        warning:
+          "[--alert-bg:var(--poyraz-warning)] [--alert-border:var(--poyraz-warning-border)] [--alert-fg:var(--poyraz-warning-foreground)] [--alert-icon:var(--poyraz-warning-icon)] [--alert-solid:var(--poyraz-warning-solid)]",
+        destructive:
+          "[--alert-bg:var(--poyraz-destructive-muted)] [--alert-border:var(--poyraz-invalid-border)] [--alert-fg:var(--poyraz-destructive-muted-foreground)] [--alert-icon:var(--poyraz-destructive)] [--alert-solid:var(--poyraz-destructive)]",
       },
       appearance: {
         soft: "border-[var(--alert-border)] bg-[var(--alert-bg)] text-[var(--alert-fg)] [&>svg]:text-[var(--alert-icon)]",
-        outline: "border-[var(--alert-border)] bg-transparent text-[var(--alert-fg)] [&>svg]:text-[var(--alert-icon)]",
-        filled: "border-transparent bg-[var(--alert-solid)] text-primary-foreground shadow-sm [&>svg]:text-current",
-        glass: "border-[var(--alert-border)] bg-glass text-[var(--alert-fg)] shadow-md backdrop-blur-glass [&>svg]:text-[var(--alert-icon)]",
-        inline: "border-[var(--alert-border)] border-l-4 border-l-[var(--alert-icon)] bg-[var(--alert-bg)] px-4 py-3 text-[var(--alert-fg)] shadow-xs [&>svg]:text-[var(--alert-icon)]",
+        outline:
+          "border-[var(--alert-border)] bg-transparent text-[var(--alert-fg)] [&>svg]:text-[var(--alert-icon)]",
+        filled:
+          "border-transparent bg-[var(--alert-solid)] text-primary-foreground shadow-sm [&>svg]:text-current",
+        glass:
+          "border-[var(--alert-border)] bg-glass text-[var(--alert-fg)] shadow-md backdrop-blur-glass [&>svg]:text-[var(--alert-icon)]",
+        inline:
+          "border-[var(--alert-border)] border-l-4 border-l-[var(--alert-icon)] bg-[var(--alert-bg)] px-4 py-3 text-[var(--alert-fg)] shadow-xs [&>svg]:text-[var(--alert-icon)]",
       },
       radius: {
         none: "rounded-none",
@@ -60,7 +68,22 @@ export interface AlertProps
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ appearance, className, dismissible = false, dismissLabel = "Dismiss alert", icon, motion, onDismiss, radius, variant = "default", children, ...props }, ref) => {
+  (
+    {
+      appearance,
+      className,
+      dismissible = false,
+      dismissLabel = "Dismiss alert",
+      icon,
+      motion,
+      onDismiss,
+      radius,
+      variant = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const Icon = variantIcons[variant ?? "default"];
     return (
       <div
@@ -70,11 +93,17 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         data-slot="alert"
         data-variant={variant}
         data-appearance={appearance ?? "soft"}
-        className={cn(alertVariants({ appearance, motion, radius, variant }), dismissible && "pr-11", className)}
+        className={cn(
+          alertVariants({ appearance, motion, radius, variant }),
+          dismissible && "pr-11",
+          className,
+        )}
         {...props}
       >
         {icon !== undefined ? icon : <Icon aria-hidden="true" />}
-        <div data-slot="alert-content" className="min-w-0">{children}</div>
+        <div data-slot="alert-content" className="min-w-0">
+          {children}
+        </div>
         {dismissible && (
           <button
             type="button"
@@ -92,12 +121,26 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 Alert.displayName = "Alert";
 
 const AlertTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => <h5 ref={ref} data-slot="alert-title" className={cn("font-semibold leading-5 tracking-tight", className)} {...props} />,
+  ({ className, ...props }, ref) => (
+    <h5
+      ref={ref}
+      data-slot="alert-title"
+      className={cn("font-semibold leading-5 tracking-tight", className)}
+      {...props}
+    />
+  ),
 );
 AlertTitle.displayName = "AlertTitle";
 
 const AlertDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => <div ref={ref} data-slot="alert-description" className={cn("mt-0.5 text-sm leading-5 opacity-85 [&_p]:leading-relaxed", className)} {...props} />,
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="alert-description"
+      className={cn("mt-0.5 text-sm leading-5 opacity-85 [&_p]:leading-relaxed", className)}
+      {...props}
+    />
+  ),
 );
 AlertDescription.displayName = "AlertDescription";
 

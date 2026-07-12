@@ -61,7 +61,7 @@ function DatePicker(props: DatePickerProps) {
   const [internalSelected, setInternalSelected] = React.useState(defaultSelected);
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
   const selected = selectionControlled ? props.selected : internalSelected;
-  const open = openControlled ? props.open ?? false : internalOpen;
+  const open = openControlled ? (props.open ?? false) : internalOpen;
 
   const setOpen = (next: boolean) => {
     if (!openControlled) setInternalOpen(next);
@@ -79,7 +79,11 @@ function DatePicker(props: DatePickerProps) {
   };
 
   return (
-    <div data-slot="date-picker" data-state={open ? "open" : "closed"} className={cn("flex w-full items-center gap-2", className)}>
+    <div
+      data-slot="date-picker"
+      data-state={open ? "open" : "closed"}
+      className={cn("flex w-full items-center gap-2", className)}
+    >
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -98,12 +102,31 @@ function DatePicker(props: DatePickerProps) {
             <span className="truncate">{selected ? formatDate(selected) : placeholder}</span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent surface={popoverSurface} radius={popoverRadius} padding="none" className="w-auto" align="start">
-          <Calendar {...calendarProps} mode="single" selected={selected} onSelect={handleSelect} surface="plain" />
+        <PopoverContent
+          surface={popoverSurface}
+          radius={popoverRadius}
+          padding="none"
+          className="w-auto"
+          align="start"
+        >
+          <Calendar
+            {...calendarProps}
+            mode="single"
+            selected={selected}
+            onSelect={handleSelect}
+            surface="plain"
+          />
         </PopoverContent>
       </Popover>
       {clearable && selected && (
-        <Button type="button" variant="ghost" size="icon" radius={triggerRadius} aria-label="Clear date" onClick={() => setSelected(undefined)}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          radius={triggerRadius}
+          aria-label="Clear date"
+          onClick={() => setSelected(undefined)}
+        >
           <X className="size-4" />
         </Button>
       )}

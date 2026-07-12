@@ -104,18 +104,20 @@ export type CalendarProps = CalendarSingleProps | CalendarRangeProps;
 
 function Calendar(props: CalendarProps) {
   const {
-  minDate,
-  maxDate,
-  className,
-  initialMonth,
-  onMonthChange,
-  radius = "lg",
-  size = "default",
-  surface = "plain",
+    minDate,
+    maxDate,
+    className,
+    initialMonth,
+    onMonthChange,
+    radius = "lg",
+    size = "default",
+    surface = "plain",
   } = props;
   const mode = props.mode ?? "single";
   const isControlled = Object.prototype.hasOwnProperty.call(props, "selected");
-  const [internalSelection, setInternalSelection] = React.useState<Date | DateRange | undefined>(props.defaultSelected);
+  const [internalSelection, setInternalSelection] = React.useState<Date | DateRange | undefined>(
+    props.defaultSelected,
+  );
   const selection = isControlled ? props.selected : internalSelection;
   const selectedDate = selection instanceof Date ? selection : selection?.from;
   const selectedRange = mode === "range" && !(selection instanceof Date) ? selection : undefined;
@@ -170,9 +172,13 @@ function Calendar(props: CalendarProps) {
     }
   };
 
-  const isInRange = (date: Date) => Boolean(
-    selectedRange?.from && selectedRange?.to && date > selectedRange.from && date < selectedRange.to,
-  );
+  const isInRange = (date: Date) =>
+    Boolean(
+      selectedRange?.from &&
+      selectedRange?.to &&
+      date > selectedRange.from &&
+      date < selectedRange.to,
+    );
 
   const nextMonth = () => {
     if (viewMonth === 11) {
@@ -185,11 +191,7 @@ function Calendar(props: CalendarProps) {
 
   const isDisabled = (date: Date) => {
     if (minDate) {
-      const min = new Date(
-        minDate.getFullYear(),
-        minDate.getMonth(),
-        minDate.getDate(),
-      );
+      const min = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
       if (date < min) return true;
     }
     if (maxDate) {
@@ -223,7 +225,10 @@ function Calendar(props: CalendarProps) {
       const rangeStart = Boolean(selectedRange?.from && isSameDay(date, selectedRange.from));
       const rangeEnd = Boolean(selectedRange?.to && isSameDay(date, selectedRange.to));
       const rangeMiddle = isInRange(date);
-      const sel = mode === "single" ? Boolean(selectedDate && isSameDay(date, selectedDate)) : rangeStart || rangeEnd;
+      const sel =
+        mode === "single"
+          ? Boolean(selectedDate && isSameDay(date, selectedDate))
+          : rangeStart || rangeEnd;
       const today = isToday(date);
       const disabled = isDisabled(date);
 
@@ -250,11 +255,16 @@ function Calendar(props: CalendarProps) {
             "hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             today && !sel && !rangeMiddle && "ring-1 ring-inset ring-primary/45 text-primary",
-            rangeMiddle && "rounded-none bg-primary-muted text-primary-muted-foreground hover:bg-primary-muted",
-            rangeStart && selectedRange?.to && "rounded-l-md rounded-r-none bg-primary text-primary-foreground",
+            rangeMiddle &&
+              "rounded-none bg-primary-muted text-primary-muted-foreground hover:bg-primary-muted",
+            rangeStart &&
+              selectedRange?.to &&
+              "rounded-l-md rounded-r-none bg-primary text-primary-foreground",
             rangeStart && !selectedRange?.to && "rounded-md bg-primary text-primary-foreground",
             rangeEnd && "rounded-l-none rounded-r-md bg-primary text-primary-foreground",
-            sel && mode === "single" && "rounded-md bg-primary text-primary-foreground shadow-sm hover:bg-primary-hover",
+            sel &&
+              mode === "single" &&
+              "rounded-md bg-primary text-primary-foreground shadow-sm hover:bg-primary-hover",
             disabled && "opacity-30 cursor-not-allowed hover:bg-transparent",
           )}
         >
@@ -303,7 +313,12 @@ function Calendar(props: CalendarProps) {
           {DAYS.map((d) => (
             <div
               key={d}
-              className={cn("flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-placeholder", size === "compact" && "h-7 w-7", size === "default" && "h-8 w-8", size === "spacious" && "h-10 w-10")}
+              className={cn(
+                "flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-placeholder",
+                size === "compact" && "h-7 w-7",
+                size === "default" && "h-8 w-8",
+                size === "spacious" && "h-10 w-10",
+              )}
             >
               {d}
             </div>
@@ -311,9 +326,7 @@ function Calendar(props: CalendarProps) {
         </div>
 
         {/* Day grid */}
-        <div className="grid grid-cols-7 animate-poyraz-slide-in-from-bottom">
-          {cells}
-        </div>
+        <div className="grid grid-cols-7 animate-poyraz-slide-in-from-bottom">{cells}</div>
       </>
     );
   };
@@ -363,8 +376,7 @@ function Calendar(props: CalendarProps) {
         {/* Month grid: 4×3 */}
         <div className="grid grid-cols-3 gap-1 animate-poyraz-slide-in-from-bottom">
           {MONTHS_SHORT.map((m, i) => {
-            const isCurrent =
-              i === now.getMonth() && viewYear === now.getFullYear();
+            const isCurrent = i === now.getMonth() && viewYear === now.getFullYear();
             const isSelected =
               selectedDate &&
               i === selectedDate.getMonth() &&
@@ -384,8 +396,7 @@ function Calendar(props: CalendarProps) {
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
-                  isSelected &&
-                    "bg-primary text-primary-foreground hover:bg-primary-hover",
+                  isSelected && "bg-primary text-primary-foreground hover:bg-primary-hover",
                 )}
               >
                 {m}
@@ -449,8 +460,7 @@ function Calendar(props: CalendarProps) {
                   "hover:bg-accent",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
-                  isSelected &&
-                    "bg-primary text-primary-foreground hover:bg-primary-hover",
+                  isSelected && "bg-primary text-primary-foreground hover:bg-primary-hover",
                 )}
               >
                 {y}
@@ -471,7 +481,8 @@ function Calendar(props: CalendarProps) {
         "select-none p-3 animate-poyraz-fade-in motion-reduce:animate-none",
         surface === "solid" && "border border-border bg-surface shadow-sm",
         surface === "soft" && "border border-transparent bg-surface-subtle",
-        surface === "glass" && "border border-glass-border-outer bg-glass shadow-md backdrop-blur-glass",
+        surface === "glass" &&
+          "border border-glass-border-outer bg-glass shadow-md backdrop-blur-glass",
         radius === "none" && "rounded-none",
         radius === "sm" && "rounded-sm",
         radius === "md" && "rounded-md",

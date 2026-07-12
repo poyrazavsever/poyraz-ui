@@ -15,7 +15,13 @@ export type ToasterProps = React.ComponentProps<typeof Sonner> & {
   motion?: "spring" | "slide" | "fade";
 };
 
-const Toaster = ({ className, motion = "spring", radius = "xl", surface = "glass", ...props }: ToasterProps) => {
+const Toaster = ({
+  className,
+  motion = "spring",
+  radius = "xl",
+  surface = "glass",
+  ...props
+}: ToasterProps) => {
   return (
     <Sonner
       className={cn("toaster group", className)}
@@ -35,7 +41,8 @@ const Toaster = ({ className, motion = "spring", radius = "xl", surface = "glass
             radius === "xl" && "rounded-xl",
             motion === "spring" && "ease-[var(--poyraz-motion-ease-spring)]",
             motion === "slide" && "ease-[var(--poyraz-motion-ease-out)]",
-            motion === "fade" && "data-[mounted=false]:translate-y-0 data-[removed=true]:translate-y-0",
+            motion === "fade" &&
+              "data-[mounted=false]:translate-y-0 data-[removed=true]:translate-y-0",
             "text-sm font-medium",
           ),
           content: "min-w-0 flex-1 pt-0.5",

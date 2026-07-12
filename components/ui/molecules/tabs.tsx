@@ -21,7 +21,10 @@ const TabsList = React.forwardRef<
   const listRef = React.useRef<React.ElementRef<typeof TabsPrimitive.List>>(null);
   const [indicator, setIndicator] = React.useState({ left: 0, width: 0, visible: false });
 
-  React.useImperativeHandle(forwardedRef, () => listRef.current as React.ElementRef<typeof TabsPrimitive.List>);
+  React.useImperativeHandle(
+    forwardedRef,
+    () => listRef.current as React.ElementRef<typeof TabsPrimitive.List>,
+  );
 
   React.useLayoutEffect(() => {
     const list = listRef.current;
@@ -38,10 +41,16 @@ const TabsList = React.forwardRef<
 
     update();
     const mutationObserver = new MutationObserver(update);
-    mutationObserver.observe(list, { attributes: true, subtree: true, attributeFilter: ["data-state"] });
+    mutationObserver.observe(list, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ["data-state"],
+    });
     const resizeObserver = new ResizeObserver(update);
     resizeObserver.observe(list);
-    list.querySelectorAll<HTMLElement>('[role="tab"]').forEach((tab) => resizeObserver.observe(tab));
+    list
+      .querySelectorAll<HTMLElement>('[role="tab"]')
+      .forEach((tab) => resizeObserver.observe(tab));
 
     return () => {
       mutationObserver.disconnect();
@@ -52,35 +61,36 @@ const TabsList = React.forwardRef<
   return (
     <TabsStyleContext.Provider value={{ variant }}>
       <TabsPrimitive.List
-      ref={listRef}
-      className={cn(
-        "relative inline-flex min-h-10 max-w-full items-center overflow-x-auto overflow-y-clip p-1 text-muted-foreground [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-        "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)]",
-        variant === "line" && "gap-1 border-b border-border bg-transparent px-0 pb-0",
-        variant === "soft" && "gap-1 bg-surface-subtle",
-        variant === "glass" && "gap-1 border border-glass-border-outer bg-glass shadow-sm backdrop-blur-glass",
-        radius === "none" && "rounded-none",
-        radius === "sm" && "rounded-sm",
-        radius === "md" && "rounded-md",
-        radius === "lg" && "rounded-lg",
-        radius === "full" && "rounded-full",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      {variant === "line" && (
-        <span
-          aria-hidden="true"
-          data-slot="tabs-indicator"
-          className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-primary transition-[transform,width,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)] will-change-transform motion-reduce:duration-[1ms]"
-          style={{
-            width: indicator.width,
-            opacity: indicator.visible ? 1 : 0,
-            transform: `translate3d(${indicator.left}px, 0, 0)`,
-          }}
-        />
-      )}
+        ref={listRef}
+        className={cn(
+          "relative inline-flex min-h-10 max-w-full items-center overflow-x-auto overflow-y-clip p-1 text-muted-foreground [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)]",
+          variant === "line" && "gap-1 border-b border-border bg-transparent px-0 pb-0",
+          variant === "soft" && "gap-1 bg-surface-subtle",
+          variant === "glass" &&
+            "gap-1 border border-glass-border-outer bg-glass shadow-sm backdrop-blur-glass",
+          radius === "none" && "rounded-none",
+          radius === "sm" && "rounded-sm",
+          radius === "md" && "rounded-md",
+          radius === "lg" && "rounded-lg",
+          radius === "full" && "rounded-full",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        {variant === "line" && (
+          <span
+            aria-hidden="true"
+            data-slot="tabs-indicator"
+            className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-primary transition-[transform,width,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)] will-change-transform motion-reduce:duration-[1ms]"
+            style={{
+              width: indicator.width,
+              opacity: indicator.visible ? 1 : 0,
+              transform: `translate3d(${indicator.left}px, 0, 0)`,
+            }}
+          />
+        )}
       </TabsPrimitive.List>
     </TabsStyleContext.Provider>
   );
@@ -111,7 +121,8 @@ const TabsTrigger = React.forwardRef<
         radius === "lg" && "rounded-lg",
         radius === "full" && "rounded-full",
         variant === "line" && "data-[state=active]:text-foreground",
-        variant !== "line" && "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+        variant !== "line" &&
+          "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
         variant === "glass" && "data-[state=active]:bg-background/80",
         className,
       )}

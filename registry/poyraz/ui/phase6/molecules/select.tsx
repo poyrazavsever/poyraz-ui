@@ -54,10 +54,7 @@ const SelectScrollUpButton = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
     ref={ref}
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className,
-    )}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
     {...props}
   >
     <ChevronUp className="h-4 w-4" />
@@ -71,17 +68,13 @@ const SelectScrollDownButton = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
     ref={ref}
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className,
-    )}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
     {...props}
   >
     <ChevronDown className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
 ));
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
 const SelectItemContext = React.createContext<{
   size: NonNullable<FloatingItemProps["size"]>;
@@ -95,44 +88,61 @@ const SelectContent = React.forwardRef<
       itemSize?: NonNullable<FloatingItemProps["size"]>;
       itemRadius?: NonNullable<FloatingItemProps["radius"]>;
     }
->(({ className, children, position = "popper", surface, radius, itemSize = "md", itemRadius = "md", collisionPadding = 8, style, ...props }, ref) => (
-  <SelectPrimitive.Portal>
-    <SelectPrimitive.Content
-      ref={ref}
-      collisionPadding={collisionPadding}
-      style={{
-        "--poyraz-floating-transform-origin":
-          "var(--radix-select-content-transform-origin)",
-        "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
-        ...style,
-      } as React.CSSProperties}
-      className={cn(
-        floatingSurfaceVariants({ surface, radius }),
-        floatingMotion,
-        "relative z-50 max-h-96 min-w-40",
-        position === "popper" &&
-          "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-        className,
-      )}
-      position={position}
-      {...props}
-    >
-      <SelectScrollUpButton />
-      <SelectItemContext.Provider value={{ size: itemSize, radius: itemRadius }}>
-      <SelectPrimitive.Viewport
+>(
+  (
+    {
+      className,
+      children,
+      position = "popper",
+      surface,
+      radius,
+      itemSize = "md",
+      itemRadius = "md",
+      collisionPadding = 8,
+      style,
+      ...props
+    },
+    ref,
+  ) => (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Content
+        ref={ref}
+        collisionPadding={collisionPadding}
+        style={
+          {
+            "--poyraz-floating-transform-origin": "var(--radix-select-content-transform-origin)",
+            "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
+            ...style,
+          } as React.CSSProperties
+        }
         className={cn(
-          "p-1",
+          floatingSurfaceVariants({ surface, radius }),
+          floatingMotion,
+          "relative z-50 max-h-96 min-w-40",
           position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          className,
         )}
+        position={position}
+        {...props}
       >
-        {children}
-      </SelectPrimitive.Viewport>
-      </SelectItemContext.Provider>
-      <SelectScrollDownButton />
-    </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
-));
+        <SelectScrollUpButton />
+        <SelectItemContext.Provider value={{ size: itemSize, radius: itemRadius }}>
+          <SelectPrimitive.Viewport
+            className={cn(
+              "p-1",
+              position === "popper" &&
+                "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+            )}
+          >
+            {children}
+          </SelectPrimitive.Viewport>
+        </SelectItemContext.Provider>
+        <SelectScrollDownButton />
+      </SelectPrimitive.Content>
+    </SelectPrimitive.Portal>
+  ),
+);
 SelectContent.displayName = SelectPrimitive.Content.displayName;
 
 const SelectLabel = React.forwardRef<
@@ -158,32 +168,38 @@ const SelectItem = React.forwardRef<
 >(({ className, children, size, radius, media, description, trailing, ...props }, ref) => {
   const defaults = React.useContext(SelectItemContext);
   return (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={cn(
-      floatingItemVariants({ size: size ?? defaults.size, radius: radius ?? defaults.radius }),
-      "cursor-default pl-8",
-      className,
-    )}
-    {...props}
-  >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <SelectPrimitive.ItemIndicator>
-        <Check className="h-4 w-4 animate-poyraz-scale-in" />
-      </SelectPrimitive.ItemIndicator>
-    </span>
-
-    {media && (
-      <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
-        {media}
+    <SelectPrimitive.Item
+      ref={ref}
+      className={cn(
+        floatingItemVariants({ size: size ?? defaults.size, radius: radius ?? defaults.radius }),
+        "cursor-default pl-8",
+        className,
+      )}
+      {...props}
+    >
+      <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+        <SelectPrimitive.ItemIndicator>
+          <Check className="h-4 w-4 animate-poyraz-scale-in" />
+        </SelectPrimitive.ItemIndicator>
       </span>
-    )}
-    <span className="min-w-0 flex-1">
-      <SelectPrimitive.ItemText><span className="block truncate font-medium">{children}</span></SelectPrimitive.ItemText>
-      {description && <span className="mt-0.5 block line-clamp-2 text-xs text-muted-foreground">{description}</span>}
-    </span>
-    {trailing && <span className="ml-auto shrink-0 text-muted-foreground">{trailing}</span>}
-  </SelectPrimitive.Item>
+
+      {media && (
+        <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
+          {media}
+        </span>
+      )}
+      <span className="min-w-0 flex-1">
+        <SelectPrimitive.ItemText>
+          <span className="block truncate font-medium">{children}</span>
+        </SelectPrimitive.ItemText>
+        {description && (
+          <span className="mt-0.5 block line-clamp-2 text-xs text-muted-foreground">
+            {description}
+          </span>
+        )}
+      </span>
+      {trailing && <span className="ml-auto shrink-0 text-muted-foreground">{trailing}</span>}
+    </SelectPrimitive.Item>
   );
 });
 SelectItem.displayName = SelectPrimitive.Item.displayName;

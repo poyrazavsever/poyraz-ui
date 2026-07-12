@@ -66,7 +66,21 @@ function resolveMermaidTheme(container: HTMLElement) {
 let idCounter = 0;
 
 const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
-  ({ className, code, chartId, children, diagramStyle = "soft", errorContent, loadingContent, radius = "lg", surface = "solid", ...props }, ref) => {
+  (
+    {
+      className,
+      code,
+      chartId,
+      children,
+      diagramStyle = "soft",
+      errorContent,
+      loadingContent,
+      radius = "lg",
+      surface = "solid",
+      ...props
+    },
+    ref,
+  ) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [svg, setSvg] = React.useState<string>("");
     const [error, setError] = React.useState<string>("");
@@ -83,7 +97,10 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
     React.useEffect(() => {
       const update = () => setThemeRevision((revision) => revision + 1);
       const observer = new MutationObserver(update);
-      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-poyraz-theme", "style"] });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class", "data-poyraz-theme", "style"],
+      });
       const media = window.matchMedia("(prefers-color-scheme: dark)");
       media.addEventListener("change", update);
       return () => {
@@ -116,7 +133,11 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
               securityLevel: "strict",
               theme: "base",
               themeVariables: resolveMermaidTheme(container),
-              flowchart: { htmlLabels: true, curve: diagramStyle === "technical" ? "linear" : "basis", padding: 12 },
+              flowchart: {
+                htmlLabels: true,
+                curve: diagramStyle === "technical" ? "linear" : "basis",
+                padding: 12,
+              },
               sequence: { actorMargin: 60, boxMargin: 8, noteMargin: 10, messageMargin: 30 },
             });
             const { svg: rendered } = await mod.default.render(id, mermaidCode);
@@ -126,20 +147,14 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
             }
           } catch (err) {
             if (!cancelled) {
-              setError(
-                err instanceof Error
-                  ? err.message
-                  : "Failed to render diagram.",
-              );
+              setError(err instanceof Error ? err.message : "Failed to render diagram.");
               setLoading(false);
             }
           }
         })
         .catch((err) => {
           if (!cancelled) {
-            setError(
-              err instanceof Error ? err.message : "Failed to load mermaid.",
-            );
+            setError(err instanceof Error ? err.message : "Failed to load mermaid.");
             setLoading(false);
           }
         });
@@ -152,12 +167,9 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
     // Combine refs
     const setRefs = React.useCallback(
       (node: HTMLDivElement | null) => {
-        (
-          containerRef as React.MutableRefObject<HTMLDivElement | null>
-        ).current = node;
+        (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
         if (typeof ref === "function") ref(node);
-        else if (ref)
-          (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
       },
       [ref],
     );
@@ -180,14 +192,25 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
         {...props}
       >
         {loading && (
-          <div role="status" className="flex items-center justify-center py-8 gap-3 text-sm text-muted-foreground animate-poyraz-fade-in">
-            {loadingContent ?? <><div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-poyraz-spin" />Rendering diagram…</>}
+          <div
+            role="status"
+            className="flex items-center justify-center py-8 gap-3 text-sm text-muted-foreground animate-poyraz-fade-in"
+          >
+            {loadingContent ?? (
+              <>
+                <div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-poyraz-spin" />
+                Rendering diagram…
+              </>
+            )}
           </div>
         )}
 
         {error && !loading && (
           <div className="py-6 text-center animate-poyraz-fade-in">
-            <div role="alert" className="inline-block rounded-md border border-invalid-border bg-invalid-muted px-3 py-2 text-xs text-destructive-muted-foreground font-mono">
+            <div
+              role="alert"
+              className="inline-block rounded-md border border-invalid-border bg-invalid-muted px-3 py-2 text-xs text-destructive-muted-foreground font-mono"
+            >
               {errorContent ? errorContent(error) : error}
             </div>
           </div>
@@ -204,13 +227,17 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
         <style
           dangerouslySetInnerHTML={{
             __html: `
-${diagramStyle === "technical" ? `.mermaid-output .node rect,
+${
+  diagramStyle === "technical"
+    ? `.mermaid-output .node rect,
 .mermaid-output .node circle,
 .mermaid-output .node ellipse,
 .mermaid-output .node polygon {
   stroke-dasharray: 6, 3;
   stroke-width: 2px;
-}` : ""}
+}`
+    : ""
+}
 .mermaid-output .cluster rect {
   ${diagramStyle === "technical" ? "stroke-dasharray: 8, 4;" : ""}
   stroke-width: 1.5px;

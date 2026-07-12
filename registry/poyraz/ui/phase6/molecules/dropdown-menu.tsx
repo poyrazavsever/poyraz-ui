@@ -29,8 +29,9 @@ const DropdownMenuContext = React.createContext<DropdownMenuContextValue>({
   cancelClose: () => {},
 });
 
-export interface DropdownMenuProps
-  extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root> {
+export interface DropdownMenuProps extends React.ComponentPropsWithoutRef<
+  typeof DropdownMenuPrimitive.Root
+> {
   /** `hover` remains click-accessible on touch and keyboard. */
   interaction?: DropdownInteraction;
   /** Grace period while the pointer travels from trigger to content. */
@@ -134,7 +135,8 @@ const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 
 interface DropdownMenuContentProps
-  extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>,
+  extends
+    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>,
     FloatingSurfaceProps {
   itemSize?: NonNullable<FloatingItemProps["size"]>;
   itemRadius?: NonNullable<FloatingItemProps["radius"]>;
@@ -180,12 +182,14 @@ const DropdownMenuContent = React.forwardRef<
               hover.scheduleClose(event);
               onPointerLeave?.(event);
             }}
-            style={{
-              "--poyraz-floating-transform-origin":
-                "var(--radix-dropdown-menu-content-transform-origin)",
-              "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
-              ...props.style,
-            } as React.CSSProperties}
+            style={
+              {
+                "--poyraz-floating-transform-origin":
+                  "var(--radix-dropdown-menu-content-transform-origin)",
+                "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
+                ...props.style,
+              } as React.CSSProperties
+            }
             className={cn(
               floatingSurfaceVariants({ surface, radius }),
               floatingMotion,
@@ -202,7 +206,8 @@ const DropdownMenuContent = React.forwardRef<
 DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
 
 interface DropdownMenuSubContentProps
-  extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>,
+  extends
+    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>,
     FloatingSurfaceProps {}
 
 const DropdownMenuSubContent = React.forwardRef<
@@ -210,31 +215,32 @@ const DropdownMenuSubContent = React.forwardRef<
   DropdownMenuSubContentProps
 >(({ className, surface, radius, sideOffset = 6, collisionPadding = 8, style, ...props }, ref) => (
   <DropdownMenuPortal>
-  <DropdownMenuPrimitive.SubContent
-    ref={ref}
-    sideOffset={sideOffset}
-    collisionPadding={collisionPadding}
-    style={{
-      "--poyraz-floating-transform-origin":
-        "var(--radix-dropdown-menu-content-transform-origin)",
-      "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
-      ...style,
-    } as React.CSSProperties}
-    className={cn(
-      floatingSurfaceVariants({ surface, radius }),
-      floatingMotion,
-      "z-[60] w-max min-w-40 max-w-[var(--radix-dropdown-menu-content-available-width)] p-1.5",
-      className,
-    )}
-    {...props}
-  />
+    <DropdownMenuPrimitive.SubContent
+      ref={ref}
+      sideOffset={sideOffset}
+      collisionPadding={collisionPadding}
+      style={
+        {
+          "--poyraz-floating-transform-origin":
+            "var(--radix-dropdown-menu-content-transform-origin)",
+          "--poyraz-floating-slide": "var(--poyraz-floating-slide-distance, 0.5rem)",
+          ...style,
+        } as React.CSSProperties
+      }
+      className={cn(
+        floatingSurfaceVariants({ surface, radius }),
+        floatingMotion,
+        "z-[60] w-max min-w-40 max-w-[var(--radix-dropdown-menu-content-available-width)] p-1.5",
+        className,
+      )}
+      {...props}
+    />
   </DropdownMenuPortal>
 ));
 DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
 
 interface DropdownMenuItemProps
-  extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>,
-    FloatingItemProps {
+  extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>, FloatingItemProps {
   media?: React.ReactNode;
   description?: React.ReactNode;
   trailing?: React.ReactNode;
@@ -260,22 +266,26 @@ const DropdownMenuItem = React.forwardRef<
       )}
       {...props}
     >
-      {rich ? <>
-      {media && (
-        <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
-          {media}
-        </span>
-      )}
-      <span className="min-w-0 flex-1">
-        <span className="block truncate font-medium">{children}</span>
-        {description && (
-          <span className="mt-0.5 block line-clamp-2 text-xs leading-snug text-muted-foreground">
-            {description}
+      {rich ? (
+        <>
+          {media && (
+            <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
+              {media}
+            </span>
+          )}
+          <span className="min-w-0 flex-1">
+            <span className="block truncate font-medium">{children}</span>
+            {description && (
+              <span className="mt-0.5 block line-clamp-2 text-xs leading-snug text-muted-foreground">
+                {description}
+              </span>
+            )}
           </span>
-        )}
-      </span>
-      {trailing && <span className="ml-auto shrink-0 text-muted-foreground">{trailing}</span>}
-      </> : children}
+          {trailing && <span className="ml-auto shrink-0 text-muted-foreground">{trailing}</span>}
+        </>
+      ) : (
+        children
+      )}
     </DropdownMenuPrimitive.Item>
   );
 });
@@ -290,7 +300,11 @@ const DropdownMenuSubTrigger = React.forwardRef<
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
-        floatingItemVariants({ inset, size: size ?? defaults.size, radius: radius ?? defaults.radius }),
+        floatingItemVariants({
+          inset,
+          size: size ?? defaults.size,
+          radius: radius ?? defaults.radius,
+        }),
         "group cursor-default whitespace-nowrap data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
         className,
       )}
@@ -320,7 +334,9 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       {...props}
     >
       <span className="absolute left-2 flex size-4 items-center justify-center">
-        <DropdownMenuPrimitive.ItemIndicator><Check className="size-4 animate-poyraz-scale-in" /></DropdownMenuPrimitive.ItemIndicator>
+        <DropdownMenuPrimitive.ItemIndicator>
+          <Check className="size-4 animate-poyraz-scale-in" />
+        </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
     </DropdownMenuPrimitive.CheckboxItem>
@@ -344,7 +360,9 @@ const DropdownMenuRadioItem = React.forwardRef<
       {...props}
     >
       <span className="absolute left-2 flex size-4 items-center justify-center">
-        <DropdownMenuPrimitive.ItemIndicator><Circle className="size-2 fill-current" /></DropdownMenuPrimitive.ItemIndicator>
+        <DropdownMenuPrimitive.ItemIndicator>
+          <Circle className="size-2 fill-current" />
+        </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
     </DropdownMenuPrimitive.RadioItem>
@@ -358,7 +376,11 @@ const DropdownMenuLabel = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-2.5 py-1.5 text-xs font-semibold text-muted-foreground", inset && "pl-8", className)}
+    className={cn(
+      "px-2.5 py-1.5 text-xs font-semibold text-muted-foreground",
+      inset && "pl-8",
+      className,
+    )}
     {...props}
   />
 ));
@@ -368,12 +390,22 @@ const DropdownMenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator ref={ref} className={cn("-mx-1 my-1 h-px bg-border", className)} {...props} />
+  <DropdownMenuPrimitive.Separator
+    ref={ref}
+    className={cn("-mx-1 my-1 h-px bg-border", className)}
+    {...props}
+  />
 ));
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
 
 const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span className={cn("ml-auto shrink-0 whitespace-nowrap pl-6 text-xs tracking-wider text-muted-foreground", className)} {...props} />
+  <span
+    className={cn(
+      "ml-auto shrink-0 whitespace-nowrap pl-6 text-xs tracking-wider text-muted-foreground",
+      className,
+    )}
+    {...props}
+  />
 );
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 

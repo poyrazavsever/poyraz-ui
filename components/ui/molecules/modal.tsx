@@ -78,7 +78,8 @@ ModalOverlay.displayName = "ModalOverlay";
 export interface ModalContentProps
   extends
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof modalContentVariants>, OverlaySurfaceProps {
+    VariantProps<typeof modalContentVariants>,
+    OverlaySurfaceProps {
   /** Hide the default close (X) button */
   hideClose?: boolean;
   mobile?: "floating" | "fullscreen";
@@ -91,7 +92,19 @@ const ModalContent = React.forwardRef<
   ModalContentProps
 >(
   (
-    { className, children, size, position, surface, radius, hideClose = false, mobile = "floating", overlayTone, overlayClassName, ...props },
+    {
+      className,
+      children,
+      size,
+      position,
+      surface,
+      radius,
+      hideClose = false,
+      mobile = "floating",
+      overlayTone,
+      overlayClassName,
+      ...props
+    },
     ref,
   ) => (
     <DialogPrimitive.Portal>
@@ -101,7 +114,8 @@ const ModalContent = React.forwardRef<
         className={cn(
           overlaySurfaceVariants({ surface, radius }),
           modalContentVariants({ size, position }),
-          mobile === "fullscreen" && "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-none",
+          mobile === "fullscreen" &&
+            "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-none",
           className,
         )}
         {...props}
@@ -121,21 +135,12 @@ ModalContent.displayName = "ModalContent";
 
 /* ── Header / Footer / Title / Description ────────────────────────── */
 
-const ModalHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn("flex flex-col space-y-1.5 text-left", className)}
-    {...props}
-  />
+const ModalHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-1.5 text-left", className)} {...props} />
 );
 ModalHeader.displayName = "ModalHeader";
 
-const ModalFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const ModalFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-2 border-t border-border",
@@ -152,10 +157,7 @@ const ModalTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn(
-      "text-base font-semibold leading-none tracking-tight",
-      className,
-    )}
+    className={cn("text-base font-semibold leading-none tracking-tight", className)}
     {...props}
   />
 ));

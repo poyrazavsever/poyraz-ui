@@ -103,7 +103,9 @@ function Autocomplete({
   itemSize = "md",
 }: AutocompleteProps) {
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
-  const [internalValue, setInternalValue] = React.useState<string | string[] | undefined>(defaultValue);
+  const [internalValue, setInternalValue] = React.useState<string | string[] | undefined>(
+    defaultValue,
+  );
   const [query, setQuery] = React.useState("");
   const [highlightIndex, setHighlightIndex] = React.useState(-1);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -115,10 +117,13 @@ function Autocomplete({
   const resolvedValue = valueControlled ? value : internalValue;
   const resolvedState = loading || state === "loading" ? "loading" : state;
 
-  const setOpen = React.useCallback((next: boolean) => {
-    if (controlledOpen === undefined) setInternalOpen(next);
-    onOpenChange?.(next);
-  }, [controlledOpen, onOpenChange]);
+  const setOpen = React.useCallback(
+    (next: boolean) => {
+      if (controlledOpen === undefined) setInternalOpen(next);
+      onOpenChange?.(next);
+    },
+    [controlledOpen, onOpenChange],
+  );
 
   // Normalize value to array for internal use
   const selectedValues = React.useMemo(() => {
@@ -153,10 +158,7 @@ function Autocomplete({
   // Close on outside click
   React.useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(e.target as Node)
-      ) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
         setOpen(false);
         // If freeSolo is off, clear the query when closing without selection
         if (!freeSolo) setQuery("");
@@ -174,9 +176,7 @@ function Autocomplete({
   // Scroll highlighted item into view
   React.useEffect(() => {
     if (highlightIndex >= 0 && listRef.current) {
-      const items = listRef.current.querySelectorAll(
-        "[data-autocomplete-item]",
-      );
+      const items = listRef.current.querySelectorAll("[data-autocomplete-item]");
       items[highlightIndex]?.scrollIntoView({ block: "nearest" });
     }
   }, [highlightIndex]);
@@ -191,8 +191,7 @@ function Autocomplete({
     } else {
       if (!valueControlled) setInternalValue(optionValue);
       onValueChange?.(optionValue);
-      const label =
-        options.find((o) => o.value === optionValue)?.label ?? optionValue;
+      const label = options.find((o) => o.value === optionValue)?.label ?? optionValue;
       setQuery(label);
       setOpen(false);
     }
@@ -252,12 +251,7 @@ function Autocomplete({
       setOpen(false);
     } else if (e.key === "Tab") {
       setOpen(false);
-    } else if (
-      e.key === "Backspace" &&
-      !query &&
-      multiple &&
-      selectedValues.length > 0
-    ) {
+    } else if (e.key === "Backspace" && !query && multiple && selectedValues.length > 0) {
       // Remove last tag
       const next = selectedValues.slice(0, -1);
       if (!valueControlled) setInternalValue(next);
@@ -274,7 +268,12 @@ function Autocomplete({
   }, [selectedValues, multiple, open, options]);
 
   return (
-    <div ref={wrapperRef} data-slot="autocomplete" data-state={resolvedState} className={cn("relative w-full", className)}>
+    <div
+      ref={wrapperRef}
+      data-slot="autocomplete"
+      data-state={resolvedState}
+      className={cn("relative w-full", className)}
+    >
       {/* Trigger */}
       <div
         className={cn(
@@ -329,9 +328,7 @@ function Autocomplete({
             onChange={handleInputChange}
             onFocus={() => setOpen(true)}
             onKeyDown={handleKeyDown}
-            placeholder={
-              multiple && selectedValues.length > 0 ? "" : placeholder
-            }
+            placeholder={multiple && selectedValues.length > 0 ? "" : placeholder}
             disabled={disabled}
             className={cn(
               "flex-1 bg-transparent text-sm text-foreground placeholder:text-placeholder",
@@ -343,7 +340,9 @@ function Autocomplete({
             aria-haspopup="listbox"
             aria-autocomplete="list"
             aria-controls={open ? listboxId : undefined}
-            aria-activedescendant={highlightIndex >= 0 ? `${listboxId}-option-${highlightIndex}` : undefined}
+            aria-activedescendant={
+              highlightIndex >= 0 ? `${listboxId}-option-${highlightIndex}` : undefined
+            }
             autoComplete="off"
           />
         </div>
@@ -369,14 +368,21 @@ function Autocomplete({
           )}
         >
           {resolvedState === "loading" && (
-            <div role="status" aria-live="polite" className="flex items-center justify-center gap-2 py-6 text-sm text-muted-foreground animate-poyraz-fade-in">
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex items-center justify-center gap-2 py-6 text-sm text-muted-foreground animate-poyraz-fade-in"
+            >
               <div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-poyraz-spin" />
               {loadingText}
             </div>
           )}
 
           {resolvedState === "error" && (
-            <div role="alert" className="px-3 py-6 text-center text-sm text-destructive-muted-foreground animate-poyraz-fade-in">
+            <div
+              role="alert"
+              className="px-3 py-6 text-center text-sm text-destructive-muted-foreground animate-poyraz-fade-in"
+            >
               {errorText}
             </div>
           )}
@@ -389,11 +395,7 @@ function Autocomplete({
 
           {resolvedState === "ready" &&
             Array.from(grouped.entries()).map(([group, opts]) => (
-              <div
-                key={group || "__ungrouped"}
-                role="group"
-                className="animate-poyraz-fade-in"
-              >
+              <div key={group || "__ungrouped"} role="group" className="animate-poyraz-fade-in">
                 {group && (
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-placeholder border-b border-accent">
                     {group}
@@ -415,8 +417,7 @@ function Autocomplete({
                         floatingItemVariants({ size: itemSize, radius: "md" }),
                         "cursor-pointer border border-transparent",
                         isHighlighted && "bg-muted border-border translate-x-0.5",
-                        !isHighlighted &&
-                          "hover:bg-muted hover:border-border",
+                        !isHighlighted && "hover:bg-muted hover:border-border",
                         opt.disabled && "pointer-events-none opacity-40",
                       )}
                       onClick={() => {
@@ -424,10 +425,18 @@ function Autocomplete({
                       }}
                       onMouseEnter={() => setHighlightIndex(flatIdx)}
                     >
-                      {opt.media && <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">{opt.media}</span>}
+                      {opt.media && (
+                        <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
+                          {opt.media}
+                        </span>
+                      )}
                       <span className="min-w-0 flex-1">
                         <span className="block truncate font-medium">{opt.label}</span>
-                        {opt.description && <span className="mt-0.5 block truncate text-xs text-muted-foreground">{opt.description}</span>}
+                        {opt.description && (
+                          <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                            {opt.description}
+                          </span>
+                        )}
                       </span>
                       {isSelected && (
                         <Check className="h-4 w-4 shrink-0 text-primary animate-poyraz-scale-in" />
