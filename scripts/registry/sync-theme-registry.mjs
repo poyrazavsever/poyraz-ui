@@ -4,6 +4,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { buildRegistryThemeCssVars } from "./theme-registry.mjs";
+import { buildRegistryThemeCss } from "./style-registry.mjs";
 
 const themeRegistryFile = resolve(
   process.cwd(),
@@ -17,6 +18,7 @@ if (!themeItem) {
 }
 
 themeItem.cssVars = await buildRegistryThemeCssVars();
+themeItem.css = buildRegistryThemeCss();
 themeItem.meta = {
   ...themeItem.meta,
   tokenSource: "src/theme-tokens.json",

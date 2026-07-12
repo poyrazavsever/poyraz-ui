@@ -136,10 +136,18 @@
   --poyraz-motion-duration-base: 180ms;
   --poyraz-motion-duration-slow: 260ms;
   --poyraz-motion-duration-deliberate: 420ms;
+  --poyraz-motion-duration-spinner: 700ms;
+  --poyraz-motion-duration-pulse: 1800ms;
   --poyraz-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --poyraz-motion-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
   --poyraz-motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --poyraz-motion-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --poyraz-motion-distance-micro: 0.125rem;
+  --poyraz-motion-distance-floating: 0.5rem;
+  --poyraz-motion-scale-enter: 0.98;
+  --poyraz-motion-scale-press-small: 0.96;
+  --poyraz-motion-scale-press-medium: 0.98;
+  --poyraz-motion-scale-press-large: 0.99;
   --poyraz-floating-slide-distance: 0.5rem;
   --poyraz-overlay-blur: 6px;
   --poyraz-z-index-base: 0;
@@ -577,7 +585,7 @@
   .poyraz-button [data-slot="button-spinner"] svg {
     width: 100%;
     height: 100%;
-    animation: poyraz-button-spin var(--poyraz-motion-duration-slow) linear infinite;
+    animation: poyraz-spin var(--poyraz-motion-duration-spinner) linear infinite;
   }
 
   .poyraz-button[data-loading] > :not([data-slot="button-spinner"]) {
@@ -929,6 +937,35 @@ input:-webkit-autofill:focus {
     var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
 }
 
+@utility animate-poyraz-floating-in {
+  animation: poyraz-floating-in var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-floating-out {
+  animation: poyraz-floating-out var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+@utility animate-poyraz-overlay-in {
+  animation: poyraz-overlay-in var(--poyraz-motion-duration-base, 180ms)
+    var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+@utility animate-poyraz-overlay-out {
+  animation: poyraz-overlay-out var(--poyraz-motion-duration-fast, 120ms)
+    var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both;
+}
+
+@utility animate-poyraz-spin {
+  animation: poyraz-spin var(--poyraz-motion-duration-spinner, 700ms) linear infinite;
+}
+
+@utility animate-poyraz-pulse {
+  animation: poyraz-pulse var(--poyraz-motion-duration-pulse, 1800ms)
+    var(--poyraz-motion-ease-standard, cubic-bezier(0.2, 0, 0, 1)) infinite;
+}
+
 @utility animate-poyraz-slide-in-from-top {
   animation: poyraz-slide-in-from-top
     var(--poyraz-motion-duration-base, 180ms)
@@ -1085,6 +1122,44 @@ input:-webkit-autofill:focus {
 }
 
 @layer utilities {
+  [data-side="top"] {
+    --poyraz-floating-translate-x: 0;
+    --poyraz-floating-translate-y: var(--poyraz-motion-distance-floating, 0.5rem);
+  }
+
+  [data-side="right"] {
+    --poyraz-floating-translate-x: calc(var(--poyraz-motion-distance-floating, 0.5rem) * -1);
+    --poyraz-floating-translate-y: 0;
+  }
+
+  [data-side="bottom"] {
+    --poyraz-floating-translate-x: 0;
+    --poyraz-floating-translate-y: calc(var(--poyraz-motion-distance-floating, 0.5rem) * -1);
+  }
+
+  [data-side="left"] {
+    --poyraz-floating-translate-x: var(--poyraz-motion-distance-floating, 0.5rem);
+    --poyraz-floating-translate-y: 0;
+  }
+
+  .poyraz-toast-motion {
+    transition: transform var(--poyraz-motion-duration-base, 180ms)
+        var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      opacity var(--poyraz-motion-duration-fast, 120ms)
+        var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .poyraz-toast-motion[data-swipe-out="true"],
+  .poyraz-toast-motion[data-swiped="true"] {
+    animation-duration: var(--poyraz-motion-duration-fast, 120ms);
+    animation-timing-function: var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    animation-fill-mode: forwards;
+  }
+
+  .poyraz-toast-motion[data-swiping="true"] {
+    transition: none;
+  }
+
   .slide-in-from-left-1\/2 {
     --poyraz-enter-translate-x: -50%;
   }
@@ -1186,6 +1261,38 @@ input:-webkit-autofill:focus {
     opacity: 0;
     transform: scale(0.96);
   }
+}
+
+@keyframes poyraz-floating-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--poyraz-floating-translate-x, 0), var(--poyraz-floating-translate-y, 0), 0)
+      scale(var(--poyraz-motion-scale-enter, 0.98));
+  }
+}
+
+@keyframes poyraz-floating-out {
+  to {
+    opacity: 0;
+    transform: translate3d(var(--poyraz-floating-translate-x, 0), var(--poyraz-floating-translate-y, 0), 0)
+      scale(var(--poyraz-motion-scale-enter, 0.98));
+  }
+}
+
+@keyframes poyraz-overlay-in {
+  from { opacity: 0; }
+}
+
+@keyframes poyraz-overlay-out {
+  to { opacity: 0; }
+}
+
+@keyframes poyraz-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes poyraz-pulse {
+  50% { opacity: 0.55; }
 }
 
 @keyframes poyraz-slide-in-from-top {
@@ -1311,8 +1418,17 @@ input:-webkit-autofill:focus {
     --poyraz-motion-duration-base: 1ms;
     --poyraz-motion-duration-slow: 1ms;
     --poyraz-motion-duration-deliberate: 1ms;
+    --poyraz-motion-duration-spinner: 1ms;
+    --poyraz-motion-duration-pulse: 1ms;
   }
 
+
+  [class*="animate-poyraz-"],
+  .poyraz-toast-motion {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
 
   .poyraz-button,
   .poyraz-button::before,
@@ -1344,6 +1460,15 @@ input:-webkit-autofill:focus {
   --poyraz-motion-duration-base: 1ms;
   --poyraz-motion-duration-slow: 1ms;
   --poyraz-motion-duration-deliberate: 1ms;
+  --poyraz-motion-duration-spinner: 1ms;
+  --poyraz-motion-duration-pulse: 1ms;
+}
+
+[data-poyraz-motion="reduced"] [class*="animate-poyraz-"],
+[data-poyraz-motion="reduced"] .poyraz-toast-motion {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
 }
 
 [data-poyraz-motion="reduced"] .poyraz-button,
