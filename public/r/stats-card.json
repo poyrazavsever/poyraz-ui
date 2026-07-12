@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-card",
+  "title": "Stats Card",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass stats-card with semantic states and composable variants.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/card"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/blocks/card-templates/stats-card.tsx",
+      "content": "import * as React from \"react\";\nimport { ArrowDownRight, ArrowUpRight, Minus } from \"lucide-react\";\nimport { Card, CardContent, type CardProps } from \"@/components/ui/atoms/card\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface StatsCardProps extends CardProps { icon?: React.ReactNode; label: string; value: string | number; trend?: \"up\" | \"down\" | \"neutral\"; trendValue?: string; chart?: React.ReactNode; }\nconst StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(({ chart, className, icon, label, trend = \"neutral\", trendValue, value, ...props }, ref) => {\n  const TrendIcon = trend === \"up\" ? ArrowUpRight : trend === \"down\" ? ArrowDownRight : Minus;\n  return <Card ref={ref} className={cn(\"group\", className)} {...props}><CardContent className=\"p-5\"><div className=\"flex items-start justify-between\"><span className=\"text-xs font-medium text-muted-foreground\">{label}</span>{icon && <span className=\"flex size-9 items-center justify-center rounded-lg bg-surface-subtle text-primary transition-transform group-hover:scale-105\">{icon}</span>}</div><div className=\"mt-3 text-3xl font-bold tracking-tight\">{value}</div>{trendValue && <div className={cn(\"mt-1.5 flex items-center gap-1 text-xs font-medium\", trend === \"up\" && \"text-success-icon\", trend === \"down\" && \"text-destructive\", trend === \"neutral\" && \"text-muted-foreground\")}><TrendIcon className=\"size-3.5\" />{trendValue}</div>}{chart && <div className=\"mt-4 h-14 text-primary\">{chart}</div>}</CardContent></Card>;\n});\nStatsCard.displayName = \"StatsCard\";\nexport { StatsCard };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/card-templates/stats-card.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-card-block",
+    "phase": "beta"
+  },
+  "type": "registry:block"
+}
