@@ -7,12 +7,12 @@ import { VariantProps } from 'class-variance-authority';
 interface NavbarContextValue {
     mobileOpen: boolean;
     setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    variant: "default" | "minimal" | "transparent" | "bordered";
+    variant: "default" | "minimal" | "transparent" | "bordered" | "glass";
     containerClassName: string;
 }
 declare const useNavbar: () => NavbarContextValue;
 declare const navbarVariants: (props?: ({
-    variant?: "default" | "bordered" | "transparent" | "minimal" | null | undefined;
+    variant?: "default" | "glass" | "bordered" | "transparent" | "minimal" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface NavbarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof navbarVariants> {
     /** Show sticky behavior */
@@ -132,14 +132,23 @@ interface NavbarMobileDrillPanelProps extends React.HTMLAttributes<HTMLDivElemen
 }
 declare const NavbarMobileDrillPanel: React.ForwardRefExoticComponent<NavbarMobileDrillPanelProps & React.RefAttributes<HTMLDivElement>>;
 
+type SidebarVariant = "default" | "collapsible" | "floating" | "mini" | "dark" | "bordered" | "inset";
 interface SidebarContextValue {
     collapsed: boolean;
     setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     mobileOpen: boolean;
     setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    variant: "default" | "collapsible" | "floating" | "mini" | "dark" | "bordered" | "inset";
+    variant: SidebarVariant;
 }
-declare const useSidebar: () => SidebarContextValue;
+interface SidebarProviderProps {
+    children: React.ReactNode;
+    variant?: SidebarVariant;
+    defaultCollapsed?: boolean;
+    defaultMobileOpen?: boolean;
+}
+declare function SidebarProvider({ children, variant, defaultCollapsed, defaultMobileOpen, }: SidebarProviderProps): react_jsx_runtime.JSX.Element;
+declare function useSidebar(): SidebarContextValue;
+
 declare const sidebarVariants: (props?: ({
     variant?: "default" | "bordered" | "inset" | "dark" | "floating" | "collapsible" | "mini" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
@@ -148,6 +157,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<t
     defaultCollapsed?: boolean;
 }
 declare const Sidebar: React.ForwardRefExoticComponent<SidebarProps & React.RefAttributes<HTMLElement>>;
+declare const SidebarPanel: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLElement> & React.RefAttributes<HTMLElement>>;
 declare const SidebarHeader: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 interface SidebarBrandingProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Logo / icon element */
@@ -197,6 +207,7 @@ interface SidebarTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
     action?: "collapse" | "mobile";
 }
 declare const SidebarTrigger: React.ForwardRefExoticComponent<SidebarTriggerProps & React.RefAttributes<HTMLButtonElement>>;
+declare const SidebarRail: React.ForwardRefExoticComponent<React.ButtonHTMLAttributes<HTMLButtonElement> & React.RefAttributes<HTMLButtonElement>>;
 interface SidebarSearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onSearch?: (value: string) => void;
 }
@@ -244,14 +255,6 @@ declare const FooterSocials: React.ForwardRefExoticComponent<React.HTMLAttribute
 declare const FooterSocialLink: React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>>;
 declare const FooterBottom: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const FooterBottomLinks: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
-    heading?: string;
-    description?: string;
-    placeholder?: string;
-    buttonText?: string;
-    onSubscribe?: (email: string) => void;
-}
-declare const FooterNewsletter: React.ForwardRefExoticComponent<FooterNewsletterProps & React.RefAttributes<HTMLDivElement>>;
 declare const FooterDivider: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHRElement> & React.RefAttributes<HTMLHRElement>>;
 declare const FooterDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
 declare const FooterBadge: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLSpanElement> & React.RefAttributes<HTMLSpanElement>>;
@@ -263,6 +266,15 @@ interface FooterCTAProps extends React.HTMLAttributes<HTMLDivElement> {
 declare const FooterCTA: React.ForwardRefExoticComponent<FooterCTAProps & React.RefAttributes<HTMLDivElement>>;
 declare const FooterApp: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const FooterAppLink: React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>>;
+
+interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
+    heading?: string;
+    description?: string;
+    placeholder?: string;
+    buttonText?: string;
+    onSubscribe?: (email: string) => void;
+}
+declare const FooterNewsletter: React.ForwardRefExoticComponent<FooterNewsletterProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const announcementBarVariants: (props?: ({
     variant?: "default" | "info" | "success" | "warning" | "branded" | "danger" | null | undefined;
@@ -276,6 +288,12 @@ interface AnnouncementBarProps extends React.HTMLAttributes<HTMLDivElement>, Var
     icon?: React.ReactNode;
     /** Action element (e.g. link or button) at the end */
     action?: React.ReactNode;
+    /** Controlled visibility. Persistence belongs to the caller or optional hook. */
+    open?: boolean;
+    /** Initial visibility for uncontrolled usage. */
+    defaultOpen?: boolean;
+    /** Called whenever visibility changes. */
+    onOpenChange?: (open: boolean) => void;
 }
 declare const AnnouncementBar: React.ForwardRefExoticComponent<AnnouncementBarProps & React.RefAttributes<HTMLDivElement>>;
 
@@ -358,4 +376,4 @@ declare const DataTable: <T>(props: DataTableProps<T> & {
     ref?: React.Ref<HTMLDivElement>;
 }) => React.ReactElement;
 
-export { AnnouncementBar, DataTable, type DataTableColumnDef, DataTableCore, type DataTableCoreProps, type DataTableState, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarBadge, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuItem, SidebarSearch, SidebarSection, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };
+export { AnnouncementBar, DataTable, type DataTableColumnDef, DataTableCore, type DataTableCoreProps, type DataTableState, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, type FooterNewsletterProps, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarBadge, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuItem, SidebarPanel, SidebarProvider, SidebarRail, SidebarSearch, SidebarSection, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };
