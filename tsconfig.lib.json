@@ -21,11 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "components/ui/**/*.ts",
-    "components/ui/**/*.tsx"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "components/ui/**/*.ts", "components/ui/**/*.tsx"],
   "exclude": ["node_modules", "dist", ".next", "app", "components/demos"]
 }

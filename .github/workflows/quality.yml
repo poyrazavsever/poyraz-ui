@@ -3,8 +3,7 @@ name: Quality
 on:
   pull_request:
   push:
-    branches:
-      - master
+    branches: [master, v3]
 
 permissions:
   contents: read
@@ -14,43 +13,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
+  static:
+    name: Static quality
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 25
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
         with:
           version: 11.5.1
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20.19
+          node-version: 22
           cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Verify theme contract
-        run: pnpm theme:check
-
-      - name: Build registry
-        run: pnpm registry:build
-
-      - name: Verify registry schema and graph
-        run: pnpm registry:check
-
-      - name: Typecheck
-        run: pnpm typecheck
-
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm registry:build
+      - name: Capture generated registry diff
+        if: always()
+        run: |
+          mkdir -p quality-artifacts
+          git diff -- public/r src/docs-registry.json COMPONENTS.md > quality-artifacts/registry.diff
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: registry-generated-diff
+          path: quality-artifacts/registry.diff
+      - name: Require committed generated output
+        run: git diff --exit-code -- public/r src/docs-registry.json COMPONENTS.md
       - name: Production build
         run: pnpm build
-
+      - run: pnpm quality:static
       - name: Upload registry and v2 baseline evidence
         if: always()
         uses: actions/upload-artifact@v7
@@ -62,3 +54,66 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  components:
+    name: Component tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:coverage
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: component-coverage
+          path: coverage
+
+  browser:
+    name: Browser quality
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install chromium
+      - run: pnpm test:browser
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: playwright-results
+          path: |
+            playwright-report
+            test-results
+
+  fixtures:
+    name: Clean fixture distribution
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm registry:build
+      - run: pnpm registry:smoke
+      - run: pnpm fixture:clean-install
+      - run: pnpm test:phase12

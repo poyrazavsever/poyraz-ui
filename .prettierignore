@@ -1,0 +1,14 @@
+.next
+coverage
+dist
+node_modules
+playwright-report
+test-results
+public/r
+registry/**/registry.json
+pnpm-lock.yaml
+src/docs-registry.json
+src/preset.css
+src/theme-tokens.json
+COMPONENTS.md
+fixtures/**/.registry

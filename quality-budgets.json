@@ -1,0 +1,8 @@
+{
+  "maxRuntimeDependencies": 26,
+  "maxRegistryDependenciesPerItem": 5,
+  "maxDistGzipBytes": 140000,
+  "maxChunkGzipBytes": 26000,
+  "maxBlurProfileDurationMs": 2000,
+  "maxBlurLongTaskMs": 100
+}

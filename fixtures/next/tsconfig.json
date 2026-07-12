@@ -2,9 +2,8 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
+    "skipLibCheck": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -17,22 +16,21 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".registry",
     "paths": {
-      "@/*": ["./*"],
-      "poyraz-ui": ["./src/index"],
-      "poyraz-ui/atoms": ["./src/atoms/index"],
-      "poyraz-ui/molecules": ["./src/molecules/index"],
-      "poyraz-ui/organisms": ["./src/organisms/index"],
-      "poyraz-ui/themes": ["./src/themes/index"]
+      "@/*": ["*"]
     },
+    "allowJs": true,
     "incremental": true
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    ".registry/**/*.ts",
+    ".registry/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "fixtures/migration/codemod"]
+  "exclude": ["node_modules"]
 }

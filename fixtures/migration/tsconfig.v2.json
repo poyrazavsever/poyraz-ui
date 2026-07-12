@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../../*"],
+      "poyraz-ui": ["../../src/index.ts"],
+      "poyraz-ui/atoms": ["../../src/atoms/index.ts"],
+      "poyraz-ui/molecules": ["../../src/molecules/index.ts"],
+      "poyraz-ui/organisms": ["../../src/organisms/index.ts"],
+      "poyraz-ui/themes": ["../../src/themes/index.ts"]
+    }
+  },
+  "include": [
+    "src/v2-consumer.tsx",
+    "../../src/**/*.ts",
+    "../../components/ui/**/*.ts",
+    "../../components/ui/**/*.tsx"
+  ]
+}
