@@ -3,7 +3,8 @@ import * as React from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { VariantProps } from 'class-variance-authority';
 import * as react_jsx_runtime from 'react/jsx-runtime';
-export { B as Button, a as ButtonEffect, b as ButtonFillDirection, c as ButtonIcon, d as ButtonLabel, e as ButtonProps, f as ButtonSwapTarget, L as Label, g as buttonVariants } from '../label-DSn-swSp.cjs';
+import { r as CardProps, q as fieldVariants } from '../label-1uMZd1e6.cjs';
+export { B as Button, a as ButtonEffect, b as ButtonFillDirection, c as ButtonIcon, d as ButtonLabel, e as ButtonProps, f as ButtonSwapTarget, C as Card, g as CardAction, h as CardContent, i as CardDescription, j as CardFooter, k as CardHeader, l as CardHeading, m as CardImage, n as CardTitle, L as Label, o as buttonVariants, p as cardVariants } from '../label-1uMZd1e6.cjs';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
@@ -28,25 +29,6 @@ declare const badgeVariants: (props?: ({
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
 }
 declare function Badge({ className, radius, size, variant, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
-
-declare const cardVariants: (props?: ({
-    variant?: "default" | "outline" | "glass" | "soft" | "ghost" | "elevated" | "interactive" | "bordered" | "highlight" | null | undefined;
-    radius?: "lg" | "xl" | "md" | "none" | "2xl" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
-}
-declare const Card: React.ForwardRefExoticComponent<CardProps & React.RefAttributes<HTMLDivElement>>;
-interface CardImageProps extends React.HTMLAttributes<HTMLDivElement> {
-    /** Aspect ratio utility class, e.g. "aspect-video" or "aspect-square" */
-    aspect?: string;
-}
-declare const CardImage: React.ForwardRefExoticComponent<CardImageProps & React.RefAttributes<HTMLDivElement>>;
-declare const CardHeader: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-declare const CardTitle: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLHeadingElement> & React.RefAttributes<HTMLHeadingElement>>;
-declare const CardDescription: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLParagraphElement> & React.RefAttributes<HTMLParagraphElement>>;
-declare const CardContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-declare const CardFooter: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
-declare const CardAction: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 
 type CompositionProps = CardProps;
 interface BasicContentCardProps extends Omit<CompositionProps, "title"> {
@@ -118,11 +100,6 @@ declare function ExpandableCard({ children, defaultOpen, expandLabel, onOpenChan
 
 declare const Checkbox: React.ForwardRefExoticComponent<Omit<CheckboxPrimitive.CheckboxProps & React.RefAttributes<HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 
-declare const fieldVariants: (props?: ({
-    variant?: "default" | "glass" | "soft" | null | undefined;
-    radius?: "sm" | "lg" | "xl" | "md" | "full" | "none" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof fieldVariants> {
 }
 declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
@@ -171,7 +148,7 @@ declare const typographyVariants: (props?: ({
     balance?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare const textEffectVariants: (props?: ({
-    effect?: "marker" | "none" | "outline" | "hand-drawn" | "contrast" | "shimmer" | null | undefined;
+    effect?: "marker" | "none" | "strike" | "outline" | "hand-drawn" | "contrast" | "shimmer" | "gradient" | "glow" | "boxed" | null | undefined;
     tone?: "warning" | "neutral" | "primary" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface TypographyProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof typographyVariants> {
@@ -184,6 +161,14 @@ interface TextEffectProps extends React.HTMLAttributes<HTMLSpanElement>, Variant
 }
 declare function TextEffect({ className, effect, tone, ...props }: TextEffectProps): react_jsx_runtime.JSX.Element;
 
+declare function applyInputMask(value: string, mask: string): string;
+interface MaskedInputProps extends Omit<InputProps, "value" | "defaultValue"> {
+    mask: string;
+    value?: string;
+    defaultValue?: string;
+    onValueChange?: (formattedValue: string, rawValue: string) => void;
+}
+declare const MaskedInput: React.ForwardRefExoticComponent<MaskedInputProps & React.RefAttributes<HTMLInputElement>>;
 interface NumberInputProps extends Omit<InputProps, "type" | "onChange" | "value"> {
     value?: number;
     onChange?: (value: number) => void;
@@ -196,13 +181,25 @@ interface SearchInputProps extends InputProps {
     onSearch?: (value: string) => void;
 }
 declare const SearchInput: React.ForwardRefExoticComponent<SearchInputProps & React.RefAttributes<HTMLInputElement>>;
-interface PhoneInputProps extends InputProps {
+interface PhoneInputProps extends Omit<InputProps, "value" | "defaultValue"> {
     /** Country code prefix, e.g. "+90" */
     countryCode?: string;
+    /** `#` digit, `A` letter and `*` alphanumeric mask tokens. */
+    mask?: string | false;
+    value?: string;
+    defaultValue?: string;
+    onValueChange?: (formattedValue: string, rawDigits: string) => void;
 }
 declare const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps & React.RefAttributes<HTMLInputElement>>;
 declare const PasswordInput: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
-declare const UrlInput: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
+interface UrlInputProps extends Omit<InputProps, "value" | "defaultValue"> {
+    protocol?: "https://" | "http://" | "";
+    normalize?: boolean;
+    value?: string;
+    defaultValue?: string;
+    onValueChange?: (value: string, absoluteUrl: string) => void;
+}
+declare const UrlInput: React.ForwardRefExoticComponent<UrlInputProps & React.RefAttributes<HTMLInputElement>>;
 
 interface BgPatternProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Pattern color — any valid CSS color */
@@ -251,4 +248,4 @@ interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 declare const ScrollArea: React.ForwardRefExoticComponent<ScrollAreaProps & React.RefAttributes<HTMLDivElement>>;
 
-export { Avatar, AvatarFallback, AvatarImage, Badge, BasicContentCard, type BgPatternProps, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle, Checkbox, ExpandableCard, FeatureCard, GlassCard, HorizontalCard, ImageContentCard, Input, InputGroup, InputGroupAddon, InteractiveCard, Logo, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, PricingPlanCard, ProfileCard, RadioGroup, RadioGroupItem, ScrollArea, type ScrollAreaProps, SearchInput, Separator, Skeleton, StatisticCard, Switch, TextEffect, Textarea, Typography, UrlInput, avatarVariants, badgeVariants, cardVariants, fieldVariants, logoVariants, textEffectVariants, typographyVariants };
+export { Avatar, AvatarFallback, AvatarImage, Badge, BasicContentCard, type BgPatternProps, Checkbox, ExpandableCard, FeatureCard, GlassCard, HorizontalCard, ImageContentCard, Input, InputGroup, InputGroupAddon, InteractiveCard, Logo, MaskedInput, type MaskedInputProps, NumberInput, PasswordInput, PatternCheckerboard, PatternCross, PatternDashedGrid, PatternDiagonal, PatternDiamond, PatternDots, PatternGrid, PatternLines, PatternRadial, type PatternRadialProps, PatternZigzag, PhoneInput, type PhoneInputProps, PricingPlanCard, ProfileCard, RadioGroup, RadioGroupItem, ScrollArea, type ScrollAreaProps, SearchInput, Separator, Skeleton, StatisticCard, Switch, TextEffect, Textarea, Typography, UrlInput, type UrlInputProps, applyInputMask, avatarVariants, badgeVariants, fieldVariants, logoVariants, textEffectVariants, typographyVariants };
