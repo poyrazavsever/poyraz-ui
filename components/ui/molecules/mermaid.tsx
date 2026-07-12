@@ -166,7 +166,7 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       <div
         ref={setRefs}
         className={cn(
-          "relative overflow-x-auto border p-4 transition-[background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)]",
+          "relative overflow-x-auto border p-4 transition-[background-color,border-color] duration-[var(--poyraz-motion-duration-base)]",
           surface === "solid" && "border-border bg-surface",
           surface === "soft" && "border-transparent bg-surface-subtle",
           surface === "glass" && "border-glass-border-outer bg-glass shadow-md backdrop-blur-glass",
@@ -181,7 +181,7 @@ const Mermaid = React.forwardRef<HTMLDivElement, MermaidProps>(
       >
         {loading && (
           <div role="status" className="flex items-center justify-center py-8 gap-3 text-sm text-muted-foreground animate-poyraz-fade-in">
-            {loadingContent ?? <><div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin motion-reduce:animate-none" />Rendering diagram…</>}
+            {loadingContent ?? <><div className="size-4 rounded-full border-2 border-primary/25 border-t-primary animate-poyraz-spin" />Rendering diagram…</>}
           </div>
         )}
 

@@ -3,6 +3,7 @@
 import { Toaster as Sonner, toast } from "sonner";
 
 import { cn } from "@/lib/utils";
+import { toastMotion } from "@/components/ui/recipes";
 
 /* ------------------------------------------------------------------ */
 /*  Toaster – Provider component (place once in layout.tsx)           */
@@ -23,6 +24,7 @@ const Toaster = ({ className, motion = "spring", radius = "xl", surface = "glass
         classNames: {
           toast: cn(
             "poyraz-toast relative flex min-h-16 w-full items-start gap-3 overflow-hidden p-4",
+            toastMotion,
             "border border-border text-foreground shadow-lg",
             surface === "solid" && "bg-surface",
             surface === "soft" && "bg-surface-subtle/95",
@@ -34,7 +36,6 @@ const Toaster = ({ className, motion = "spring", radius = "xl", surface = "glass
             motion === "spring" && "ease-[var(--poyraz-motion-ease-spring)]",
             motion === "slide" && "ease-[var(--poyraz-motion-ease-out)]",
             motion === "fade" && "data-[mounted=false]:translate-y-0 data-[removed=true]:translate-y-0",
-            "data-[swiping=true]:transition-none data-[swiped=true]:transition-none motion-reduce:duration-[1ms]",
             "text-sm font-medium",
           ),
           content: "min-w-0 flex-1 pt-0.5",
