@@ -36,9 +36,7 @@ const announcementBarVariants = cva(
 );
 
 export interface AnnouncementBarProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof announcementBarVariants> {
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof announcementBarVariants> {
   /** Allow users to dismiss the bar */
   dismissible?: boolean;
   /** Callback when dismissed */
@@ -115,20 +113,42 @@ const AnnouncementBar = React.forwardRef<HTMLDivElement, AnnouncementBarProps>(
         data-state={open ? "open" : "closed"}
         onTransitionEnd={(event) => {
           onTransitionEnd?.(event);
-          if (!open && event.currentTarget === event.target && event.propertyName === "opacity") finishExit();
+          if (!open && event.currentTarget === event.target && event.propertyName === "opacity")
+            finishExit();
         }}
         className={cn(
           announcementBarVariants({ variant }),
           "grid motion-reduce:transition-none",
-          open ? "grid-rows-[1fr] translate-y-0 opacity-100" : "grid-rows-[0fr] -translate-y-2 opacity-0",
+          open
+            ? "grid-rows-[1fr] translate-y-0 opacity-100"
+            : "grid-rows-[0fr] -translate-y-2 opacity-0",
           className,
         )}
         {...props}
       >
-        <div data-slot="announcement-bar-content" className="@container/announcement mx-auto flex min-h-0 w-full max-w-5xl flex-wrap items-center justify-center gap-x-3 gap-y-1 overflow-hidden px-10 py-2 @sm/announcement:flex-nowrap">
-          {icon && <span data-slot="announcement-bar-icon" className="shrink-0 animate-poyraz-scale-in motion-reduce:animate-none">{icon}</span>}
-          <span data-slot="announcement-bar-message" className="min-w-0 text-center text-xs @sm/announcement:text-sm">{children}</span>
-          {action && <span data-slot="announcement-bar-action" className="shrink-0">{action}</span>}
+        <div
+          data-slot="announcement-bar-content"
+          className="@container/announcement mx-auto flex min-h-0 w-full max-w-5xl flex-wrap items-center justify-center gap-x-3 gap-y-1 overflow-hidden px-10 py-2 @sm/announcement:flex-nowrap"
+        >
+          {icon && (
+            <span
+              data-slot="announcement-bar-icon"
+              className="shrink-0 animate-poyraz-scale-in motion-reduce:animate-none"
+            >
+              {icon}
+            </span>
+          )}
+          <span
+            data-slot="announcement-bar-message"
+            className="min-w-0 text-center text-xs @sm/announcement:text-sm"
+          >
+            {children}
+          </span>
+          {action && (
+            <span data-slot="announcement-bar-action" className="shrink-0">
+              {action}
+            </span>
+          )}
           {dismissible && (
             <button
               type="button"

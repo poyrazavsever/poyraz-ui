@@ -146,12 +146,8 @@ function DataTableInner<T>(
   }, [filtered, sortCol, sortDir, columns]);
 
   /* ── Paginated data ──────────────────────────────────────────────── */
-  const totalPages = pagination
-    ? Math.max(1, Math.ceil(sorted.length / pageSize))
-    : 1;
-  const rows = pagination
-    ? sorted.slice(page * pageSize, (page + 1) * pageSize)
-    : sorted;
+  const totalPages = pagination ? Math.max(1, Math.ceil(sorted.length / pageSize)) : 1;
+  const rows = pagination ? sorted.slice(page * pageSize, (page + 1) * pageSize) : sorted;
 
   // Reset page when data or search changes
   React.useEffect(() => {
@@ -159,13 +155,11 @@ function DataTableInner<T>(
   }, [search, data]);
 
   /* ── Row ID helper ───────────────────────────────────────────────── */
-  const rowId = (row: T, i: number) =>
-    getRowId ? getRowId(row, i) : String(i);
+  const rowId = (row: T, i: number) => (getRowId ? getRowId(row, i) : String(i));
 
   /* ── Selection ───────────────────────────────────────────────────── */
   const allPageSelected =
-    rows.length > 0 &&
-    rows.every((row, i) => selectedIds.has(rowId(row, page * pageSize + i)));
+    rows.length > 0 && rows.every((row, i) => selectedIds.has(rowId(row, page * pageSize + i)));
 
   const toggleRow = (id: string) => {
     setSelectedIds((prev) => {
@@ -180,9 +174,7 @@ function DataTableInner<T>(
     setSelectedIds((prev) => {
       const next = new Set(prev);
       if (allPageSelected) {
-        rows.forEach((_, i) =>
-          next.delete(rowId(rows[i], page * pageSize + i)),
-        );
+        rows.forEach((_, i) => next.delete(rowId(rows[i], page * pageSize + i)));
       } else {
         rows.forEach((_, i) => next.add(rowId(rows[i], page * pageSize + i)));
       }
@@ -259,10 +251,7 @@ function DataTableInner<T>(
                 </Button>
                 {colToggleOpen && (
                   <>
-                    <div
-                      className="fixed inset-0 z-40"
-                      onClick={() => setColToggleOpen(false)}
-                    />
+                    <div className="fixed inset-0 z-40" onClick={() => setColToggleOpen(false)} />
                     <div className="absolute right-0 top-full mt-1 z-50 w-48 bg-background border border-border p-2 space-y-0.5 origin-top-right animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-[var(--poyraz-motion-duration-base)]">
                       {columns.map((col) => (
                         <button
@@ -302,7 +291,15 @@ function DataTableInner<T>(
         columns={visibleColumns}
         data={rows}
         getRowId={(row, index) => rowId(row, page * pageSize + index)}
-        state={(loading ? "loading" : error ? "error" : rows.length ? "populated" : "empty") satisfies DataTableState}
+        state={
+          (loading
+            ? "loading"
+            : error
+              ? "error"
+              : rows.length
+                ? "populated"
+                : "empty") satisfies DataTableState
+        }
         emptyContent={emptyMessage}
         errorContent={error}
         selectable={selectable}
@@ -325,18 +322,11 @@ function DataTableInner<T>(
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-placeholder">
             Showing{" "}
-            <span className="font-semibold text-muted-foreground">
-              {page * pageSize + 1}
-            </span>
-            –
+            <span className="font-semibold text-muted-foreground">{page * pageSize + 1}</span>–
             <span className="font-semibold text-muted-foreground">
               {Math.min((page + 1) * pageSize, sorted.length)}
             </span>{" "}
-            of{" "}
-            <span className="font-semibold text-muted-foreground">
-              {sorted.length}
-            </span>{" "}
-            results
+            of <span className="font-semibold text-muted-foreground">{sorted.length}</span> results
           </p>
 
           <div className="flex items-center gap-1">

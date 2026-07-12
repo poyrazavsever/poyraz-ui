@@ -4,14 +4,7 @@ import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  ChevronDown,
-  ChevronRight,
-  ChevronLeft,
-  Menu,
-  Search,
-  X,
-} from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronLeft, Menu, Search, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useNavbarAutoHide } from "@/components/ui/hooks/use-navbar-auto-hide";
@@ -49,16 +42,15 @@ const navbarVariants = cva("w-full", {
       minimal: "bg-background text-foreground",
       transparent: "bg-transparent text-foreground",
       bordered: "bg-background text-foreground border-b border-border-strong",
-      glass: "bg-glass text-foreground border-b border-glass-border-outer shadow-[var(--poyraz-glass-shadow)] backdrop-blur-glass",
+      glass:
+        "bg-glass text-foreground border-b border-glass-border-outer shadow-[var(--poyraz-glass-shadow)] backdrop-blur-glass",
     },
   },
   defaultVariants: { variant: "default" },
 });
 
 export interface NavbarProps
-  extends
-    React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof navbarVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof navbarVariants> {
   /** Show sticky behavior */
   sticky?: boolean;
   /** Auto-hide when scrolling down, reveal when scrolling up */
@@ -122,61 +114,34 @@ Navbar.displayName = "Navbar";
 /*  TOP BAR (announcement / info / secondary)                          */
 /* ================================================================== */
 
-const topBarVariants = cva(
-  ["w-full", "text-xs font-medium tracking-wide"].join(" "),
-  {
-    variants: {
-      variant: {
-        announcement:
-          "bg-primary text-primary-foreground border-b border-primary-800",
-        info: "bg-accent text-secondary-foreground border-b border-border",
-        secondary: "bg-muted text-muted-foreground border-b border-border",
-      },
+const topBarVariants = cva(["w-full", "text-xs font-medium tracking-wide"].join(" "), {
+  variants: {
+    variant: {
+      announcement: "bg-primary text-primary-foreground border-b border-primary-800",
+      info: "bg-accent text-secondary-foreground border-b border-border",
+      secondary: "bg-muted text-muted-foreground border-b border-border",
     },
-    defaultVariants: { variant: "announcement" },
   },
-);
+  defaultVariants: { variant: "announcement" },
+});
 
 export interface NavbarTopBarProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof topBarVariants> {
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof topBarVariants> {
   /** Show a dismiss / close button */
   dismissible?: boolean;
 }
 
 const NavbarTopBar = React.forwardRef<HTMLDivElement, NavbarTopBarProps>(
-  (
-    {
-      className,
-      variant = "announcement",
-      dismissible = false,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, variant = "announcement", dismissible = false, children, ...props }, ref) => {
     const { containerClassName } = useNavbar();
     const [dismissed, setDismissed] = React.useState(false);
 
     if (dismissed) return null;
 
     return (
-      <div
-        ref={ref}
-        className={cn(topBarVariants({ variant }), className)}
-        {...props}
-      >
-        <div
-          className={cn(
-            "py-1",
-            "flex items-center justify-between",
-            containerClassName,
-          )}
-        >
-          <div className="flex items-center gap-4 flex-1 min-w-0">
-            {children}
-          </div>
+      <div ref={ref} className={cn(topBarVariants({ variant }), className)} {...props}>
+        <div className={cn("py-1", "flex items-center justify-between", containerClassName)}>
+          <div className="flex items-center gap-4 flex-1 min-w-0">{children}</div>
           {dismissible && (
             <button
               type="button"
@@ -209,62 +174,60 @@ interface NavbarTopBarSectionProps extends React.HTMLAttributes<HTMLDivElement> 
   align?: "start" | "center" | "end";
 }
 
-const NavbarTopBarSection = React.forwardRef<
-  HTMLDivElement,
-  NavbarTopBarSectionProps
->(({ className, align = "start", children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "flex items-center gap-3 text-[11px]",
-      align === "center" && "justify-center",
-      align === "end" && "ml-auto",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const NavbarTopBarSection = React.forwardRef<HTMLDivElement, NavbarTopBarSectionProps>(
+  ({ className, align = "start", children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "flex items-center gap-3 text-[11px]",
+        align === "center" && "justify-center",
+        align === "end" && "ml-auto",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 NavbarTopBarSection.displayName = "NavbarTopBarSection";
 
 /* ================================================================== */
 /*  MAIN CONTAINER                                                     */
 /* ================================================================== */
 
-const NavbarMain = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { variant, containerClassName } = useNavbar();
+const NavbarMain = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { variant, containerClassName } = useNavbar();
 
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "relative w-full",
-        "border-b",
-        variant === "transparent"
-          ? "border-glass-border"
-          : variant === "bordered"
-            ? "border-border-strong"
-            : "border-border",
-        className,
-      )}
-      {...props}
-    >
+    return (
       <div
+        ref={ref}
         className={cn(
-          "py-2",
-          "flex items-center justify-between gap-3 @sm/navbar:gap-4 @lg/navbar:gap-6",
-          containerClassName,
+          "relative w-full",
+          "border-b",
+          variant === "transparent"
+            ? "border-glass-border"
+            : variant === "bordered"
+              ? "border-border-strong"
+              : "border-border",
+          className,
         )}
+        {...props}
       >
-        {children}
+        <div
+          className={cn(
+            "py-2",
+            "flex items-center justify-between gap-3 @sm/navbar:gap-4 @lg/navbar:gap-6",
+            containerClassName,
+          )}
+        >
+          {children}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 NavbarMain.displayName = "NavbarMain";
 
 /* ================================================================== */
@@ -280,9 +243,10 @@ const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
     if (href) {
       return (
         <a
+          ref={ref as React.Ref<HTMLAnchorElement>}
           href={href}
           className={cn("flex items-center gap-2", className)}
-          {...(props as any)}
+          {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
           {children}
         </a>
@@ -290,11 +254,7 @@ const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
     }
 
     return (
-      <div
-        ref={ref}
-        className={cn("flex items-center gap-2", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("flex items-center gap-2", className)} {...props}>
         {children}
       </div>
     );
@@ -361,11 +321,7 @@ const NavbarLink = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Item>
-    <NavigationMenuPrimitive.Link
-      ref={ref}
-      className={cn(navLinkStyles, className)}
-      {...props}
-    >
+    <NavigationMenuPrimitive.Link ref={ref} className={cn(navLinkStyles, className)} {...props}>
       {children}
     </NavigationMenuPrimitive.Link>
   </NavigationMenuPrimitive.Item>
@@ -444,9 +400,7 @@ const megaMenuVariants = cva("p-6", {
 });
 
 export interface NavbarMegaMenuProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof megaMenuVariants> {}
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof megaMenuVariants> {}
 
 const NavbarMegaMenu = React.forwardRef<HTMLDivElement, NavbarMegaMenuProps>(
   ({ className, layout, children, ...props }, ref) => (
@@ -466,14 +420,13 @@ NavbarMegaMenu.displayName = "NavbarMegaMenu";
 /*  MEGA MENU LINKS COLUMN (for "featured" layout left side)           */
 /* ================================================================== */
 
-const NavbarMegaMenuLinks = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={cn("grid grid-cols-2 gap-2", className)} {...props}>
-    {children}
-  </div>
-));
+const NavbarMegaMenuLinks = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div ref={ref} className={cn("grid grid-cols-2 gap-2", className)} {...props}>
+      {children}
+    </div>
+  ),
+);
 NavbarMegaMenuLinks.displayName = "NavbarMegaMenuLinks";
 
 /* ================================================================== */
@@ -525,9 +478,7 @@ const NavbarMegaMenuItem = React.forwardRef<
     >
       <div className="text-sm font-medium leading-none">{title}</div>
       {description && (
-        <p className="mt-1.5 text-xs text-muted-foreground leading-snug">
-          {description}
-        </p>
+        <p className="mt-1.5 text-xs text-muted-foreground leading-snug">{description}</p>
       )}
       {children}
     </a>
@@ -541,19 +492,18 @@ NavbarMegaMenuItem.displayName = "NavbarMegaMenuItem";
 /*  ACTIONS (right side buttons)                                       */
 /* ================================================================== */
 
-const NavbarActions = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="navbar-actions"
-    className={cn("hidden @lg/navbar:flex items-center gap-2 shrink-0", className)}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const NavbarActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="navbar-actions"
+      className={cn("hidden @lg/navbar:flex items-center gap-2 shrink-0", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 NavbarActions.displayName = "NavbarActions";
 
 /* ================================================================== */
@@ -594,82 +544,79 @@ NavbarMobileToggle.displayName = "NavbarMobileToggle";
 /*  MOBILE MENU PANEL                                                  */
 /* ================================================================== */
 
-const NavbarMobileMenu = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { mobileOpen, setMobileOpen } = useNavbar();
+const NavbarMobileMenu = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { mobileOpen, setMobileOpen } = useNavbar();
 
-  // Prevent body scroll when menu is open
-  React.useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
+    // Prevent body scroll when menu is open
+    React.useEffect(() => {
+      if (mobileOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, [mobileOpen]);
 
-  return (
-    <>
-      {/* Backdrop */}
-      <div
-        className={cn(
-          "@lg/navbar:hidden fixed inset-0 z-[998] bg-overlay backdrop-blur-[1px] transition-[opacity,backdrop-filter] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:transition-none",
-          mobileOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none",
-        )}
-        onClick={() => setMobileOpen(false)}
-        aria-hidden
-      />
+    return (
+      <>
+        {/* Backdrop */}
+        <div
+          className={cn(
+            "@lg/navbar:hidden fixed inset-0 z-[998] bg-overlay backdrop-blur-[1px] transition-[opacity,backdrop-filter] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:transition-none",
+            mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+          )}
+          onClick={() => setMobileOpen(false)}
+          aria-hidden
+        />
 
-      {/* Slide-in panel */}
-      <div
-        ref={ref}
-        className={cn(
-          "@lg/navbar:hidden fixed top-0 right-0 z-[999] h-full w-[min(88%,24rem)]",
-          "bg-background",
-          "border-l border-border",
-          "shadow-none transform-gpu will-change-transform",
-          "transition-transform duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
-          mobileOpen ? "translate-x-0" : "translate-x-full",
-          className,
-        )}
-        {...props}
-      >
-        {/* Panel header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-          <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
-            Menu
-          </span>
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={() => setMobileOpen(false)}
-            className={cn(
-              "inline-flex items-center justify-center",
-              "h-8 w-8",
-              "border rounded-sm",
-              "border-border-strong hover:bg-accent hover:border-input",
-              "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-95",
-              "cursor-pointer",
-            )}
-          >
-            <X className="h-4 w-4" />
-          </button>
+        {/* Slide-in panel */}
+        <div
+          ref={ref}
+          className={cn(
+            "@lg/navbar:hidden fixed top-0 right-0 z-[999] h-full w-[min(88%,24rem)]",
+            "bg-background",
+            "border-l border-border",
+            "shadow-none transform-gpu will-change-transform",
+            "transition-transform duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
+            mobileOpen ? "translate-x-0" : "translate-x-full",
+            className,
+          )}
+          {...props}
+        >
+          {/* Panel header */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+            <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
+              Menu
+            </span>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "inline-flex items-center justify-center",
+                "h-8 w-8",
+                "border rounded-sm",
+                "border-border-strong hover:bg-accent hover:border-input",
+                "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] active:scale-95",
+                "cursor-pointer",
+              )}
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          {/* Panel links */}
+          <nav className="flex flex-col gap-1 px-4 py-4 overflow-y-auto h-[calc(100%-57px)] animate-poyraz-fade-in">
+            {children}
+          </nav>
         </div>
-
-        {/* Panel links */}
-        <nav className="flex flex-col gap-1 px-4 py-4 overflow-y-auto h-[calc(100%-57px)] animate-poyraz-fade-in">
-          {children}
-        </nav>
-      </div>
-    </>
-  );
-});
+      </>
+    );
+  },
+);
 NavbarMobileMenu.displayName = "NavbarMobileMenu";
 
 /* ================================================================== */
@@ -680,27 +627,26 @@ interface NavbarMobileLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
   active?: boolean;
 }
 
-const NavbarMobileLink = React.forwardRef<
-  HTMLAnchorElement,
-  NavbarMobileLinkProps
->(({ className, active, children, ...props }, ref) => (
-  <a
-    ref={ref}
-    className={cn(
-      "block px-2.5 py-2",
-      "text-sm font-medium",
-      "border border-transparent",
-      "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-      active
-        ? "bg-primary-muted text-primary-muted-foreground border-primary-200 font-semibold"
-        : "hover:bg-muted hover:border-border",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </a>
-));
+const NavbarMobileLink = React.forwardRef<HTMLAnchorElement, NavbarMobileLinkProps>(
+  ({ className, active, children, ...props }, ref) => (
+    <a
+      ref={ref}
+      className={cn(
+        "block px-2.5 py-2",
+        "text-sm font-medium",
+        "border border-transparent",
+        "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+        active
+          ? "bg-primary-muted text-primary-muted-foreground border-primary-200 font-semibold"
+          : "hover:bg-muted hover:border-border",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </a>
+  ),
+);
 NavbarMobileLink.displayName = "NavbarMobileLink";
 
 /* ================================================================== */
@@ -711,42 +657,40 @@ interface NavbarMobileGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
 }
 
-const NavbarMobileGroup = React.forwardRef<
-  HTMLDivElement,
-  NavbarMobileGroupProps
->(({ className, label, children, ...props }, ref) => (
-  <div ref={ref} className={cn("mb-3", className)} {...props}>
-    {label && (
-      <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-placeholder">
-        {label}
-      </div>
-    )}
-    <div className="flex flex-col gap-0.5">{children}</div>
-  </div>
-));
+const NavbarMobileGroup = React.forwardRef<HTMLDivElement, NavbarMobileGroupProps>(
+  ({ className, label, children, ...props }, ref) => (
+    <div ref={ref} className={cn("mb-3", className)} {...props}>
+      {label && (
+        <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-placeholder">
+          {label}
+        </div>
+      )}
+      <div className="flex flex-col gap-0.5">{children}</div>
+    </div>
+  ),
+);
 NavbarMobileGroup.displayName = "NavbarMobileGroup";
 
 /* ================================================================== */
 /*  MOBILE ACTIONS (CTA buttons in bottom of mobile menu)              */
 /* ================================================================== */
 
-const NavbarMobileActions = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "mt-auto px-4 py-4",
-      "border-t border-border",
-      "flex flex-col gap-2",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const NavbarMobileActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "mt-auto px-4 py-4",
+        "border-t border-border",
+        "flex flex-col gap-2",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 NavbarMobileActions.displayName = "NavbarMobileActions";
 
 /* ================================================================== */
@@ -761,16 +705,7 @@ interface NavbarSearchProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
-  (
-    {
-      className,
-      placeholder = "Search…",
-      onSearch,
-      wrapperClassName,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, placeholder = "Search…", onSearch, wrapperClassName, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter" && onSearch) {
         onSearch(e.currentTarget.value);
@@ -778,9 +713,7 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
     };
 
     return (
-      <div
-        className={cn("relative hidden @sm/navbar:flex items-center", wrapperClassName)}
-      >
+      <div className={cn("relative hidden @sm/navbar:flex items-center", wrapperClassName)}>
         <Search className="absolute left-2.5 h-3.5 w-3.5 text-placeholder" />
         <input
           ref={ref}
@@ -808,23 +741,22 @@ NavbarSearch.displayName = "NavbarSearch";
 /*  DIVIDER (vertical separator)                                       */
 /* ================================================================== */
 
-const NavbarDivider = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    role="separator"
-    className={cn(
-      "hidden @lg/navbar:block",
-      "h-5 w-px",
-      "border-l border-border",
-      "mx-2",
-      className,
-    )}
-    {...props}
-  />
-));
+const NavbarDivider = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      role="separator"
+      className={cn(
+        "hidden @lg/navbar:block",
+        "h-5 w-px",
+        "border-l border-border",
+        "mx-2",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 NavbarDivider.displayName = "NavbarDivider";
 
 /* ================================================================== */
@@ -854,10 +786,7 @@ function NavbarPopoverDropdown({
     <NavigationMenuPrimitive.Item className="relative">
       <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
         <PopoverPrimitive.Trigger asChild>
-          <button
-            type="button"
-            className={cn(navLinkStyles, "group cursor-pointer")}
-          >
+          <button type="button" className={cn(navLinkStyles, "group cursor-pointer")}>
             {label}
             <ChevronDown
               className={cn(
@@ -946,10 +875,7 @@ function NavbarPanelDropdown({
     <NavigationMenuPrimitive.Item className="relative">
       <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
         <PopoverPrimitive.Trigger asChild>
-          <button
-            type="button"
-            className={cn(navLinkStyles, "group cursor-pointer")}
-          >
+          <button type="button" className={cn(navLinkStyles, "group cursor-pointer")}>
             {label}
             <ChevronDown
               className={cn(
@@ -996,39 +922,34 @@ interface NavbarPanelDropdownItemProps extends React.AnchorHTMLAttributes<HTMLAn
   icon?: React.ReactNode;
 }
 
-const NavbarPanelDropdownItem = React.forwardRef<
-  HTMLAnchorElement,
-  NavbarPanelDropdownItemProps
->(({ className, title, description, icon, children, ...props }, ref) => (
-  <a
-    ref={ref}
-    className={cn(
-      "flex items-start gap-3 p-2.5",
-      "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-      "hover:bg-muted",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-      className,
-    )}
-    {...props}
-  >
-    {icon && (
-      <span className="flex items-center justify-center h-8 w-8 rounded-sm bg-accent text-muted-foreground shrink-0 mt-0.5">
-        {icon}
-      </span>
-    )}
-    <div className="min-w-0">
-      <div className="text-sm font-medium leading-none text-foreground">
-        {title}
-      </div>
-      {description && (
-        <p className="mt-1 text-xs text-muted-foreground leading-snug">
-          {description}
-        </p>
+const NavbarPanelDropdownItem = React.forwardRef<HTMLAnchorElement, NavbarPanelDropdownItemProps>(
+  ({ className, title, description, icon, children, ...props }, ref) => (
+    <a
+      ref={ref}
+      className={cn(
+        "flex items-start gap-3 p-2.5",
+        "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+        "hover:bg-muted",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        className,
       )}
-      {children}
-    </div>
-  </a>
-));
+      {...props}
+    >
+      {icon && (
+        <span className="flex items-center justify-center h-8 w-8 rounded-sm bg-accent text-muted-foreground shrink-0 mt-0.5">
+          {icon}
+        </span>
+      )}
+      <div className="min-w-0">
+        <div className="text-sm font-medium leading-none text-foreground">{title}</div>
+        {description && (
+          <p className="mt-1 text-xs text-muted-foreground leading-snug">{description}</p>
+        )}
+        {children}
+      </div>
+    </a>
+  ),
+);
 NavbarPanelDropdownItem.displayName = "NavbarPanelDropdownItem";
 
 /* ================================================================== */
@@ -1040,57 +961,56 @@ interface NavbarMobileDropdownProps extends React.HTMLAttributes<HTMLDivElement>
   defaultOpen?: boolean;
 }
 
-const NavbarMobileDropdown = React.forwardRef<
-  HTMLDivElement,
-  NavbarMobileDropdownProps
->(({ className, label, defaultOpen = false, children, ...props }, ref) => {
-  const [open, setOpen] = React.useState(defaultOpen);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const [height, setHeight] = React.useState<number>(0);
+const NavbarMobileDropdown = React.forwardRef<HTMLDivElement, NavbarMobileDropdownProps>(
+  ({ className, label, defaultOpen = false, children, ...props }, ref) => {
+    const [open, setOpen] = React.useState(defaultOpen);
+    const contentRef = React.useRef<HTMLDivElement>(null);
+    const [height, setHeight] = React.useState<number>(0);
 
-  React.useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    }
-  }, [children, open]);
+    React.useEffect(() => {
+      if (contentRef.current) {
+        setHeight(contentRef.current.scrollHeight);
+      }
+    }, [children, open]);
 
-  return (
-    <div ref={ref} className={cn(className)} {...props}>
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        className={cn(
-          "flex items-center justify-between w-full",
-          "px-2.5 py-2",
-          "text-sm font-medium",
-          "border border-transparent",
-          "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-          "hover:bg-muted hover:border-border",
-          "cursor-pointer",
-        )}
-      >
-        {label}
-        <ChevronDown
+    return (
+      <div ref={ref} className={cn(className)} {...props}>
+        <button
+          type="button"
+          onClick={() => setOpen((prev) => !prev)}
           className={cn(
-            "h-4 w-4 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
-            open && "rotate-180",
+            "flex items-center justify-between w-full",
+            "px-2.5 py-2",
+            "text-sm font-medium",
+            "border border-transparent",
+            "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+            "hover:bg-muted hover:border-border",
+            "cursor-pointer",
           )}
-          aria-hidden
-        />
-      </button>
-      <div
-        ref={contentRef}
-        className={cn(
-          "overflow-hidden transition-[max-height,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
-          open ? "opacity-100" : "opacity-0",
-        )}
-        style={{ maxHeight: open ? `${height}px` : "0px" }}
-      >
-        <div className="pl-3 pb-1 flex flex-col gap-0.5">{children}</div>
+        >
+          {label}
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+              open && "rotate-180",
+            )}
+            aria-hidden
+          />
+        </button>
+        <div
+          ref={contentRef}
+          className={cn(
+            "overflow-hidden transition-[max-height,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+            open ? "opacity-100" : "opacity-0",
+          )}
+          style={{ maxHeight: open ? `${height}px` : "0px" }}
+        >
+          <div className="pl-3 pb-1 flex flex-col gap-0.5">{children}</div>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 NavbarMobileDropdown.displayName = "NavbarMobileDropdown";
 
 /* ================================================================== */
@@ -1113,66 +1033,62 @@ const DrillDownContext = React.createContext<DrillDownContextValue>({
 /*  MOBILE DRILL-DOWN MENU (wraps mobile menu content with stack)      */
 /* ================================================================== */
 
-interface NavbarMobileDrillMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+type NavbarMobileDrillMenuProps = React.HTMLAttributes<HTMLDivElement>;
 
-const NavbarMobileDrillMenu = React.forwardRef<
-  HTMLDivElement,
-  NavbarMobileDrillMenuProps
->(({ className, children, ...props }, ref) => {
-  const [panelStack, setPanelStack] = React.useState<string[]>([]);
-  const childArray = React.Children.toArray(children);
-  const panels = childArray.filter(
-    (child) =>
-      React.isValidElement(child) &&
-      typeof child.type !== "string" &&
-      "displayName" in child.type &&
-      child.type.displayName === "NavbarMobileDrillPanel",
-  );
-  const mainContent = childArray.filter(
-    (child) =>
-      !React.isValidElement(child) ||
-      typeof child.type === "string" ||
-      !("displayName" in child.type) ||
-      child.type.displayName !== "NavbarMobileDrillPanel",
-  );
-
-  const activePanel =
-    panelStack.length > 0 ? panelStack[panelStack.length - 1] : null;
-
-  const pushPanel = React.useCallback((id: string) => {
-    setPanelStack((prev) =>
-      prev[prev.length - 1] === id ? prev : [...prev, id],
+const NavbarMobileDrillMenu = React.forwardRef<HTMLDivElement, NavbarMobileDrillMenuProps>(
+  ({ className, children, ...props }, ref) => {
+    const [panelStack, setPanelStack] = React.useState<string[]>([]);
+    const childArray = React.Children.toArray(children);
+    const panels = childArray.filter(
+      (child) =>
+        React.isValidElement(child) &&
+        typeof child.type !== "string" &&
+        "displayName" in child.type &&
+        child.type.displayName === "NavbarMobileDrillPanel",
     );
-  }, []);
+    const mainContent = childArray.filter(
+      (child) =>
+        !React.isValidElement(child) ||
+        typeof child.type === "string" ||
+        !("displayName" in child.type) ||
+        child.type.displayName !== "NavbarMobileDrillPanel",
+    );
 
-  const popPanel = React.useCallback(() => {
-    setPanelStack((prev) => prev.slice(0, -1));
-  }, []);
+    const activePanel = panelStack.length > 0 ? panelStack[panelStack.length - 1] : null;
 
-  return (
-    <DrillDownContext.Provider value={{ activePanel, pushPanel, popPanel }}>
-      <div
-        ref={ref}
-        data-slot="navbar-mobile-drill-menu"
-        data-panel={activePanel ?? undefined}
-        className={cn("relative overflow-hidden", className)}
-        {...props}
-      >
-        {/* Main panel */}
+    const pushPanel = React.useCallback((id: string) => {
+      setPanelStack((prev) => (prev[prev.length - 1] === id ? prev : [...prev, id]));
+    }, []);
+
+    const popPanel = React.useCallback(() => {
+      setPanelStack((prev) => prev.slice(0, -1));
+    }, []);
+
+    return (
+      <DrillDownContext.Provider value={{ activePanel, pushPanel, popPanel }}>
         <div
-          className={cn(
-            "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
-            activePanel ? "-translate-x-full" : "translate-x-0",
-            activePanel ? "opacity-0" : "opacity-100",
-          )}
+          ref={ref}
+          data-slot="navbar-mobile-drill-menu"
+          data-panel={activePanel ?? undefined}
+          className={cn("relative overflow-hidden", className)}
+          {...props}
         >
-          {mainContent}
+          {/* Main panel */}
+          <div
+            className={cn(
+              "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
+              activePanel ? "-translate-x-full" : "translate-x-0",
+              activePanel ? "opacity-0" : "opacity-100",
+            )}
+          >
+            {mainContent}
+          </div>
+          {panels}
         </div>
-        {panels}
-      </div>
-    </DrillDownContext.Provider>
-  );
-});
+      </DrillDownContext.Provider>
+    );
+  },
+);
 NavbarMobileDrillMenu.displayName = "NavbarMobileDrillMenu";
 
 /* ================================================================== */
@@ -1184,39 +1100,35 @@ interface NavbarMobileDrillTriggerProps extends React.HTMLAttributes<HTMLButtonE
   panelId: string;
 }
 
-const NavbarMobileDrillTrigger = React.forwardRef<
-  HTMLButtonElement,
-  NavbarMobileDrillTriggerProps
->(({ className, panelId, children, ...props }, ref) => {
-  const { activePanel, pushPanel } = React.useContext(DrillDownContext);
+const NavbarMobileDrillTrigger = React.forwardRef<HTMLButtonElement, NavbarMobileDrillTriggerProps>(
+  ({ className, panelId, children, ...props }, ref) => {
+    const { activePanel, pushPanel } = React.useContext(DrillDownContext);
 
-  return (
-    <button
-      ref={ref}
-      type="button"
-      data-slot="navbar-mobile-drill-trigger"
-      aria-expanded={activePanel === panelId}
-      aria-controls={`navbar-drill-panel-${panelId}`}
-      onClick={() => pushPanel(panelId)}
-      className={cn(
-        "flex items-center justify-between w-full",
-        "px-2.5 py-2",
-        "text-sm font-medium",
-        "border border-transparent",
-        "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group",
-        "hover:bg-muted hover:border-border",
-        "cursor-pointer",
-      )}
-      {...props}
-    >
-      {children}
-      <ChevronRight
-        className="h-4 w-4 text-placeholder"
-        aria-hidden
-      />
-    </button>
-  );
-});
+    return (
+      <button
+        ref={ref}
+        type="button"
+        data-slot="navbar-mobile-drill-trigger"
+        aria-expanded={activePanel === panelId}
+        aria-controls={`navbar-drill-panel-${panelId}`}
+        onClick={() => pushPanel(panelId)}
+        className={cn(
+          "flex items-center justify-between w-full",
+          "px-2.5 py-2",
+          "text-sm font-medium",
+          "border border-transparent",
+          "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group",
+          "hover:bg-muted hover:border-border",
+          "cursor-pointer",
+        )}
+        {...props}
+      >
+        {children}
+        <ChevronRight className="h-4 w-4 text-placeholder" aria-hidden />
+      </button>
+    );
+  },
+);
 NavbarMobileDrillTrigger.displayName = "NavbarMobileDrillTrigger";
 
 /* ================================================================== */
@@ -1230,52 +1142,51 @@ interface NavbarMobileDrillPanelProps extends React.HTMLAttributes<HTMLDivElemen
   backLabel?: string;
 }
 
-const NavbarMobileDrillPanel = React.forwardRef<
-  HTMLDivElement,
-  NavbarMobileDrillPanelProps
->(({ className, panelId, backLabel = "Back", children, ...props }, ref) => {
-  const { activePanel, popPanel } = React.useContext(DrillDownContext);
-  const isActive = activePanel === panelId;
+const NavbarMobileDrillPanel = React.forwardRef<HTMLDivElement, NavbarMobileDrillPanelProps>(
+  ({ className, panelId, backLabel = "Back", children, ...props }, ref) => {
+    const { activePanel, popPanel } = React.useContext(DrillDownContext);
+    const isActive = activePanel === panelId;
 
-  return (
-    <div
-      ref={ref}
-      id={`navbar-drill-panel-${panelId}`}
-      data-slot="navbar-mobile-drill-panel"
-      data-state={isActive ? "open" : "closed"}
-      aria-hidden={!isActive}
-      className={cn(
-        "absolute inset-0 h-full",
-        "bg-surface",
-        "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
-        isActive ? "translate-x-0" : "translate-x-full",
-        isActive ? "opacity-100" : "opacity-0",
-        isActive ? "pointer-events-auto" : "pointer-events-none",
-        className,
-      )}
-      {...props}
-    >
-      <button
-        type="button"
-        data-slot="navbar-mobile-drill-back"
-        onClick={popPanel}
+    return (
+      <div
+        ref={ref}
+        id={`navbar-drill-panel-${panelId}`}
+        data-slot="navbar-mobile-drill-panel"
+        data-state={isActive ? "open" : "closed"}
+        aria-hidden={!isActive}
         className={cn(
-          "flex items-center gap-1 w-full",
-          "px-2.5 py-2 mb-1",
-          "text-sm font-medium text-muted-foreground",
-          "border-b border-accent",
-          "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-          "hover:bg-muted hover:text-secondary-foreground",
-          "cursor-pointer",
+          "absolute inset-0 h-full",
+          "bg-surface",
+          "transition-[transform,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)]",
+          isActive ? "translate-x-0" : "translate-x-full",
+          isActive ? "opacity-100" : "opacity-0",
+          isActive ? "pointer-events-auto" : "pointer-events-none",
+          className,
         )}
+        {...props}
       >
-        <ChevronLeft className="h-4 w-4" aria-hidden />
-        {backLabel}
-      </button>
-      <div className="flex flex-col gap-0.5 px-1">{children}</div>
-    </div>
-  );
-});
+        <button
+          type="button"
+          data-slot="navbar-mobile-drill-back"
+          onClick={popPanel}
+          className={cn(
+            "flex items-center gap-1 w-full",
+            "px-2.5 py-2 mb-1",
+            "text-sm font-medium text-muted-foreground",
+            "border-b border-accent",
+            "transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+            "hover:bg-muted hover:text-secondary-foreground",
+            "cursor-pointer",
+          )}
+        >
+          <ChevronLeft className="h-4 w-4" aria-hidden />
+          {backLabel}
+        </button>
+        <div className="flex flex-col gap-0.5 px-1">{children}</div>
+      </div>
+    );
+  },
+);
 NavbarMobileDrillPanel.displayName = "NavbarMobileDrillPanel";
 
 /* ================================================================== */

@@ -69,7 +69,9 @@ function NavigationBlock({
           ))}
         </NavbarLinks>
         <NavbarActions>
-          <Button variant="ghost" size="sm">Sign in</Button>
+          <Button variant="ghost" size="sm">
+            Sign in
+          </Button>
           <Button size="sm">Get started</Button>
         </NavbarActions>
         <NavbarMobileToggle aria-label="Open navigation">

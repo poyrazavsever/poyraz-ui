@@ -24,18 +24,13 @@ const footerVariants = cva(["w-full", "border-t"].join(" "), {
 });
 
 export interface FooterProps
-  extends
-    React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof footerVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof footerVariants> {
   /** Class name applied to inner container for width constraint */
   containerClassName?: string;
 }
 
 const Footer = React.forwardRef<HTMLElement, FooterProps>(
-  (
-    { className, variant = "full", containerClassName, children, ...props },
-    ref,
-  ) => (
+  ({ className, variant = "full", containerClassName, children, ...props }, ref) => (
     <footer
       ref={ref}
       data-slot="footer"
@@ -43,9 +38,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
       className={cn("@container/footer min-w-0", footerVariants({ variant }), className)}
       {...props}
     >
-      <div className={cn("px-6", containerClassName ?? DEFAULT_CONTAINER)}>
-        {children}
-      </div>
+      <div className={cn("px-6", containerClassName ?? DEFAULT_CONTAINER)}>{children}</div>
     </footer>
   ),
 );
@@ -55,37 +48,40 @@ Footer.displayName = "Footer";
 /*  FOOTER GRID (multi-column layout for 'full' variant)               */
 /* ================================================================== */
 
-const FooterGrid = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="footer-grid"
-    className={cn(
-      "grid gap-8",
-      "grid-cols-1 @sm/footer:grid-cols-2 @md/footer:grid-cols-3 @lg/footer:grid-cols-4",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterGrid = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="footer-grid"
+      className={cn(
+        "grid gap-8",
+        "grid-cols-1 @sm/footer:grid-cols-2 @md/footer:grid-cols-3 @lg/footer:grid-cols-4",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterGrid.displayName = "FooterGrid";
 
 /* ================================================================== */
 /*  FOOTER SECTION (column)                                            */
 /* ================================================================== */
 
-const FooterSection = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div ref={ref} data-slot="footer-section" className={cn("flex flex-col gap-3", className)} {...props}>
-    {children}
-  </div>
-));
+const FooterSection = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="footer-section"
+      className={cn("flex flex-col gap-3", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterSection.displayName = "FooterSection";
 
 /* ================================================================== */
@@ -141,38 +137,36 @@ FooterLink.displayName = "FooterLink";
 /*  FOOTER BRAND (for 'branded' variant)                               */
 /* ================================================================== */
 
-const FooterBrand = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="footer-brand"
-    className={cn("flex flex-col items-start gap-3", "max-w-sm", className)}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterBrand = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="footer-brand"
+      className={cn("flex flex-col items-start gap-3", "max-w-sm", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterBrand.displayName = "FooterBrand";
 
 /* ================================================================== */
 /*  FOOTER SOCIALS                                                     */
 /* ================================================================== */
 
-const FooterSocials = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="footer-socials"
-    className={cn("flex items-center gap-2", className)}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterSocials = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="footer-socials"
+      className={cn("flex items-center gap-2", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterSocials.displayName = "FooterSocials";
 
 /* ================================================================== */
@@ -206,59 +200,52 @@ FooterSocialLink.displayName = "FooterSocialLink";
 /*  FOOTER BOTTOM (copyright bar)                                      */
 /* ================================================================== */
 
-const FooterBottom = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="footer-bottom"
-    className={cn(
-      "flex flex-col @sm/footer:flex-row items-center justify-between gap-4",
-      "pt-5 mt-6",
-      "border-t border-border",
-      "text-xs text-placeholder",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterBottom = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="footer-bottom"
+      className={cn(
+        "flex flex-col @sm/footer:flex-row items-center justify-between gap-4",
+        "pt-5 mt-6",
+        "border-t border-border",
+        "text-xs text-placeholder",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterBottom.displayName = "FooterBottom";
 
 /* ================================================================== */
 /*  FOOTER BOTTOM LINKS                                                */
 /* ================================================================== */
 
-const FooterBottomLinks = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center gap-4 flex-wrap", "text-xs", className)}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterBottomLinks = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex items-center gap-4 flex-wrap", "text-xs", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterBottomLinks.displayName = "FooterBottomLinks";
 
 /* ================================================================== */
 /*  FOOTER DIVIDER                                                     */
 /* ================================================================== */
 
-const FooterDivider = React.forwardRef<
-  HTMLHRElement,
-  React.HTMLAttributes<HTMLHRElement>
->(({ className, ...props }, ref) => (
-  <hr
-    ref={ref}
-    className={cn("border-t border-border my-8", className)}
-    {...props}
-  />
-));
+const FooterDivider = React.forwardRef<HTMLHRElement, React.HTMLAttributes<HTMLHRElement>>(
+  ({ className, ...props }, ref) => (
+    <hr ref={ref} className={cn("border-t border-border my-8", className)} {...props} />
+  ),
+);
 FooterDivider.displayName = "FooterDivider";
 
 /* ================================================================== */
@@ -283,44 +270,42 @@ FooterDescription.displayName = "FooterDescription";
 /*  FOOTER BADGE (small label / version tag)                           */
 /* ================================================================== */
 
-const FooterBadge = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement>
->(({ className, children, ...props }, ref) => (
-  <span
-    ref={ref}
-    className={cn(
-      "inline-flex items-center",
-      "px-2 py-0.5",
-      "text-[10px] font-bold uppercase tracking-wider",
-      "border border-border rounded-sm",
-      "text-muted-foreground bg-muted",
-      "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </span>
-));
+const FooterBadge = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+  ({ className, children, ...props }, ref) => (
+    <span
+      ref={ref}
+      className={cn(
+        "inline-flex items-center",
+        "px-2 py-0.5",
+        "text-[10px] font-bold uppercase tracking-wider",
+        "border border-border rounded-sm",
+        "text-muted-foreground bg-muted",
+        "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </span>
+  ),
+);
 FooterBadge.displayName = "FooterBadge";
 
 /* ================================================================== */
 /*  FOOTER LINK GROUP (horizontal inline links row)                    */
 /* ================================================================== */
 
-const FooterLinkGroup = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-wrap items-center gap-x-6 gap-y-2", className)}
-    {...props}
-  >
-    {children}
-  </div>
-));
+const FooterLinkGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex flex-wrap items-center gap-x-6 gap-y-2", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  ),
+);
 FooterLinkGroup.displayName = "FooterLinkGroup";
 
 /* ================================================================== */
@@ -347,12 +332,8 @@ const FooterCTA = React.forwardRef<HTMLDivElement, FooterCTAProps>(
       {...props}
     >
       <div className="min-w-0">
-        {heading && (
-          <h4 className="text-sm font-semibold text-foreground">{heading}</h4>
-        )}
-        {description && (
-          <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
-        )}
+        {heading && <h4 className="text-sm font-semibold text-foreground">{heading}</h4>}
+        {description && <p className="text-xs text-muted-foreground mt-0.5">{description}</p>}
       </div>
       <div className="flex items-center gap-2 shrink-0">{children}</div>
     </div>
@@ -364,17 +345,16 @@ FooterCTA.displayName = "FooterCTA";
 /*  FOOTER APP (app store badges / download area)                      */
 /* ================================================================== */
 
-const FooterApp = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props}>
-    <span className="text-xs font-bold uppercase tracking-[0.15em] text-placeholder">
-      Download App
-    </span>
-    <div className="flex items-center gap-2">{children}</div>
-  </div>
-));
+const FooterApp = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props}>
+      <span className="text-xs font-bold uppercase tracking-[0.15em] text-placeholder">
+        Download App
+      </span>
+      <div className="flex items-center gap-2">{children}</div>
+    </div>
+  ),
+);
 FooterApp.displayName = "FooterApp";
 
 /* ================================================================== */

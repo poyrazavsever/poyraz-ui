@@ -2,13 +2,7 @@
 
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  ChevronDown,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Search,
-  X,
-} from "lucide-react";
+import { ChevronDown, PanelLeftClose, PanelLeftOpen, Search, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -48,10 +42,8 @@ const sidebarVariants = cva(
           "fixed inset-y-0 left-0 z-50 w-64 bg-glass text-foreground border-r border-glass-border-outer backdrop-blur-glass shadow-[var(--poyraz-glass-shadow)]",
         mini: "w-16 bg-background text-foreground border-r border-border",
         dark: "w-56 bg-inverted text-inverted-foreground border-r border-border-strong",
-        bordered:
-          "w-56 bg-background text-foreground border border-border-strong",
-        inset:
-          "w-56 bg-muted/80 text-foreground border border-border rounded-lg shadow-sm",
+        bordered: "w-56 bg-background text-foreground border border-border-strong",
+        inset: "w-56 bg-muted/80 text-foreground border border-border rounded-lg shadow-sm",
       },
     },
     defaultVariants: { variant: "default" },
@@ -59,26 +51,17 @@ const sidebarVariants = cva(
 );
 
 export interface SidebarProps
-  extends
-    React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof sidebarVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof sidebarVariants> {
   /** Start in collapsed state (for collapsible variant) */
   defaultCollapsed?: boolean;
 }
 
 const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
-  (
-    {
-      className,
-      variant = "default",
-      defaultCollapsed = false,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
+  ({ className, variant = "default", defaultCollapsed = false, children, ...props }, ref) => (
     <SidebarProvider variant={variant ?? "default"} defaultCollapsed={defaultCollapsed}>
-      <SidebarPanel ref={ref} className={className} {...props}>{children}</SidebarPanel>
+      <SidebarPanel ref={ref} className={className} {...props}>
+        {children}
+      </SidebarPanel>
     </SidebarProvider>
   ),
 );
@@ -89,12 +72,42 @@ const SidebarPanel = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElem
     const { collapsed, mobileOpen, setMobileOpen, variant } = useSidebar();
     const collapsibleWidth = variant === "collapsible" ? (collapsed ? "w-16" : "w-56") : "";
 
-    if (variant === "floating" && !mobileOpen) return <aside ref={ref} data-slot="sidebar" className="hidden" {...props}>{children}</aside>;
+    if (variant === "floating" && !mobileOpen)
+      return (
+        <aside ref={ref} data-slot="sidebar" className="hidden" {...props}>
+          {children}
+        </aside>
+      );
 
-    return <>
-      {variant === "floating" && mobileOpen && <div data-slot="sidebar-overlay" className="fixed inset-0 z-40 bg-overlay backdrop-blur-[1px] animate-poyraz-fade-in motion-reduce:animate-none" onClick={() => setMobileOpen(false)} />}
-      <aside ref={ref} data-slot="sidebar" data-variant={variant} data-collapsed={collapsed ? "" : undefined} data-mobile-open={mobileOpen ? "" : undefined} className={cn("@container/sidebar min-w-0 motion-reduce:transition-none", sidebarVariants({ variant }), collapsibleWidth, variant === "floating" && "shadow-[var(--poyraz-glass-shadow)] animate-poyraz-slide-in-from-left will-change-transform motion-reduce:animate-none", className)} {...props}>{children}</aside>
-    </>;
+    return (
+      <>
+        {variant === "floating" && mobileOpen && (
+          <div
+            data-slot="sidebar-overlay"
+            className="fixed inset-0 z-40 bg-overlay backdrop-blur-[1px] animate-poyraz-fade-in motion-reduce:animate-none"
+            onClick={() => setMobileOpen(false)}
+          />
+        )}
+        <aside
+          ref={ref}
+          data-slot="sidebar"
+          data-variant={variant}
+          data-collapsed={collapsed ? "" : undefined}
+          data-mobile-open={mobileOpen ? "" : undefined}
+          className={cn(
+            "@container/sidebar min-w-0 motion-reduce:transition-none",
+            sidebarVariants({ variant }),
+            collapsibleWidth,
+            variant === "floating" &&
+              "shadow-[var(--poyraz-glass-shadow)] animate-poyraz-slide-in-from-left will-change-transform motion-reduce:animate-none",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </aside>
+      </>
+    );
   },
 );
 SidebarPanel.displayName = "SidebarPanel";
@@ -103,35 +116,34 @@ SidebarPanel.displayName = "SidebarPanel";
 /*  SIDEBAR HEADER                                                     */
 /* ================================================================== */
 
-const SidebarHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { collapsed, variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  return (
-    <div
-      ref={ref}
-      data-slot="sidebar-header"
-      className={cn(
-        "flex items-center gap-3 shrink-0",
-        "px-4 py-4",
-        "border-b",
-        dark ? "border-border-strong" : "border-border",
-        collapsed &&
-          variant !== "default" &&
-          variant !== "dark" &&
-          variant !== "bordered" &&
-          "justify-center px-2",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        data-slot="sidebar-header"
+        className={cn(
+          "flex items-center gap-3 shrink-0",
+          "px-4 py-4",
+          "border-b",
+          dark ? "border-border-strong" : "border-border",
+          collapsed &&
+            variant !== "default" &&
+            variant !== "dark" &&
+            variant !== "bordered" &&
+            "justify-center px-2",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 SidebarHeader.displayName = "SidebarHeader";
 
 /* ================================================================== */
@@ -156,11 +168,7 @@ const SidebarBranding = React.forwardRef<HTMLDivElement, SidebarBrandingProps>(
       <div
         ref={ref}
         data-slot="sidebar-branding"
-        className={cn(
-          "flex items-center gap-3",
-          collapsed && "justify-center",
-          className,
-        )}
+        className={cn("flex items-center gap-3", collapsed && "justify-center", className)}
         {...props}
       >
         {logo && (
@@ -236,45 +244,43 @@ SidebarContent.displayName = "SidebarContent";
 /*  SIDEBAR GROUP                                                      */
 /* ================================================================== */
 
-const SidebarGroup = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div ref={ref} data-slot="sidebar-group" className={cn("mb-4", className)} {...props}>
-    {children}
-  </div>
-));
+const SidebarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => (
+    <div ref={ref} data-slot="sidebar-group" className={cn("mb-4", className)} {...props}>
+      {children}
+    </div>
+  ),
+);
 SidebarGroup.displayName = "SidebarGroup";
 
 /* ================================================================== */
 /*  SIDEBAR GROUP LABEL                                                */
 /* ================================================================== */
 
-const SidebarGroupLabel = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { collapsed, variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarGroupLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  if (collapsed) return null;
+    if (collapsed) return null;
 
-  return (
-    <div
-      ref={ref}
-      data-slot="sidebar-group-label"
-      className={cn(
-        "px-3 mb-2",
-        "text-[10px] font-bold uppercase tracking-[0.15em]",
-        dark ? "text-muted-foreground" : "text-placeholder",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        data-slot="sidebar-group-label"
+        className={cn(
+          "px-3 mb-2",
+          "text-[10px] font-bold uppercase tracking-[0.15em]",
+          dark ? "text-muted-foreground" : "text-placeholder",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 SidebarGroupLabel.displayName = "SidebarGroupLabel";
 
 /* ================================================================== */
@@ -291,17 +297,7 @@ export interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
-  (
-    {
-      className,
-      title,
-      collapsible = true,
-      defaultOpen = true,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, title, collapsible = true, defaultOpen = true, children, ...props }, ref) => {
     const [open, setOpen] = React.useState(defaultOpen);
     const { collapsed, variant } = useSidebar();
     const dark = isDarkVariant(variant);
@@ -309,7 +305,13 @@ const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
     if (collapsed) return null;
 
     return (
-      <div ref={ref} data-slot="sidebar-section" data-state={open ? "open" : "closed"} className={cn("mb-4", className)} {...props}>
+      <div
+        ref={ref}
+        data-slot="sidebar-section"
+        data-state={open ? "open" : "closed"}
+        className={cn("mb-4", className)}
+        {...props}
+      >
         {collapsible ? (
           <button
             type="button"
@@ -361,14 +363,18 @@ SidebarSection.displayName = "SidebarSection";
 /*  SIDEBAR MENU                                                       */
 /* ================================================================== */
 
-const SidebarMenu = React.forwardRef<
-  HTMLUListElement,
-  React.HTMLAttributes<HTMLUListElement>
->(({ className, children, ...props }, ref) => (
-  <ul ref={ref} data-slot="sidebar-menu" className={cn("flex flex-col gap-0.5", className)} {...props}>
-    {children}
-  </ul>
-));
+const SidebarMenu = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLUListElement>>(
+  ({ className, children, ...props }, ref) => (
+    <ul
+      ref={ref}
+      data-slot="sidebar-menu"
+      className={cn("flex flex-col gap-0.5", className)}
+      {...props}
+    >
+      {children}
+    </ul>
+  ),
+);
 SidebarMenu.displayName = "SidebarMenu";
 
 /* ================================================================== */
@@ -389,10 +395,7 @@ export interface SidebarMenuItemProps extends React.LiHTMLAttributes<HTMLLIEleme
 }
 
 const SidebarMenuItem = React.forwardRef<HTMLLIElement, SidebarMenuItemProps>(
-  (
-    { className, active, icon, badge, action, href, children, ...props },
-    ref,
-  ) => {
+  ({ className, active, icon, badge, action, href, children, ...props }, ref) => {
     const { collapsed, variant } = useSidebar();
     const dark = isDarkVariant(variant);
 
@@ -537,27 +540,26 @@ SidebarMenuAction.displayName = "SidebarMenuAction";
 /*  SIDEBAR SEPARATOR                                                  */
 /* ================================================================== */
 
-const SidebarSeparator = React.forwardRef<
-  HTMLHRElement,
-  React.HTMLAttributes<HTMLHRElement>
->(({ className, ...props }, ref) => {
-  const { variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarSeparator = React.forwardRef<HTMLHRElement, React.HTMLAttributes<HTMLHRElement>>(
+  ({ className, ...props }, ref) => {
+    const { variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  return (
-    <hr
-      ref={ref}
-      data-slot="sidebar-separator"
-      className={cn(
-        "border-t",
-        dark ? "border-border-strong" : "border-border",
-        "my-3 mx-3",
-        className,
-      )}
-      {...props}
-    />
-  );
-});
+    return (
+      <hr
+        ref={ref}
+        data-slot="sidebar-separator"
+        className={cn(
+          "border-t",
+          dark ? "border-border-strong" : "border-border",
+          "my-3 mx-3",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
 SidebarSeparator.displayName = "SidebarSeparator";
 
 /* ================================================================== */
@@ -570,20 +572,13 @@ export interface SidebarBadgeProps extends React.HTMLAttributes<HTMLSpanElement>
 }
 
 const SidebarBadge = React.forwardRef<HTMLSpanElement, SidebarBadgeProps>(
-  (
-    { className, variant: badgeVariant = "default", children, ...props },
-    ref,
-  ) => {
+  ({ className, variant: badgeVariant = "default", children, ...props }, ref) => {
     if (badgeVariant === "dot") {
       return (
         <span
           ref={ref}
           data-slot="sidebar-badge"
-          className={cn(
-            "inline-block size-1.5 shrink-0 rounded-full",
-            "bg-primary",
-            className,
-          )}
+          className={cn("inline-block size-1.5 shrink-0 rounded-full", "bg-primary", className)}
           {...props}
         />
       );
@@ -616,31 +611,30 @@ SidebarBadge.displayName = "SidebarBadge";
 /*  SIDEBAR FOOTER                                                     */
 /* ================================================================== */
 
-const SidebarFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { collapsed, variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  return (
-    <div
-      ref={ref}
-      data-slot="sidebar-footer"
-      className={cn(
-        "shrink-0",
-        "px-4 py-3",
-        "border-t",
-        dark ? "border-border-strong" : "border-border",
-        collapsed && "px-2 flex justify-center",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        data-slot="sidebar-footer"
+        className={cn(
+          "shrink-0",
+          "px-4 py-3",
+          "border-t",
+          dark ? "border-border-strong" : "border-border",
+          collapsed && "px-2 flex justify-center",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 SidebarFooter.displayName = "SidebarFooter";
 
 /* ================================================================== */
@@ -654,8 +648,7 @@ export interface SidebarTriggerProps extends React.ButtonHTMLAttributes<HTMLButt
 
 const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
   ({ className, action = "collapse", ...props }, ref) => {
-    const { collapsed, setCollapsed, mobileOpen, setMobileOpen, variant } =
-      useSidebar();
+    const { collapsed, setCollapsed, mobileOpen, setMobileOpen, variant } = useSidebar();
     const dark = isDarkVariant(variant);
 
     const handleClick = () => {
@@ -796,10 +789,7 @@ interface SidebarSubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
-  (
-    { className, label, icon, defaultOpen = false, children, ...props },
-    ref,
-  ) => {
+  ({ className, label, icon, defaultOpen = false, children, ...props }, ref) => {
     const [open, setOpen] = React.useState(defaultOpen);
     const { collapsed, variant } = useSidebar();
     const dark = isDarkVariant(variant);
@@ -807,7 +797,13 @@ const SidebarSubMenu = React.forwardRef<HTMLDivElement, SidebarSubMenuProps>(
     if (collapsed) return null;
 
     return (
-      <div ref={ref} data-slot="sidebar-submenu" data-state={open ? "open" : "closed"} className={cn("", className)} {...props}>
+      <div
+        ref={ref}
+        data-slot="sidebar-submenu"
+        data-state={open ? "open" : "closed"}
+        className={cn("", className)}
+        {...props}
+      >
         <button
           type="button"
           data-slot="sidebar-submenu-trigger"
@@ -876,46 +872,45 @@ interface SidebarSubMenuItemProps extends React.HTMLAttributes<HTMLDivElement> {
   href?: string;
 }
 
-const SidebarSubMenuItem = React.forwardRef<
-  HTMLDivElement,
-  SidebarSubMenuItemProps
->(({ className, active, href, children, ...props }, ref) => {
-  const { variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarSubMenuItem = React.forwardRef<HTMLDivElement, SidebarSubMenuItemProps>(
+  ({ className, active, href, children, ...props }, ref) => {
+    const { variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  const inner = (
-    <div
-      ref={ref}
-      data-slot="sidebar-submenu-item"
-      className={cn(
-        "px-3 py-2",
-        "text-sm",
-        "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
-        "cursor-pointer",
-        active
-          ? dark
-            ? "text-primary-muted-foreground font-semibold"
-            : "text-primary-muted-foreground font-semibold"
-          : dark
-            ? "text-muted-foreground hover:text-foreground"
-            : "text-muted-foreground hover:text-foreground",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-
-  if (href) {
-    return (
-      <a href={href} className="no-underline">
-        {inner}
-      </a>
+    const inner = (
+      <div
+        ref={ref}
+        data-slot="sidebar-submenu-item"
+        className={cn(
+          "px-3 py-2",
+          "text-sm",
+          "rounded-sm transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+          "cursor-pointer",
+          active
+            ? dark
+              ? "text-primary-muted-foreground font-semibold"
+              : "text-primary-muted-foreground font-semibold"
+            : dark
+              ? "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
     );
-  }
-  return inner;
-});
+
+    if (href) {
+      return (
+        <a href={href} className="no-underline">
+          {inner}
+        </a>
+      );
+    }
+    return inner;
+  },
+);
 SidebarSubMenuItem.displayName = "SidebarSubMenuItem";
 
 /* ================================================================== */
@@ -933,74 +928,65 @@ interface SidebarUserProfileProps extends React.HTMLAttributes<HTMLDivElement> {
   initials?: string;
 }
 
-const SidebarUserProfile = React.forwardRef<
-  HTMLDivElement,
-  SidebarUserProfileProps
->(({ className, name, role, avatarUrl, initials, children, ...props }, ref) => {
-  const { collapsed, variant } = useSidebar();
-  const dark = isDarkVariant(variant);
+const SidebarUserProfile = React.forwardRef<HTMLDivElement, SidebarUserProfileProps>(
+  ({ className, name, role, avatarUrl, initials, children, ...props }, ref) => {
+    const { collapsed, variant } = useSidebar();
+    const dark = isDarkVariant(variant);
 
-  return (
-    <div
-      ref={ref}
-      data-slot="sidebar-user-profile"
-      className={cn(
-        "flex items-center gap-3",
-        collapsed && "justify-center",
-        className,
-      )}
-      {...props}
-    >
-      {/* Avatar */}
+    return (
       <div
-        className={cn(
-          "shrink-0 w-8 h-8 flex items-center justify-center",
-          "border rounded-sm overflow-hidden",
-          "text-xs font-bold",
-          dark
-            ? "border-border-strong bg-surface-raised text-foreground"
-            : "border-border-strong bg-accent text-muted-foreground",
-        )}
+        ref={ref}
+        data-slot="sidebar-user-profile"
+        className={cn("flex items-center gap-3", collapsed && "justify-center", className)}
+        {...props}
       >
-        {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt={name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          (initials ?? name.charAt(0).toUpperCase())
-        )}
-      </div>
-
-      {/* Text */}
-      {!collapsed && (
-        <div className="flex-1 min-w-0">
-          <div
-            className={cn(
-              "text-sm font-semibold truncate",
-              dark ? "text-inverted-foreground" : "text-foreground",
-            )}
-          >
-            {name}
-          </div>
-          {role && (
-            <div
-              className={cn(
-                "text-xs truncate",
-                dark ? "text-muted-foreground" : "text-placeholder",
-              )}
-            >
-              {role}
-            </div>
+        {/* Avatar */}
+        <div
+          className={cn(
+            "shrink-0 w-8 h-8 flex items-center justify-center",
+            "border rounded-sm overflow-hidden",
+            "text-xs font-bold",
+            dark
+              ? "border-border-strong bg-surface-raised text-foreground"
+              : "border-border-strong bg-accent text-muted-foreground",
+          )}
+        >
+          {avatarUrl ? (
+            <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+          ) : (
+            (initials ?? name.charAt(0).toUpperCase())
           )}
         </div>
-      )}
 
-      {children}
-    </div>
-  );
-});
+        {/* Text */}
+        {!collapsed && (
+          <div className="flex-1 min-w-0">
+            <div
+              className={cn(
+                "text-sm font-semibold truncate",
+                dark ? "text-inverted-foreground" : "text-foreground",
+              )}
+            >
+              {name}
+            </div>
+            {role && (
+              <div
+                className={cn(
+                  "text-xs truncate",
+                  dark ? "text-muted-foreground" : "text-placeholder",
+                )}
+              >
+                {role}
+              </div>
+            )}
+          </div>
+        )}
+
+        {children}
+      </div>
+    );
+  },
+);
 SidebarUserProfile.displayName = "SidebarUserProfile";
 
 /* ================================================================== */

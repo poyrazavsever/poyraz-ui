@@ -7,10 +7,7 @@ export interface UseNavbarAutoHideOptions {
   threshold?: number;
 }
 
-function useNavbarAutoHide({
-  enabled = true,
-  threshold = 80,
-}: UseNavbarAutoHideOptions = {}) {
+function useNavbarAutoHide({ enabled = true, threshold = 80 }: UseNavbarAutoHideOptions = {}) {
   const [hidden, setHidden] = React.useState(false);
   const lastScrollY = React.useRef(0);
 

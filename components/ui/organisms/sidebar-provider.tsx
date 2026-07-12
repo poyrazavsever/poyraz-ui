@@ -3,13 +3,7 @@
 import * as React from "react";
 
 export type SidebarVariant =
-  | "default"
-  | "collapsible"
-  | "floating"
-  | "mini"
-  | "dark"
-  | "bordered"
-  | "inset";
+  "default" | "collapsible" | "floating" | "mini" | "dark" | "bordered" | "inset";
 
 export interface SidebarContextValue {
   collapsed: boolean;
@@ -34,9 +28,7 @@ function SidebarProvider({
   defaultCollapsed = false,
   defaultMobileOpen = false,
 }: SidebarProviderProps) {
-  const [collapsed, setCollapsed] = React.useState(
-    variant === "mini" ? true : defaultCollapsed,
-  );
+  const [collapsed, setCollapsed] = React.useState(variant === "mini" ? true : defaultCollapsed);
   const [mobileOpen, setMobileOpen] = React.useState(defaultMobileOpen);
   const value = React.useMemo(
     () => ({ collapsed, setCollapsed, mobileOpen, setMobileOpen, variant }),

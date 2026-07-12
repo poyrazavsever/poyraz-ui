@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/atoms/button";
 import { Input } from "@/components/ui/atoms/input";
 import { cn } from "@/lib/utils";
 
-export interface FooterNewsletterProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
   heading?: string;
   description?: string;
   placeholder?: string;
@@ -15,10 +14,7 @@ export interface FooterNewsletterProps
   onSubscribe?: (email: string) => void;
 }
 
-const FooterNewsletter = React.forwardRef<
-  HTMLDivElement,
-  FooterNewsletterProps
->(
+const FooterNewsletter = React.forwardRef<HTMLDivElement, FooterNewsletterProps>(
   (
     {
       className,

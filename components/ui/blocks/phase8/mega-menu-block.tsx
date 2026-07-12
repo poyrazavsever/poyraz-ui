@@ -32,7 +32,9 @@ function MegaMenuBlock() {
           <NavbarDropdown label="Products">
             <NavbarMegaMenu layout="full">
               {products.map(({ title, description, icon: Icon }) => (
-                <NavbarMegaMenuItem key={title} href="#" title={title} description={description}><Icon className="mt-2 size-4 text-primary" /></NavbarMegaMenuItem>
+                <NavbarMegaMenuItem key={title} href="#" title={title} description={description}>
+                  <Icon className="mt-2 size-4 text-primary" />
+                </NavbarMegaMenuItem>
               ))}
             </NavbarMegaMenu>
           </NavbarDropdown>
@@ -41,7 +43,11 @@ function MegaMenuBlock() {
       </NavbarMain>
       <NavbarMobileMenu>
         <NavbarMobileDropdown label="Products">
-          {products.map(({ title }) => <a key={title} href="#" className="block px-3 py-2 text-sm">{title}</a>)}
+          {products.map(({ title }) => (
+            <a key={title} href="#" className="block px-3 py-2 text-sm">
+              {title}
+            </a>
+          ))}
         </NavbarMobileDropdown>
       </NavbarMobileMenu>
     </Navbar>
