@@ -14,7 +14,10 @@ for (const token of ["--poyraz-info", "--poyraz-success", "--poyraz-warning", "-
 for (const treatment of ["border-l-4", "bg-[var(--alert-bg)]", "shadow-xs"]) requireText("inline alert separation", alert, treatment);
 
 const sonner = await read("components/ui/molecules/sonner.tsx");
-for (const state of ["data-[swiping=true]", "data-[swiped=true]", "data-[removed=true]"]) requireText("toast motion state", sonner, state);
+requireText("toast motion recipe", sonner, "toastMotion");
+const recipes = await read("components/ui/recipes.ts");
+for (const state of ["data-[swiping=true]", "data-[swiped=true]"]) requireText("toast motion state", recipes, state);
+requireText("toast removed state", sonner, "data-[removed=true]");
 for (const surface of ['"solid"', '"soft"', '"glass"']) requireText("toast surface", sonner, surface);
 
 const form = await read("components/ui/molecules/form.tsx");

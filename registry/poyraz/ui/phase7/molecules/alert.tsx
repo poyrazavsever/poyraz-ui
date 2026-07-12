@@ -5,7 +5,7 @@ import { AlertCircle, AlertTriangle, CheckCircle2, Info, Terminal, X } from "luc
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "relative grid w-full grid-cols-[auto_1fr] items-start gap-x-3 border p-4 transition-[color,background-color,border-color,box-shadow,transform,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] [&>svg]:mt-0.5 [&>svg]:size-4",
+  "relative grid w-full grid-cols-[auto_1fr] items-start gap-x-3 border p-4 transition-[color,background-color,border-color,transform,opacity] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)] [&>svg]:mt-0.5 [&>svg]:size-4",
   {
     variants: {
       variant: {

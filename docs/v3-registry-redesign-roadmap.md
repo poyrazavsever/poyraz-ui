@@ -1108,26 +1108,26 @@ Core componentlerde CSS ve Radix state attribute'ları yeterli olmalıdır. Ağ�
 
 ### Atomik görevler
 
-- [ ] `P9-001` Motion token isimlerini mevcut ve yeni sistem arasında eşleştir.
-- [ ] `P9-002` Eski compatibility animation alias'larının kullanımını raporla.
-- [ ] `P9-003` Yeni native Poyraz motion utility setini tanımla.
-- [ ] `P9-004` Fade-in/out keyframe'lerini normalize et.
-- [ ] `P9-005` Scale-in/out keyframe'lerini normalize et.
-- [ ] `P9-006` Side-aware floating keyframe'lerini normalize et.
-- [ ] `P9-007` Overlay motion recipe'sini oluştur.
-- [ ] `P9-008` Accordion height motion recipe'sini oluştur.
-- [ ] `P9-009` Toast swipe motion recipe'sini oluştur.
-- [ ] `P9-010` Loading spinner ve pulse recipe'lerini oluştur.
-- [ ] `P9-011` Button/icon micro-interaction recipe'sini oluştur.
-- [ ] `P9-012` Hover translation mesafesini 1–2px aralığında standardize et.
-- [ ] `P9-013` Press scale oranını component boyutuna göre kontrol et.
-- [ ] `P9-014` Animasyon sırasında border/shadow repaint maliyetini profil et.
-- [ ] `P9-015` Blur animation yapmaktan kaçın; blur'u sabit tutup opacity/transform animate et.
-- [ ] `P9-016` Reduced-motion testlerini otomasyona ekle.
-- [ ] `P9-017` Animasyon exit state'lerinin unmount öncesi çalıştığını doğrula.
-- [ ] `P9-018` Motion dokümantasyon sayfası oluştur.
-- [ ] `P9-019` Her motion family için do/don't örnekleri ekle.
-- [ ] `P9-020` Opsiyonel advanced motion block dependency kararını ver.
+- [x] `P9-001` Motion token isimlerini mevcut ve yeni sistem arasında eşleştir.
+- [x] `P9-002` Eski compatibility animation alias'larının kullanımını raporla.
+- [x] `P9-003` Yeni native Poyraz motion utility setini tanımla.
+- [x] `P9-004` Fade-in/out keyframe'lerini normalize et.
+- [x] `P9-005` Scale-in/out keyframe'lerini normalize et.
+- [x] `P9-006` Side-aware floating keyframe'lerini normalize et.
+- [x] `P9-007` Overlay motion recipe'sini oluştur.
+- [x] `P9-008` Accordion height motion recipe'sini oluştur.
+- [x] `P9-009` Toast swipe motion recipe'sini oluştur.
+- [x] `P9-010` Loading spinner ve pulse recipe'lerini oluştur.
+- [x] `P9-011` Button/icon micro-interaction recipe'sini oluştur.
+- [x] `P9-012` Hover translation mesafesini 1–2px aralığında standardize et.
+- [x] `P9-013` Press scale oranını component boyutuna göre kontrol et.
+- [x] `P9-014` Animasyon sırasında border/shadow repaint maliyetini profil et.
+- [x] `P9-015` Blur animation yapmaktan kaçın; blur'u sabit tutup opacity/transform animate et.
+- [x] `P9-016` Reduced-motion testlerini otomasyona ekle.
+- [x] `P9-017` Animasyon exit state'lerinin unmount öncesi çalıştığını doğrula.
+- [x] `P9-018` Motion dokümantasyon sayfası oluştur.
+- [x] `P9-019` Her motion family için do/don't örnekleri ekle.
+- [x] `P9-020` Opsiyonel advanced motion block dependency kararını ver.
 
 ### Motion kabul kriterleri
 
@@ -1147,30 +1147,30 @@ Dokümantasyonu package kataloğundan registry ürünü anlatan interaktif bir s
 
 ### Atomik görevler
 
-- [ ] `P10-001` Docs information architecture'ını `Getting Started / Theme / Components / Blocks / Migration` olarak yenile.
-- [ ] `P10-002` Registry metadata'yı navigation için tek kaynak yap.
-- [ ] `P10-003` Manuel component sayısı metinlerini kaldır veya otomatik üret.
-- [ ] `P10-004` Her component sayfasına install command ekle.
-- [ ] `P10-005` Install command copy action ekle.
-- [ ] `P10-006` Her component sayfasına kaynak kod görünümü ekle.
-- [ ] `P10-007` Her component sayfasına dependency listesi ekle.
-- [ ] `P10-008` Her component sayfasına accessibility notları ekle.
-- [ ] `P10-009` Her component sayfasına API/variant/size/state tablosu ekle.
-- [ ] `P10-010` Light/dark/system theme kontrolünü koru.
-- [ ] `P10-011` Docs shell'i yeni Soft Glass tasarım diliyle yenile.
-- [ ] `P10-012` Background seçici ekle: solid, gradient, image-like dark.
-- [ ] `P10-013` Glass componentlerin farklı zeminlerde test edilmesini sağlayan preview kontrolü ekle.
-- [ ] `P10-014` Radius/density/motion preview kontrollerini ekle.
-- [ ] `P10-015` Button variant playground oluştur.
-- [ ] `P10-016` Token gallery ve semantic role açıklamalarını ekle.
-- [ ] `P10-017` Motion gallery oluştur.
-- [ ] `P10-018` Block preview için desktop/tablet/mobile switcher ekle.
-- [ ] `P10-019` Registry kurulum troubleshooting sayfası oluştur.
-- [ ] `P10-020` V2 docs'u stable legacy URL altında erişilebilir tut.
-- [ ] `P10-021` V2→V3 migration guide yayınla.
-- [ ] `P10-022` README'yi registry-first quick start ile güncelle.
-- [ ] `P10-023` COMPONENTS.md içindeki eski ölçü ve varyant bilgilerini registry metadata ile senkronla.
-- [ ] `P10-024` CLI çıktısındaki link ve komutları yeni docs'a yönlendir.
+- [x] `P10-001` Docs information architecture'ını `Getting Started / Theme / Components / Blocks / Migration` olarak yenile.
+- [x] `P10-002` Registry metadata'yı navigation için tek kaynak yap.
+- [x] `P10-003` Manuel component sayısı metinlerini kaldır veya otomatik üret.
+- [x] `P10-004` Her component sayfasına install command ekle.
+- [x] `P10-005` Install command copy action ekle.
+- [x] `P10-006` Her component sayfasına kaynak kod görünümü ekle.
+- [x] `P10-007` Her component sayfasına dependency listesi ekle.
+- [x] `P10-008` Her component sayfasına accessibility notları ekle.
+- [x] `P10-009` Her component sayfasına API/variant/size/state tablosu ekle.
+- [x] `P10-010` Light/dark/system theme kontrolünü koru.
+- [x] `P10-011` Docs shell'i yeni Soft Glass tasarım diliyle yenile.
+- [x] `P10-012` Background seçici ekle: solid, gradient, image-like dark.
+- [x] `P10-013` Glass componentlerin farklı zeminlerde test edilmesini sağlayan preview kontrolü ekle.
+- [x] `P10-014` Radius/density/motion preview kontrollerini ekle.
+- [x] `P10-015` Button variant playground oluştur.
+- [x] `P10-016` Token gallery ve semantic role açıklamalarını ekle.
+- [x] `P10-017` Motion gallery oluştur.
+- [x] `P10-018` Block preview için desktop/tablet/mobile switcher ekle.
+- [x] `P10-019` Registry kurulum troubleshooting sayfası oluştur.
+- [x] `P10-020` V2 docs'u stable legacy URL altında erişilebilir tut.
+- [x] `P10-021` V2→V3 migration guide yayınla.
+- [x] `P10-022` README'yi registry-first quick start ile güncelle.
+- [x] `P10-023` COMPONENTS.md içindeki eski ölçü ve varyant bilgilerini registry metadata ile senkronla.
+- [x] `P10-024` CLI çıktısındaki link ve komutları yeni docs'a yönlendir.
 
 ### Çıkış kriteri
 

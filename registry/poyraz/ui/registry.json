@@ -1234,7 +1234,8 @@
       ],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
-        "@poyraz/poyraz-theme"
+        "@poyraz/poyraz-theme",
+        "@poyraz/poyraz-recipes"
       ],
       "files": [
         {

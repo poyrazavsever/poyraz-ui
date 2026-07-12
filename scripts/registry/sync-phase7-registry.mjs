@@ -8,7 +8,7 @@ const registry = JSON.parse(await readFile(registryFile, "utf8"));
 
 const specs = [
   { name: "alert", source: "components/ui/molecules/alert.tsx", path: "phase7/molecules/alert.tsx", target: "@ui/molecules/alert.tsx", dependencies: ["class-variance-authority@^0.7.1", "lucide-react@^0.574.0"] },
-  { name: "sonner", source: "components/ui/molecules/sonner.tsx", path: "phase7/molecules/sonner.tsx", target: "@ui/molecules/sonner.tsx", dependencies: ["sonner@^2.0.7"] },
+  { name: "sonner", source: "components/ui/molecules/sonner.tsx", path: "phase7/molecules/sonner.tsx", target: "@ui/molecules/sonner.tsx", dependencies: ["sonner@^2.0.7"], internal: ["poyraz-recipes"] },
   { name: "form", source: "components/ui/molecules/form.tsx", path: "phase7/molecules/form.tsx", target: "@ui/molecules/form.tsx", dependencies: ["@radix-ui/react-slot@^1.2.4", "react-hook-form@^7.71.1"], internal: ["label"], optional: true },
   { name: "calendar", source: "components/ui/molecules/calendar.tsx", path: "phase7/molecules/calendar.tsx", target: "@ui/molecules/calendar.tsx", dependencies: ["lucide-react@^0.574.0"], internal: ["button"] },
   { name: "date-picker", source: "components/ui/molecules/date-picker.tsx", path: "phase7/molecules/date-picker.tsx", target: "@ui/molecules/date-picker.tsx", dependencies: ["lucide-react@^0.574.0"], internal: ["button", "calendar", "popover", "poyraz-recipes"] },

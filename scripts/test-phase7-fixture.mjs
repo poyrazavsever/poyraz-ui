@@ -30,11 +30,11 @@ for (const name of phase7) {
       await writeFile(destination, file.content);
     }
   }
-  await symlink(resolve(root, "node_modules"), resolve(fixture, "node_modules"), "dir");
+  await symlink(resolve(root, "node_modules"), resolve(fixture, "node_modules"), process.platform === "win32" ? "junction" : "dir");
   await writeFile(resolve(fixture, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, noEmit: true, target: "ES2020", lib: ["DOM", "ES2020"], module: "ESNext", moduleResolution: "Bundler", jsx: "react-jsx", esModuleInterop: true, skipLibCheck: true, baseUrl: ".", paths: { "@/*": ["./*"] } }, include: ["**/*.ts", "**/*.tsx"] }, null, 2));
-  const result = spawnSync(resolve(root, "node_modules/.bin/tsc"), ["--project", resolve(fixture, "tsconfig.json")], { cwd: fixture, encoding: "utf8" });
+  const result = spawnSync(process.execPath, [resolve(root, "node_modules/typescript/bin/tsc"), "--project", resolve(fixture, "tsconfig.json")], { cwd: fixture, encoding: "utf8" });
   if (result.status !== 0) {
-    process.stderr.write(`Standalone fixture failed: ${name}\n${result.stdout}${result.stderr}`);
+    process.stderr.write(`Standalone fixture failed: ${name}\n${result.stdout ?? ""}${result.stderr ?? ""}${result.error?.message ?? ""}`);
     process.exit(result.status ?? 1);
   }
 }
