@@ -68,35 +68,67 @@ type CalendarView = "days" | "months" | "years";
 /*  CALENDAR                                                           */
 /* ================================================================== */
 
-export interface CalendarProps {
-  /** Currently selected date */
-  selected?: Date;
-  /** Called when user picks a date */
-  onSelect?: (date: Date) => void;
+export interface DateRange {
+  from?: Date;
+  to?: Date;
+}
+
+interface CalendarBaseProps {
   /** Minimum selectable date */
   minDate?: Date;
   /** Maximum selectable date */
   maxDate?: Date;
   className?: string;
+  surface?: "plain" | "solid" | "soft" | "glass";
+  radius?: "none" | "sm" | "md" | "lg" | "xl";
+  size?: "compact" | "default" | "spacious";
+  initialMonth?: Date;
+  onMonthChange?: (month: Date) => void;
 }
 
-function Calendar({
-  selected,
-  onSelect,
+export interface CalendarSingleProps extends CalendarBaseProps {
+  mode?: "single";
+  selected?: Date;
+  defaultSelected?: Date;
+  onSelect?: (date: Date | undefined) => void;
+}
+
+export interface CalendarRangeProps extends CalendarBaseProps {
+  mode: "range";
+  selected?: DateRange;
+  defaultSelected?: DateRange;
+  onSelect?: (range: DateRange | undefined) => void;
+}
+
+export type CalendarProps = CalendarSingleProps | CalendarRangeProps;
+
+function Calendar(props: CalendarProps) {
+  const {
   minDate,
   maxDate,
   className,
-}: CalendarProps) {
+  initialMonth,
+  onMonthChange,
+  radius = "lg",
+  size = "default",
+  surface = "plain",
+  } = props;
+  const mode = props.mode ?? "single";
+  const isControlled = Object.prototype.hasOwnProperty.call(props, "selected");
+  const [internalSelection, setInternalSelection] = React.useState<Date | DateRange | undefined>(props.defaultSelected);
+  const selection = isControlled ? props.selected : internalSelection;
+  const selectedDate = selection instanceof Date ? selection : selection?.from;
+  const selectedRange = mode === "range" && !(selection instanceof Date) ? selection : undefined;
   const [viewYear, setViewYear] = React.useState(() =>
-    (selected ?? new Date()).getFullYear(),
+    (initialMonth ?? selectedDate ?? new Date()).getFullYear(),
   );
   const [viewMonth, setViewMonth] = React.useState(() =>
-    (selected ?? new Date()).getMonth(),
+    (initialMonth ?? selectedDate ?? new Date()).getMonth(),
   );
   const [view, setView] = React.useState<CalendarView>("days");
   // Year decade range start for years grid
   const [decadeStart, setDecadeStart] = React.useState(() => {
-    const y = (selected ?? new Date()).getFullYear();
+    const y = (initialMonth ?? selectedDate ?? new Date()).getFullYear();
     return y - (y % 12);
   });
 
@@ -111,6 +143,36 @@ function Calendar({
       setViewMonth((m) => m - 1);
     }
   };
+
+  React.useEffect(() => {
+    onMonthChange?.(new Date(viewYear, viewMonth, 1));
+  }, [onMonthChange, viewMonth, viewYear]);
+
+  const emitSelection = (next: Date | DateRange | undefined) => {
+    if (!isControlled) setInternalSelection(next);
+    if (mode === "range") {
+      (props as CalendarRangeProps).onSelect?.(next as DateRange | undefined);
+    } else {
+      (props as CalendarSingleProps).onSelect?.(next as Date | undefined);
+    }
+  };
+
+  const selectDate = (date: Date) => {
+    if (mode === "single") {
+      emitSelection(date);
+      return;
+    }
+    const current = selectedRange;
+    if (!current?.from || current.to || date < current.from) {
+      emitSelection({ from: date, to: undefined });
+    } else {
+      emitSelection({ from: current.from, to: date });
+    }
+  };
+
+  const isInRange = (date: Date) => Boolean(
+    selectedRange?.from && selectedRange?.to && date > selectedRange.from && date < selectedRange.to,
+  );
 
   const nextMonth = () => {
     if (viewMonth === 11) {
@@ -158,7 +220,10 @@ function Calendar({
     // Day cells
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(viewYear, viewMonth, day);
-      const sel = selected && isSameDay(date, selected);
+      const rangeStart = Boolean(selectedRange?.from && isSameDay(date, selectedRange.from));
+      const rangeEnd = Boolean(selectedRange?.to && isSameDay(date, selectedRange.to));
+      const rangeMiddle = isInRange(date);
+      const sel = mode === "single" ? Boolean(selectedDate && isSameDay(date, selectedDate)) : rangeStart || rangeEnd;
       const today = isToday(date);
       const disabled = isDisabled(date);
 
@@ -167,15 +232,29 @@ function Calendar({
           key={day}
           type="button"
           disabled={disabled}
-          onClick={() => onSelect?.(date)}
+          onClick={() => selectDate(date)}
+          aria-label={date.toLocaleDateString()}
+          aria-pressed={sel}
+          data-selected={sel ? "" : undefined}
+          data-today={today ? "" : undefined}
+          data-range-start={rangeStart ? "" : undefined}
+          data-range-middle={rangeMiddle ? "" : undefined}
+          data-range-end={rangeEnd ? "" : undefined}
           className={cn(
-            "h-8 w-8 text-sm font-medium cursor-pointer",
+            "text-sm font-medium cursor-pointer",
+            size === "compact" && "h-7 w-7",
+            size === "default" && "h-8 w-8",
+            size === "spacious" && "h-10 w-10",
             "flex items-center justify-center",
             "transition-all duration-150 ease-out active:scale-95",
             "hover:bg-accent",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            today && !sel && "border border-primary",
-            sel && "bg-primary text-primary-foreground hover:bg-primary-600",
+            today && !sel && !rangeMiddle && "ring-1 ring-inset ring-primary/45 text-primary",
+            rangeMiddle && "rounded-none bg-primary-muted text-primary-muted-foreground hover:bg-primary-muted",
+            rangeStart && selectedRange?.to && "rounded-l-md rounded-r-none bg-primary text-primary-foreground",
+            rangeStart && !selectedRange?.to && "rounded-md bg-primary text-primary-foreground",
+            rangeEnd && "rounded-l-none rounded-r-md bg-primary text-primary-foreground",
+            sel && mode === "single" && "rounded-md bg-primary text-primary-foreground shadow-sm hover:bg-primary-hover",
             disabled && "opacity-30 cursor-not-allowed hover:bg-transparent",
           )}
         >
@@ -224,7 +303,7 @@ function Calendar({
           {DAYS.map((d) => (
             <div
               key={d}
-              className="h-8 w-8 flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-placeholder"
+              className={cn("flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-placeholder", size === "compact" && "h-7 w-7", size === "default" && "h-8 w-8", size === "spacious" && "h-10 w-10")}
             >
               {d}
             </div>
@@ -287,9 +366,9 @@ function Calendar({
             const isCurrent =
               i === now.getMonth() && viewYear === now.getFullYear();
             const isSelected =
-              selected &&
-              i === selected.getMonth() &&
-              viewYear === selected.getFullYear();
+              selectedDate &&
+              i === selectedDate.getMonth() &&
+              viewYear === selectedDate.getFullYear();
             return (
               <button
                 key={m}
@@ -306,7 +385,7 @@ function Calendar({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
                   isSelected &&
-                    "bg-primary text-primary-foreground hover:bg-primary-600",
+                    "bg-primary text-primary-foreground hover:bg-primary-hover",
                 )}
               >
                 {m}
@@ -354,7 +433,7 @@ function Calendar({
         <div className="grid grid-cols-3 gap-1 animate-poyraz-slide-in-from-bottom">
           {years.map((y) => {
             const isCurrent = y === now.getFullYear();
-            const isSelected = selected && y === selected.getFullYear();
+            const isSelected = selectedDate && y === selectedDate.getFullYear();
             return (
               <button
                 key={y}
@@ -371,7 +450,7 @@ function Calendar({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isCurrent && !isSelected && "border border-primary",
                   isSelected &&
-                    "bg-primary text-primary-foreground hover:bg-primary-600",
+                    "bg-primary text-primary-foreground hover:bg-primary-hover",
                 )}
               >
                 {y}
@@ -384,7 +463,23 @@ function Calendar({
   };
 
   return (
-    <div className={cn("p-3 select-none animate-poyraz-fade-in", className)}>
+    <div
+      data-slot="calendar"
+      data-mode={mode}
+      data-surface={surface}
+      className={cn(
+        "select-none p-3 animate-poyraz-fade-in motion-reduce:animate-none",
+        surface === "solid" && "border border-border bg-surface shadow-sm",
+        surface === "soft" && "border border-transparent bg-surface-subtle",
+        surface === "glass" && "border border-glass-border-outer bg-glass shadow-md backdrop-blur-glass",
+        radius === "none" && "rounded-none",
+        radius === "sm" && "rounded-sm",
+        radius === "md" && "rounded-md",
+        radius === "lg" && "rounded-lg",
+        radius === "xl" && "rounded-xl",
+        className,
+      )}
+    >
       {view === "days" && renderDays()}
       {view === "months" && renderMonths()}
       {view === "years" && renderYears()}

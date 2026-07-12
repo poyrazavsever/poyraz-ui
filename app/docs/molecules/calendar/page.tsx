@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar } from "poyraz-ui/molecules";
+import { Calendar, type DateRange } from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function CalendarDemo() {
@@ -10,15 +10,15 @@ function CalendarDemo() {
 }
 
 function CalendarRangeDemo() {
-  const [date, setDate] = React.useState<Date | undefined>();
-  return <Calendar selected={date} onSelect={setDate} />;
+  const [range, setRange] = React.useState<DateRange | undefined>();
+  return <Calendar mode="range" selected={range} onSelect={setRange} surface="glass" radius="xl" />;
 }
 
 export default function CalendarPage() {
   return (
     <ComponentPage
       name="Calendar"
-      description="An inline date calendar component with month navigation. Click the month/year header to switch to month view, then year view. Supports single-date selection with custom styling."
+      description="Controlled or uncontrolled single/range calendar with semantic today, selection and range states plus solid, soft and glass surfaces."
       importCode={`import { Calendar } from "poyraz-ui/molecules";`}
     >
       <DemoSection
@@ -34,13 +34,13 @@ export default function CalendarPage() {
       </DemoSection>
 
       <DemoSection
-        title="No Default Selection"
-        description="Calendar with no date pre-selected. Use the header to navigate months and years."
-        code={`const [date, setDate] = useState<Date | undefined>();
+        title="Range + Glass"
+        description="Range start, middle and end states use semantic selection roles."
+        code={`const [range, setRange] = useState<DateRange | undefined>();
 
-<Calendar selected={date} onSelect={setDate} />`}
+<Calendar mode="range" selected={range} onSelect={setRange} surface="glass" radius="xl" />`}
       >
-        <div className="border border-border rounded-sm bg-background w-fit">
+        <div className="w-fit rounded-2xl bg-[radial-gradient(circle_at_top,var(--color-primary-muted),var(--color-background))] p-4">
           <CalendarRangeDemo />
         </div>
       </DemoSection>
