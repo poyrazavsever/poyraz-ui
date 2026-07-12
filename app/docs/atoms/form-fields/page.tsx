@@ -4,6 +4,7 @@ import * as React from "react";
 import { Label } from "@/components/ui/atoms/label";
 import {
   NumberInput,
+  MaskedInput,
   SearchInput,
   PhoneInput,
   PasswordInput,
@@ -26,6 +27,7 @@ export default function FormFieldsPage() {
       description="Specialized InputGroup compositions with one shared focus ring across editable input, icons, prefixes and actions."
       importCode={`import {
   NumberInput,
+  MaskedInput,
   SearchInput,
   PhoneInput,
   PasswordInput,
@@ -63,12 +65,12 @@ export default function FormFieldsPage() {
 
       <DemoSection
         title="Phone Input"
-        description="Input with a country code prefix."
-        code={`<PhoneInput countryCode="+90" placeholder="555 123 4567" />`}
+        description="Country prefix and customizable digit mask. # accepts digits, A letters and * alphanumeric characters."
+        code={`<PhoneInput countryCode="+90" mask="(###) ### ## ##" />`}
       >
         <div className="max-w-sm space-y-2">
           <Label>Phone</Label>
-          <PhoneInput countryCode="+90" placeholder="555 123 4567" />
+          <PhoneInput countryCode="+90" mask="(###) ### ## ##" />
         </div>
       </DemoSection>
 
@@ -85,12 +87,23 @@ export default function FormFieldsPage() {
 
       <DemoSection
         title="URL Input"
-        description="Input with an https:// prefix."
-        code={`<UrlInput placeholder="example.com" />`}
+        description="Protocol-aware URL field strips duplicate protocol and whitespace while preserving the normalized value."
+        code={`<UrlInput protocol="https://" placeholder="example.com/path" />`}
       >
         <div className="max-w-sm space-y-2">
           <Label>URL</Label>
           <UrlInput placeholder="example.com" />
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="Custom Mask"
+        description="Use MaskedInput for project-specific identifiers without adding a masking dependency."
+        code={`<MaskedInput mask="AA-####-****" placeholder="TR-2026-A1B2" />`}
+      >
+        <div className="max-w-sm space-y-2">
+          <Label>Reference code</Label>
+          <MaskedInput mask="AA-####-****" placeholder="TR-2026-A1B2" />
         </div>
       </DemoSection>
     </ComponentPage>
