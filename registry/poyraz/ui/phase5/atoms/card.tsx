@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 // ─── Card Root ──────────────────────────────────────────────────────────────
 
 const cardVariants = cva(
-  "poyraz-card relative flex flex-col overflow-hidden border text-card-foreground transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+  "poyraz-card relative flex flex-col overflow-hidden border text-card-foreground transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
   {
     variants: {
       variant: {

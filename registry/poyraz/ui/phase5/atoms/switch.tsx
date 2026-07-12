@@ -14,7 +14,7 @@ const Switch = React.forwardRef<
     className={cn(
       "peer relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-input bg-surface-200 shadow-inner",
       "after:absolute after:-inset-y-2 after:-inset-x-1 after:content-['']",
-      "transition-[color,background-color,border-color,box-shadow] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
+      "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]",
       "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/25",
       "data-[state=checked]:border-primary data-[state=checked]:bg-primary",
       "disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled disabled:opacity-100",
