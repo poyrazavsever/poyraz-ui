@@ -24,7 +24,7 @@ Root `data-variant`, `data-size`, `data-radius`, `data-effect`, `data-fill-direc
 - `size`: `xs | sm | default | lg | icon-sm | icon | icon-lg`.
 - `radius`: `none | xs | sm | md | lg | xl | 2xl | full`. Varsayılan `md`; size'dan bağımsızdır ve `className` ile override edilebilir.
 - `effect`: `none | shine | fill | swap | border-draw`. Efekt dekoratiftir ve varianttan bağımsızdır.
-- `fillDirection`: fill için `right | up`.
+- `fillDirection`: fill için `right | left | up | down`; değer dolgunun hareket yönünü belirtir.
 - `swapTarget`: swap için `icon | label | both`. Hedefli kullanımda `ButtonIcon` ve `ButtonLabel` tercih edilir.
 - `loading`: native controlü disable eder, `asChild` controlüne `aria-disabled` ekler, click'i engeller ve `aria-busy` yayınlar.
 - `asChild`: Radix Slot ile tek child'ın semantiğini korur.
@@ -32,7 +32,7 @@ Root `data-variant`, `data-size`, `data-radius`, `data-effect`, `data-fill-direc
 
 Loading label'ı DOM ve layout akışında görünmez olarak tutar; spinner absolute konumlanır. Bu nedenle loading geçişinde button genişliği değişmez ve accessible name kaybolmaz.
 
-Icon-only kullanımda `aria-label` veya screen-reader-only metin zorunludur. Disabled ve loading state pointer ve click davranışını kapatır. Focus ring yalnızca `focus-visible` halinde semantic ring tokenıyla görünür. Press feedback hafif scale kullanır. Reduced-motion media query ve `data-poyraz-motion="reduced"` altında translation, scale ve animasyonlar kapatılır.
+Icon-only kullanımda `aria-label` veya screen-reader-only metin zorunludur. Disabled ve loading state pointer ve click davranışını kapatır. Focus ring yalnızca `focus-visible` halinde semantic ring tokenıyla görünür. Button varyantları elevation veya shadow kullanmaz; hiyerarşi renk, border ve yüzey kontrastıyla kurulur. Press feedback hafif scale kullanır. Reduced-motion media query ve `data-poyraz-motion="reduced"` altında translation, scale ve animasyonlar kapatılır.
 
 ## V2 → V3 mapping
 
@@ -52,5 +52,5 @@ Icon-only kullanımda `aria-label` veya screen-reader-only metin zorunludur. Dis
 
 - Docs Button sayfasındaki variant matrisi light ve dark theme'de kontrol edilir.
 - Glass örneği hem açık gradient hem koyu görsel benzeri gradient üzerinde aynı anda gösterilir.
-- Shine, horizontal/vertical fill, content/icon/label swap ve border draw örnekleri hover ile doğrulanır.
+- Shine, dört yönlü fill, content/icon/label swap ve border draw örnekleri hover ile doğrulanır.
 - Browser reduced-motion emülasyonunda elementlerin translate/scale animasyonu çalışmamalıdır.

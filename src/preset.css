@@ -521,6 +521,7 @@
   .poyraz-button {
     --poyraz-button-effect-color: var(--poyraz-primary-hover);
     --poyraz-button-spinner-color: currentColor;
+    --poyraz-button-shine-color: rgb(255 255 255 / 0.62);
   }
 
   .poyraz-button[data-variant="default"],
@@ -529,8 +530,21 @@
   }
 
   .poyraz-button-glass {
+    --poyraz-button-glass-border-hover: var(--poyraz-border-strong);
+    --poyraz-button-shine-color: color-mix(in srgb, var(--poyraz-primary) 34%, transparent);
     background-color: var(--poyraz-glass-fallback);
     background-clip: padding-box;
+  }
+
+  .poyraz-button-glass:hover {
+    border-color: var(--poyraz-button-glass-border-hover);
+    background-color: var(--poyraz-glass-background-strong);
+  }
+
+  .dark .poyraz-button-glass,
+  [data-poyraz-theme="dark"] .poyraz-button-glass {
+    --poyraz-button-glass-border-hover: var(--poyraz-glass-border);
+    --poyraz-button-shine-color: rgb(255 255 255 / 0.62);
   }
 
   .poyraz-button > [data-slot="button-content"],
@@ -577,7 +591,7 @@
 
   .poyraz-button[data-effect="shine"]::before,
   .poyraz-button[data-effect="fill"]::before,
-  .poyraz-button[data-effect="border-draw"]::before {
+  .poyraz-button[data-effect="border-draw"]::after {
     content: "";
     position: absolute;
     z-index: 0;
@@ -589,7 +603,7 @@
     bottom: -60%;
     left: -45%;
     width: 28%;
-    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.62), transparent);
+    background: linear-gradient(90deg, transparent, var(--poyraz-button-shine-color), transparent);
     filter: blur(1px);
     transform: translateX(-180%) skewX(-18deg);
   }
@@ -599,44 +613,58 @@
   }
 
   .poyraz-button[data-effect="fill"]::before {
-    inset: 0;
+    inset: -1px;
     background: var(--poyraz-button-effect-color);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-out);
+    transform: translate3d(-101%, 0, 0);
+    transition: transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard);
+    will-change: transform;
+  }
+
+  .poyraz-button[data-effect="fill"][data-fill-direction="left"]::before {
+    transform: translate3d(101%, 0, 0);
   }
 
   .poyraz-button[data-effect="fill"][data-fill-direction="up"]::before {
-    transform: scaleY(0);
-    transform-origin: center bottom;
+    transform: translate3d(0, 101%, 0);
+  }
+
+  .poyraz-button[data-effect="fill"][data-fill-direction="down"]::before {
+    transform: translate3d(0, -101%, 0);
   }
 
   .poyraz-button[data-effect="fill"]:hover::before {
-    transform: scaleX(1);
+    transform: translate3d(0, 0, 0);
   }
 
-  .poyraz-button[data-effect="fill"][data-fill-direction="up"]:hover::before {
-    transform: scaleY(1);
-  }
-
-  .poyraz-button[data-effect="swap"]:hover[data-swap-target="both"] [data-slot="button-content"],
-  .poyraz-button[data-effect="swap"]:hover[data-swap-target="both"] [data-slot="button-label"],
-  .poyraz-button[data-effect="swap"]:hover[data-swap-target="both"] [data-slot="button-icon"],
+  .poyraz-button[data-effect="swap"]:hover[data-swap-target="both"] > [data-slot="button-content"],
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="icon"] [data-slot="button-icon"],
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="icon"] [data-slot="button-content"] > svg,
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="label"] [data-slot="button-label"] {
-    animation: poyraz-button-swap var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out);
+    animation: poyraz-button-swap var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard);
+    will-change: transform, opacity;
   }
 
-  .poyraz-button[data-effect="border-draw"]::before {
+  .poyraz-button[data-effect="border-draw"]::after {
+    --poyraz-button-border-progress: 0deg;
     inset: -1px;
-    border: 2px solid currentColor;
     border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from -90deg,
+      currentColor 0deg,
+      currentColor var(--poyraz-button-border-progress),
+      transparent var(--poyraz-button-border-progress),
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     opacity: 0;
   }
 
-  .poyraz-button[data-effect="border-draw"]:hover::before {
-    animation: poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out) forwards;
+  .poyraz-button[data-effect="border-draw"]:hover::after {
+    animation: poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) linear forwards;
   }
 
   .poyraz-text-hand-drawn {
@@ -792,6 +820,10 @@
     background-color: var(--poyraz-glass-background);
     -webkit-backdrop-filter: blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass));
     backdrop-filter: blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass));
+  }
+
+  .poyraz-button-glass:hover {
+    background-color: var(--poyraz-glass-background-strong);
   }
 
   .poyraz-glass-field {
@@ -1206,6 +1238,12 @@ input:-webkit-autofill:focus {
   }
 }
 
+@property --poyraz-button-border-progress {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @keyframes poyraz-button-spin {
   to {
     transform: rotate(360deg);
@@ -1224,44 +1262,30 @@ input:-webkit-autofill:focus {
 @keyframes poyraz-button-swap {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
-  32% {
-    opacity: 1;
-    transform: translateY(35%);
-  }
-  49% {
+  45% {
     opacity: 0;
-    transform: translateY(115%);
+    transform: translate3d(0, 105%, 0);
   }
-  50% {
+  55% {
     opacity: 0;
-    transform: translateY(-115%);
-  }
-  68% {
-    opacity: 1;
-    transform: translateY(-35%);
+    transform: translate3d(0, -105%, 0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes poyraz-button-border-draw {
   0% {
-    opacity: 1;
-    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-  }
-  35% {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  }
-  65% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+    --poyraz-button-border-progress: 0deg;
+    opacity: 0;
   }
   100% {
+    --poyraz-button-border-progress: 360deg;
     opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 
@@ -1292,6 +1316,7 @@ input:-webkit-autofill:focus {
 
   .poyraz-button,
   .poyraz-button::before,
+  .poyraz-button::after,
   .poyraz-button [data-slot="button-spinner"] svg,
   .poyraz-button [data-slot="button-content"],
   .poyraz-button [data-slot="button-label"],
@@ -1323,6 +1348,7 @@ input:-webkit-autofill:focus {
 
 [data-poyraz-motion="reduced"] .poyraz-button,
 [data-poyraz-motion="reduced"] .poyraz-button::before,
+[data-poyraz-motion="reduced"] .poyraz-button::after,
 [data-poyraz-motion="reduced"] .poyraz-button [data-slot="button-spinner"] svg,
 [data-poyraz-motion="reduced"] .poyraz-button [data-slot="button-content"],
 [data-poyraz-motion="reduced"] .poyraz-button [data-slot="button-label"],

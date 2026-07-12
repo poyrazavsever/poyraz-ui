@@ -7,24 +7,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border text-sm font-semibold outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:shadow-none disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border aria-disabled:shadow-none active:scale-[0.975] [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border font-sans text-sm font-semibold outline-none transition-[color,background-color,border-color,transform] duration-200 ease-out data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border active:scale-[0.975] [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "border-primary/80 bg-primary text-primary-foreground shadow-[0_8px_22px_-10px_var(--poyraz-primary)] hover:bg-primary-hover hover:shadow-[0_12px_28px_-12px_var(--poyraz-primary)]",
+          "border-primary/80 bg-primary text-primary-foreground hover:border-primary-hover hover:bg-primary-hover",
         secondary:
-          "border-border-strong/70 bg-secondary text-secondary-foreground shadow-sm hover:border-border-strong hover:bg-accent",
-        soft: "border-primary/15 bg-primary-muted text-primary-muted-foreground shadow-xs hover:border-primary/25 hover:bg-primary/15",
+          "border-border-strong/70 bg-secondary text-secondary-foreground hover:border-border-strong hover:bg-accent",
+        soft: "border-primary/15 bg-primary-muted text-primary-muted-foreground hover:border-primary/25 hover:bg-primary/15",
         outline:
-          "border-primary/55 bg-background/60 text-primary shadow-xs hover:border-primary hover:bg-primary-muted",
+          "border-primary/55 bg-background/60 text-primary hover:border-primary hover:bg-primary-muted",
         glass:
-          "poyraz-button-glass border-glass-border-outer text-foreground shadow-[var(--poyraz-glass-shadow)] hover:border-glass-border hover:bg-glass-strong",
+          "poyraz-button-glass border-glass-border-outer text-foreground hover:border-border-strong hover:bg-glass-strong dark:hover:border-glass-border",
         ghost:
           "border-transparent bg-transparent text-foreground/75 hover:bg-accent hover:text-foreground",
         destructive:
-          "border-destructive/80 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        link: "h-auto overflow-visible rounded-none border-transparent bg-transparent px-0 text-primary shadow-none underline-offset-4 hover:underline active:scale-100",
+          "border-destructive/80 bg-destructive text-destructive-foreground hover:border-destructive hover:bg-destructive/90",
+        link: "h-auto overflow-visible rounded-none border-transparent bg-transparent px-0 text-primary underline-offset-4 hover:underline active:scale-100",
       },
       size: {
         xs: "h-7 gap-1.5 px-2.5 text-xs [&_svg]:size-3.5",
@@ -55,7 +55,7 @@ const buttonVariants = cva(
 );
 
 type ButtonEffect = "none" | "shine" | "fill" | "swap" | "border-draw";
-type ButtonFillDirection = "right" | "up";
+type ButtonFillDirection = "right" | "left" | "up" | "down";
 type ButtonSwapTarget = "icon" | "label" | "both";
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
@@ -66,7 +66,7 @@ type ButtonProps = React.ComponentPropsWithoutRef<"button"> &
     loading?: boolean;
     /** Optional decorative hover motion; semantic state remains unchanged. */
     effect?: ButtonEffect;
-    /** Axis used by the fill effect. */
+    /** Direction in which the fill effect travels. */
     fillDirection?: ButtonFillDirection;
     /** Anatomy animated by the swap effect. Raw text is treated as content. */
     swapTarget?: ButtonSwapTarget;

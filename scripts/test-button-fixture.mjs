@@ -23,7 +23,11 @@ async function installFiles(item) {
 
 await installFiles(buttonItem);
 await installFiles(utilsItem);
-await symlink(resolve(root, "node_modules"), resolve(fixture, "node_modules"), "dir");
+await symlink(
+  resolve(root, "node_modules"),
+  resolve(fixture, "node_modules"),
+  process.platform === "win32" ? "junction" : "dir",
+);
 
 await writeFile(
   resolve(fixture, "usage.tsx"),
@@ -35,7 +39,10 @@ const ref = React.createRef<HTMLButtonElement>();
 export const fixture = (
   <>
     <Button ref={ref} variant="soft" size="xs" effect="shine">Shine</Button>
-    <Button variant="glass" radius="full" effect="fill" fillDirection="up">Fill</Button>
+    <Button variant="glass" radius="full" effect="fill" fillDirection="right">Right</Button>
+    <Button effect="fill" fillDirection="left">Left</Button>
+    <Button effect="fill" fillDirection="up">Up</Button>
+    <Button effect="fill" fillDirection="down">Down</Button>
     <Button effect="swap" swapTarget="both">
       <ButtonLabel>Continue</ButtonLabel><ButtonIcon aria-hidden>→</ButtonIcon>
     </Button>
@@ -72,8 +79,8 @@ await writeFile(
 );
 
 const result = spawnSync(
-  resolve(root, "node_modules/.bin/tsc"),
-  ["--project", resolve(fixture, "tsconfig.json")],
+  process.execPath,
+  [resolve(root, "node_modules/typescript/bin/tsc"), "--project", resolve(fixture, "tsconfig.json")],
   { cwd: fixture, encoding: "utf8" },
 );
 

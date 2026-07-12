@@ -20,13 +20,6 @@ const variants = [
   "link",
 ] as const;
 
-const effects = [
-  ["shine", "Shine sweep"],
-  ["fill", "Fill right"],
-  ["swap", "Swap content"],
-  ["border-draw", "Border draw"],
-] as const;
-
 export default function ButtonPage() {
   return (
     <ComponentPage
@@ -84,10 +77,12 @@ export default function ButtonPage() {
 
       <DemoSection
         title="Hover effects"
-        description="Motion is opt-in and independent from visual variant. Fill also supports fillDirection=up; swap can target icon, label or both."
+        description="Motion is opt-in and independent from visual variant. Fill can travel in four directions; swap can target icon, label or both."
         code={`<Button effect="shine">Shine sweep</Button>
 <Button effect="fill">Fill right</Button>
+<Button effect="fill" fillDirection="left">Fill left</Button>
 <Button effect="fill" fillDirection="up">Fill up</Button>
+<Button effect="fill" fillDirection="down">Fill down</Button>
 <Button effect="swap" swapTarget="both">
   <ButtonLabel>Swap content</ButtonLabel>
   <ButtonIcon><ArrowRight /></ButtonIcon>
@@ -95,13 +90,17 @@ export default function ButtonPage() {
 <Button effect="border-draw">Border draw</Button>`}
       >
         <div className="flex flex-wrap items-center gap-3">
-          {effects.map(([effect, label]) => (
-            <Button key={effect} effect={effect} variant={effect === "border-draw" ? "outline" : "default"}>
-              <ButtonLabel>{label}</ButtonLabel>
-              <ButtonIcon><ArrowRight /></ButtonIcon>
+          <Button effect="shine">Shine sweep</Button>
+          {(["right", "left", "up", "down"] as const).map((direction) => (
+            <Button key={direction} effect="fill" fillDirection={direction} variant="soft">
+              Fill {direction}
             </Button>
           ))}
-          <Button effect="fill" fillDirection="up" variant="soft">Fill up</Button>
+          <Button effect="swap" swapTarget="both">
+            <ButtonLabel>Swap content</ButtonLabel>
+            <ButtonIcon><ArrowRight /></ButtonIcon>
+          </Button>
+          <Button effect="border-draw" variant="outline">Border draw</Button>
           <Button effect="swap" swapTarget="icon" variant="secondary">
             Icon only swap
             <ButtonIcon><ArrowRight /></ButtonIcon>
@@ -119,12 +118,12 @@ export default function ButtonPage() {
         code={`<Button variant="glass"><Sparkles /> AI Generate</Button>`}
       >
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-white/70 bg-gradient-to-br from-red-100 via-white to-slate-200 p-8 shadow-inner">
+          <div className="rounded-2xl border border-border bg-[linear-gradient(135deg,var(--poyraz-primary-muted),var(--poyraz-background),var(--poyraz-surface-200))] p-8">
             <Button variant="glass" effect="shine" radius="full">
               <Sparkles /> AI Generate
             </Button>
           </div>
-          <div className="rounded-2xl border border-white/15 bg-[radial-gradient(circle_at_20%_20%,#7f1d1d_0%,#251719_36%,#0b0e12_100%)] p-8 text-white shadow-xl">
+          <div className="rounded-2xl border border-white/15 bg-[radial-gradient(circle_at_20%_20%,#7f1d1d_0%,#251719_36%,#0b0e12_100%)] p-8 text-white">
             <Button variant="glass" effect="shine" radius="full" className="text-white">
               <Sparkles /> AI Generate
             </Button>
