@@ -40,7 +40,7 @@ export function ComponentPage({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-w-0 space-y-10 pb-10">
+    <div className="min-w-0 space-y-10">
       <div className="space-y-3">
         <h1 className="text-2xl font-black tracking-tight">{name}</h1>
         <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{description}</p>

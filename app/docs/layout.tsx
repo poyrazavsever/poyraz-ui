@@ -211,7 +211,11 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <div className="mx-auto min-h-[calc(100dvh-57px)] w-full max-w-[68rem] px-0 py-10 md:py-14">
             {children}
           </div>
-          <Footer variant="compact" containerClassName="max-w-[68rem] px-0">
+          <Footer
+            variant="compact"
+            className="border-t-0 py-0"
+            containerClassName="max-w-[68rem] px-0"
+          >
             <FooterBottom className="mt-0 border-t border-border py-6">
               <span className="text-xs text-placeholder">
                 &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
