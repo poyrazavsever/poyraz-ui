@@ -4,12 +4,12 @@
 
 Docs Introduction (`/docs`) sayfasi light/dark ve desktop/mobile kombinasyonlarinda kaydedildi.
 
-| Tema | Viewport | Artifact | Boyut |
-| --- | --- | --- | ---: |
+| Tema  | Viewport    | Artifact                                                              |       Boyut |
+| ----- | ----------- | --------------------------------------------------------------------- | ----------: |
 | Light | 1440 x 1100 | [`v2-docs-light-desktop.png`](../baselines/v2-docs-light-desktop.png) | 173186 byte |
-| Dark | 1440 x 1100 | [`v2-docs-dark-desktop.png`](../baselines/v2-docs-dark-desktop.png) | 173488 byte |
-| Light | 390 x 844 | [`v2-docs-light-mobile.png`](../baselines/v2-docs-light-mobile.png) | 74212 byte |
-| Dark | 390 x 844 | [`v2-docs-dark-mobile.png`](../baselines/v2-docs-dark-mobile.png) | 72936 byte |
+| Dark  | 1440 x 1100 | [`v2-docs-dark-desktop.png`](../baselines/v2-docs-dark-desktop.png)   | 173488 byte |
+| Light | 390 x 844   | [`v2-docs-light-mobile.png`](../baselines/v2-docs-light-mobile.png)   |  74212 byte |
+| Dark  | 390 x 844   | [`v2-docs-dark-mobile.png`](../baselines/v2-docs-dark-mobile.png)     |  72936 byte |
 
 Bu dort dosya v2 tasariminin tarihsel referansidir; v3 pixel-parity hedefi degildir. V3 visual regression suite'i kendi approved snapshot setini olusturur. Bu baseline'in amaci degisen layout, docs navigation ve theme davranisini yan yana karsilastirabilmektir.
 
@@ -26,12 +26,12 @@ Baseline'da gozlenen ayirt edici v2 kararlar:
 `pnpm build:lib` baseline ortaminda basarili tamamlandi.
 
 | ESM entry | tsup raporu | Post-build dosya boyutu |
-| --- | ---: | ---: |
-| root | 4.11 KB | 4218 byte |
-| atoms | 707 B | 721 byte |
-| molecules | 2.11 KB | 2173 byte |
-| organisms | 1.35 KB | 1398 byte |
-| themes | 4.90 KB | 5044 byte |
+| --------- | ----------: | ----------------------: |
+| root      |     4.11 KB |               4218 byte |
+| atoms     |       707 B |                721 byte |
+| molecules |     2.11 KB |               2173 byte |
+| organisms |     1.35 KB |               1398 byte |
+| themes    |     4.90 KB |               5044 byte |
 
 Post-build dosyalarinin 14 byte daha buyuk olmasi `tsup.config.ts` tarafindan eklenen `\"use client\";\n` prefix'idir. Tum dist snapshot'i 36 dosya ve 747740 byte'tir; buna ESM, CJS, declaration ve ortak chunk'lar dahildir.
 
@@ -59,4 +59,3 @@ node scripts/audit-v2-build-output.mjs --json
 ```
 
 Build scripti mevcut `dist` ve `.next` dizinlerini salt-okunur tarar; build baslatmaz ve artifact yazmaz.
-

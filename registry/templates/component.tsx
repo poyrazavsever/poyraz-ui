@@ -37,4 +37,3 @@ Component.displayName = "Component";
 
 export { Component, componentVariants };
 export type { ComponentProps };
-

@@ -13,77 +13,77 @@ Tabloda `C/U` controlled ve uncontrolled, `C` controlled-only, `internal` consum
 
 ## Atomlar
 
-| Aile | className | asChild | Ref | State modeli | Loading | CVA |
-| --- | --- | --- | --- | --- | --- | --- |
-| avatar | Evet | Hayir | Evet | Radix image/fallback lifecycle | Hayir | Hayir |
-| badge | Evet | Hayir | **Hayir** | N/A | Hayir | **Evet** |
-| bg-pattern | Evet | Hayir | Evet | N/A | Hayir | Hayir |
-| button | Evet | **Evet** | Evet | Native disabled | **Public prop** | **Evet** |
-| card | Evet | Hayir | Evet | N/A | Hayir | **Evet** |
-| checkbox | Evet | Radix root contract | Evet | **C/U, Radix** | Hayir | Hayir |
-| form-fields | Evet | Hayir | Evet | NumberInput `C`; digerleri native | Hayir | Hayir |
-| input | Evet | Hayir | Evet | **C/U, native** | Hayir | Hayir |
-| label | Evet | Hayir | Evet | N/A | Hayir | Hayir |
-| logo | Evet | Hayir | **Hayir** | N/A | Hayir | Hayir |
-| radio-group | Evet | Radix root contract | Evet | **C/U, Radix** | Hayir | Hayir |
-| scroll-area | Evet | Hayir | Evet | Native scroll | Hayir | Hayir |
-| separator | Evet | Radix root contract | Evet | N/A | Hayir | Hayir |
-| skeleton | Evet | Hayir | **Hayir** | N/A | Hayir | Hayir |
-| switch | Evet | Radix root contract | Evet | **C/U, Radix** | Hayir | Hayir |
-| textarea | Evet | Hayir | Evet | **C/U, native** | Hayir | Hayir |
-| typography | Evet | Hayir | **Hayir** | N/A | Hayir | Hayir |
+| Aile        | className | asChild             | Ref       | State modeli                      | Loading         | CVA      |
+| ----------- | --------- | ------------------- | --------- | --------------------------------- | --------------- | -------- |
+| avatar      | Evet      | Hayir               | Evet      | Radix image/fallback lifecycle    | Hayir           | Hayir    |
+| badge       | Evet      | Hayir               | **Hayir** | N/A                               | Hayir           | **Evet** |
+| bg-pattern  | Evet      | Hayir               | Evet      | N/A                               | Hayir           | Hayir    |
+| button      | Evet      | **Evet**            | Evet      | Native disabled                   | **Public prop** | **Evet** |
+| card        | Evet      | Hayir               | Evet      | N/A                               | Hayir           | **Evet** |
+| checkbox    | Evet      | Radix root contract | Evet      | **C/U, Radix**                    | Hayir           | Hayir    |
+| form-fields | Evet      | Hayir               | Evet      | NumberInput `C`; digerleri native | Hayir           | Hayir    |
+| input       | Evet      | Hayir               | Evet      | **C/U, native**                   | Hayir           | Hayir    |
+| label       | Evet      | Hayir               | Evet      | N/A                               | Hayir           | Hayir    |
+| logo        | Evet      | Hayir               | **Hayir** | N/A                               | Hayir           | Hayir    |
+| radio-group | Evet      | Radix root contract | Evet      | **C/U, Radix**                    | Hayir           | Hayir    |
+| scroll-area | Evet      | Hayir               | Evet      | Native scroll                     | Hayir           | Hayir    |
+| separator   | Evet      | Radix root contract | Evet      | N/A                               | Hayir           | Hayir    |
+| skeleton    | Evet      | Hayir               | **Hayir** | N/A                               | Hayir           | Hayir    |
+| switch      | Evet      | Radix root contract | Evet      | **C/U, Radix**                    | Hayir           | Hayir    |
+| textarea    | Evet      | Hayir               | Evet      | **C/U, native**                   | Hayir           | Hayir    |
+| typography  | Evet      | Hayir               | **Hayir** | N/A                               | Hayir           | Hayir    |
 
 ## Molecule'ler
 
-| Aile | className | asChild | Ref | State modeli | Loading | CVA |
-| --- | --- | --- | --- | --- | --- | --- |
-| accordion | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| alert | Evet | Hayir | Evet | N/A | Hayir | **Evet** |
-| autocomplete | Evet | Hayir | **Hayir** | Selection `C`; query/open internal | **Public prop** | Hayir |
-| breadcrumb | Evet | BreadcrumbLink'te var; Slot degil | Evet | N/A | Hayir | Hayir |
-| calendar | Evet | Hayir | **Hayir** | Selected `C`; view internal | Hayir | Hayir |
-| card-templates | Evet | CTA slotlari node ile | Evet | N/A | Hayir | Hayir |
-| command-palette | Evet | Trigger'da Radix | Evet | Open `C/U`; search internal | Hayir | Hayir |
-| date-picker | Evet | Hayir; yalniz internal Trigger kullaniminda | **Hayir** | Selected `C`; open internal | Hayir | Hayir |
-| dialog | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| drawer | Evet | Vaul subparts | Evet | **C/U, Vaul** | Hayir | Hayir |
-| dropdown-menu | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| form | Evet | FormControl Slot | Evet | React Hook Form | Hayir | Hayir |
-| hover-card | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| mermaid | Evet | Hayir | Partial | Render lifecycle internal | Internal | Hayir |
-| modal | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | **Evet** |
-| pagination | Evet | Link'te Button contract'i | Evet | Consumer-owned | Hayir | Hayir |
-| popover | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| select | Evet | Bazi Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| sheet | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | **Evet** |
-| sonner | Evet | Hayir | **Hayir** | Imperative store | Toast kendi state'i | Hayir |
-| tabs | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
-| tooltip | Evet | Radix subparts | Evet | **C/U, Radix** | Hayir | Hayir |
+| Aile            | className | asChild                                     | Ref       | State modeli                       | Loading             | CVA      |
+| --------------- | --------- | ------------------------------------------- | --------- | ---------------------------------- | ------------------- | -------- |
+| accordion       | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| alert           | Evet      | Hayir                                       | Evet      | N/A                                | Hayir               | **Evet** |
+| autocomplete    | Evet      | Hayir                                       | **Hayir** | Selection `C`; query/open internal | **Public prop**     | Hayir    |
+| breadcrumb      | Evet      | BreadcrumbLink'te var; Slot degil           | Evet      | N/A                                | Hayir               | Hayir    |
+| calendar        | Evet      | Hayir                                       | **Hayir** | Selected `C`; view internal        | Hayir               | Hayir    |
+| card-templates  | Evet      | CTA slotlari node ile                       | Evet      | N/A                                | Hayir               | Hayir    |
+| command-palette | Evet      | Trigger'da Radix                            | Evet      | Open `C/U`; search internal        | Hayir               | Hayir    |
+| date-picker     | Evet      | Hayir; yalniz internal Trigger kullaniminda | **Hayir** | Selected `C`; open internal        | Hayir               | Hayir    |
+| dialog          | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| drawer          | Evet      | Vaul subparts                               | Evet      | **C/U, Vaul**                      | Hayir               | Hayir    |
+| dropdown-menu   | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| form            | Evet      | FormControl Slot                            | Evet      | React Hook Form                    | Hayir               | Hayir    |
+| hover-card      | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| mermaid         | Evet      | Hayir                                       | Partial   | Render lifecycle internal          | Internal            | Hayir    |
+| modal           | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | **Evet** |
+| pagination      | Evet      | Link'te Button contract'i                   | Evet      | Consumer-owned                     | Hayir               | Hayir    |
+| popover         | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| select          | Evet      | Bazi Radix subparts                         | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| sheet           | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | **Evet** |
+| sonner          | Evet      | Hayir                                       | **Hayir** | Imperative store                   | Toast kendi state'i | Hayir    |
+| tabs            | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
+| tooltip         | Evet      | Radix subparts                              | Evet      | **C/U, Radix**                     | Hayir               | Hayir    |
 
 ## Organism'ler
 
-| Aile | className | asChild | Ref | State modeli | Loading | CVA |
-| --- | --- | --- | --- | --- | --- | --- |
-| announcement-bar | Evet | Hayir | Evet | Dismiss internal | Hayir | **Evet** |
-| data-table | Evet | Hayir | Evet | Sort/filter/page/selection internal | Hayir | Hayir |
-| footer | Evet | Hayir | Evet | Newsletter input internal | Hayir | **Evet** |
-| navbar | Evet | Link/Trigger parcalarinda | Evet | Mobile/auto-hide internal; Radix dropdown mix | Hayir | **Evet** |
-| sidebar | Evet | Hayir | Evet | Collapse/mobile/submenu internal | Hayir | **Evet** |
+| Aile             | className | asChild                   | Ref  | State modeli                                  | Loading | CVA      |
+| ---------------- | --------- | ------------------------- | ---- | --------------------------------------------- | ------- | -------- |
+| announcement-bar | Evet      | Hayir                     | Evet | Dismiss internal                              | Hayir   | **Evet** |
+| data-table       | Evet      | Hayir                     | Evet | Sort/filter/page/selection internal           | Hayir   | Hayir    |
+| footer           | Evet      | Hayir                     | Evet | Newsletter input internal                     | Hayir   | **Evet** |
+| navbar           | Evet      | Link/Trigger parcalarinda | Evet | Mobile/auto-hide internal; Radix dropdown mix | Hayir   | **Evet** |
+| sidebar          | Evet      | Hayir                     | Evet | Collapse/mobile/submenu internal              | Hayir   | **Evet** |
 
 ## CVA envanteri
 
-| Aile | Recipe | Kaynak export | Public barrel export |
-| --- | --- | --- | --- |
-| badge | `badgeVariants` | Evet | Evet |
-| button | `buttonVariants` | Evet | Evet |
-| card | `cardVariants` | Evet | Evet |
-| alert | `alertVariants` | Evet | **Hayir** |
-| modal | `modalContentVariants` | Evet | Evet |
-| sheet | `sheetContentVariants` | Evet | Evet |
-| announcement-bar | `announcementBarVariants` | Evet | Evet |
-| footer | `footerVariants` | Evet | Evet |
-| navbar | `navbarVariants`, `megaMenuVariants`, `topBarVariants` | Evet | Evet |
-| sidebar | `sidebarVariants` | Evet | Evet |
+| Aile             | Recipe                                                 | Kaynak export | Public barrel export |
+| ---------------- | ------------------------------------------------------ | ------------- | -------------------- |
+| badge            | `badgeVariants`                                        | Evet          | Evet                 |
+| button           | `buttonVariants`                                       | Evet          | Evet                 |
+| card             | `cardVariants`                                         | Evet          | Evet                 |
+| alert            | `alertVariants`                                        | Evet          | **Hayir**            |
+| modal            | `modalContentVariants`                                 | Evet          | Evet                 |
+| sheet            | `sheetContentVariants`                                 | Evet          | Evet                 |
+| announcement-bar | `announcementBarVariants`                              | Evet          | Evet                 |
+| footer           | `footerVariants`                                       | Evet          | Evet                 |
+| navbar           | `navbarVariants`, `megaMenuVariants`, `topBarVariants` | Evet          | Evet                 |
+| sidebar          | `sidebarVariants`                                      | Evet          | Evet                 |
 
 ## Kritik ozellestirme aciklari
 
@@ -117,4 +117,3 @@ node scripts/audit-v2-source.mjs --json \
 ```
 
 Static script source sinyallerini raporlar; yukaridaki state ve `asChild` yorumlari manuel API incelemesidir.
-

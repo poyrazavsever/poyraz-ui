@@ -4,7 +4,9 @@ import { writeFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9223";
 const baseUrl = process.env.DOCS_URL ?? "http://127.0.0.1:3000";
-const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, { method: "PUT" }).then((response) => response.json());
+const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, {
+  method: "PUT",
+}).then((response) => response.json());
 const socket = new WebSocket(target.webSocketDebuggerUrl);
 const pending = new Map();
 const waiters = new Map();
@@ -16,7 +18,9 @@ socket.addEventListener("message", ({ data }) => {
     const request = pending.get(message.id);
     if (!request) return;
     pending.delete(message.id);
-    message.error ? request.reject(new Error(message.error.message)) : request.resolve(message.result);
+    message.error
+      ? request.reject(new Error(message.error.message))
+      : request.resolve(message.result);
     return;
   }
   const listeners = waiters.get(message.method) ?? [];
@@ -44,7 +48,11 @@ function waitFor(method) {
 }
 
 async function evaluate(expression) {
-  const result = await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
+  const result = await send("Runtime.evaluate", {
+    expression,
+    awaitPromise: true,
+    returnByValue: true,
+  });
   if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
   return result.result.value;
 }
@@ -65,7 +73,12 @@ await send("Page.enable");
 await send("Runtime.enable");
 await send("Network.enable");
 await send("Network.setCacheDisabled", { cacheDisabled: true });
-await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 1100, deviceScaleFactor: 1, mobile: false });
+await send("Emulation.setDeviceMetricsOverride", {
+  width: 1440,
+  height: 1100,
+  deviceScaleFactor: 1,
+  mobile: false,
+});
 
 const loaded = waitFor("Page.loadEventFired");
 await send("Page.navigate", { url: `${baseUrl}/docs/atoms/button` });
@@ -140,11 +153,24 @@ if (!initial.shadowless) failures.push("one or more buttons still render a box s
 if (initial.buttonCount < 20) failures.push(`unexpected button count: ${initial.buttonCount}`);
 for (const direction of ["right", "left", "up", "down"]) {
   if (!initial.fills[direction]) failures.push(`missing ${direction} fill`);
-  if (fillProgress[direction] === initial.fills[direction]) failures.push(`${direction} fill did not animate`);
+  if (fillProgress[direction] === initial.fills[direction])
+    failures.push(`${direction} fill did not animate`);
 }
-if (swap.contentAnimations !== 1 || swap.labelAnimations !== 0 || swap.iconAnimations !== 0) failures.push(`swap animation is nested: ${JSON.stringify(swap)}`);
-if (!border.background.includes("conic-gradient") || border.progress === "0deg" || border.progress === "360deg") failures.push(`border draw is not interpolating: ${JSON.stringify(border)}`);
-if (!glass.hovered || glass.shineAnimation !== "poyraz-button-shine" || glass.borderColor === glassInitial.borderColor || glass.backgroundColor === glassInitial.backgroundColor) failures.push(`light glass hover is not visible: ${JSON.stringify({ glassInitial, glass })}`);
+if (swap.contentAnimations !== 1 || swap.labelAnimations !== 0 || swap.iconAnimations !== 0)
+  failures.push(`swap animation is nested: ${JSON.stringify(swap)}`);
+if (
+  !border.background.includes("conic-gradient") ||
+  border.progress === "0deg" ||
+  border.progress === "360deg"
+)
+  failures.push(`border draw is not interpolating: ${JSON.stringify(border)}`);
+if (
+  !glass.hovered ||
+  glass.shineAnimation !== "poyraz-button-shine" ||
+  glass.borderColor === glassInitial.borderColor ||
+  glass.backgroundColor === glassInitial.backgroundColor
+)
+  failures.push(`light glass hover is not visible: ${JSON.stringify({ glassInitial, glass })}`);
 
 if (process.env.BUTTON_SCREENSHOT) {
   const screenshot = await send("Page.captureScreenshot", { format: "png", fromSurface: true });

@@ -1,0 +1,133 @@
+name: V3 Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Declared version from release.config.json
+        required: true
+        default: 3.0.0
+        type: string
+      channel:
+        description: Release channel
+        required: true
+        default: stable
+        type: choice
+        options: [alpha, beta, rc, stable]
+      publish_release:
+        description: Create the immutable git tag and GitHub release
+        required: true
+        default: false
+        type: boolean
+      promote_legacy_v2:
+        description: Add the legacy-v2 npm dist-tag to the current V2 package
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v3-release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm registry:build
+      - name: Require committed generated registry
+        run: git diff --exit-code -- public/r src/docs-registry.json COMPONENTS.md
+      - run: pnpm release:preflight -- --version=${{ inputs.version }} --channel=${{ inputs.channel }}
+      - run: pnpm quality
+      - run: pnpm fixture:clean-install
+      - run: pnpm build
+      - run: pnpm release:artifacts -- --version=${{ inputs.version }} --channel=${{ inputs.channel }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: poyraz-ui-${{ inputs.version }}
+          path: release-artifacts
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish registry release
+    if: inputs.publish_release
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment: v3-production
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          name: poyraz-ui-${{ inputs.version }}
+          path: release-artifacts
+      - name: Create immutable tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "v${{ inputs.version }}"
+          release-artifacts/registry/*.json
+          release-artifacts/release.json
+          release-artifacts/SHA256SUMS.txt
+          --target "${{ github.sha }}"
+          --title "Poyraz UI v${{ inputs.version }}"
+          --notes-file release-artifacts/RELEASE_NOTES.md
+          ${{ inputs.channel != 'stable' && '--prerelease' || '' }}
+
+  legacy-tag:
+    name: Preserve V2 npm tag
+    if: inputs.publish_release && inputs.promote_legacy_v2 && inputs.channel == 'stable'
+    needs: [prepare, publish]
+    runs-on: ubuntu-latest
+    environment: v3-production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: Apply legacy-v2 without moving latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm dist-tag add "poyraz-ui@$(node -p "require('./package.json').version")" legacy-v2
+
+  post-release:
+    name: Production registry smoke
+    if: inputs.publish_release
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm release:smoke -- --attempts=12 --delay-ms=10000

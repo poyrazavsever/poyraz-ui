@@ -8,19 +8,19 @@ Every Phase 8 organism or block establishes a named Tailwind container and respo
 
 ## Registry blocks
 
-| Item | Main dependencies | Responsive behavior | Accessibility notes |
-| --- | --- | --- | --- |
-| `navigation-block` | Button, Navbar | Desktop links switch to mobile navigation from the navbar container width. | Native links, `aria-current`, labelled mobile trigger. Active route is supplied as plain `activeHref`. |
-| `mobile-navigation-block` | Button, Sheet, Navigation Block | Dedicated compact navigation opens a capped mobile sheet. | Dialog focus management, labelled navigation and framework-neutral `aria-current`. |
-| `mega-menu-block` | Navbar | Mega menu columns and mobile disclosure follow the navbar container. | Radix Navigation Menu keyboard behavior and labelled product navigation. |
-| `mobile-sidebar-block` | Button, Sheet, Sidebar | Uses a viewport sheet by intent; panel width is capped. | Dialog focus management, hidden title, labelled trigger. |
-| `footer-blocks` | Button, Footer, Footer Newsletter | Footer columns and newsletter form use the footer container. | Landmark footer, labelled social links and native form controls. |
-| `dashboard-shell-block` | Avatar, Badge, Button, Card, Input, Sidebar | Sidebar appears only when the shell container has room. | Search label, notification label and semantic navigation parts. |
-| `glass-app-shell-block` | Navigation Block, Sidebar | Navbar and sidebar react independently to their named containers. | Preserves native navigation and main landmarks. |
-| `auth-card-block` | Button, Card, Input, Label | Form padding and card width adapt to the auth container. | Associated labels, autocomplete hints and native submit behavior. |
-| `pricing-block` | Badge, Button, Card | Plans stack until the pricing container reaches large width. | Ordered feature content and descriptive action labels. |
-| `brand-hero-block` | Badge, Button | Actions and feature anatomy reflow from the hero container. | Literal heading, clear actions and decorative icons excluded from navigation. |
-| `smart-dashboard-block` | Badge, Button, Card | Stats progress from one to two to four columns; content panels split at large width. | Text equivalents for chart bars, labelled options control and semantic activity list. |
+| Item                      | Main dependencies                           | Responsive behavior                                                                  | Accessibility notes                                                                                    |
+| ------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `navigation-block`        | Button, Navbar                              | Desktop links switch to mobile navigation from the navbar container width.           | Native links, `aria-current`, labelled mobile trigger. Active route is supplied as plain `activeHref`. |
+| `mobile-navigation-block` | Button, Sheet, Navigation Block             | Dedicated compact navigation opens a capped mobile sheet.                            | Dialog focus management, labelled navigation and framework-neutral `aria-current`.                     |
+| `mega-menu-block`         | Navbar                                      | Mega menu columns and mobile disclosure follow the navbar container.                 | Radix Navigation Menu keyboard behavior and labelled product navigation.                               |
+| `mobile-sidebar-block`    | Button, Sheet, Sidebar                      | Uses a viewport sheet by intent; panel width is capped.                              | Dialog focus management, hidden title, labelled trigger.                                               |
+| `footer-blocks`           | Button, Footer, Footer Newsletter           | Footer columns and newsletter form use the footer container.                         | Landmark footer, labelled social links and native form controls.                                       |
+| `dashboard-shell-block`   | Avatar, Badge, Button, Card, Input, Sidebar | Sidebar appears only when the shell container has room.                              | Search label, notification label and semantic navigation parts.                                        |
+| `glass-app-shell-block`   | Navigation Block, Sidebar                   | Navbar and sidebar react independently to their named containers.                    | Preserves native navigation and main landmarks.                                                        |
+| `auth-card-block`         | Button, Card, Input, Label                  | Form padding and card width adapt to the auth container.                             | Associated labels, autocomplete hints and native submit behavior.                                      |
+| `pricing-block`           | Badge, Button, Card                         | Plans stack until the pricing container reaches large width.                         | Ordered feature content and descriptive action labels.                                                 |
+| `brand-hero-block`        | Badge, Button                               | Actions and feature anatomy reflow from the hero container.                          | Literal heading, clear actions and decorative icons excluded from navigation.                          |
+| `smart-dashboard-block`   | Badge, Button, Card                         | Stats progress from one to two to four columns; content panels split at large width. | Text equivalents for chart bars, labelled options control and semantic activity list.                  |
 
 ## Behavior boundaries
 

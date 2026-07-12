@@ -2,10 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const repositoryRoot = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "..",
-);
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const tokenPath = path.join(repositoryRoot, "src/theme-tokens.json");
 const presetPath = path.join(repositoryRoot, "src/preset.css");
 const startMarker = "/* @poyraz-tokens:start */";
@@ -50,9 +47,7 @@ function cssThemeValue(value) {
 }
 
 function declarationBlock(selector, entries) {
-  const declarations = entries
-    .map(([name, value]) => `  ${name}: ${value};`)
-    .join("\n");
+  const declarations = entries.map(([name, value]) => `  ${name}: ${value};`).join("\n");
   return `${selector} {\n${declarations}\n}`;
 }
 
@@ -89,18 +84,13 @@ if (start === -1 || end === -1 || end < start) {
 const currentGenerated = preset.slice(start, end + endMarker.length);
 if (process.argv.includes("--check")) {
   if (currentGenerated !== generated) {
-    console.error(
-      "Generated theme CSS is stale. Run: node scripts/generate-theme-tokens.mjs",
-    );
+    console.error("Generated theme CSS is stale. Run: node scripts/generate-theme-tokens.mjs");
     process.exitCode = 1;
   } else {
     console.log("Theme CSS is synchronized with src/theme-tokens.json.");
   }
 } else {
-  const nextPreset = `${preset.slice(0, start)}${generated}${preset.slice(
-    end + endMarker.length,
-  )}`;
+  const nextPreset = `${preset.slice(0, start)}${generated}${preset.slice(end + endMarker.length)}`;
   await writeFile(presetPath, nextPreset);
   console.log("Generated theme CSS in src/preset.css.");
 }
-

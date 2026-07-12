@@ -2,8 +2,7 @@
 
 import { writeFile } from "node:fs/promises";
 
-const [url, output, widthArg = "1440", heightArg = "1100", theme = "light"] =
-  process.argv.slice(2);
+const [url, output, widthArg = "1440", heightArg = "1100", theme = "light"] = process.argv.slice(2);
 
 if (!url || !output) {
   throw new Error(
@@ -92,4 +91,3 @@ const { data } = await send("Page.captureScreenshot", {
 await writeFile(output, Buffer.from(data, "base64"));
 await send("Page.close");
 socket.close();
-

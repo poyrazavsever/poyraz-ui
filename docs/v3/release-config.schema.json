@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.poyrazavsever.com/schemas/release-config.schema.json",
+  "title": "Poyraz UI release configuration",
+  "type": "object",
+  "required": ["schemaVersion", "product", "targetVersion", "registry", "npm", "milestones"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "product": { "const": "poyraz-ui-registry" },
+    "targetVersion": { "type": "string", "pattern": "^3\\.\\d+\\.\\d+(-[a-z]+\\.\\d+)?$" },
+    "releaseTagPrefix": { "type": "string" },
+    "repository": { "type": "string" },
+    "registry": {
+      "type": "object",
+      "required": ["namespace", "homepage", "baseUrl", "template", "index", "minimumItems"],
+      "properties": {
+        "namespace": { "const": "@poyraz" },
+        "homepage": { "type": "string", "format": "uri" },
+        "baseUrl": { "type": "string", "format": "uri" },
+        "template": { "type": "string", "pattern": "\\{name\\}" },
+        "index": { "const": "registry.json" },
+        "minimumItems": { "type": "integer", "minimum": 1 },
+        "smokeItems": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      },
+      "additionalProperties": false
+    },
+    "npm": {
+      "type": "object",
+      "required": ["package", "role", "expectedMajor", "maintenanceTag", "publishV3Package"],
+      "properties": {
+        "package": { "const": "poyraz-ui" },
+        "role": { "const": "legacy-v2" },
+        "expectedMajor": { "const": 2 },
+        "maintenanceTag": { "const": "legacy-v2" },
+        "stableTag": { "const": "latest" },
+        "publishV3Package": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "milestones": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["version", "channel", "status"],
+        "properties": {
+          "version": { "type": "string" },
+          "channel": { "enum": ["alpha", "beta", "rc", "stable"] },
+          "status": { "enum": ["planned", "complete", "candidate", "released"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

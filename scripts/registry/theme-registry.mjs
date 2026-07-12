@@ -46,12 +46,10 @@ function registryThemeValue(value) {
 export async function buildRegistryThemeCssVars({ cwd = process.cwd() } = {}) {
   const tokenFile = resolve(cwd, THEME_TOKEN_FILE);
   const tokens = JSON.parse(await readFile(tokenFile, "utf8"));
-  const primitiveEntries = flattenValues(tokens.primitives).map(
-    ([pathParts, value]) => [
-      variableName(pathParts).slice(2),
-      registryThemeValue(value),
-    ],
-  );
+  const primitiveEntries = flattenValues(tokens.primitives).map(([pathParts, value]) => [
+    variableName(pathParts).slice(2),
+    registryThemeValue(value),
+  ]);
   const sharedEntries = flattenValues(tokens.shared).map(([pathParts, value]) => [
     variableName(pathParts).slice(2),
     registryThemeValue(value),

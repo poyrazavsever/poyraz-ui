@@ -4,33 +4,33 @@ Durum: Faz 0 urun karari. Bu matris v3 alpha'dan once fixture CI ile uygulanir; 
 
 ## Runtime ve toolchain
 
-| Katman | V3 destek karari | CI seviyesi | Not |
-| --- | --- | --- | --- |
-| React | `18.3+` ve `19.x` | Tier 1 | Her iki major icin registry install/typecheck fixture |
-| React DOM | React ile ayni major | Tier 1 | Mixed major desteklenmez |
-| TypeScript | `5.4+` | Tier 1 | Registry kaynagi strict mode'da typecheck edilir |
-| Tailwind CSS | `4.x` | Tier 1 | `@theme`, CSS-first config ve source detection temel sozlesmedir |
-| Tailwind CSS 3 | Desteklenmez | - | Ayri legacy style item uretilmez |
-| Node.js | Aktif LTS: minimum `20.x` | Tier 1 | Registry build/CLI; docs build CI ayrica `22.x` ile kosulur |
-| Package managers | pnpm, npm, yarn, bun | Tier 1/2 | pnpm ve npm her PR; yarn/bun release candidate smoke |
-| ESM | Zorunlu | Tier 1 | Registry kaynaklari standart ESM/TSX |
-| CommonJS consumer | Registry kaynak modelinde hedef degil | - | Legacy v2 runtime package politikasi ayri |
+| Katman            | V3 destek karari                      | CI seviyesi | Not                                                              |
+| ----------------- | ------------------------------------- | ----------- | ---------------------------------------------------------------- |
+| React             | `18.3+` ve `19.x`                     | Tier 1      | Her iki major icin registry install/typecheck fixture            |
+| React DOM         | React ile ayni major                  | Tier 1      | Mixed major desteklenmez                                         |
+| TypeScript        | `5.4+`                                | Tier 1      | Registry kaynagi strict mode'da typecheck edilir                 |
+| Tailwind CSS      | `4.x`                                 | Tier 1      | `@theme`, CSS-first config ve source detection temel sozlesmedir |
+| Tailwind CSS 3    | Desteklenmez                          | -           | Ayri legacy style item uretilmez                                 |
+| Node.js           | Aktif LTS: minimum `20.x`             | Tier 1      | Registry build/CLI; docs build CI ayrica `22.x` ile kosulur      |
+| Package managers  | pnpm, npm, yarn, bun                  | Tier 1/2    | pnpm ve npm her PR; yarn/bun release candidate smoke             |
+| ESM               | Zorunlu                               | Tier 1      | Registry kaynaklari standart ESM/TSX                             |
+| CommonJS consumer | Registry kaynak modelinde hedef degil | -           | Legacy v2 runtime package politikasi ayri                        |
 
 React 18 destegi, kaynakta React 19-only API kullanmama anlamina gelir. React 19 ref iyilestirmeleri kullanilacaksa React 18-compatible `forwardRef` contract'i korunur veya major destek karari ADR ile degistirilir.
 
 ## Framework matrisi
 
-| Ortam | Seviye | Test senaryosu |
-| --- | --- | --- |
-| Next.js App Router, son iki maintained major | Tier 1 | Server-safe import, client primitive, SSR/hydration, dark theme |
-| Vite + React | Tier 1 | Temiz install, Tailwind v4, HMR ve production build |
-| React Router framework mode / Remix-compatible React | Tier 2 | SSR + hydration smoke |
-| Next.js Pages Router | Tier 2 | Client render ve production build smoke |
-| Astro React island | Community/Tier 3 | `client:*` boundary belgelenir; release blocker degil |
-| Gatsby / custom webpack | Community/Tier 3 | Standart React + Tailwind v4 ise best-effort |
-| Create React App | Desteklenmez | CRA modern hedef degildir |
-| React Native | Desteklenmez | DOM, Tailwind CSS ve Radix bagimliligi nedeniyle kapsam disi |
-| Vue/Svelte/Angular | Desteklenmez | React registry kaynaklari kapsam disi |
+| Ortam                                                | Seviye           | Test senaryosu                                                  |
+| ---------------------------------------------------- | ---------------- | --------------------------------------------------------------- |
+| Next.js App Router, son iki maintained major         | Tier 1           | Server-safe import, client primitive, SSR/hydration, dark theme |
+| Vite + React                                         | Tier 1           | Temiz install, Tailwind v4, HMR ve production build             |
+| React Router framework mode / Remix-compatible React | Tier 2           | SSR + hydration smoke                                           |
+| Next.js Pages Router                                 | Tier 2           | Client render ve production build smoke                         |
+| Astro React island                                   | Community/Tier 3 | `client:*` boundary belgelenir; release blocker degil           |
+| Gatsby / custom webpack                              | Community/Tier 3 | Standart React + Tailwind v4 ise best-effort                    |
+| Create React App                                     | Desteklenmez     | CRA modern hedef degildir                                       |
+| React Native                                         | Desteklenmez     | DOM, Tailwind CSS ve Radix bagimliligi nedeniyle kapsam disi    |
+| Vue/Svelte/Angular                                   | Desteklenmez     | React registry kaynaklari kapsam disi                           |
 
 Framework-specific kod generic `registry:ui` item'ina girmez. Next Link/Image gibi entegrasyonlar ayri example veya framework block item'i olur.
 
@@ -44,16 +44,16 @@ Framework-specific kod generic `registry:ui` item'ina girmez. Next Link/Image gi
 
 ## Browser matrisi
 
-| Browser | Minimum | Glass | Not |
-| --- | ---: | --- | --- |
-| Chrome desktop/Android | 121+ | Tam | Chromium baseline; custom scrollbar mevcut v2 notuyla uyumlu |
-| Edge | 121+ | Tam | Chromium |
-| Firefox | 128 ESR+ | Tam veya kontrollu fark | Scrollbar ve filter rendering visual tolerance ile test edilir |
-| Safari macOS | 17+ | Tam, `-webkit-` prefix dahil | Blur/compositing ve reduced-transparency smoke |
-| Safari iOS/iPadOS | 17+ | Tam, performans butcesiyle | Nested blur sayisi sinirlanir |
-| Samsung Internet | Guncel iki major | Progressive | Android smoke |
-| WebView | Yukaridaki engine baseline'ina uyan | Progressive | Host engine sorumlulugu |
-| IE / legacy EdgeHTML | Desteklenmez | Fallback yok | Modern CSS/ESM hedefi |
+| Browser                |                             Minimum | Glass                        | Not                                                            |
+| ---------------------- | ----------------------------------: | ---------------------------- | -------------------------------------------------------------- |
+| Chrome desktop/Android |                                121+ | Tam                          | Chromium baseline; custom scrollbar mevcut v2 notuyla uyumlu   |
+| Edge                   |                                121+ | Tam                          | Chromium                                                       |
+| Firefox                |                            128 ESR+ | Tam veya kontrollu fark      | Scrollbar ve filter rendering visual tolerance ile test edilir |
+| Safari macOS           |                                 17+ | Tam, `-webkit-` prefix dahil | Blur/compositing ve reduced-transparency smoke                 |
+| Safari iOS/iPadOS      |                                 17+ | Tam, performans butcesiyle   | Nested blur sayisi sinirlanir                                  |
+| Samsung Internet       |                    Guncel iki major | Progressive                  | Android smoke                                                  |
+| WebView                | Yukaridaki engine baseline'ina uyan | Progressive                  | Host engine sorumlulugu                                        |
+| IE / legacy EdgeHTML   |                        Desteklenmez | Fallback yok                 | Modern CSS/ESM hedefi                                          |
 
 Minimum surum altinda temel HTML/CSS tesadufen calisabilir; bug fix ve CI garantisi verilmez.
 
@@ -108,4 +108,3 @@ Ornek kontrat:
 ## Release gate
 
 Stable release'te Tier 1 matrisinin tamaminda registry install, typecheck ve production build yesil olmalidir. Tier 2 hatalari belgelenmis workaround yoksa RC blocker; Tier 3 hatalari release blocker degildir.
-

@@ -60,14 +60,22 @@ for (const effect of ["shine", "fill", "swap", "border-draw"]) {
 requireText("reduced motion", css, "prefers-reduced-motion: reduce");
 requireText("glass fallback", css, ".poyraz-button-glass");
 requireText("fill foreground", source, "data-[effect=fill]:hover:text-primary-foreground");
-requireText("shadowless transition", source, "transition-[color,background-color,border-color,transform]");
+requireText(
+  "shadowless transition",
+  source,
+  "transition-[color,background-color,border-color,transform]",
+);
 if (/\bshadow(?:-|\[)/.test(source)) {
   failures.push("shadowless variants: button source must not include shadow utilities");
 }
 
 for (const direction of ["right", "left", "up", "down"]) {
   requireText("fill direction API", source, `\"${direction}\"`);
-  requireText("fill direction docs", docs, direction === "right" ? "Fill right" : `fillDirection=\"${direction}\"`);
+  requireText(
+    "fill direction docs",
+    docs,
+    direction === "right" ? "Fill right" : `fillDirection=\"${direction}\"`,
+  );
 }
 
 requireText("gap-free fill", css, 'data-effect="fill"]::before {\n    inset: -1px');
@@ -78,7 +86,11 @@ requireText("single swap target", css, 'data-swap-target="both"] > [data-slot="b
 requireText("continuous border property", css, "@property --poyraz-button-border-progress");
 requireText("continuous border gradient", css, "conic-gradient(");
 requireText("light glass shine", css, "color-mix(in srgb, var(--poyraz-primary) 34%, transparent)");
-requireText("light glass border", css, "--poyraz-button-glass-border-hover: var(--poyraz-border-strong)");
+requireText(
+  "light glass border",
+  css,
+  "--poyraz-button-glass-border-hover: var(--poyraz-border-strong)",
+);
 
 const iconButtons = [...docs.matchAll(/<Button\s+size="icon(?:-sm|-lg)?"[^>]*>/g)];
 if (iconButtons.length < 3) {

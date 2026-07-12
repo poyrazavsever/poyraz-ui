@@ -4,11 +4,11 @@
 
 44 component kaynak ailesinin statik incelemesi:
 
-| Boundary | Aile sayisi | Anlam |
-| --- | ---: | --- |
-| Client gerekli | 30 | Hook, browser API veya client davranis primitive'i kullaniyor |
-| Server-safe, statik inceleme | 13 | State/effect/browser API/client primitive sinyali yok |
-| Server-safe wrapper / client Slot dependency | 1 | `button`; wrapper stateless, `@radix-ui/react-slot` siniri fixture ile dogrulanmali |
+| Boundary                                     | Aile sayisi | Anlam                                                                               |
+| -------------------------------------------- | ----------: | ----------------------------------------------------------------------------------- |
+| Client gerekli                               |          30 | Hook, browser API veya client davranis primitive'i kullaniyor                       |
+| Server-safe, statik inceleme                 |          13 | State/effect/browser API/client primitive sinyali yok                               |
+| Server-safe wrapper / client Slot dependency |           1 | `button`; wrapper stateless, `@radix-ui/react-slot` siniri fixture ile dogrulanmali |
 
 29 dosyada acik `use client` vardir. `footer.tsx`, `React.useState` kullandigi halde directive tasimayan tek client-required dosyadir. Mevcut tsup `onSuccess` adimi butun ESM/CJS JS dosyalarina `use client` ekledigi icin bu kaynak hatasi package build'inde maskelenir; component dosyasi consumer'a dogrudan kopyalandiginda ortaya cikar.
 
@@ -22,62 +22,62 @@
 
 ## Atomlar
 
-| Aile | Zorunlu internal | Zorunlu paket | Opsiyonel paket | Boundary ve gerekce |
-| --- | --- | --- | --- | --- |
-| avatar | `cn` | `@radix-ui/react-avatar` | - | Client; Radix Avatar |
-| badge | `cn` | `class-variance-authority` | - | Server-safe |
-| bg-pattern | `cn` | - | - | Server-safe |
-| button | `cn` | `@radix-ui/react-slot`, `class-variance-authority` | - | Kosullu; stateless wrapper, Slot dependency |
-| card | `cn` | `class-variance-authority` | - | Server-safe |
-| checkbox | `cn` | `@radix-ui/react-checkbox` | - | Client; Radix Checkbox |
-| form-fields | `Button`, `Input`, `cn` | `lucide-react` | - | Client; local state ve event davranisi |
-| input | `cn` | - | - | Server-safe |
-| label | `cn` | - | - | Server-safe |
-| logo | `cn` | - | - | Server-safe |
-| radio-group | `cn` | `@radix-ui/react-radio-group` | - | Client; Radix Radio Group |
-| scroll-area | `cn` | - | - | Directive var, fakat davranis sadece CSS/props; v3'te server-safe fixture ile yeniden siniflandirilmali |
-| separator | `cn` | `@radix-ui/react-separator` | - | Client; Radix Separator |
-| skeleton | `cn` | - | - | Server-safe |
-| switch | `cn` | `@radix-ui/react-switch` | - | Client; Radix Switch |
-| textarea | `cn` | - | - | Server-safe |
-| typography | - | `clsx`, `tailwind-merge` | - | Server-safe; fakat utility ve visual component sorumluluklari karismis |
+| Aile        | Zorunlu internal        | Zorunlu paket                                      | Opsiyonel paket | Boundary ve gerekce                                                                                     |
+| ----------- | ----------------------- | -------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------- |
+| avatar      | `cn`                    | `@radix-ui/react-avatar`                           | -               | Client; Radix Avatar                                                                                    |
+| badge       | `cn`                    | `class-variance-authority`                         | -               | Server-safe                                                                                             |
+| bg-pattern  | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| button      | `cn`                    | `@radix-ui/react-slot`, `class-variance-authority` | -               | Kosullu; stateless wrapper, Slot dependency                                                             |
+| card        | `cn`                    | `class-variance-authority`                         | -               | Server-safe                                                                                             |
+| checkbox    | `cn`                    | `@radix-ui/react-checkbox`                         | -               | Client; Radix Checkbox                                                                                  |
+| form-fields | `Button`, `Input`, `cn` | `lucide-react`                                     | -               | Client; local state ve event davranisi                                                                  |
+| input       | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| label       | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| logo        | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| radio-group | `cn`                    | `@radix-ui/react-radio-group`                      | -               | Client; Radix Radio Group                                                                               |
+| scroll-area | `cn`                    | -                                                  | -               | Directive var, fakat davranis sadece CSS/props; v3'te server-safe fixture ile yeniden siniflandirilmali |
+| separator   | `cn`                    | `@radix-ui/react-separator`                        | -               | Client; Radix Separator                                                                                 |
+| skeleton    | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| switch      | `cn`                    | `@radix-ui/react-switch`                           | -               | Client; Radix Switch                                                                                    |
+| textarea    | `cn`                    | -                                                  | -               | Server-safe                                                                                             |
+| typography  | -                       | `clsx`, `tailwind-merge`                           | -               | Server-safe; fakat utility ve visual component sorumluluklari karismis                                  |
 
 ## Molecule'ler
 
-| Aile | Zorunlu internal | Zorunlu paket | Opsiyonel paket | Boundary ve gerekce |
-| --- | --- | --- | --- | --- |
-| accordion | `cn` | `@radix-ui/react-accordion`, `lucide-react` | - | Client; Radix Accordion |
-| alert | `cn` | `class-variance-authority`, `lucide-react` | - | Server-safe |
-| autocomplete | `cn` | `lucide-react` | - | Client; state, refs, effects ve `document` listener |
-| breadcrumb | `cn` | `lucide-react` | - | Server-safe |
-| calendar | `Button`, `cn` | `lucide-react` | - | Client; view state |
-| card-templates | `Card`, `cn` | - | - | Server-safe |
-| command-palette | `cn` | `@radix-ui/react-dialog`, `@radix-ui/react-visually-hidden`, `lucide-react` | - | Client; Dialog ve context/state |
-| date-picker | `Button`, `Calendar`, `Popover`, `cn` | `lucide-react` | - | Client; open state ve transitif Radix Popover |
-| dialog | `cn` | `@radix-ui/react-dialog`, `lucide-react` | - | Client; Radix Dialog |
-| drawer | `cn` | `vaul` | - | Client; Vaul |
-| dropdown-menu | `cn` | `@radix-ui/react-dropdown-menu`, `lucide-react` | - | Client; Radix Dropdown Menu |
-| form | `Label`, `cn` | `@radix-ui/react-slot`, `react-hook-form` | - | Client; form context/hooks |
-| hover-card | `cn` | `@radix-ui/react-hover-card` | - | Client; Radix Hover Card |
-| mermaid | `cn` | - | `mermaid` | Client; effect/ref/state ve browser-only dinamik render |
-| modal | `cn` | `@radix-ui/react-dialog`, `class-variance-authority`, `lucide-react` | - | Client; Radix Dialog |
-| pagination | `Button`, `cn` | `lucide-react` | - | Server-safe |
-| popover | `cn` | `@radix-ui/react-popover` | - | Client; Radix Popover |
-| select | `cn` | `@radix-ui/react-select`, `lucide-react` | - | Client; Radix Select |
-| sheet | `cn` | `@radix-ui/react-dialog`, `class-variance-authority`, `lucide-react` | - | Client; Radix Dialog |
-| sonner | `cn` | `sonner` | - | Client; toast runtime |
-| tabs | `cn` | `@radix-ui/react-tabs` | - | Client; Radix Tabs |
-| tooltip | `cn` | `@radix-ui/react-tooltip` | - | Client; Radix Tooltip |
+| Aile            | Zorunlu internal                      | Zorunlu paket                                                               | Opsiyonel paket | Boundary ve gerekce                                     |
+| --------------- | ------------------------------------- | --------------------------------------------------------------------------- | --------------- | ------------------------------------------------------- |
+| accordion       | `cn`                                  | `@radix-ui/react-accordion`, `lucide-react`                                 | -               | Client; Radix Accordion                                 |
+| alert           | `cn`                                  | `class-variance-authority`, `lucide-react`                                  | -               | Server-safe                                             |
+| autocomplete    | `cn`                                  | `lucide-react`                                                              | -               | Client; state, refs, effects ve `document` listener     |
+| breadcrumb      | `cn`                                  | `lucide-react`                                                              | -               | Server-safe                                             |
+| calendar        | `Button`, `cn`                        | `lucide-react`                                                              | -               | Client; view state                                      |
+| card-templates  | `Card`, `cn`                          | -                                                                           | -               | Server-safe                                             |
+| command-palette | `cn`                                  | `@radix-ui/react-dialog`, `@radix-ui/react-visually-hidden`, `lucide-react` | -               | Client; Dialog ve context/state                         |
+| date-picker     | `Button`, `Calendar`, `Popover`, `cn` | `lucide-react`                                                              | -               | Client; open state ve transitif Radix Popover           |
+| dialog          | `cn`                                  | `@radix-ui/react-dialog`, `lucide-react`                                    | -               | Client; Radix Dialog                                    |
+| drawer          | `cn`                                  | `vaul`                                                                      | -               | Client; Vaul                                            |
+| dropdown-menu   | `cn`                                  | `@radix-ui/react-dropdown-menu`, `lucide-react`                             | -               | Client; Radix Dropdown Menu                             |
+| form            | `Label`, `cn`                         | `@radix-ui/react-slot`, `react-hook-form`                                   | -               | Client; form context/hooks                              |
+| hover-card      | `cn`                                  | `@radix-ui/react-hover-card`                                                | -               | Client; Radix Hover Card                                |
+| mermaid         | `cn`                                  | -                                                                           | `mermaid`       | Client; effect/ref/state ve browser-only dinamik render |
+| modal           | `cn`                                  | `@radix-ui/react-dialog`, `class-variance-authority`, `lucide-react`        | -               | Client; Radix Dialog                                    |
+| pagination      | `Button`, `cn`                        | `lucide-react`                                                              | -               | Server-safe                                             |
+| popover         | `cn`                                  | `@radix-ui/react-popover`                                                   | -               | Client; Radix Popover                                   |
+| select          | `cn`                                  | `@radix-ui/react-select`, `lucide-react`                                    | -               | Client; Radix Select                                    |
+| sheet           | `cn`                                  | `@radix-ui/react-dialog`, `class-variance-authority`, `lucide-react`        | -               | Client; Radix Dialog                                    |
+| sonner          | `cn`                                  | `sonner`                                                                    | -               | Client; toast runtime                                   |
+| tabs            | `cn`                                  | `@radix-ui/react-tabs`                                                      | -               | Client; Radix Tabs                                      |
+| tooltip         | `cn`                                  | `@radix-ui/react-tooltip`                                                   | -               | Client; Radix Tooltip                                   |
 
 ## Organism'ler
 
-| Aile | Zorunlu internal | Zorunlu paket | Opsiyonel paket | Boundary ve gerekce |
-| --- | --- | --- | --- | --- |
-| announcement-bar | `cn` | `class-variance-authority`, `lucide-react` | - | Client; dismiss state |
-| data-table | `Badge`, `Button`, `Checkbox`, `Input`, `cn` | `lucide-react` | - | Client; sort/filter/page/selection state ve effects |
-| footer | `cn` | `class-variance-authority` | - | **Client; `useState` var fakat directive yok** |
-| navbar | `cn` | `@radix-ui/react-navigation-menu`, `@radix-ui/react-popover`, `class-variance-authority`, `lucide-react` | - | Client; context/state/effect/browser scroll |
-| sidebar | `cn` | `class-variance-authority`, `lucide-react` | - | Client; context/state |
+| Aile             | Zorunlu internal                             | Zorunlu paket                                                                                            | Opsiyonel paket | Boundary ve gerekce                                 |
+| ---------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------- |
+| announcement-bar | `cn`                                         | `class-variance-authority`, `lucide-react`                                                               | -               | Client; dismiss state                               |
+| data-table       | `Badge`, `Button`, `Checkbox`, `Input`, `cn` | `lucide-react`                                                                                           | -               | Client; sort/filter/page/selection state ve effects |
+| footer           | `cn`                                         | `class-variance-authority`                                                                               | -               | **Client; `useState` var fakat directive yok**      |
+| navbar           | `cn`                                         | `@radix-ui/react-navigation-menu`, `@radix-ui/react-popover`, `class-variance-authority`, `lucide-react` | -               | Client; context/state/effect/browser scroll         |
+| sidebar          | `cn`                                         | `class-variance-authority`, `lucide-react`                                                               | -               | Client; context/state                               |
 
 ## Package declaration bulgulari
 
@@ -101,4 +101,3 @@
 node scripts/audit-v2-source.mjs --json \
   | jq '.components[] | {family, dependencies, clientBoundary}'
 ```
-

@@ -2,7 +2,9 @@
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9223";
 const baseUrl = process.env.DOCS_URL ?? "http://127.0.0.1:3000";
-const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, { method: "PUT" }).then((response) => response.json());
+const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, {
+  method: "PUT",
+}).then((response) => response.json());
 const socket = new WebSocket(target.webSocketDebuggerUrl);
 const pending = new Map();
 let sequence = 0;
@@ -16,7 +18,9 @@ socket.addEventListener("message", ({ data }) => {
   const request = pending.get(message.id);
   if (!request) return;
   pending.delete(message.id);
-  message.error ? request.reject(new Error(message.error.message)) : request.resolve(message.result);
+  message.error
+    ? request.reject(new Error(message.error.message))
+    : request.resolve(message.result);
 });
 function send(method, params = {}) {
   const id = ++sequence;
@@ -24,12 +28,21 @@ function send(method, params = {}) {
   return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
 }
 async function evaluate(expression) {
-  const result = await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
+  const result = await send("Runtime.evaluate", {
+    expression,
+    awaitPromise: true,
+    returnByValue: true,
+  });
   if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
   return result.result.value;
 }
 async function navigate(path, width = 1440, height = 1000) {
-  await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile: width < 768 });
+  await send("Emulation.setDeviceMetricsOverride", {
+    width,
+    height,
+    deviceScaleFactor: 1,
+    mobile: width < 768,
+  });
   await send("Page.navigate", { url: `${baseUrl}${path}` });
   await new Promise((resolve) => setTimeout(resolve, 1000));
 }
@@ -166,12 +179,36 @@ const mobile = await evaluate(`(() => ({
 }))()`);
 
 const failures = [];
-for (const [key, value] of Object.entries(desktop)) if ((typeof value === "boolean" && !value) || (key === "sidebarLeft" && value < 20) || (key === "fadeMask" && value === "none") || (key === "themeModes" && value !== 3) || (key === "playgroundSelects" && value < 5) || (key === "playgroundCheckboxes" && value < 2)) failures.push(`desktop ${key}: ${value}`);
-for (const [group, result] of Object.entries({ dropdown, tabs, accordion, typography, announcement })) for (const [key, value] of Object.entries(result)) if (!value) failures.push(`${group} ${key}: ${value}`);
-if (!block.button || block.viewport !== "mobile" || !block.liveBlock || !block.registryDetails) failures.push(`block detail: ${JSON.stringify(block)}`);
-for (const [key, value] of Object.entries(mobile)) if (!value) failures.push(`mobile ${key}: ${value}`);
+for (const [key, value] of Object.entries(desktop))
+  if (
+    (typeof value === "boolean" && !value) ||
+    (key === "sidebarLeft" && value < 20) ||
+    (key === "fadeMask" && value === "none") ||
+    (key === "themeModes" && value !== 3) ||
+    (key === "playgroundSelects" && value < 5) ||
+    (key === "playgroundCheckboxes" && value < 2)
+  )
+    failures.push(`desktop ${key}: ${value}`);
+for (const [group, result] of Object.entries({
+  dropdown,
+  tabs,
+  accordion,
+  typography,
+  announcement,
+}))
+  for (const [key, value] of Object.entries(result))
+    if (!value) failures.push(`${group} ${key}: ${value}`);
+if (!block.button || block.viewport !== "mobile" || !block.liveBlock || !block.registryDetails)
+  failures.push(`block detail: ${JSON.stringify(block)}`);
+for (const [key, value] of Object.entries(mobile))
+  if (!value) failures.push(`mobile ${key}: ${value}`);
 
 await send("Page.close");
 socket.close();
-if (failures.length) { failures.forEach((failure) => console.error(`- ${failure}`)); process.exit(1); }
-console.log("Phase 10 browser checks passed (docs shell, playground primitives, dropdown, tabs, typography, announcement and responsive blocks)." );
+if (failures.length) {
+  failures.forEach((failure) => console.error(`- ${failure}`));
+  process.exit(1);
+}
+console.log(
+  "Phase 10 browser checks passed (docs shell, playground primitives, dropdown, tabs, typography, announcement and responsive blocks).",
+);

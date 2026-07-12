@@ -57,9 +57,7 @@ export async function loadSourceRegistry({
     const definition = await readJsonFile(absoluteFile);
 
     if (definition.$schema !== REGISTRY_SCHEMA) {
-      throw new Error(
-        `${relative(rootDirectory, absoluteFile)} must use ${REGISTRY_SCHEMA}`,
-      );
+      throw new Error(`${relative(rootDirectory, absoluteFile)} must use ${REGISTRY_SCHEMA}`);
     }
 
     definitions.push({
@@ -72,9 +70,7 @@ export async function loadSourceRegistry({
 
     for (const include of definition.include ?? []) {
       if (typeof include !== "string" || include.trim() === "") {
-        throw new Error(
-          `${relative(rootDirectory, absoluteFile)} contains an invalid include`,
-        );
+        throw new Error(`${relative(rootDirectory, absoluteFile)} contains an invalid include`);
       }
 
       if (isAbsolute(include) || !include.endsWith("registry.json")) {
@@ -91,13 +87,12 @@ export async function loadSourceRegistry({
 
   await visit(rootFile);
 
-  const items = definitions.flatMap(
-    ({ definition, definitionFile, sourceDirectory }) =>
-      (definition.items ?? []).map((item) => ({
-        item,
-        definitionFile,
-        sourceDirectory,
-      })),
+  const items = definitions.flatMap(({ definition, definitionFile, sourceDirectory }) =>
+    (definition.items ?? []).map((item) => ({
+      item,
+      definitionFile,
+      sourceDirectory,
+    })),
   );
 
   return { definitions, items, rootDirectory, rootFile };

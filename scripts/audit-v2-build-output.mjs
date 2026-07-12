@@ -60,12 +60,15 @@ if (process.argv.includes("--json")) {
 } else {
   console.log("# Poyraz UI v2 build-output snapshot\n");
   console.log(`- Package version: \`${result.packageVersion}\``);
-  console.log(`- dist: ${result.dist.present ? `${result.dist.fileCount} files / ${result.dist.totalBytes} bytes` : "not present"}`);
-  console.log(`- .next: ${result.next.present ? `${result.next.fileCount} files / ${result.next.totalBytes} bytes` : "not present"}`);
+  console.log(
+    `- dist: ${result.dist.present ? `${result.dist.fileCount} files / ${result.dist.totalBytes} bytes` : "not present"}`,
+  );
+  console.log(
+    `- .next: ${result.next.present ? `${result.next.fileCount} files / ${result.next.totalBytes} bytes` : "not present"}`,
+  );
   if (result.dist.present) {
     console.log("\n| dist file | bytes |");
     console.log("| --- | ---: |");
     for (const row of result.dist.files) console.log(`| \`${row.file}\` | ${row.bytes} |`);
   }
 }
-

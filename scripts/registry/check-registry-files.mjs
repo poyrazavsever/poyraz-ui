@@ -3,11 +3,7 @@
 import { stat } from "node:fs/promises";
 import { isAbsolute, resolve } from "node:path";
 
-import {
-  formatRelative,
-  isInsideDirectory,
-  loadSourceRegistry,
-} from "./source-registry.mjs";
+import { formatRelative, isInsideDirectory, loadSourceRegistry } from "./source-registry.mjs";
 
 const registryFile = process.argv[2] ?? "registry.json";
 const catalog = await loadSourceRegistry({ registryFile });
@@ -37,9 +33,7 @@ for (const { item, definitionFile, sourceDirectory } of catalog.items) {
     const sourceFile = resolve(sourceDirectory, file.path);
 
     if (!isInsideDirectory(catalog.rootDirectory, sourceFile)) {
-      failures.push(
-        `${item.name}: source path escapes the repository (${file.path})`,
-      );
+      failures.push(`${item.name}: source path escapes the repository (${file.path})`);
       continue;
     }
 

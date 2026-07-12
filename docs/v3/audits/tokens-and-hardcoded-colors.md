@@ -4,16 +4,16 @@
 
 Baseline scripti `components/ui`, `src` ve `app` altindaki CSS/TS/TSX dosyalarini taradi.
 
-| Olcum | Sonuc |
-| --- | ---: |
-| Benzersiz `--poyraz-*` adi | 66 |
-| Semantic renk tokeni | 52 |
-| Kalici motion tokeni | 6 |
-| Animation-local gecici variable | 8 |
-| Hex veya sabit Tailwind palette iceren satir | 409 |
-| Component kaynaklarindaki satir | 85 |
-| Docs/app kaynaklarindaki satir | 174 |
-| Token/theme kaynaklarindaki satir | 150 |
+| Olcum                                        | Sonuc |
+| -------------------------------------------- | ----: |
+| Benzersiz `--poyraz-*` adi                   |    66 |
+| Semantic renk tokeni                         |    52 |
+| Kalici motion tokeni                         |     6 |
+| Animation-local gecici variable              |     8 |
+| Hex veya sabit Tailwind palette iceren satir |   409 |
+| Component kaynaklarindaki satir              |    85 |
+| Docs/app kaynaklarindaki satir               |   174 |
+| Token/theme kaynaklarindaki satir            |   150 |
 
 `transparent` yapisal bir deger oldugu icin sabit palette sayimina alinmamistir. `black` ve `white`, opacity modifier'lari dahil sayilmistir. Bir satir birden cok sabit utility icerebilir; sayi utility adedi degil kaynak satiri adedidir.
 
@@ -21,30 +21,30 @@ Baseline scripti `components/ui`, `src` ve `app` altindaki CSS/TS/TSX dosyalarin
 
 ### 52 semantic renk tokeni
 
-| Grup | Tokenlar |
-| --- | --- |
-| Core | `background`, `foreground` |
+| Grup            | Tokenlar                                                                                                                                                                                                   |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Core            | `background`, `foreground`                                                                                                                                                                                 |
 | Primary / brand | `primary`, `primary-foreground`, `primary-200`, `primary-600`, `primary-700`, `primary-800`, `primary-900`, `primary-hover`, `primary-active`, `primary-dark`, `primary-muted`, `primary-muted-foreground` |
-| Secondary | `secondary`, `secondary-foreground` |
-| Muted | `muted`, `muted-foreground` |
-| Accent | `accent`, `accent-hover`, `accent-foreground` |
-| Destructive | `destructive`, `destructive-foreground`, `destructive-muted`, `destructive-muted-foreground` |
-| Border/input | `border`, `border-strong`, `input`, `ring` |
-| Overlay | `overlay`, `overlay-light` |
-| Placeholder | `placeholder` |
-| Inverted | `inverted`, `inverted-foreground` |
-| Surface | `surface-50`, `surface-100`, `surface-200` |
-| Status | `info*`, `success*`, `warning*`: her grupte base, foreground, border, icon ve solid |
+| Secondary       | `secondary`, `secondary-foreground`                                                                                                                                                                        |
+| Muted           | `muted`, `muted-foreground`                                                                                                                                                                                |
+| Accent          | `accent`, `accent-hover`, `accent-foreground`                                                                                                                                                              |
+| Destructive     | `destructive`, `destructive-foreground`, `destructive-muted`, `destructive-muted-foreground`                                                                                                               |
+| Border/input    | `border`, `border-strong`, `input`, `ring`                                                                                                                                                                 |
+| Overlay         | `overlay`, `overlay-light`                                                                                                                                                                                 |
+| Placeholder     | `placeholder`                                                                                                                                                                                              |
+| Inverted        | `inverted`, `inverted-foreground`                                                                                                                                                                          |
+| Surface         | `surface-50`, `surface-100`, `surface-200`                                                                                                                                                                 |
+| Status          | `info*`, `success*`, `warning*`: her grupte base, foreground, border, icon ve solid                                                                                                                        |
 
 Tablodaki adlarin tamami `--poyraz-` prefix'i ile kullanilir. Mevcut brand kirmizisi korunacak baseline degerleri:
 
-| Rol | Light | Dark |
-| --- | --- | --- |
-| Primary | `#dc2626` | `#ef4444` |
-| Hover | `#b91c1c` | `#dc2626` |
-| Active | `#991b1b` | `#b91c1c` |
-| Dark | `#7f1d1d` | `#991b1b` |
-| Muted | `#fef2f2` | `#1c0a0a` |
+| Rol              | Light     | Dark      |
+| ---------------- | --------- | --------- |
+| Primary          | `#dc2626` | `#ef4444` |
+| Hover            | `#b91c1c` | `#dc2626` |
+| Active           | `#991b1b` | `#b91c1c` |
+| Dark             | `#7f1d1d` | `#991b1b` |
+| Muted            | `#fef2f2` | `#1c0a0a` |
 | Muted foreground | `#b91c1c` | `#fca5a5` |
 
 ### 6 motion tokeni
@@ -80,20 +80,20 @@ Eksik foundation token gruplari:
 
 ## Component sabit renk matrisi
 
-| Dosya | Satir | Tur | Degerlendirme |
-| --- | ---: | --- | --- |
-| `atoms/scroll-area.tsx` | 13 | Hex fallback | Semantic var kullaniliyor ama fallback component icinde tekrar ediyor; style item'a tasinmali |
-| `atoms/switch.tsx` | 1 | `white/50` | Thumb highlight tokenlanmali |
-| `molecules/card-templates.tsx` | 5 | yellow/green/black/white | Rating, trend ve image-overlay rolleri tokenlanmali |
-| `molecules/drawer.tsx` | 1 | `black/40` | `overlay` tokeni kullanilmali |
-| `molecules/mermaid.tsx` | 22 | 18 hex + 4 palette | En yuksek oncelikli theme bypass; light/dark semantic Mermaid theme uretilmeli |
-| `molecules/modal.tsx` | 1 | `black/40` | `overlay` tokeni kullanilmali |
-| `molecules/pagination.tsx` | 1 | palette adi | Yalniz comment icinde; runtime ihlali degil |
-| `molecules/sheet.tsx` | 1 | `black/40` | `overlay` tokeni kullanilmali |
-| `organisms/announcement-bar.tsx` | 3 | blue/emerald/amber + black/white | Status semantic tokenlari zaten var; dogrudan onlara gecilmeli |
-| `organisms/footer.tsx` | 1 | slate border | Inverted border rolu eksik |
-| `organisms/navbar.tsx` | 3 | white/black | Top-bar highlight, mobile overlay ve drill panel surface tokenlanmali |
-| `organisms/sidebar.tsx` | 33 | slate/red/black/white | `dark` varyanti tum semantic theme sistemini bypass ediyor |
+| Dosya                            | Satir | Tur                              | Degerlendirme                                                                                 |
+| -------------------------------- | ----: | -------------------------------- | --------------------------------------------------------------------------------------------- |
+| `atoms/scroll-area.tsx`          |    13 | Hex fallback                     | Semantic var kullaniliyor ama fallback component icinde tekrar ediyor; style item'a tasinmali |
+| `atoms/switch.tsx`               |     1 | `white/50`                       | Thumb highlight tokenlanmali                                                                  |
+| `molecules/card-templates.tsx`   |     5 | yellow/green/black/white         | Rating, trend ve image-overlay rolleri tokenlanmali                                           |
+| `molecules/drawer.tsx`           |     1 | `black/40`                       | `overlay` tokeni kullanilmali                                                                 |
+| `molecules/mermaid.tsx`          |    22 | 18 hex + 4 palette               | En yuksek oncelikli theme bypass; light/dark semantic Mermaid theme uretilmeli                |
+| `molecules/modal.tsx`            |     1 | `black/40`                       | `overlay` tokeni kullanilmali                                                                 |
+| `molecules/pagination.tsx`       |     1 | palette adi                      | Yalniz comment icinde; runtime ihlali degil                                                   |
+| `molecules/sheet.tsx`            |     1 | `black/40`                       | `overlay` tokeni kullanilmali                                                                 |
+| `organisms/announcement-bar.tsx` |     3 | blue/emerald/amber + black/white | Status semantic tokenlari zaten var; dogrudan onlara gecilmeli                                |
+| `organisms/footer.tsx`           |     1 | slate border                     | Inverted border rolu eksik                                                                    |
+| `organisms/navbar.tsx`           |     3 | white/black                      | Top-bar highlight, mobile overlay ve drill panel surface tokenlanmali                         |
+| `organisms/sidebar.tsx`          |    33 | slate/red/black/white            | `dark` varyanti tum semantic theme sistemini bypass ediyor                                    |
 
 Script 85 component satiri raporlar; Pagination comment'i cikarildiginda 84 runtime/style satiri kalir. En buyuk iki kaynak Sidebar (33) ve Mermaid'dir (22); birlikte ihlallerin yaklasik ucte ikisini olusturur.
 
@@ -123,4 +123,3 @@ node scripts/audit-v2-source.mjs --json \
 ```
 
 JSON raporu her sabit renk icin dosya, satir, eslesen palette/hex ve kaynak context'ini; her token icin tum occurrence dosya ve satirlarini verir.
-

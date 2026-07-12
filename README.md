@@ -16,6 +16,10 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 [Documentation](https://ui.poyrazavsever.com) · [npm](https://www.npmjs.com/package/poyraz-ui) · [GitHub](https://github.com/poyrazavsever/poyraz-ui)
 
+> V3 is a registry-first stable candidate. Release gates and artifacts are defined in
+> [`release.config.json`](release.config.json), with operational steps in the
+> [release runbook](docs/v3/release-runbook.md).
+
 </div>
 
 ---
@@ -40,7 +44,7 @@ pnpm dlx shadcn@latest add @poyraz/button
 
 The component is copied into your configured `aliases.ui` directory. Theme variables, motion utilities and registry dependencies are resolved automatically. See the [installation guide](https://ui.poyrazavsever.com/docs/installation) or [troubleshooting](https://ui.poyrazavsever.com/docs/troubleshooting).
 
-The npm package remains available for V2 projects. Its stable reference is kept under [V2 legacy docs](https://ui.poyrazavsever.com/docs/legacy/v2).
+The npm package remains available for V2 projects. Planned blocker-fix support ends **2027-03-31** and end-of-maintenance is **2027-06-30**. Use the [V2 legacy docs](https://ui.poyrazavsever.com/docs/legacy/v2) and the [incremental migration guide](https://ui.poyrazavsever.com/docs/migration).
 
 ---
 
@@ -111,12 +115,7 @@ The interactive wizard will:
 
 ```tsx
 import { Button, Badge, Input, Card, CardContent } from "poyraz-ui/atoms";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-} from "poyraz-ui/molecules";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "poyraz-ui/molecules";
 
 function App() {
   return (

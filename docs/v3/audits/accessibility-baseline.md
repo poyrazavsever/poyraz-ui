@@ -24,13 +24,13 @@ Script 44 TSX dosyasini baseline commit'inden okudu; 21 native button, 6 native 
 
 ## Otomatik sinyaller
 
-| Sinyal | Adet | Manuel yorum |
-| --- | ---: | --- |
-| `onClick` alan native olmayan element | 5 | Bir kismi aria-hidden backdrop; Autocomplete wrapper ve sortable `th` ayrica incelenmeli |
-| Sortable `th`, `aria-sort` yok | 1 | **Dogrulanmis problem** |
-| Listbox var, `aria-activedescendant` yok | 2 dosya | **Autocomplete ve Command Palette'te dogrulandi** |
-| Disclosure sinyali var, opening tag'de `aria-expanded` yok | 3 | Sidebar section/submenu dogrulandi; Autocomplete'te expanded input uzerinde oldugu icin regex false-positive |
-| Input opening tag'de id/accessible-name sinyali yok | 6 | Generic Input consumer'a birakir; Footer/Navbar/Sidebar default ornekleri riskli |
+| Sinyal                                                     |    Adet | Manuel yorum                                                                                                 |
+| ---------------------------------------------------------- | ------: | ------------------------------------------------------------------------------------------------------------ |
+| `onClick` alan native olmayan element                      |       5 | Bir kismi aria-hidden backdrop; Autocomplete wrapper ve sortable `th` ayrica incelenmeli                     |
+| Sortable `th`, `aria-sort` yok                             |       1 | **Dogrulanmis problem**                                                                                      |
+| Listbox var, `aria-activedescendant` yok                   | 2 dosya | **Autocomplete ve Command Palette'te dogrulandi**                                                            |
+| Disclosure sinyali var, opening tag'de `aria-expanded` yok |       3 | Sidebar section/submenu dogrulandi; Autocomplete'te expanded input uzerinde oldugu icin regex false-positive |
+| Input opening tag'de id/accessible-name sinyali yok        |       6 | Generic Input consumer'a birakir; Footer/Navbar/Sidebar default ornekleri riskli                             |
 
 Detayli dosya/satir listesi script ciktisindadir.
 
@@ -80,11 +80,10 @@ Her registry item icin:
 
 ## Component oncelik sirasi
 
-| Oncelik | Componentler | Neden |
-| --- | --- | --- |
-| P0 | DataTable, Autocomplete, Calendar/DatePicker, Navbar mobile, Sidebar mobile | Klavye/focus/role temel davranisi etkileniyor |
-| P1 | Command Palette, column toggle, FooterNewsletter, Mermaid | Accessible name/state/announcement eksigi |
-| P2 | Hard-coded labels, touch size, contrast tuning | Sistemik kalite ve localization |
+| Oncelik | Componentler                                                                | Neden                                         |
+| ------- | --------------------------------------------------------------------------- | --------------------------------------------- |
+| P0      | DataTable, Autocomplete, Calendar/DatePicker, Navbar mobile, Sidebar mobile | Klavye/focus/role temel davranisi etkileniyor |
+| P1      | Command Palette, column toggle, FooterNewsletter, Mermaid                   | Accessible name/state/announcement eksigi     |
+| P2      | Hard-coded labels, touch size, contrast tuning                              | Sistemik kalite ve localization               |
 
 V3 alpha, P0 grubunda acik yuksek oncelikli bulguyla yayinlanmamalidir.
-

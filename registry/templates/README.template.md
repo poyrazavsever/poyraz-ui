@@ -1,12 +1,12 @@
 # Component
 
-| Metadata | Value |
-| --- | --- |
-| Registry name | `component` |
-| Category | `actions`, `forms`, `layout`, `feedback` veya `overlay` |
-| Client boundary | `server-compatible` veya `use client` gerekçesi |
-| Runtime dependencies | Paket ve sürüm aralıkları |
-| Registry dependencies | `@poyraz/...` item listesi |
+| Metadata              | Value                                                   |
+| --------------------- | ------------------------------------------------------- |
+| Registry name         | `component`                                             |
+| Category              | `actions`, `forms`, `layout`, `feedback` veya `overlay` |
+| Client boundary       | `server-compatible` veya `use client` gerekçesi         |
+| Runtime dependencies  | Paket ve sürüm aralıkları                               |
+| Registry dependencies | `@poyraz/...` item listesi                              |
 
 ## Anatomy
 
@@ -27,4 +27,3 @@ Variant/size matrisi, `className`, CSS variable ve `data-*` override örneklerin
 ## Verification
 
 Light/dark, LTR/RTL, reduced-motion, fixture ve registry kontrollerini listele.
-

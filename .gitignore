@@ -12,6 +12,13 @@
 
 # testing
 /coverage
+/playwright-report
+/test-results
+/quality-artifacts
+/release-artifacts
+/fixtures/*/.registry
+/fixtures/*/.next
+/fixtures/*/dist
 
 # next.js
 /.next/

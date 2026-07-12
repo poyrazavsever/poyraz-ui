@@ -30,15 +30,20 @@ Runtime component package'i v3'te **legacy maintenance line** olur; registry sou
 
 ### Destek penceresi
 
+Planlanan takvim:
+
+- Security ve release-blocking fix son tarihi: **2027-03-31**.
+- End-of-maintenance: **2027-06-30**.
+
 V3 stable tarihinden itibaren:
 
-| Donem | V2 runtime destegi |
-| --- | --- |
-| Ilk 3 ay | Kritik security, kritik accessibility, React/Next ekosisteminde bloklayici uyumluluk ve packaging fix |
-| 4-6 ay | Kritik security ve veri/uygulama kirilmasina yol acan bloklayici fix |
-| 6 ay sonrasi | End-of-maintenance; yalniz istisnai security advisory veya community patch review |
+| Donem        | V2 runtime destegi                                                                                    |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| Ilk 3 ay     | Kritik security, kritik accessibility, React/Next ekosisteminde bloklayici uyumluluk ve packaging fix |
+| 4-6 ay       | Kritik security ve veri/uygulama kirilmasina yol acan bloklayici fix                                  |
+| 6 ay sonrasi | End-of-maintenance; yalniz istisnai security advisory veya community patch review                     |
 
-Takvim v3 stable release notunda gercek tarihlerle doldurulur. Destek penceresi v3 alpha/beta ile baslamaz.
+Stable V3 tarihi bu plandan gec kalirsa ilk uc aylik kritik destek taahhudu korunacak sekilde tarihler ileri alinir; tarihler sessizce erkene cekilmez. Destek penceresi v3 alpha/beta ile baslamaz.
 
 ### V2'ye alinmayacak degisiklikler
 
@@ -121,4 +126,3 @@ V2 maintenance ancak su kosullarla sona erer:
 2. Migration rehberi ve import mapping tamamdir.
 3. Son v2 release/tag ve EOL tarihi README/release notes'ta gorunur.
 4. Acik kritik security veya bloklayici uyumluluk problemi yoktur.
-

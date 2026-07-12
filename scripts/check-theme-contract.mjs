@@ -2,17 +2,11 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const repositoryRoot = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "..",
-);
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = JSON.parse(
   await readFile(path.join(repositoryRoot, "src/theme-tokens.json"), "utf8"),
 );
-const preset = await readFile(
-  path.join(repositoryRoot, "src/preset.css"),
-  "utf8",
-);
+const preset = await readFile(path.join(repositoryRoot, "src/preset.css"), "utf8");
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -38,12 +32,7 @@ assert(
   "brand red contains every 50-950 primitive step",
 );
 
-for (const palette of [
-  "statusInfo",
-  "statusSuccess",
-  "statusWarning",
-  "statusDanger",
-]) {
+for (const palette of ["statusInfo", "statusSuccess", "statusWarning", "statusDanger"]) {
   assert(
     source.primitives[palette] && source.primitives[palette] !== source.primitives.brandRed,
     `${palette} is independent from the brand palette`,
@@ -77,8 +66,7 @@ for (const name of [
 
 const parsePixels = (value) => Number.parseFloat(value.replace("px", ""));
 assert(
-  parsePixels(source.shared.blur.glassStrong) <=
-    parsePixels(source.shared.blur.maximumStack),
+  parsePixels(source.shared.blur.glassStrong) <= parsePixels(source.shared.blur.maximumStack),
   "strong glass blur stays within the 24px maximum budget",
 );
 
@@ -90,16 +78,10 @@ for (const selectorOrPolicy of [
   '[data-poyraz-performance="low"] .poyraz-glass',
   "@media (prefers-reduced-motion: reduce)",
 ]) {
-  assert(
-    preset.includes(selectorOrPolicy),
-    `preset contains ${selectorOrPolicy}`,
-  );
+  assert(preset.includes(selectorOrPolicy), `preset contains ${selectorOrPolicy}`);
 }
 
 assert(
-  !/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\{\s*\*[\s,]/.test(
-    preset,
-  ),
+  !/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\{\s*\*[\s,]/.test(preset),
   "reduced-motion policy does not globally reset consumer elements",
 );
-

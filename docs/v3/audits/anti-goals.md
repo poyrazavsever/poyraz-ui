@@ -76,11 +76,10 @@ Bir anti-goal bilincli olarak asilacaksa ADR, owner, migration etkisi ve test pl
 
 ## Onay kaydi
 
-| Rol | Karar | Tarih / not |
-| --- | --- | --- |
-| Product owner | Bekliyor | V3 API freeze oncesi |
-| Design owner | Bekliyor | Token/foundation review ile |
+| Rol               | Karar               | Tarih / not                 |
+| ----------------- | ------------------- | --------------------------- |
+| Product owner     | Bekliyor            | V3 API freeze oncesi        |
+| Design owner      | Bekliyor            | Token/foundation review ile |
 | Engineering owner | Faz 0 icin onerildi | Registry ADR'lariyla uyumlu |
 
 P0-018'in teslimi bu listenin onaya sunulmasidir. Nihai sign-off kaydi bosken API freeze yapilmaz.
-

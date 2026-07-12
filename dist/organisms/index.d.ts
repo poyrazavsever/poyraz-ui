@@ -116,8 +116,7 @@ interface NavbarMobileDropdownProps extends React.HTMLAttributes<HTMLDivElement>
     defaultOpen?: boolean;
 }
 declare const NavbarMobileDropdown: React.ForwardRefExoticComponent<NavbarMobileDropdownProps & React.RefAttributes<HTMLDivElement>>;
-interface NavbarMobileDrillMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-}
+type NavbarMobileDrillMenuProps = React.HTMLAttributes<HTMLDivElement>;
 declare const NavbarMobileDrillMenu: React.ForwardRefExoticComponent<NavbarMobileDrillMenuProps & React.RefAttributes<HTMLDivElement>>;
 interface NavbarMobileDrillTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
     /** Unique panel ID this trigger opens */

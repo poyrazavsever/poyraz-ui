@@ -11,10 +11,7 @@ import { loadSourceRegistry, readJsonFile } from "./source-registry.mjs";
 import { buildRegistryThemeCssVars } from "./theme-registry.mjs";
 
 const registryFile = process.argv[2] ?? "registry.json";
-const outputDirectory = resolve(
-  process.cwd(),
-  process.env.POYRAZ_REGISTRY_OUTPUT ?? "public/r",
-);
+const outputDirectory = resolve(process.cwd(), process.env.POYRAZ_REGISTRY_OUTPUT ?? "public/r");
 
 function reportSchemaFailure(label, error) {
   const details = error.issues
@@ -40,10 +37,7 @@ if (!rootResult.success) {
 for (const { item, definitionFile } of source.items) {
   const result = registryItemSchema.safeParse(item);
   if (!result.success) {
-    reportSchemaFailure(
-      `${definitionFile} item "${item.name ?? "<unnamed>"}"`,
-      result.error,
-    );
+    reportSchemaFailure(`${definitionFile} item "${item.name ?? "<unnamed>"}"`, result.error);
   }
 }
 
@@ -57,9 +51,7 @@ if (!flattenedResult.success) {
   reportSchemaFailure("Flattened source registry", flattenedResult.error);
 }
 
-const themeItem = flattenedRegistry.items.find(
-  ({ name }) => name === "poyraz-theme",
-);
+const themeItem = flattenedRegistry.items.find(({ name }) => name === "poyraz-theme");
 const expectedThemeCssVars = await buildRegistryThemeCssVars();
 
 if (!themeItem) {
@@ -67,9 +59,7 @@ if (!themeItem) {
 }
 
 if (JSON.stringify(themeItem.cssVars) !== JSON.stringify(expectedThemeCssVars)) {
-  throw new Error(
-    "Registry theme is stale. Run: node scripts/registry/sync-theme-registry.mjs",
-  );
+  throw new Error("Registry theme is stale. Run: node scripts/registry/sync-theme-registry.mjs");
 }
 
 const requiredThemeCssRules = [
@@ -88,9 +78,11 @@ for (const rule of requiredThemeCssRules) {
 let generatedCount = 0;
 
 if (existsSync(outputDirectory)) {
-  const generatedFiles = (await readdir(outputDirectory, {
-    withFileTypes: true,
-  }))
+  const generatedFiles = (
+    await readdir(outputDirectory, {
+      withFileTypes: true,
+    })
+  )
     .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
     .map((entry) => entry.name)
     .sort();

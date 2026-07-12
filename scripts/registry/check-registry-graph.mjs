@@ -5,10 +5,7 @@ import { loadSourceRegistry } from "./source-registry.mjs";
 const registryFile = process.argv[2] ?? "registry.json";
 const namespace = process.env.POYRAZ_REGISTRY_NAMESPACE ?? "poyraz";
 const internalHosts = new Set(
-  (
-    process.env.POYRAZ_REGISTRY_HOSTS ??
-    "ui.poyrazavsever.com,localhost,127.0.0.1,[::1]"
-  )
+  (process.env.POYRAZ_REGISTRY_HOSTS ?? "ui.poyrazavsever.com,localhost,127.0.0.1,[::1]")
     .split(",")
     .map((host) => host.trim())
     .filter(Boolean),
@@ -57,9 +54,7 @@ function getLocalDependencyName(address) {
   }
 }
 
-const graph = new Map(
-  [...itemsByName].map(([name]) => [name, new Set()]),
-);
+const graph = new Map([...itemsByName].map(([name]) => [name, new Set()]));
 
 for (const [name, { item }] of itemsByName) {
   for (const dependency of item.registryDependencies ?? []) {
@@ -70,9 +65,7 @@ for (const [name, { item }] of itemsByName) {
     }
 
     if (!itemsByName.has(localName)) {
-      failures.push(
-        `${name}: internal registry dependency "${dependency}" does not exist`,
-      );
+      failures.push(`${name}: internal registry dependency "${dependency}" does not exist`);
       continue;
     }
 
@@ -120,10 +113,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-const edgeCount = [...graph.values()].reduce(
-  (total, dependencies) => total + dependencies.size,
-  0,
-);
+const edgeCount = [...graph.values()].reduce((total, dependencies) => total + dependencies.size, 0);
 
 console.log(
   `Registry graph is valid (${itemsByName.size} unique items, ${edgeCount} internal dependencies, no cycles).`,

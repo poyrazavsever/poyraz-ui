@@ -47,9 +47,7 @@ function normalize(path) {
 
 async function sourceFiles(directory, predicate = () => true) {
   if (!sourceRef) {
-    return (await walk(join(root, directory)))
-      .map(normalize)
-      .filter(predicate);
+    return (await walk(join(root, directory))).map(normalize).filter(predicate);
   }
 
   const { stdout } = await execFileAsync(
@@ -83,9 +81,7 @@ function extractImports(source) {
 function extractDynamicImports(source) {
   return [
     ...new Set(
-      [...source.matchAll(/\bimport\s*\(\s*["']([^"']+)["']\s*\)/g)].map(
-        (match) => match[1],
-      ),
+      [...source.matchAll(/\bimport\s*\(\s*["']([^"']+)["']\s*\)/g)].map((match) => match[1]),
     ),
   ].sort();
 }
@@ -118,9 +114,7 @@ function determineClientBoundary(source, imports) {
   const explicit = /^\s*["']use client["'];/m.test(source);
   const hooks = [
     ...new Set(
-      [...source.matchAll(/React\.(use[A-Z][A-Za-z0-9]*)\s*\(/g)].map(
-        (match) => match[1],
-      ),
+      [...source.matchAll(/React\.(use[A-Z][A-Za-z0-9]*)\s*\(/g)].map((match) => match[1]),
     ),
   ].sort();
   const browserApis = [
@@ -131,13 +125,10 @@ function determineClientBoundary(source, imports) {
     ),
   ].sort();
   const clientDependencies = imports.filter(
-    (name) =>
-      name.startsWith("@radix-ui/react-") && name !== "@radix-ui/react-slot",
+    (name) => name.startsWith("@radix-ui/react-") && name !== "@radix-ui/react-slot",
   );
   clientDependencies.push(
-    ...imports.filter((name) =>
-      ["react-hook-form", "sonner", "vaul"].includes(name),
-    ),
+    ...imports.filter((name) => ["react-hook-form", "sonner", "vaul"].includes(name)),
   );
 
   if (explicit || hooks.length || browserApis.length || clientDependencies.length) {
@@ -212,7 +203,9 @@ async function auditComponents() {
 
     rows.push({
       file,
-      family: file.replace(/^components\/ui\/(atoms|molecules|organisms)\//, "").replace(/\.tsx$/, ""),
+      family: file
+        .replace(/^components\/ui\/(atoms|molecules|organisms)\//, "")
+        .replace(/\.tsx$/, ""),
       classification: classification.replace(/s$/, ""),
       dependencies: {
         internal: internalDependencies,
@@ -228,11 +221,7 @@ async function auditComponents() {
 }
 
 async function auditPublicApi() {
-  const barrels = [
-    "src/atoms/index.ts",
-    "src/molecules/index.ts",
-    "src/organisms/index.ts",
-  ];
+  const barrels = ["src/atoms/index.ts", "src/molecules/index.ts", "src/organisms/index.ts"];
   const entries = [];
 
   for (const barrel of barrels) {
@@ -281,12 +270,11 @@ async function auditPublicApi() {
 async function auditColorsAndTokens() {
   const eligible = [];
   for (const directory of scanRoots) {
-    eligible.push(
-      ...(await sourceFiles(directory, (path) => /\.(css|ts|tsx)$/.test(path))),
-    );
+    eligible.push(...(await sourceFiles(directory, (path) => /\.(css|ts|tsx)$/.test(path))));
   }
 
-  const palettePattern = /\b(?:bg|text|border|ring|outline|shadow|fill|stroke|from|via|to)-(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:[0-9]{2,3})(?:\/[0-9]{1,3})?|(?:black|white)(?:\/[0-9]{1,3})?)\b/g;
+  const palettePattern =
+    /\b(?:bg|text|border|ring|outline|shadow|fill|stroke|from|via|to)-(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:[0-9]{2,3})(?:\/[0-9]{1,3})?|(?:black|white)(?:\/[0-9]{1,3})?)\b/g;
   const hexPattern = /#[0-9a-fA-F]{3,8}\b/g;
   const tokenPattern = /--poyraz-[a-z0-9-]+/g;
   const hardColors = [];

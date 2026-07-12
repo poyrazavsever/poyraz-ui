@@ -102,11 +102,7 @@ function ensurePresetImport(cssPath) {
   let newContent;
   if (tailwindIdx !== -1) {
     const lineEnd = content.indexOf("\n", tailwindIdx);
-    newContent =
-      content.slice(0, lineEnd + 1) +
-      PRESET_IMPORT +
-      "\n" +
-      content.slice(lineEnd + 1);
+    newContent = content.slice(0, lineEnd + 1) + PRESET_IMPORT + "\n" + content.slice(lineEnd + 1);
   } else {
     newContent = PRESET_IMPORT + "\n" + content;
   }
@@ -149,9 +145,7 @@ function printLayoutSnippet() {
   console.log("");
   console.log(bold("  Add ThemeProvider to your root layout:"));
   console.log("");
-  console.log(
-    dim("  ┌─────────────────────────────────────────────────────────┐"),
-  );
+  console.log(dim("  ┌─────────────────────────────────────────────────────────┐"));
   console.log(
     `  ${dim("│")} ${cyan('import { ThemeProvider } from "reactive-switcher";')}      ${dim("│")}`,
   );
@@ -170,9 +164,7 @@ function printLayoutSnippet() {
   console.log(
     `  ${dim("│")} ${cyan("</ThemeProvider>")}                                        ${dim("│")}`,
   );
-  console.log(
-    dim("  └─────────────────────────────────────────────────────────┘"),
-  );
+  console.log(dim("  └─────────────────────────────────────────────────────────┘"));
   console.log("");
 }
 
@@ -195,8 +187,7 @@ async function init(args) {
   banner();
 
   // 1. Detect / ask for CSS file
-  const argCss =
-    args.indexOf("--css") !== -1 ? args[args.indexOf("--css") + 1] : null;
+  const argCss = args.indexOf("--css") !== -1 ? args[args.indexOf("--css") + 1] : null;
   let cssPath = argCss || detectCssFile();
 
   if (!cssPath) {
@@ -219,10 +210,7 @@ async function init(args) {
 
   if (wantThemes) {
     // Generate theme file
-    const themePath = await ask(
-      "  Where to create theme config?",
-      "src/lib/themes.ts",
-    );
+    const themePath = await ask("  Where to create theme config?", "src/lib/themes.ts");
     generateThemeFile(themePath);
 
     // Print layout snippet
@@ -233,14 +221,8 @@ async function init(args) {
     console.log(cyan("  npm install reactive-switcher"));
     console.log("");
   } else {
-    console.log(
-      dim("  ↳ Skipped. Poyraz UI works standalone in light mode by default."),
-    );
-    console.log(
-      dim(
-        "  ↳ You can add reactive-switcher later by running this command again.",
-      ),
-    );
+    console.log(dim("  ↳ Skipped. Poyraz UI works standalone in light mode by default."));
+    console.log(dim("  ↳ You can add reactive-switcher later by running this command again."));
     console.log("");
   }
 

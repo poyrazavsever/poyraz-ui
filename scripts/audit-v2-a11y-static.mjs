@@ -51,7 +51,10 @@ async function sourceFiles() {
     ["ls-tree", "-r", "--name-only", sourceRef, "--", "components/ui"],
     { cwd: root, maxBuffer: 10 * 1024 * 1024 },
   );
-  return stdout.split("\n").filter((path) => path.endsWith(".tsx")).sort();
+  return stdout
+    .split("\n")
+    .filter((path) => path.endsWith(".tsx"))
+    .sort();
 }
 
 async function sourceText(path) {

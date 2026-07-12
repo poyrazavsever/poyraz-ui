@@ -134,4 +134,3 @@ Karar, Button pilotu temiz consumer'a asagidaki sonuc ile kurulunca teknik olara
 ## Geri donus
 
 Alpha/beta sirasinda registry protokolu urun gereksinimlerini karsilamazsa runtime package gecici olarak v2 maintenance hattinda kalir. Bu, ozel kopyalama motoruna otomatik gecis anlami tasimaz; yeni ADR gerekir.
-

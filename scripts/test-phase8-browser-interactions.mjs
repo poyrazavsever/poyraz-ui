@@ -2,7 +2,9 @@
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9223";
 const baseUrl = process.env.DOCS_URL ?? "http://127.0.0.1:3000";
-const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, { method: "PUT" }).then((response) => response.json());
+const target = await fetch(`${endpoint}/json/new?${encodeURIComponent("about:blank")}`, {
+  method: "PUT",
+}).then((response) => response.json());
 const socket = new WebSocket(target.webSocketDebuggerUrl);
 const pending = new Map();
 const waiters = new Map();
@@ -14,7 +16,9 @@ socket.addEventListener("message", ({ data }) => {
     const request = pending.get(message.id);
     if (!request) return;
     pending.delete(message.id);
-    message.error ? request.reject(new Error(message.error.message)) : request.resolve(message.result);
+    message.error
+      ? request.reject(new Error(message.error.message))
+      : request.resolve(message.result);
     return;
   }
   const listeners = waiters.get(message.method) ?? [];
@@ -49,7 +53,11 @@ async function navigate(path) {
 }
 
 async function evaluate(expression) {
-  const result = await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
+  const result = await send("Runtime.evaluate", {
+    expression,
+    awaitPromise: true,
+    returnByValue: true,
+  });
   if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
   return result.result.value;
 }
@@ -58,7 +66,12 @@ await send("Page.enable");
 await send("Runtime.enable");
 await send("Network.enable");
 await send("Network.setCacheDisabled", { cacheDisabled: true });
-await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 1100, deviceScaleFactor: 1, mobile: false });
+await send("Emulation.setDeviceMetricsOverride", {
+  width: 1440,
+  height: 1100,
+  deviceScaleFactor: 1,
+  mobile: false,
+});
 
 await navigate("/docs/organisms/navbar");
 const navbar = await evaluate(`(async () => {
@@ -112,8 +125,11 @@ const sidebar = await evaluate(`(() => {
 
 const failures = [];
 if (navbar.error) failures.push(navbar.error);
-for (const [key, value] of Object.entries(navbar)) if (key !== "error" && (value === false || value === 0 || value === "hidden")) failures.push(`navbar ${key}: ${value}`);
-for (const key of ["fontLoaded", "fontConsistent", "badgeFound", "badgeWrapperTransparent"]) if (!sidebar[key]) failures.push(`sidebar ${key}: ${sidebar[key]}`);
+for (const [key, value] of Object.entries(navbar))
+  if (key !== "error" && (value === false || value === 0 || value === "hidden"))
+    failures.push(`navbar ${key}: ${value}`);
+for (const key of ["fontLoaded", "fontConsistent", "badgeFound", "badgeWrapperTransparent"])
+  if (!sidebar[key]) failures.push(`sidebar ${key}: ${sidebar[key]}`);
 
 await send("Page.close");
 socket.close();

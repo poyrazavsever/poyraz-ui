@@ -26,8 +26,10 @@ const glassCss = {
   "@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))": {
     ".poyraz-glass": {
       "background-color": "var(--glass-background)",
-      "-webkit-backdrop-filter": "blur(var(--poyraz-glass-blur-current)) saturate(var(--poyraz-glass-saturation-current))",
-      "backdrop-filter": "blur(var(--poyraz-glass-blur-current)) saturate(var(--poyraz-glass-saturation-current))",
+      "-webkit-backdrop-filter":
+        "blur(var(--poyraz-glass-blur-current)) saturate(var(--poyraz-glass-saturation-current))",
+      "backdrop-filter":
+        "blur(var(--poyraz-glass-blur-current)) saturate(var(--poyraz-glass-saturation-current))",
     },
     ".poyraz-glass-strong": { "background-color": "var(--glass-background-strong)" },
     ".poyraz-glass .poyraz-glass": {
@@ -47,15 +49,15 @@ const glassCss = {
       "backdrop-filter": "none",
     },
   },
-  '[data-poyraz-transparency="reduced"] .poyraz-glass, [data-poyraz-performance="low"] .poyraz-glass, .poyraz-glass[data-poyraz-transparency="reduced"], .poyraz-glass[data-poyraz-performance="low"]': {
-    "background-color": "var(--glass-fallback)",
-    "box-shadow": "var(--poyraz-shadow-sm)",
-    "-webkit-backdrop-filter": "none",
-    "backdrop-filter": "none",
-  },
+  '[data-poyraz-transparency="reduced"] .poyraz-glass, [data-poyraz-performance="low"] .poyraz-glass, .poyraz-glass[data-poyraz-transparency="reduced"], .poyraz-glass[data-poyraz-performance="low"]':
+    {
+      "background-color": "var(--glass-fallback)",
+      "box-shadow": "var(--poyraz-shadow-sm)",
+      "-webkit-backdrop-filter": "none",
+      "backdrop-filter": "none",
+    },
 };
 
 export function buildRegistryThemeCss() {
   return { ...glassCss, ...buildRegistryMotionCss() };
 }
-

@@ -6,10 +6,7 @@ import { resolve } from "node:path";
 import { buildRegistryThemeCssVars } from "./theme-registry.mjs";
 import { buildRegistryThemeCss } from "./style-registry.mjs";
 
-const themeRegistryFile = resolve(
-  process.cwd(),
-  "registry/poyraz/styles/registry.json",
-);
+const themeRegistryFile = resolve(process.cwd(), "registry/poyraz/styles/registry.json");
 const registry = JSON.parse(await readFile(themeRegistryFile, "utf8"));
 const themeItem = registry.items?.find(({ name }) => name === "poyraz-theme");
 

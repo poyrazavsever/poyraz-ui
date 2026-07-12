@@ -34,11 +34,11 @@ Button has a dedicated prop playground. Template pages use a desktop, tablet and
 
 `SidebarContent` exposes `scrollMode`:
 
-| Value | Behavior |
-| --- | --- |
-| `auto` | Native vertical scrollbar with stable gutter. |
-| `hidden` | Wheel, touch and keyboard scrolling with the scrollbar hidden. |
-| `fade` | Hidden scrollbar plus top and bottom mask fades that signal overflow. |
+| Value    | Behavior                                                              |
+| -------- | --------------------------------------------------------------------- |
+| `auto`   | Native vertical scrollbar with stable gutter.                         |
+| `hidden` | Wheel, touch and keyboard scrolling with the scrollbar hidden.        |
+| `fade`   | Hidden scrollbar plus top and bottom mask fades that signal overflow. |
 
 The docs shell uses `fade`. The sidebar is sticky inside the centered 1440px shell rather than fixed to the viewport edge.
 
@@ -60,4 +60,3 @@ pnpm test:phase10:browser
 ```
 
 `registry:build` refreshes public registry documents, then `docs:sync` refreshes both the compact docs catalog and `COMPONENTS.md`.
-

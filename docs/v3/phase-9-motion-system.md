@@ -6,15 +6,15 @@ Phase 9 makes motion a documented design-system contract. Core components use CS
 
 ## Token mapping
 
-| Previous usage | Native token or utility | Policy |
-| --- | --- | --- |
-| `duration-150` | `--poyraz-motion-duration-fast` (120ms) | Hover, focus and press feedback |
-| `duration-200` | `--poyraz-motion-duration-base` (180ms) | Component entrance and content change |
-| `duration-300` | `--poyraz-motion-duration-slow` (260ms) | Large panel movement |
-| `ease-out` | `--poyraz-motion-ease-out` | Entrances and direct feedback |
-| `ease-in` | `--poyraz-motion-ease-in` | Shorter exits |
-| `translate-x-0.5` | `--poyraz-motion-distance-micro` (2px) | Icon and item hover |
-| `zoom-in-95` | `--poyraz-motion-scale-enter` (0.98) | Floating surfaces |
+| Previous usage    | Native token or utility                 | Policy                                |
+| ----------------- | --------------------------------------- | ------------------------------------- |
+| `duration-150`    | `--poyraz-motion-duration-fast` (120ms) | Hover, focus and press feedback       |
+| `duration-200`    | `--poyraz-motion-duration-base` (180ms) | Component entrance and content change |
+| `duration-300`    | `--poyraz-motion-duration-slow` (260ms) | Large panel movement                  |
+| `ease-out`        | `--poyraz-motion-ease-out`              | Entrances and direct feedback         |
+| `ease-in`         | `--poyraz-motion-ease-in`               | Shorter exits                         |
+| `translate-x-0.5` | `--poyraz-motion-distance-micro` (2px)  | Icon and item hover                   |
+| `zoom-in-95`      | `--poyraz-motion-scale-enter` (0.98)    | Floating surfaces                     |
 
 Compatibility classes such as `animate-in`, `fade-in-0`, `zoom-in-95` and directional `slide-*` remain in `preset.css` for existing registry consumers. New Poyraz source must use `animate-poyraz-*` utilities or recipes. Run `pnpm motion:audit-aliases` for the current migration inventory.
 
@@ -45,16 +45,16 @@ Automated coverage:
 
 ## Do and don't
 
-| Family | Do | Don't |
-| --- | --- | --- |
-| Fade | Use for presence without spatial change | Fade essential status without a persistent label |
-| Scale | Keep the range between 0.98 and 1 | Scale full-page layouts or text-heavy panels |
-| Floating | Derive direction from `data-side` | Add React state just to choose a direction |
-| Overlay | Animate opacity around a static blur | Animate `filter` or `backdrop-filter` |
-| Accordion | Animate measured Radix height and opacity | Animate an arbitrary `max-height` or remove content before exit |
-| Toast | Preserve direct swipe tracking and shorten dismissal | Override Sonner gesture transforms during a swipe |
-| Progress | Pair motion with status text or an accessible label | Leave decorative loops running in reduced-motion mode |
-| Controls | Keep feedback under 200ms and hover travel at 1-2px | Animate border width, large shadows or layout coordinates |
+| Family    | Do                                                   | Don't                                                           |
+| --------- | ---------------------------------------------------- | --------------------------------------------------------------- |
+| Fade      | Use for presence without spatial change              | Fade essential status without a persistent label                |
+| Scale     | Keep the range between 0.98 and 1                    | Scale full-page layouts or text-heavy panels                    |
+| Floating  | Derive direction from `data-side`                    | Add React state just to choose a direction                      |
+| Overlay   | Animate opacity around a static blur                 | Animate `filter` or `backdrop-filter`                           |
+| Accordion | Animate measured Radix height and opacity            | Animate an arbitrary `max-height` or remove content before exit |
+| Toast     | Preserve direct swipe tracking and shorten dismissal | Override Sonner gesture transforms during a swipe               |
+| Progress  | Pair motion with status text or an accessible label  | Leave decorative loops running in reduced-motion mode           |
+| Controls  | Keep feedback under 200ms and hover travel at 1-2px  | Animate border width, large shadows or layout coordinates       |
 
 ## Advanced dependency decision
 

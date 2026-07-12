@@ -8,14 +8,33 @@ import { spawnSync } from "node:child_process";
 const root = process.cwd();
 const catalog = JSON.parse(await readFile(resolve(root, "public/r/registry.json"), "utf8"));
 const items = new Map(catalog.items.map((item) => [item.name, item]));
-const phase7 = ["alert", "sonner", "form", "calendar", "date-picker", "autocomplete", "data-table-core", "data-table", "mermaid", "star-rating", "article-card", "image-card", "news-card", "stats-card", "testimonial-card", "pricing-card", "product-card"];
+const phase7 = [
+  "alert",
+  "sonner",
+  "form",
+  "calendar",
+  "date-picker",
+  "autocomplete",
+  "data-table-core",
+  "data-table",
+  "mermaid",
+  "star-rating",
+  "article-card",
+  "image-card",
+  "news-card",
+  "stats-card",
+  "testimonial-card",
+  "pricing-card",
+  "product-card",
+];
 
 function collect(name, result = new Set()) {
   if (result.has(name)) return result;
   const item = items.get(name);
   if (!item) throw new Error(`Fixture dependency is missing: ${name}`);
   result.add(name);
-  for (const address of item.registryDependencies ?? []) if (address.startsWith("@poyraz/")) collect(address.slice(8), result);
+  for (const address of item.registryDependencies ?? [])
+    if (address.startsWith("@poyraz/")) collect(address.slice(8), result);
   return result;
 }
 
@@ -30,11 +49,47 @@ for (const name of phase7) {
       await writeFile(destination, file.content);
     }
   }
-  await symlink(resolve(root, "node_modules"), resolve(fixture, "node_modules"), process.platform === "win32" ? "junction" : "dir");
-  await writeFile(resolve(fixture, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, noEmit: true, target: "ES2020", lib: ["DOM", "ES2020"], module: "ESNext", moduleResolution: "Bundler", jsx: "react-jsx", esModuleInterop: true, skipLibCheck: true, baseUrl: ".", paths: { "@/*": ["./*"] } }, include: ["**/*.ts", "**/*.tsx"] }, null, 2));
-  const result = spawnSync(process.execPath, [resolve(root, "node_modules/typescript/bin/tsc"), "--project", resolve(fixture, "tsconfig.json")], { cwd: fixture, encoding: "utf8" });
+  await symlink(
+    resolve(root, "node_modules"),
+    resolve(fixture, "node_modules"),
+    process.platform === "win32" ? "junction" : "dir",
+  );
+  await writeFile(
+    resolve(fixture, "tsconfig.json"),
+    JSON.stringify(
+      {
+        compilerOptions: {
+          strict: true,
+          noEmit: true,
+          target: "ES2020",
+          lib: ["DOM", "ES2020"],
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          jsx: "react-jsx",
+          esModuleInterop: true,
+          skipLibCheck: true,
+          baseUrl: ".",
+          paths: { "@/*": ["./*"] },
+        },
+        include: ["**/*.ts", "**/*.tsx"],
+      },
+      null,
+      2,
+    ),
+  );
+  const result = spawnSync(
+    process.execPath,
+    [
+      resolve(root, "node_modules/typescript/bin/tsc"),
+      "--project",
+      resolve(fixture, "tsconfig.json"),
+    ],
+    { cwd: fixture, encoding: "utf8" },
+  );
   if (result.status !== 0) {
-    process.stderr.write(`Standalone fixture failed: ${name}\n${result.stdout ?? ""}${result.stderr ?? ""}${result.error?.message ?? ""}`);
+    process.stderr.write(
+      `Standalone fixture failed: ${name}\n${result.stdout ?? ""}${result.stderr ?? ""}${result.error?.message ?? ""}`,
+    );
     process.exit(result.status ?? 1);
   }
 }

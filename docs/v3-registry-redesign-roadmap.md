@@ -213,14 +213,14 @@ poyraz-ui/
 
 ### 5.2 Registry item türleri
 
-| İçerik | Registry türü | Örnek |
-| --- | --- | --- |
-| Temel UI component | `registry:ui` | button, input, dialog |
-| Ortak utility | `registry:lib` | utils/cn |
-| Hook | `registry:hook` | use-media-query |
-| Tema/token kurulumu | `registry:style` veya uygun registry item | poyraz-theme |
-| Birleşik ürün parçası | `registry:block` | dashboard-shell |
-| Tekil uygulama componenti | `registry:component` | theme-toggle |
+| İçerik                    | Registry türü                             | Örnek                 |
+| ------------------------- | ----------------------------------------- | --------------------- |
+| Temel UI component        | `registry:ui`                             | button, input, dialog |
+| Ortak utility             | `registry:lib`                            | utils/cn              |
+| Hook                      | `registry:hook`                           | use-media-query       |
+| Tema/token kurulumu       | `registry:style` veya uygun registry item | poyraz-theme          |
+| Birleşik ürün parçası     | `registry:block`                          | dashboard-shell       |
+| Tekil uygulama componenti | `registry:component`                      | theme-toggle          |
 
 ### 5.3 Consumer tarafında hedef sonuç
 
@@ -413,9 +413,7 @@ border-color: var(--glass-border);
 box-shadow:
   inset 0 1px 0 var(--glass-border-highlight),
   var(--glass-shadow);
-backdrop-filter:
-  blur(var(--glass-blur))
-  saturate(var(--glass-saturation));
+backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
 ```
 
 Fallback zorunluluğu:
@@ -696,16 +694,16 @@ Yeni mimari, tasarım, motion ve registry yaklaşımını tek bir yüksek görü
 
 ### 4.1 Önerilen Button varyantları
 
-| Variant | Kullanım |
-| --- | --- |
-| `default` | Brand kırmızı primary CTA |
-| `secondary` | Nötr, soft ve daha düşük öncelikli action |
-| `soft` | Brand tint yüzeyli sakin action |
-| `outline` | Şeffaf zemin, belirgin ama soft border |
-| `glass` | Glass container veya görsel arka plan üzerinde action |
-| `ghost` | Toolbar ve düşük öncelikli action |
-| `destructive` | Riskli action |
-| `link` | Metin içi navigation/action |
+| Variant       | Kullanım                                              |
+| ------------- | ----------------------------------------------------- |
+| `default`     | Brand kırmızı primary CTA                             |
+| `secondary`   | Nötr, soft ve daha düşük öncelikli action             |
+| `soft`        | Brand tint yüzeyli sakin action                       |
+| `outline`     | Şeffaf zemin, belirgin ama soft border                |
+| `glass`       | Glass container veya görsel arka plan üzerinde action |
+| `ghost`       | Toolbar ve düşük öncelikli action                     |
+| `destructive` | Riskli action                                         |
+| `link`        | Metin içi navigation/action                           |
 
 Önerilen boyutlar:
 
@@ -1209,32 +1207,32 @@ Distribution checks
 
 ### Atomik görevler
 
-- [ ] `P11-001` Format scripti ekle.
-- [ ] `P11-002` Lint scripti ekle.
-- [ ] `P11-003` Bağımsız typecheck scripti ekle.
-- [ ] `P11-004` Registry schema validation scripti ekle.
-- [ ] `P11-005` Registry dependency cycle testi ekle.
-- [ ] `P11-006` Broken registry file path testi ekle.
-- [ ] `P11-007` Duplicate item name testi ekle.
-- [ ] `P11-008` Unit test runner kur.
-- [ ] `P11-009` DOM interaction test altyapısı kur.
-- [ ] `P11-010` Axe tabanlı accessibility kontrolü ekle.
-- [ ] `P11-011` Playwright browser test altyapısı kur.
-- [ ] `P11-012` Light/dark visual regression projeleri oluştur.
-- [ ] `P11-013` Mobile/desktop visual viewportları oluştur.
-- [ ] `P11-014` Glass fallback test browser/context'i oluştur.
-- [ ] `P11-015` Reduced-motion test context'i oluştur.
-- [ ] `P11-016` Keyboard-only interaction suite oluştur.
-- [ ] `P11-017` Focus trap/return focus suite oluştur.
-- [ ] `P11-018` Next.js clean fixture oluştur.
-- [ ] `P11-019` Vite clean fixture oluştur.
-- [ ] `P11-020` Her registry item için install smoke test tasarla.
-- [ ] `P11-021` Kurulan fixture için typecheck çalıştır.
-- [ ] `P11-022` Kurulan fixture için production build çalıştır.
-- [ ] `P11-023` Registry output değiştiğinde generated diff'i CI artifact yap.
-- [ ] `P11-024` Bundle/runtime dependency bütçesi belirle.
-- [ ] `P11-025` Blur-heavy demo için performans profili ekle.
-- [ ] `P11-026` Pull request required-check listesini tanımla.
+- [x] `P11-001` Format scripti ekle.
+- [x] `P11-002` Lint scripti ekle.
+- [x] `P11-003` Bağımsız typecheck scripti ekle.
+- [x] `P11-004` Registry schema validation scripti ekle.
+- [x] `P11-005` Registry dependency cycle testi ekle.
+- [x] `P11-006` Broken registry file path testi ekle.
+- [x] `P11-007` Duplicate item name testi ekle.
+- [x] `P11-008` Unit test runner kur.
+- [x] `P11-009` DOM interaction test altyapısı kur.
+- [x] `P11-010` Axe tabanlı accessibility kontrolü ekle.
+- [x] `P11-011` Playwright browser test altyapısı kur.
+- [x] `P11-012` Light/dark visual regression projeleri oluştur.
+- [x] `P11-013` Mobile/desktop visual viewportları oluştur.
+- [x] `P11-014` Glass fallback test browser/context'i oluştur.
+- [x] `P11-015` Reduced-motion test context'i oluştur.
+- [x] `P11-016` Keyboard-only interaction suite oluştur.
+- [x] `P11-017` Focus trap/return focus suite oluştur.
+- [x] `P11-018` Next.js clean fixture oluştur.
+- [x] `P11-019` Vite clean fixture oluştur.
+- [x] `P11-020` Her registry item için install smoke test tasarla.
+- [x] `P11-021` Kurulan fixture için typecheck çalıştır.
+- [x] `P11-022` Kurulan fixture için production build çalıştır.
+- [x] `P11-023` Registry output değiştiğinde generated diff'i CI artifact yap.
+- [x] `P11-024` Bundle/runtime dependency bütçesi belirle.
+- [x] `P11-025` Blur-heavy demo için performans profili ekle.
+- [x] `P11-026` Pull request required-check listesini tanımla.
 
 ### Minimum release gate
 
@@ -1256,26 +1254,26 @@ Migration tek seferlik “her şeyi değiştir” komutu olmamalıdır. Kullanı
 
 ### Atomik görevler
 
-- [ ] `P12-001` V2 import kullanan örnek consumer fixture oluştur.
-- [ ] `P12-002` V2 component → V3 registry item mapping tablosu oluştur.
-- [ ] `P12-003` V2 prop → V3 prop mapping tablosu oluştur.
-- [ ] `P12-004` Kaldırılan/değişen variant mapping tablosu oluştur.
-- [ ] `P12-005` Eski `preset.css` token → yeni token mapping tablosu oluştur.
-- [ ] `P12-006` Eski theme object entegrasyonu için migration bölümü yaz.
-- [ ] `P12-007` `reactive-switcher` kullanan projeler için provider-independent CSS migration örneği yaz.
-- [ ] `P12-008` Next Themes örneğini framework-specific recipe olarak ayır.
-- [ ] `P12-009` İlk migration adımı olarak theme/utils registry item kurulumunu tanımla.
-- [ ] `P12-010` İkinci adım olarak Button/Input/Card geçişini tanımla.
-- [ ] `P12-011` Üçüncü adım olarak Radix molecule geçişini tanımla.
-- [ ] `P12-012` Dördüncü adım olarak organism/block geçişini tanımla.
-- [ ] `P12-013` Eski npm importları kaldığında tespit edecek `rg` komutlarını guide'a ekle.
-- [ ] `P12-014` İsteğe bağlı codemod fizibilitesini değerlendir.
-- [ ] `P12-015` Codemod yalnızca güvenli import dönüşümlerini yapacaksa uygula.
-- [ ] `P12-016` Consumer'ın özelleştirilmiş v2 componentlerini overwrite etmeme politikasını yaz.
-- [ ] `P12-017` Theme token migration için otomatik kontrol scripti değerlendir.
-- [ ] `P12-018` Legacy v2 docs ve package desteğinin bitiş tarihini yayınla.
-- [ ] `P12-019` Migration fixture'ını final v3 build ile doğrula.
-- [ ] `P12-020` Rollback adımlarını guide'a ekle.
+- [x] `P12-001` V2 import kullanan örnek consumer fixture oluştur.
+- [x] `P12-002` V2 component → V3 registry item mapping tablosu oluştur.
+- [x] `P12-003` V2 prop → V3 prop mapping tablosu oluştur.
+- [x] `P12-004` Kaldırılan/değişen variant mapping tablosu oluştur.
+- [x] `P12-005` Eski `preset.css` token → yeni token mapping tablosu oluştur.
+- [x] `P12-006` Eski theme object entegrasyonu için migration bölümü yaz.
+- [x] `P12-007` `reactive-switcher` kullanan projeler için provider-independent CSS migration örneği yaz.
+- [x] `P12-008` Next Themes örneğini framework-specific recipe olarak ayır.
+- [x] `P12-009` İlk migration adımı olarak theme/utils registry item kurulumunu tanımla.
+- [x] `P12-010` İkinci adım olarak Button/Input/Card geçişini tanımla.
+- [x] `P12-011` Üçüncü adım olarak Radix molecule geçişini tanımla.
+- [x] `P12-012` Dördüncü adım olarak organism/block geçişini tanımla.
+- [x] `P12-013` Eski npm importları kaldığında tespit edecek `rg` komutlarını guide'a ekle.
+- [x] `P12-014` İsteğe bağlı codemod fizibilitesini değerlendir.
+- [x] `P12-015` Codemod yalnızca güvenli import dönüşümlerini yapacaksa uygula.
+- [x] `P12-016` Consumer'ın özelleştirilmiş v2 componentlerini overwrite etmeme politikasını yaz.
+- [x] `P12-017` Theme token migration için otomatik kontrol scripti değerlendir.
+- [x] `P12-018` Legacy v2 docs ve package desteğinin bitiş tarihini yayınla.
+- [x] `P12-019` Migration fixture'ını final v3 build ile doğrula.
+- [x] `P12-020` Rollback adımlarını guide'a ekle.
 
 ### Önerilen compatibility politikası
 
@@ -1392,23 +1390,40 @@ Release görevleri:
 - İlk kullanıcı geri bildirimleri kategorize edilir.
 - En sık yapılan consumer override'ları v3.1 planına girdi olur.
 
+### 13.8 Release engineering görevleri
+
+- [x] `P13-001` Registry sürümünü npm legacy package sürümünden ayıran release manifesti oluştur.
+- [x] `P13-002` Alpha, beta, RC ve stable channel/version sözleşmesini makine tarafından doğrula.
+- [x] `P13-003` Production registry namespace ve URL template'ini sabitle.
+- [x] `P13-004` Stable release preflight scripti ekle.
+- [x] `P13-005` Registry artifact ve SHA-256 checksum üretimini ekle.
+- [x] `P13-006` Npm package içeriği için publish öncesi dry-run raporu üret.
+- [x] `P13-007` Protected environment kullanan manual release workflow'u ekle.
+- [x] `P13-008` V2 `legacy-v2` dist-tag'ini `latest` taşımadan uygulayan güvenli job ekle.
+- [x] `P13-009` Production registry endpoint smoke testini ekle.
+- [x] `P13-010` Stable changelog, release notes ve release runbook yaz.
+- [x] `P13-011` Release durumunu ve legacy bağlantılarını docs içinde görünür yap.
+- [x] `P13-012` Release contract, artifact ve local endpoint testini kalite zincirine bağla.
+
+`R-001`–`R-012` stable operasyon checklist'idir. Tag oluşturma, production yayın ve post-release smoke maddeleri yalnızca korumalı workflow gerçek stable release commit'i üzerinde çalıştırıldığında işaretlenir; release hazırlığı sırasında tamamlanmış gibi gösterilmez.
+
 ---
 
 ## 9. Riskler ve önlemler
 
-| Risk | Etki | Önlem |
-| --- | --- | --- |
-| Registry ve npm package aynı anda kafa karıştırır | Yüksek | V3'te primary install yolunu tek ve açık tut; legacy'yi ayrı etiketle |
-| Glass yüzey düşük kontrast üretir | Yüksek | Solid fallback, contrast testleri, opak içerik yüzeyi |
-| Blur düşük cihazlarda performansı düşürür | Orta/Yüksek | Blur budget, nested blur sınırı, sabit blur ve transform-only animation |
-| Çok fazla variant API'yi şişirir | Orta | Variant eklemek için gerçek use-case şartı ve API review |
-| Registry item dependency cycle oluşur | Yüksek | CI graph validation |
-| Docs ve registry ayrışır | Yüksek | Navigation/API bilgisini registry metadata'dan üret |
-| V2 consumer migrationı zorlaşır | Yüksek | Component bazlı migration, mapping tablosu, legacy docs |
-| Radix portal theme tokenlarını kaybeder | Orta | Portal fixture testleri, theme tokenlarının root scope'ta bulunması |
-| Custom CLI bakım yükü yaratır | Yüksek | Shadcn registry/CLI'ı temel al; Poyraz CLI'ı ince orchestration katmanı tut |
-| Her dosyaya `use client` eklenir | Orta | Registry kaynaklarında client sınırını dosya bazında belirle |
-| Tasarım sadece dashboard demosunda iyi görünür | Yüksek | Form, table, long content ve plain app shell senaryolarında test et |
+| Risk                                              | Etki        | Önlem                                                                       |
+| ------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| Registry ve npm package aynı anda kafa karıştırır | Yüksek      | V3'te primary install yolunu tek ve açık tut; legacy'yi ayrı etiketle       |
+| Glass yüzey düşük kontrast üretir                 | Yüksek      | Solid fallback, contrast testleri, opak içerik yüzeyi                       |
+| Blur düşük cihazlarda performansı düşürür         | Orta/Yüksek | Blur budget, nested blur sınırı, sabit blur ve transform-only animation     |
+| Çok fazla variant API'yi şişirir                  | Orta        | Variant eklemek için gerçek use-case şartı ve API review                    |
+| Registry item dependency cycle oluşur             | Yüksek      | CI graph validation                                                         |
+| Docs ve registry ayrışır                          | Yüksek      | Navigation/API bilgisini registry metadata'dan üret                         |
+| V2 consumer migrationı zorlaşır                   | Yüksek      | Component bazlı migration, mapping tablosu, legacy docs                     |
+| Radix portal theme tokenlarını kaybeder           | Orta        | Portal fixture testleri, theme tokenlarının root scope'ta bulunması         |
+| Custom CLI bakım yükü yaratır                     | Yüksek      | Shadcn registry/CLI'ı temel al; Poyraz CLI'ı ince orchestration katmanı tut |
+| Her dosyaya `use client` eklenir                  | Orta        | Registry kaynaklarında client sınırını dosya bazında belirle                |
+| Tasarım sadece dashboard demosunda iyi görünür    | Yüksek      | Form, table, long content ve plain app shell senaryolarında test et         |
 
 ---
 

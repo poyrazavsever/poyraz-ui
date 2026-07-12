@@ -2,10 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const repositoryRoot = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "..",
-);
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = JSON.parse(
   await readFile(path.join(repositoryRoot, "src/theme-tokens.json"), "utf8"),
 );
@@ -29,17 +26,13 @@ function rgb(hex) {
   if (!/^[\da-f]{6}$/i.test(normalized)) {
     throw new Error(`Contrast checks require an opaque hex color, got: ${hex}`);
   }
-  return [0, 2, 4].map((offset) =>
-    Number.parseInt(normalized.slice(offset, offset + 2), 16),
-  );
+  return [0, 2, 4].map((offset) => Number.parseInt(normalized.slice(offset, offset + 2), 16));
 }
 
 function luminance(hex) {
   const channels = rgb(hex).map((channel) => {
     const value = channel / 255;
-    return value <= 0.04045
-      ? value / 12.92
-      : ((value + 0.055) / 1.055) ** 2.4;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
   });
   return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
 }
@@ -70,7 +63,7 @@ const checks = [
   ["destructiveMutedForeground", "destructiveMuted", 4.5],
   ["infoForeground", "info", 4.5],
   ["successForeground", "success", 4.5],
-  ["warningForeground", "warning", 4.5]
+  ["warningForeground", "warning", 4.5],
 ];
 
 let failed = false;

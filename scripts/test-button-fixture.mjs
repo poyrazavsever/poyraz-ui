@@ -12,9 +12,7 @@ const utilsItem = JSON.parse(await readFile(resolve(root, "public/r/poyraz-utils
 
 async function installFiles(item) {
   for (const file of item.files ?? []) {
-    const target = file.target
-      .replace(/^@ui\//, "components/ui/")
-      .replace(/^@lib\//, "lib/");
+    const target = file.target.replace(/^@ui\//, "components/ui/").replace(/^@lib\//, "lib/");
     const destination = resolve(fixture, target);
     await mkdir(dirname(destination), { recursive: true });
     await writeFile(destination, file.content);
@@ -80,7 +78,11 @@ await writeFile(
 
 const result = spawnSync(
   process.execPath,
-  [resolve(root, "node_modules/typescript/bin/tsc"), "--project", resolve(fixture, "tsconfig.json")],
+  [
+    resolve(root, "node_modules/typescript/bin/tsc"),
+    "--project",
+    resolve(fixture, "tsconfig.json"),
+  ],
   { cwd: fixture, encoding: "utf8" },
 );
 

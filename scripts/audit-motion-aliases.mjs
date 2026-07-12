@@ -5,17 +5,27 @@ import { extname, join, relative } from "node:path";
 
 const roots = ["components", "app"];
 const aliases = [
-  "animate-in", "animate-out", "fade-in", "fade-in-0", "fade-out", "fade-out-0",
-  "zoom-in-95", "zoom-out-95", "animate-accordion-down", "animate-accordion-up",
+  "animate-in",
+  "animate-out",
+  "fade-in",
+  "fade-in-0",
+  "fade-out",
+  "fade-out-0",
+  "zoom-in-95",
+  "zoom-out-95",
+  "animate-accordion-down",
+  "animate-accordion-up",
 ];
 const slideAlias = /(?<!poyraz-)\bslide-(?:in|out)-(?:from|to)-[^\s"'`]+/g;
 
 async function files(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
-  const nested = await Promise.all(entries.map((entry) => {
-    const path = join(directory, entry.name);
-    return entry.isDirectory() ? files(path) : [path];
-  }));
+  const nested = await Promise.all(
+    entries.map((entry) => {
+      const path = join(directory, entry.name);
+      return entry.isDirectory() ? files(path) : [path];
+    }),
+  );
   return nested.flat();
 }
 
