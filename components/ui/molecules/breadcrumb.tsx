@@ -18,7 +18,7 @@ const BreadcrumbList = React.forwardRef<
   <ol
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
+      "flex max-w-full flex-nowrap items-center gap-1.5 overflow-x-auto break-words text-sm text-muted-foreground scrollbar-none sm:gap-2.5",
       "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
@@ -99,11 +99,12 @@ BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
 
 const BreadcrumbEllipsis = ({
   className,
+  "aria-label": ariaLabel = "More breadcrumb items",
   ...props
 }: React.ComponentProps<"span">) => (
   <span
-    role="presentation"
-    aria-hidden="true"
+    role="img"
+    aria-label={ariaLabel}
     className={cn(
       "flex h-9 w-9 items-center justify-center text-placeholder transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
@@ -111,7 +112,6 @@ const BreadcrumbEllipsis = ({
     {...props}
   >
     <MoreHorizontal className="h-4 w-4 animate-poyraz-fade-in" />
-    <span className="sr-only">More</span>
   </span>
 );
 BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";

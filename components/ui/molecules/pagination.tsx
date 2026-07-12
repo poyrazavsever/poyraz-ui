@@ -21,7 +21,7 @@ const PaginationContent = React.forwardRef<
   <ul
     ref={ref}
     className={cn(
-      "flex flex-row flex-wrap items-center justify-center gap-1",
+      "flex max-w-full flex-row flex-nowrap items-center justify-start gap-1 overflow-x-auto scrollbar-none sm:justify-center",
       "transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       className,
     )}
@@ -53,14 +53,12 @@ const PaginationLink = ({
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({
-        variant: isActive ? "outline" : "ghost", // Brutalist: Active is outline (dashed border), Ghost is text
+        variant: "ghost",
         size,
+        radius: "md",
       }),
-      // Override for brutalist "active" state explicitly if needed, but button variant handles it.
-      // However, outline button has border-slate-900.
-      // Let's ensure active state is distinct.
       "transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-y-px active:translate-y-0",
-      isActive && "bg-accent border-foreground scale-[1.02] animate-poyraz-scale-in", // Optional override
+      isActive && "border border-primary/25 bg-primary-muted text-primary shadow-sm hover:border-primary/35 hover:bg-primary-muted hover:text-primary",
       className,
     )}
     {...props}
