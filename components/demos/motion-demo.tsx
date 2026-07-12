@@ -4,6 +4,8 @@ import { type CSSProperties, useState } from "react";
 import { LoaderCircle, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/atoms/button";
+import { Checkbox } from "@/components/ui/atoms/checkbox";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/molecules/tabs";
 import { cn } from "@/lib/utils";
 
 const samples = [
@@ -39,48 +41,39 @@ export function MotionDemo() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex rounded-md border border-border bg-surface p-1" aria-label="Preview speed">
           {(["inspect", "actual"] as const).map((value) => (
-            <button
+            <Button
               key={value}
               type="button"
+              size="xs"
+              variant={speed === value ? "secondary" : "ghost"}
               aria-pressed={speed === value}
-              className={cn(
-                "h-7 rounded-sm px-3 text-xs font-semibold transition-colors",
-                speed === value ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
-              )}
               onClick={() => {
                 setSpeed(value);
                 setIteration((current) => current + 1);
               }}
             >
               {value === "inspect" ? "Inspect 700ms" : "Actual 180ms"}
-            </button>
+            </Button>
           ))}
         </div>
         <label className="flex min-h-9 cursor-pointer items-center gap-2 rounded-md border border-border bg-surface px-3 text-sm">
-          <input type="checkbox" checked={reduced} onChange={(event) => setReduced(event.target.checked)} />
+          <Checkbox checked={reduced} onCheckedChange={(checked) => setReduced(checked === true)} />
           Reduced motion
         </label>
       </div>
 
-      <div className="overflow-x-auto">
-        <div className="flex min-w-max gap-1 border-b border-border" role="tablist" aria-label="Motion family">
+      <Tabs value={sample.slot} onValueChange={(value) => selectSample(samples.findIndex((item) => item.slot === value))}>
+        <TabsList aria-label="Motion family">
           {samples.map((item, index) => (
-            <button
+            <TabsTrigger
               key={item.name}
-              type="button"
-              role="tab"
-              aria-selected={sampleIndex === index}
-              className={cn(
-                "relative h-10 px-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                sampleIndex === index && "text-foreground after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-primary",
-              )}
-              onClick={() => selectSample(index)}
+              value={item.slot}
             >
               {item.name}
-            </button>
+            </TabsTrigger>
           ))}
-        </div>
-      </div>
+        </TabsList>
+      </Tabs>
 
       <div className="relative flex min-h-56 items-center justify-center overflow-hidden rounded-md border border-border bg-surface-subtle p-6 sm:min-h-64">
         <div className="absolute left-4 top-4 text-xs text-muted-foreground">

@@ -35,7 +35,7 @@ export default function ButtonPage() {
     >
       <DemoSection
         title="Playground"
-        description="Compose the public Button props and copy the resulting JSX. Global preview controls above remain active."
+        description="Compose the public Button props and copy the resulting JSX. The page-level surface preview remains active."
       >
         <ButtonPlayground />
       </DemoSection>

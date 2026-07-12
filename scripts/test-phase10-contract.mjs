@@ -13,8 +13,10 @@ for (const item of catalog.items) if (!publicNames.has(item.name)) failures.push
 for (const section of ["Atoms", "Molecules", "Organisms"]) if (!catalog.navigation.some((group) => group.section === section)) failures.push(`docs navigation: missing ${section}`);
 if (!catalog.counts.blocks || catalog.counts.blocks !== catalog.blocks.length) failures.push("docs catalog: block count is stale");
 
-for (const href of new Set(catalog.items.map((item) => item.href.split("#")[0]))) {
-  try { await access(`${href.replace(/^\//, "app/")}/page.tsx`); } catch { failures.push(`docs route: missing ${href}`); }
+for (const item of catalog.items) {
+  const href = item.href.split("#")[0];
+  const route = item.section === "Blocks" ? "app/docs/blocks/[slug]/page.tsx" : `${href.replace(/^\//, "app/")}/page.tsx`;
+  try { await access(route); } catch { failures.push(`docs route: missing ${href}`); }
 }
 
 const layout = await read("app/docs/layout.tsx");
@@ -34,14 +36,25 @@ const componentPages = (await Promise.all(["atoms", "molecules", "organisms"].ma
 if (componentPages.filter((source) => source.includes("<ComponentPage")).length < 40) failures.push("component pages: shared ComponentPage coverage is incomplete");
 
 const codeBlock = await read("components/docs/code-block.tsx");
-for (const expected of ["RegistryDetails", "PreviewToolbar", "previewClassName", "data-preview-background"]) requireText("component page composition", codeBlock, expected);
+for (const expected of ["RegistryDetails", "linear-gradient(135deg"]) requireText("component page composition", codeBlock, expected);
+for (const removed of ["PreviewToolbar", "previewClassName", "data-preview-background"]) if (codeBlock.includes(removed)) failures.push(`component page composition: obsolete ${removed} remains`);
+try { await access("components/docs/preview-context.tsx"); failures.push("preview controls: obsolete preview context remains"); } catch {}
 const details = await read("components/docs/registry-details.tsx");
-for (const expected of ["shadcn@latest add @poyraz", "Runtime dependencies", "Registry dependencies", "Source", "API", "Accessibility", "navigator.clipboard"]) requireText("registry details", details, expected);
-const preview = await read("components/docs/preview-context.tsx");
-for (const expected of ['"solid"', '"gradient"', '"dark"', '"sharp"', '"soft"', '"round"', '"compact"', '"spacious"', '"reduced"']) requireText("preview controls", preview, expected);
+for (const expected of ["shadcn@latest add @poyraz", "Runtime dependencies", "Registry dependencies", "Source", "API", "Accessibility", 'lang="bash"']) requireText("registry details", details, expected);
+if (details.includes("border-y")) failures.push("registry details: outer double-border treatment remains");
+requireText("block detail route", await read("app/docs/blocks/[slug]/page.tsx"), "BlockDemo");
+requireText("block catalog links", await read("app/docs/blocks/page.tsx"), "block.href");
 
 requireText("button playground", await read("app/docs/atoms/button/page.tsx"), "ButtonPlayground");
-for (const expected of ["variant", "size", "radius", "effect", "fillDirection"]) requireText("button playground controls", await read("components/demos/button-playground.tsx"), expected);
+const playground = await read("components/demos/button-playground.tsx");
+for (const expected of ["variant", "size", "radius", "effect", "fillDirection", "<Select", "<Checkbox", "<Button"]) requireText("button playground controls", playground, expected);
+for (const native of ["<select", 'type="checkbox"']) if (playground.includes(native)) failures.push(`button playground: native ${native} remains`);
+
+const { readdir } = await import("node:fs/promises");
+const uiPaths = await readdir("components/ui", { recursive: true });
+const uiSources = await Promise.all(uiPaths.filter((path) => /\.(tsx|ts)$/.test(path)).map((path) => read(`components/ui/${path}`)));
+const hoverTranslation = /(?:group-|enabled:)?hover:(?:-?translate-[xy]|translate-[xy]-)|group-hover:(?:-?translate-[xy]|translate-[xy]-)|data-\[highlighted\]:translate-x|focus:translate-x/;
+if (uiSources.some((source) => hoverTranslation.test(source))) failures.push("motion policy: directional hover translation remains in components/ui");
 for (const page of ["auth", "dashboard", "hero", "pricing"]) requireText(`block preview ${page}`, await read(`app/docs/templates/${page}/page.tsx`), "BlockPreview");
 for (const viewport of ["desktop", "tablet", "mobile"]) requireText("block viewport", await read("components/docs/block-preview.tsx"), viewport);
 
@@ -62,4 +75,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`Phase 10 contract is valid (${catalog.counts.components} components, ${catalog.counts.blocks} blocks, registry-driven docs).`);
-

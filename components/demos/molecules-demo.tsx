@@ -788,12 +788,13 @@ export function MoleculesDemo() {
               <nav className="flex flex-col gap-2 py-6">
                 {["Dashboard", "Projects", "Team", "Settings", "Help"].map(
                   (item) => (
-                    <button
+                    <Button
                       key={item}
-                      className="text-left px-3 py-2.5 text-sm border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer rounded-sm"
+                      variant="ghost"
+                      className="justify-start"
                     >
                       {item}
-                    </button>
+                    </Button>
                   ),
                 )}
               </nav>
