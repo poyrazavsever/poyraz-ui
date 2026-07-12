@@ -1048,48 +1048,48 @@ registry:block  → sayfa/ürün seviyesinde değiştirilecek büyük yapı
 
 ### Navbar görevleri
 
-- [ ] `P8-N01` Navbar primitive parçalarını ürün navigation verisinden ayır.
-- [ ] `P8-N02` Desktop navigation block oluştur.
-- [ ] `P8-N03` Responsive mobile navigation block oluştur.
-- [ ] `P8-N04` Mega menu blockunu ayrı registry item yap.
-- [ ] `P8-N05` Glass navbar varyantını ekle.
-- [ ] `P8-N06` Sticky/auto-hide hook'unu Navbar markupından ayırmayı değerlendir.
-- [ ] `P8-N07` Scroll motion'ını reduced-motion ile doğrula.
-- [ ] `P8-N08` Active route bilgisini framework bağımsız tut.
+- [x] `P8-N01` Navbar primitive parçalarını ürün navigation verisinden ayır.
+- [x] `P8-N02` Desktop navigation block oluştur.
+- [x] `P8-N03` Responsive mobile navigation block oluştur.
+- [x] `P8-N04` Mega menu blockunu ayrı registry item yap.
+- [x] `P8-N05` Glass navbar varyantını ekle.
+- [x] `P8-N06` Sticky/auto-hide hook'unu Navbar markupından ayırmayı değerlendir.
+- [x] `P8-N07` Scroll motion'ını reduced-motion ile doğrula.
+- [x] `P8-N08` Active route bilgisini framework bağımsız tut.
 
 ### Sidebar görevleri
 
-- [ ] `P8-S01` Sidebar dosyasındaki hard-coded dark palette'i tamamen kaldır.
-- [ ] `P8-S02` Sidebar provider/context davranışını ayrı item olarak yapılandır.
-- [ ] `P8-S03` Sidebar rail, trigger, group, menu, submenu ve footer slotlarını ayır.
-- [ ] `P8-S04` Collapsible ve icon-only state'leri test et.
-- [ ] `P8-S05` Floating/glass sidebar varyantını yeni tokenlara bağla.
-- [ ] `P8-S06` Mobile sheet sidebar blockunu ayrı example olarak sun.
-- [ ] `P8-S07` Keyboard tab order ve tooltip davranışını test et.
+- [x] `P8-S01` Sidebar dosyasındaki hard-coded dark palette'i tamamen kaldır.
+- [x] `P8-S02` Sidebar provider/context davranışını ayrı item olarak yapılandır.
+- [x] `P8-S03` Sidebar rail, trigger, group, menu, submenu ve footer slotlarını ayır.
+- [x] `P8-S04` Collapsible ve icon-only state'leri test et.
+- [x] `P8-S05` Floating/glass sidebar varyantını yeni tokenlara bağla.
+- [x] `P8-S06` Mobile sheet sidebar blockunu ayrı example olarak sun.
+- [x] `P8-S07` Keyboard tab order ve tooltip davranışını test et.
 
 ### Footer görevleri
 
-- [ ] `P8-F01` Footer anatomy'yi temel layout ve örnek içerik olarak ayır.
-- [ ] `P8-F02` Dark varyanttaki sabit border rengini tokenlaştır.
-- [ ] `P8-F03` Newsletter formunu ayrı composition olarak tanımla.
-- [ ] `P8-F04` Compact, centered ve branded block örneklerini sadeleştir.
+- [x] `P8-F01` Footer anatomy'yi temel layout ve örnek içerik olarak ayır.
+- [x] `P8-F02` Dark varyanttaki sabit border rengini tokenlaştır.
+- [x] `P8-F03` Newsletter formunu ayrı composition olarak tanımla.
+- [x] `P8-F04` Compact, centered ve branded block örneklerini sadeleştir.
 
 ### Announcement Bar görevleri
 
-- [ ] `P8-A01` Info/warning renklerini semantic tokenlara taşı.
-- [ ] `P8-A02` Dismissed state persistence'ı core componentten ayır.
-- [ ] `P8-A03` Enter/exit height + fade motion'ını layout shift açısından test et.
+- [x] `P8-A01` Info/warning renklerini semantic tokenlara taşı.
+- [x] `P8-A02` Dismissed state persistence'ı core componentten ayır.
+- [x] `P8-A03` Enter/exit height + fade motion'ını layout shift açısından test et.
 
 ### Hazır blocklar
 
-- [ ] `P8-B01` Soft Glass Dashboard Shell oluştur.
-- [ ] `P8-B02` Glass Navbar + Sidebar layout blocku oluştur.
-- [ ] `P8-B03` Auth card blockunu yeni Card/Input/Button ile yeniden kur.
-- [ ] `P8-B04` Pricing blockunu yeni Card varyantlarıyla yeniden kur.
-- [ ] `P8-B05` Hero blockunda brand red'i kontrollü accent olarak kullan.
-- [ ] `P8-B06` Referans görsellerden esinlenen smart-dashboard demo blocku oluştur.
-- [ ] `P8-B07` Blocklarda mock data ile business logic'i birbirinden ayır.
-- [ ] `P8-B08` Her block için bağımlılık, responsive ve accessibility belgesi yaz.
+- [x] `P8-B01` Soft Glass Dashboard Shell oluştur.
+- [x] `P8-B02` Glass Navbar + Sidebar layout blocku oluştur.
+- [x] `P8-B03` Auth card blockunu yeni Card/Input/Button ile yeniden kur.
+- [x] `P8-B04` Pricing blockunu yeni Card varyantlarıyla yeniden kur.
+- [x] `P8-B05` Hero blockunda brand red'i kontrollü accent olarak kullan.
+- [x] `P8-B06` Referans görsellerden esinlenen smart-dashboard demo blocku oluştur.
+- [x] `P8-B07` Blocklarda mock data ile business logic'i birbirinden ayır.
+- [x] `P8-B08` Her block için bağımlılık, responsive ve accessibility belgesi yaz.
 
 ### Çıkış kriteri
 
