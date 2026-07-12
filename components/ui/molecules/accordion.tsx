@@ -5,18 +5,22 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { floatingSurfaceVariants, type FloatingSurfaceProps } from "@/components/ui/recipes";
 
 const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> &
+    FloatingSurfaceProps & { separated?: boolean }
+>(({ className, surface, radius, separated = false, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
     className={cn(
       "border-b border-border transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
       "data-[state=open]:border-border-strong",
+      separated && floatingSurfaceVariants({ surface, radius }),
+      separated && "mb-2 border p-0 data-[state=open]:border-border-strong",
       className,
     )}
     {...props}
@@ -56,10 +60,11 @@ const AccordionContent = React.forwardRef<
     className={cn(
       "overflow-hidden text-sm",
       "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up",
+      "motion-reduce:data-[state=open]:animate-none motion-reduce:data-[state=closed]:animate-none",
     )}
     {...props}
   >
-    <div className={cn("pb-4 pt-0 animate-poyraz-fade-in", className)}>
+    <div className={cn("pb-4 pt-0 data-[state=open]:animate-poyraz-fade-in motion-reduce:animate-none", className)}>
       {children}
     </div>
   </AccordionPrimitive.Content>
