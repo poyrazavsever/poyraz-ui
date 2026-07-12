@@ -168,7 +168,9 @@ interface SidebarBrandingProps extends React.HTMLAttributes<HTMLDivElement> {
     subtitle?: string;
 }
 declare const SidebarBranding: React.ForwardRefExoticComponent<SidebarBrandingProps & React.RefAttributes<HTMLDivElement>>;
-declare const SidebarContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
+declare const SidebarContent: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & {
+    scrollMode?: "auto" | "hidden" | "fade";
+} & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarGroup: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 declare const SidebarGroupLabel: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>>;
 interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {

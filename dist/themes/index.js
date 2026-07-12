@@ -166,13 +166,25 @@ var theme_tokens_default = {
         fast: "120ms",
         base: "180ms",
         slow: "260ms",
-        deliberate: "420ms"
+        deliberate: "420ms",
+        spinner: "700ms",
+        pulse: "1800ms"
       },
       ease: {
         standard: "cubic-bezier(0.2, 0, 0, 1)",
         in: "cubic-bezier(0.7, 0, 0.84, 0)",
         out: "cubic-bezier(0.16, 1, 0.3, 1)",
         spring: "cubic-bezier(0.34, 1.56, 0.64, 1)"
+      },
+      distance: {
+        micro: "0.125rem",
+        floating: "0.5rem"
+      },
+      scale: {
+        enter: "0.98",
+        pressSmall: "0.96",
+        pressMedium: "0.98",
+        pressLarge: "0.99"
       }
     },
     floating: {
