@@ -5,8 +5,7 @@ import { fieldVariants } from "@/components/ui/recipes";
 import { cn } from "@/lib/utils";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof fieldVariants> {}
+  extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof fieldVariants> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, radius, type, variant, ...props }, ref) => (

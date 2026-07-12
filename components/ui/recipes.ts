@@ -7,7 +7,8 @@ const fieldVariants = cva(
       variant: {
         default: "border-input bg-surface shadow-xs",
         soft: "border-transparent bg-surface-subtle shadow-none hover:border-border-strong",
-        glass: "poyraz-glass-field border-glass-border-outer bg-glass !text-foreground placeholder:!text-muted-foreground caret-foreground shadow-sm backdrop-blur-glass",
+        glass:
+          "poyraz-glass-field border-glass-border-outer bg-glass !text-foreground placeholder:!text-muted-foreground caret-foreground shadow-sm backdrop-blur-glass",
       },
       radius: {
         none: "rounded-none",
@@ -102,27 +103,24 @@ const overlayVariants = cva(
   },
 );
 
-const overlaySurfaceVariants = cva(
-  "border text-foreground outline-none",
-  {
-    variants: {
-      surface: {
-        solid: "border-border bg-background shadow-xl",
-        soft: "border-border/80 bg-surface-subtle shadow-xl",
-        glass:
-          "border-glass-border-outer bg-glass shadow-xl backdrop-blur-glass supports-[backdrop-filter]:bg-glass",
-      },
-      radius: {
-        none: "rounded-none",
-        sm: "rounded-sm",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        xl: "rounded-xl",
-      },
+const overlaySurfaceVariants = cva("border text-foreground outline-none", {
+  variants: {
+    surface: {
+      solid: "border-border bg-background shadow-xl",
+      soft: "border-border/80 bg-surface-subtle shadow-xl",
+      glass:
+        "border-glass-border-outer bg-glass shadow-xl backdrop-blur-glass supports-[backdrop-filter]:bg-glass",
     },
-    defaultVariants: { surface: "solid", radius: "xl" },
+    radius: {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      xl: "rounded-xl",
+    },
   },
-);
+  defaultVariants: { surface: "solid", radius: "xl" },
+});
 
 type FloatingSurfaceProps = VariantProps<typeof floatingSurfaceVariants>;
 type FloatingItemProps = VariantProps<typeof floatingItemVariants>;
@@ -141,9 +139,4 @@ export {
   overlayVariants,
   overlaySurfaceVariants,
 };
-export type {
-  FloatingSurfaceProps,
-  FloatingItemProps,
-  OverlayProps,
-  OverlaySurfaceProps,
-};
+export type { FloatingSurfaceProps, FloatingItemProps, OverlayProps, OverlaySurfaceProps };

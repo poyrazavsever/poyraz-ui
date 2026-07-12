@@ -330,43 +330,23 @@
   --font-secondary: var(--poyraz-font-secondary);
 
   --text-poyraz-caption: var(--poyraz-typography-caption-size);
-  --text-poyraz-caption--line-height: var(
-    --poyraz-typography-caption-line-height
-  );
-  --text-poyraz-caption--letter-spacing: var(
-    --poyraz-typography-caption-letter-spacing
-  );
+  --text-poyraz-caption--line-height: var(--poyraz-typography-caption-line-height);
+  --text-poyraz-caption--letter-spacing: var(--poyraz-typography-caption-letter-spacing);
   --text-poyraz-body-sm: var(--poyraz-typography-body-small-size);
-  --text-poyraz-body-sm--line-height: var(
-    --poyraz-typography-body-small-line-height
-  );
-  --text-poyraz-body-sm--letter-spacing: var(
-    --poyraz-typography-body-small-letter-spacing
-  );
+  --text-poyraz-body-sm--line-height: var(--poyraz-typography-body-small-line-height);
+  --text-poyraz-body-sm--letter-spacing: var(--poyraz-typography-body-small-letter-spacing);
   --text-poyraz-body: var(--poyraz-typography-body-size);
   --text-poyraz-body--line-height: var(--poyraz-typography-body-line-height);
-  --text-poyraz-body--letter-spacing: var(
-    --poyraz-typography-body-letter-spacing
-  );
+  --text-poyraz-body--letter-spacing: var(--poyraz-typography-body-letter-spacing);
   --text-poyraz-title: var(--poyraz-typography-title-size);
   --text-poyraz-title--line-height: var(--poyraz-typography-title-line-height);
-  --text-poyraz-title--letter-spacing: var(
-    --poyraz-typography-title-letter-spacing
-  );
+  --text-poyraz-title--letter-spacing: var(--poyraz-typography-title-letter-spacing);
   --text-poyraz-heading: var(--poyraz-typography-heading-size);
-  --text-poyraz-heading--line-height: var(
-    --poyraz-typography-heading-line-height
-  );
-  --text-poyraz-heading--letter-spacing: var(
-    --poyraz-typography-heading-letter-spacing
-  );
+  --text-poyraz-heading--line-height: var(--poyraz-typography-heading-line-height);
+  --text-poyraz-heading--letter-spacing: var(--poyraz-typography-heading-letter-spacing);
   --text-poyraz-display: var(--poyraz-typography-display-size);
-  --text-poyraz-display--line-height: var(
-    --poyraz-typography-display-line-height
-  );
-  --text-poyraz-display--letter-spacing: var(
-    --poyraz-typography-display-letter-spacing
-  );
+  --text-poyraz-display--line-height: var(--poyraz-typography-display-line-height);
+  --text-poyraz-display--letter-spacing: var(--poyraz-typography-display-letter-spacing);
 
   /* Semantic colors */
   --color-background: var(--poyraz-background);
@@ -404,9 +384,7 @@
   --color-destructive: var(--poyraz-destructive);
   --color-destructive-foreground: var(--poyraz-destructive-foreground);
   --color-destructive-muted: var(--poyraz-destructive-muted);
-  --color-destructive-muted-foreground: var(
-    --poyraz-destructive-muted-foreground
-  );
+  --color-destructive-muted-foreground: var(--poyraz-destructive-muted-foreground);
   --color-invalid: var(--poyraz-invalid);
   --color-invalid-foreground: var(--poyraz-invalid-foreground);
   --color-invalid-muted: var(--poyraz-invalid-muted);
@@ -617,7 +595,8 @@
   }
 
   .poyraz-button[data-effect="shine"]:hover::before {
-    animation: poyraz-button-shine var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out);
+    animation: poyraz-button-shine var(--poyraz-motion-duration-deliberate)
+      var(--poyraz-motion-ease-out);
   }
 
   .poyraz-button[data-effect="fill"]::before {
@@ -646,9 +625,12 @@
 
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="both"] > [data-slot="button-content"],
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="icon"] [data-slot="button-icon"],
-  .poyraz-button[data-effect="swap"]:hover[data-swap-target="icon"] [data-slot="button-content"] > svg,
+  .poyraz-button[data-effect="swap"]:hover[data-swap-target="icon"]
+    [data-slot="button-content"]
+    > svg,
   .poyraz-button[data-effect="swap"]:hover[data-swap-target="label"] [data-slot="button-label"] {
-    animation: poyraz-button-swap var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard);
+    animation: poyraz-button-swap var(--poyraz-motion-duration-slow)
+      var(--poyraz-motion-ease-standard);
     will-change: transform, opacity;
   }
 
@@ -664,8 +646,12 @@
       transparent var(--poyraz-button-border-progress),
       transparent 360deg
     );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -691,7 +677,30 @@
     left: -0.08em;
     height: 0.24em;
     background: var(--poyraz-text-effect);
-    clip-path: polygon(0 58%, 7% 43%, 15% 52%, 24% 38%, 34% 49%, 45% 35%, 57% 48%, 68% 34%, 78% 46%, 89% 32%, 100% 43%, 99% 68%, 90% 59%, 79% 70%, 68% 58%, 57% 73%, 45% 60%, 34% 75%, 23% 62%, 14% 77%, 6% 66%, 0 80%);
+    clip-path: polygon(
+      0 58%,
+      7% 43%,
+      15% 52%,
+      24% 38%,
+      34% 49%,
+      45% 35%,
+      57% 48%,
+      68% 34%,
+      78% 46%,
+      89% 32%,
+      100% 43%,
+      99% 68%,
+      90% 59%,
+      79% 70%,
+      68% 58%,
+      57% 73%,
+      45% 60%,
+      34% 75%,
+      23% 62%,
+      14% 77%,
+      6% 66%,
+      0 80%
+    );
     opacity: 0.9;
     transform: rotate(-1.2deg) skewX(-7deg);
   }
@@ -735,14 +744,20 @@
 
   .poyraz-text-gradient {
     color: transparent;
-    background-image: linear-gradient(110deg, var(--poyraz-text-effect), color-mix(in srgb, var(--poyraz-text-effect) 48%, white), var(--poyraz-primary-hover));
+    background-image: linear-gradient(
+      110deg,
+      var(--poyraz-text-effect),
+      color-mix(in srgb, var(--poyraz-text-effect) 48%, white),
+      var(--poyraz-primary-hover)
+    );
     background-clip: text;
     -webkit-background-clip: text;
   }
 
   .poyraz-text-glow {
     color: var(--poyraz-text-effect);
-    text-shadow: 0 0 0.35em color-mix(in srgb, var(--poyraz-text-effect) 42%, transparent),
+    text-shadow:
+      0 0 0.35em color-mix(in srgb, var(--poyraz-text-effect) 42%, transparent),
       0 0 0.8em color-mix(in srgb, var(--poyraz-text-effect) 24%, transparent);
   }
 
@@ -841,11 +856,9 @@
     background-color: var(--poyraz-glass-fallback);
   }
 
-
   .poyraz-button-glass {
     background-color: var(--poyraz-glass-fallback);
   }
-
 
   .poyraz-glass-field {
     background-color: var(--poyraz-glass-fallback);
@@ -962,32 +975,27 @@ input:-webkit-autofill:focus {
 }
 
 @utility animate-poyraz-slide-in-from-top {
-  animation: poyraz-slide-in-from-top
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-slide-in-from-top var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 @utility animate-poyraz-slide-in-from-bottom {
-  animation: poyraz-slide-in-from-bottom
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-slide-in-from-bottom var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 @utility animate-poyraz-slide-in-from-left {
-  animation: poyraz-slide-in-from-left
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-slide-in-from-left var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 @utility animate-poyraz-slide-in-from-right {
-  animation: poyraz-slide-in-from-right
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-slide-in-from-right var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 @utility animate-poyraz-accordion-down {
-  animation: poyraz-accordion-down
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-accordion-down var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
@@ -1000,20 +1008,14 @@ input:-webkit-autofill:focus {
 @utility animate-in {
   animation-name: poyraz-enter;
   animation-duration: var(--poyraz-motion-duration-base, 180ms);
-  animation-timing-function: var(
-    --poyraz-motion-ease-out,
-    cubic-bezier(0.16, 1, 0.3, 1)
-  );
+  animation-timing-function: var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   animation-fill-mode: both;
 }
 
 @utility animate-out {
   animation-name: poyraz-exit;
   animation-duration: var(--poyraz-motion-duration-fast, 120ms);
-  animation-timing-function: var(
-    --poyraz-motion-ease-in,
-    cubic-bezier(0.7, 0, 0.84, 0)
-  );
+  animation-timing-function: var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0));
   animation-fill-mode: both;
 }
 
@@ -1106,8 +1108,7 @@ input:-webkit-autofill:focus {
 }
 
 @utility animate-accordion-down {
-  animation: poyraz-accordion-down
-    var(--poyraz-motion-duration-base, 180ms)
+  animation: poyraz-accordion-down var(--poyraz-motion-duration-base, 180ms)
     var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
@@ -1138,7 +1139,8 @@ input:-webkit-autofill:focus {
   }
 
   .poyraz-toast-motion {
-    transition: transform var(--poyraz-motion-duration-base, 180ms)
+    transition:
+      transform var(--poyraz-motion-duration-base, 180ms)
         var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
       opacity var(--poyraz-motion-duration-fast, 120ms)
         var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
@@ -1219,16 +1221,8 @@ input:-webkit-autofill:focus {
 @keyframes poyraz-exit {
   to {
     opacity: var(--poyraz-exit-opacity, 1);
-    transform: translate3d(
-        var(--poyraz-exit-translate-x, 0),
-        var(--poyraz-exit-translate-y, 0),
-        0
-      )
-      scale3d(
-        var(--poyraz-exit-scale, 1),
-        var(--poyraz-exit-scale, 1),
-        var(--poyraz-exit-scale, 1)
-      );
+    transform: translate3d(var(--poyraz-exit-translate-x, 0), var(--poyraz-exit-translate-y, 0), 0)
+      scale3d(var(--poyraz-exit-scale, 1), var(--poyraz-exit-scale, 1), var(--poyraz-exit-scale, 1));
   }
 }
 
@@ -1261,7 +1255,11 @@ input:-webkit-autofill:focus {
 @keyframes poyraz-floating-in {
   from {
     opacity: 0;
-    transform: translate3d(var(--poyraz-floating-translate-x, 0), var(--poyraz-floating-translate-y, 0), 0)
+    transform: translate3d(
+        var(--poyraz-floating-translate-x, 0),
+        var(--poyraz-floating-translate-y, 0),
+        0
+      )
       scale(var(--poyraz-motion-scale-enter, 0.98));
   }
 }
@@ -1269,25 +1267,37 @@ input:-webkit-autofill:focus {
 @keyframes poyraz-floating-out {
   to {
     opacity: 0;
-    transform: translate3d(var(--poyraz-floating-translate-x, 0), var(--poyraz-floating-translate-y, 0), 0)
+    transform: translate3d(
+        var(--poyraz-floating-translate-x, 0),
+        var(--poyraz-floating-translate-y, 0),
+        0
+      )
       scale(var(--poyraz-motion-scale-enter, 0.98));
   }
 }
 
 @keyframes poyraz-overlay-in {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
 @keyframes poyraz-overlay-out {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes poyraz-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes poyraz-pulse {
-  50% { opacity: 0.55; }
+  50% {
+    opacity: 0.55;
+  }
 }
 
 @keyframes poyraz-slide-in-from-top {
@@ -1392,10 +1402,12 @@ input:-webkit-autofill:focus {
 }
 
 @keyframes poyraz-text-shimmer {
-  0%, 14% {
+  0%,
+  14% {
     background-position: 120% center;
   }
-  72%, 100% {
+  72%,
+  100% {
     background-position: -120% center;
   }
 }
@@ -1419,7 +1431,6 @@ input:-webkit-autofill:focus {
     --poyraz-motion-duration-spinner: 1ms;
     --poyraz-motion-duration-pulse: 1ms;
   }
-
 
   [class*="animate-poyraz-"],
   .poyraz-toast-motion {
@@ -1497,7 +1508,6 @@ input:-webkit-autofill:focus {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-
 
   .poyraz-glass-field {
     background-color: var(--poyraz-glass-fallback);

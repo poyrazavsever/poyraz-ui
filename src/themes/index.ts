@@ -76,9 +76,7 @@ function toKebabCase(value: string): string {
     .toLowerCase();
 }
 
-function createThemeVariables(
-  theme: Record<string, string>,
-): Record<string, string> {
+function createThemeVariables(theme: Record<string, string>): Record<string, string> {
   return Object.fromEntries(
     Object.entries(theme).map(([name, value]) => [
       `--poyraz-${toKebabCase(name)}`,

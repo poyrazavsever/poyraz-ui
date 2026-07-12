@@ -30,19 +30,18 @@ const avatarVariants = cva(
 type AvatarProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> &
   VariantProps<typeof avatarVariants>;
 
-const Avatar = React.forwardRef<
-  React.ComponentRef<typeof AvatarPrimitive.Root>,
-  AvatarProps
->(({ className, radius, size, ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    data-slot="avatar"
-    data-radius={radius ?? "full"}
-    data-size={size ?? "default"}
-    className={cn(avatarVariants({ radius, size }), className)}
-    {...props}
-  />
-));
+const Avatar = React.forwardRef<React.ComponentRef<typeof AvatarPrimitive.Root>, AvatarProps>(
+  ({ className, radius, size, ...props }, ref) => (
+    <AvatarPrimitive.Root
+      ref={ref}
+      data-slot="avatar"
+      data-radius={radius ?? "full"}
+      data-size={size ?? "default"}
+      className={cn(avatarVariants({ radius, size }), className)}
+      {...props}
+    />
+  ),
+);
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 const AvatarImage = React.forwardRef<

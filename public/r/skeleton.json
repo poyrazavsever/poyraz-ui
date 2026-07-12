@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/poyraz/ui/phase5/atoms/skeleton.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\n        \"animate-poyraz-pulse rounded-lg bg-accent/80\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-poyraz-pulse rounded-lg bg-accent/80\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
       "type": "registry:ui",
       "target": "@ui/atoms/skeleton.tsx"
     }

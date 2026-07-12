@@ -5,8 +5,7 @@ import { fieldVariants } from "@/components/ui/recipes";
 import { cn } from "@/lib/utils";
 
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    VariantProps<typeof fieldVariants> {}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, VariantProps<typeof fieldVariants> {}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, radius, variant, ...props }, ref) => (
@@ -16,11 +15,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       data-variant={variant ?? "default"}
       data-radius={radius ?? "md"}
       data-invalid={props["aria-invalid"] ? "" : undefined}
-      className={cn(
-        fieldVariants({ variant, radius }),
-        "min-h-24 resize-y px-3 py-2.5",
-        className,
-      )}
+      className={cn(fieldVariants({ variant, radius }), "min-h-24 resize-y px-3 py-2.5", className)}
       {...props}
     />
   ),

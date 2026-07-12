@@ -49,9 +49,12 @@ const textEffectVariants = cva("relative inline-block", {
       strike: "poyraz-text-strike",
     },
     tone: {
-      primary: "[--poyraz-text-effect:var(--color-primary)] [--poyraz-text-effect-soft:var(--color-primary-muted)]",
-      neutral: "[--poyraz-text-effect:var(--color-foreground)] [--poyraz-text-effect-soft:var(--color-accent)]",
-      warning: "[--poyraz-text-effect:var(--color-warning-icon)] [--poyraz-text-effect-soft:var(--color-warning)]",
+      primary:
+        "[--poyraz-text-effect:var(--color-primary)] [--poyraz-text-effect-soft:var(--color-primary-muted)]",
+      neutral:
+        "[--poyraz-text-effect:var(--color-foreground)] [--poyraz-text-effect-soft:var(--color-accent)]",
+      warning:
+        "[--poyraz-text-effect:var(--color-warning-icon)] [--poyraz-text-effect-soft:var(--color-warning)]",
     },
   },
   defaultVariants: { effect: "none", tone: "primary" },
@@ -60,8 +63,7 @@ const textEffectVariants = cva("relative inline-block", {
 type TypographyVariant = NonNullable<VariantProps<typeof typographyVariants>["variant"]>;
 
 export interface TypographyProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof typographyVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof typographyVariants> {
   component?: React.ElementType;
   /** @deprecated Use font="secondary". */
   secondaryFont?: boolean;
@@ -101,18 +103,14 @@ function Typography({
       data-slot="typography"
       data-variant={variant}
       data-font={resolvedFont ?? "primary"}
-      className={cn(
-        typographyVariants({ variant, font: resolvedFont, balance }),
-        className,
-      )}
+      className={cn(typographyVariants({ variant, font: resolvedFont, balance }), className)}
       {...props}
     />
   );
 }
 
 export interface TextEffectProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof textEffectVariants> {}
+  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof textEffectVariants> {}
 
 function TextEffect({ className, effect, tone, ...props }: TextEffectProps) {
   return (
@@ -126,9 +124,4 @@ function TextEffect({ className, effect, tone, ...props }: TextEffectProps) {
   );
 }
 
-export {
-  TextEffect,
-  Typography,
-  textEffectVariants,
-  typographyVariants,
-};
+export { TextEffect, Typography, textEffectVariants, typographyVariants };

@@ -54,8 +54,7 @@ const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
         className={cn("poyraz-scroll-area relative", overflowClass, className)}
         style={
           {
-            maxHeight:
-              typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
+            maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
             "--sb-size": `${sz}px`,
             ...style,
           } as React.CSSProperties

@@ -181,7 +181,9 @@ export function Header() {
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
 }
 ```
@@ -473,7 +475,9 @@ export function Header() {
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
 }
 ```
@@ -538,7 +542,6 @@ MIT © [Poyraz Avsever](https://github.com/poyrazavsever)
   Made with ❤️ by <a href="https://poyrazavsever.com">Poyraz Avsever</a>
 </p>
 
-
 ---
 
 # Reactive Switcher 🎨
@@ -550,14 +553,14 @@ MIT © [Poyraz Avsever](https://github.com/poyrazavsever)
 
 ## ✨ Features
 
--  **Zero Runtime Overhead** - Uses CSS variables for instant theme switching
--  **TypeScript First** - Full type safety with autocomplete support
--  **Tailwind CSS v4 Ready** - Seamless integration with the new engine
--  **Persistent Themes** - LocalStorage support out of the box
--  **System Theme Detection** - Respects `prefers-color-scheme`
--  **No Flash** - SSR compatible with hydration flash prevention
--  **Scoped Theming** - Apply different themes to different parts of your app
--  **Ready-to-use Components** - `ThemeSwitcher` and `ThemeToggle` included
+- **Zero Runtime Overhead** - Uses CSS variables for instant theme switching
+- **TypeScript First** - Full type safety with autocomplete support
+- **Tailwind CSS v4 Ready** - Seamless integration with the new engine
+- **Persistent Themes** - LocalStorage support out of the box
+- **System Theme Detection** - Respects `prefers-color-scheme`
+- **No Flash** - SSR compatible with hydration flash prevention
+- **Scoped Theming** - Apply different themes to different parts of your app
+- **Ready-to-use Components** - `ThemeSwitcher` and `ThemeToggle` included
 
 ## 📦 Installation
 
@@ -711,7 +714,9 @@ export function Header() {
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
 }
 ```

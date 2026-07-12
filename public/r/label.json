@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/poyraz/ui/phase5/atoms/label.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst Label = React.forwardRef<HTMLLabelElement, LabelProps>(\n  ({ className, ...props }, ref) => (\n    <label\n      ref={ref}\n      data-slot=\"label\"\n      className={cn(\n        \"text-sm font-medium leading-none text-foreground\",\n        \"peer-disabled:opacity-40 peer-disabled:cursor-not-allowed\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;\n\nconst Label = React.forwardRef<HTMLLabelElement, LabelProps>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    data-slot=\"label\"\n    className={cn(\n      \"text-sm font-medium leading-none text-foreground\",\n      \"peer-disabled:opacity-40 peer-disabled:cursor-not-allowed\",\n      className,\n    )}\n    {...props}\n  />\n));\nLabel.displayName = \"Label\";\n\nexport { Label };\n",
       "type": "registry:ui",
       "target": "@ui/atoms/label.tsx"
     }

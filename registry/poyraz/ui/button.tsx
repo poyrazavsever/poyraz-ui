@@ -29,11 +29,14 @@ const buttonVariants = cva(
       size: {
         xs: "h-7 gap-1.5 px-2.5 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
         sm: "h-8 gap-1.5 px-3 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
-        default: "h-10 px-4 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4",
+        default:
+          "h-10 px-4 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4",
         lg: "h-11 px-6 text-base [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-4.5",
-        "icon-sm": "size-8 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
+        "icon-sm":
+          "size-8 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5",
         icon: "size-10 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4",
-        "icon-lg": "size-11 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-5",
+        "icon-lg":
+          "size-11 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-5",
       },
       radius: {
         none: "rounded-none",
@@ -88,6 +91,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       swapTarget = "both",
       type,
       variant = "default",
+      "aria-label": ariaLabel,
       ...props
     },
     ref,
@@ -96,6 +100,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const sharedProps = {
       "aria-busy": loading || undefined,
       "aria-disabled": asChild && isDisabled ? true : undefined,
+      "aria-label": ariaLabel ?? (loading && typeof children === "string" ? children : undefined),
       "data-effect": effect,
       "data-fill-direction": fillDirection,
       "data-loading": loading ? "" : undefined,
@@ -117,8 +122,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const spinner = (
       <span data-slot="button-spinner" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
-          <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeLinecap="round" strokeWidth="3" />
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            stroke="currentColor"
+            strokeOpacity="0.25"
+            strokeWidth="3"
+          />
+          <path
+            d="M21 12a9 9 0 0 0-9-9"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="3"
+          />
         </svg>
       </span>
     );
@@ -133,13 +150,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button
-        ref={ref}
-        type={type ?? "button"}
-        disabled={isDisabled}
-        {...sharedProps}
-        {...props}
-      >
+      <button ref={ref} type={type ?? "button"} disabled={isDisabled} {...sharedProps} {...props}>
         {spinner}
         <span data-slot="button-content">{children}</span>
       </button>
@@ -157,9 +168,4 @@ function ButtonLabel({ className, ...props }: React.ComponentPropsWithoutRef<"sp
 }
 
 export { Button, ButtonIcon, ButtonLabel, buttonVariants };
-export type {
-  ButtonEffect,
-  ButtonFillDirection,
-  ButtonProps,
-  ButtonSwapTarget,
-};
+export type { ButtonEffect, ButtonFillDirection, ButtonProps, ButtonSwapTarget };

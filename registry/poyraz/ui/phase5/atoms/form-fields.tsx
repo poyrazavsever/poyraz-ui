@@ -4,12 +4,7 @@ import * as React from "react";
 import { Minus, Plus, Search, Eye, EyeOff, Phone, Globe } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import {
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  type InputProps,
-} from "@/components/ui/atoms/input";
+import { Input, InputGroup, InputGroupAddon, type InputProps } from "@/components/ui/atoms/input";
 import { Button } from "@/components/ui/atoms/button";
 
 /* ================================================================== */
@@ -83,10 +78,7 @@ MaskedInput.displayName = "MaskedInput";
 /*  NUMBER INPUT                                                       */
 /* ================================================================== */
 
-export interface NumberInputProps extends Omit<
-  InputProps,
-  "type" | "onChange" | "value"
-> {
+export interface NumberInputProps extends Omit<InputProps, "type" | "onChange" | "value"> {
   value?: number;
   onChange?: (value: number) => void;
   min?: number;
@@ -223,13 +215,30 @@ export interface PhoneInputProps extends Omit<InputProps, "value" | "defaultValu
 }
 
 const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ className, countryCode = "+1", defaultValue, mask = "(###) ### ## ##", onValueChange, placeholder, value, radius, variant, ...props }, ref) => {
+  (
+    {
+      className,
+      countryCode = "+1",
+      defaultValue,
+      mask = "(###) ### ## ##",
+      onValueChange,
+      placeholder,
+      value,
+      radius,
+      variant,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <InputGroup data-slot="phone-input" radius={radius} variant={variant} className={className}>
         <InputGroupAddon position="start" className="border-0 pr-0">
           <Phone className="h-4 w-4" />
         </InputGroupAddon>
-        <span data-slot="phone-prefix" className="select-none whitespace-nowrap border-r border-border px-2 text-sm font-medium text-muted-foreground">
+        <span
+          data-slot="phone-prefix"
+          className="select-none whitespace-nowrap border-r border-border px-2 text-sm font-medium text-muted-foreground"
+        >
           {countryCode}
         </span>
         {mask ? (
@@ -246,7 +255,16 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
             {...props}
           />
         ) : (
-          <Input ref={ref} type="tel" inputMode="tel" value={value} defaultValue={defaultValue} placeholder={placeholder} className={cn(innerInput)} {...props} />
+          <Input
+            ref={ref}
+            type="tel"
+            inputMode="tel"
+            value={value}
+            defaultValue={defaultValue}
+            placeholder={placeholder}
+            className={cn(innerInput)}
+            {...props}
+          />
         )}
       </InputGroup>
     );
@@ -263,7 +281,12 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
     const [visible, setVisible] = React.useState(false);
 
     return (
-      <InputGroup data-slot="password-input" radius={radius} variant={variant} className={className}>
+      <InputGroup
+        data-slot="password-input"
+        radius={radius}
+        variant={variant}
+        className={className}
+      >
         <Input
           ref={ref}
           type={visible ? "text" : "password"}
@@ -280,11 +303,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           tabIndex={-1}
           aria-label={visible ? "Hide password" : "Show password"}
         >
-          {visible ? (
-            <EyeOff className="h-4 w-4" />
-          ) : (
-            <Eye className="h-4 w-4" />
-          )}
+          {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
         </Button>
       </InputGroup>
     );
@@ -305,10 +324,29 @@ export interface UrlInputProps extends Omit<InputProps, "value" | "defaultValue"
 }
 
 const UrlInput = React.forwardRef<HTMLInputElement, UrlInputProps>(
-  ({ className, defaultValue, normalize = true, onChange, onValueChange, protocol = "https://", value, radius, variant, ...props }, ref) => {
-    const normalizeUrl = (input: string) => normalize
-      ? input.trim().replace(/^https?:\/\//i, "").replace(/^\/\//, "").replace(/\s+/g, "")
-      : input;
+  (
+    {
+      className,
+      defaultValue,
+      normalize = true,
+      onChange,
+      onValueChange,
+      protocol = "https://",
+      value,
+      radius,
+      variant,
+      ...props
+    },
+    ref,
+  ) => {
+    const normalizeUrl = (input: string) =>
+      normalize
+        ? input
+            .trim()
+            .replace(/^https?:\/\//i, "")
+            .replace(/^\/\//, "")
+            .replace(/\s+/g, "")
+        : input;
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const normalized = normalizeUrl(event.currentTarget.value);
       event.currentTarget.value = normalized;
@@ -320,9 +358,14 @@ const UrlInput = React.forwardRef<HTMLInputElement, UrlInputProps>(
         <InputGroupAddon position="start" className="border-0 pr-0">
           <Globe className="h-4 w-4" />
         </InputGroupAddon>
-        {protocol && <span data-slot="url-prefix" className="select-none whitespace-nowrap border-r border-border px-2 text-sm text-muted-foreground">
-          {protocol}
-        </span>}
+        {protocol && (
+          <span
+            data-slot="url-prefix"
+            className="select-none whitespace-nowrap border-r border-border px-2 text-sm text-muted-foreground"
+          >
+            {protocol}
+          </span>
+        )}
         <Input
           ref={ref}
           type="text"
@@ -343,4 +386,12 @@ UrlInput.displayName = "UrlInput";
 /*  EXPORTS                                                            */
 /* ================================================================== */
 
-export { applyInputMask, MaskedInput, NumberInput, SearchInput, PhoneInput, PasswordInput, UrlInput };
+export {
+  applyInputMask,
+  MaskedInput,
+  NumberInput,
+  SearchInput,
+  PhoneInput,
+  PasswordInput,
+  UrlInput,
+};

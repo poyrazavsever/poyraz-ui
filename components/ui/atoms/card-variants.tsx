@@ -27,7 +27,13 @@ interface BasicContentCardProps extends Omit<CompositionProps, "title"> {
   action?: React.ReactNode;
 }
 
-function BasicContentCard({ action, children, description, title, ...props }: BasicContentCardProps) {
+function BasicContentCard({
+  action,
+  children,
+  description,
+  title,
+  ...props
+}: BasicContentCardProps) {
   return (
     <Card data-slot="basic-content-card" {...props}>
       <CardHeader>
@@ -51,15 +57,31 @@ interface ImageContentCardProps extends Omit<CompositionProps, "title"> {
   action?: React.ReactNode;
 }
 
-function ImageContentCard({ action, alt, category, description, src, title, ...props }: ImageContentCardProps) {
+function ImageContentCard({
+  action,
+  alt,
+  category,
+  description,
+  src,
+  title,
+  ...props
+}: ImageContentCardProps) {
   return (
     <Card data-slot="image-content-card" variant="interactive" className="group" {...props}>
       <CardImage>
-        <img src={src} alt={alt} className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+        <img
+          src={src}
+          alt={alt}
+          className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        />
       </CardImage>
       <CardHeader>
         <CardHeading>
-          {category && <Badge size="sm" className="mb-1 w-fit">{category}</Badge>}
+          {category && (
+            <Badge size="sm" className="mb-1 w-fit">
+              {category}
+            </Badge>
+          )}
           <CardTitle>{title}</CardTitle>
           {description && <CardDescription>{description}</CardDescription>}
         </CardHeading>
@@ -73,16 +95,39 @@ interface HorizontalCardProps extends ImageContentCardProps {
   imageClassName?: string;
 }
 
-function HorizontalCard({ action, alt, category, description, imageClassName, src, title, ...props }: HorizontalCardProps) {
+function HorizontalCard({
+  action,
+  alt,
+  category,
+  description,
+  imageClassName,
+  src,
+  title,
+  ...props
+}: HorizontalCardProps) {
   return (
-    <Card data-slot="horizontal-card" className="grid overflow-hidden sm:grid-cols-[minmax(9rem,38%)_1fr]" {...props}>
-      <div data-slot="horizontal-card-image" className={cn("min-h-40 overflow-hidden border-b border-border sm:border-b-0 sm:border-r", imageClassName)}>
+    <Card
+      data-slot="horizontal-card"
+      className="grid overflow-hidden sm:grid-cols-[minmax(9rem,38%)_1fr]"
+      {...props}
+    >
+      <div
+        data-slot="horizontal-card-image"
+        className={cn(
+          "min-h-40 overflow-hidden border-b border-border sm:border-b-0 sm:border-r",
+          imageClassName,
+        )}
+      >
         <img src={src} alt={alt} className="size-full object-cover" />
       </div>
       <div className="flex min-w-0 flex-col">
         <CardHeader>
           <CardHeading>
-            {category && <Badge size="sm" className="mb-1 w-fit">{category}</Badge>}
+            {category && (
+              <Badge size="sm" className="mb-1 w-fit">
+                {category}
+              </Badge>
+            )}
             <CardTitle>{title}</CardTitle>
             {description && <CardDescription>{description}</CardDescription>}
           </CardHeading>
@@ -105,11 +150,19 @@ function ProfileCard({ avatar, bio, name, role, socialActions, ...props }: Profi
   return (
     <Card data-slot="profile-card" {...props}>
       <CardContent className="flex flex-col items-center p-6 text-center">
-        <img src={avatar} alt="" className="size-20 rounded-full border-4 border-surface object-cover shadow-md" />
+        <img
+          src={avatar}
+          alt=""
+          className="size-20 rounded-full border-4 border-surface object-cover shadow-md"
+        />
         <CardTitle className="mt-4 max-w-full break-words text-center">{name}</CardTitle>
         {role && <p className="mt-1 text-sm text-primary">{role}</p>}
         {bio && <CardDescription className="mt-3">{bio}</CardDescription>}
-        {socialActions && <div data-slot="profile-card-actions" className="mt-4 flex items-center gap-2">{socialActions}</div>}
+        {socialActions && (
+          <div data-slot="profile-card-actions" className="mt-4 flex items-center gap-2">
+            {socialActions}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -124,17 +177,42 @@ interface StatisticCardProps extends CompositionProps {
   icon?: React.ReactNode;
 }
 
-function StatisticCard({ chart, change, icon, label, trend = "neutral", value, ...props }: StatisticCardProps) {
+function StatisticCard({
+  chart,
+  change,
+  icon,
+  label,
+  trend = "neutral",
+  value,
+  ...props
+}: StatisticCardProps) {
   return (
     <Card data-slot="statistic-card" {...props}>
       <CardHeader>
-        <CardHeading><CardDescription>{label}</CardDescription></CardHeading>
+        <CardHeading>
+          <CardDescription>{label}</CardDescription>
+        </CardHeading>
         {icon && <CardAction>{icon}</CardAction>}
       </CardHeader>
       <CardContent>
         <div className="text-3xl font-bold tracking-tight text-foreground">{value}</div>
-        {change && <div className={cn("mt-1 text-xs font-medium", trend === "up" && "text-success-icon", trend === "down" && "text-destructive", trend === "neutral" && "text-muted-foreground")}>{change}</div>}
-        {chart && <div data-slot="statistic-card-chart" className="mt-4 h-16 text-primary">{chart}</div>}
+        {change && (
+          <div
+            className={cn(
+              "mt-1 text-xs font-medium",
+              trend === "up" && "text-success-icon",
+              trend === "down" && "text-destructive",
+              trend === "neutral" && "text-muted-foreground",
+            )}
+          >
+            {change}
+          </div>
+        )}
+        {chart && (
+          <div data-slot="statistic-card-chart" className="mt-4 h-16 text-primary">
+            {chart}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -150,19 +228,46 @@ interface PricingPlanCardProps extends Omit<CompositionProps, "title"> {
   popular?: boolean;
 }
 
-function PricingPlanCard({ action, description, features, name, period, popular, price, ...props }: PricingPlanCardProps) {
+function PricingPlanCard({
+  action,
+  description,
+  features,
+  name,
+  period,
+  popular,
+  price,
+  ...props
+}: PricingPlanCardProps) {
   return (
-    <Card data-slot="pricing-plan-card" variant={popular ? "interactive" : "default"} className={cn(popular && "border-primary/50 shadow-md")} {...props}>
+    <Card
+      data-slot="pricing-plan-card"
+      variant={popular ? "interactive" : "default"}
+      className={cn(popular && "border-primary/50 shadow-md")}
+      {...props}
+    >
       <CardHeader>
         <CardHeading>
           <CardTitle>{name}</CardTitle>
           {description && <CardDescription>{description}</CardDescription>}
         </CardHeading>
-        {popular && <CardAction><Badge>Popular</Badge></CardAction>}
+        {popular && (
+          <CardAction>
+            <Badge>Popular</Badge>
+          </CardAction>
+        )}
       </CardHeader>
       <CardContent>
-        <div className="flex items-baseline gap-1"><span className="text-3xl font-bold">{price}</span>{period && <span className="text-sm text-muted-foreground">/{period}</span>}</div>
-        <ul className="mt-5 space-y-2.5 text-sm">{features.map((feature, index) => <li key={index} className="flex gap-2 before:text-primary before:content-['✓']">{feature}</li>)}</ul>
+        <div className="flex items-baseline gap-1">
+          <span className="text-3xl font-bold">{price}</span>
+          {period && <span className="text-sm text-muted-foreground">/{period}</span>}
+        </div>
+        <ul className="mt-5 space-y-2.5 text-sm">
+          {features.map((feature, index) => (
+            <li key={index} className="flex gap-2 before:text-primary before:content-['✓']">
+              {feature}
+            </li>
+          ))}
+        </ul>
       </CardContent>
       <CardFooter>{action}</CardFooter>
     </Card>
@@ -180,7 +285,9 @@ function FeatureCard({ action, description, icon, title, ...props }: FeatureCard
   return (
     <Card data-slot="feature-card" variant="soft" {...props}>
       <CardContent className="p-5">
-        <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary-muted text-primary">{icon}</div>
+        <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary-muted text-primary">
+          {icon}
+        </div>
         <CardTitle>{title}</CardTitle>
         <CardDescription className="mt-2">{description}</CardDescription>
         {action && <div className="mt-4">{action}</div>}
@@ -190,7 +297,14 @@ function FeatureCard({ action, description, icon, title, ...props }: FeatureCard
 }
 
 function GlassCard({ className, ...props }: CompositionProps) {
-  return <Card data-slot="glass-card" variant="glass" className={cn("poyraz-glass", className)} {...props} />;
+  return (
+    <Card
+      data-slot="glass-card"
+      variant="glass"
+      className={cn("poyraz-glass", className)}
+      {...props}
+    />
+  );
 }
 
 interface InteractiveCardProps extends CompositionProps {
@@ -199,9 +313,21 @@ interface InteractiveCardProps extends CompositionProps {
 
 function InteractiveCard({ actions, children, className, ...props }: InteractiveCardProps) {
   return (
-    <Card data-slot="interactive-card" variant="interactive" className={cn("group", className)} {...props}>
+    <Card
+      data-slot="interactive-card"
+      variant="interactive"
+      className={cn("group", className)}
+      {...props}
+    >
       {children}
-      {actions && <div data-slot="interactive-card-actions" className="absolute inset-x-4 bottom-4 opacity-0 transition-opacity duration-[var(--poyraz-motion-duration-fast)] group-hover:opacity-100 group-focus-within:opacity-100">{actions}</div>}
+      {actions && (
+        <div
+          data-slot="interactive-card-actions"
+          className="absolute inset-x-4 bottom-4 opacity-0 transition-opacity duration-[var(--poyraz-motion-duration-fast)] group-hover:opacity-100 group-focus-within:opacity-100"
+        >
+          {actions}
+        </div>
+      )}
     </Card>
   );
 }
@@ -214,7 +340,15 @@ interface ExpandableCardProps extends CompositionProps {
   expandLabel?: string;
 }
 
-function ExpandableCard({ children, defaultOpen = false, expandLabel = "Show details", onOpenChange, open, summary, ...props }: ExpandableCardProps) {
+function ExpandableCard({
+  children,
+  defaultOpen = false,
+  expandLabel = "Show details",
+  onOpenChange,
+  open,
+  summary,
+  ...props
+}: ExpandableCardProps) {
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
   const isOpen = open ?? internalOpen;
   const setOpen = (next: boolean) => {
@@ -239,7 +373,16 @@ function ExpandableCard({ children, defaultOpen = false, expandLabel = "Show det
         </div>
       </div>
       <CardFooter>
-        <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)} aria-expanded={isOpen} className="ml-auto">{expandLabel}<ChevronDown className={cn("transition-transform", isOpen && "rotate-180")} /></Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setOpen(!isOpen)}
+          aria-expanded={isOpen}
+          className="ml-auto"
+        >
+          {expandLabel}
+          <ChevronDown className={cn("transition-transform", isOpen && "rotate-180")} />
+        </Button>
       </CardFooter>
     </Card>
   );

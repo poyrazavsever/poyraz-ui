@@ -1,12 +1,12 @@
 # Button v3
 
-| Metadata | Value |
-| --- | --- |
-| Registry name | `button` |
-| Category | Actions |
-| Client boundary | `use client`; loading/asChild click suppression için internal handler kullanır |
-| Runtime dependencies | `@radix-ui/react-slot`, `class-variance-authority` |
-| Registry dependencies | `@poyraz/poyraz-utils`, `@poyraz/poyraz-theme` |
+| Metadata              | Value                                                                          |
+| --------------------- | ------------------------------------------------------------------------------ |
+| Registry name         | `button`                                                                       |
+| Category              | Actions                                                                        |
+| Client boundary       | `use client`; loading/asChild click suppression için internal handler kullanır |
+| Runtime dependencies  | `@radix-ui/react-slot`, `class-variance-authority`                             |
+| Registry dependencies | `@poyraz/poyraz-utils`, `@poyraz/poyraz-theme`                                 |
 
 ## Anatomy
 
@@ -36,17 +36,17 @@ Icon-only kullanımda `aria-label` veya screen-reader-only metin zorunludur. Dis
 
 ## V2 → V3 mapping
 
-| V2 | V3 | Not |
-| --- | --- | --- |
-| `default` | `default` | Uppercase/brutalist stil yerine soft brand CTA |
-| `secondary` | `secondary` | Nötr soft surface |
-| — | `soft` | Yeni brand tint seçeneği |
-| `outline` | `outline` | Sert siyah border yerine semantic brand border |
-| — | `glass` | Yeni translucent/fallback-aware seçenek |
-| `ghost` | `ghost` | Toolbar ve düşük vurgu |
-| `destructive` | `destructive` | Semantic danger tokenları |
-| `link` | `link` | Inline action davranışı korunur |
-| `sm/default/lg/icon` | Aynı adlar | Ölçek korunur; `xs`, `icon-sm`, `icon-lg` eklenir |
+| V2                   | V3            | Not                                               |
+| -------------------- | ------------- | ------------------------------------------------- |
+| `default`            | `default`     | Uppercase/brutalist stil yerine soft brand CTA    |
+| `secondary`          | `secondary`   | Nötr soft surface                                 |
+| —                    | `soft`        | Yeni brand tint seçeneği                          |
+| `outline`            | `outline`     | Sert siyah border yerine semantic brand border    |
+| —                    | `glass`       | Yeni translucent/fallback-aware seçenek           |
+| `ghost`              | `ghost`       | Toolbar ve düşük vurgu                            |
+| `destructive`        | `destructive` | Semantic danger tokenları                         |
+| `link`               | `link`        | Inline action davranışı korunur                   |
+| `sm/default/lg/icon` | Aynı adlar    | Ölçek korunur; `xs`, `icon-sm`, `icon-lg` eklenir |
 
 ## Görsel doğrulama matrisi
 

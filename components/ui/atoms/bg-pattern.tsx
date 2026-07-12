@@ -19,10 +19,7 @@ export interface BgPatternProps extends React.HTMLAttributes<HTMLDivElement> {
 const baseClass = "pointer-events-none select-none";
 const overlayClass = "absolute inset-0 z-0";
 
-function patternWrapper(
-  overlay: boolean | undefined,
-  className: string | undefined,
-) {
+function patternWrapper(overlay: boolean | undefined, className: string | undefined) {
   return cn(baseClass, overlay && overlayClass, className);
 }
 
@@ -30,15 +27,7 @@ function patternWrapper(
 
 export const PatternDots = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.08,
-      size = 24,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.08, size = 24, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -65,15 +54,7 @@ PatternDots.displayName = "PatternDots";
 
 export const PatternGrid = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.06,
-      size = 40,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.06, size = 40, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -100,15 +81,7 @@ PatternGrid.displayName = "PatternGrid";
 
 export const PatternLines = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.06,
-      size = 20,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.06, size = 20, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -135,15 +108,7 @@ PatternLines.displayName = "PatternLines";
 
 export const PatternDiagonal = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.06,
-      size = 16,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.06, size = 16, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -175,15 +140,7 @@ PatternDiagonal.displayName = "PatternDiagonal";
 
 export const PatternCross = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.07,
-      size = 32,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.07, size = 32, overlay, className, style, ...props },
     ref,
   ) => {
     const half = size / 2;
@@ -215,20 +172,9 @@ PatternCross.displayName = "PatternCross";
 
 /* ── 6. Checkerboard ──────────────────────────────────────────────── */
 
-export const PatternCheckerboard = React.forwardRef<
-  HTMLDivElement,
-  BgPatternProps
->(
+export const PatternCheckerboard = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.04,
-      size = 32,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.04, size = 32, overlay, className, style, ...props },
     ref,
   ) => {
     const half = size / 2;
@@ -262,15 +208,7 @@ PatternCheckerboard.displayName = "PatternCheckerboard";
 
 export const PatternDiamond = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.05,
-      size = 28,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.05, size = 28, overlay, className, style, ...props },
     ref,
   ) => {
     const half = size / 2;
@@ -304,15 +242,7 @@ PatternDiamond.displayName = "PatternDiamond";
 
 export const PatternZigzag = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.06,
-      size = 20,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.06, size = 20, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -343,20 +273,9 @@ PatternZigzag.displayName = "PatternZigzag";
 
 /* ── 9. Dashed Grid ───────────────────────────────────────────────── */
 
-export const PatternDashedGrid = React.forwardRef<
-  HTMLDivElement,
-  BgPatternProps
->(
+export const PatternDashedGrid = React.forwardRef<HTMLDivElement, BgPatternProps>(
   (
-    {
-      color = "currentColor",
-      opacity = 0.08,
-      size = 48,
-      overlay,
-      className,
-      style,
-      ...props
-    },
+    { color = "currentColor", opacity = 0.08, size = 48, overlay, className, style, ...props },
     ref,
   ) => (
     <div
@@ -410,10 +329,7 @@ export interface PatternRadialProps extends React.HTMLAttributes<HTMLDivElement>
   overlay?: boolean;
 }
 
-export const PatternRadial = React.forwardRef<
-  HTMLDivElement,
-  PatternRadialProps
->(
+export const PatternRadial = React.forwardRef<HTMLDivElement, PatternRadialProps>(
   (
     {
       from = "rgba(220,38,38,0.08)",

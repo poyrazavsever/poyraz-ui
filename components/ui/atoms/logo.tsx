@@ -30,8 +30,7 @@ const logoVariants = cva(
 );
 
 export interface LogoProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof logoVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof logoVariants> {
   href?: string;
   src?: string;
   width?: number;

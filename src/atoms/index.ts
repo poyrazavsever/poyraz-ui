@@ -1,17 +1,7 @@
 // Atoms — Fundamental building blocks
-export {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  avatarVariants,
-} from "@/components/ui/atoms/avatar";
+export { Avatar, AvatarImage, AvatarFallback, avatarVariants } from "@/components/ui/atoms/avatar";
 export { Badge, badgeVariants } from "@/components/ui/atoms/badge";
-export {
-  Button,
-  ButtonIcon,
-  ButtonLabel,
-  buttonVariants,
-} from "@/components/ui/atoms/button";
+export { Button, ButtonIcon, ButtonLabel, buttonVariants } from "@/components/ui/atoms/button";
 export type {
   ButtonEffect,
   ButtonFillDirection,
@@ -67,7 +57,11 @@ export {
   UrlInput,
   applyInputMask,
 } from "@/components/ui/atoms/form-fields";
-export type { MaskedInputProps, PhoneInputProps, UrlInputProps } from "@/components/ui/atoms/form-fields";
+export type {
+  MaskedInputProps,
+  PhoneInputProps,
+  UrlInputProps,
+} from "@/components/ui/atoms/form-fields";
 export {
   PatternDots,
   PatternGrid,
@@ -80,9 +74,6 @@ export {
   PatternDashedGrid,
   PatternRadial,
 } from "@/components/ui/atoms/bg-pattern";
-export type {
-  BgPatternProps,
-  PatternRadialProps,
-} from "@/components/ui/atoms/bg-pattern";
+export type { BgPatternProps, PatternRadialProps } from "@/components/ui/atoms/bg-pattern";
 export { ScrollArea } from "@/components/ui/atoms/scroll-area";
 export type { ScrollAreaProps } from "@/components/ui/atoms/scroll-area";

@@ -4,21 +4,21 @@ Phase 5 replaces the v2 brutalist surface language with semantic, soft and optio
 
 ## V2 API inventory and migration
 
-| Component | V2 contract | V3 migration |
-| --- | --- | --- |
-| Label | Native label props | Typography is no longer forced uppercase; `data-slot="label"` added |
-| Separator | Radix orientation/decorative | Same behavior; semantic border and `data-slot` |
-| Skeleton | Native div props | Border removed; soft semantic fill and radius |
-| Input/Textarea | Native props | `variant=default|soft|glass`, independent radius, invalid data styling |
-| Form Fields | Input-based convenience wrappers | All wrappers use `InputGroup`; one focus ring surrounds input, icons and actions |
-| Checkbox/Radio/Switch | Radix controlled/uncontrolled props | `data-state` is the styling source; larger touch hit area and indicator motion |
-| Badge | Four variants | Semantic status and glass variants; size and radius recipes |
-| Avatar | Radix image/fallback | Size and radius recipes replace ad-hoc class overrides |
-| Card | `default/bordered/elevated/highlight/ghost/interactive` | Preferred variants are `default/soft/outline/glass/elevated/interactive`; legacy names remain as compatibility aliases |
-| Typography | Heading/body map and `secondaryFont` | Fixed semantic scale, `font=primary|secondary|inherit`; `secondaryFont` remains deprecated compatibility |
-| ScrollArea | Custom CSS scrollbar | Same API with semantic colors, rounded scrollbar and no hard-coded fallback palette |
-| Logo | Image/link wrapper | Shine effect, radius and interaction recipes |
-| Background patterns | Color/opacity/size props | API preserved; patterns remain decorative and consumer-controlled |
+| Component             | V2 contract                                             | V3 migration                                                                                                           |
+| --------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Label                 | Native label props                                      | Typography is no longer forced uppercase; `data-slot="label"` added                                                    |
+| Separator             | Radix orientation/decorative                            | Same behavior; semantic border and `data-slot`                                                                         |
+| Skeleton              | Native div props                                        | Border removed; soft semantic fill and radius                                                                          |
+| Input/Textarea        | Native props                                            | `variant=default                                                                                                       | soft      | glass`, independent radius, invalid data styling           |
+| Form Fields           | Input-based convenience wrappers                        | All wrappers use `InputGroup`; one focus ring surrounds input, icons and actions                                       |
+| Checkbox/Radio/Switch | Radix controlled/uncontrolled props                     | `data-state` is the styling source; larger touch hit area and indicator motion                                         |
+| Badge                 | Four variants                                           | Semantic status and glass variants; size and radius recipes                                                            |
+| Avatar                | Radix image/fallback                                    | Size and radius recipes replace ad-hoc class overrides                                                                 |
+| Card                  | `default/bordered/elevated/highlight/ghost/interactive` | Preferred variants are `default/soft/outline/glass/elevated/interactive`; legacy names remain as compatibility aliases |
+| Typography            | Heading/body map and `secondaryFont`                    | Fixed semantic scale, `font=primary                                                                                    | secondary | inherit`; `secondaryFont` remains deprecated compatibility |
+| ScrollArea            | Custom CSS scrollbar                                    | Same API with semantic colors, rounded scrollbar and no hard-coded fallback palette                                    |
+| Logo                  | Image/link wrapper                                      | Shine effect, radius and interaction recipes                                                                           |
+| Background patterns   | Color/opacity/size props                                | API preserved; patterns remain decorative and consumer-controlled                                                      |
 
 ## Field anatomy and focus
 
@@ -50,4 +50,3 @@ Phase 5 compositions are distributed separately as `card-variants`: BasicContent
 - Icon-only actions have accessible names; selection primitives retain Radix keyboard behavior.
 - Forced-colors rules cover checked selection controls.
 - Registry graph, generated item schema and clean fixture TypeScript installation are required before release.
-
