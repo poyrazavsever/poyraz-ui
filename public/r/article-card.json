@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "article-card",
+  "title": "Article Card",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass article-card with semantic states and composable variants.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/card",
+    "@poyraz/badge"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/blocks/card-templates/article-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Card, CardDescription, CardFooter, CardHeader, CardHeading, CardImage, CardTitle, type CardProps } from \"@/components/ui/atoms/card\";\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ArticleCardProps extends Omit<CardProps, \"title\"> {\n  image?: string; category?: string; title: string; excerpt?: string;\n  author?: { name: string; avatar?: string }; date?: string; readTime?: string; href?: string;\n}\n\nconst ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(({ author, category, className, date, excerpt, href, image, readTime, title, ...props }, ref) => {\n  const content = <Card ref={ref} variant=\"interactive\" className={cn(\"group overflow-hidden\", className)} {...props}>\n    {image && <CardImage><img src={image} alt=\"\" className=\"size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]\" /></CardImage>}\n    <CardHeader><CardHeading>{category && <Badge size=\"sm\" variant=\"outline\" className=\"mb-1\">{category}</Badge>}<CardTitle>{title}</CardTitle>{excerpt && <CardDescription>{excerpt}</CardDescription>}</CardHeading></CardHeader>\n    {(author || date || readTime) && <CardFooter className=\"text-xs text-muted-foreground\"><div className=\"flex flex-wrap items-center gap-2\">{author?.avatar && <img src={author.avatar} alt=\"\" className=\"size-6 rounded-full object-cover\" />}{author && <span className=\"font-medium text-foreground\">{author.name}</span>}{date && <span>{date}</span>}{readTime && <span>{readTime}</span>}</div></CardFooter>}\n  </Card>;\n  return href ? <a href={href} className=\"block text-inherit no-underline\">{content}</a> : content;\n});\nArticleCard.displayName = \"ArticleCard\";\nexport { ArticleCard };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/card-templates/article-card.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-card-block",
+    "phase": "beta"
+  },
+  "type": "registry:block"
+}
