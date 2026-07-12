@@ -12,6 +12,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
+  CardHeading,
   CardImage,
   CardTitle,
   type CardProps,
@@ -30,8 +31,10 @@ function BasicContentCard({ action, children, description, title, ...props }: Ba
   return (
     <Card data-slot="basic-content-card" {...props}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        {description && <CardDescription>{description}</CardDescription>}
+        <CardHeading>
+          <CardTitle>{title}</CardTitle>
+          {description && <CardDescription>{description}</CardDescription>}
+        </CardHeading>
         {action && <CardAction>{action}</CardAction>}
       </CardHeader>
       {children && <CardContent>{children}</CardContent>}
@@ -55,9 +58,11 @@ function ImageContentCard({ action, alt, category, description, src, title, ...p
         <img src={src} alt={alt} className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
       </CardImage>
       <CardHeader>
-        {category && <Badge size="sm">{category}</Badge>}
-        <CardTitle>{title}</CardTitle>
-        {description && <CardDescription>{description}</CardDescription>}
+        <CardHeading>
+          {category && <Badge size="sm" className="mb-1 w-fit">{category}</Badge>}
+          <CardTitle>{title}</CardTitle>
+          {description && <CardDescription>{description}</CardDescription>}
+        </CardHeading>
       </CardHeader>
       {action && <CardFooter>{action}</CardFooter>}
     </Card>
@@ -76,9 +81,11 @@ function HorizontalCard({ action, alt, category, description, imageClassName, sr
       </div>
       <div className="flex min-w-0 flex-col">
         <CardHeader>
-          {category && <Badge size="sm">{category}</Badge>}
-          <CardTitle>{title}</CardTitle>
-          {description && <CardDescription>{description}</CardDescription>}
+          <CardHeading>
+            {category && <Badge size="sm" className="mb-1 w-fit">{category}</Badge>}
+            <CardTitle>{title}</CardTitle>
+            {description && <CardDescription>{description}</CardDescription>}
+          </CardHeading>
         </CardHeader>
         {action && <CardFooter>{action}</CardFooter>}
       </div>
@@ -99,7 +106,7 @@ function ProfileCard({ avatar, bio, name, role, socialActions, ...props }: Profi
     <Card data-slot="profile-card" {...props}>
       <CardContent className="flex flex-col items-center p-6 text-center">
         <img src={avatar} alt="" className="size-20 rounded-full border-4 border-surface object-cover shadow-md" />
-        <CardTitle className="mt-4">{name}</CardTitle>
+        <CardTitle className="mt-4 max-w-full break-words text-center">{name}</CardTitle>
         {role && <p className="mt-1 text-sm text-primary">{role}</p>}
         {bio && <CardDescription className="mt-3">{bio}</CardDescription>}
         {socialActions && <div data-slot="profile-card-actions" className="mt-4 flex items-center gap-2">{socialActions}</div>}
@@ -121,7 +128,7 @@ function StatisticCard({ chart, change, icon, label, trend = "neutral", value, .
   return (
     <Card data-slot="statistic-card" {...props}>
       <CardHeader>
-        <CardDescription>{label}</CardDescription>
+        <CardHeading><CardDescription>{label}</CardDescription></CardHeading>
         {icon && <CardAction>{icon}</CardAction>}
       </CardHeader>
       <CardContent>
@@ -147,9 +154,11 @@ function PricingPlanCard({ action, description, features, name, period, popular,
   return (
     <Card data-slot="pricing-plan-card" variant={popular ? "interactive" : "default"} className={cn(popular && "border-primary/50 shadow-md")} {...props}>
       <CardHeader>
-        <CardTitle>{name}</CardTitle>
+        <CardHeading>
+          <CardTitle>{name}</CardTitle>
+          {description && <CardDescription>{description}</CardDescription>}
+        </CardHeading>
         {popular && <CardAction><Badge>Popular</Badge></CardAction>}
-        {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-1"><span className="text-3xl font-bold">{price}</span>{period && <span className="text-sm text-muted-foreground">/{period}</span>}</div>
@@ -216,7 +225,19 @@ function ExpandableCard({ children, defaultOpen = false, expandLabel = "Show det
   return (
     <Card data-slot="expandable-card" data-state={isOpen ? "open" : "closed"} {...props}>
       <CardContent className="p-5">{summary}</CardContent>
-      <div data-slot="expandable-card-content" hidden={!isOpen} className="border-t border-border px-5 py-4 text-sm animate-poyraz-slide-in-from-top">{children}</div>
+      <div
+        data-slot="expandable-card-content"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
+        className={cn(
+          "grid transition-[grid-template-rows,opacity] duration-[var(--poyraz-motion-duration-slow)] ease-[var(--poyraz-motion-ease-out)] motion-reduce:duration-[1ms]",
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+        )}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="border-t border-border px-5 py-4 text-sm">{children}</div>
+        </div>
+      </div>
       <CardFooter>
         <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)} aria-expanded={isOpen} className="ml-auto">{expandLabel}<ChevronDown className={cn("transition-transform", isOpen && "rotate-180")} /></Button>
       </CardFooter>
