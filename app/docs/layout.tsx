@@ -3,292 +3,222 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FileText,
-  Home,
-  Download,
-  ChevronDown,
-  Github,
-  Palette,
-} from "lucide-react";
+import { ChevronDown, Github, Sparkles } from "lucide-react";
 
 import { cn } from "poyraz-ui";
-import { Logo } from "poyraz-ui/atoms";
-import { Button } from "poyraz-ui/atoms";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarMain,
-  NavbarLinks,
-  NavbarLink,
-  NavbarActions,
-  NavbarMobileToggle,
-  NavbarMobileMenu,
-  NavbarMobileLink,
-} from "poyraz-ui/organisms";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
-} from "poyraz-ui/organisms";
+import { Button, Logo } from "poyraz-ui/atoms";
 import {
   Footer,
   FooterBottom,
-  FooterSocials,
   FooterSocialLink,
+  FooterSocials,
+  Navbar,
+  NavbarActions,
+  NavbarBrand,
+  NavbarLink,
+  NavbarLinks,
+  NavbarMain,
+  NavbarMobileLink,
+  NavbarMobileMenu,
+  NavbarMobileToggle,
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
 } from "poyraz-ui/organisms";
-import {
-  componentRegistry,
-  docsMobileNav,
-  socialLinks,
-  toSlug,
-} from "@/lib/navigation";
+
+import docsCatalog from "@/src/docs-registry.json";
+import { socialLinks } from "@/lib/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PreviewProvider } from "@/components/docs/preview-context";
 
-/* ── Collapsible sidebar group ────────────────────────────────────── */
+type DocsLink = { title: string; href: string };
 
-function SidebarSection({
+const primarySections = [
+  {
+    label: "Getting Started",
+    items: [
+      { title: "Introduction", href: "/docs" },
+      { title: "Installation", href: "/docs/installation" },
+      { title: "Troubleshooting", href: "/docs/troubleshooting" },
+    ],
+  },
+  {
+    label: "Theme",
+    items: [
+      { title: "Theme and tokens", href: "/docs/theme" },
+      { title: "Motion", href: "/docs/motion" },
+    ],
+  },
+] as const;
+
+const migrationLinks = [
+  { title: "V2 to V3", href: "/docs/migration" },
+  { title: "V2 legacy docs", href: "/docs/legacy/v2" },
+] as const;
+
+function DocsLinkList({ items, pathname }: { items: readonly DocsLink[]; pathname: string }) {
+  return (
+    <ul className="space-y-0.5">
+      {items.map((item) => {
+        const active = pathname === item.href;
+        return (
+          <li key={`${item.href}-${item.title}`}>
+            <Link
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "block rounded-sm px-3 py-1.5 text-[13px] no-underline transition-colors",
+                active
+                  ? "bg-primary-muted font-semibold text-primary-muted-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
+              )}
+            >
+              {item.title}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function DocsNavSection({
   label,
-  basePath,
   items,
   pathname,
-  isOpen,
-  onToggle,
+  defaultOpen = false,
 }: {
   label: string;
-  basePath: string;
-  items: string[];
+  items: readonly DocsLink[];
   pathname: string;
-  isOpen: boolean;
-  onToggle: () => void;
+  defaultOpen?: boolean;
 }) {
-  return (
-    <div className="space-y-0.5">
-      <div
-        className={cn(
-          "flex items-center justify-between w-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest",
-          "text-placeholder hover:text-muted-foreground transition-colors",
-        )}
-      >
-        <Link
-          href={basePath}
-          className={cn(
-            "flex-1 no-underline cursor-pointer transition-colors",
-            pathname === basePath || pathname.startsWith(basePath + "/")
-              ? "text-foreground"
-              : "text-placeholder hover:text-muted-foreground",
-          )}
-        >
-          {label}
-        </Link>
-        <button
-          onClick={onToggle}
-          className="cursor-pointer p-0.5 text-placeholder hover:text-muted-foreground transition-colors"
-          aria-label={isOpen ? "Collapse section" : "Expand section"}
-        >
-          <ChevronDown
-            className={cn(
-              "h-3.5 w-3.5 transition-transform duration-200",
-              isOpen && "rotate-180",
-            )}
-          />
-        </button>
-      </div>
-      {isOpen && (
-        <ul className="space-y-0.5">
-          {items.map((item) => {
-            const href = `${basePath}/${toSlug(item)}`;
-            const active = pathname === href;
-            return (
-              <li key={item}>
-                <Link
-                  href={href}
-                  className={cn(
-                    "block px-4 py-1.5 text-[13px] transition-colors no-underline",
-                    "border-l-[3px] border-solid",
-                    active
-                      ? "border-primary bg-primary-muted text-primary-muted-foreground font-semibold"
-                      : "border-transparent text-muted-foreground hover:text-foreground hover:bg-accent",
-                  )}
-                >
-                  {item}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
-  );
-}
+  const containsActive = items.some(({ href }) => pathname === href || pathname.startsWith(`${href}/`));
+  const [open, setOpen] = React.useState(defaultOpen || containsActive);
 
-function DocsSidebarContent() {
-  const pathname = usePathname();
-
-  // Determine which section should be open based on the current path
-  const getActiveSection = React.useCallback(() => {
-    for (const group of componentRegistry) {
-      // Match both category page (/docs/atoms) and individual items (/docs/atoms/button)
-      if (
-        pathname === group.basePath ||
-        pathname.startsWith(group.basePath + "/")
-      ) {
-        return group.label;
-      }
-    }
-    return null;
-  }, [pathname]);
-
-  const [openSection, setOpenSection] = React.useState<string | null>(
-    () => getActiveSection() ?? componentRegistry[0]?.label ?? null,
-  );
-
-  // Sync when navigating to a different section
   React.useEffect(() => {
-    const active = getActiveSection();
-    if (active) {
-      setOpenSection(active);
-    }
-  }, [getActiveSection]);
+    if (containsActive) setOpen(true);
+  }, [containsActive]);
 
   return (
-    <>
-      <SidebarGroup>
-        <SidebarGroupLabel>Getting Started</SidebarGroupLabel>
-        <SidebarMenu>
-          <SidebarMenuItem
-            href="/docs"
-            icon={<Home className="h-4 w-4" />}
-            active={pathname === "/docs"}
-          >
-            Introduction
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            href="/docs/installation"
-            icon={<Download className="h-4 w-4" />}
-            active={pathname === "/docs/installation"}
-          >
-            Installation
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            href="/docs/theme"
-            icon={<Palette className="h-4 w-4" />}
-            active={pathname === "/docs/theme"}
-          >
-            Theme
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarGroup>
-
-      <div className="px-2 space-y-2 mt-2">
-        {componentRegistry.map((group) => (
-          <SidebarSection
-            key={group.label}
-            label={`${group.label} (${group.items.length})`}
-            basePath={group.basePath}
-            items={group.items}
-            pathname={pathname}
-            isOpen={openSection === group.label}
-            onToggle={() =>
-              setOpenSection((prev) =>
-                prev === group.label ? null : group.label,
-              )
-            }
-          />
-        ))}
-      </div>
-    </>
+    <section className="space-y-1.5">
+      <button
+        type="button"
+        className="flex w-full items-center justify-between rounded-sm px-3 py-1.5 text-[10px] font-bold uppercase text-placeholder transition-colors hover:text-foreground"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span>{label}</span>
+        <ChevronDown className={cn("size-3 transition-transform", open && "rotate-180")} />
+      </button>
+      {open && <DocsLinkList items={items} pathname={pathname} />}
+    </section>
   );
 }
 
-export default function DocsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex min-h-screen flex-col">
-      {/* ─── TOP NAVBAR ───────────────────────────────────── */}
-      <Navbar variant="minimal" sticky>
-        <NavbarMain>
-          <NavbarBrand href="/">
-            <Logo width={32} height={32} />
-          </NavbarBrand>
+function DocsSidebarNavigation() {
+  const pathname = usePathname();
+  const componentLinks = docsCatalog.navigation.flatMap((group) => group.items);
 
+  return (
+    <nav aria-label="Documentation" className="space-y-4">
+      {primarySections.map((section) => (
+        <DocsNavSection
+          key={section.label}
+          label={section.label}
+          items={section.items}
+          pathname={pathname}
+          defaultOpen
+        />
+      ))}
+
+      <DocsNavSection label="Components" items={componentLinks} pathname={pathname} />
+      <DocsNavSection
+        label={`Blocks (${docsCatalog.counts.blocks})`}
+        items={[{ title: "Block catalog", href: "/docs/blocks" }, ...docsCatalog.blocks]}
+        pathname={pathname}
+      />
+      <DocsNavSection label="Migration" items={migrationLinks} pathname={pathname} defaultOpen />
+    </nav>
+  );
+}
+
+const mobileLinks = [
+  { title: "Getting started", href: "/docs" },
+  { title: "Theme", href: "/docs/theme" },
+  { title: "Components", href: "/docs/atoms" },
+  { title: "Blocks", href: "/docs/blocks" },
+  { title: "Migration", href: "/docs/migration" },
+];
+
+export default function DocsLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar variant="minimal" sticky className="border-b border-border/80 bg-background/90 backdrop-blur-lg">
+        <NavbarMain className="mx-auto max-w-[1440px] px-5 lg:px-8">
+          <NavbarBrand href="/">
+            <Logo width={30} height={30} />
+          </NavbarBrand>
           <NavbarLinks>
             <NavbarLink href="/docs">Docs</NavbarLink>
             <NavbarLink href="/docs/atoms">Components</NavbarLink>
+            <NavbarLink href="/docs/blocks">Blocks</NavbarLink>
           </NavbarLinks>
-
           <NavbarActions>
             <ThemeToggle />
-            <Link href={socialLinks.repo} target="_blank">
-              <Button size="icon" variant="ghost">
-                <Github className="h-4 w-4" />
-              </Button>
-            </Link>
+            <Button asChild size="icon" variant="ghost">
+              <Link href={socialLinks.repo} target="_blank" aria-label="GitHub repository">
+                <Github className="size-4" />
+              </Link>
+            </Button>
           </NavbarActions>
-
           <NavbarMobileToggle />
         </NavbarMain>
-
         <NavbarMobileMenu>
-          {docsMobileNav.map((item) => (
-            <NavbarMobileLink key={item.href} href={item.href}>
-              {item.label}
-            </NavbarMobileLink>
+          {mobileLinks.map((item) => (
+            <NavbarMobileLink key={item.href} href={item.href}>{item.title}</NavbarMobileLink>
           ))}
         </NavbarMobileMenu>
       </Navbar>
 
-      {/* ─── BODY ─────────────────────────────────────────── */}
-      <div className="flex flex-1">
-        {/* Desktop Sidebar — fixed */}
-        <div className="hidden lg:block w-56 shrink-0">
-          <Sidebar
-            variant="default"
-            className="fixed top-[57px] left-0 w-56 h-[calc(100vh-57px)] border-r border-border overflow-y-auto"
-          >
-            <SidebarHeader className="h-12">
-              <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
-                Docs
-              </span>
-            </SidebarHeader>
-            <SidebarContent>
-              <DocsSidebarContent />
-            </SidebarContent>
-          </Sidebar>
-        </div>
+      <PreviewProvider>
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-0 px-5 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10 lg:px-8 xl:gap-14">
+        <aside className="hidden lg:block">
+          <div className="sticky top-[73px] h-[calc(100dvh-89px)] py-4">
+            <Sidebar variant="default" className="h-full w-full rounded-lg border border-border bg-surface/95">
+              <SidebarHeader className="h-auto border-b border-border px-5 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-semibold text-foreground">Poyraz UI</p>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground">V3 registry docs</p>
+                  </div>
+                  <Sparkles className="size-4 text-primary" aria-hidden="true" />
+                </div>
+              </SidebarHeader>
+              <SidebarContent scrollMode="fade" className="px-3">
+                <DocsSidebarNavigation />
+              </SidebarContent>
+            </Sidebar>
+          </div>
+        </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-auto bg-muted/50">
-          <div className="max-w-4xl mx-auto py-10 px-6 md:px-10">
+        <main className="min-w-0">
+          <div className="mx-auto min-h-[calc(100dvh-57px)] w-full max-w-[68rem] px-0 py-10 md:py-14">
             {children}
           </div>
-
-          {/* Docs Footer (compact) */}
-          <Footer variant="compact" containerClassName="max-w-4xl mx-auto">
-            <FooterBottom className="mt-0 pt-0 border-t-0">
-              <span className="text-xs text-placeholder">
-                &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
-              </span>
+          <Footer variant="compact" containerClassName="max-w-[68rem] px-0">
+            <FooterBottom className="mt-0 border-t border-border py-6">
+              <span className="text-xs text-placeholder">&copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.</span>
               <FooterSocials>
-                <FooterSocialLink
-                  href={socialLinks.github}
-                  aria-label="GitHub"
-                  className="h-7 w-7"
-                >
-                  <Github className="h-3 w-3" />
+                <FooterSocialLink href={socialLinks.github} aria-label="GitHub" className="size-7">
+                  <Github className="size-3" />
                 </FooterSocialLink>
               </FooterSocials>
             </FooterBottom>
           </Footer>
         </main>
       </div>
+      </PreviewProvider>
     </div>
   );
 }

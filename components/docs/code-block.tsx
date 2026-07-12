@@ -6,6 +6,8 @@ import { Copy, Check } from "lucide-react";
 import { toast } from "@/components/ui/molecules/sonner";
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { cn } from "@/lib/utils";
+import { PreviewToolbar, previewClassName, previewStyle, usePreview } from "@/components/docs/preview-context";
+import { RegistryDetails } from "@/components/docs/registry-details";
 
 /* ================================================================== */
 /*  Shiki highlighting helper (lazy-loaded)                            */
@@ -116,11 +118,16 @@ export function DemoBlock({
   children: React.ReactNode;
   className?: string;
 }) {
+  const { state } = usePreview();
   return (
     <div
       data-slot="docs-demo"
+      data-preview-background={state.background}
+      data-poyraz-motion={state.motion === "reduced" ? "reduced" : undefined}
+      style={previewStyle(state)}
       className={cn(
-        "@container/demo relative min-w-0 overflow-visible rounded-lg border border-border bg-background p-3 @sm/demo:p-4 @lg/demo:p-6",
+        "@container/demo relative min-w-0 overflow-visible rounded-lg border border-border p-3 @sm/demo:p-4 @lg/demo:p-6",
+        previewClassName(state),
         className,
       )}
     >
@@ -153,6 +160,9 @@ export function ComponentPage({
           {description}
         </p>
       </div>
+
+      <RegistryDetails name={name} />
+      <PreviewToolbar />
 
       {/* Import */}
       <section className="space-y-3">
