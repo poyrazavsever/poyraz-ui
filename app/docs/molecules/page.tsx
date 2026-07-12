@@ -28,6 +28,7 @@ const molecules = [
     description: "Navigation path indicator.",
   },
   { name: "Calendar", slug: "calendar", description: "Date selection grid." },
+  { name: "Card Templates", slug: "card-templates", description: "Independent article, product, stats and pricing blocks." },
   {
     name: "Command Palette",
     slug: "command-palette",
