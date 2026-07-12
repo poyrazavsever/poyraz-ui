@@ -100,7 +100,7 @@ const TabsTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         "relative inline-flex shrink-0 items-center justify-center whitespace-nowrap font-medium outline-none",
-        "transition-[color,background-color,box-shadow] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+        "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
         size === "sm" && "h-7 px-2.5 text-xs",
         size === "md" && "h-8 px-3 text-sm",

@@ -16,8 +16,11 @@ for (const recipe of ["floatingSurfaceVariants", "floatingMotion", "floatingItem
   requireText("shared recipe", recipes, recipe);
 }
 for (const surface of ["solid:", "soft:", "glass:"]) requireText("surface strategy", recipes, surface);
-requireText("side motion", recipes, "data-[side=bottom]");
-requireText("reduced floating motion", recipes, "motion-reduce:[--poyraz-enter-scale:1]");
+requireText("native floating entrance", recipes, "animate-poyraz-floating-in");
+requireText("native floating exit", recipes, "animate-poyraz-floating-out");
+const preset = await read("src/preset.css");
+requireText("side motion", preset, '[data-side="bottom"]');
+requireText("reduced floating motion", preset, '[class*="animate-poyraz-"]');
 
 const dropdown = await read("components/ui/molecules/dropdown-menu.tsx");
 for (const api of ['"click" | "hover"', "closeDelay", "itemSize", "itemRadius", "media?:", "description?:", "trailing?:"]) {
@@ -45,7 +48,7 @@ const drawer = await read("components/ui/molecules/drawer.tsx");
 if (/data-\[state=open\].*slide-in/.test(drawer)) failures.push("drawer: CSS transform motion must not compete with Vaul gesture motion");
 
 const accordion = await read("components/ui/molecules/accordion.tsx");
-requireText("accordion height", await read("src/preset.css"), "--radix-accordion-content-height");
+requireText("accordion height", preset, "--radix-accordion-content-height");
 requireText("accordion icon", accordion, "rotate-180");
 const tabs = await read("components/ui/molecules/tabs.tsx");
 for (const variant of ['"line"', '"soft"', '"glass"']) requireText("tabs variant", tabs, variant);

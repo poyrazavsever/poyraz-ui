@@ -5,7 +5,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { floatingSurfaceVariants, type FloatingSurfaceProps } from "@/components/ui/recipes";
+import { accordionMotion, floatingSurfaceVariants, type FloatingSurfaceProps } from "@/components/ui/recipes";
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -59,8 +59,7 @@ const AccordionContent = React.forwardRef<
     ref={ref}
     className={cn(
       "overflow-hidden text-sm",
-      "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up",
-      "motion-reduce:data-[state=open]:animate-none motion-reduce:data-[state=closed]:animate-none",
+      accordionMotion,
     )}
     {...props}
   >
