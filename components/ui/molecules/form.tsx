@@ -168,6 +168,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      data-slot="form-message"
       className={cn(
         "text-sm font-medium text-destructive animate-poyraz-slide-in-from-top transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
         className,
