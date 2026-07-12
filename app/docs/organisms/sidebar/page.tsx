@@ -43,6 +43,23 @@ import {
 } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
+const scrollItems = ["Overview", "Activity", "Analytics", "Customers", "Projects", "Invoices", "Messages", "Files", "Team", "Security", "Integrations", "Settings"];
+
+function ScrollModeSidebar({ mode }: { mode: "auto" | "hidden" | "fade" }) {
+  return (
+    <div className="h-72 min-w-0 overflow-hidden rounded-md border border-border">
+      <Sidebar className="h-full w-full">
+        <SidebarHeader className="h-12"><span className="text-sm font-semibold capitalize">{mode} scroll</span></SidebarHeader>
+        <SidebarContent scrollMode={mode}>
+          <SidebarMenu>
+            {scrollItems.map((item, index) => <SidebarMenuItem key={item} active={index === 0}>{item}</SidebarMenuItem>)}
+          </SidebarMenu>
+        </SidebarContent>
+      </Sidebar>
+    </div>
+  );
+}
+
 export default function SidebarPage() {
   return (
     <ComponentPage
@@ -59,6 +76,20 @@ export default function SidebarPage() {
 } from "poyraz-ui/organisms";`}
     >
       {/* ─── 1. Full Featured ────────────────────────── */}
+      <DemoSection
+        title="Content overflow"
+        description="Choose a visible scrollbar, a hidden scrollbar with wheel and keyboard scrolling, or edge fades that signal more content without a scrollbar."
+        code={`<SidebarContent scrollMode="auto" />
+<SidebarContent scrollMode="hidden" />
+<SidebarContent scrollMode="fade" />`}
+      >
+        <div className="grid gap-4 @2xl/demo:grid-cols-3">
+          <ScrollModeSidebar mode="auto" />
+          <ScrollModeSidebar mode="hidden" />
+          <ScrollModeSidebar mode="fade" />
+        </div>
+      </DemoSection>
+
       <DemoSection
         title="Full Featured"
         description="Default sidebar with search, user profile, grouped menu items, sub-menus, badges, and footer."

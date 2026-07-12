@@ -208,14 +208,21 @@ SidebarBranding.displayName = "SidebarBranding";
 
 const SidebarContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
+  React.HTMLAttributes<HTMLDivElement> & {
+    scrollMode?: "auto" | "hidden" | "fade";
+  }
+>(({ className, children, scrollMode = "auto", ...props }, ref) => (
   <div
     ref={ref}
     data-slot="sidebar-content"
+    data-scroll-mode={scrollMode}
     className={cn(
-      "flex-1 overflow-y-auto overflow-x-hidden",
-      "px-3 py-4",
+      "min-h-0 flex-1 overflow-x-hidden px-3",
+      scrollMode === "auto" && "overflow-y-auto py-4 [scrollbar-gutter:stable]",
+      scrollMode === "hidden" &&
+        "overflow-y-auto py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+      scrollMode === "fade" &&
+        "overflow-y-auto py-7 [scrollbar-width:none] [mask-image:linear-gradient(to_bottom,transparent,black_1.5rem,black_calc(100%-1.5rem),transparent)] [&::-webkit-scrollbar]:hidden",
       className,
     )}
     {...props}
