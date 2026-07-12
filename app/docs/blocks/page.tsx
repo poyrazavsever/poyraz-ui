@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, Blocks } from "lucide-react";
 
 import docsCatalog from "@/src/docs-registry.json";
-import { InstallCommand } from "@/components/docs/install-command";
 
 const previews = [
   { label: "Dashboard", href: "/docs/templates/dashboard" },
@@ -35,15 +34,13 @@ export default function BlocksPage() {
         <div className="flex items-center gap-2"><Blocks className="size-5 text-primary" /><h2 className="text-poyraz-title font-semibold">All blocks ({docsCatalog.counts.blocks})</h2></div>
         <div className="grid gap-4 lg:grid-cols-2">
           {docsCatalog.blocks.map((block) => (
-            <article key={block.name} id={block.name} className="scroll-mt-24 rounded-md border border-border bg-surface p-4">
+            <Link key={block.name} href={block.href} className="group block rounded-md border border-border bg-surface p-4 no-underline transition-colors hover:border-border-strong hover:bg-surface-subtle">
               <div className="mb-4"><h3 className="font-semibold">{block.title}</h3><p className="mt-1 text-sm text-muted-foreground">{block.description}</p></div>
-              <InstallCommand name={block.name} />
-              <p className="mt-3 text-xs text-placeholder">{block.registryDependencies.length} registry dependencies / {block.files.length} source files</p>
-            </article>
+              <div className="mt-3 flex items-center justify-between gap-3"><p className="text-xs text-placeholder">{block.registryDependencies.length} registry dependencies / {block.files.length} source files</p><ArrowRight className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5" /></div>
+            </Link>
           ))}
         </div>
       </section>
     </div>
   );
 }
-

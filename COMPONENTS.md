@@ -73,24 +73,24 @@ pnpm dlx shadcn@latest add @poyraz/button
 
 | Item | Type | Runtime dependencies | Docs |
 | --- | --- | --- | --- |
-| `article-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `auth-card-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `brand-hero-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `dashboard-shell-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `footer-blocks` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `glass-app-shell-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `image-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `mega-menu-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `mobile-navigation-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `mobile-sidebar-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `navigation-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `news-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `pricing-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `pricing-card` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `product-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `smart-dashboard-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `stats-card` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks) |
-| `testimonial-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks) |
+| `article-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks/article-card) |
+| `auth-card-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/auth-card-block) |
+| `brand-hero-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/brand-hero-block) |
+| `dashboard-shell-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/dashboard-shell-block) |
+| `footer-blocks` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/footer-blocks) |
+| `glass-app-shell-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/glass-app-shell-block) |
+| `image-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks/image-card) |
+| `mega-menu-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/mega-menu-block) |
+| `mobile-navigation-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/mobile-navigation-block) |
+| `mobile-sidebar-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/mobile-sidebar-block) |
+| `navigation-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/navigation-block) |
+| `news-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks/news-card) |
+| `pricing-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/pricing-block) |
+| `pricing-card` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/pricing-card) |
+| `product-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks/product-card) |
+| `smart-dashboard-block` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/smart-dashboard-block) |
+| `stats-card` | `registry:block` | lucide-react@^0.574.0 | [Open](https://ui.poyrazavsever.com/docs/blocks/stats-card) |
+| `testimonial-card` | `registry:block` | None | [Open](https://ui.poyrazavsever.com/docs/blocks/testimonial-card) |
 
 ## Source of truth
 

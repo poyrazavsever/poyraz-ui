@@ -34,7 +34,7 @@ const moleculeNames = new Set([
 const organismNames = new Set(["announcement-bar", "data-table", "footer", "navbar", "sidebar"]);
 
 function docsLocation(item) {
-  if (item.type === "registry:block") return { section: "Blocks", href: `/docs/blocks#${item.name}` };
+  if (item.type === "registry:block") return { section: "Blocks", href: `/docs/blocks/${item.name}` };
   if (hidden.has(item.name)) return null;
   if (organismNames.has(item.name)) return { section: "Organisms", href: `/docs/organisms/${item.name}` };
   if (moleculeNames.has(item.name) || aliases[item.name] === "card-templates") {

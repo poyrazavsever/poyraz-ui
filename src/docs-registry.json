@@ -1086,7 +1086,7 @@
       "description": "Poyraz Soft Glass article-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#article-card",
+      "href": "/docs/blocks/article-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -1112,7 +1112,7 @@
       "description": "Poyraz Soft Glass image-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#image-card",
+      "href": "/docs/blocks/image-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -1138,7 +1138,7 @@
       "description": "Poyraz Soft Glass news-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#news-card",
+      "href": "/docs/blocks/news-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -1164,7 +1164,7 @@
       "description": "Poyraz Soft Glass stats-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#stats-card",
+      "href": "/docs/blocks/stats-card",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1191,7 +1191,7 @@
       "description": "Poyraz Soft Glass testimonial-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#testimonial-card",
+      "href": "/docs/blocks/testimonial-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -1217,7 +1217,7 @@
       "description": "Poyraz Soft Glass pricing-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#pricing-card",
+      "href": "/docs/blocks/pricing-card",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1245,7 +1245,7 @@
       "description": "Poyraz Soft Glass product-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#product-card",
+      "href": "/docs/blocks/product-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -1391,7 +1391,7 @@
       "description": "Poyraz Soft Glass Navigation Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#navigation-block",
+      "href": "/docs/blocks/navigation-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1421,7 +1421,7 @@
       "description": "Poyraz Soft Glass Mobile Navigation Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mobile-navigation-block",
+      "href": "/docs/blocks/mobile-navigation-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1452,7 +1452,7 @@
       "description": "Poyraz Soft Glass Mega Menu Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mega-menu-block",
+      "href": "/docs/blocks/mega-menu-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1481,7 +1481,7 @@
       "description": "Poyraz Soft Glass Mobile Sidebar Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mobile-sidebar-block",
+      "href": "/docs/blocks/mobile-sidebar-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1512,7 +1512,7 @@
       "description": "Poyraz Soft Glass Footer Blocks with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#footer-blocks",
+      "href": "/docs/blocks/footer-blocks",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1543,7 +1543,7 @@
       "description": "Poyraz Soft Glass Dashboard Shell Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#dashboard-shell-block",
+      "href": "/docs/blocks/dashboard-shell-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1577,7 +1577,7 @@
       "description": "Poyraz Soft Glass Glass App Shell Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#glass-app-shell-block",
+      "href": "/docs/blocks/glass-app-shell-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1607,7 +1607,7 @@
       "description": "Poyraz Soft Glass Auth Card Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#auth-card-block",
+      "href": "/docs/blocks/auth-card-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1639,7 +1639,7 @@
       "description": "Poyraz Soft Glass Pricing Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#pricing-block",
+      "href": "/docs/blocks/pricing-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1670,7 +1670,7 @@
       "description": "Poyraz Soft Glass Brand Hero Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#brand-hero-block",
+      "href": "/docs/blocks/brand-hero-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -1700,7 +1700,7 @@
       "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#smart-dashboard-block",
+      "href": "/docs/blocks/smart-dashboard-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -2950,7 +2950,7 @@
       "description": "Poyraz Soft Glass article-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#article-card",
+      "href": "/docs/blocks/article-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -2976,7 +2976,7 @@
       "description": "Poyraz Soft Glass Auth Card Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#auth-card-block",
+      "href": "/docs/blocks/auth-card-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3008,7 +3008,7 @@
       "description": "Poyraz Soft Glass Brand Hero Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#brand-hero-block",
+      "href": "/docs/blocks/brand-hero-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3038,7 +3038,7 @@
       "description": "Poyraz Soft Glass Dashboard Shell Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#dashboard-shell-block",
+      "href": "/docs/blocks/dashboard-shell-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3072,7 +3072,7 @@
       "description": "Poyraz Soft Glass Footer Blocks with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#footer-blocks",
+      "href": "/docs/blocks/footer-blocks",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3103,7 +3103,7 @@
       "description": "Poyraz Soft Glass Glass App Shell Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#glass-app-shell-block",
+      "href": "/docs/blocks/glass-app-shell-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3133,7 +3133,7 @@
       "description": "Poyraz Soft Glass image-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#image-card",
+      "href": "/docs/blocks/image-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -3159,7 +3159,7 @@
       "description": "Poyraz Soft Glass Mega Menu Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mega-menu-block",
+      "href": "/docs/blocks/mega-menu-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3188,7 +3188,7 @@
       "description": "Poyraz Soft Glass Mobile Navigation Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mobile-navigation-block",
+      "href": "/docs/blocks/mobile-navigation-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3219,7 +3219,7 @@
       "description": "Poyraz Soft Glass Mobile Sidebar Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#mobile-sidebar-block",
+      "href": "/docs/blocks/mobile-sidebar-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3250,7 +3250,7 @@
       "description": "Poyraz Soft Glass Navigation Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#navigation-block",
+      "href": "/docs/blocks/navigation-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3280,7 +3280,7 @@
       "description": "Poyraz Soft Glass news-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#news-card",
+      "href": "/docs/blocks/news-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -3306,7 +3306,7 @@
       "description": "Poyraz Soft Glass Pricing Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#pricing-block",
+      "href": "/docs/blocks/pricing-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3337,7 +3337,7 @@
       "description": "Poyraz Soft Glass pricing-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#pricing-card",
+      "href": "/docs/blocks/pricing-card",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3365,7 +3365,7 @@
       "description": "Poyraz Soft Glass product-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#product-card",
+      "href": "/docs/blocks/product-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",
@@ -3392,7 +3392,7 @@
       "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#smart-dashboard-block",
+      "href": "/docs/blocks/smart-dashboard-block",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3428,7 +3428,7 @@
       "description": "Poyraz Soft Glass stats-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#stats-card",
+      "href": "/docs/blocks/stats-card",
       "dependencies": [
         "lucide-react@^0.574.0"
       ],
@@ -3455,7 +3455,7 @@
       "description": "Poyraz Soft Glass testimonial-card with semantic states and composable variants.",
       "type": "registry:block",
       "section": "Blocks",
-      "href": "/docs/blocks#testimonial-card",
+      "href": "/docs/blocks/testimonial-card",
       "dependencies": [],
       "registryDependencies": [
         "@poyraz/poyraz-utils",

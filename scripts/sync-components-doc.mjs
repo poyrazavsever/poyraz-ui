@@ -22,7 +22,7 @@ const lines = [
 for (const group of [...catalog.navigation, { section: "Blocks", items: catalog.blocks }]) {
   lines.push(`## ${group.section}`, "", "| Item | Type | Runtime dependencies | Docs |", "| --- | --- | --- | --- |");
   for (const item of group.items) {
-    const docs = item.href.startsWith("/docs/blocks#") ? "/docs/blocks" : item.href;
+    const docs = item.href;
     lines.push(`| \`${item.name}\` | \`${item.type}\` | ${item.dependencies.join(", ") || "None"} | [Open](https://ui.poyrazavsever.com${docs}) |`);
   }
   lines.push("");
