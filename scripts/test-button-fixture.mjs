@@ -28,7 +28,7 @@ await symlink(resolve(root, "node_modules"), resolve(fixture, "node_modules"), "
 await writeFile(
   resolve(fixture, "usage.tsx"),
   `import * as React from "react";
-import { Button, ButtonIcon, ButtonLabel, buttonVariants } from "@/components/ui/button";
+import { Button, ButtonIcon, ButtonLabel, buttonVariants } from "@/components/ui/atoms/button";
 
 const ref = React.createRef<HTMLButtonElement>();
 
