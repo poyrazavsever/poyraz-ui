@@ -141,7 +141,7 @@ interface SidebarContextValue {
 }
 declare const useSidebar: () => SidebarContextValue;
 declare const sidebarVariants: (props?: ({
-    variant?: "default" | "bordered" | "inset" | "dark" | "collapsible" | "floating" | "mini" | null | undefined;
+    variant?: "default" | "bordered" | "inset" | "dark" | "floating" | "collapsible" | "mini" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface SidebarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof sidebarVariants> {
     /** Start in collapsed state (for collapsible variant) */
@@ -279,29 +279,48 @@ interface AnnouncementBarProps extends React.HTMLAttributes<HTMLDivElement>, Var
 }
 declare const AnnouncementBar: React.ForwardRefExoticComponent<AnnouncementBarProps & React.RefAttributes<HTMLDivElement>>;
 
-interface ColumnDef<T> {
-    /** Unique key for the column (matches object key or custom) */
+type SortDirection = "asc" | "desc" | null;
+type DataTableState = "populated" | "empty" | "loading" | "error";
+interface DataTableColumnDef<T> {
     id: string;
-    /** Column header label */
     header: string;
-    /** Accessor function to get cell value */
     accessorFn?: (row: T) => unknown;
-    /** Key of T to access directly */
     accessorKey?: keyof T;
-    /** Custom cell renderer */
     cell?: (row: T) => React.ReactNode;
-    /** Enable sorting (default: true) */
     sortable?: boolean;
-    /** Enable filtering on this column */
     filterable?: boolean;
-    /** Column width class */
     className?: string;
-    /** Hidden by default */
     hidden?: boolean;
 }
+interface DataTableCoreProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+    columns: DataTableColumnDef<T>[];
+    data: T[];
+    getRowId?: (row: T, index: number) => string;
+    state?: DataTableState;
+    emptyContent?: React.ReactNode;
+    errorContent?: React.ReactNode;
+    loadingRows?: number;
+    selectable?: boolean;
+    selectedIds?: ReadonlySet<string>;
+    onToggleRow?: (id: string, row: T) => void;
+    onToggleAll?: () => void;
+    sortColumn?: string | null;
+    sortDirection?: SortDirection;
+    onSort?: (columnId: string) => void;
+    caption?: string;
+    stickyHeader?: boolean;
+    density?: "compact" | "default" | "spacious";
+    surface?: "solid" | "soft" | "glass";
+    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    maxHeight?: string | number;
+}
+declare const DataTableCore: <T>(props: DataTableCoreProps<T> & {
+    ref?: React.Ref<HTMLDivElement>;
+}) => React.ReactElement;
+
 interface DataTableProps<T> {
     /** Column definitions */
-    columns: ColumnDef<T>[];
+    columns: DataTableColumnDef<T>[];
     /** Data rows */
     data: T[];
     /** Unique key extractor for each row */
@@ -326,9 +345,17 @@ interface DataTableProps<T> {
     caption?: string;
     /** Empty state message */
     emptyMessage?: string;
+    loading?: boolean;
+    error?: React.ReactNode;
+    stickyHeader?: boolean;
+    tableMaxHeight?: string | number;
+    density?: "compact" | "default" | "spacious";
+    surface?: "solid" | "soft" | "glass";
+    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    toolbar?: React.ReactNode;
 }
 declare const DataTable: <T>(props: DataTableProps<T> & {
     ref?: React.Ref<HTMLDivElement>;
 }) => React.ReactElement;
 
-export { AnnouncementBar, DataTable, type ColumnDef as DataTableColumnDef, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarBadge, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuItem, SidebarSearch, SidebarSection, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };
+export { AnnouncementBar, DataTable, type DataTableColumnDef, DataTableCore, type DataTableCoreProps, type DataTableState, Footer, FooterApp, FooterAppLink, FooterBadge, FooterBottom, FooterBottomLinks, FooterBrand, FooterCTA, FooterDescription, FooterDivider, FooterGrid, FooterHeading, FooterLink, FooterLinkGroup, FooterNewsletter, FooterSection, FooterSocialLink, FooterSocials, Navbar, NavbarActions, NavbarBrand, NavbarDivider, NavbarDropdown, NavbarDropdownTrigger, NavbarLink, NavbarLinks, NavbarMain, NavbarMegaMenu, NavbarMegaMenuFeatured, NavbarMegaMenuItem, NavbarMegaMenuLinks, NavbarMobileActions, NavbarMobileDrillMenu, NavbarMobileDrillPanel, NavbarMobileDrillTrigger, NavbarMobileDropdown, NavbarMobileGroup, NavbarMobileLink, NavbarMobileMenu, NavbarMobileToggle, NavbarPanelDropdown, NavbarPanelDropdownItem, NavbarPopoverDropdown, NavbarPopoverDropdownItem, NavbarSearch, NavbarTopBar, NavbarTopBarSection, Sidebar, SidebarBadge, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuItem, SidebarSearch, SidebarSection, SidebarSeparator, SidebarSubMenu, SidebarSubMenuItem, SidebarTrigger, SidebarUserProfile, announcementBarVariants, footerVariants, megaMenuVariants, navbarVariants, sidebarVariants, topBarVariants, useNavbar, useSidebar };
