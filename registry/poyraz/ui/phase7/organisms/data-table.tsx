@@ -268,7 +268,7 @@ function DataTableInner<T>(
                         <button
                           key={col.id}
                           type="button"
-                          className="flex items-center gap-2 w-full px-2 py-1.5 text-sm hover:bg-muted cursor-pointer transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5"
+                          className="flex w-full cursor-pointer items-center gap-2 px-2 py-1.5 text-sm transition-colors duration-[var(--poyraz-motion-duration-fast)] hover:bg-muted"
                           onClick={() => toggleColumn(col.id)}
                         >
                           <span
@@ -343,7 +343,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:-translate-x-0.5"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage(0)}
               aria-label="First page"
@@ -353,7 +353,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:-translate-x-0.5"
+              className="h-7 w-7"
               disabled={page === 0}
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               aria-label="Previous page"
@@ -368,7 +368,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:translate-x-0.5"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               aria-label="Next page"
@@ -378,7 +378,7 @@ function DataTableInner<T>(
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] enabled:hover:translate-x-0.5"
+              className="h-7 w-7"
               disabled={page >= totalPages - 1}
               onClick={() => setPage(totalPages - 1)}
               aria-label="Last page"

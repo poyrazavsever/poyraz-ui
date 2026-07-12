@@ -416,7 +416,7 @@ function Autocomplete({
                         "cursor-pointer border border-transparent",
                         isHighlighted && "bg-muted border-border translate-x-0.5",
                         !isHighlighted &&
-                          "hover:bg-muted hover:border-border hover:translate-x-0.5",
+                          "hover:bg-muted hover:border-border",
                         opt.disabled && "pointer-events-none opacity-40",
                       )}
                       onClick={() => {

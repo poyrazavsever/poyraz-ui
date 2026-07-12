@@ -270,11 +270,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={prevMonth}
             aria-label="Previous month"
           >
-            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
+            <ChevronLeft className="h-4 w-4" />
           </Button>
           <button
             type="button"
@@ -290,11 +290,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={nextMonth}
             aria-label="Next month"
           >
-            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
 
@@ -329,11 +329,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={() => setViewYear((y) => y - 1)}
             aria-label="Previous year"
           >
-            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
+            <ChevronLeft className="h-4 w-4" />
           </Button>
           <button
             type="button"
@@ -352,11 +352,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={() => setViewYear((y) => y + 1)}
             aria-label="Next year"
           >
-            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
 
@@ -409,11 +409,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:-translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={() => setDecadeStart((d) => d - 12)}
             aria-label="Previous decade"
           >
-            <ChevronLeft className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:-translate-x-0.5" />
+            <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm font-bold uppercase tracking-wide">
             {decadeStart} – {decadeStart + 11}
@@ -421,11 +421,11 @@ function Calendar(props: CalendarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="group h-7 w-7 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:translate-x-0.5 active:scale-95"
+            className="h-7 w-7 active:scale-95"
             onClick={() => setDecadeStart((d) => d + 12)}
             aria-label="Next decade"
           >
-            <ChevronRight className="h-4 w-4 transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group-hover:translate-x-0.5" />
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
 
