@@ -5,11 +5,13 @@ import { readFile } from "node:fs/promises";
 const failures = [];
 const read = (path) => readFile(path, "utf8");
 const requireText = (label, content, expected) => { if (!content.includes(expected)) failures.push(`${label}: missing ${expected}`); };
+const forbidText = (label, content, forbidden) => { if (content.includes(forbidden)) failures.push(`${label}: contains forbidden ${forbidden}`); };
 
 const alert = await read("components/ui/molecules/alert.tsx");
 for (const variant of ["default:", "info:", "success:", "warning:", "destructive:"]) requireText("alert status", alert, variant);
 for (const appearance of ["soft:", "outline:", "filled:", "glass:", "inline:"]) requireText("alert appearance", alert, appearance);
 for (const token of ["--poyraz-info", "--poyraz-success", "--poyraz-warning", "--poyraz-destructive"]) requireText("semantic feedback token", alert, token);
+for (const treatment of ["border-l-4", "bg-[var(--alert-bg)]", "shadow-xs"]) requireText("inline alert separation", alert, treatment);
 
 const sonner = await read("components/ui/molecules/sonner.tsx");
 for (const state of ["data-[swiping=true]", "data-[swiped=true]", "data-[removed=true]"]) requireText("toast motion state", sonner, state);
@@ -45,6 +47,11 @@ for (const name of blockNames) {
   const content = await read(`components/ui/blocks/card-templates/${name}.tsx`);
   if (/\b(?:yellow|green)-(?:[1-9]00|50|950)\b/.test(content)) failures.push(`${name}: fixed yellow/green palette utility found`);
 }
+const newsCard = await read("components/ui/blocks/card-templates/news-card.tsx");
+for (const layout of ["h-fit", "self-start"]) requireText("news card intrinsic height", newsCard, layout);
+const testimonialCard = await read("components/ui/blocks/card-templates/testimonial-card.tsx");
+for (const layout of ["h-full", "flex-1 flex-col", "mt-auto"]) requireText("testimonial footer alignment", testimonialCard, layout);
+forbidText("interactive card vertical hover", await read("components/ui/atoms/card.tsx"), "hover:-translate-y");
 
 const registry = JSON.parse(await read("public/r/registry.json"));
 const registryItems = new Map(registry.items.map((item) => [item.name, item]));
