@@ -904,16 +904,16 @@ Kapsam:
 
 Ortak görevler:
 
-- [ ] `P6-F01` Floating surface recipe oluştur.
-- [ ] `P6-F02` Solid/soft/glass surface varyant stratejisini belirle.
-- [ ] `P6-F03` Radix transform-origin variable'larını animation origin olarak kullan.
-- [ ] `P6-F04` Side-aware slide mesafesini tokenlaştır.
-- [ ] `P6-F05` Open/closed fade ve scale değerlerini standardize et.
-- [ ] `P6-F06` Collision/viewport padding davranışını test et.
-- [ ] `P6-F07` Portal içindeki theme token inheritance davranışını doğrula.
-- [ ] `P6-F08` Item focus/selected/disabled state'lerini standardize et.
-- [ ] `P6-F09` Nested submenu motion ve z-index davranışını test et.
-- [ ] `P6-F10` Touch ve pointer etkileşim farklarını test et.
+- [x] `P6-F01` Floating surface recipe oluştur.
+- [x] `P6-F02` Solid/soft/glass surface varyant stratejisini belirle.
+- [x] `P6-F03` Radix transform-origin variable'larını animation origin olarak kullan.
+- [x] `P6-F04` Side-aware slide mesafesini tokenlaştır.
+- [x] `P6-F05` Open/closed fade ve scale değerlerini standardize et.
+- [x] `P6-F06` Collision/viewport padding davranışını test et.
+- [x] `P6-F07` Portal içindeki theme token inheritance davranışını doğrula.
+- [x] `P6-F08` Item focus/selected/disabled state'lerini standardize et.
+- [x] `P6-F09` Nested submenu motion ve z-index davranışını test et.
+- [x] `P6-F10` Touch ve pointer etkileşim farklarını test et.
 
 ### 6.2 Overlay family
 
@@ -927,19 +927,19 @@ Kapsam:
 
 Ortak görevler:
 
-- [ ] `P6-O01` Overlay background ve blur recipe oluştur.
-- [ ] `P6-O02` Overlay opacity'sini light/dark için ayrı tokenlaştır.
-- [ ] `P6-O03` Dialog content surface varyantını tanımla.
-- [ ] `P6-O04` Center dialog scale/fade motion'ını standardize et.
-- [ ] `P6-O05` Sheet side-aware slide motion'ını standardize et.
-- [ ] `P6-O06` Vaul Drawer'ın kendi gesture motion'ıyla CSS motion çakışmasını engelle.
-- [ ] `P6-O07` Initial focus ve return focus testlerini ekle.
-- [ ] `P6-O08` Escape ile kapatma testini ekle.
-- [ ] `P6-O09` Outside interaction politikasını component bazında belge.
-- [ ] `P6-O10` Body scroll lock ve scrollbar shift davranışını test et.
-- [ ] `P6-O11` Nested overlay senaryosunu test et.
-- [ ] `P6-O12` Reduced-motion altında enter/exit'i yalnızca kısa fade'e indir.
-- [ ] `P6-O13` Mobile fullscreen ve desktop floating layout farkını tanımla.
+- [x] `P6-O01` Overlay background ve blur recipe oluştur.
+- [x] `P6-O02` Overlay opacity'sini light/dark için ayrı tokenlaştır.
+- [x] `P6-O03` Dialog content surface varyantını tanımla.
+- [x] `P6-O04` Center dialog scale/fade motion'ını standardize et.
+- [x] `P6-O05` Sheet side-aware slide motion'ını standardize et.
+- [x] `P6-O06` Vaul Drawer'ın kendi gesture motion'ıyla CSS motion çakışmasını engelle.
+- [x] `P6-O07` Initial focus ve return focus testlerini ekle.
+- [x] `P6-O08` Escape ile kapatma testini ekle.
+- [x] `P6-O09` Outside interaction politikasını component bazında belge.
+- [x] `P6-O10` Body scroll lock ve scrollbar shift davranışını test et.
+- [x] `P6-O11` Nested overlay senaryosunu test et.
+- [x] `P6-O12` Reduced-motion altında enter/exit'i yalnızca kısa fade'e indir.
+- [x] `P6-O13` Mobile fullscreen ve desktop floating layout farkını tanımla.
 
 ### 6.3 Disclosure/navigation family
 
@@ -952,13 +952,13 @@ Kapsam:
 
 Görevler:
 
-- [ ] `P6-D01` Accordion height animation'ını Radix content height variable'ına bağla.
-- [ ] `P6-D02` Accordion trigger icon rotation standardını uygula.
-- [ ] `P6-D03` Tabs için soft/glass list yüzeyi tasarla.
-- [ ] `P6-D04` Tabs active indicator motion'ını layout shift yaratmadan uygula.
-- [ ] `P6-D05` Breadcrumb separator ve collapsed state semantics'ini doğrula.
-- [ ] `P6-D06` Pagination icon-only item accessible name'lerini doğrula.
-- [ ] `P6-D07` Mobile overflow davranışını tüm family için test et.
+- [x] `P6-D01` Accordion height animation'ını Radix content height variable'ına bağla.
+- [x] `P6-D02` Accordion trigger icon rotation standardını uygula.
+- [x] `P6-D03` Tabs için soft/glass list yüzeyi tasarla.
+- [x] `P6-D04` Tabs active indicator motion'ını layout shift yaratmadan uygula.
+- [x] `P6-D05` Breadcrumb separator ve collapsed state semantics'ini doğrula.
+- [x] `P6-D06` Pagination icon-only item accessible name'lerini doğrula.
+- [x] `P6-D07` Mobile overflow davranışını tüm family için test et.
 
 ### Registry dependency örnekleri
 
@@ -1003,24 +1003,24 @@ form
 
 ### Atomik görevler
 
-- [ ] `P7-001` Status semantic tokenlarını Alert ve Toast'a uygula.
-- [ ] `P7-002` Alert için `default`, `info`, `success`, `warning`, `destructive` varyantlarını normalize et.
-- [ ] `P7-003` Toast enter/exit ve swipe state motion'larını test et.
-- [ ] `P7-004` FormMessage için invalid announcement davranışını doğrula.
-- [ ] `P7-005` Form dependency'lerini opsiyonel registry install olarak tanımla.
-- [ ] `P7-006` Calendar selection/today/range state'lerini semantic tokenlara bağla.
-- [ ] `P7-007` DatePicker controlled/uncontrolled API'sini netleştir.
-- [ ] `P7-008` Autocomplete keyboard navigation ve empty/loading state'lerini test et.
-- [ ] `P7-009` DataTable core ile toolbar/pagination example'larını ayır.
-- [ ] `P7-010` DataTable'ı framework/data library bağımlılığından mümkün olduğunca bağımsız tut.
-- [ ] `P7-011` DataTable mobile overflow ve sticky header davranışını test et.
-- [ ] `P7-012` Mermaid'i public registry item olarak ekle.
-- [ ] `P7-013` Mermaid hard-coded light theme renklerini semantic theme resolver'a taşı.
-- [ ] `P7-014` Mermaid client-only ve dynamic import davranışını doğrula.
-- [ ] `P7-015` Card Templates'i temel `Card` item'ından ayrı block/component item'larına böl.
-- [ ] `P7-016` Card Template'lerde sabit yellow/green palette sınıflarını tokenlaştır.
-- [ ] `P7-017` Her composite item için açık registry dependency graph yaz.
-- [ ] `P7-018` Empty, loading, error ve populated state docs örnekleri oluştur.
+- [x] `P7-001` Status semantic tokenlarını Alert ve Toast'a uygula.
+- [x] `P7-002` Alert için `default`, `info`, `success`, `warning`, `destructive` varyantlarını normalize et.
+- [x] `P7-003` Toast enter/exit ve swipe state motion'larını test et.
+- [x] `P7-004` FormMessage için invalid announcement davranışını doğrula.
+- [x] `P7-005` Form dependency'lerini opsiyonel registry install olarak tanımla.
+- [x] `P7-006` Calendar selection/today/range state'lerini semantic tokenlara bağla.
+- [x] `P7-007` DatePicker controlled/uncontrolled API'sini netleştir.
+- [x] `P7-008` Autocomplete keyboard navigation ve empty/loading state'lerini test et.
+- [x] `P7-009` DataTable core ile toolbar/pagination example'larını ayır.
+- [x] `P7-010` DataTable'ı framework/data library bağımlılığından mümkün olduğunca bağımsız tut.
+- [x] `P7-011` DataTable mobile overflow ve sticky header davranışını test et.
+- [x] `P7-012` Mermaid'i public registry item olarak ekle.
+- [x] `P7-013` Mermaid hard-coded light theme renklerini semantic theme resolver'a taşı.
+- [x] `P7-014` Mermaid client-only ve dynamic import davranışını doğrula.
+- [x] `P7-015` Card Templates'i temel `Card` item'ından ayrı block/component item'larına böl.
+- [x] `P7-016` Card Template'lerde sabit yellow/green palette sınıflarını tokenlaştır.
+- [x] `P7-017` Her composite item için açık registry dependency graph yaz.
+- [x] `P7-018` Empty, loading, error ve populated state docs örnekleri oluştur.
 
 ### Çıkış kriteri
 
