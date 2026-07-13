@@ -5,7 +5,13 @@ import { useTheme } from "next-themes";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  className?: string;
+  buttonClassName?: string;
+  activeClassName?: string;
+};
+
+export function ThemeToggle({ className, buttonClassName, activeClassName }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -19,7 +25,10 @@ export function ThemeToggle() {
 
   return (
     <div
-      className="flex items-center rounded-md border border-border bg-surface p-0.5"
+      className={cn(
+        "flex items-center rounded-md border border-border bg-surface p-0.5",
+        className,
+      )}
       aria-label="Color theme"
     >
       {modes.map(({ value, label, icon: Icon }) => (
@@ -31,7 +40,8 @@ export function ThemeToggle() {
           aria-pressed={mounted && theme === value}
           className={cn(
             "flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground",
-            mounted && theme === value && "bg-accent text-foreground",
+            buttonClassName,
+            mounted && theme === value && cn("bg-accent text-foreground", activeClassName),
           )}
           onClick={() => setTheme(value)}
         >

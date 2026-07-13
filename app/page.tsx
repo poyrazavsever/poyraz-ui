@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Github,
@@ -707,11 +707,22 @@ function AuthShowcase() {
 /* ── Main Page ──────────────────────────────────────────────────── */
 
 export default function Home() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* ─── NAVBAR ──────────────────────────────────────── */}
-      <Navbar variant="default" sticky>
-        <NavbarMain>
+      <Navbar
+        variant={isScrolled ? "glass" : "transparent"}
+        className="fixed left-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300"
+      >
+        <NavbarMain className={isScrolled ? undefined : "border-white/10"}>
           <NavbarBrand href="/">
             <Logo width={32} height={32} />
           </NavbarBrand>
@@ -721,6 +732,11 @@ export default function Home() {
               <NavbarLink
                 key={item.href}
                 href={item.href}
+                className={
+                  isScrolled
+                    ? undefined
+                    : "text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
+                }
                 {...(item.external ? { target: "_blank" } : {})}
               >
                 {item.label}
@@ -733,16 +749,46 @@ export default function Home() {
               placeholder="Search docs..."
               aria-label="Search documentation"
               wrapperClassName="hidden xl:flex"
+              className={
+                isScrolled
+                  ? undefined
+                  : "border-white/20 bg-white/10 text-white placeholder:text-white/60 focus:ring-white/35"
+              }
             />
-            <ThemeToggle />
+            <ThemeToggle
+              className={
+                isScrolled ? undefined : "border-white/20 bg-white/10 text-white backdrop-blur-md"
+              }
+              buttonClassName={
+                isScrolled
+                  ? undefined
+                  : "text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
+              }
+              activeClassName={isScrolled ? undefined : "bg-white/20 text-white"}
+            />
             <Link href={socialLinks.website} target="_blank">
-              <Button size="sm" effect="swap">
+              <Button
+                size="sm"
+                effect="swap"
+                variant={isScrolled ? "default" : "outline"}
+                className={
+                  isScrolled
+                    ? undefined
+                    : "border-white/30 bg-white/10 text-white backdrop-blur-md hover:border-white/60 hover:bg-white/15"
+                }
+              >
                 Return Back
               </Button>
             </Link>
           </NavbarActions>
 
-          <NavbarMobileToggle />
+          <NavbarMobileToggle
+            className={
+              isScrolled
+                ? undefined
+                : "border-white/25 text-white hover:border-white/50 hover:bg-white/10"
+            }
+          />
         </NavbarMain>
 
         <NavbarMobileMenu>
@@ -755,7 +801,7 @@ export default function Home() {
       </Navbar>
 
       {/* ─── HERO ────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-6 py-20 text-white md:py-28">
+      <section className="relative isolate overflow-hidden px-6 pb-20 pt-32 text-white md:pb-28 md:pt-40">
         <svg
           aria-hidden="true"
           className="absolute inset-0 -z-20 h-full w-full dark:hidden"
@@ -821,7 +867,10 @@ export default function Home() {
             </Badge>
           </Link>
 
-          <Typography variant="h1" className="text-white">
+          <Typography
+            variant="h1"
+            className="max-w-4xl text-[clamp(3.75rem,10vw,8.5rem)] leading-[0.9] text-white"
+          >
             <span className="font-secondary text-white">UI Kit</span> for Poyraz
           </Typography>
 
