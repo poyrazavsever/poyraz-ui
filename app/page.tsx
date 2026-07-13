@@ -377,7 +377,7 @@ export default function Home() {
 
             <Typography
               variant="h1"
-              className="max-w-3xl text-[clamp(3.5rem,8vw,7.75rem)] leading-[0.9] text-white"
+              className="max-w-3xl text-[clamp(3.5rem,8vw,2.75rem)] leading-[0.9] text-white"
             >
               <span className="font-secondary text-white">UI Kit</span> for Poyraz
             </Typography>
