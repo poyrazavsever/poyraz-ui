@@ -1794,6 +1794,21 @@ semver uyumlu şekilde ele almak.
 Faz 18 release'i bekletmez. Aşağıdaki maddeler `3.0.0` yayınlandıktan sonra takip edilir;
 tasarım polish'i ve yeni variant fikirleri `3.1.0+` backlog'una taşınır.
 
+### Yayın öncesi Faz 18 kararı
+
+- [x] `P18-GATE-001` Faz 18 kapsamı `3.0.0` deploy/npm publish için blocker değildir.
+- [x] `P18-GATE-002` `package.json`, changelog ve stable release gate'leri Faz 17 release
+      commit'inde tamamlandı.
+- [x] `P18-GATE-003` Yeni component, yeni variant, animasyon ve salt görsel polish işleri
+      `3.1.0+` backlog'una ertelendi.
+- [x] `P18-GATE-004` `3.0.1` kapsamı yalnızca critical install, type, build, accessibility,
+      docs ve production regression fixleriyle sınırlandı.
+- [x] `P18-GATE-005` Yayın öncesi yapılacak kalan işler yalnızca dış operasyonlardır:
+      `v3 → master` merge, Vercel production smoke, protected npm publish, dist-tag/tag/GitHub
+      Release doğrulaması.
+
+### Yayın sonrası takip listesi
+
 - [ ] `P18-001` İlk 72 saat npm install, Vercel docs ve production registry smoke sonuçlarını izle.
 - [ ] `P18-002` Critical install/type/build/accessibility hatalarını `3.0.1` patch kapsamına al.
 - [ ] `P18-003` Npm package ve source registry geri bildirimlerini ayrı etiketlerle sınıflandır.
