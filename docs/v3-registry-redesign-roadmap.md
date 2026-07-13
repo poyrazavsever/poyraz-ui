@@ -1,20 +1,31 @@
-# Poyraz UI v3 — Registry-First Yeniden Tasarım ve Geçiş Yol Haritası
+# Poyraz UI v3 — NPM Package + Source Registry Yeniden Tasarım ve Geçiş Yol Haritası
 
-> Durum: Planlama  
+> Durum: Release hazırlığı
 > Mevcut sürüm: `2.1.0`  
 > Hedef sürüm: `3.0.0`  
 > Hedef tasarım dili: **Poyraz Soft Glass**  
-> Hedef dağıtım modeli: **shadcn uyumlu source registry + kullanıcıya ait component kodu**
+> Hedef dağıtım modeli: **`poyraz-ui@3.0.0` npm runtime package + shadcn uyumlu source registry**
+
+> **Dağıtım kararı güncellemesi — 2026-07-13:** Poyraz UI en başından beri bir npm
+> paketidir ve V3 stable release'in birincil ticari/teknik çıktısı
+> `poyraz-ui@3.0.0` paketinin npm `latest` etiketiyle yayınlanmasıdır. Source
+> registry, npm paketini kaldırmaz; kaynak koda sahip olmak ve shadcn tarzı kurulum
+> isteyen consumer'lar için ikinci ve eşit derecede desteklenen dağıtım kanalıdır.
+> Registry-only kabulüne dayanan `P0-014`, `P0-015`, `P13-001`, `P13-008`, ADR-0001
+> ve ADR-0002 kararları tarihsel kayıt olarak korunur ancak **Faz 14 tarafından
+> supersede edilir**.
 
 ---
 
 ## 1. Belgenin amacı
 
-Bu belge Poyraz UI'ın mevcut paket tabanlı component library yapısından, kaynak kodun consumer projeye kopyalandığı ve proje tarafından sahiplenildiği registry-first bir tasarım sistemine geçişini tanımlar.
+Bu belge Poyraz UI'ın mevcut npm component library yapısını V3 major sürüme
+taşırken, aynı componentlerin kaynak kodunun consumer projeye kopyalanabildiği source
+registry kanalını da destekleyen çift dağıtım modelini tanımlar.
 
 Plan yalnızca görsel bir tema değişimini kapsamaz. Aşağıdaki dört alan birlikte ele alınır:
 
-1. Component dağıtım modelinin değiştirilmesi.
+1. Npm package ve source registry dağıtım kanallarının ortak bir public API ve source üzerinde birleştirilmesi.
 2. Tasarım tokenlarının yeniden modellenmesi.
 3. Component API ve composition standartlarının güçlendirilmesi.
 4. Yeni minimal, soft, hafif rounded ve glass yüzeyli tasarım dilinin uygulanması.
@@ -25,32 +36,37 @@ Bu değişiklikler dağıtım biçimini, varsayılan görünümü ve bazı publi
 
 ## 2. Yönetici özeti ve temel karar
 
-### 2.1 Önerilen ana yön
+### 2.1 Onaylanan ana yön
 
-Poyraz UI v3 için önerilen model:
+Poyraz UI v3 için onaylanan model:
 
 ```text
 Radix Primitives
        ↓
 Davranış + erişilebilirlik + state attribute'ları
        ↓
-Poyraz UI registry kaynakları
-       ↓
-shadcn CLI / Poyraz registry namespace
-       ↓
-Consumer projesindeki components/ui/*.tsx
-       ↓
-Kodun sahibi consumer; görünüm tamamen değiştirilebilir
+Poyraz UI ortak component kaynakları ve tokenları
+       ├── npm build → poyraz-ui@3.x → package import kullanan consumer
+       └── registry build → @poyraz/* → components/ui/*.tsx sahibi consumer
 ```
 
-Sıfırdan özel bir dosya kopyalama motoru yazmak yerine resmi shadcn registry şeması kullanılmalıdır. Poyraz UI'ın kendi CLI'ı, registry kurulumunu kolaylaştıran ince bir başlangıç katmanı olabilir; fakat bağımlılık çözme, registry item doğrulama ve dosya kurma davranışını yeniden icat etmemelidir.
+Npm package mevcut consumer import modelini ve hızlı kurulumu korur. Source registry ise
+componenti fork etmeden kaynak seviyesinde özelleştirmek isteyen kullanıcıya aittir. İki
+kanal farklı implementation taşımamalı; registry payload ve package entry point'leri aynı
+canonical component kaynağından üretilmelidir.
 
-### 2.2 Neden registry-first?
+Sıfırdan özel bir dosya kopyalama motoru yazmak yerine resmi shadcn registry şeması
+kullanılmalıdır. Poyraz UI CLI'ı npm package setup ve registry kurulum yollarını açıkça
+ayırabilir; fakat dependency resolution ve dosya kurma davranışını yeniden icat etmemelidir.
 
+### 2.2 Neden çift dağıtım?
+
+- Mevcut npm consumer'lar V3'e standart semver ve package importlarıyla geçebilir.
+- Npm paketi merkezi bug fix, type ve dependency güncellemelerini kolaylaştırır.
 - Kullanıcı component kaynak kodunu doğrudan kendi `components/ui` dizininde görür.
 - Kullanıcı `className`, CVA recipe, CSS variable, markup ve Radix parçalarını değiştirebilir.
 - Kullanıcı yalnızca ihtiyaç duyduğu componentleri ve bağımlılıkları kurar.
-- Componentler merkezi npm runtime paketine sıkı biçimde bağlı kalmaz.
+- Derin özelleştirme isteyen consumer merkezi npm runtime paketine bağlı kalmak zorunda değildir.
 - Framework'e özel örnekler ayrı registry item'ları olarak dağıtılabilir.
 - Tema, hook, utility, component ve page block aynı dağıtım sistemiyle kurulabilir.
 - Registry dependency graph sayesinde `date-picker` kurulurken `button`, `calendar` ve `popover` otomatik çözülebilir.
@@ -59,7 +75,9 @@ Sıfırdan özel bir dosya kopyalama motoru yazmak yerine resmi shadcn registry 
 
 Poyraz UI v3 şu şekilde tanımlanmalıdır:
 
-> Poyraz UI, Radix tabanlı erişilebilir davranışları; soft, modern ve glass destekli bir görsel sistemle birleştiren, kaynak koduna sahip olduğunuz açık bir React component registry'sidir.
+> Poyraz UI, Radix tabanlı erişilebilir davranışları soft, modern ve glass destekli
+> bir görsel sistemle birleştiren; npm paketi olarak kullanılabilen veya source registry
+> üzerinden kaynak koduyla sahiplenilebilen açık bir React component sistemidir.
 
 ---
 
@@ -79,7 +97,7 @@ Poyraz UI v3 şu şekilde tanımlanmalıdır:
 
 ### 3.2 Geçişte çözülmesi gereken sorunlar
 
-- Component kaynakları consumer projesine kurulmak yerine npm runtime üzerinden tüketiliyor.
+- Yalnızca npm runtime üzerinden tüketim, kaynak seviyesinde özelleştirme isteyen consumer'a ikinci bir kurulum yolu sunmuyor.
 - Tüm JS çıktısına build sonrasında `"use client"` ekleniyor; server/client sınırı gereğinden geniş.
 - `cn` hem `src/utils.ts` hem `typography.tsx` içinde tanımlı.
 - Token değerleri `preset.css`, theme TypeScript dosyası ve docs globals içinde tekrar ediyor.
@@ -107,8 +125,8 @@ Poyraz UI v3 şu şekilde tanımlanmalıdır:
 - Varsayılan keskin/brutalist border karakteri soft yüzey hiyerarşisine dönüşecek.
 - `rounded-sm` ağırlıklı tek radius kullanımı semantic radius ölçeğine dönüşecek.
 - Sürekli `shadow-none` yaklaşımı, düşük yoğunluklu soft shadow ve inner highlight sistemine dönüşecek.
-- Component dağıtımı package import yerine registry install modelini birincil yol yapacak.
-- Atoms/molecules/organisms package entry point'leri v3'ün ana consumer API'si olmayacak.
+- Component dağıtımı npm package import ve registry install modellerini birlikte destekleyecek.
+- Atoms/molecules/organisms package entry point'leri V3 compatibility incelemesinden geçecek; kaldırılan veya taşınan exportlar major migration notunda açıklanacak.
 - Tema entegrasyonu tek bir theme provider'a bağlı olmayacak; CSS variable ve class/data-attribute temelli kalacak.
 
 ---
@@ -520,7 +538,7 @@ Mevcut v2 davranışını ölçülebilir bir baseline olarak sabitlemek ve v3 ka
 ### Çıkış kriteri
 
 - V2 public API ve görsel baseline arşivlenmiş olmalı.
-- Registry-first kararı onaylanmış olmalı.
+- Dağıtım kararı ADR ile kaydedilmiş olmalı; bu tarihsel registry-first karar Faz 14'te çift dağıtım modeliyle supersede edilmiştir.
 - V3 kapsamına girmeyen işler açıkça listelenmiş olmalı.
 - Destek matrisi belirsiz kalmamalı.
 
@@ -594,7 +612,7 @@ CLI'ın üstlenmemesi gereken sorumluluk:
 - Temiz bir projede tek komutla Button kaynak dosyası kurulabilmeli.
 - Dependency ve alias çözümü doğru çalışmalı.
 - Registry schema doğrulaması CI'da geçmeli.
-- Kurulum npm runtime component importuna ihtiyaç duymamalı.
+- Registry kurulum yolu npm runtime component importuna ihtiyaç duymamalı; npm package kurulum yolu ayrıca Faz 16'da doğrulanmalı.
 
 ---
 
@@ -1166,7 +1184,7 @@ Dokümantasyonu package kataloğundan registry ürünü anlatan interaktif bir s
 - [x] `P10-019` Registry kurulum troubleshooting sayfası oluştur.
 - [x] `P10-020` V2 docs'u stable legacy URL altında erişilebilir tut.
 - [x] `P10-021` V2→V3 migration guide yayınla.
-- [x] `P10-022` README'yi registry-first quick start ile güncelle.
+- [x] `P10-022` README'yi source registry quick start ile güncelle.
 - [x] `P10-023` COMPONENTS.md içindeki eski ölçü ve varyant bilgilerini registry metadata ile senkronla.
 - [x] `P10-024` CLI çıktısındaki link ve komutları yeni docs'a yönlendir.
 
@@ -1278,10 +1296,12 @@ Migration tek seferlik “her şeyi değiştir” komutu olmamalıdır. Kullanı
 ### Önerilen compatibility politikası
 
 - `v2.1.x`: yalnızca kritik bug ve güvenlik düzeltmeleri.
-- V3 geliştirme süresince npm `latest`: v2 stable olarak kalır.
-- V3 prerelease npm dağıtımı varsa `next` tag'i kullanılır.
+- V3 release candidate doğrulanana kadar npm `latest`: v2 stable olarak kalır.
+- `poyraz-ui@3.0.0-rc.1` npm `next` etiketiyle gerçek consumer projede doğrulanır.
+- Stable yayınla birlikte `poyraz-ui@3.0.0`, npm `latest` olur.
+- Son V2 sürümü geri dönüş ve migration için `legacy-v2` etiketiyle korunur.
 - Registry item'ları alpha/beta süresince açıkça prerelease olarak işaretlenir.
-- Stable v3 öncesinde V2 importları sessizce farklı görünüme geçirilmez.
+- Stable V3 öncesinde kaldırılan veya değiştirilen V2 export/prop sözleşmeleri migration guide'da listelenir.
 - Eski runtime package için destek süresi release notunda net yazılır.
 
 ---
@@ -1370,13 +1390,13 @@ Release kapısı:
 
 Release görevleri:
 
-- [ ] `R-001` Version ve changelog güncelle.
+- [ ] `R-001` `package.json` versionını `3.0.0` yap ve changelog'u release tarihiyle güncelle.
 - [ ] `R-002` Registry production build üret.
 - [ ] `R-003` Registry schema doğrula.
 - [ ] `R-004` Tüm fixture install/build testlerini çalıştır.
 - [ ] `R-005` Docs production build çalıştır.
 - [ ] `R-006` Release tag oluştur.
-- [ ] `R-007` Npm package rolü devam ediyorsa `latest` tag politikasını uygula.
+- [ ] `R-007` `poyraz-ui@3.0.0` paketini npm'e yayınla, `latest` → V3 ve `legacy-v2` → son V2 olacak şekilde dist-tag politikasını doğrula.
 - [ ] `R-008` Registry namespace production config'i yayınla.
 - [ ] `R-009` Migration guide ve release notes yayınla.
 - [ ] `R-010` Legacy v2 docs linkini görünür tut.
@@ -1407,46 +1427,375 @@ Release görevleri:
 
 `R-001`–`R-012` stable operasyon checklist'idir. Tag oluşturma, production yayın ve post-release smoke maddeleri yalnızca korumalı workflow gerçek stable release commit'i üzerinde çalıştırıldığında işaretlenir; release hazırlığı sırasında tamamlanmış gibi gösterilmez.
 
+> **Faz 13 karar düzeltmesi:** `P13-001` ve `P13-008` ile kurulan registry-only /
+> legacy-only npm politikası tamamlanmış tarihsel çalışma olarak kalır, fakat stable yayın
+> sözleşmesi değildir. Npm V3 publish akışı, dist-tag geçişi ve çift dağıtım doğrulamaları
+> Faz 14–17 içinde bu politikayı değiştirir.
+
+---
+
+## Faz 14 — Dağıtım sözleşmesini düzeltme ve major scope freeze
+
+### Amaç
+
+Registry-only olarak yazılmış release engineering kararlarını, Poyraz UI'ın gerçek ürün
+hedefi olan **npm runtime package + source registry** modeline çevirmek. Bu fazdan sonra
+V3 stable çıkana kadar yeni component, yeni variant veya salt görsel refinement eklenmez.
+Yalnızca package/registry public API, kurulum, erişilebilirlik, build ve release blocker'ları
+değişiklik kabul eder.
+
+### Onaylanan ürün sözleşmesi
+
+- `poyraz-ui@3.0.0`, npm üzerindeki stable runtime component paketidir.
+- Stable yayın sonunda npm `latest` etiketi `3.0.0` sürümünü gösterir.
+- Son V2 sürümü `legacy-v2` etiketiyle kurulabilir kalır.
+- `@poyraz/*` registry namespace'i, aynı componentlerin consumer-owned source dağıtımıdır.
+- Npm package ve registry iki ayrı implementation değildir; aynı canonical source ve token sözleşmesinden üretilir.
+- Npm import yolu kullanan consumer package update alır; registry kullanan consumer kurulan source dosyasının sahibidir.
+- V3 stable sonrasındaki tasarım iyileştirmeleri mevcut import ve prop kullanımını kırmaz.
+
+### Atomik görevler
+
+- [x] `P14-001` Npm package'ın V3'te de birincil desteklenen ürün olduğunu kaydeden yeni ADR yaz.
+- [x] `P14-002` Yeni ADR içinde ADR-0001 ve ADR-0002'nin hangi kararlarını supersede ettiğini tek tek listele.
+- [x] `P14-003` Npm package ile registry'nin ortak canonical source kuralını ADR'a ekle.
+- [x] `P14-004` Package ve registry çıktısının farklılaşması durumunda source of truth sırasını tanımla.
+- [x] `P14-005` `release.config.json` npm rolünü `legacy-v2` yerine V3 stable package olacak şekilde yeniden modelle.
+- [x] `P14-006` Release config schema'sındaki `legacy-v2` sabitlerini V3 publish sözleşmesini doğrulayacak şekilde güncelle.
+- [x] `P14-007` Release preflight içindeki `publishV3Package: false` zorunluluğunu kaldır.
+- [x] `P14-008` Preflight'a package adı, hedef version, channel ve dist-tag eşleşme kontrolleri ekle.
+- [x] `P14-009` `package.json` version değişikliğinin yalnızca release commit'inde yapılacağı kuralını yaz.
+- [x] `P14-010` Npm `latest`, `next` ve `legacy-v2` dist-tag geçiş tablosunu yaz.
+- [x] `P14-011` V2'ye dönüş komutunu ve V3 uninstall/rollback akışını release runbook'a ekle.
+- [x] `P14-012` `docs/v3/release-runbook.md` içindeki “V3 npm'e publish edilmez” hükümlerini kaldır.
+- [x] `P14-013` `docs/v3/releases/v3.0.0.md` release notunu npm V3 + registry modeline göre güncelle.
+- [x] `P14-014` `CHANGELOG.md` dağıtım açıklamasını npm runtime V3 yayınını içerecek şekilde güncelle.
+- [x] `P14-015` Migration guide'daki registry-only yönlendirmeyi iki kurulum yolu sunacak şekilde düzelt.
+- [x] `P14-016` README'de “npm package” ve “source registry” quick startlarını yan yana, kullanım amacıyla birlikte göster.
+- [x] `P14-017` Docs ana Installation sayfasını varsayılan olarak V3 npm package kurulumunu gösterecek şekilde güncelle.
+- [x] `P14-018` Installation sayfasında source registry kurulumunu “Own the source” alternatifi olarak göster.
+- [x] `P14-019` Legacy V2 sayfasını `poyraz-ui@legacy-v2` komutuyla erişilebilir tut.
+- [x] `P14-020` CLI'ın npm setup ve registry add sorumluluklarını ayır; çıktıda iki modeli birbirine karıştırma.
+- [x] `P14-021` Major scope freeze tarihini changelog/release notes içinde kaydet.
+- [x] `P14-022` Yeni component, variant ve animasyon taleplerini Faz 18 backlog'una yönlendiren contribution kuralı ekle.
+- [x] `P14-023` Faz 0–13 içinde registry-only karara bağlı kalmış tüm doküman ve scriptleri `rg` ile envanterle.
+- [x] `P14-024` Envanterdeki her kayıt için “güncellendi”, “tarihsel kayıt” veya “silindi” kararı ver.
+
+### Faz 14 doğrulama kaydı — 2026-07-13
+
+- ADR-0003 npm V3 + source registry kararını, canonical source sırasını, dist-tag politikasını ve scope freeze'i kaydetti; ADR-0001/0002 tarihsel `Superseded` kaydı olarak korundu.
+- `release.config.json` schema v2, release schema, preflight ve artifact manifest çift dağıtım sözleşmesine geçirildi.
+- `pnpm test:phase14` geçti; strict stable preflight'in `package.json@2.1.0` durumunu release commit'e kadar reddettiği doğrulandı.
+- `pnpm test:phase13` geçti; release artifact ve local registry endpoint smoke geriye uyumlu kaldı.
+- `pnpm typecheck` geçti.
+- `pnpm lint` 0 hata ile geçti; 67 mevcut warning Faz 15 kalite sınıflandırma kapsamındadır.
+- `pnpm theme:check` geçti.
+- Next production build geçti ve 83 route üretildi.
+- `docs/v3/audits/phase14-distribution-contract.md` aktif, tarihsel ve korunan registry anlatımlarının karar envanterini içerir.
+- `package.json` versionı ADR gereği release commit'ine kadar `2.1.0` kalır.
+- `npm.publishWorkflowReady` Faz 16 tarball publish/consumer smoke tamamlanana kadar `false` kalır; protected stable publish guard ile kapalıdır.
+
+### Çıkış kriteri
+
+- Repo içinde V3 npm publish'i yasaklayan aktif release assertion kalmamalı.
+- Docs, ADR, config, schema, preflight ve workflow aynı çift dağıtım modelini anlatmalı.
+- Npm package ve registry için hangi source'un canonical olduğu tartışmasız olmalı.
+- V3 stable'a kadar major scope freeze uygulanmalı.
+
+---
+
+## Faz 15 — Release blocker'ları ve eski açık checklist kapanışı
+
+### Amaç
+
+Yeni özellik eklemeden, mevcut branch'in temiz kurulmasını, build edilmesini ve package/registry
+consumer senaryolarında güvenilir çalışmasını sağlamak. Bu faz mevcut incelemede bulunan
+blocker'ları ve Faz 1, Faz 4, Faz 5 ile Definition of Done'da açık kalan doğrulamaları kapatır.
+
+### 15.1 Kurulum, build ve dağıtım blocker'ları
+
+- [ ] `P15-BLOCK-001` Mevcut `pnpm-lock.yaml` büyük farkını dependency kaynağı ve sürüm değişimleri açısından incele.
+- [ ] `P15-BLOCK-002` Gereksiz lockfile churn'ünü temizle veya neden gerekli olduğunu release kaydına yaz.
+- [ ] `P15-BLOCK-003` Committed lockfile ile Node 22 + pnpm 11.5.1 üzerinde `pnpm install --frozen-lockfile` çalıştır.
+- [ ] `P15-BLOCK-004` Root install sırasında minimum-release-age nedeniyle reddedilen dependency kalmadığını doğrula.
+- [ ] `P15-BLOCK-005` İzole Next/Vite fixture kurulumlarında `sharp` build script onay politikasını fixture'a taşı.
+- [ ] `P15-BLOCK-006` Fixture build approval konfigürasyonunun root workspace'e tesadüfen bağlı olmadığını test et.
+- [ ] `P15-BLOCK-007` `pnpm fixture:clean-install` komutunu temiz ortamda tamamen geçir.
+- [ ] `P15-BLOCK-008` Production build sonrasında tracked `dist/**/*.d.ts` ve `dist/**/*.d.cts` farkı oluşmasını engelle.
+- [ ] `P15-BLOCK-009` Dist çıktısı repoda tutulacaksa deterministic build kontrolünü CI'a ekle.
+- [ ] `P15-BLOCK-010` Dist repoda tutulmayacaksa package build/publish aşamasında üretildiğini ve tarball'a girdiğini doğrula.
+- [ ] `P15-BLOCK-011` Registry build sonrasında `public/r`, docs registry ve `COMPONENTS.md` farkı oluşmadığını doğrula.
+- [ ] `P15-BLOCK-012` Temiz worktree üzerinde full `pnpm release:verify` çalıştır.
+
+### 15.2 Public API, accessibility ve composition blocker'ları
+
+- [ ] `P15-API-001` Command Palette `role="option"` elemanlarına doğru `aria-selected` state'ini ekle.
+- [ ] `P15-API-002` Command Palette keyboard selection ve screen reader state testini ekle.
+- [ ] `P15-API-003` `NavbarMobileDrillTrigger` içinde consumer `className` değerini forward et.
+- [ ] `P15-API-004` Navbar drill trigger için class override contract testi ekle.
+- [ ] `P15-API-005` Tüm public componentlerde destructure edilip uygulanmayan `className` prop taraması yap.
+- [ ] `P15-API-006` Tüm public package exportlarını ESM, CJS ve TypeScript üzerinden import eden smoke test ekle.
+- [ ] `P15-API-007` Interactive public componentlerin keyboard/focus kritik akışlarını test matrisiyle eşleştir.
+- [ ] `P15-API-008` Lint uyarılarını accessibility/contract, correctness, performance ve docs olarak sınıflandır.
+- [ ] `P15-API-009` Accessibility/contract ve correctness sınıfındaki lint uyarılarını stable öncesi sıfırla.
+- [ ] `P15-API-010` Ertelenen performance/docs uyarılarını issue/backlog referansıyla kaydet.
+
+### 15.3 Eski açık checklistlerin taşınması
+
+Aşağıdaki görevler tamamlandığında Faz 1, Faz 4 ve Faz 5 altındaki orijinal checkbox da
+aynı commit içinde işaretlenmelidir:
+
+- [ ] `P15-LEGACY-001` `P1-021`: Local registry URL üzerinden temiz Next.js fixture'a Button kur.
+- [ ] `P15-LEGACY-002` `P1-022`: Local registry URL üzerinden temiz Vite fixture'a Button kur.
+- [ ] `P15-LEGACY-003` `P1-023`: Kurulan Button dosyasının `components/ui/button.tsx` hedefine geldiğini doğrula.
+- [ ] `P15-LEGACY-004` `P1-024`: Registry kurulumunun consumer dependency manifestini doğru güncellediğini doğrula.
+- [ ] `P15-LEGACY-005` `P1-025`: Kullanılan shadcn CLI sürümünde dry-run/diff/overwrite davranışlarını manuel doğrula ve desteklenmeyen flag varsa gerçek karşılığını dokümante et.
+- [ ] `P15-LEGACY-006` `P1-027`: GitHub repository item address ile kurulum akışını test et.
+- [ ] `P15-LEGACY-007` `P4-030`: Repository sahibi mevcut Button baseline'ını V3 stable için kabul et veya blocker görsel farkı kaydet.
+- [ ] `P15-LEGACY-008` `P5-INPUT-05`: Input/Textarea autofill surface, text ve placeholder kontrastını Chrome, Safari ve Firefox'ta doğrula.
+- [ ] `P15-LEGACY-009` Tasarım onayı sonrasında kalan salt görsel Button önerilerini Faz 18'e taşı; Faz 15 içinde yeni variant ekleme.
+
+### 15.4 Definition of Done kanıt matrisi
+
+Definition of Done altındaki checkbox'lar global tamamlanma listesi değil, component başına
+uygulanacak şablondur. Stable kanıtı aşağıdaki görevlerle üretilir:
+
+- [ ] `P15-DOD-001` Her public npm exportu ve her registry item'ı satır olan DoD kanıt matrisi üret.
+- [ ] `P15-DOD-002` Registry-only maddeleri npm-only exportlar için gerekçeli `N/A` olarak işaretle.
+- [ ] `P15-DOD-003` Package export, registry metadata, docs ve source isimlerinin drift kontrolünü otomatikleştir.
+- [ ] `P15-DOD-004` Her public export için importability ve type-resolution sonucu kaydet.
+- [ ] `P15-DOD-005` Her interactive component için keyboard, focus-visible ve reduced-motion kanıtı bağla.
+- [ ] `P15-DOD-006` Glass variant bulunan componentleri light/dark ve en az iki background üzerinde doğrula.
+- [ ] `P15-DOD-007` Global coverage yüzdesini tek başına release kanıtı sayma; release-critical component test matrisinde açık satır bırakma.
+- [ ] `P15-DOD-008` Mevcut coverage değerini baseline olarak kaydet ve coverage düşüşünü CI'da engelle.
+- [ ] `P15-DOD-009` Critical public akışlar için eksik unit/DOM/browser testlerini ekle.
+- [ ] `P15-DOD-010` Kanıt matrisini release artifact içine ekle.
+
+### Çıkış kriteri
+
+- Committed HEAD temiz ortamda frozen install, fixture install, typecheck ve production build geçmeli.
+- Known accessibility ve public composition blocker'ı kalmamalı.
+- Faz 1, Faz 4 ve Faz 5'teki sekiz açık uygulama checkbox'ı kapanmalı.
+- DoD maddeleri component/export bazında kanıtlanmalı; genel şablon “tahminen tamamlandı” diye topluca işaretlenmemeli.
+- Salt görsel refinement bu fazın çıkışını geciktirmemeli.
+
+---
+
+## Faz 16 — Npm package hazırlığı ve release candidate
+
+### Amaç
+
+Registry testlerinden bağımsız olarak gerçek npm tarball'ını üretmek, kurulabilirliğini ve
+public API'sini doğrulamak, ardından `next` etiketiyle kısa bir RC smoke yapmak.
+
+### 16.1 Package manifest ve build sözleşmesi
+
+- [ ] `P16-PKG-001` `package.json` ad, description, repository, homepage, license ve keywords alanlarını V3 için gözden geçir.
+- [ ] `P16-PKG-002` Root, atoms, molecules, organisms, themes ve CSS preset exportlarını V3 public API kararıyla eşleştir.
+- [ ] `P16-PKG-003` Her export için ESM, CJS ve declaration dosyasının tarball içinde bulunduğunu doğrula.
+- [ ] `P16-PKG-004` `files` alanında yalnızca consumer için gerekli dist, CSS, CLI, README ve license dosyalarını bırak.
+- [ ] `P16-PKG-005` Peer dependency ve optional peer dependency aralıklarını React 18/19, Radix ve Tailwind destek matrisiyle doğrula.
+- [ ] `P16-PKG-006` Node/package-manager engine politikasını tanımla.
+- [ ] `P16-PKG-007` `sideEffects` politikasının CSS importlarının tree-shaking ile kaybolmasına neden olmadığını test et.
+- [ ] `P16-PKG-008` `prepack` veya `prepublishOnly` zincirini full package build + type + package smoke çalıştıracak şekilde düzenle.
+- [ ] `P16-PKG-009` Local publish komutu yerine CI artifact'ından aynı tarball'ın yayınlanacağı kuralını uygula.
+- [ ] `P16-PKG-010` Package tarball boyutu ve unpacked size budget belirle.
+
+### 16.2 Tarball consumer matrisi
+
+- [ ] `P16-SMOKE-001` `npm pack --dry-run --json` çıktısını release artifact olarak üret.
+- [ ] `P16-SMOKE-002` Gerçek `.tgz` dosyasını oluştur ve checksum kaydet.
+- [ ] `P16-SMOKE-003` Tarball'ı temiz Next.js App Router projesine kur.
+- [ ] `P16-SMOKE-004` Tarball'ı temiz Vite React projesine kur.
+- [ ] `P16-SMOKE-005` Next ve Vite fixture'larda root import kullanımını typecheck/build et.
+- [ ] `P16-SMOKE-006` Next ve Vite fixture'larda atoms/molecules/organisms subpath importlarını typecheck/build et.
+- [ ] `P16-SMOKE-007` Theme ve `preset.css` importlarını production build içinde doğrula.
+- [ ] `P16-SMOKE-008` CLI binary'nin tarball içinden çalıştığını ve V3 komutlarını doğru gösterdiğini doğrula.
+- [ ] `P16-SMOKE-009` Registry ile kurulan Button ve npm'den import edilen Button public prop/variant sözleşmesini karşılaştır.
+- [ ] `P16-SMOKE-010` Package consumer ve registry consumer'ın aynı uygulamada çakışmadan kullanılabildiği migration smoke testi ekle.
+
+### 16.3 Npm publish otomasyonu
+
+- [ ] `P16-NPM-001` Npm organization/package publish yetkisini ve 2FA/trusted publishing gereksinimini doğrula.
+- [ ] `P16-NPM-002` GitHub `v3-production` environment approval ve npm secret/trusted publisher konfigürasyonunu doğrula.
+- [ ] `P16-NPM-003` Release workflow'a artifact'tan npm publish yapan korumalı job ekle.
+- [ ] `P16-NPM-004` Workflow'un version zaten yayınlanmışsa tekrar publish denemeden güvenli şekilde durmasını sağla.
+- [ ] `P16-NPM-005` Stable olmayan versionların yalnızca `next` etiketiyle yayınlanmasını doğrula.
+- [ ] `P16-NPM-006` Stable versionın `latest` etiketine geçmesini açık approval'a bağla.
+- [ ] `P16-NPM-007` Son V2 sürümüne `legacy-v2` etiketi uygulayan job'u koru ve hedef versionı package metadata'dan bağımsız sabitle.
+- [ ] `P16-NPM-008` Publish provenance/attestation üretimini ve npm package sayfasında görünmesini doğrula.
+- [ ] `P16-NPM-009` Publish sonrası `npm view poyraz-ui versions dist-tags` smoke kontrolü ekle.
+- [ ] `P16-NPM-010` Publish sonrası temiz projede registry'den değil npm registry'den kurulum testi ekle.
+
+### 16.4 Kısa RC kapısı
+
+- [ ] `P16-RC-001` Reviewed commit üzerinde `3.0.0-rc.1` tarball ve release notes üret.
+- [ ] `P16-RC-002` `poyraz-ui@3.0.0-rc.1` paketini npm `next` etiketiyle yayınla.
+- [ ] `P16-RC-003` `pnpm add poyraz-ui@next` ile en az bir gerçek Next ve bir gerçek Vite consumer smoke yap.
+- [ ] `P16-RC-004` RC sırasında yalnızca release blocker düzeltmesi kabul et.
+- [ ] `P16-RC-005` RC'de public API değişirse stable öncesi migration/release notunu güncelle.
+- [ ] `P16-RC-006` RC kabulünden sonra stable tarball'ın yalnızca version/release metadata farkı taşıdığını doğrula.
+
+### Çıkış kriteri
+
+- Npm tarball gerçek Next ve Vite consumer'da kurulmalı, typecheck ve production build geçmeli.
+- Package exportları ve registry contractı aynı component API'sini sunmalı.
+- Protected workflow `next`, `latest` ve `legacy-v2` etiketlerini deterministik yönetmeli.
+- RC üzerinde blocker kalmamalı; salt görsel değişiklik stable'a alınmamalı.
+
+---
+
+## Faz 17 — Master merge, Vercel deploy ve `poyraz-ui@3.0.0` stable yayın
+
+### Amaç
+
+Tek bir reviewed commit'i önce `master` production kaynağı yapmak, Vercel docs/registry
+deploy'unu doğrulamak ve aynı commit'ten npm stable package ile immutable GitHub Release
+üretmek.
+
+### Zorunlu yayın sırası
+
+1. Temiz ve reviewed `v3` commit'i üzerinde tüm quality gate'leri geçir.
+2. `v3 → master` pull request'ini merge et.
+3. `master` commit'inin Vercel production deploy'unu bekle.
+4. Production docs ve registry endpointlerini smoke test et.
+5. Aynı `master` SHA için release artifact/tarball üret.
+6. Protected approval sonrasında npm stable publish yap.
+7. Dist-tag, tarball install, GitHub tag/release ve checksum doğrulamalarını tamamla.
+
+### 17.1 PR ve merge kapısı
+
+- [ ] `P17-MERGE-001` Release scope dışı ve kullanıcıya ait unstaged değişiklik kalmadığını doğrula.
+- [ ] `P17-MERGE-002` `v3` branch'ini origin ile senkronla ve exact release SHA'yı kaydet.
+- [ ] `P17-MERGE-003` `v3 → master` PR aç; npm V3 ve registry dağıtım özetini PR açıklamasına ekle.
+- [ ] `P17-MERGE-004` Static quality check'ini exact PR SHA üzerinde geçir.
+- [ ] `P17-MERGE-005` Component tests check'ini exact PR SHA üzerinde geçir.
+- [ ] `P17-MERGE-006` Browser quality check'ini exact PR SHA üzerinde geçir.
+- [ ] `P17-MERGE-007` Clean fixture distribution check'ini exact PR SHA üzerinde geçir.
+- [ ] `P17-MERGE-008` Npm tarball consumer smoke check'ini required check olarak geçir.
+- [ ] `P17-MERGE-009` Critical/high issue ve onaylanmamış API diff olmadığını doğrula.
+- [ ] `P17-MERGE-010` PR'ı `master` branch'ine merge et ve resulting master SHA'yı kaydet.
+
+### 17.2 Vercel production kapısı
+
+- [ ] `P17-DEPLOY-001` Vercel production projesinin deploy branch'inin `master` olduğunu doğrula.
+- [ ] `P17-DEPLOY-002` Master merge deploy'unun success olmasını bekle.
+- [ ] `P17-DEPLOY-003` Production ana sayfa ve Installation sayfasında V3 içeriğini doğrula.
+- [ ] `P17-DEPLOY-004` `/r/registry.json` endpointinde status, content-type ve minimum item sayısını doğrula.
+- [ ] `P17-DEPLOY-005` Theme, utils, Button, Dialog ve Navbar registry payloadlarını production üzerinden doğrula.
+- [ ] `P17-DEPLOY-006` Production namespace ile gerçek temiz projeye bir Button kur.
+- [ ] `P17-DEPLOY-007` Vercel deployment SHA ile master release SHA'nın aynı olduğunu doğrula.
+- [ ] `P17-DEPLOY-008` Production smoke başarısızsa npm publish job'unu başlatma.
+
+### 17.3 Stable npm ve GitHub Release
+
+- [ ] `P17-PUBLISH-001` Master release SHA üzerinde `package.json` versionının tam `3.0.0` olduğunu doğrula.
+- [ ] `P17-PUBLISH-002` Changelog'daki `Unreleased` ifadesini release tarihiyle değiştir.
+- [ ] `P17-PUBLISH-003` Release workflow'u önce publish kapalı artifact-review modunda çalıştır.
+- [ ] `P17-PUBLISH-004` Tarball file list, size, declaration, checksum ve release notes artifactlarını onayla.
+- [ ] `P17-PUBLISH-005` Protected environment approval ile `poyraz-ui@3.0.0` npm publish job'unu çalıştır.
+- [ ] `P17-PUBLISH-006` Npm `latest` etiketinin tam `3.0.0` olduğunu doğrula.
+- [ ] `P17-PUBLISH-007` Npm `legacy-v2` etiketinin son `2.1.x` sürümünü gösterdiğini doğrula.
+- [ ] `P17-PUBLISH-008` Npm `next` etiketini koruma veya kaldırma kararını release notunda uygula.
+- [ ] `P17-PUBLISH-009` Temiz projede `pnpm add poyraz-ui@3.0.0` install/typecheck/build smoke yap.
+- [ ] `P17-PUBLISH-010` `v3.0.0` immutable git tag'ini master release SHA üzerinde oluştur.
+- [ ] `P17-PUBLISH-011` GitHub Release'i npm tarball metadata, registry artifact ve checksumlarla yayınla.
+- [ ] `P17-PUBLISH-012` Npm, GitHub Release, Vercel docs ve registry version bilgilerinin aynı olduğunu doğrula.
+
+### 17.4 Eski stable checklist kapanışı
+
+- [ ] `P17-R-001` Faz 13 `R-001`–`R-005` maddelerini release kanıt linkleriyle işaretle.
+- [ ] `P17-R-002` Faz 13 `R-006`–`R-009` maddelerini tag/npm/Vercel kanıtlarıyla işaretle.
+- [ ] `P17-R-003` Faz 13 `R-010` ve `R-011` maddelerini docs ve temiz install kanıtıyla işaretle.
+- [ ] `P17-R-004` Npm ve production registry post-release smoke geçince `R-012` maddesini işaretle.
+- [ ] `P17-R-005` `release.config.json` stable milestone durumunu `candidate` → `complete` yap.
+- [ ] `P17-R-006` Roadmap release durumunu ve gerçek yayın tarihini güncelle.
+
+### Rollback sınırı
+
+- Npm'e yayınlanan `3.0.0` versionı silinmez veya aynı versionla tekrar yayınlanmaz.
+- Kritik package hatasında `latest` geçici olarak son güvenli sürüme alınır ve `3.0.1` hazırlanır.
+- Vercel hatasında önceki deployment rollback edilir; registry payload ve npm package
+  version eşleşme notu status/release kanalında yayınlanır.
+- Hatalı git tag yeniden kullanılmaz; düzeltme patch version ile yapılır.
+
+### Çıkış kriteri
+
+- `master`, Vercel production, npm `poyraz-ui@3.0.0` ve `v3.0.0` GitHub tag aynı reviewed source commit'ine bağlı olmalı.
+- Npm `latest` V3'ü, `legacy-v2` son V2'yi göstermeli.
+- Production package install ve registry install smoke testleri geçmeli.
+- Faz 13 stable operasyon checklist'i tamamen kapanmalı.
+
+---
+
+## Faz 18 — V3 sonrası stabilizasyon ve API-kırmayan tasarım backlog'u
+
+### Amaç
+
+Major release'i yeni görsel taleplerle geciktirmeden, yayın sonrası geri bildirimleri
+semver uyumlu şekilde ele almak.
+
+### Sürüm politikası
+
+- `3.0.x`: kurulum, declaration, accessibility, regression, docs ve kritik styling fixleri.
+- `3.1.x`: mevcut kullanım biçimini bozmayan yeni opt-in variant, effect ve componentler.
+- Public prop kaldırma, yeniden adlandırma veya default behavior kırılması yeni major olmadan yapılmaz.
+- API aynı kalsa bile layout ölçüsü veya varsayılan görünümü ciddi değiştiren işler visual
+  breaking change olarak değerlendirilir; release notu ve visual diff gerektirir.
+
+### Atomik görevler
+
+- [ ] `P18-001` Stable sonrasında 72 saatlik kurulum ve issue gözlem penceresi tanımla.
+- [ ] `P18-002` Npm install, Vercel registry ve docs smoke testlerini stabilizasyon penceresinde tekrarla.
+- [ ] `P18-003` Package ve registry consumer geri bildirimlerini ayrı etiketlerle sınıflandır.
+- [ ] `P18-004` Critical install/type/accessibility hatalarını `3.0.1` patch kapsamına al.
+- [ ] `P18-005` Button için ertelenen salt görsel polish ve yeni effect fikirlerini `3.1.0` backlog'una taşı.
+- [ ] `P18-006` Card, typography, glass ve motion refinements için public API değişmeyecek kabul kriteri yaz.
+- [ ] `P18-007` Yeni variantların mevcut default variantı değiştirmemesini contract testine bağla.
+- [ ] `P18-008` Motion güncellemelerinde reduced-motion ve layout-shift regression testi zorunlu tut.
+- [ ] `P18-009` Default görsel değişiklikler için before/after visual artifact ve migration notu iste.
+- [ ] `P18-010` Coverage ve lint warning backlog'unu her minor sürümde ölçülebilir şekilde azalt.
+- [ ] `P18-011` Consumer override örneklerinden token/slot eksiklerini çıkar; breaking olmayanları minor'a planla.
+- [ ] `P18-012` `3.1.0` başlamadan önce V3 public API stability raporu yayınla.
+
 ---
 
 ## 9. Riskler ve önlemler
 
-| Risk                                              | Etki        | Önlem                                                                       |
-| ------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
-| Registry ve npm package aynı anda kafa karıştırır | Yüksek      | V3'te primary install yolunu tek ve açık tut; legacy'yi ayrı etiketle       |
-| Glass yüzey düşük kontrast üretir                 | Yüksek      | Solid fallback, contrast testleri, opak içerik yüzeyi                       |
-| Blur düşük cihazlarda performansı düşürür         | Orta/Yüksek | Blur budget, nested blur sınırı, sabit blur ve transform-only animation     |
-| Çok fazla variant API'yi şişirir                  | Orta        | Variant eklemek için gerçek use-case şartı ve API review                    |
-| Registry item dependency cycle oluşur             | Yüksek      | CI graph validation                                                         |
-| Docs ve registry ayrışır                          | Yüksek      | Navigation/API bilgisini registry metadata'dan üret                         |
-| V2 consumer migrationı zorlaşır                   | Yüksek      | Component bazlı migration, mapping tablosu, legacy docs                     |
-| Radix portal theme tokenlarını kaybeder           | Orta        | Portal fixture testleri, theme tokenlarının root scope'ta bulunması         |
-| Custom CLI bakım yükü yaratır                     | Yüksek      | Shadcn registry/CLI'ı temel al; Poyraz CLI'ı ince orchestration katmanı tut |
-| Her dosyaya `use client` eklenir                  | Orta        | Registry kaynaklarında client sınırını dosya bazında belirle                |
-| Tasarım sadece dashboard demosunda iyi görünür    | Yüksek      | Form, table, long content ve plain app shell senaryolarında test et         |
+| Risk                                              | Etki        | Önlem                                                                                |
+| ------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------ |
+| Registry ve npm package aynı anda kafa karıştırır | Yüksek      | İki resmi kurulum yolunu kullanım amacıyla ayır; aynı source/API contractını test et |
+| Glass yüzey düşük kontrast üretir                 | Yüksek      | Solid fallback, contrast testleri, opak içerik yüzeyi                                |
+| Blur düşük cihazlarda performansı düşürür         | Orta/Yüksek | Blur budget, nested blur sınırı, sabit blur ve transform-only animation              |
+| Çok fazla variant API'yi şişirir                  | Orta        | Variant eklemek için gerçek use-case şartı ve API review                             |
+| Registry item dependency cycle oluşur             | Yüksek      | CI graph validation                                                                  |
+| Docs ve registry ayrışır                          | Yüksek      | Navigation/API bilgisini registry metadata'dan üret                                  |
+| V2 consumer migrationı zorlaşır                   | Yüksek      | Component bazlı migration, mapping tablosu, legacy docs                              |
+| Radix portal theme tokenlarını kaybeder           | Orta        | Portal fixture testleri, theme tokenlarının root scope'ta bulunması                  |
+| Custom CLI bakım yükü yaratır                     | Yüksek      | Shadcn registry/CLI'ı temel al; Poyraz CLI'ı ince orchestration katmanı tut          |
+| Her dosyaya `use client` eklenir                  | Orta        | Registry kaynaklarında client sınırını dosya bazında belirle                         |
+| Tasarım sadece dashboard demosunda iyi görünür    | Yüksek      | Form, table, long content ve plain app shell senaryolarında test et                  |
 
 ---
 
-## 10. Önceliklendirilmiş ilk çalışma dilimi
+## 10. Önceliklendirilmiş release kapanış dilimi
 
-Aşağıdaki sıra ilk uygulanabilir milestone'dur:
+Aşağıdaki sıra V3 major release için uygulanacak son çalışma dilimidir:
 
-1. `P0-001`–`P0-008`: mevcut API envanteri.
-2. Registry-first ve legacy package ADR'ları.
-3. Root ve nested `registry.json` dosyaları.
-4. Tek kaynak `cn` utility item'ı.
-5. Yeni theme/token item'ı.
-6. Light/dark/glass token preview sayfası.
-7. Button API ve variant sözleşmesi.
-8. Yeni Button implementation.
-9. Button registry dependency metadata.
-10. Next fixture install ve build.
-11. Vite fixture install ve build.
-12. Button accessibility ve visual tests.
-13. Button docs/playground.
-14. `alpha.1` tasarım ve teknik review.
+1. Faz 14: npm V3 + source registry dağıtım sözleşmesini düzelt.
+2. Faz 15: lockfile, clean fixture, declaration, accessibility ve public API blocker'larını kapat.
+3. Faz 15: eski `P1-*`, `P4-030` ve `P5-INPUT-05` checklistlerini gerçek kanıtla tamamla.
+4. Faz 16: npm tarball'ı temiz Next ve Vite consumerlarda doğrula.
+5. Faz 16: `3.0.0-rc.1` paketini `next` etiketiyle kısa smoke sürecinden geçir.
+6. Faz 17: `v3 → master` PR required checklerini geçir ve merge et.
+7. Faz 17: Vercel production docs/registry deploy'unu doğrula.
+8. Faz 17: `poyraz-ui@3.0.0` paketini npm `latest` olarak yayınla.
+9. Faz 17: GitHub Release/tag, dist-tag ve post-release smoke kanıtlarını tamamla.
+10. Faz 18: API-kırmayan görsel ve yeni variant işlerini release sonrasına taşı.
 
-Bu çalışma dilimi tamamlanmadan diğer 40+ component toplu olarak yeniden stillendirilmemelidir. Button pilotunda çıkacak API, token ve registry hataları foundation seviyesinde çözülmelidir.
+Bu çalışma diliminde yeni component veya salt görsel variant eklenmemelidir. Stable release'i
+yalnızca install, package contract, type, accessibility, API, CI veya production blocker'ı
+durdurabilir.
 
 ---
 
@@ -1454,6 +1803,8 @@ Bu çalışma dilimi tamamlanmadan diğer 40+ component toplu olarak yeniden sti
 
 Bir component yalnızca JSX'i yeniden stillendirildiğinde tamamlanmış sayılmaz. Her v3 component için aşağıdaki maddelerin tamamı gerekir:
 
+- [ ] Npm public API'de yer alıyorsa doğru package exportundan import ediliyor.
+- [ ] Npm tarball consumer testinde typecheck ve build geçiyor.
 - [ ] Registry item kaydı var.
 - [ ] Dependency metadata eksiksiz.
 - [ ] Clean consumer projeye kuruluyor.
@@ -1481,6 +1832,9 @@ Bir component yalnızca JSX'i yeniden stillendirildiğinde tamamlanmış sayılm
 
 V3 başarılı kabul edilmek için:
 
+- `poyraz-ui@3.0.0` npm registry üzerinden temiz Next ve Vite projelerine kurulabilmeli.
+- Root ve desteklenen subpath package importları ESM, CJS ve TypeScript'te çözülebilmeli.
+- Npm `latest` V3'ü, `legacy-v2` son V2'yi göstermeli.
 - Bir kullanıcı yalnızca istediği componenti kendi projesine kurabilmeli.
 - Kurulan componentin görünümünü package patch/fork yapmadan değiştirebilmeli.
 - Brand kırmızı palette light ve dark temada tanınabilir kalmalı.
@@ -1507,17 +1861,19 @@ V3 başarılı kabul edilmek için:
 
 ## 14. Son karar özeti
 
-Poyraz UI v3 için önerilen temel kararlar:
+Poyraz UI v3 için onaylanan temel kararlar:
 
-1. Dağıtım modeli registry-first olacak.
-2. Shadcn registry şeması ve kurulum akışı kullanılacak.
-3. Radix davranış ve accessibility primitive'i olarak korunacak.
-4. Component kodunun sahibi consumer olacak.
-5. Mevcut kırmızı brand palette korunacak.
-6. Yeni görsel dil `Soft + Surface + Glass` katmanları üzerine kurulacak.
-7. Glass yalnızca uygun yüzeylerde kullanılacak; her componentin default'u olmayacak.
-8. Button tüm sistemin pilot componenti olacak.
-9. Büyük organismler registry blocklarına dönüştürülecek.
-10. Docs ve registry metadata tek kaynağa yaklaştırılacak.
-11. V2 doğrudan değiştirilmek yerine v3 major sürümle kontrollü migration sunulacak.
-12. Stable release öncesinde registry install, accessibility, visual regression ve fixture build testleri zorunlu olacak.
+1. `poyraz-ui@3.0.0` npm runtime package olarak yayınlanacak ve npm `latest` V3'e taşınacak.
+2. Source registry, npm paketinin yerine geçmeyen ikinci resmi dağıtım kanalı olacak.
+3. Npm package ve registry aynı canonical component source ve public API sözleşmesini kullanacak.
+4. Shadcn registry şeması ve kurulum akışı kullanılacak.
+5. Radix davranış ve accessibility primitive'i olarak korunacak.
+6. Registry yolunda component kodunun sahibi consumer olacak.
+7. Mevcut kırmızı brand palette korunacak.
+8. Yeni görsel dil `Soft + Surface + Glass` katmanları üzerine kurulacak.
+9. Glass yalnızca uygun yüzeylerde kullanılacak; her componentin default'u olmayacak.
+10. Büyük organismler registry blocklarına dönüştürülecek.
+11. Docs, npm exports ve registry metadata ortak source'a yaklaştırılacak.
+12. V2, `legacy-v2` etiketi ve migration dokümanıyla erişilebilir kalacak.
+13. Stable release öncesinde npm tarball install, registry install, accessibility, visual regression ve fixture build testleri zorunlu olacak.
+14. Major release scope'u dondurulacak; API-kırmayan tasarım refinements Faz 18'e bırakılacak.

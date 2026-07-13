@@ -1,10 +1,19 @@
 # V2 to V3 Migration Guide
 
-V3 is registry-first: component source is installed into the consumer repository and imported locally. Migration is intentionally incremental. V2 package imports may coexist temporarily while each installed component is reviewed.
+V3 supports two official migration targets. Choose one per component/application boundary:
+
+1. **Npm package upgrade:** keep supported `poyraz-ui` imports and move to the V3 runtime package.
+2. **Own the source:** install selected components from `@poyraz/*` and import the local files.
+
+The npm path is the shortest upgrade for applications that want centralized semver updates.
+The registry path is intentionally incremental and is intended for source-level customization.
+Both may coexist during migration because they are generated from the same canonical V3
+component source.
 
 ## Support Timeline
 
-- V2 line: `2.1.x`, available under the planned `legacy-v2` dist-tag after V3 stable.
+- V3 package: `poyraz-ui@3.x`; stable is published under `latest`.
+- V2 line: `2.1.x`, available under `legacy-v2` after V3 stable.
 - Security and release-blocking fixes: through **2027-03-31**.
 - End of maintenance: **2027-06-30**.
 - V2 source remains available after EOL, but no response or patch SLA applies.
@@ -12,11 +21,36 @@ V3 is registry-first: component source is installed into the consumer repository
 ## Before Starting
 
 1. Create a migration branch and record current visual/browser baselines.
-2. Pin the existing V2 package version; do not combine a V2 upgrade with component migration.
+2. Pin the existing V2 package version while preparing; choose npm-upgrade or source-registry scope before changing imports.
 3. Run `pnpm migration:audit <source-directories>` and keep the report.
 4. Back up customized local UI files. Registry installation must never overwrite a consumer-owned customized component without review.
 
-## Step 1: Foundation
+## Route A: Upgrade the npm runtime package
+
+Review the V3 release notes and then update on a migration branch:
+
+```bash
+pnpm add poyraz-ui@3
+```
+
+Keep supported imports:
+
+```tsx
+import { Button, Input, Card } from "poyraz-ui/atoms";
+import { Dialog } from "poyraz-ui/molecules";
+import "poyraz-ui/preset.css";
+```
+
+Run typecheck, production build and visual/interaction regression tests. V3 is a major visual
+and API release: a compiling import does not prove variant, sizing or layout parity. Apply the
+prop/variant and token mappings below where needed.
+
+Use the source route only for components that need local markup, CVA or Radix composition
+ownership. Moving every package import to a registry file is not required.
+
+## Route B: Own component source through the registry
+
+### Step 1: Foundation
 
 ```bash
 pnpm dlx shadcn@latest add @poyraz/poyraz-theme @poyraz/poyraz-utils @poyraz/poyraz-recipes
@@ -24,7 +58,7 @@ pnpm dlx shadcn@latest add @poyraz/poyraz-theme @poyraz/poyraz-utils @poyraz/poy
 
 Import the installed theme CSS once after Tailwind. Keep the V2 preset during coexistence only if an unmigrated V2 component still needs it. Do not import both files indefinitely.
 
-## Step 2: Button, Input and Card
+### Step 2: Button, Input and Card
 
 ```bash
 pnpm dlx shadcn@latest add @poyraz/button @poyraz/input @poyraz/card
@@ -44,7 +78,7 @@ import { Card } from "@/components/ui/atoms/card";
 
 Button prop names remain compatible, but dimensions changed. V2 `default` was approximately 32px; use V3 `sm` for that height. V2 `sm` maps approximately to V3 `xs`. Card legacy variants remain as compatibility variants, while V3 adds semantic surface and radius controls.
 
-## Step 3: Radix-backed Molecules
+### Step 3: Radix-backed Molecules
 
 Install and migrate one interaction family at a time:
 
@@ -54,7 +88,7 @@ pnpm dlx shadcn@latest add @poyraz/dialog @poyraz/select @poyraz/dropdown-menu @
 
 After each family, verify controlled state, keyboard navigation, Escape behavior, focus trap/return focus, portal theme inheritance and reduced motion. Do not treat an import-only compile as migration completion.
 
-## Step 4: Organisms and Blocks
+### Step 4: Organisms and Blocks
 
 ```bash
 pnpm dlx shadcn@latest add @poyraz/navbar @poyraz/sidebar @poyraz/footer
@@ -164,4 +198,7 @@ Safe and implemented: splitting named V2 barrel imports into known local item im
 5. Run typecheck, production build, keyboard tests and visual comparison.
 6. Record why the component rolled back before attempting migration again.
 
-Do not mix rollback with generated formatting changes or unrelated refactors. A component remains complete only when its V2 import, V2 runtime theme dependency and obsolete local token overrides are all removed.
+Do not mix rollback with generated formatting changes or unrelated refactors. For the source
+route, a component migration is complete only when its V2 import, V2 runtime theme dependency
+and obsolete local token overrides are removed. For the npm route, the `poyraz-ui` dependency
+remains and is upgraded to V3; only obsolete V2 adapters and contracts are removed.

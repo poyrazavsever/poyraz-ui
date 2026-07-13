@@ -4,7 +4,7 @@ import { CheckCircle2, Clock3, ExternalLink } from "lucide-react";
 import releaseConfig from "@/release.config.json";
 
 const releaseHighlights = [
-  "Registry-first source distribution",
+  "Npm runtime package + source registry distribution",
   "71 dependency-aware registry items",
   "Next.js and Vite clean-install verification",
   "Light, dark, glass and reduced-motion quality gates",
@@ -16,11 +16,11 @@ export default function ReleasesPage() {
     <article className="space-y-12">
       <header className="max-w-3xl space-y-4">
         <p className="text-xs font-semibold uppercase text-primary">Release</p>
-        <h1 className="text-3xl font-bold text-foreground">Poyraz UI Registry v3.0.0</h1>
+        <h1 className="text-3xl font-bold text-foreground">Poyraz UI v3.0.0</h1>
         <p className="text-base leading-7 text-muted-foreground">
-          V3 is the stable candidate for the source-owned Poyraz registry. The npm package remains
-          the explicit V2 maintenance line; registry consumers install only the components they own
-          and customize locally.
+          V3 is the stable candidate for the Poyraz npm runtime package and source registry. Package
+          consumers receive semver updates; registry consumers install and own only the component
+          source they want to customize.
         </p>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <span className="inline-flex items-center gap-2 border border-warning/40 bg-warning-muted px-3 py-1.5 font-medium text-warning-muted-foreground">
@@ -90,8 +90,8 @@ export default function ReleasesPage() {
           <h2 className="text-xl font-semibold text-foreground">Compatibility</h2>
           <p className="text-sm leading-6 text-muted-foreground">
             V2 blocker support continues through {releaseConfig.support.v2BlockerFixesUntil}; end of
-            maintenance is {releaseConfig.support.v2EndOfMaintenance}. Stable V3 does not move npm
-            latest or silently replace V2 imports.
+            maintenance is {releaseConfig.support.v2EndOfMaintenance}. Stable V3 moves npm latest to
+            3.0.0 while the final V2 release remains available as legacy-v2.
           </p>
           <div className="flex flex-wrap gap-4 text-sm font-medium">
             <Link className="text-primary hover:underline" href="/docs/migration">

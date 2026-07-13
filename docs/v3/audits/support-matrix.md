@@ -4,17 +4,17 @@ Durum: Faz 0 urun karari. Bu matris v3 alpha'dan once fixture CI ile uygulanir; 
 
 ## Runtime ve toolchain
 
-| Katman            | V3 destek karari                      | CI seviyesi | Not                                                              |
-| ----------------- | ------------------------------------- | ----------- | ---------------------------------------------------------------- |
-| React             | `18.3+` ve `19.x`                     | Tier 1      | Her iki major icin registry install/typecheck fixture            |
-| React DOM         | React ile ayni major                  | Tier 1      | Mixed major desteklenmez                                         |
-| TypeScript        | `5.4+`                                | Tier 1      | Registry kaynagi strict mode'da typecheck edilir                 |
-| Tailwind CSS      | `4.x`                                 | Tier 1      | `@theme`, CSS-first config ve source detection temel sozlesmedir |
-| Tailwind CSS 3    | Desteklenmez                          | -           | Ayri legacy style item uretilmez                                 |
-| Node.js           | Aktif LTS: minimum `20.x`             | Tier 1      | Registry build/CLI; docs build CI ayrica `22.x` ile kosulur      |
-| Package managers  | pnpm, npm, yarn, bun                  | Tier 1/2    | pnpm ve npm her PR; yarn/bun release candidate smoke             |
-| ESM               | Zorunlu                               | Tier 1      | Registry kaynaklari standart ESM/TSX                             |
-| CommonJS consumer | Registry kaynak modelinde hedef degil | -           | Legacy v2 runtime package politikasi ayri                        |
+| Katman            | V3 destek karari                      | CI seviyesi | Not                                                               |
+| ----------------- | ------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| React             | `18.3+` ve `19.x`                     | Tier 1      | Her iki major icin registry install/typecheck fixture             |
+| React DOM         | React ile ayni major                  | Tier 1      | Mixed major desteklenmez                                          |
+| TypeScript        | `5.4+`                                | Tier 1      | Registry kaynagi strict mode'da typecheck edilir                  |
+| Tailwind CSS      | `4.x`                                 | Tier 1      | `@theme`, CSS-first config ve source detection temel sozlesmedir  |
+| Tailwind CSS 3    | Desteklenmez                          | -           | Ayri legacy style item uretilmez                                  |
+| Node.js           | Aktif LTS: minimum `20.x`             | Tier 1      | Registry build/CLI; docs build CI ayrica `22.x` ile kosulur       |
+| Package managers  | pnpm, npm, yarn, bun                  | Tier 1/2    | pnpm ve npm her PR; yarn/bun release candidate smoke              |
+| ESM               | Zorunlu                               | Tier 1      | Registry kaynaklari standart ESM/TSX                              |
+| CommonJS consumer | Npm package exportlariyla desteklenir | Tier 1      | CJS entry point ve declaration resolution tarball ile test edilir |
 
 React 18 destegi, kaynakta React 19-only API kullanmama anlamina gelir. React 19 ref iyilestirmeleri kullanilacaksa React 18-compatible `forwardRef` contract'i korunur veya major destek karari ADR ile degistirilir.
 

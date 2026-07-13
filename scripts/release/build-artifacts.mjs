@@ -6,7 +6,12 @@ import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { basename, join, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { assertReleaseRequest, parseArguments, readJson } from "./release-lib.mjs";
+import {
+  assertReleaseRequest,
+  distTagForChannel,
+  parseArguments,
+  readJson,
+} from "./release-lib.mjs";
 
 async function filesBelow(root) {
   const entries = await readdir(root, { withFileTypes: true });
@@ -51,8 +56,16 @@ export async function buildReleaseArtifacts({
     npm: {
       package: packageManifest.name,
       version: packageManifest.version,
+      targetVersion: version,
       role: config.npm.role,
-      publishV3Package: false,
+      distTag: distTagForChannel(config, channel),
+      publishV3Package: config.npm.publishV3Package,
+      publishWorkflowReady: config.npm.publishWorkflowReady,
+      packageVersionReady: packageManifest.version === version,
+      legacy: {
+        version: config.npm.legacyVersion,
+        distTag: config.npm.maintenanceTag,
+      },
     },
   };
   await writeFile(

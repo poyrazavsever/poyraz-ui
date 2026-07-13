@@ -10,6 +10,9 @@ import { Separator } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
 import { Card, CardContent } from "poyraz-ui/atoms";
 
+const registryConfig =
+  '{\n  "registries": {\n    "@poyraz": "https://ui.poyrazavsever.com/r/{name}.json"\n  }\n}';
+
 function CopyBlock({ code, children }: { code: string; children: React.ReactNode }) {
   const [copied, setCopied] = useState(false);
 
@@ -41,35 +44,80 @@ export default function InstallationPage() {
       <div className="space-y-4">
         <Typography variant="h1">Installation</Typography>
         <Typography variant="lead">
-          Get Poyraz UI up and running in your project in minutes.
+          Use the V3 npm package for centralized updates, or install source through the registry
+          when you want to own and edit every component layer.
         </Typography>
       </div>
 
       <Separator />
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <Card className="border-primary/30 bg-primary-muted/30">
+          <CardContent className="space-y-3 p-5">
+            <Typography variant="h3">Npm package</Typography>
+            <Typography variant="muted">
+              Recommended for semver updates, package imports and the fastest application setup.
+            </Typography>
+            <CopyBlock code="pnpm add poyraz-ui@3">pnpm add poyraz-ui@3</CopyBlock>
+          </CardContent>
+        </Card>
+        <Card variant="glass">
+          <CardContent className="space-y-3 p-5">
+            <Typography variant="h3">Own the source</Typography>
+            <Typography variant="muted">
+              Install selected components locally for markup, recipe and Radix composition control.
+            </Typography>
+            <CopyBlock code="pnpm dlx shadcn@latest add @poyraz/button">
+              pnpm dlx shadcn@latest add @poyraz/button
+            </CopyBlock>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* Step 1: Install */}
       <section className="space-y-4">
-        <Typography variant="h2">1. Install the package</Typography>
-        <Typography variant="p">Install Poyraz UI with your preferred package manager:</Typography>
+        <Typography variant="h2">1. Install the V3 npm package</Typography>
+        <Typography variant="p">
+          The package route keeps supported imports under `poyraz-ui` and receives centralized
+          updates through npm:
+        </Typography>
 
         <div className="space-y-3">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               pnpm
             </p>
-            <CopyBlock code="pnpm add poyraz-ui">pnpm add poyraz-ui</CopyBlock>
+            <CopyBlock code="pnpm add poyraz-ui@3">pnpm add poyraz-ui@3</CopyBlock>
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">npm</p>
-            <CopyBlock code="npm install poyraz-ui">npm install poyraz-ui</CopyBlock>
+            <CopyBlock code="npm install poyraz-ui@3">npm install poyraz-ui@3</CopyBlock>
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               yarn
             </p>
-            <CopyBlock code="yarn add poyraz-ui">yarn add poyraz-ui</CopyBlock>
+            <CopyBlock code="yarn add poyraz-ui@3">yarn add poyraz-ui@3</CopyBlock>
           </div>
         </div>
+      </section>
+
+      <section className="space-y-4">
+        <Typography variant="h2">Alternative: Own the source</Typography>
+        <Typography variant="p">
+          Choose this route when a component should live in your repository. Add the production
+          namespace to `components.json`, then install only the source you need.
+        </Typography>
+        <CopyBlock code={registryConfig}>
+          <pre className="whitespace-pre-wrap">{registryConfig}</pre>
+        </CopyBlock>
+        <CopyBlock code="pnpm dlx shadcn@latest add @poyraz/button">
+          pnpm dlx shadcn@latest add @poyraz/button
+        </CopyBlock>
+        <Typography variant="muted">
+          The installed files are consumer-owned. Registry installation is optional and does not
+          replace the supported V3 npm runtime package.
+        </Typography>
       </section>
 
       {/* Step 2: Peer Dependencies */}
@@ -131,7 +179,9 @@ export default function InstallationPage() {
 
         <Typography variant="p">You can set this up automatically with the CLI:</Typography>
 
-        <CopyBlock code="npx poyraz-ui init">npx poyraz-ui init</CopyBlock>
+        <CopyBlock code="npx poyraz-ui@3 init --mode package">
+          npx poyraz-ui@3 init --mode package
+        </CopyBlock>
 
         <Typography variant="muted">Or manually add the import to your CSS file:</Typography>
 
@@ -235,7 +285,7 @@ export default function InstallationPage() {
       <section className="space-y-4">
         <Typography variant="h2">6. Theme Support (Optional)</Typography>
         <Typography variant="p">
-          Poyraz UI v2 uses semantic CSS tokens that can be overridden for full theme customization.
+          Poyraz UI v3 uses semantic CSS tokens that can be overridden for full theme customization.
           For dynamic theme switching, install{" "}
           <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
             reactive-switcher
@@ -276,8 +326,8 @@ export default function InstallationPage() {
         </div>
 
         <Typography variant="muted">
-          The CLI wizard (<code className="text-xs">npx poyraz-ui init</code>) can scaffold this
-          configuration automatically.
+          The CLI wizard (<code className="text-xs">npx poyraz-ui@3 init --mode package</code>) can
+          scaffold this configuration automatically.
         </Typography>
       </section>
 

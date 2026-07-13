@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added `poyraz-ui@3.0.0` as the primary npm runtime package alongside the `@poyraz` source registry.
 - Added the production `@poyraz` source registry with theme, utility, recipe, hook, UI and block items.
 - Added semantic light, dark and glass foundations with reduced-motion and transparency fallbacks.
 - Added responsive component documentation, playgrounds and install metadata generated from registry sources.
@@ -13,8 +14,9 @@
 
 ### Changed
 
-- V3 distribution is registry-first: installed source belongs to the consumer and no V3 runtime component barrel is published.
-- `poyraz-ui@2.1.x` remains the legacy V2 runtime line and can be promoted to `legacy-v2` without moving npm `latest`.
+- V3 uses a dual distribution contract: npm package imports and consumer-owned registry source are both supported from one canonical component implementation.
+- Stable `3.0.0` moves npm `latest` to V3; the final `2.1.x` release remains available through `legacy-v2`.
+- Major scope was frozen on 2026-07-13; new visual variants, animations and cosmetic refinements are deferred until after stable.
 
 ### Migration
 

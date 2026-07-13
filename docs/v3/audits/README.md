@@ -26,8 +26,8 @@ Kaynak ve accessibility scriptleri varsayilan olarak yukaridaki commit'i okur. G
 | P0-009, P0-010 | [Gorsel baseline](./visual-and-build-baseline.md) ve `docs/v3/baselines/*.png` | Tamamlandi                                            |
 | P0-011, P0-012 | [Build baseline](./visual-and-build-baseline.md)                               | Tamamlandi                                            |
 | P0-013         | [Accessibility baseline](./accessibility-baseline.md)                          | Baseline raporu tamamlandi; uygunluk iddiasi degildir |
-| P0-014         | [ADR-0001](../adr/0001-registry-first-distribution.md)                         | Kabul edildi                                          |
-| P0-015         | [ADR-0002](../adr/0002-legacy-runtime-package-policy.md)                       | Kabul edildi                                          |
+| P0-014         | [ADR-0001](../adr/0001-registry-first-distribution.md)                         | Tarihsel; ADR-0003 tarafindan supersede edildi        |
+| P0-015         | [ADR-0002](../adr/0002-legacy-runtime-package-policy.md)                       | Tarihsel; ADR-0003 tarafindan supersede edildi        |
 | P0-016, P0-017 | [Destek matrisi](./support-matrix.md)                                          | Karar verildi                                         |
 | P0-018         | [V3 anti-goals](./anti-goals.md)                                               | Ekip onayina sunuldu                                  |
 

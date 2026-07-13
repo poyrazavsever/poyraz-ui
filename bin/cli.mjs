@@ -5,6 +5,8 @@
  *
  * Usage:
  *   npx poyraz-ui init
+ *   npx poyraz-ui init --mode package
+ *   npx poyraz-ui init --mode registry
  *   npx poyraz-ui init --css ./src/app/globals.css
  */
 
@@ -57,10 +59,25 @@ const cyan = (t) => `\x1b[36m${t}\x1b[0m`;
 function banner() {
   console.log("");
   console.log(bold(red("  ╔═══════════════════════════════╗")));
-  console.log(bold(red("  ║      ") + "POYRAZ UI V3 REGISTRY" + red("      ║")));
+  console.log(bold(red("  ║    ") + "POYRAZ UI V3 DISTRIBUTION" + red("    ║")));
   console.log(bold(red("  ╚═══════════════════════════════╝")));
   console.log(dim("  Minimal • Brutalist • Themeable"));
   console.log("");
+}
+
+const PACKAGE_MODE = "Npm package";
+const REGISTRY_MODE = "Source registry";
+
+function argumentValue(args, name) {
+  const index = args.indexOf(name);
+  return index === -1 ? null : (args[index + 1] ?? null);
+}
+
+function normalizeMode(value) {
+  if (!value) return null;
+  if (value === "package" || value === "npm") return PACKAGE_MODE;
+  if (value === "registry" || value === "source") return REGISTRY_MODE;
+  return null;
 }
 
 /* ── Detect CSS file ──────────────────────────────────────────────── */
@@ -168,6 +185,28 @@ function printLayoutSnippet() {
   console.log("");
 }
 
+function printRegistrySetup() {
+  console.log("");
+  console.log(bold("  Source registry mode"));
+  console.log(dim("  Use this mode when the application should own and edit component source."));
+  console.log("");
+  console.log(bold("  1. Add the namespace to components.json:"));
+  console.log("");
+  console.log(cyan('  "registries": {'));
+  console.log(cyan('    "@poyraz": "https://ui.poyrazavsever.com/r/{name}.json"'));
+  console.log(cyan("  }"));
+  console.log("");
+  console.log(bold("  2. Install only the source you need:"));
+  console.log(cyan("  pnpm dlx shadcn@latest add @poyraz/button"));
+  console.log("");
+  console.log(
+    dim(
+      "  Registry mode does not add poyraz-ui/preset.css or package theme imports automatically.",
+    ),
+  );
+  console.log(dim("  Installed files are consumer-owned; review diffs before overwriting them."));
+}
+
 /* ── Main ─────────────────────────────────────────────────────────── */
 
 async function main() {
@@ -185,6 +224,32 @@ async function main() {
 
 async function init(args) {
   banner();
+
+  const requestedMode = argumentValue(args, "--mode");
+  const normalizedMode = normalizeMode(requestedMode);
+  if (requestedMode && !normalizedMode) {
+    console.log(red(`  ✗ Unknown install mode: ${requestedMode}`));
+    console.log(dim("  Supported modes: package, registry"));
+    rl.close();
+    process.exitCode = 1;
+    return;
+  }
+
+  const mode =
+    normalizedMode ??
+    (await select("  Choose the V3 distribution model", [PACKAGE_MODE, REGISTRY_MODE]));
+
+  if (mode === REGISTRY_MODE) {
+    printRegistrySetup();
+    console.log("");
+    console.log(green(bold("  ✓ Registry instructions ready!")));
+    console.log(dim("  Docs: https://ui.poyrazavsever.com/docs/installation"));
+    console.log("");
+    rl.close();
+    return;
+  }
+
+  console.log(dim("  Mode: npm package (centralized semver updates and package imports)"));
 
   // 1. Detect / ask for CSS file
   const argCss = args.indexOf("--css") !== -1 ? args[args.indexOf("--css") + 1] : null;
@@ -229,7 +294,8 @@ async function init(args) {
   // 4. Done
   console.log(green(bold("  ✓ Setup complete!")));
   console.log("");
-  console.log(dim("  V3 install: pnpm dlx shadcn@latest add @poyraz/button"));
+  console.log(dim("  Package install: pnpm add poyraz-ui@3"));
+  console.log(dim("  Own the source: npx poyraz-ui@3 init --mode registry"));
   console.log(dim("  Docs: https://ui.poyrazavsever.com/docs/installation"));
   console.log(dim("  Help: https://ui.poyrazavsever.com/docs/troubleshooting"));
   console.log("");

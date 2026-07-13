@@ -68,8 +68,9 @@ export default function MigrationPage() {
         <p className="text-xs font-bold uppercase text-primary">Migration</p>
         <h1 className="text-poyraz-heading font-semibold">V2 to V3</h1>
         <p className="max-w-3xl text-muted-foreground">
-          V3 is registry-first. Migrate component by component, keep V2 pinned during coexistence
-          and remove the runtime package only after the final local-source build passes.
+          Upgrade to the V3 npm runtime package for centralized semver updates, or move selected
+          components to the source registry when you need local ownership. Both routes can coexist
+          during an incremental migration.
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <span>
@@ -81,6 +82,23 @@ export default function MigrationPage() {
           </span>
         </div>
       </header>
+
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="space-y-3 border border-border bg-surface p-5">
+          <h2 className="text-poyraz-title font-semibold">Npm package upgrade</h2>
+          <p className="text-sm text-muted-foreground">
+            Keep supported package imports and move the application to the V3 runtime package.
+          </p>
+          <CodeBlock lang="bash" code="pnpm add poyraz-ui@3" />
+        </div>
+        <div className="space-y-3 border border-border bg-surface p-5">
+          <h2 className="text-poyraz-title font-semibold">Own the source</h2>
+          <p className="text-sm text-muted-foreground">
+            Follow the incremental sequence below for components that need source-level control.
+          </p>
+          <CodeBlock lang="bash" code="pnpm dlx shadcn@latest add @poyraz/button" />
+        </div>
+      </section>
 
       <section className="space-y-5">
         <h2 className="text-poyraz-title font-semibold">Incremental sequence</h2>
@@ -96,7 +114,8 @@ export default function MigrationPage() {
       <section className="space-y-4">
         <h2 className="text-poyraz-title font-semibold">Component mapping</h2>
         <p className="text-sm text-muted-foreground">
-          Install the registry item first, then replace the package import with the local target.
+          This mapping is only required for the source-ownership route. Install the registry item
+          first, then replace that component&apos;s package import with the local target.
         </p>
         <MappingTable
           headers={["Layer", "V2 symbols", "V3 item", "Local import"]}
@@ -144,7 +163,9 @@ export default function MigrationPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-poyraz-title font-semibold">Remove runtime theme objects</h2>
+        <h2 className="text-poyraz-title font-semibold">
+          Source route: remove V2 runtime theme objects
+        </h2>
         <p className="text-sm text-muted-foreground">
           The registry theme owns variables. A provider-independent application only needs to set
           the selector consumed by the preset.

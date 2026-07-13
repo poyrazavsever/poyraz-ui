@@ -1,7 +1,7 @@
 {
   "$schema": "./docs/v3/release-config.schema.json",
-  "schemaVersion": 1,
-  "product": "poyraz-ui-registry",
+  "schemaVersion": 2,
+  "product": "poyraz-ui",
   "targetVersion": "3.0.0",
   "releaseTagPrefix": "v",
   "repository": "poyrazavsever/poyraz-ui",
@@ -16,18 +16,22 @@
   },
   "npm": {
     "package": "poyraz-ui",
-    "role": "legacy-v2",
-    "expectedMajor": 2,
+    "role": "primary-v3-runtime",
+    "expectedMajor": 3,
+    "legacyVersion": "2.1.0",
     "maintenanceTag": "legacy-v2",
+    "prereleaseTag": "next",
     "stableTag": "latest",
-    "publishV3Package": false
+    "publishV3Package": true,
+    "publishWorkflowReady": false,
+    "versionPolicy": "release-commit"
   },
   "milestones": [
     { "version": "3.0.0-alpha.1", "channel": "alpha", "status": "complete" },
     { "version": "3.0.0-alpha.2", "channel": "alpha", "status": "complete" },
     { "version": "3.0.0-beta.1", "channel": "beta", "status": "complete" },
     { "version": "3.0.0-beta.2", "channel": "beta", "status": "complete" },
-    { "version": "3.0.0-rc.1", "channel": "rc", "status": "complete" },
+    { "version": "3.0.0-rc.1", "channel": "rc", "status": "planned" },
     { "version": "3.0.0", "channel": "stable", "status": "candidate" }
   ],
   "support": {

@@ -16,7 +16,7 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 [Documentation](https://ui.poyrazavsever.com) · [npm](https://www.npmjs.com/package/poyraz-ui) · [GitHub](https://github.com/poyrazavsever/poyraz-ui)
 
-> V3 is a registry-first stable candidate. Release gates and artifacts are defined in
+> V3 is an npm package + source registry stable candidate. Release gates and artifacts are defined in
 > [`release.config.json`](release.config.json), with operational steps in the
 > [release runbook](docs/v3/release-runbook.md).
 
@@ -24,9 +24,30 @@ Clean borders · No shadows · Subtle rounding · Dual font system · Atomic Des
 
 ---
 
-## V3 Registry Quick Start
+## V3 Quick Start
 
-Poyraz UI V3 installs components as source through the shadcn registry. Add the namespace to `components.json`:
+Choose the distribution model that matches the project:
+
+| Npm package                                | Source registry                              |
+| ------------------------------------------ | -------------------------------------------- |
+| Central semver updates and package imports | Consumer-owned source and deep customization |
+| `pnpm add poyraz-ui@3`                     | `pnpm dlx shadcn@latest add @poyraz/button`  |
+| Import from `poyraz-ui/*`                  | Import the installed local file              |
+
+### Npm package
+
+```sh
+pnpm add poyraz-ui@3
+```
+
+```tsx
+import { Button } from "poyraz-ui/atoms";
+import "poyraz-ui/preset.css";
+```
+
+### Own the source
+
+Add the namespace to `components.json`:
 
 ```json
 {
@@ -36,15 +57,19 @@ Poyraz UI V3 installs components as source through the shadcn registry. Add the 
 }
 ```
 
-Install a component and its theme/dependency graph:
-
 ```bash
 pnpm dlx shadcn@latest add @poyraz/button
 ```
 
-The component is copied into your configured `aliases.ui` directory. Theme variables, motion utilities and registry dependencies are resolved automatically. See the [installation guide](https://ui.poyrazavsever.com/docs/installation) or [troubleshooting](https://ui.poyrazavsever.com/docs/troubleshooting).
+The component is copied into the configured `aliases.ui` directory. Theme variables, motion
+utilities and registry dependencies are resolved automatically. Both channels use the same V3
+component contract. See the [installation guide](https://ui.poyrazavsever.com/docs/installation)
+or [troubleshooting](https://ui.poyrazavsever.com/docs/troubleshooting).
 
-The npm package remains available for V2 projects. Planned blocker-fix support ends **2027-03-31** and end-of-maintenance is **2027-06-30**. Use the [V2 legacy docs](https://ui.poyrazavsever.com/docs/legacy/v2) and the [incremental migration guide](https://ui.poyrazavsever.com/docs/migration).
+The previous V2 package remains available as `poyraz-ui@legacy-v2`. Planned blocker-fix support
+ends **2027-03-31** and end-of-maintenance is **2027-06-30**. Use the
+[V2 legacy docs](https://ui.poyrazavsever.com/docs/legacy/v2) and
+[migration guide](https://ui.poyrazavsever.com/docs/migration).
 
 ---
 
@@ -67,12 +92,12 @@ The npm package remains available for V2 projects. Planned blocker-fix support e
 
 ---
 
-## V2 Package Installation
+## V3 Package Installation
 
 ```bash
-pnpm add poyraz-ui        # recommended
-npm install poyraz-ui     # or npm
-yarn add poyraz-ui        # or yarn
+pnpm add poyraz-ui@3        # recommended
+npm install poyraz-ui@3     # or npm
+yarn add poyraz-ui@3        # or yarn
 ```
 
 ### Peer Dependencies

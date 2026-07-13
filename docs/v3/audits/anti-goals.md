@@ -1,11 +1,12 @@
 # Poyraz UI v3 Anti-Goals
 
-Durum: Ekip onayina sunuldu. Bu liste scope-control belgesidir; yeni bir is asagidaki sinirlardan birini degistiriyorsa roadmap maddesi olarak eklenmeden once ayri karar gerekir.
+Durum: Faz 0 tarihsel scope-control kaydi. Dagitimla ilgili 2 numarali karar ADR-0003
+tarafindan supersede edilmistir; tasarim, API, motion ve kalite sinirlari gecerlidir.
 
 ## Urun ve dagitim anti-goallari
 
 1. Sifirdan shadcn ile rekabet eden genel amacli bir dosya kopyalama/package-manager motoru yazmak.
-2. Runtime npm component package'ini v3'un birincil tuketim modeli olarak surdurmek.
+2. ~~Runtime npm component package'ini v3'un birincil tuketim modeli olarak surdurmek.~~ Superseded: npm package ve source registry V3'te iki resmi kanaldir.
 3. Consumer'in kurduktan sonra degistirdigi source dosyalarina otomatik, conflictsiz update/merge garantisi vermek.
 4. Tum componentleri tek komutla zorunlu kuran monolitik dependency graph olusturmak.
 5. Registry item'larini Poyraz'a ait gizli runtime global state veya kapali API'ye baglamak.
@@ -66,7 +67,7 @@ Durum: Ekip onayina sunuldu. Bu liste scope-control belgesidir; yeni bir is asag
 
 Bir teklif icin su sorular sorulur:
 
-1. Registry-first ve source-ownership modelini guclendiriyor mu?
+1. Ortak canonical source'tan npm package ve source registry sozlesmesini guclendiriyor mu?
 2. Semantic token veya composable API ile cozulmesi gerekirken yeni prop/engine mi ekliyor?
 3. Accessibility, fallback ve performance maliyeti olculdu mu?
 4. Pilot Button + theme + clean fixture kapsamini gereksiz buyutuyor mu?

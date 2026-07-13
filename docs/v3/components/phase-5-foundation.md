@@ -1,6 +1,6 @@
 # Phase 5 — Foundation component contract
 
-Phase 5 replaces the v2 brutalist surface language with semantic, soft and optionally glass recipes. Runtime package exports remain available during migration; registry source is the v3 distribution contract.
+Phase 5 replaces the v2 brutalist surface language with semantic, soft and optionally glass recipes. V3 runtime package exports and source registry items are generated from the same canonical component implementation.
 
 ## V2 API inventory and migration
 

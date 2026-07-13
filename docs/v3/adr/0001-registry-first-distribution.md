@@ -1,9 +1,13 @@
 # ADR-0001: Registry-First Source Distribution
 
-- Durum: Kabul edildi
+- Durum: Superseded by ADR-0003
 - Tarih: 2026-07-11
 - Karar sahipleri: Poyraz UI maintainers
 - Ilgili roadmap: P0-014, Faz 1 ve Faz 12
+
+> 2026-07-13: Registry'nin tek birincil dağıtım olması kararı ADR-0003 tarafından
+> supersede edildi. Shadcn registry protokolü, source ownership ve registry güvenlik
+> guardrail'leri geçerliliğini korur.
 
 ## Baglam
 

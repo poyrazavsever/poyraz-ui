@@ -10,16 +10,15 @@ export default function LegacyV2Page() {
         <h1 className="text-poyraz-heading font-semibold">Poyraz UI V2</h1>
         <p className="max-w-3xl text-muted-foreground">
           V2 package imports remain documented at this stable URL for existing applications. New
-          applications should use the V3 registry.
+          applications should use the V3 npm package or source registry.
         </p>
         <p className="max-w-3xl text-sm text-muted-foreground">
           Planned blocker-fix support ends 2027-03-31. V2 reaches end of maintenance on 2027-06-30
-          and remains available under the planned <code>legacy-v2</code> dist-tag.
+          and remains available under the <code>legacy-v2</code> dist-tag.
         </p>
       </header>
       <section className="space-y-3">
         <h2 className="text-poyraz-title font-semibold">Package setup</h2>
-        <CodeBlock lang="bash" code="pnpm add poyraz-ui reactive-switcher" />
         <CodeBlock lang="bash" code="pnpm add poyraz-ui@legacy-v2" />
         <CodeBlock
           lang="css"

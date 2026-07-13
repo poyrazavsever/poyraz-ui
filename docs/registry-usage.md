@@ -1,7 +1,12 @@
 # Poyraz UI Registry Kullanımı
 
-Poyraz UI v3 componentleri npm runtime importu yerine kaynak kod olarak consumer
-projeye kurulur. Registry, resmî shadcn schema ve CLI akışını kullanır.
+Poyraz UI v3 iki resmi dağıtım yolu sunar. Bu belge, npm runtime package yerine
+component kaynağını consumer projede sahiplenmek isteyen kullanıcılar için source
+registry yolunu anlatır. Registry, resmî shadcn schema ve CLI akışını kullanır.
+
+Merkezi semver update ve package import isteyen kullanıcılar `pnpm add poyraz-ui@3`
+ile npm dağıtımını kullanmalıdır. Npm package ve registry aynı V3 component sözleşmesinden
+üretilir.
 
 ## Namespace yapılandırması
 

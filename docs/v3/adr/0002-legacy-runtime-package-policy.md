@@ -1,9 +1,13 @@
 # ADR-0002: V3 Sonrasi Legacy Runtime Package Politikasi
 
-- Durum: Kabul edildi
+- Durum: Superseded by ADR-0003
 - Tarih: 2026-07-11
 - Karar sahipleri: Poyraz UI maintainers
 - Ilgili roadmap: P0-015 ve Faz 12-13
+
+> 2026-07-13: V3 runtime package'ın yalnız legacy olması kararı ADR-0003 tarafından
+> supersede edildi. V2 maintenance takvimi ve `legacy-v2` fallback etiketi korunur;
+> `poyraz-ui@3.x` yeniden birincil runtime component package'dır.
 
 ## Baglam
 

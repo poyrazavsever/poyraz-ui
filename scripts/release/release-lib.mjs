@@ -27,6 +27,10 @@ export function channelForVersion(version) {
   return match?.[1] ?? null;
 }
 
+export function distTagForChannel(config, channel) {
+  return channel === "stable" ? config.npm.stableTag : config.npm.prereleaseTag;
+}
+
 export function assertReleaseRequest(config, { version, channel }) {
   const detectedChannel = channelForVersion(version);
   if (!detectedChannel) throw new Error(`Unsupported release version: ${version}`);
@@ -39,9 +43,26 @@ export function assertReleaseRequest(config, { version, channel }) {
     throw new Error(`Release ${version} (${channel}) is not declared in release.config.json.`);
   }
 
-  if (config.npm.publishV3Package !== false || config.npm.role !== "legacy-v2") {
+  const targetMajor = Number(config.targetVersion.split(".")[0]);
+  if (
+    config.npm.publishV3Package !== true ||
+    config.npm.role !== "primary-v3-runtime" ||
+    config.npm.expectedMajor !== targetMajor
+  ) {
+    throw new Error("V3 must publish the poyraz-ui runtime package and source registry together.");
+  }
+
+  if (
+    config.npm.stableTag !== "latest" ||
+    config.npm.prereleaseTag !== "next" ||
+    config.npm.maintenanceTag !== "legacy-v2"
+  ) {
+    throw new Error("The npm latest, next and legacy-v2 dist-tag contract is invalid.");
+  }
+
+  if (channel === "stable" && version !== config.targetVersion) {
     throw new Error(
-      "V3 must remain registry-first and the npm runtime package must remain legacy-v2.",
+      `Stable release must match targetVersion ${config.targetVersion}; found ${version}.`,
     );
   }
 
@@ -65,6 +86,7 @@ export async function runReleasePreflight({
   channel,
   allowDirty = false,
   checkGit = true,
+  enforcePackageVersion = true,
 } = {}) {
   const config = await readJson("release.config.json");
   const packageManifest = await readJson("package.json");
@@ -73,10 +95,23 @@ export async function runReleasePreflight({
   const milestone = assertReleaseRequest(config, { version, channel });
   const errors = [];
 
-  const packageMajor = Number(packageManifest.version.split(".")[0]);
-  if (packageManifest.name !== config.npm.package || packageMajor !== config.npm.expectedMajor) {
+  if (packageManifest.name !== config.npm.package) {
     errors.push(
-      `Legacy package must remain ${config.npm.package}@${config.npm.expectedMajor}.x; found ${packageManifest.name}@${packageManifest.version}.`,
+      `Release package must be named ${config.npm.package}; found ${packageManifest.name}.`,
+    );
+  }
+  if (enforcePackageVersion && packageManifest.version !== version) {
+    errors.push(
+      `Release commit must set ${config.npm.package} to ${version}; found ${packageManifest.version}.`,
+    );
+  }
+  if (
+    !enforcePackageVersion &&
+    packageManifest.version !== version &&
+    packageManifest.version !== config.npm.legacyVersion
+  ) {
+    errors.push(
+      `Pre-release diagnostics allow only target ${version} or declared legacy ${config.npm.legacyVersion}; found ${packageManifest.version}.`,
     );
   }
 
@@ -137,6 +172,8 @@ export async function runReleasePreflight({
     milestoneStatus: milestone.status,
     registryItems: generatedRegistry.items.length,
     packageVersion: packageManifest.version,
+    packageVersionReady: packageManifest.version === version,
+    npmDistTag: distTagForChannel(config, channel),
     releaseNotesPath,
   };
 }

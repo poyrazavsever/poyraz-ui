@@ -142,6 +142,7 @@
     "test:phase10:browser": "node scripts/test-phase10-browser-interactions.mjs",
     "test:phase12": "node scripts/test-phase12-migration.mjs && pnpm migration:fixture && pnpm migration:check-final",
     "test:phase13": "node scripts/test-phase13-release.mjs",
+    "test:phase14": "node scripts/test-phase14-distribution.mjs",
     "test:unit": "vitest run --project unit",
     "test:dom": "vitest run --project dom",
     "test:a11y": "vitest run --project accessibility",
@@ -154,7 +155,7 @@
     "test:performance": "playwright test tests/browser/performance.spec.ts --project=desktop-light",
     "test": "pnpm test:unit && pnpm test:dom && pnpm test:a11y",
     "quality:static": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm registry:check && pnpm budget:check",
-    "quality": "pnpm quality:static && pnpm test && pnpm registry:smoke && pnpm fixture:typecheck && pnpm test:phase12 && pnpm test:phase13",
+    "quality": "pnpm quality:static && pnpm test && pnpm registry:smoke && pnpm fixture:typecheck && pnpm test:phase12 && pnpm test:phase13 && pnpm test:phase14",
     "start": "next start",
     "prepublishOnly": "pnpm build:lib"
   },

@@ -5,8 +5,8 @@
   "type": "object",
   "required": ["schemaVersion", "product", "targetVersion", "registry", "npm", "milestones"],
   "properties": {
-    "schemaVersion": { "const": 1 },
-    "product": { "const": "poyraz-ui-registry" },
+    "schemaVersion": { "const": 2 },
+    "product": { "const": "poyraz-ui" },
     "targetVersion": { "type": "string", "pattern": "^3\\.\\d+\\.\\d+(-[a-z]+\\.\\d+)?$" },
     "releaseTagPrefix": { "type": "string" },
     "repository": { "type": "string" },
@@ -26,14 +26,29 @@
     },
     "npm": {
       "type": "object",
-      "required": ["package", "role", "expectedMajor", "maintenanceTag", "publishV3Package"],
+      "required": [
+        "package",
+        "role",
+        "expectedMajor",
+        "legacyVersion",
+        "maintenanceTag",
+        "prereleaseTag",
+        "stableTag",
+        "publishV3Package",
+        "publishWorkflowReady",
+        "versionPolicy"
+      ],
       "properties": {
         "package": { "const": "poyraz-ui" },
-        "role": { "const": "legacy-v2" },
-        "expectedMajor": { "const": 2 },
+        "role": { "const": "primary-v3-runtime" },
+        "expectedMajor": { "const": 3 },
+        "legacyVersion": { "type": "string", "pattern": "^2\\.\\d+\\.\\d+$" },
         "maintenanceTag": { "const": "legacy-v2" },
+        "prereleaseTag": { "const": "next" },
         "stableTag": { "const": "latest" },
-        "publishV3Package": { "const": false }
+        "publishV3Package": { "const": true },
+        "publishWorkflowReady": { "type": "boolean" },
+        "versionPolicy": { "const": "release-commit" }
       },
       "additionalProperties": false
     },
