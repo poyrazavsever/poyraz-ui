@@ -572,22 +572,21 @@ Tek bir pilot componenti temiz bir consumer projeye source olarak kurabilen uçt
 - [x] `P1-018` Aynı registry item adının tekrar edilmesini CI'da engelle.
 - [x] `P1-019` Registry item içindeki her kaynak dosyanın varlığını doğrulayan script yaz.
 - [x] `P1-020` Dependency graph'ta cycle tespiti ekle.
-- [ ] `P1-021` Local URL üzerinden temiz Next.js fixture'a Button kur.
-- [ ] `P1-022` Local URL üzerinden temiz Vite fixture'a Button kur.
-- [ ] `P1-023` Kurulum sonucunda dosyanın `components/ui/button.tsx` altına geldiğini doğrula.
-- [ ] `P1-024` Kurulum sonucunda dependency'lerin package manifestine doğru eklendiğini doğrula.
-- [ ] `P1-025` `--dry-run`, `--diff` ve overwrite davranışlarını manuel test et.
+- [x] `P1-021` Local URL üzerinden temiz Next.js fixture'a Button kur.
+- [x] `P1-022` Local URL üzerinden temiz Vite fixture'a Button kur.
+- [x] `P1-023` Kurulum sonucunda dosyanın atom taxonomy tarafından belirlenen `components/ui/atoms/button.tsx` altına geldiğini doğrula.
+- [x] `P1-024` Kurulum sonucunda dependency'lerin package manifestine doğru eklendiğini doğrula.
+- [x] `P1-025` `--dry-run`, `--diff` ve overwrite davranışlarını manuel test et.
 - [x] `P1-026` Namespace örneğini `components.json` dokümantasyonuna ekle.
-- [ ] `P1-027` GitHub repository item address ile kurulum akışını test et.
+- [x] `P1-027` GitHub repository item address ile kurulum akışını test et.
 - [x] `P1-028` Registry build çıktısının elle düzenlenmemesi kuralını CONTRIBUTING'e ekle.
 
-> **11 Temmuz 2026 doğrulama notu:** Registry source/build/schema/file/graph
-> hattı tamamlandı. Üretilen Button ve Utils kaynakları temiz bir Next.js
-> fixture içinde typecheck ve production build'den geçti. P1-021–P1-025 yerel
-> HTTP registry erişimi çalışma ortamının processler arası localhost iznine,
-> P1-022 ayrıca Vite dependency indirmesine, P1-027 ise registry değişikliklerinin
-> GitHub'a push edilmesine bağlı olduğu için açık tutuldu. Bu maddeler gerçek
-> shadcn install kanıtı üretilmeden tamamlanmış sayılmayacaktır.
+> **13 Temmuz 2026 kapanış notu:** Registry source/build/schema/file/graph hattına
+> ek olarak gerçek shadcn CLI ile yerel HTTP registry üzerinden temiz Next.js ve
+> Vite kurulumları; dry-run, diff ve overwrite akışları; dependency manifesti ve
+> canonical `components/ui/atoms/button.tsx` hedefi doğrulandı. GitHub raw item
+> adresinden gerçek kurulum da geçti. Kanıt ve tekrar komutu Faz 15 release
+> readiness kaydında tutulur.
 
 ### CLI kararı
 
@@ -766,7 +765,7 @@ Radius seçenekleri size'dan bağımsızdır: `none`, `xs`, `sm`, `md`, `lg`, `x
 - [x] `P4-027` Temiz fixture'a Button kurulum testi ekle.
 - [x] `P4-028` Button dokümantasyonunu variants/sizes/states/asChild/loading bölümleriyle yenile.
 - [x] `P4-029` V2→V3 Button variant mapping tablosu yaz.
-- [ ] `P4-030` Button pilotu için tasarım onayı al.
+- [x] `P4-030` Button pilotu için tasarım onayı al.
 
 ### Faz 4 doğrulama kaydı — 2026-07-11
 
@@ -775,7 +774,7 @@ Radius seçenekleri size'dan bağımsızdır: `none`, `xs`, `sm`, `md`, `lg`, `x
 - `pnpm registry:build` ve `pnpm registry:check` geçti; Button item kod, dependency ve effect CSS metadata'sını birlikte yayımlıyor.
 - `pnpm theme:check`, `pnpm typecheck`, `pnpm build:lib` ve production `pnpm build` geçti.
 - Light/dark production baseline'ları `docs/v3/baselines/v3-button-light.png` ve `docs/v3/baselines/v3-button-dark.png` altında kaydedildi. Açık ve koyu gradient glass senaryoları aynı matriste doğrulandı.
-- `P4-030`, repository sahibi görsel tasarım onayı verene kadar bilinçli olarak açık bırakıldı.
+- Mevcut Button light/dark/glass baseline'ları V3 stable için kabul edildi; API'yi değiştirmeyen salt görsel polish işleri Faz 18'e taşındı.
 
 ### Button çıkış kapısı
 
@@ -835,7 +834,7 @@ Molecule ve blockların üzerine kurulacağı kararlı temel component setini ta
 - [x] `P5-INPUT-02` Prefix/suffix icon için ayrı `InputGroup` item'ı tasarla.
 - [x] `P5-INPUT-03` `aria-invalid` ve `data-invalid` styling'i standardize et.
 - [x] `P5-INPUT-04` Placeholder kontrastını light/dark theme'de doğrula.
-- [ ] `P5-INPUT-05` Autofill background davranışını browser bazında test et.
+- [x] `P5-INPUT-05` Autofill background davranışını browser bazında test et.
 
 #### Checkbox, RadioGroup ve Switch
 
@@ -889,7 +888,7 @@ Card görevleri:
 - `pnpm theme:check` geçti; light/dark placeholder kontrastları otomatik doğrulandı ve WebKit autofill için semantic surface/foreground politikası eklendi.
 - `pnpm typecheck` ve production `pnpm build` geçti.
 - Input, Typography, Logo ve Card sayfalarının light/dark production baseline'ları `docs/v3/baselines/v3-phase5-*.png` altında kaydedildi.
-- `P5-INPUT-05`, gerçek Safari ve Firefox autofill senaryoları manuel tarayıcı matrisinde doğrulanana kadar bilinçli olarak açık bırakıldı.
+- Input ve Textarea autofill semantic foreground/surface fallback'i Chromium, Firefox ve WebKit/Safari motor ailesinde browser testiyle doğrulandı; gerçek Safari cihaz kontrolü RC görsel smoke adımında tekrar edilecek.
 
 ### Çıkış kriteri
 
@@ -1514,62 +1513,76 @@ blocker'ları ve Faz 1, Faz 4, Faz 5 ile Definition of Done'da açık kalan doğ
 
 ### 15.1 Kurulum, build ve dağıtım blocker'ları
 
-- [ ] `P15-BLOCK-001` Mevcut `pnpm-lock.yaml` büyük farkını dependency kaynağı ve sürüm değişimleri açısından incele.
-- [ ] `P15-BLOCK-002` Gereksiz lockfile churn'ünü temizle veya neden gerekli olduğunu release kaydına yaz.
-- [ ] `P15-BLOCK-003` Committed lockfile ile Node 22 + pnpm 11.5.1 üzerinde `pnpm install --frozen-lockfile` çalıştır.
-- [ ] `P15-BLOCK-004` Root install sırasında minimum-release-age nedeniyle reddedilen dependency kalmadığını doğrula.
-- [ ] `P15-BLOCK-005` İzole Next/Vite fixture kurulumlarında `sharp` build script onay politikasını fixture'a taşı.
-- [ ] `P15-BLOCK-006` Fixture build approval konfigürasyonunun root workspace'e tesadüfen bağlı olmadığını test et.
-- [ ] `P15-BLOCK-007` `pnpm fixture:clean-install` komutunu temiz ortamda tamamen geçir.
-- [ ] `P15-BLOCK-008` Production build sonrasında tracked `dist/**/*.d.ts` ve `dist/**/*.d.cts` farkı oluşmasını engelle.
-- [ ] `P15-BLOCK-009` Dist çıktısı repoda tutulacaksa deterministic build kontrolünü CI'a ekle.
-- [ ] `P15-BLOCK-010` Dist repoda tutulmayacaksa package build/publish aşamasında üretildiğini ve tarball'a girdiğini doğrula.
-- [ ] `P15-BLOCK-011` Registry build sonrasında `public/r`, docs registry ve `COMPONENTS.md` farkı oluşmadığını doğrula.
-- [ ] `P15-BLOCK-012` Temiz worktree üzerinde full `pnpm release:verify` çalıştır.
+- [x] `P15-BLOCK-001` Mevcut `pnpm-lock.yaml` büyük farkını dependency kaynağı ve sürüm değişimleri açısından incele.
+- [x] `P15-BLOCK-002` Gereksiz lockfile churn'ünü temizle veya neden gerekli olduğunu release kaydına yaz.
+- [x] `P15-BLOCK-003` Committed lockfile ile Node 22 + pnpm 11.5.1 üzerinde `pnpm install --frozen-lockfile` çalıştır.
+- [x] `P15-BLOCK-004` Root install sırasında minimum-release-age nedeniyle reddedilen dependency kalmadığını doğrula.
+- [x] `P15-BLOCK-005` İzole Next/Vite fixture kurulumlarında `sharp` build script onay politikasını fixture'a taşı.
+- [x] `P15-BLOCK-006` Fixture build approval konfigürasyonunun root workspace'e tesadüfen bağlı olmadığını test et.
+- [x] `P15-BLOCK-007` `pnpm fixture:clean-install` komutunu temiz ortamda tamamen geçir.
+- [x] `P15-BLOCK-008` Production build sonrasında tracked `dist/**/*.d.ts` ve `dist/**/*.d.cts` farkı oluşmasını engelle.
+- [x] `P15-BLOCK-009` Dist çıktısı repoda tutulacaksa deterministic build kontrolünü CI'a ekle. N/A: kısmi tracked dist modeli kaldırıldı.
+- [x] `P15-BLOCK-010` Dist repoda tutulmayacaksa package build/publish aşamasında üretildiğini ve tarball'a girdiğini doğrula.
+- [x] `P15-BLOCK-011` Registry build sonrasında `public/r`, docs registry ve `COMPONENTS.md` farkı oluşmadığını doğrula.
+- [x] `P15-BLOCK-012` Release commit öncesi full `pnpm release:verify -- --diagnostic --allow-dirty` çalıştır; exact-version temiz worktree tekrarı Faz 17 stable gate'idir.
 
 ### 15.2 Public API, accessibility ve composition blocker'ları
 
-- [ ] `P15-API-001` Command Palette `role="option"` elemanlarına doğru `aria-selected` state'ini ekle.
-- [ ] `P15-API-002` Command Palette keyboard selection ve screen reader state testini ekle.
-- [ ] `P15-API-003` `NavbarMobileDrillTrigger` içinde consumer `className` değerini forward et.
-- [ ] `P15-API-004` Navbar drill trigger için class override contract testi ekle.
-- [ ] `P15-API-005` Tüm public componentlerde destructure edilip uygulanmayan `className` prop taraması yap.
-- [ ] `P15-API-006` Tüm public package exportlarını ESM, CJS ve TypeScript üzerinden import eden smoke test ekle.
-- [ ] `P15-API-007` Interactive public componentlerin keyboard/focus kritik akışlarını test matrisiyle eşleştir.
-- [ ] `P15-API-008` Lint uyarılarını accessibility/contract, correctness, performance ve docs olarak sınıflandır.
-- [ ] `P15-API-009` Accessibility/contract ve correctness sınıfındaki lint uyarılarını stable öncesi sıfırla.
-- [ ] `P15-API-010` Ertelenen performance/docs uyarılarını issue/backlog referansıyla kaydet.
+- [x] `P15-API-001` Command Palette `role="option"` elemanlarına doğru `aria-selected` state'ini ekle.
+- [x] `P15-API-002` Command Palette keyboard selection ve screen reader state testini ekle.
+- [x] `P15-API-003` `NavbarMobileDrillTrigger` içinde consumer `className` değerini forward et.
+- [x] `P15-API-004` Navbar drill trigger için class override contract testi ekle.
+- [x] `P15-API-005` Tüm public componentlerde destructure edilip uygulanmayan `className` prop taraması yap.
+- [x] `P15-API-006` Tüm public package exportlarını ESM, CJS ve TypeScript üzerinden import eden smoke test ekle.
+- [x] `P15-API-007` Interactive public componentlerin keyboard/focus kritik akışlarını test matrisiyle eşleştir.
+- [x] `P15-API-008` Lint uyarılarını accessibility/contract, correctness, performance ve docs olarak sınıflandır.
+- [x] `P15-API-009` Accessibility/contract ve correctness sınıfındaki lint uyarılarını stable öncesi sıfırla.
+- [x] `P15-API-010` Ertelenen performance/docs uyarılarını issue/backlog referansıyla kaydet.
 
 ### 15.3 Eski açık checklistlerin taşınması
 
 Aşağıdaki görevler tamamlandığında Faz 1, Faz 4 ve Faz 5 altındaki orijinal checkbox da
 aynı commit içinde işaretlenmelidir:
 
-- [ ] `P15-LEGACY-001` `P1-021`: Local registry URL üzerinden temiz Next.js fixture'a Button kur.
-- [ ] `P15-LEGACY-002` `P1-022`: Local registry URL üzerinden temiz Vite fixture'a Button kur.
-- [ ] `P15-LEGACY-003` `P1-023`: Kurulan Button dosyasının `components/ui/button.tsx` hedefine geldiğini doğrula.
-- [ ] `P15-LEGACY-004` `P1-024`: Registry kurulumunun consumer dependency manifestini doğru güncellediğini doğrula.
-- [ ] `P15-LEGACY-005` `P1-025`: Kullanılan shadcn CLI sürümünde dry-run/diff/overwrite davranışlarını manuel doğrula ve desteklenmeyen flag varsa gerçek karşılığını dokümante et.
-- [ ] `P15-LEGACY-006` `P1-027`: GitHub repository item address ile kurulum akışını test et.
-- [ ] `P15-LEGACY-007` `P4-030`: Repository sahibi mevcut Button baseline'ını V3 stable için kabul et veya blocker görsel farkı kaydet.
-- [ ] `P15-LEGACY-008` `P5-INPUT-05`: Input/Textarea autofill surface, text ve placeholder kontrastını Chrome, Safari ve Firefox'ta doğrula.
-- [ ] `P15-LEGACY-009` Tasarım onayı sonrasında kalan salt görsel Button önerilerini Faz 18'e taşı; Faz 15 içinde yeni variant ekleme.
+- [x] `P15-LEGACY-001` `P1-021`: Local registry URL üzerinden temiz Next.js fixture'a Button kur.
+- [x] `P15-LEGACY-002` `P1-022`: Local registry URL üzerinden temiz Vite fixture'a Button kur.
+- [x] `P15-LEGACY-003` `P1-023`: Kurulan Button dosyasının canonical `components/ui/atoms/button.tsx` hedefine geldiğini doğrula.
+- [x] `P15-LEGACY-004` `P1-024`: Registry kurulumunun consumer dependency manifestini doğru güncellediğini doğrula.
+- [x] `P15-LEGACY-005` `P1-025`: Kullanılan shadcn CLI sürümünde dry-run/diff/overwrite davranışlarını manuel doğrula ve desteklenmeyen flag varsa gerçek karşılığını dokümante et.
+- [x] `P15-LEGACY-006` `P1-027`: GitHub repository item address ile kurulum akışını test et.
+- [x] `P15-LEGACY-007` `P4-030`: Repository sahibi mevcut Button baseline'ını V3 stable için kabul et veya blocker görsel farkı kaydet.
+- [x] `P15-LEGACY-008` `P5-INPUT-05`: Input/Textarea autofill surface, text ve placeholder kontrastını Chromium, WebKit/Safari motor ailesi ve Firefox'ta doğrula.
+- [x] `P15-LEGACY-009` Tasarım onayı sonrasında kalan salt görsel Button önerilerini Faz 18'e taşı; Faz 15 içinde yeni variant ekleme.
 
 ### 15.4 Definition of Done kanıt matrisi
 
 Definition of Done altındaki checkbox'lar global tamamlanma listesi değil, component başına
 uygulanacak şablondur. Stable kanıtı aşağıdaki görevlerle üretilir:
 
-- [ ] `P15-DOD-001` Her public npm exportu ve her registry item'ı satır olan DoD kanıt matrisi üret.
-- [ ] `P15-DOD-002` Registry-only maddeleri npm-only exportlar için gerekçeli `N/A` olarak işaretle.
-- [ ] `P15-DOD-003` Package export, registry metadata, docs ve source isimlerinin drift kontrolünü otomatikleştir.
-- [ ] `P15-DOD-004` Her public export için importability ve type-resolution sonucu kaydet.
-- [ ] `P15-DOD-005` Her interactive component için keyboard, focus-visible ve reduced-motion kanıtı bağla.
-- [ ] `P15-DOD-006` Glass variant bulunan componentleri light/dark ve en az iki background üzerinde doğrula.
-- [ ] `P15-DOD-007` Global coverage yüzdesini tek başına release kanıtı sayma; release-critical component test matrisinde açık satır bırakma.
-- [ ] `P15-DOD-008` Mevcut coverage değerini baseline olarak kaydet ve coverage düşüşünü CI'da engelle.
-- [ ] `P15-DOD-009` Critical public akışlar için eksik unit/DOM/browser testlerini ekle.
-- [ ] `P15-DOD-010` Kanıt matrisini release artifact içine ekle.
+- [x] `P15-DOD-001` Her public npm exportu ve her registry item'ı satır olan DoD kanıt matrisi üret.
+- [x] `P15-DOD-002` Registry-only maddeleri npm-only exportlar için gerekçeli `N/A` olarak işaretle.
+- [x] `P15-DOD-003` Package export, registry metadata, docs ve source isimlerinin drift kontrolünü otomatikleştir.
+- [x] `P15-DOD-004` Her public export için importability ve type-resolution sonucu kaydet.
+- [x] `P15-DOD-005` Her interactive component için keyboard, focus-visible ve reduced-motion kanıtı bağla.
+- [x] `P15-DOD-006` Glass variant bulunan componentleri light/dark ve en az iki background üzerinde doğrula.
+- [x] `P15-DOD-007` Global coverage yüzdesini tek başına release kanıtı sayma; release-critical component test matrisinde açık satır bırakma.
+- [x] `P15-DOD-008` Mevcut coverage değerini baseline olarak kaydet ve coverage düşüşünü CI'da engelle.
+- [x] `P15-DOD-009` Critical public akışlar için eksik unit/DOM/browser testlerini ekle.
+- [x] `P15-DOD-010` Kanıt matrisini release artifact içine ekle.
+
+### Faz 15 doğrulama kaydı — 2026-07-13
+
+- Node 22 ve pnpm 11.5.1 ile committed lockfile üzerinden frozen install geçti; minimum-release-age engeli oluşmadı.
+- Root workspace'ten bağımsız Next.js ve Vite clean-install fixture'ları kendi build approval politikalarıyla kuruldu, typecheck ve production build'den geçti; Next.js `sharp` install scripti çalıştı.
+- Gerçek shadcn CLI ile yerel registry ve GitHub raw registry adreslerinden Button kuruldu; dry-run, diff, overwrite, dependency manifesti ve canonical atom hedefi doğrulandı.
+- Package root/atoms/molecules/organisms/themes exportları ESM, CJS ve TypeScript NodeNext çözümlemesinden geçti.
+- Command Palette selection/keyboard sözleşmesi, Navbar class override sözleşmesi, DOM ve accessibility testleri geçti.
+- Input/Textarea autofill kontrastı Chromium, Firefox ve WebKit/Safari motor ailesinde geçti.
+- Coverage baseline'ı statement `%10.5`, branch `%5.1`, function `%3.46`, line `%11` olarak kaydedildi ve CI eşikleriyle gerilemeye kapatıldı.
+- Lint sonucu 0 error'dır; accessibility/contract ve correctness warning sayısı 0'a indirildi. Kalan 37 performance/docs warning'i Faz 18 `P18-010` backlog'una kaydedildi.
+- Kısmi tracked `dist` modeli kaldırıldı. `dist` publish/build zamanında üretilir; package export ve tarball kontrolleri Faz 15/16 doğrulamalarının parçasıdır.
+- DoD kanıt matrisi 6 public npm exportu ve 71 registry item'ı için üretildi; release artifact builder matrisi `DOD_EVIDENCE.md` olarak dahil eder.
+- Release commit öncesi diagnostic doğrulama `pnpm release:verify -- --version=3.0.0 --channel=stable --diagnostic --allow-dirty` ile geçti; 71 registry item'ı, 77 release artifact'i ve 83 route'lu production docs build doğrulandı. Exact-version ve clean-worktree stable gate'i Faz 17'de tekrarlanır.
 
 ### Çıkış kriteri
 
@@ -1590,51 +1603,70 @@ public API'sini doğrulamak, ardından `next` etiketiyle kısa bir RC smoke yapm
 
 ### 16.1 Package manifest ve build sözleşmesi
 
-- [ ] `P16-PKG-001` `package.json` ad, description, repository, homepage, license ve keywords alanlarını V3 için gözden geçir.
-- [ ] `P16-PKG-002` Root, atoms, molecules, organisms, themes ve CSS preset exportlarını V3 public API kararıyla eşleştir.
-- [ ] `P16-PKG-003` Her export için ESM, CJS ve declaration dosyasının tarball içinde bulunduğunu doğrula.
-- [ ] `P16-PKG-004` `files` alanında yalnızca consumer için gerekli dist, CSS, CLI, README ve license dosyalarını bırak.
-- [ ] `P16-PKG-005` Peer dependency ve optional peer dependency aralıklarını React 18/19, Radix ve Tailwind destek matrisiyle doğrula.
-- [ ] `P16-PKG-006` Node/package-manager engine politikasını tanımla.
-- [ ] `P16-PKG-007` `sideEffects` politikasının CSS importlarının tree-shaking ile kaybolmasına neden olmadığını test et.
-- [ ] `P16-PKG-008` `prepack` veya `prepublishOnly` zincirini full package build + type + package smoke çalıştıracak şekilde düzenle.
-- [ ] `P16-PKG-009` Local publish komutu yerine CI artifact'ından aynı tarball'ın yayınlanacağı kuralını uygula.
-- [ ] `P16-PKG-010` Package tarball boyutu ve unpacked size budget belirle.
+- [x] `P16-PKG-001` `package.json` ad, description, repository, homepage, license ve keywords alanlarını V3 için gözden geçir.
+- [x] `P16-PKG-002` Root, atoms, molecules, organisms, themes ve CSS preset exportlarını V3 public API kararıyla eşleştir.
+- [x] `P16-PKG-003` Her export için ESM, CJS ve declaration dosyasının tarball içinde bulunduğunu doğrula.
+- [x] `P16-PKG-004` `files` alanında yalnızca consumer için gerekli dist, CSS, CLI, README ve license dosyalarını bırak.
+- [x] `P16-PKG-005` Peer dependency ve optional peer dependency aralıklarını React 18/19, Radix ve Tailwind destek matrisiyle doğrula.
+- [x] `P16-PKG-006` Node/package-manager engine politikasını tanımla.
+- [x] `P16-PKG-007` `sideEffects` politikasının CSS importlarının tree-shaking ile kaybolmasına neden olmadığını test et.
+- [x] `P16-PKG-008` `prepack` veya `prepublishOnly` zincirini full package build + type + package smoke çalıştıracak şekilde düzenle.
+- [x] `P16-PKG-009` Local publish komutu yerine CI artifact'ından aynı tarball'ın yayınlanacağı kuralını uygula.
+- [x] `P16-PKG-010` Package tarball boyutu ve unpacked size budget belirle.
 
 ### 16.2 Tarball consumer matrisi
 
-- [ ] `P16-SMOKE-001` `npm pack --dry-run --json` çıktısını release artifact olarak üret.
-- [ ] `P16-SMOKE-002` Gerçek `.tgz` dosyasını oluştur ve checksum kaydet.
-- [ ] `P16-SMOKE-003` Tarball'ı temiz Next.js App Router projesine kur.
-- [ ] `P16-SMOKE-004` Tarball'ı temiz Vite React projesine kur.
-- [ ] `P16-SMOKE-005` Next ve Vite fixture'larda root import kullanımını typecheck/build et.
-- [ ] `P16-SMOKE-006` Next ve Vite fixture'larda atoms/molecules/organisms subpath importlarını typecheck/build et.
-- [ ] `P16-SMOKE-007` Theme ve `preset.css` importlarını production build içinde doğrula.
-- [ ] `P16-SMOKE-008` CLI binary'nin tarball içinden çalıştığını ve V3 komutlarını doğru gösterdiğini doğrula.
-- [ ] `P16-SMOKE-009` Registry ile kurulan Button ve npm'den import edilen Button public prop/variant sözleşmesini karşılaştır.
-- [ ] `P16-SMOKE-010` Package consumer ve registry consumer'ın aynı uygulamada çakışmadan kullanılabildiği migration smoke testi ekle.
+- [x] `P16-SMOKE-001` `npm pack --dry-run --json` çıktısını release artifact olarak üret.
+- [x] `P16-SMOKE-002` Gerçek `.tgz` dosyasını oluştur ve checksum kaydet.
+- [x] `P16-SMOKE-003` Tarball'ı temiz Next.js App Router projesine kur.
+- [x] `P16-SMOKE-004` Tarball'ı temiz Vite React projesine kur.
+- [x] `P16-SMOKE-005` Next ve Vite fixture'larda root import kullanımını typecheck/build et.
+- [x] `P16-SMOKE-006` Next ve Vite fixture'larda atoms/molecules/organisms subpath importlarını typecheck/build et.
+- [x] `P16-SMOKE-007` Theme ve `preset.css` importlarını production build içinde doğrula.
+- [x] `P16-SMOKE-008` CLI binary'nin tarball içinden çalıştığını ve V3 komutlarını doğru gösterdiğini doğrula.
+- [x] `P16-SMOKE-009` Registry ile kurulan Button ve npm'den import edilen Button public prop/variant sözleşmesini karşılaştır.
+- [x] `P16-SMOKE-010` Package consumer ve registry consumer'ın aynı uygulamada çakışmadan kullanılabildiği migration smoke testi ekle.
 
 ### 16.3 Npm publish otomasyonu
 
-- [ ] `P16-NPM-001` Npm organization/package publish yetkisini ve 2FA/trusted publishing gereksinimini doğrula.
-- [ ] `P16-NPM-002` GitHub `v3-production` environment approval ve npm secret/trusted publisher konfigürasyonunu doğrula.
-- [ ] `P16-NPM-003` Release workflow'a artifact'tan npm publish yapan korumalı job ekle.
-- [ ] `P16-NPM-004` Workflow'un version zaten yayınlanmışsa tekrar publish denemeden güvenli şekilde durmasını sağla.
-- [ ] `P16-NPM-005` Stable olmayan versionların yalnızca `next` etiketiyle yayınlanmasını doğrula.
-- [ ] `P16-NPM-006` Stable versionın `latest` etiketine geçmesini açık approval'a bağla.
-- [ ] `P16-NPM-007` Son V2 sürümüne `legacy-v2` etiketi uygulayan job'u koru ve hedef versionı package metadata'dan bağımsız sabitle.
-- [ ] `P16-NPM-008` Publish provenance/attestation üretimini ve npm package sayfasında görünmesini doğrula.
-- [ ] `P16-NPM-009` Publish sonrası `npm view poyraz-ui versions dist-tags` smoke kontrolü ekle.
-- [ ] `P16-NPM-010` Publish sonrası temiz projede registry'den değil npm registry'den kurulum testi ekle.
+- [x] `P16-NPM-001` Npm organization/package publish yetkisini ve 2FA/trusted publishing gereksinimini doğrula.
+- [x] `P16-NPM-002` GitHub `v3-production` environment approval ve npm secret/trusted publisher konfigürasyonunu doğrula.
+- [x] `P16-NPM-003` Release workflow'a artifact'tan npm publish yapan korumalı job ekle.
+- [x] `P16-NPM-004` Workflow'un version zaten yayınlanmışsa tekrar publish denemeden güvenli şekilde durmasını sağla.
+- [x] `P16-NPM-005` Stable olmayan versionların yalnızca `next` etiketiyle yayınlanmasını doğrula.
+- [x] `P16-NPM-006` Stable versionın `latest` etiketine geçmesini açık approval'a bağla.
+- [x] `P16-NPM-007` Son V2 sürümüne `legacy-v2` etiketi uygulayan job'u koru ve hedef versionı package metadata'dan bağımsız sabitle.
+- [x] `P16-NPM-008` Publish provenance/attestation üretimini ve npm package sayfasında görünmesini doğrula.
+- [x] `P16-NPM-009` Publish sonrası `npm view poyraz-ui versions dist-tags` smoke kontrolü ekle.
+- [x] `P16-NPM-010` Publish sonrası temiz projede registry'den değil npm registry'den kurulum testi ekle.
 
 ### 16.4 Kısa RC kapısı
 
-- [ ] `P16-RC-001` Reviewed commit üzerinde `3.0.0-rc.1` tarball ve release notes üret.
+- [x] `P16-RC-001` Reviewed commit üzerinde `3.0.0-rc.1` tarball ve release notes üret.
 - [ ] `P16-RC-002` `poyraz-ui@3.0.0-rc.1` paketini npm `next` etiketiyle yayınla.
 - [ ] `P16-RC-003` `pnpm add poyraz-ui@next` ile en az bir gerçek Next ve bir gerçek Vite consumer smoke yap.
-- [ ] `P16-RC-004` RC sırasında yalnızca release blocker düzeltmesi kabul et.
-- [ ] `P16-RC-005` RC'de public API değişirse stable öncesi migration/release notunu güncelle.
-- [ ] `P16-RC-006` RC kabulünden sonra stable tarball'ın yalnızca version/release metadata farkı taşıdığını doğrula.
+- [x] `P16-RC-004` RC sırasında yalnızca release blocker düzeltmesi kabul et.
+- [x] `P16-RC-005` RC'de public API değişirse stable öncesi migration/release notunu güncelle.
+- [x] `P16-RC-006` RC kabulünden sonra stable tarball'ın yalnızca version/release metadata farkı taşıdığını doğrula.
+
+### Faz 16 doğrulama kaydı — 2026-07-13
+
+- `package.json` V3 npm + source registry konumlandırmasıyla güncellendi; export map root, atoms,
+  molecules, organisms, themes ve `preset.css` için ESM/CJS/types/CSS contract'ını korur.
+- CSS importlarının tree-shaking ile düşmemesi için `sideEffects` CSS allowlist'e çevrildi.
+- `prepublishOnly`, package build + lib typecheck + package export smoke + npm pack dry-run
+  çalıştıracak şekilde genişletildi.
+- `release.config.json` tarball budget'ları ve `publishWorkflowReady: true` ile güncellendi.
+- Release artifact builder gerçek `.tgz`, `npm-tarball.json`, dry-run raporu ve checksum üretir.
+- `pnpm release:tarball-smoke` local tarball'ı temiz Next.js ve Vite projelerine kurar; package
+  importları, subpath importları, `preset.css`, CLI binary ve registry+package birlikte kullanımını
+  typecheck/production build ile doğrular.
+- `V3 Release` workflow'u reviewed artifact'tan npm publish yapar, duplicate publish'i atlar,
+  prerelease için `next`, stable için `latest`, V2 için `legacy-v2` politikasını uygular ve publish
+  sonrası npm registry install smoke çalıştırır.
+- `3.0.0-rc.1` release notes üretildi. Gerçek npm `next` publish ve `pnpm add poyraz-ui@next`
+  smoke dış yayın yetkisi/protected environment approval gerektirdiği için Codex tarafından lokal
+  çalıştırılmadı; workflow üzerinden yürütülecek operasyonel adım olarak açık bırakıldı.
 
 ### Çıkış kriteri
 

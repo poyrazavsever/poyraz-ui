@@ -9,6 +9,7 @@ const args = parseArguments(process.argv.slice(2));
 const version = String(args.version ?? "3.0.0");
 const channel = String(args.channel ?? "stable");
 const allowDirty = args["allow-dirty"] === true;
+const diagnostic = args.diagnostic === true;
 const isWindows = process.platform === "win32";
 
 function runPnpm(script) {
@@ -21,7 +22,12 @@ function runPnpm(script) {
 
 try {
   runPnpm("registry:build");
-  await runReleasePreflight({ version, channel, allowDirty });
+  await runReleasePreflight({
+    version,
+    channel,
+    allowDirty,
+    enforcePackageVersion: !diagnostic,
+  });
   runPnpm("quality");
   runPnpm("fixture:clean-install");
   runPnpm("build");

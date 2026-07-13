@@ -24,6 +24,57 @@ async function filesBelow(root) {
   return nested.flat().sort();
 }
 
+function runNpmPack(args, cacheDirectory) {
+  const packCommand = process.platform === "win32" ? (process.env.ComSpec ?? "cmd.exe") : "npm";
+  const packArguments =
+    process.platform === "win32" ? ["/d", "/s", "/c", "npm.cmd", ...args] : args;
+  return execFileSync(packCommand, packArguments, {
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+    env: { ...process.env, npm_config_cache: cacheDirectory },
+  });
+}
+
+function assertPackReport(packReport, config) {
+  const report = Array.isArray(packReport) ? packReport[0] : packReport;
+  if (!report) throw new Error("npm pack did not return package metadata.");
+
+  const requiredFiles = [
+    "package.json",
+    "dist/index.js",
+    "dist/index.cjs",
+    "dist/index.d.ts",
+    "dist/index.d.cts",
+    "dist/atoms/index.js",
+    "dist/molecules/index.js",
+    "dist/organisms/index.js",
+    "dist/themes/index.js",
+    "src/preset.css",
+    "bin/cli.mjs",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+  ];
+  const packedFiles = new Set((report.files ?? []).map((file) => file.path));
+  for (const file of requiredFiles) {
+    if (!packedFiles.has(file)) throw new Error(`npm tarball is missing required file: ${file}`);
+  }
+
+  const budget = config.npm.tarball;
+  if (budget) {
+    if (report.size > budget.maxSizeBytes) {
+      throw new Error(`npm tarball size ${report.size} exceeds budget ${budget.maxSizeBytes}.`);
+    }
+    if (report.unpackedSize > budget.maxUnpackedSizeBytes) {
+      throw new Error(
+        `npm tarball unpacked size ${report.unpackedSize} exceeds budget ${budget.maxUnpackedSizeBytes}.`,
+      );
+    }
+  }
+
+  return report;
+}
+
 export async function buildReleaseArtifacts({
   version,
   channel,
@@ -41,6 +92,10 @@ export async function buildReleaseArtifacts({
   await mkdir(output, { recursive: true });
   await cp(resolve("public", "r"), registryOutput, { recursive: true });
   await cp(resolve("docs", "v3", "releases", `v${version}.md`), join(output, "RELEASE_NOTES.md"));
+  await cp(
+    resolve("docs", "v3", "audits", "phase15-dod-evidence.md"),
+    join(output, "DOD_EVIDENCE.md"),
+  );
 
   const releaseManifest = {
     schemaVersion: 1,
@@ -76,18 +131,34 @@ export async function buildReleaseArtifacts({
 
   if (includePackReport) {
     const npmCache = join(output, ".npm-cache");
-    const packCommand = process.platform === "win32" ? (process.env.ComSpec ?? "cmd.exe") : "npm";
-    const packArguments =
-      process.platform === "win32"
-        ? ["/d", "/s", "/c", "npm.cmd", "pack", "--dry-run", "--json", "--ignore-scripts"]
-        : ["pack", "--dry-run", "--json", "--ignore-scripts"];
-    const report = execFileSync(packCommand, packArguments, {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
-      env: { ...process.env, npm_config_cache: npmCache },
-    });
+    const report = runNpmPack(["pack", "--dry-run", "--json", "--ignore-scripts"], npmCache);
+    const packReport = JSON.parse(report);
+    const metadata = assertPackReport(packReport, config);
     await rm(npmCache, { recursive: true, force: true });
     await writeFile(join(output, "npm-pack-dry-run.json"), report, "utf8");
+
+    const npmOutput = join(output, "npm");
+    const packCache = join(output, ".npm-pack-cache");
+    await mkdir(npmOutput, { recursive: true });
+    const tarballReport = runNpmPack(
+      ["pack", "--json", "--ignore-scripts", "--pack-destination", npmOutput],
+      packCache,
+    );
+    await rm(packCache, { recursive: true, force: true });
+    const tarballMetadata = assertPackReport(JSON.parse(tarballReport), config);
+    await writeFile(
+      join(output, "npm-tarball.json"),
+      `${JSON.stringify(
+        {
+          ...tarballMetadata,
+          dryRunSize: metadata.size,
+          dryRunUnpackedSize: metadata.unpackedSize,
+        },
+        null,
+        2,
+      )}\n`,
+      "utf8",
+    );
   }
 
   const artifactFiles = (await filesBelow(output)).filter(

@@ -10,15 +10,28 @@ export async function readJson(path) {
 }
 
 export function parseArguments(argv) {
-  return Object.fromEntries(
-    argv.map((argument) => {
-      const normalized = argument.replace(/^--/, "");
-      const separator = normalized.indexOf("=");
-      return separator === -1
-        ? [normalized, true]
-        : [normalized.slice(0, separator), normalized.slice(separator + 1)];
-    }),
-  );
+  const parsed = {};
+  for (let index = 0; index < argv.length; index += 1) {
+    const argument = argv[index];
+    if (argument === "--") continue;
+    if (!argument.startsWith("--")) continue;
+
+    const normalized = argument.slice(2);
+    const separator = normalized.indexOf("=");
+    if (separator !== -1) {
+      parsed[normalized.slice(0, separator)] = normalized.slice(separator + 1);
+      continue;
+    }
+
+    const next = argv[index + 1];
+    if (next && !next.startsWith("--")) {
+      parsed[normalized] = next;
+      index += 1;
+    } else {
+      parsed[normalized] = true;
+    }
+  }
+  return parsed;
 }
 
 export function channelForVersion(version) {
@@ -113,6 +126,39 @@ export async function runReleasePreflight({
     errors.push(
       `Pre-release diagnostics allow only target ${version} or declared legacy ${config.npm.legacyVersion}; found ${packageManifest.version}.`,
     );
+  }
+  if (!packageManifest.description?.includes("source registry")) {
+    errors.push("package.json description must describe the npm + source registry V3 contract.");
+  }
+  for (const keyword of ["radix-ui", "shadcn", "registry", "glassmorphism"]) {
+    if (!packageManifest.keywords?.includes(keyword)) {
+      errors.push(`package.json keywords must include ${keyword}.`);
+    }
+  }
+  for (const exportPath of [".", "./atoms", "./molecules", "./organisms", "./themes"]) {
+    const entry = packageManifest.exports?.[exportPath];
+    if (!entry?.import?.default || !entry?.import?.types || !entry?.require?.default) {
+      errors.push(`package.json export ${exportPath} must expose ESM, CJS and types.`);
+    }
+  }
+  if (packageManifest.exports?.["./preset.css"] !== "./src/preset.css") {
+    errors.push('package.json must expose "./preset.css" as ./src/preset.css.');
+  }
+  for (const file of ["dist", "src/preset.css", "bin", "README.md", "CHANGELOG.md", "LICENSE"]) {
+    if (!packageManifest.files?.includes(file))
+      errors.push(`package.json files must include ${file}.`);
+  }
+  if (
+    !Array.isArray(packageManifest.sideEffects) ||
+    !packageManifest.sideEffects.includes("**/*.css")
+  ) {
+    errors.push("package.json sideEffects must preserve CSS imports.");
+  }
+  if (!packageManifest.engines?.node?.includes("22") || !packageManifest.engines?.pnpm) {
+    errors.push("package.json engines must declare the Node 22 / pnpm release policy.");
+  }
+  if (!config.npm.tarball?.maxSizeBytes || !config.npm.tarball?.maxUnpackedSizeBytes) {
+    errors.push("release.config.json must declare npm tarball size budgets.");
   }
 
   if (

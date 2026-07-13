@@ -36,7 +36,8 @@
         "stableTag",
         "publishV3Package",
         "publishWorkflowReady",
-        "versionPolicy"
+        "versionPolicy",
+        "tarball"
       ],
       "properties": {
         "package": { "const": "poyraz-ui" },
@@ -48,7 +49,16 @@
         "stableTag": { "const": "latest" },
         "publishV3Package": { "const": true },
         "publishWorkflowReady": { "type": "boolean" },
-        "versionPolicy": { "const": "release-commit" }
+        "versionPolicy": { "const": "release-commit" },
+        "tarball": {
+          "type": "object",
+          "required": ["maxSizeBytes", "maxUnpackedSizeBytes"],
+          "properties": {
+            "maxSizeBytes": { "type": "integer", "minimum": 1 },
+            "maxUnpackedSizeBytes": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     },

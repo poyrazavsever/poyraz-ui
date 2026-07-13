@@ -16,6 +16,7 @@
 /test-results
 /quality-artifacts
 /release-artifacts
+/release-artifacts-*
 /fixtures/*/.registry
 /fixtures/*/.next
 /fixtures/*/dist

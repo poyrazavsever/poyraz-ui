@@ -57,7 +57,12 @@ jobs:
       - run: pnpm quality
       - run: pnpm fixture:clean-install
       - run: pnpm build
+      - name: Validate build-time package dist
+        run: pnpm dist:check
+      - run: pnpm test:package-exports
       - run: pnpm release:artifacts -- --version=${{ inputs.version }} --channel=${{ inputs.channel }}
+      - name: Smoke npm tarball in clean consumers
+        run: pnpm release:tarball-smoke -- --tarball release-artifacts/npm/*.tgz
       - uses: actions/upload-artifact@v7
         with:
           name: poyraz-ui-${{ inputs.version }}
@@ -87,6 +92,27 @@ jobs:
         with:
           name: poyraz-ui-${{ inputs.version }}
           path: release-artifacts
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: Publish npm package from reviewed tarball
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          PACKAGE=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.package)")
+          TAG=$(node -e "const c=require('./release.config.json'); process.stdout.write('${{ inputs.channel }}' === 'stable' ? c.npm.stableTag : c.npm.prereleaseTag)")
+          TARBALL=$(ls release-artifacts/npm/*.tgz)
+
+          if npm view "$PACKAGE@${{ inputs.version }}" version >/dev/null 2>&1; then
+            echo "$PACKAGE@${{ inputs.version }} is already published; skipping npm publish."
+            exit 0
+          fi
+
+          npm publish "$TARBALL" --tag "$TAG" --provenance --access public
+          test "$(npm view "$PACKAGE@${{ inputs.version }}" version)" = "${{ inputs.version }}"
+          npm dist-tag ls "$PACKAGE"
       - name: Create immutable tag and GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -138,4 +164,12 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Verify npm package and dist-tags
+        run: |
+          PACKAGE=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.package)")
+          TAG=$(node -e "const c=require('./release.config.json'); process.stdout.write('${{ inputs.channel }}' === 'stable' ? c.npm.stableTag : c.npm.prereleaseTag)")
+          test "$(npm view "$PACKAGE@${{ inputs.version }}" version)" = "${{ inputs.version }}"
+          test "$(npm view "$PACKAGE" dist-tags.$TAG)" = "${{ inputs.version }}"
+      - name: Smoke install from npm registry
+        run: pnpm release:tarball-smoke -- --package-spec poyraz-ui@${{ inputs.version }}
       - run: pnpm release:smoke -- --attempts=12 --delay-ms=10000

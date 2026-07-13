@@ -23,8 +23,12 @@
     "prereleaseTag": "next",
     "stableTag": "latest",
     "publishV3Package": true,
-    "publishWorkflowReady": false,
-    "versionPolicy": "release-commit"
+    "publishWorkflowReady": true,
+    "versionPolicy": "release-commit",
+    "tarball": {
+      "maxSizeBytes": 750000,
+      "maxUnpackedSizeBytes": 3500000
+    }
   },
   "milestones": [
     { "version": "3.0.0-alpha.1", "channel": "alpha", "status": "complete" },

@@ -40,6 +40,13 @@ This behavior is declared by `npm.versionPolicy: release-commit` in `release.con
 `--allow-dirty` and disabled package-version enforcement are diagnostic/test-only behaviors.
 The release workflow never uses them.
 
+Before the version bump commit, the same pipeline can be exercised without weakening the
+protected stable gate:
+
+```bash
+pnpm release:verify -- --version=3.0.0 --channel=stable --diagnostic --allow-dirty
+```
+
 ## Artifact Review
 
 Run the `V3 Release` workflow from the reviewed master commit with publishing disabled. Inspect:
@@ -48,7 +55,8 @@ Run the `V3 Release` workflow from the reviewed master commit with publishing di
 - `RELEASE_NOTES.md`
 - `registry/*.json`
 - `npm-pack-dry-run.json`
-- npm tarball and package file list once Faz 16 is complete
+- `npm-tarball.json`
+- `npm/*.tgz`
 - `SHA256SUMS.txt`
 - Definition of Done evidence matrix once Faz 15 is complete
 
@@ -56,9 +64,10 @@ The release manifest must identify npm and registry as two outputs of the same v
 
 ## Publish
 
-Publishing remains blocked while `release.config.json → npm.publishWorkflowReady` is `false`.
-Faz 16 may set it to `true` only after the protected npm publish job and tarball consumer smoke
-are complete.
+Publishing is allowed only through the protected workflow while
+`release.config.json → npm.publishWorkflowReady` is `true`. The workflow publishes the reviewed
+`release-artifacts/npm/*.tgz` tarball, then verifies npm dist-tags and runs a clean npm registry
+install smoke.
 
 Required stable order:
 

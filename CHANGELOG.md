@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0-rc.1] - Unreleased
+
+### Added
+
+- Added the release-candidate npm tarball artifact and clean consumer smoke gate for V3.
+- Added protected `next` dist-tag publish automation for `poyraz-ui@3.0.0-rc.1`.
+
+### Validation
+
+- RC artifacts must pass package export smoke, clean Next/Vite tarball install, CLI binary smoke and production builds before npm `next` publish approval.
+
 ## [3.0.0] - Unreleased
 
 ### Added
