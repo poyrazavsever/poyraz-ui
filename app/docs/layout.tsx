@@ -6,29 +6,18 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Github } from "lucide-react";
 
 import { cn } from "poyraz-ui";
-import { Button, Logo } from "poyraz-ui/atoms";
 import {
   Footer,
   FooterBottom,
   FooterSocialLink,
   FooterSocials,
-  Navbar,
-  NavbarActions,
-  NavbarBrand,
-  NavbarLink,
-  NavbarLinks,
-  NavbarMain,
-  NavbarMobileLink,
-  NavbarMobileMenu,
-  NavbarMobileToggle,
   Sidebar,
   SidebarContent,
-  SidebarHeader,
 } from "poyraz-ui/organisms";
 
 import docsCatalog from "@/src/docs-registry.json";
 import { socialLinks } from "@/lib/navigation";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteNavbar } from "@/components/site-navbar";
 
 type DocsLink = { title: string; href: string };
 
@@ -145,50 +134,10 @@ function DocsSidebarNavigation() {
   );
 }
 
-const mobileLinks = [
-  { title: "Getting started", href: "/docs" },
-  { title: "Theme", href: "/docs/theme" },
-  { title: "Components", href: "/docs/atoms" },
-  { title: "Blocks", href: "/docs/blocks" },
-  { title: "Migration", href: "/docs/migration" },
-];
-
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar
-        variant="minimal"
-        sticky
-        containerClassName="mx-auto max-w-[1440px] px-5 lg:px-8"
-        className="border-b border-border/80 bg-background/90 backdrop-blur-lg"
-      >
-        <NavbarMain>
-          <NavbarBrand href="/">
-            <Logo width={30} height={30} />
-          </NavbarBrand>
-          <NavbarLinks>
-            <NavbarLink href="/docs">Docs</NavbarLink>
-            <NavbarLink href="/docs/atoms">Components</NavbarLink>
-            <NavbarLink href="/docs/blocks">Blocks</NavbarLink>
-          </NavbarLinks>
-          <NavbarActions>
-            <ThemeToggle />
-            <Button asChild size="icon" variant="ghost">
-              <Link href={socialLinks.repo} target="_blank" aria-label="GitHub repository">
-                <Github className="size-4" />
-              </Link>
-            </Button>
-          </NavbarActions>
-          <NavbarMobileToggle />
-        </NavbarMain>
-        <NavbarMobileMenu>
-          {mobileLinks.map((item) => (
-            <NavbarMobileLink key={item.href} href={item.href}>
-              {item.title}
-            </NavbarMobileLink>
-          ))}
-        </NavbarMobileMenu>
-      </Navbar>
+      <SiteNavbar />
 
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 px-5 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-10 lg:px-8 xl:gap-12">
         <aside className="hidden lg:block">
@@ -197,10 +146,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               variant="default"
               className="h-full w-full border-0 border-r border-border bg-background"
             >
-              <SidebarHeader className="h-auto border-0 px-3 pb-3 pt-2">
-                <p className="text-sm font-semibold text-foreground">Poyraz UI</p>
-              </SidebarHeader>
-              <SidebarContent scrollMode="fade" className="px-3">
+              <SidebarContent scrollMode="fade" className="px-3 pt-3">
                 <DocsSidebarNavigation />
               </SidebarContent>
             </Sidebar>
