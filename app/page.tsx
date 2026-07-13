@@ -59,6 +59,7 @@ import {
   NavbarBrand,
   NavbarLinks,
   NavbarLink,
+  NavbarSearch,
   NavbarActions,
   NavbarMobileToggle,
   NavbarMobileMenu,
@@ -92,15 +93,15 @@ function CopyInstallCommand() {
   };
 
   return (
-    <div className="flex items-center gap-3 rounded-sm border border-border bg-muted px-4 py-2.5 font-mono text-sm text-foreground w-full max-w-md">
-      <span className="text-placeholder">$</span>
+    <div className="flex w-full max-w-md items-center gap-3 rounded-sm border border-white/20 bg-white/10 px-4 py-2.5 font-mono text-sm text-white shadow-[0_16px_50px_rgba(0,0,0,0.18)] backdrop-blur-md">
+      <span className="text-white/55">$</span>
       <span className="flex-1">{command}</span>
       <button
         onClick={handleCopy}
-        className="text-placeholder hover:text-foreground cursor-pointer transition-colors"
+        className="cursor-pointer text-white/70 transition-colors hover:text-white"
         aria-label="Copy install command"
       >
-        {copied ? <Check className="h-4 w-4 text-success-solid" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4 text-white" /> : <Copy className="h-4 w-4" />}
       </button>
     </div>
   );
@@ -715,7 +716,7 @@ export default function Home() {
             <Logo width={32} height={32} />
           </NavbarBrand>
 
-          <NavbarLinks>
+          <NavbarLinks className="mr-auto">
             {mainNav.map((item) => (
               <NavbarLink
                 key={item.href}
@@ -728,9 +729,16 @@ export default function Home() {
           </NavbarLinks>
 
           <NavbarActions>
+            <NavbarSearch
+              placeholder="Search docs..."
+              aria-label="Search documentation"
+              wrapperClassName="hidden xl:flex"
+            />
             <ThemeToggle />
             <Link href={socialLinks.website} target="_blank">
-              <Button size="sm">Return Back</Button>
+              <Button size="sm" effect="swap">
+                Return Back
+              </Button>
             </Link>
           </NavbarActions>
 
@@ -747,36 +755,100 @@ export default function Home() {
       </Navbar>
 
       {/* ─── HERO ────────────────────────────────────────── */}
-      <section className="px-6 pt-20 pb-8 md:pt-28 md:pb-12">
-        <div className="max-w-5xl mx-auto text-center space-y-8 flex flex-col items-center">
+      <section className="relative isolate overflow-hidden px-6 py-20 text-white md:py-28">
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 -z-20 h-full w-full dark:hidden"
+          preserveAspectRatio="none"
+          viewBox="0 0 1920 1080"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="1920" height="1080" fill="rgb(150, 0, 0)" />
+          <g>
+            <path
+              fill="rgb(179, 23, 23)"
+              d="M0,294.371L40,294.641C80,294.911,160,295.452,240,261.866C320,228.281,400,160.57,480,157.048C560,153.526,640,214.192,720,256.716C800,299.24,880,323.621,960,297.815C1040,272.009,1120,196.015,1200,164.517C1280,133.02,1360,146.018,1440,155.868C1520,165.718,1600,172.42,1680,199.488C1760,226.557,1840,273.991,1880,297.709L1920,321.426L1920,1080L0,1080Z"
+            />
+          </g>
+          <g transform="translate(0, 360)">
+            <path
+              fill="rgb(207, 45, 45)"
+              d="M0,76.208L40,105.443C80,134.679,160,193.15,240,184.819C320,176.489,400,101.358,480,115.361C560,129.364,640,232.502,720,247.573C800,262.645,880,189.649,960,190.045C1040,190.44,1120,264.226,1200,287.706C1280,311.187,1360,284.362,1440,242.633C1520,200.905,1600,144.273,1680,121.653C1760,99.032,1840,110.423,1880,116.118L1920,121.814L1920,720L0,720Z"
+            />
+          </g>
+          <g transform="translate(0, 720)">
+            <path
+              fill="rgb(236, 68, 68)"
+              d="M0,103.61L40,91.931C80,80.252,160,56.894,240,60.883C320,64.872,400,96.208,480,125.898C560,155.588,640,183.632,720,163.746C800,143.859,880,76.041,960,54.177C1040,32.313,1120,56.402,1200,74.791C1280,93.18,1360,105.87,1440,125.973C1520,146.075,1600,173.592,1680,189.127C1760,204.662,1840,208.216,1880,209.993L1920,211.77L1920,360L0,360Z"
+            />
+          </g>
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 -z-20 hidden h-full w-full dark:block"
+          preserveAspectRatio="none"
+          viewBox="0 0 1920 1080"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="1920" height="1080" fill="rgb(23, 2, 2)" />
+          <g>
+            <path
+              fill="rgb(62, 8, 8)"
+              d="M0,294.371L40,294.641C80,294.911,160,295.452,240,261.866C320,228.281,400,160.57,480,157.048C560,153.526,640,214.192,720,256.716C800,299.24,880,323.621,960,297.815C1040,272.009,1120,196.015,1200,164.517C1280,133.02,1360,146.018,1440,155.868C1520,165.718,1600,172.42,1680,199.488C1760,226.557,1840,273.991,1880,297.709L1920,321.426L1920,1080L0,1080Z"
+            />
+          </g>
+          <g transform="translate(0, 360)">
+            <path
+              fill="rgb(101, 14, 14)"
+              d="M0,76.208L40,105.443C80,134.679,160,193.15,240,184.819C320,176.489,400,101.358,480,115.361C560,129.364,640,232.502,720,247.573C800,262.645,880,189.649,960,190.045C1040,190.44,1120,264.226,1200,287.706C1280,311.187,1360,284.362,1440,242.633C1520,200.905,1600,144.273,1680,121.653C1760,99.032,1840,110.423,1880,116.118L1920,121.814L1920,720L0,720Z"
+            />
+          </g>
+          <g transform="translate(0, 720)">
+            <path
+              fill="rgb(140, 20, 20)"
+              d="M0,103.61L40,91.931C80,80.252,160,56.894,240,60.883C320,64.872,400,96.208,480,125.898C560,155.588,640,183.632,720,163.746C800,143.859,880,76.041,960,54.177C1040,32.313,1120,56.402,1200,74.791C1280,93.18,1360,105.87,1440,125.973C1520,146.075,1600,173.592,1680,189.127C1760,204.662,1840,208.216,1880,209.993L1920,211.77L1920,360L0,360Z"
+            />
+          </g>
+        </svg>
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.24),transparent_38%),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.2))]" />
+        <div className="mx-auto flex max-w-5xl flex-col items-center space-y-8 text-center">
           <Link href={socialLinks.repo} target="_blank">
             <Badge
               variant="outline"
-              className="bg-background px-4 py-1.5 text-sm uppercase tracking-widest hover:bg-accent transition-colors"
+              className="border-white/25 bg-white/10 px-4 py-1.5 text-sm uppercase tracking-widest text-white backdrop-blur-md transition-colors hover:bg-white/15"
             >
-              v2.1.0 - Open Source
+              v3.0.0 - Open Source
             </Badge>
           </Link>
 
-          <Typography variant="h1">
-            <span className="font-secondary text-primary">UI Kit</span> for Poyraz
+          <Typography variant="h1" className="text-white">
+            <span className="font-secondary text-white">UI Kit</span> for Poyraz
           </Typography>
 
-          <Typography variant="lead" className="max-w-2xl">
+          <Typography variant="lead" className="max-w-2xl text-white/82">
             Minimal design system for modern web applications.
-            <span className="block mt-2 font-medium text-foreground">
+            <span className="mt-2 block font-medium text-white">
               Clean borders. Subtle rounding. Modern, functional design.
             </span>
           </Typography>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full justify-center">
             <Link href="/docs">
-              <Button size="lg" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                effect="swap"
+                className="w-full border-white bg-white text-primary shadow-[0_16px_50px_rgba(0,0,0,0.22)] hover:border-white hover:bg-white/90 sm:w-auto"
+              >
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href={socialLinks.repo} target="_blank">
-              <Button variant="outline" size="lg" className="bg-background w-full sm:w-auto">
+              <Button
+                variant="outline"
+                size="lg"
+                effect="swap"
+                className="w-full border-white/35 bg-white/10 text-white backdrop-blur-md hover:border-white/60 hover:bg-white/15 sm:w-auto"
+              >
                 <Github className="mr-2 h-4 w-4" /> GitHub
               </Button>
             </Link>
@@ -865,7 +937,7 @@ export default function Home() {
               An open-source minimal UI component library for modern web applications.
             </p>
           </FooterBrand>
-          <FooterGrid className="flex-1 max-w-lg grid-cols-2">
+          <FooterGrid className="flex-1 grid-cols-1 gap-10 sm:grid-cols-2 lg:max-w-xl lg:gap-14">
             {footerNav.map((section) => (
               <FooterSection key={section.heading}>
                 <FooterHeading>{section.heading}</FooterHeading>

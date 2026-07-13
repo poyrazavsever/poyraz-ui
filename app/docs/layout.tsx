@@ -21,9 +21,9 @@ import {
   NavbarMobileLink,
   NavbarMobileMenu,
   NavbarMobileToggle,
+  NavbarSearch,
   Sidebar,
   SidebarContent,
-  SidebarHeader,
 } from "poyraz-ui/organisms";
 
 import docsCatalog from "@/src/docs-registry.json";
@@ -166,12 +166,17 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <NavbarBrand href="/">
             <Logo width={30} height={30} />
           </NavbarBrand>
-          <NavbarLinks>
+          <NavbarLinks className="mr-auto">
             <NavbarLink href="/docs">Docs</NavbarLink>
             <NavbarLink href="/docs/atoms">Components</NavbarLink>
             <NavbarLink href="/docs/blocks">Blocks</NavbarLink>
           </NavbarLinks>
           <NavbarActions>
+            <NavbarSearch
+              placeholder="Search docs..."
+              aria-label="Search documentation"
+              wrapperClassName="hidden xl:flex"
+            />
             <ThemeToggle />
             <Button asChild size="icon" variant="ghost">
               <Link href={socialLinks.repo} target="_blank" aria-label="GitHub repository">
@@ -197,10 +202,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               variant="default"
               className="h-full w-full border-0 border-r border-border bg-background"
             >
-              <SidebarHeader className="h-auto border-0 px-3 pb-3 pt-2">
-                <p className="text-sm font-semibold text-foreground">Poyraz UI</p>
-              </SidebarHeader>
-              <SidebarContent scrollMode="fade" className="px-3">
+              <SidebarContent scrollMode="fade" className="px-3 pt-3">
                 <DocsSidebarNavigation />
               </SidebarContent>
             </Sidebar>
