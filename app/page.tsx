@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
@@ -16,7 +17,6 @@ import {
   MessageCircle,
   Search,
   SlidersHorizontal,
-  Sparkles,
   Star,
   Users,
 } from "lucide-react";
@@ -47,6 +47,15 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
+  CommandPalette,
+  CommandPaletteContent,
+  CommandPaletteEmpty,
+  CommandPaletteFooter,
+  CommandPaletteGroup,
+  CommandPaletteInput,
+  CommandPaletteItem,
+  CommandPaletteList,
+  CommandPaletteSeparator,
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
@@ -87,6 +96,194 @@ import {
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { mainNav, mobileNav, socialLinks } from "@/lib/navigation";
+
+const globalSearchItems = [
+  {
+    title: "Button",
+    href: "/docs/atoms/button",
+    group: "Atoms",
+    description: "Variants, sizes and hover effects",
+  },
+  {
+    title: "Card",
+    href: "/docs/atoms/card",
+    group: "Atoms",
+    description: "Soft, glass and content surfaces",
+  },
+  {
+    title: "Checkbox",
+    href: "/docs/atoms/checkbox",
+    group: "Atoms",
+    description: "Accessible boolean controls",
+  },
+  {
+    title: "Form Fields",
+    href: "/docs/atoms/form-fields",
+    group: "Atoms",
+    description: "Masked, phone and URL inputs",
+  },
+  {
+    title: "Input",
+    href: "/docs/atoms/input",
+    group: "Atoms",
+    description: "Composable field primitives",
+  },
+  { title: "Logo", href: "/docs/atoms/logo", group: "Atoms", description: "Brand mark variants" },
+  {
+    title: "Typography",
+    href: "/docs/atoms/typography",
+    group: "Atoms",
+    description: "Text scales and emphasis effects",
+  },
+  {
+    title: "Alert",
+    href: "/docs/molecules/alert",
+    group: "Molecules",
+    description: "Semantic feedback banners",
+  },
+  {
+    title: "Autocomplete",
+    href: "/docs/molecules/autocomplete",
+    group: "Molecules",
+    description: "Searchable combobox patterns",
+  },
+  {
+    title: "Command Palette",
+    href: "/docs/molecules/command-palette",
+    group: "Molecules",
+    description: "Global search and action overlay",
+  },
+  {
+    title: "Dropdown Menu",
+    href: "/docs/molecules/dropdown-menu",
+    group: "Molecules",
+    description: "Click and hover menu variants",
+  },
+  {
+    title: "Pagination",
+    href: "/docs/molecules/pagination",
+    group: "Molecules",
+    description: "Page navigation controls",
+  },
+  {
+    title: "Select",
+    href: "/docs/molecules/select",
+    group: "Molecules",
+    description: "Styled select menus",
+  },
+  {
+    title: "Sonner",
+    href: "/docs/molecules/sonner",
+    group: "Molecules",
+    description: "Toast notifications",
+  },
+  {
+    title: "Tabs",
+    href: "/docs/molecules/tabs",
+    group: "Molecules",
+    description: "Animated tab navigation",
+  },
+  {
+    title: "Navbar",
+    href: "/docs/organisms/navbar",
+    group: "Organisms",
+    description: "Responsive navigation systems",
+  },
+  {
+    title: "Data Table",
+    href: "/docs/organisms/data-table",
+    group: "Organisms",
+    description: "Interactive table patterns",
+  },
+  {
+    title: "Blocks",
+    href: "/docs/blocks",
+    group: "Templates",
+    description: "Copy-ready UI sections",
+  },
+];
+
+function GlobalSearchPalette({
+  onOpenChange,
+  open,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredItems = globalSearchItems.filter((item) => {
+    if (!normalizedQuery) return true;
+    return [item.title, item.group, item.description]
+      .join(" ")
+      .toLowerCase()
+      .includes(normalizedQuery);
+  });
+  const groupedItems = filteredItems.reduce<Record<string, typeof globalSearchItems>>(
+    (groups, item) => {
+      groups[item.group] ??= [];
+      groups[item.group].push(item);
+      return groups;
+    },
+    {},
+  );
+
+  const closeAndNavigate = (href: string) => {
+    onOpenChange(false);
+    router.push(href);
+  };
+
+  return (
+    <CommandPalette
+      open={open}
+      onOpenChange={(nextOpen) => {
+        onOpenChange(nextOpen);
+        if (!nextOpen) setQuery("");
+      }}
+    >
+      <CommandPaletteContent surface="glass" radius="xl" overlayTone="glass">
+        <CommandPaletteInput
+          autoFocus
+          placeholder="Search components, docs, blocks..."
+          onValueChange={setQuery}
+        />
+        <CommandPaletteList>
+          {filteredItems.length === 0 ? (
+            <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
+          ) : (
+            Object.entries(groupedItems).map(([group, items], groupIndex) => (
+              <div key={group}>
+                {groupIndex > 0 && <CommandPaletteSeparator />}
+                <CommandPaletteGroup heading={group}>
+                  {items.map((item) => (
+                    <CommandPaletteItem
+                      key={item.href}
+                      icon={<Search className="size-4" />}
+                      description={item.description}
+                      shortcut="↵"
+                      onClick={() => closeAndNavigate(item.href)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") closeAndNavigate(item.href);
+                      }}
+                    >
+                      {item.title}
+                    </CommandPaletteItem>
+                  ))}
+                </CommandPaletteGroup>
+              </div>
+            ))
+          )}
+        </CommandPaletteList>
+        <CommandPaletteFooter>
+          <span>Type to search</span>
+          <span>Enter to open</span>
+          <span>Esc to close</span>
+        </CommandPaletteFooter>
+      </CommandPaletteContent>
+    </CommandPalette>
+  );
+}
 
 function CopyInstallCommand() {
   const [copied, setCopied] = useState(false);
@@ -482,6 +679,7 @@ function InteractiveComponentPanel() {
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const updateScrollState = () => setIsScrolled(window.scrollY > 24);
@@ -489,8 +687,32 @@ export default function Home() {
     return () => window.removeEventListener("scroll", updateScrollState);
   }, []);
 
+  useEffect(() => {
+    const openSearchFromShortcut = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const isTypingTarget =
+        target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.isContentEditable;
+
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setIsSearchOpen(true);
+        return;
+      }
+
+      if (!isTypingTarget && event.key === "/") {
+        event.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+
+    window.addEventListener("keydown", openSearchFromShortcut);
+    return () => window.removeEventListener("keydown", openSearchFromShortcut);
+  }, []);
+
   return (
     <main className="min-h-screen bg-background">
+      <GlobalSearchPalette open={isSearchOpen} onOpenChange={setIsSearchOpen} />
+
       <Navbar
         variant={isScrolled ? "glass" : "transparent"}
         className="fixed left-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300"
@@ -521,12 +743,23 @@ export default function Home() {
             <NavbarSearch
               placeholder="Search docs..."
               aria-label="Search documentation"
+              aria-haspopup="dialog"
+              aria-expanded={isSearchOpen}
+              readOnly
               wrapperClassName="hidden xl:flex"
               className={
                 isScrolled
                   ? undefined
                   : "border-white/20 bg-white/10 text-white placeholder:text-white/60 focus:ring-white/35"
               }
+              onClick={() => setIsSearchOpen(true)}
+              onFocus={() => setIsSearchOpen(true)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setIsSearchOpen(true);
+                }
+              }}
             />
             <ThemeToggle
               className={
