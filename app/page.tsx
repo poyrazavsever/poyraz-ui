@@ -20,15 +20,22 @@ import { toast } from "poyraz-ui/molecules";
 import { Avatar, AvatarFallback, AvatarImage } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "poyraz-ui/atoms";
 import { Checkbox } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import { RadioGroup, RadioGroupItem } from "poyraz-ui/atoms";
-import { Separator } from "poyraz-ui/atoms";
 import { Typography } from "poyraz-ui/atoms";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "poyraz-ui/molecules";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "poyraz-ui/molecules";
 import {
   Navbar,
   NavbarActions,
@@ -133,137 +140,161 @@ function InteractiveComponentPanel() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative mx-auto w-full max-w-[36rem] lg:mx-0 lg:ml-auto">
-      <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-white/10 blur-3xl" />
-      <Card className="border-white/20 bg-white/92 text-foreground shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur-xl dark:bg-surface/92">
-        <CardHeader className="space-y-2">
-          <div className="flex items-center justify-between gap-4">
-            <Badge className="bg-primary text-primary-foreground">Live components</Badge>
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((id) => (
-                <Avatar key={id} className="size-8 border-2 border-background">
-                  <AvatarImage src={`https://i.pravatar.cc/64?img=${id}`} />
-                  <AvatarFallback>U{id}</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-          </div>
-          <CardTitle>Build with the real kit</CardTitle>
-          <CardDescription>
-            These are focusable, selectable and clickable Poyraz UI components — not flat mockups.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-5">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="hero-email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
-                <Input
-                  id="hero-email"
-                  type="email"
-                  placeholder="poyraz@example.com"
-                  className="pl-9"
-                />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="hero-password">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
-                <Input
-                  id="hero-password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="pl-9 pr-9"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((value) => !value)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-placeholder transition-colors hover:text-foreground"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                </button>
-              </div>
-            </div>
-          </div>
+    <div className="pointer-events-none absolute right-[-7vw] top-[14%] hidden h-[76vh] w-[min(58vw,760px)] lg:block">
+      <div className="absolute inset-0 rounded-full bg-white/15 blur-3xl" />
 
-          <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
-            <div className="space-y-2">
-              <Label>Component style</Label>
-              <Select defaultValue="glass">
-                <SelectTrigger>
-                  <SelectValue placeholder="Choose style" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="glass">Glass</SelectItem>
-                  <SelectItem value="soft">Soft</SelectItem>
-                  <SelectItem value="outline">Outline</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-end">
-              <Button
-                effect="swap"
-                onClick={() => toast.success("This button is interactive.")}
-                className="w-full sm:w-auto"
-              >
-                Try it <ArrowRight className="size-4" />
-              </Button>
-            </div>
-          </div>
+      <div className="pointer-events-auto absolute left-[8%] top-[2%] flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-2 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+        <Badge className="bg-white text-primary">Live</Badge>
+        <span className="text-sm font-medium">71 registry items</span>
+      </div>
 
-          <Separator />
+      <div className="pointer-events-auto absolute right-[18%] top-[5%] flex -space-x-3">
+        {[1, 2, 3, 4].map((id) => (
+          <Avatar key={id} className="size-11 border-2 border-white/70 shadow-xl">
+            <AvatarImage src={`https://i.pravatar.cc/80?img=${id}`} />
+            <AvatarFallback>U{id}</AvatarFallback>
+          </Avatar>
+        ))}
+      </div>
 
-          <RadioGroup defaultValue="registry" className="grid gap-3 sm:grid-cols-2">
-            <Label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-background/70 p-3">
-              <RadioGroupItem value="registry" className="mt-0.5" />
-              <span>
-                <span className="block text-sm font-semibold">Source registry</span>
-                <span className="text-xs text-muted-foreground">Own and customize files.</span>
-              </span>
-            </Label>
-            <Label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-background/70 p-3">
-              <RadioGroupItem value="package" className="mt-0.5" />
-              <span>
-                <span className="block text-sm font-semibold">Npm package</span>
-                <span className="text-xs text-muted-foreground">Install and update fast.</span>
-              </span>
-            </Label>
-          </RadioGroup>
+      <div className="pointer-events-auto absolute left-[18%] top-[18%] w-72 -rotate-2 rounded-2xl border border-white/20 bg-white/90 p-4 text-foreground shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl dark:bg-surface/90">
+        <Label htmlFor="hero-cloud-email">Email</Label>
+        <div className="relative mt-2">
+          <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
+          <Input
+            id="hero-cloud-email"
+            type="email"
+            placeholder="poyraz@example.com"
+            className="pl-9"
+          />
+        </div>
+      </div>
 
-          <div className="flex flex-col gap-3 rounded-xl border border-border bg-background/70 p-3 sm:flex-row sm:items-center">
-            <div className="flex flex-1 items-center gap-2.5">
-              <Checkbox id="hero-terms" defaultChecked />
-              <Label htmlFor="hero-terms" className="text-sm font-normal normal-case">
-                Use accessible defaults
-              </Label>
-            </div>
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
-              <Input placeholder="Search components..." className="pl-9" />
-            </div>
-          </div>
+      <div className="pointer-events-auto absolute right-[8%] top-[22%] w-64 rotate-2 rounded-2xl border border-white/20 bg-white/90 p-4 text-foreground shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl dark:bg-surface/90">
+        <Label htmlFor="hero-cloud-password">Password</Label>
+        <div className="relative mt-2">
+          <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
+          <Input
+            id="hero-cloud-password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+            className="pl-9 pr-9"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((value) => !value)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-placeholder transition-colors hover:text-foreground"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+          </button>
+        </div>
+      </div>
 
-          <div className="flex items-center justify-between rounded-xl border border-border bg-background/70 p-3">
-            <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-primary-muted text-primary">
-                <Users className="size-5" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold">71 registry items</p>
-                <p className="text-xs text-muted-foreground">
-                  Atoms, molecules, organisms and blocks.
-                </p>
-              </div>
-            </div>
-            <Button variant="ghost" size="icon" aria-label="Open settings">
-              <SlidersHorizontal className="size-4" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="pointer-events-auto absolute left-[4%] top-[43%] w-56 rotate-1 rounded-2xl border border-white/20 bg-white/90 p-4 text-foreground shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl dark:bg-surface/90">
+        <Label>Style</Label>
+        <Select defaultValue="glass">
+          <SelectTrigger className="mt-2">
+            <SelectValue placeholder="Choose style" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="glass">Glass</SelectItem>
+            <SelectItem value="soft">Soft</SelectItem>
+            <SelectItem value="outline">Outline</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="pointer-events-auto absolute right-[24%] top-[45%] flex flex-wrap gap-3">
+        <Button effect="swap" onClick={() => toast.success("Primary action from Poyraz UI.")}>
+          Save <Check className="size-4" />
+        </Button>
+        <Button
+          variant="outline"
+          effect="shine"
+          className="bg-white/90"
+          onClick={() => toast.info("Outline button clicked.")}
+        >
+          Preview
+        </Button>
+        <Button
+          variant="glass"
+          effect="border-draw"
+          onClick={() => toast.warning("Glass action fired.")}
+        >
+          Glass
+        </Button>
+      </div>
+
+      <div className="pointer-events-auto absolute left-[36%] top-[58%] grid w-60 -rotate-1 gap-2">
+        <Alert
+          variant="success"
+          appearance="glass"
+          radius="xl"
+          className="border-white/25 bg-white/85 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.22)] dark:bg-surface/90"
+        >
+          <AlertTitle>Saved</AlertTitle>
+          <AlertDescription>Component synced.</AlertDescription>
+        </Alert>
+        <Alert
+          variant="info"
+          appearance="glass"
+          radius="xl"
+          className="translate-x-8 border-white/25 bg-white/85 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.2)] dark:bg-surface/90"
+        >
+          <AlertTitle>Toast preview</AlertTitle>
+          <AlertDescription>Click buttons to fire real toasts.</AlertDescription>
+        </Alert>
+      </div>
+
+      <RadioGroup
+        defaultValue="registry"
+        className="pointer-events-auto absolute right-[6%] top-[61%] grid w-80 gap-3"
+      >
+        <Label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-white/20 bg-white/90 p-3 text-foreground shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:bg-surface/90">
+          <RadioGroupItem value="registry" className="mt-0.5" />
+          <span>
+            <span className="block text-sm font-semibold">Source registry</span>
+            <span className="text-xs text-muted-foreground">
+              Own and customize component files.
+            </span>
+          </span>
+        </Label>
+        <Label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-white/20 bg-white/90 p-3 text-foreground shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:bg-surface/90">
+          <RadioGroupItem value="package" className="mt-0.5" />
+          <span>
+            <span className="block text-sm font-semibold">Npm package</span>
+            <span className="text-xs text-muted-foreground">Install and update with semver.</span>
+          </span>
+        </Label>
+      </RadioGroup>
+
+      <div className="pointer-events-auto absolute left-[13%] bottom-[15%] flex w-80 -rotate-1 items-center gap-3 rounded-2xl border border-white/20 bg-white/90 p-3 text-foreground shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:bg-surface/90">
+        <Checkbox id="hero-cloud-terms" defaultChecked />
+        <Label htmlFor="hero-cloud-terms" className="text-sm font-normal normal-case">
+          Accessible defaults enabled
+        </Label>
+      </div>
+
+      <div className="pointer-events-auto absolute right-[2%] bottom-[3%] w-72 -rotate-2 rounded-2xl border border-white/20 bg-white/90 p-3 text-foreground shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:bg-surface/90">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-placeholder" />
+          <Input placeholder="Search components..." className="pl-9" />
+        </div>
+      </div>
+
+      <div className="pointer-events-auto absolute left-[2%] bottom-[4%] flex rotate-2 items-center gap-3 rounded-2xl border border-white/20 bg-white/90 p-3 text-foreground shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:bg-surface/90">
+        <div className="flex size-10 items-center justify-center rounded-xl bg-primary-muted text-primary">
+          <Users className="size-5" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold">Atoms → blocks</p>
+          <p className="text-xs text-muted-foreground">Composable surfaces.</p>
+        </div>
+        <Button variant="ghost" size="icon" aria-label="Open settings">
+          <SlidersHorizontal className="size-4" />
+        </Button>
+      </div>
     </div>
   );
 }
@@ -363,9 +394,10 @@ export default function Home() {
 
       <section className="relative isolate flex min-h-screen overflow-hidden px-6 pb-16 pt-28 text-white md:pt-36">
         <HeroWaveBackground />
+        <InteractiveComponentPanel />
 
-        <div className="mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(28rem,1.1fr)]">
-          <div className="flex max-w-2xl flex-col items-start space-y-7 text-left">
+        <div className="mx-auto flex w-full max-w-5xl items-center">
+          <div className="flex max-w-[34rem] flex-col items-start space-y-7 text-left">
             <Link href={socialLinks.repo} target="_blank">
               <Badge
                 variant="outline"
@@ -377,7 +409,7 @@ export default function Home() {
 
             <Typography
               variant="h1"
-              className="max-w-3xl text-[clamp(3.5rem,8vw,2.75rem)] leading-[0.9] text-white"
+              className="max-w-3xl text-[clamp(3.5rem,8vw,7.75rem)] leading-[0.9] text-white"
             >
               <span className="font-secondary text-white">UI Kit</span> for Poyraz
             </Typography>
@@ -413,8 +445,6 @@ export default function Home() {
 
             <CopyInstallCommand />
           </div>
-
-          <InteractiveComponentPanel />
         </div>
       </section>
     </main>
