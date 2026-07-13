@@ -43,6 +43,42 @@ import {
 } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
+const scrollItems = [
+  "Overview",
+  "Activity",
+  "Analytics",
+  "Customers",
+  "Projects",
+  "Invoices",
+  "Messages",
+  "Files",
+  "Team",
+  "Security",
+  "Integrations",
+  "Settings",
+];
+
+function ScrollModeSidebar({ mode }: { mode: "auto" | "hidden" | "fade" }) {
+  return (
+    <div className="h-72 min-w-0 overflow-hidden rounded-md border border-border">
+      <Sidebar className="h-full w-full">
+        <SidebarHeader className="h-12">
+          <span className="text-sm font-semibold capitalize">{mode} scroll</span>
+        </SidebarHeader>
+        <SidebarContent scrollMode={mode}>
+          <SidebarMenu>
+            {scrollItems.map((item, index) => (
+              <SidebarMenuItem key={item} active={index === 0}>
+                {item}
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarContent>
+      </Sidebar>
+    </div>
+  );
+}
+
 export default function SidebarPage() {
   return (
     <ComponentPage
@@ -59,6 +95,20 @@ export default function SidebarPage() {
 } from "poyraz-ui/organisms";`}
     >
       {/* ─── 1. Full Featured ────────────────────────── */}
+      <DemoSection
+        title="Content overflow"
+        description="Choose a visible scrollbar, a hidden scrollbar with wheel and keyboard scrolling, or edge fades that signal more content without a scrollbar."
+        code={`<SidebarContent scrollMode="auto" />
+<SidebarContent scrollMode="hidden" />
+<SidebarContent scrollMode="fade" />`}
+      >
+        <div className="grid gap-4 @2xl/demo:grid-cols-3">
+          <ScrollModeSidebar mode="auto" />
+          <ScrollModeSidebar mode="hidden" />
+          <ScrollModeSidebar mode="fade" />
+        </div>
+      </DemoSection>
+
       <DemoSection
         title="Full Featured"
         description="Default sidebar with search, user profile, grouped menu items, sub-menus, badges, and footer."
@@ -127,15 +177,10 @@ export default function SidebarPage() {
                   <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
                     Dashboard
                   </SidebarMenuItem>
-                  <SidebarMenuItem
-                    icon={<BarChart3 className="h-4 w-4" />}
-                    badge="3"
-                  >
+                  <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />} badge="3">
                     Analytics
                   </SidebarMenuItem>
-                  <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-                    Users
-                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Users</SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroup>
               <SidebarSeparator />
@@ -151,9 +196,7 @@ export default function SidebarPage() {
                     <SidebarSubMenuItem>Published</SidebarSubMenuItem>
                     <SidebarSubMenuItem>Archived</SidebarSubMenuItem>
                   </SidebarSubMenu>
-                  <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>
-                    Pages
-                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>Pages</SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroup>
               <SidebarSeparator />
@@ -215,19 +258,11 @@ export default function SidebarPage() {
             <SidebarContent>
               <SidebarSearch />
               <SidebarMenu>
-                <SidebarMenuItem
-                  icon={<LayoutDashboard className="h-4 w-4" />}
-                  active
-                >
+                <SidebarMenuItem icon={<LayoutDashboard className="h-4 w-4" />} active>
                   Dashboard
                 </SidebarMenuItem>
-                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-                  Users
-                </SidebarMenuItem>
-                <SidebarSubMenu
-                  label="Settings"
-                  icon={<Settings className="h-4 w-4" />}
-                >
+                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Users</SidebarMenuItem>
+                <SidebarSubMenu label="Settings" icon={<Settings className="h-4 w-4" />}>
                   <SidebarSubMenuItem>General</SidebarSubMenuItem>
                   <SidebarSubMenuItem>Security</SidebarSubMenuItem>
                 </SidebarSubMenu>
@@ -275,18 +310,11 @@ export default function SidebarPage() {
               <SidebarGroup>
                 <SidebarGroupLabel>Design</SidebarGroupLabel>
                 <SidebarMenu>
-                  <SidebarMenuItem
-                    icon={<Palette className="h-4 w-4" />}
-                    active
-                  >
+                  <SidebarMenuItem icon={<Palette className="h-4 w-4" />} active>
                     Themes
                   </SidebarMenuItem>
-                  <SidebarMenuItem icon={<Globe className="h-4 w-4" />}>
-                    i18n
-                  </SidebarMenuItem>
-                  <SidebarMenuItem icon={<Code className="h-4 w-4" />}>
-                    Components
-                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<Globe className="h-4 w-4" />}>i18n</SidebarMenuItem>
+                  <SidebarMenuItem icon={<Code className="h-4 w-4" />}>Components</SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroup>
             </SidebarContent>
@@ -324,15 +352,9 @@ export default function SidebarPage() {
           <Sidebar variant="mini">
             <SidebarContent>
               <SidebarMenu>
-                <SidebarMenuItem icon={<Home className="h-4 w-4" />}>
-                  Home
-                </SidebarMenuItem>
-                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-                  Users
-                </SidebarMenuItem>
-                <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>
-                  Settings
-                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Home className="h-4 w-4" />}>Home</SidebarMenuItem>
+                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Users</SidebarMenuItem>
+                <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>Settings</SidebarMenuItem>
                 <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />}>
                   Analytics
                 </SidebarMenuItem>
@@ -371,35 +393,21 @@ export default function SidebarPage() {
         <div className="border border-border rounded-sm h-[350px] overflow-hidden">
           <Sidebar>
             <SidebarHeader>
-              <SidebarUserProfile
-                name="Maria Garcia"
-                role="Product Manager"
-                initials="MG"
-              />
+              <SidebarUserProfile name="Maria Garcia" role="Product Manager" initials="MG" />
             </SidebarHeader>
             <SidebarContent>
               <SidebarMenu>
-                <SidebarMenuItem
-                  icon={<LayoutDashboard className="h-4 w-4" />}
-                  active
-                >
+                <SidebarMenuItem icon={<LayoutDashboard className="h-4 w-4" />} active>
                   Overview
                 </SidebarMenuItem>
-                <SidebarMenuItem
-                  icon={<FileText className="h-4 w-4" />}
-                  badge="12"
-                >
+                <SidebarMenuItem icon={<FileText className="h-4 w-4" />} badge="12">
                   Tasks
                 </SidebarMenuItem>
-                <SidebarMenuItem icon={<Mail className="h-4 w-4" />}>
-                  Messages
-                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Mail className="h-4 w-4" />}>Messages</SidebarMenuItem>
               </SidebarMenu>
             </SidebarContent>
             <SidebarFooter>
-              <span className="text-xs text-placeholder">
-                Logged in as Maria
-              </span>
+              <span className="text-xs text-placeholder">Logged in as Maria</span>
             </SidebarFooter>
           </Sidebar>
         </div>
@@ -439,12 +447,8 @@ export default function SidebarPage() {
                 <SidebarMenuItem icon={<Home className="h-4 w-4" />} active>
                   Dashboard
                 </SidebarMenuItem>
-                <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>
-                  Documents
-                </SidebarMenuItem>
-                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-                  Members
-                </SidebarMenuItem>
+                <SidebarMenuItem icon={<FileText className="h-4 w-4" />}>Documents</SidebarMenuItem>
+                <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Members</SidebarMenuItem>
               </SidebarMenu>
             </SidebarContent>
             <SidebarFooter>
@@ -490,18 +494,11 @@ export default function SidebarPage() {
             </SidebarHeader>
             <SidebarContent>
               <SidebarMenu>
-                <SidebarMenuItem
-                  icon={<LayoutDashboard className="h-4 w-4" />}
-                  active
-                >
+                <SidebarMenuItem icon={<LayoutDashboard className="h-4 w-4" />} active>
                   Overview
                 </SidebarMenuItem>
-                <SidebarMenuItem icon={<Palette className="h-4 w-4" />}>
-                  Themes
-                </SidebarMenuItem>
-                <SidebarMenuItem icon={<Code className="h-4 w-4" />}>
-                  Components
-                </SidebarMenuItem>
+                <SidebarMenuItem icon={<Palette className="h-4 w-4" />}>Themes</SidebarMenuItem>
+                <SidebarMenuItem icon={<Code className="h-4 w-4" />}>Components</SidebarMenuItem>
               </SidebarMenu>
             </SidebarContent>
           </Sidebar>
@@ -559,9 +556,7 @@ export default function SidebarPage() {
               <SidebarSeparator />
               <SidebarSection title="Management" defaultOpen={false}>
                 <SidebarMenu>
-                  <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-                    Users
-                  </SidebarMenuItem>
+                  <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Users</SidebarMenuItem>
                   <SidebarMenuItem icon={<ShieldCheck className="h-4 w-4" />}>
                     Roles
                   </SidebarMenuItem>

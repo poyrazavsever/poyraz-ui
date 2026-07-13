@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonial-card",
+  "title": "Testimonial Card",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass testimonial-card with semantic states and composable variants.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/card",
+    "@poyraz/star-rating"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/blocks/card-templates/testimonial-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Card, CardContent, type CardProps } from \"@/components/ui/atoms/card\";\nimport { StarRating } from \"@/components/ui/blocks/card-templates/star-rating\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface TestimonialCardProps extends CardProps {\n  quote: string;\n  author: string;\n  role?: string;\n  avatar?: string;\n  rating?: number;\n}\nconst TestimonialCard = React.forwardRef<HTMLDivElement, TestimonialCardProps>(\n  ({ author, avatar, className, quote, rating, role, ...props }, ref) => (\n    <Card ref={ref} className={cn(\"group h-full\", className)} {...props}>\n      <CardContent className=\"flex h-full flex-1 flex-col p-5\">\n        <span className=\"font-secondary text-4xl leading-none text-primary\">“</span>\n        <blockquote className=\"mt-1 text-sm leading-relaxed text-secondary-foreground\">\n          {quote}\n        </blockquote>\n        {rating != null && <StarRating rating={rating} className=\"mt-3\" />}\n        <div className=\"mt-auto flex items-center gap-3 border-t border-border pt-4\">\n          {avatar && <img src={avatar} alt=\"\" className=\"size-9 rounded-full object-cover\" />}\n          <div className=\"min-w-0\">\n            <div className=\"truncate text-sm font-semibold\">{author}</div>\n            {role && <div className=\"truncate text-xs text-muted-foreground\">{role}</div>}\n          </div>\n        </div>\n      </CardContent>\n    </Card>\n  ),\n);\nTestimonialCard.displayName = \"TestimonialCard\";\nexport { TestimonialCard };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/card-templates/testimonial-card.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-card-block",
+    "phase": "beta"
+  },
+  "type": "registry:block"
+}

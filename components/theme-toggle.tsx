@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
-import { Button } from "poyraz-ui/atoms";
+import { Monitor, Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -11,32 +11,33 @@ export function ThemeToggle() {
 
   React.useEffect(() => setMounted(true), []);
 
-  if (!mounted) {
-    return (
-      <Button
-        size="icon"
-        variant="ghost"
-        className="h-9 w-9"
-        aria-label="Toggle theme"
-      >
-        <Sun className="h-4 w-4" />
-      </Button>
-    );
-  }
+  const modes = [
+    { value: "light", label: "Light", icon: Sun },
+    { value: "dark", label: "Dark", icon: Moon },
+    { value: "system", label: "System", icon: Monitor },
+  ] as const;
 
   return (
-    <Button
-      size="icon"
-      variant="ghost"
-      className="h-9 w-9"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle theme"
+    <div
+      className="flex items-center rounded-md border border-border bg-surface p-0.5"
+      aria-label="Color theme"
     >
-      {theme === "dark" ? (
-        <Sun className="h-4 w-4" />
-      ) : (
-        <Moon className="h-4 w-4" />
-      )}
-    </Button>
+      {modes.map(({ value, label, icon: Icon }) => (
+        <button
+          key={value}
+          type="button"
+          title={label}
+          aria-label={`${label} theme`}
+          aria-pressed={mounted && theme === value}
+          className={cn(
+            "flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground",
+            mounted && theme === value && "bg-accent text-foreground",
+          )}
+          onClick={() => setTheme(value)}
+        >
+          <Icon className="size-3.5" />
+        </button>
+      ))}
+    </div>
   );
 }

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "include": [
+    "lib/registry.json",
+    "styles/registry.json",
+    "ui/registry.json",
+    "hooks/registry.json",
+    "blocks/registry.json"
+  ]
+}

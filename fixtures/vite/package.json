@@ -1,0 +1,21 @@
+{
+  "name": "poyraz-ui-vite-clean-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "vite": "^8.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5"
+  }
+}

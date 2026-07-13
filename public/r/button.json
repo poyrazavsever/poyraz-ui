@@ -1,0 +1,199 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "title": "Button",
+  "author": "Poyraz Avsever",
+  "description": "A composable button primitive and variant recipe for the Poyraz Soft Glass design language.",
+  "dependencies": [
+    "@radix-ui/react-slot@^1.2.4",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slot, Slottable } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"poyraz-button relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap border font-sans text-sm font-semibold outline-none transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] data-[effect=fill]:hover:text-primary-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground disabled:border-border disabled:opacity-100 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:bg-disabled aria-disabled:text-disabled-foreground aria-disabled:border-border active:scale-[var(--poyraz-button-press-scale)] motion-reduce:transition-none motion-reduce:active:scale-100 [&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-primary/80 bg-primary text-primary-foreground hover:border-primary-hover hover:bg-primary-hover\",\n        secondary:\n          \"border-border-strong/70 bg-secondary text-secondary-foreground hover:border-border-strong hover:bg-accent\",\n        soft: \"border-primary/15 bg-primary-muted text-primary-muted-foreground hover:border-primary/25 hover:bg-primary/15\",\n        outline:\n          \"border-primary/55 bg-background/60 text-primary hover:border-primary hover:bg-primary-muted\",\n        glass:\n          \"poyraz-button-glass border-glass-border-outer text-foreground hover:border-border-strong hover:bg-glass-strong dark:hover:border-glass-border\",\n        ghost:\n          \"border-transparent bg-transparent text-foreground/75 hover:bg-accent hover:text-foreground\",\n        destructive:\n          \"border-destructive/80 bg-destructive text-destructive-foreground hover:border-destructive hover:bg-destructive/90\",\n        link: \"h-auto overflow-visible rounded-none border-transparent bg-transparent px-0 text-primary underline-offset-4 hover:underline active:scale-100\",\n      },\n      size: {\n        xs: \"h-7 gap-1.5 px-2.5 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5\",\n        sm: \"h-8 gap-1.5 px-3 text-xs [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5\",\n        default:\n          \"h-10 px-4 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4\",\n        lg: \"h-11 px-6 text-base [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-4.5\",\n        \"icon-sm\":\n          \"size-8 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-small)] [&_svg]:size-3.5\",\n        icon: \"size-10 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-medium)] [&_svg]:size-4\",\n        \"icon-lg\":\n          \"size-11 p-0 [--poyraz-button-press-scale:var(--poyraz-motion-scale-press-large)] [&_svg]:size-5\",\n      },\n      radius: {\n        none: \"rounded-none\",\n        xs: \"rounded-xs\",\n        sm: \"rounded-sm\",\n        md: \"rounded-md\",\n        lg: \"rounded-lg\",\n        xl: \"rounded-xl\",\n        \"2xl\": \"rounded-2xl\",\n        full: \"rounded-full\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n      radius: \"md\",\n    },\n  },\n);\n\ntype ButtonEffect = \"none\" | \"shine\" | \"fill\" | \"swap\" | \"border-draw\";\ntype ButtonFillDirection = \"right\" | \"left\" | \"up\" | \"down\";\ntype ButtonSwapTarget = \"icon\" | \"label\" | \"both\";\n\ntype ButtonProps = React.ComponentPropsWithoutRef<\"button\"> &\n  VariantProps<typeof buttonVariants> & {\n    /** Render the button styles and behavior on the single child element. */\n    asChild?: boolean;\n    /** Keep the label in-flow while showing a centered busy indicator. */\n    loading?: boolean;\n    /** Optional decorative hover motion; semantic state remains unchanged. */\n    effect?: ButtonEffect;\n    /** Direction in which the fill effect travels. */\n    fillDirection?: ButtonFillDirection;\n    /** Anatomy animated by the swap effect. Raw text is treated as content. */\n    swapTarget?: ButtonSwapTarget;\n  };\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  (\n    {\n      asChild = false,\n      children,\n      className,\n      disabled = false,\n      effect = \"none\",\n      fillDirection = \"right\",\n      loading = false,\n      onClick,\n      radius = \"md\",\n      size = \"default\",\n      swapTarget = \"both\",\n      type,\n      variant = \"default\",\n      \"aria-label\": ariaLabel,\n      ...props\n    },\n    ref,\n  ) => {\n    const isDisabled = disabled || loading;\n    const sharedProps = {\n      \"aria-busy\": loading || undefined,\n      \"aria-disabled\": asChild && isDisabled ? true : undefined,\n      \"aria-label\": ariaLabel ?? (loading && typeof children === \"string\" ? children : undefined),\n      \"data-effect\": effect,\n      \"data-fill-direction\": fillDirection,\n      \"data-loading\": loading ? \"\" : undefined,\n      \"data-radius\": radius,\n      \"data-size\": size,\n      \"data-slot\": \"button\",\n      \"data-swap-target\": swapTarget,\n      \"data-variant\": variant,\n      className: cn(buttonVariants({ variant, size, radius }), className),\n      onClick: (event: React.MouseEvent<HTMLButtonElement>) => {\n        if (isDisabled) {\n          event.preventDefault();\n          return;\n        }\n        onClick?.(event);\n      },\n    };\n\n    const spinner = (\n      <span data-slot=\"button-spinner\" aria-hidden=\"true\">\n        <svg viewBox=\"0 0 24 24\" fill=\"none\">\n          <circle\n            cx=\"12\"\n            cy=\"12\"\n            r=\"9\"\n            stroke=\"currentColor\"\n            strokeOpacity=\"0.25\"\n            strokeWidth=\"3\"\n          />\n          <path\n            d=\"M21 12a9 9 0 0 0-9-9\"\n            stroke=\"currentColor\"\n            strokeLinecap=\"round\"\n            strokeWidth=\"3\"\n          />\n        </svg>\n      </span>\n    );\n\n    if (asChild) {\n      return (\n        <Slot ref={ref} {...sharedProps} {...props}>\n          {spinner}\n          <Slottable>{children}</Slottable>\n        </Slot>\n      );\n    }\n\n    return (\n      <button ref={ref} type={type ?? \"button\"} disabled={isDisabled} {...sharedProps} {...props}>\n        {spinner}\n        <span data-slot=\"button-content\">{children}</span>\n      </button>\n    );\n  },\n);\nButton.displayName = \"Button\";\n\nfunction ButtonIcon({ className, ...props }: React.ComponentPropsWithoutRef<\"span\">) {\n  return <span data-slot=\"button-icon\" className={cn(\"inline-flex\", className)} {...props} />;\n}\n\nfunction ButtonLabel({ className, ...props }: React.ComponentPropsWithoutRef<\"span\">) {\n  return <span data-slot=\"button-label\" className={cn(\"inline-flex\", className)} {...props} />;\n}\n\nexport { Button, ButtonIcon, ButtonLabel, buttonVariants };\nexport type { ButtonEffect, ButtonFillDirection, ButtonProps, ButtonSwapTarget };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/button.tsx"
+    }
+  ],
+  "css": {
+    ".poyraz-button": {
+      "--poyraz-button-effect-color": "var(--primary-hover)",
+      "--poyraz-button-spinner-color": "currentColor",
+      "--poyraz-button-shine-color": "rgb(255 255 255 / 0.62)"
+    },
+    ".poyraz-button[data-variant=\"default\"], .poyraz-button[data-variant=\"destructive\"]": {
+      "--poyraz-button-effect-color": "rgb(255 255 255 / 0.16)"
+    },
+    ".poyraz-button-glass": {
+      "--poyraz-button-glass-border-hover": "var(--border-strong)",
+      "--poyraz-button-shine-color": "color-mix(in srgb, var(--primary) 34%, transparent)",
+      "background-color": "var(--glass-background)",
+      "backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))",
+      "-webkit-backdrop-filter": "blur(var(--poyraz-blur-glass)) saturate(var(--poyraz-saturation-glass))"
+    },
+    ".poyraz-button-glass:hover": {
+      "border-color": "var(--poyraz-button-glass-border-hover)",
+      "background-color": "var(--glass-background-strong)"
+    },
+    ".dark .poyraz-button-glass, [data-poyraz-theme=\"dark\"] .poyraz-button-glass": {
+      "--poyraz-button-glass-border-hover": "var(--glass-border)",
+      "--poyraz-button-shine-color": "rgb(255 255 255 / 0.62)"
+    },
+    ".poyraz-button > [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
+      "position": "relative",
+      "z-index": "1"
+    },
+    ".poyraz-button > [data-slot=\"button-content\"]": {
+      "display": "inline-flex",
+      "align-items": "center",
+      "justify-content": "center",
+      "gap": "inherit"
+    },
+    ".poyraz-button [data-slot=\"button-spinner\"]": {
+      "position": "absolute",
+      "inset": "50% auto auto 50%",
+      "z-index": "2",
+      "display": "inline-flex",
+      "width": "1rem",
+      "height": "1rem",
+      "color": "var(--poyraz-button-spinner-color)",
+      "opacity": "0",
+      "transform": "translate(-50%, -50%)",
+      "pointer-events": "none"
+    },
+    ".poyraz-button [data-slot=\"button-spinner\"] svg": {
+      "width": "100%",
+      "height": "100%",
+      "animation": "poyraz-button-spin var(--poyraz-motion-duration-slow) linear infinite"
+    },
+    ".poyraz-button[data-loading] > :not([data-slot=\"button-spinner\"])": {
+      "visibility": "hidden"
+    },
+    ".poyraz-button[data-loading] [data-slot=\"button-spinner\"]": {
+      "opacity": "1",
+      "visibility": "visible"
+    },
+    ".poyraz-button[data-effect=\"shine\"]::before, .poyraz-button[data-effect=\"fill\"]::before, .poyraz-button[data-effect=\"border-draw\"]::after": {
+      "content": "\"\"",
+      "position": "absolute",
+      "z-index": "0",
+      "pointer-events": "none"
+    },
+    ".poyraz-button[data-effect=\"shine\"]::before": {
+      "top": "-60%",
+      "bottom": "-60%",
+      "left": "-45%",
+      "width": "28%",
+      "background": "linear-gradient(90deg, transparent, var(--poyraz-button-shine-color), transparent)",
+      "filter": "blur(1px)",
+      "transform": "translateX(-180%) skewX(-18deg)"
+    },
+    ".poyraz-button[data-effect=\"shine\"]:hover::before": {
+      "animation": "poyraz-button-shine var(--poyraz-motion-duration-deliberate) var(--poyraz-motion-ease-out)"
+    },
+    ".poyraz-button[data-effect=\"fill\"]::before": {
+      "inset": "-1px",
+      "background": "var(--poyraz-button-effect-color)",
+      "transform": "translate3d(-101%, 0, 0)",
+      "transition": "transform var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard)",
+      "will-change": "transform"
+    },
+    ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"left\"]::before": {
+      "transform": "translate3d(101%, 0, 0)"
+    },
+    ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"up\"]::before": {
+      "transform": "translate3d(0, 101%, 0)"
+    },
+    ".poyraz-button[data-effect=\"fill\"][data-fill-direction=\"down\"]::before": {
+      "transform": "translate3d(0, -101%, 0)"
+    },
+    ".poyraz-button[data-effect=\"fill\"]:hover::before": {
+      "transform": "translate3d(0, 0, 0)"
+    },
+    ".poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"both\"] > [data-slot=\"button-content\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-icon\"], .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"icon\"] [data-slot=\"button-content\"] > svg, .poyraz-button[data-effect=\"swap\"]:hover[data-swap-target=\"label\"] [data-slot=\"button-label\"]": {
+      "animation": "poyraz-button-swap var(--poyraz-motion-duration-slow) var(--poyraz-motion-ease-standard)",
+      "will-change": "transform, opacity"
+    },
+    ".poyraz-button[data-effect=\"border-draw\"]::after": {
+      "--poyraz-button-border-progress": "0deg",
+      "inset": "-1px",
+      "border-radius": "inherit",
+      "padding": "2px",
+      "background": "conic-gradient(from -90deg, currentColor 0deg, currentColor var(--poyraz-button-border-progress), transparent var(--poyraz-button-border-progress), transparent 360deg)",
+      "-webkit-mask": "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+      "mask": "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+      "-webkit-mask-composite": "xor",
+      "mask-composite": "exclude",
+      "opacity": "0"
+    },
+    ".poyraz-button[data-effect=\"border-draw\"]:hover::after": {
+      "animation": "poyraz-button-border-draw var(--poyraz-motion-duration-deliberate) linear forwards"
+    },
+    "@keyframes poyraz-button-spin": {
+      "to": {
+        "transform": "rotate(360deg)"
+      }
+    },
+    "@property --poyraz-button-border-progress": {
+      "syntax": "\"<angle>\"",
+      "inherits": "false",
+      "initial-value": "0deg"
+    },
+    "@keyframes poyraz-button-shine": {
+      "from": {
+        "transform": "translateX(-180%) skewX(-18deg)"
+      },
+      "to": {
+        "transform": "translateX(720%) skewX(-18deg)"
+      }
+    },
+    "@keyframes poyraz-button-swap": {
+      "0%": {
+        "opacity": "1",
+        "transform": "translate3d(0, 0, 0)"
+      },
+      "45%": {
+        "opacity": "0",
+        "transform": "translate3d(0, 105%, 0)"
+      },
+      "55%": {
+        "opacity": "0",
+        "transform": "translate3d(0, -105%, 0)"
+      },
+      "100%": {
+        "opacity": "1",
+        "transform": "translate3d(0, 0, 0)"
+      }
+    },
+    "@keyframes poyraz-button-border-draw": {
+      "0%": {
+        "--poyraz-button-border-progress": "0deg",
+        "opacity": "0"
+      },
+      "100%": {
+        "--poyraz-button-border-progress": "360deg",
+        "opacity": "1"
+      }
+    },
+    "@media (prefers-reduced-motion: reduce)": {
+      ".poyraz-button, .poyraz-button::before, .poyraz-button::after, .poyraz-button [data-slot=\"button-spinner\"] svg, .poyraz-button [data-slot=\"button-content\"], .poyraz-button [data-slot=\"button-label\"], .poyraz-button [data-slot=\"button-icon\"]": {
+        "animation": "none !important",
+        "transition-duration": "1ms !important"
+      }
+    },
+    "[data-poyraz-motion=\"reduced\"] .poyraz-button, [data-poyraz-motion=\"reduced\"] .poyraz-button::before, [data-poyraz-motion=\"reduced\"] .poyraz-button::after, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-spinner\"] svg, [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-content\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-label\"], [data-poyraz-motion=\"reduced\"] .poyraz-button [data-slot=\"button-icon\"]": {
+      "animation": "none !important",
+      "transition-duration": "1ms !important"
+    }
+  },
+  "meta": {
+    "category": "actions",
+    "phase": "alpha"
+  },
+  "type": "registry:ui"
+}

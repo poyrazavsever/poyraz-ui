@@ -11,10 +11,7 @@ function VerticalDemo() {
       className="w-full max-w-sm border border-border rounded-sm bg-background p-4"
     >
       {Array.from({ length: 30 }, (_, i) => (
-        <div
-          key={i}
-          className="py-2 border-b border-border text-sm text-foreground"
-        >
+        <div key={i} className="py-2 border-b border-border text-sm text-foreground">
           Item {i + 1} — Scrollable content line
         </div>
       ))}

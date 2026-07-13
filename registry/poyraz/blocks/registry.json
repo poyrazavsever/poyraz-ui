@@ -1,0 +1,339 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "navigation-block",
+      "type": "registry:block",
+      "title": "Navigation Block",
+      "description": "Poyraz Soft Glass Navigation Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/navbar"
+      ],
+      "files": [
+        {
+          "path": "phase8/navigation-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/navigation-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "mobile-navigation-block",
+      "type": "registry:block",
+      "title": "Mobile Navigation Block",
+      "description": "Poyraz Soft Glass Mobile Navigation Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/sheet",
+        "@poyraz/navigation-block"
+      ],
+      "files": [
+        {
+          "path": "phase8/mobile-navigation-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mobile-navigation-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "mega-menu-block",
+      "type": "registry:block",
+      "title": "Mega Menu Block",
+      "description": "Poyraz Soft Glass Mega Menu Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/navbar"
+      ],
+      "files": [
+        {
+          "path": "phase8/mega-menu-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mega-menu-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "mobile-sidebar-block",
+      "type": "registry:block",
+      "title": "Mobile Sidebar Block",
+      "description": "Poyraz Soft Glass Mobile Sidebar Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/sheet",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "phase8/mobile-sidebar-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/mobile-sidebar-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "footer-blocks",
+      "type": "registry:block",
+      "title": "Footer Blocks",
+      "description": "Poyraz Soft Glass Footer Blocks with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/footer",
+        "@poyraz/footer-newsletter"
+      ],
+      "files": [
+        {
+          "path": "phase8/footer-blocks.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/footer-blocks.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "dashboard-shell-block",
+      "type": "registry:block",
+      "title": "Dashboard Shell Block",
+      "description": "Poyraz Soft Glass Dashboard Shell Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/avatar",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card",
+        "@poyraz/input",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "phase8/dashboard-shell-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/dashboard-shell-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "glass-app-shell-block",
+      "type": "registry:block",
+      "title": "Glass App Shell Block",
+      "description": "Poyraz Soft Glass Glass App Shell Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/navigation-block",
+        "@poyraz/sidebar"
+      ],
+      "files": [
+        {
+          "path": "phase8/glass-app-shell-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/glass-app-shell-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "auth-card-block",
+      "type": "registry:block",
+      "title": "Auth Card Block",
+      "description": "Poyraz Soft Glass Auth Card Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/button",
+        "@poyraz/card",
+        "@poyraz/input",
+        "@poyraz/label"
+      ],
+      "files": [
+        {
+          "path": "phase8/auth-card-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/auth-card-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "pricing-block",
+      "type": "registry:block",
+      "title": "Pricing Block",
+      "description": "Poyraz Soft Glass Pricing Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card"
+      ],
+      "files": [
+        {
+          "path": "phase8/pricing-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/pricing-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "brand-hero-block",
+      "type": "registry:block",
+      "title": "Brand Hero Block",
+      "description": "Poyraz Soft Glass Brand Hero Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button"
+      ],
+      "files": [
+        {
+          "path": "phase8/brand-hero-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/brand-hero-block.tsx"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "smart-dashboard-block",
+      "type": "registry:block",
+      "title": "Smart Dashboard Block",
+      "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [
+        "lucide-react@^0.574.0"
+      ],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme",
+        "@poyraz/badge",
+        "@poyraz/button",
+        "@poyraz/card"
+      ],
+      "files": [
+        {
+          "path": "phase8/smart-dashboard-block.tsx",
+          "type": "registry:block",
+          "target": "@ui/blocks/phase8/smart-dashboard-block.tsx"
+        },
+        {
+          "path": "phase8/dashboard-data.ts",
+          "type": "registry:file",
+          "target": "@ui/blocks/phase8/dashboard-data.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-block",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    }
+  ]
+}

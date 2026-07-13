@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navigation-block",
+  "title": "Navigation Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Navigation Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/button",
+    "@poyraz/navbar"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/navigation-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Menu, Sparkles } from \"lucide-react\";\n\nimport { Button } from \"@/components/ui/atoms/button\";\nimport {\n  Navbar,\n  NavbarActions,\n  NavbarBrand,\n  NavbarLink,\n  NavbarLinks,\n  NavbarMain,\n  NavbarMobileLink,\n  NavbarMobileMenu,\n  NavbarMobileToggle,\n} from \"@/components/ui/organisms/navbar\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface NavigationItem {\n  label: string;\n  href: string;\n}\n\nexport const navigationItems: NavigationItem[] = [\n  { label: \"Overview\", href: \"#overview\" },\n  { label: \"Components\", href: \"#components\" },\n  { label: \"Blocks\", href: \"#blocks\" },\n  { label: \"Changelog\", href: \"#changelog\" },\n];\n\nexport interface NavigationBlockProps extends React.HTMLAttributes<HTMLElement> {\n  items?: NavigationItem[];\n  activeHref?: string;\n  glass?: boolean;\n}\n\nfunction NavigationBlock({\n  items = navigationItems,\n  activeHref,\n  glass = true,\n  className,\n  ...props\n}: NavigationBlockProps) {\n  return (\n    <Navbar\n      data-slot=\"navigation-block\"\n      variant={glass ? \"glass\" : \"bordered\"}\n      className={cn(\"rounded-lg\", className)}\n      {...props}\n    >\n      <NavbarMain>\n        <NavbarBrand href=\"#overview\" className=\"min-w-0 font-semibold\">\n          <span className=\"flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground\">\n            <Sparkles className=\"size-4\" aria-hidden />\n          </span>\n          <span className=\"truncate\">Poyraz UI</span>\n        </NavbarBrand>\n        <NavbarLinks aria-label=\"Primary navigation\">\n          {items.map((item) => (\n            <NavbarLink\n              key={item.href}\n              href={item.href}\n              active={activeHref === item.href}\n              aria-current={activeHref === item.href ? \"page\" : undefined}\n            >\n              {item.label}\n            </NavbarLink>\n          ))}\n        </NavbarLinks>\n        <NavbarActions>\n          <Button variant=\"ghost\" size=\"sm\">\n            Sign in\n          </Button>\n          <Button size=\"sm\">Get started</Button>\n        </NavbarActions>\n        <NavbarMobileToggle aria-label=\"Open navigation\">\n          <Menu className=\"size-4\" />\n        </NavbarMobileToggle>\n      </NavbarMain>\n      <NavbarMobileMenu>\n        {items.map((item) => (\n          <NavbarMobileLink\n            key={item.href}\n            href={item.href}\n            active={activeHref === item.href}\n            aria-current={activeHref === item.href ? \"page\" : undefined}\n          >\n            {item.label}\n          </NavbarMobileLink>\n        ))}\n      </NavbarMobileMenu>\n    </Navbar>\n  );\n}\n\nexport { NavigationBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/navigation-block.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

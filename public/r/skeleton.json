@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass skeleton component.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/skeleton.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-poyraz-pulse rounded-lg bg-accent/80\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/skeleton.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}

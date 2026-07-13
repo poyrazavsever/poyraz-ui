@@ -1,0 +1,40 @@
+Poyraz UI v2 build baseline
+===========================
+
+Captured: 2026-07-11 Europe/Istanbul
+Source ref: 0437769ce7597a2c86e0d93d98be5158fa09e79a
+Package: poyraz-ui@2.1.0
+Node: v24.16.0
+pnpm: 11.5.1
+
+pnpm build:lib
+  result: PASS
+  format: ESM + CJS + DTS
+  tsup-reported ESM entry sizes before post-build use-client prefix:
+    dist/index.js             4.11 KB
+    dist/atoms/index.js       707 B
+    dist/molecules/index.js   2.11 KB
+    dist/organisms/index.js   1.35 KB
+    dist/themes/index.js      4.90 KB
+  filesystem snapshot after use-client prefix:
+    dist files                36
+    dist total                747740 bytes
+    dist/index.js             4218 bytes
+    dist/atoms/index.js       721 bytes
+    dist/molecules/index.js   2173 bytes
+    dist/organisms/index.js   1398 bytes
+    dist/themes/index.js      5044 bytes
+
+pnpm build
+  result: PASS
+  Next.js static routes: 57
+  .next snapshot: 2526 files / 108041451 bytes
+
+Notes
+  - The 14-byte difference on emitted JS entry files is the post-build
+    `"use client";` prefix added by tsup.config.ts.
+  - .next total includes framework build/cache metadata and is diagnostic,
+    not a browser transfer-size budget.
+  - Use `node scripts/audit-v2-build-output.mjs` after a build to repeat the
+    filesystem-size snapshot.
+

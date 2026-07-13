@@ -8,7 +8,7 @@ export default function SonnerPage() {
   return (
     <ComponentPage
       name="Sonner (Toast)"
-      description="Toast notification system powered by Sonner. Drop-in replacement for traditional toasts with brutalist styling."
+      description="Semantic animated toast system powered by Sonner, with solid, soft and glass surfaces plus native promise/swipe states."
       importCode={`import { Toaster } from "poyraz-ui/molecules";
 import { toast } from "sonner";
 
@@ -24,9 +24,7 @@ import { toast } from "sonner";
   Show Toast
 </Button>`}
       >
-        <Button onClick={() => toast("Event has been created")}>
-          Show Toast
-        </Button>
+        <Button onClick={() => toast("Event has been created")}>Show Toast</Button>
       </DemoSection>
 
       <DemoSection
@@ -56,13 +54,8 @@ toast.warning("Your session is about to expire.");
 toast.info("A new update is available.");`}
       >
         <div className="flex flex-wrap gap-3">
-          <Button onClick={() => toast.success("Profile saved successfully!")}>
-            Success
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => toast.error("Something went wrong.")}
-          >
+          <Button onClick={() => toast.success("Profile saved successfully!")}>Success</Button>
+          <Button variant="destructive" onClick={() => toast.error("Something went wrong.")}>
             Error
           </Button>
           <Button
@@ -71,10 +64,7 @@ toast.info("A new update is available.");`}
           >
             Warning
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => toast.info("A new update is available.")}
-          >
+          <Button variant="secondary" onClick={() => toast.info("A new update is available.")}>
             Info
           </Button>
         </div>
@@ -116,6 +106,7 @@ toast.info("A new update is available.");`}
     loading: "Loading...",
     success: "Data loaded!",
     error: "Failed to load data.",
+    description: "Syncing the latest workspace data.",
   },
 );`}
       >
@@ -126,6 +117,7 @@ toast.info("A new update is available.");`}
               loading: "Loading...",
               success: "Data loaded!",
               error: "Failed to load data.",
+              description: "Syncing the latest workspace data.",
             })
           }
         >

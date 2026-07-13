@@ -22,14 +22,7 @@ import {
 } from "poyraz-ui/organisms";
 import { Button } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
-import {
-  Github,
-  Twitter,
-  Linkedin,
-  Mail,
-  Apple,
-  Smartphone,
-} from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, Apple, Smartphone } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function FooterPage() {
@@ -230,9 +223,7 @@ export default function FooterPage() {
       >
         <Footer variant="compact">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <span className="text-sm text-muted-foreground">
-              © 2026 Poyraz UI
-            </span>
+            <span className="text-sm text-muted-foreground">© 2026 Poyraz UI</span>
             <FooterBottomLinks>
               <FooterLink href="#">Privacy</FooterLink>
               <FooterLink href="#">Terms</FooterLink>
@@ -321,9 +312,7 @@ export default function FooterPage() {
               <FooterBrand>
                 <span className="text-lg font-bold">Poyraz UI</span>
               </FooterBrand>
-              <FooterDescription>
-                Open source, accessible, and customizable.
-              </FooterDescription>
+              <FooterDescription>Open source, accessible, and customizable.</FooterDescription>
             </FooterSection>
             <FooterSection>
               <FooterHeading>Product</FooterHeading>
@@ -378,23 +367,15 @@ export default function FooterPage() {
                 <FooterAppLink href="#">
                   <Apple className="h-4 w-4" />
                   <div>
-                    <div className="text-[9px] text-placeholder leading-none">
-                      Download on the
-                    </div>
-                    <div className="text-xs font-semibold leading-tight">
-                      App Store
-                    </div>
+                    <div className="text-[9px] text-placeholder leading-none">Download on the</div>
+                    <div className="text-xs font-semibold leading-tight">App Store</div>
                   </div>
                 </FooterAppLink>
                 <FooterAppLink href="#">
                   <Smartphone className="h-4 w-4" />
                   <div>
-                    <div className="text-[9px] text-placeholder leading-none">
-                      Get it on
-                    </div>
-                    <div className="text-xs font-semibold leading-tight">
-                      Google Play
-                    </div>
+                    <div className="text-[9px] text-placeholder leading-none">Get it on</div>
+                    <div className="text-xs font-semibold leading-tight">Google Play</div>
                   </div>
                 </FooterAppLink>
               </FooterApp>
@@ -442,8 +423,8 @@ export default function FooterPage() {
                 <FooterBadge>v1.0</FooterBadge>
               </div>
               <FooterDescription>
-                Build beautiful, accessible interfaces with our minimal
-                component library. Open source and free forever.
+                Build beautiful, accessible interfaces with our minimal component library. Open
+                source and free forever.
               </FooterDescription>
               <FooterSocials className="mt-2">
                 <FooterSocialLink href="#" aria-label="GitHub">

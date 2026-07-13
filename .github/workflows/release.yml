@@ -1,0 +1,175 @@
+name: V3 Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Declared version from release.config.json
+        required: true
+        default: 3.0.0
+        type: string
+      channel:
+        description: Release channel
+        required: true
+        default: stable
+        type: choice
+        options: [alpha, beta, rc, stable]
+      publish_release:
+        description: Publish the reviewed npm + registry distribution release
+        required: true
+        default: false
+        type: boolean
+      promote_legacy_v2:
+        description: Preserve the declared V2 package under the legacy-v2 dist-tag
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v3-release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm registry:build
+      - name: Require committed generated registry
+        run: git diff --exit-code -- public/r src/docs-registry.json COMPONENTS.md
+      - run: pnpm release:preflight -- --version=${{ inputs.version }} --channel=${{ inputs.channel }}
+      - run: pnpm quality
+      - run: pnpm fixture:clean-install
+      - run: pnpm build
+      - name: Validate build-time package dist
+        run: pnpm dist:check
+      - run: pnpm test:package-exports
+      - run: pnpm release:artifacts -- --version=${{ inputs.version }} --channel=${{ inputs.channel }}
+      - name: Smoke npm tarball in clean consumers
+        run: pnpm release:tarball-smoke -- --tarball release-artifacts/npm/*.tgz
+      - uses: actions/upload-artifact@v7
+        with:
+          name: poyraz-ui-${{ inputs.version }}
+          path: release-artifacts
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish distribution release
+    if: inputs.publish_release
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment: v3-production
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Require completed npm publish workflow
+        run: >-
+          node -e "const config=require('./release.config.json');
+          if(!config.npm.publishV3Package || !config.npm.publishWorkflowReady){
+          throw new Error('Faz 16 npm publish workflow is not ready; stable publishing is blocked.')}"
+      - uses: actions/download-artifact@v8
+        with:
+          name: poyraz-ui-${{ inputs.version }}
+          path: release-artifacts
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: Publish npm package from reviewed tarball
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          PACKAGE=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.package)")
+          TAG=$(node -e "const c=require('./release.config.json'); process.stdout.write('${{ inputs.channel }}' === 'stable' ? c.npm.stableTag : c.npm.prereleaseTag)")
+          TARBALL=$(ls release-artifacts/npm/*.tgz)
+
+          if npm view "$PACKAGE@${{ inputs.version }}" version >/dev/null 2>&1; then
+            echo "$PACKAGE@${{ inputs.version }} is already published; skipping npm publish."
+            exit 0
+          fi
+
+          npm publish "$TARBALL" --tag "$TAG" --provenance --access public
+          test "$(npm view "$PACKAGE@${{ inputs.version }}" version)" = "${{ inputs.version }}"
+          npm dist-tag ls "$PACKAGE"
+      - name: Create immutable tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "v${{ inputs.version }}"
+          release-artifacts/registry/*.json
+          release-artifacts/release.json
+          release-artifacts/SHA256SUMS.txt
+          --target "${{ github.sha }}"
+          --title "Poyraz UI v${{ inputs.version }}"
+          --notes-file release-artifacts/RELEASE_NOTES.md
+          ${{ inputs.channel != 'stable' && '--prerelease' || '' }}
+
+  legacy-tag:
+    name: Preserve V2 npm tag
+    if: inputs.publish_release && inputs.promote_legacy_v2 && inputs.channel == 'stable'
+    needs: [prepare, publish]
+    runs-on: ubuntu-latest
+    environment: v3-production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: Apply legacy-v2 without moving latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          LEGACY_PACKAGE=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.package+'@'+c.npm.legacyVersion)")
+          LEGACY_TAG=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.maintenanceTag)")
+          npm dist-tag add "$LEGACY_PACKAGE" "$LEGACY_TAG"
+
+  post-release:
+    name: Production registry smoke
+    if: inputs.publish_release
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Verify npm package and dist-tags
+        run: |
+          PACKAGE=$(node -e "const c=require('./release.config.json'); process.stdout.write(c.npm.package)")
+          TAG=$(node -e "const c=require('./release.config.json'); process.stdout.write('${{ inputs.channel }}' === 'stable' ? c.npm.stableTag : c.npm.prereleaseTag)")
+          test "$(npm view "$PACKAGE@${{ inputs.version }}" version)" = "${{ inputs.version }}"
+          test "$(npm view "$PACKAGE" dist-tags.$TAG)" = "${{ inputs.version }}"
+      - name: Smoke install from npm registry
+        run: pnpm release:tarball-smoke -- --package-spec poyraz-ui@${{ inputs.version }}
+      - run: pnpm release:smoke -- --attempts=12 --delay-ms=10000

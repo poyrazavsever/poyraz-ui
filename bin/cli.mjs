@@ -5,6 +5,8 @@
  *
  * Usage:
  *   npx poyraz-ui init
+ *   npx poyraz-ui init --mode package
+ *   npx poyraz-ui init --mode registry
  *   npx poyraz-ui init --css ./src/app/globals.css
  */
 
@@ -57,10 +59,25 @@ const cyan = (t) => `\x1b[36m${t}\x1b[0m`;
 function banner() {
   console.log("");
   console.log(bold(red("  ╔═══════════════════════════════╗")));
-  console.log(bold(red("  ║        ") + "POYRAZ UI v2" + red("          ║")));
+  console.log(bold(red("  ║    ") + "POYRAZ UI V3 DISTRIBUTION" + red("    ║")));
   console.log(bold(red("  ╚═══════════════════════════════╝")));
   console.log(dim("  Minimal • Brutalist • Themeable"));
   console.log("");
+}
+
+const PACKAGE_MODE = "Npm package";
+const REGISTRY_MODE = "Source registry";
+
+function argumentValue(args, name) {
+  const index = args.indexOf(name);
+  return index === -1 ? null : (args[index + 1] ?? null);
+}
+
+function normalizeMode(value) {
+  if (!value) return null;
+  if (value === "package" || value === "npm") return PACKAGE_MODE;
+  if (value === "registry" || value === "source") return REGISTRY_MODE;
+  return null;
 }
 
 /* ── Detect CSS file ──────────────────────────────────────────────── */
@@ -102,11 +119,7 @@ function ensurePresetImport(cssPath) {
   let newContent;
   if (tailwindIdx !== -1) {
     const lineEnd = content.indexOf("\n", tailwindIdx);
-    newContent =
-      content.slice(0, lineEnd + 1) +
-      PRESET_IMPORT +
-      "\n" +
-      content.slice(lineEnd + 1);
+    newContent = content.slice(0, lineEnd + 1) + PRESET_IMPORT + "\n" + content.slice(lineEnd + 1);
   } else {
     newContent = PRESET_IMPORT + "\n" + content;
   }
@@ -149,9 +162,7 @@ function printLayoutSnippet() {
   console.log("");
   console.log(bold("  Add ThemeProvider to your root layout:"));
   console.log("");
-  console.log(
-    dim("  ┌─────────────────────────────────────────────────────────┐"),
-  );
+  console.log(dim("  ┌─────────────────────────────────────────────────────────┐"));
   console.log(
     `  ${dim("│")} ${cyan('import { ThemeProvider } from "reactive-switcher";')}      ${dim("│")}`,
   );
@@ -170,10 +181,30 @@ function printLayoutSnippet() {
   console.log(
     `  ${dim("│")} ${cyan("</ThemeProvider>")}                                        ${dim("│")}`,
   );
-  console.log(
-    dim("  └─────────────────────────────────────────────────────────┘"),
-  );
+  console.log(dim("  └─────────────────────────────────────────────────────────┘"));
   console.log("");
+}
+
+function printRegistrySetup() {
+  console.log("");
+  console.log(bold("  Source registry mode"));
+  console.log(dim("  Use this mode when the application should own and edit component source."));
+  console.log("");
+  console.log(bold("  1. Add the namespace to components.json:"));
+  console.log("");
+  console.log(cyan('  "registries": {'));
+  console.log(cyan('    "@poyraz": "https://ui.poyrazavsever.com/r/{name}.json"'));
+  console.log(cyan("  }"));
+  console.log("");
+  console.log(bold("  2. Install only the source you need:"));
+  console.log(cyan("  pnpm dlx shadcn@latest add @poyraz/button"));
+  console.log("");
+  console.log(
+    dim(
+      "  Registry mode does not add poyraz-ui/preset.css or package theme imports automatically.",
+    ),
+  );
+  console.log(dim("  Installed files are consumer-owned; review diffs before overwriting them."));
 }
 
 /* ── Main ─────────────────────────────────────────────────────────── */
@@ -194,9 +225,34 @@ async function main() {
 async function init(args) {
   banner();
 
+  const requestedMode = argumentValue(args, "--mode");
+  const normalizedMode = normalizeMode(requestedMode);
+  if (requestedMode && !normalizedMode) {
+    console.log(red(`  ✗ Unknown install mode: ${requestedMode}`));
+    console.log(dim("  Supported modes: package, registry"));
+    rl.close();
+    process.exitCode = 1;
+    return;
+  }
+
+  const mode =
+    normalizedMode ??
+    (await select("  Choose the V3 distribution model", [PACKAGE_MODE, REGISTRY_MODE]));
+
+  if (mode === REGISTRY_MODE) {
+    printRegistrySetup();
+    console.log("");
+    console.log(green(bold("  ✓ Registry instructions ready!")));
+    console.log(dim("  Docs: https://ui.poyrazavsever.com/docs/installation"));
+    console.log("");
+    rl.close();
+    return;
+  }
+
+  console.log(dim("  Mode: npm package (centralized semver updates and package imports)"));
+
   // 1. Detect / ask for CSS file
-  const argCss =
-    args.indexOf("--css") !== -1 ? args[args.indexOf("--css") + 1] : null;
+  const argCss = args.indexOf("--css") !== -1 ? args[args.indexOf("--css") + 1] : null;
   let cssPath = argCss || detectCssFile();
 
   if (!cssPath) {
@@ -219,10 +275,7 @@ async function init(args) {
 
   if (wantThemes) {
     // Generate theme file
-    const themePath = await ask(
-      "  Where to create theme config?",
-      "src/lib/themes.ts",
-    );
+    const themePath = await ask("  Where to create theme config?", "src/lib/themes.ts");
     generateThemeFile(themePath);
 
     // Print layout snippet
@@ -233,21 +286,18 @@ async function init(args) {
     console.log(cyan("  npm install reactive-switcher"));
     console.log("");
   } else {
-    console.log(
-      dim("  ↳ Skipped. Poyraz UI works standalone in light mode by default."),
-    );
-    console.log(
-      dim(
-        "  ↳ You can add reactive-switcher later by running this command again.",
-      ),
-    );
+    console.log(dim("  ↳ Skipped. Poyraz UI works standalone in light mode by default."));
+    console.log(dim("  ↳ You can add reactive-switcher later by running this command again."));
     console.log("");
   }
 
   // 4. Done
   console.log(green(bold("  ✓ Setup complete!")));
   console.log("");
-  console.log(dim("  Docs: https://ui.poyrazavsever.com/docs"));
+  console.log(dim("  Package install: pnpm add poyraz-ui@3"));
+  console.log(dim("  Own the source: npx poyraz-ui@3 init --mode registry"));
+  console.log(dim("  Docs: https://ui.poyrazavsever.com/docs/installation"));
+  console.log(dim("  Help: https://ui.poyrazavsever.com/docs/troubleshooting"));
   console.log("");
 
   rl.close();

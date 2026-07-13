@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "smart-dashboard-block",
+  "title": "Smart Dashboard Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Smart Dashboard Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/badge",
+    "@poyraz/button",
+    "@poyraz/card"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/smart-dashboard-block.tsx",
+      "content": "import { ArrowUpRight, MoreHorizontal } from \"lucide-react\";\n\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { Button } from \"@/components/ui/atoms/button\";\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/atoms/card\";\nimport {\n  dashboardActivity,\n  dashboardChart,\n  dashboardStats,\n} from \"@/components/ui/blocks/phase8/dashboard-data\";\n\nexport interface SmartDashboardBlockProps {\n  stats?: typeof dashboardStats;\n  activity?: typeof dashboardActivity;\n  chart?: number[];\n}\n\nfunction SmartDashboardBlock({\n  stats = dashboardStats,\n  activity = dashboardActivity,\n  chart = dashboardChart,\n}: SmartDashboardBlockProps) {\n  return (\n    <section data-slot=\"smart-dashboard-block\" className=\"@container/dashboard min-w-0 space-y-4\">\n      <header className=\"flex flex-col gap-3 @sm/dashboard:flex-row @sm/dashboard:items-end @sm/dashboard:justify-between\">\n        <div>\n          <Badge variant=\"glass\">Live workspace</Badge>\n          <h2 className=\"mt-2 text-xl font-semibold\">Performance overview</h2>\n          <p className=\"text-sm text-muted-foreground\">A compact view of product health.</p>\n        </div>\n        <Button variant=\"outline\" size=\"sm\">\n          View report <ArrowUpRight className=\"size-4\" />\n        </Button>\n      </header>\n      <div className=\"grid grid-cols-1 gap-3 @sm/dashboard:grid-cols-2 @xl/dashboard:grid-cols-4\">\n        {stats.map(({ label, value, change, icon: Icon }) => (\n          <Card key={label} variant=\"glass\">\n            <CardHeader className=\"p-4\">\n              <div>\n                <CardDescription>{label}</CardDescription>\n                <CardTitle className=\"mt-1 text-xl\">{value}</CardTitle>\n              </div>\n              <span className=\"flex size-8 items-center justify-center rounded-md bg-primary-muted text-primary\">\n                <Icon className=\"size-4\" />\n              </span>\n            </CardHeader>\n            <CardContent className=\"px-4 pb-4\">\n              <Badge variant=\"success\" size=\"sm\">\n                {change}\n              </Badge>\n            </CardContent>\n          </Card>\n        ))}\n      </div>\n      <div className=\"grid gap-4 @lg/dashboard:grid-cols-[minmax(0,1.6fr)_minmax(15rem,1fr)]\">\n        <Card variant=\"default\">\n          <CardHeader>\n            <div>\n              <CardTitle>Usage trend</CardTitle>\n              <CardDescription>Last 12 reporting periods</CardDescription>\n            </div>\n            <Button variant=\"ghost\" size=\"icon-sm\" aria-label=\"Chart options\">\n              <MoreHorizontal className=\"size-4\" />\n            </Button>\n          </CardHeader>\n          <CardContent>\n            <div className=\"flex h-44 items-end gap-1.5\" aria-label=\"Usage trend chart\">\n              {chart.map((value, index) => (\n                <div\n                  key={index}\n                  className=\"min-w-1 flex-1 rounded-t-sm bg-primary-muted\"\n                  style={{ height: `${value}%` }}\n                >\n                  <span className=\"sr-only\">\n                    Period {index + 1}: {value}\n                  </span>\n                </div>\n              ))}\n            </div>\n          </CardContent>\n        </Card>\n        <Card variant=\"soft\">\n          <CardHeader>\n            <div>\n              <CardTitle>Recent activity</CardTitle>\n              <CardDescription>Workspace events</CardDescription>\n            </div>\n          </CardHeader>\n          <CardContent>\n            <ul className=\"divide-y divide-border\">\n              {activity.map((item) => (\n                <li key={`${item.title}-${item.time}`} className=\"py-3 first:pt-0 last:pb-0\">\n                  <div className=\"flex justify-between gap-3\">\n                    <p className=\"text-sm font-medium\">{item.title}</p>\n                    <time className=\"shrink-0 text-xs text-muted-foreground\">{item.time}</time>\n                  </div>\n                  <p className=\"mt-1 text-xs text-muted-foreground\">{item.detail}</p>\n                </li>\n              ))}\n            </ul>\n          </CardContent>\n        </Card>\n      </div>\n    </section>\n  );\n}\n\nexport { SmartDashboardBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/smart-dashboard-block.tsx"
+    },
+    {
+      "path": "registry/poyraz/blocks/phase8/dashboard-data.ts",
+      "content": "import { Activity, CreditCard, Users, Zap } from \"lucide-react\";\n\nexport const dashboardStats = [\n  { label: \"Active users\", value: \"12,480\", change: \"+8.2%\", icon: Users },\n  { label: \"Revenue\", value: \"$84,240\", change: \"+12.4%\", icon: CreditCard },\n  { label: \"Conversion\", value: \"6.8%\", change: \"+1.1%\", icon: Activity },\n  { label: \"Automation\", value: \"1,284\", change: \"+18.7%\", icon: Zap },\n];\n\nexport const dashboardActivity = [\n  { title: \"Workspace upgraded\", detail: \"Growth plan\", time: \"2 min\" },\n  { title: \"New team member\", detail: \"Product design\", time: \"18 min\" },\n  { title: \"Report exported\", detail: \"Q3 performance\", time: \"1 hr\" },\n];\n\nexport const dashboardChart = [44, 58, 48, 72, 64, 82, 76, 91, 84, 96, 88, 100];\n",
+      "type": "registry:file",
+      "target": "@ui/blocks/phase8/dashboard-data.ts"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

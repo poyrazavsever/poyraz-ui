@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "baseUrl": ".registry",
+    "paths": { "@/*": ["*"] }
+  },
+  "include": [
+    "src/main.tsx",
+    "src/v3-consumer.tsx",
+    "vite.config.ts",
+    ".registry/**/*.ts",
+    ".registry/**/*.tsx"
+  ]
+}

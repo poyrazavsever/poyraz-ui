@@ -10,13 +10,10 @@ import { Separator } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
 import { Card, CardContent } from "poyraz-ui/atoms";
 
-function CopyBlock({
-  code,
-  children,
-}: {
-  code: string;
-  children: React.ReactNode;
-}) {
+const registryConfig =
+  '{\n  "registries": {\n    "@poyraz": "https://ui.poyrazavsever.com/r/{name}.json"\n  }\n}';
+
+function CopyBlock({ code, children }: { code: string; children: React.ReactNode }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -33,15 +30,9 @@ function CopyBlock({
         className="absolute top-3 right-3 text-slate-500 hover:text-slate-100 cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
         aria-label="Copy code"
       >
-        {copied ? (
-          <Check className="h-4 w-4 text-success-solid" />
-        ) : (
-          <Copy className="h-4 w-4" />
-        )}
+        {copied ? <Check className="h-4 w-4 text-success-solid" /> : <Copy className="h-4 w-4" />}
       </button>
-      <CardContent className="p-4 font-mono text-sm leading-relaxed">
-        {children}
-      </CardContent>
+      <CardContent className="p-4 font-mono text-sm leading-relaxed">{children}</CardContent>
     </Card>
   );
 }
@@ -53,17 +44,42 @@ export default function InstallationPage() {
       <div className="space-y-4">
         <Typography variant="h1">Installation</Typography>
         <Typography variant="lead">
-          Get Poyraz UI up and running in your project in minutes.
+          Use the V3 npm package for centralized updates, or install source through the registry
+          when you want to own and edit every component layer.
         </Typography>
       </div>
 
       <Separator />
 
+      <section className="grid gap-4 md:grid-cols-2">
+        <Card className="border-primary/30 bg-primary-muted/30">
+          <CardContent className="space-y-3 p-5">
+            <Typography variant="h3">Npm package</Typography>
+            <Typography variant="muted">
+              Recommended for semver updates, package imports and the fastest application setup.
+            </Typography>
+            <CopyBlock code="pnpm add poyraz-ui@3">pnpm add poyraz-ui@3</CopyBlock>
+          </CardContent>
+        </Card>
+        <Card variant="glass">
+          <CardContent className="space-y-3 p-5">
+            <Typography variant="h3">Own the source</Typography>
+            <Typography variant="muted">
+              Install selected components locally for markup, recipe and Radix composition control.
+            </Typography>
+            <CopyBlock code="pnpm dlx shadcn@latest add @poyraz/button">
+              pnpm dlx shadcn@latest add @poyraz/button
+            </CopyBlock>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* Step 1: Install */}
       <section className="space-y-4">
-        <Typography variant="h2">1. Install the package</Typography>
+        <Typography variant="h2">1. Install the V3 npm package</Typography>
         <Typography variant="p">
-          Install Poyraz UI with your preferred package manager:
+          The package route keeps supported imports under `poyraz-ui` and receives centralized
+          updates through npm:
         </Typography>
 
         <div className="space-y-3">
@@ -71,43 +87,53 @@ export default function InstallationPage() {
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               pnpm
             </p>
-            <CopyBlock code="pnpm add poyraz-ui">pnpm add poyraz-ui</CopyBlock>
+            <CopyBlock code="pnpm add poyraz-ui@3">pnpm add poyraz-ui@3</CopyBlock>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
-              npm
-            </p>
-            <CopyBlock code="npm install poyraz-ui">
-              npm install poyraz-ui
-            </CopyBlock>
+            <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">npm</p>
+            <CopyBlock code="npm install poyraz-ui@3">npm install poyraz-ui@3</CopyBlock>
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               yarn
             </p>
-            <CopyBlock code="yarn add poyraz-ui">yarn add poyraz-ui</CopyBlock>
+            <CopyBlock code="yarn add poyraz-ui@3">yarn add poyraz-ui@3</CopyBlock>
           </div>
         </div>
+      </section>
+
+      <section className="space-y-4">
+        <Typography variant="h2">Alternative: Own the source</Typography>
+        <Typography variant="p">
+          Choose this route when a component should live in your repository. Add the production
+          namespace to `components.json`, then install only the source you need.
+        </Typography>
+        <CopyBlock code={registryConfig}>
+          <pre className="whitespace-pre-wrap">{registryConfig}</pre>
+        </CopyBlock>
+        <CopyBlock code="pnpm dlx shadcn@latest add @poyraz/button">
+          pnpm dlx shadcn@latest add @poyraz/button
+        </CopyBlock>
+        <Typography variant="muted">
+          The installed files are consumer-owned. Registry installation is optional and does not
+          replace the supported V3 npm runtime package.
+        </Typography>
       </section>
 
       {/* Step 2: Peer Dependencies */}
       <section className="space-y-4">
         <Typography variant="h2">2. Peer Dependencies</Typography>
         <Typography variant="p">
-          Poyraz UI requires the following peer dependencies. Make sure they are
-          installed in your project:
+          Poyraz UI requires the following peer dependencies. Make sure they are installed in your
+          project:
         </Typography>
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm border border-border rounded-sm">
             <thead>
               <tr className="border-b border-border bg-muted">
-                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
-                  Package
-                </th>
-                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
-                  Version
-                </th>
+                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">Package</th>
+                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">Version</th>
                 <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
                   Required
                 </th>
@@ -140,27 +166,24 @@ export default function InstallationPage() {
       <section className="space-y-4">
         <Typography variant="h2">3. Import CSS Preset</Typography>
         <Typography variant="p">
-          Add the Poyraz UI CSS preset to your global stylesheet. The preset
-          includes semantic design tokens (colors, fonts), base layer styles,
-          motion utilities for molecule animations, and automatically
-          configures Tailwind to scan Poyraz UI components for utility classes.
+          Add the Poyraz UI CSS preset to your global stylesheet. The preset includes semantic
+          design tokens (colors, fonts), base layer styles, motion utilities for molecule
+          animations, and automatically configures Tailwind to scan Poyraz UI components for utility
+          classes.
         </Typography>
 
         <Typography variant="muted">
-          This import is required for animated Accordion, Dropdown Menu,
-          Select, Popover, Tooltip, Dialog, Sheet, and other molecule
-          interactions.
+          This import is required for animated Accordion, Dropdown Menu, Select, Popover, Tooltip,
+          Dialog, Sheet, and other molecule interactions.
         </Typography>
 
-        <Typography variant="p">
-          You can set this up automatically with the CLI:
-        </Typography>
+        <Typography variant="p">You can set this up automatically with the CLI:</Typography>
 
-        <CopyBlock code="npx poyraz-ui init">npx poyraz-ui init</CopyBlock>
+        <CopyBlock code="npx poyraz-ui@3 init --mode package">
+          npx poyraz-ui@3 init --mode package
+        </CopyBlock>
 
-        <Typography variant="muted">
-          Or manually add the import to your CSS file:
-        </Typography>
+        <Typography variant="muted">Or manually add the import to your CSS file:</Typography>
 
         <CopyBlock
           code={`/* globals.css */\n@import "tailwindcss";\n@import "poyraz-ui/preset.css";`}
@@ -179,8 +202,8 @@ export default function InstallationPage() {
       <section className="space-y-4">
         <Typography variant="h2">4. Start Using Components</Typography>
         <Typography variant="p">
-          Import components directly from the package. You can import from the
-          main entry point or use the tree-shakeable sub-paths:
+          Import components directly from the package. You can import from the main entry point or
+          use the tree-shakeable sub-paths:
         </Typography>
 
         <CopyBlock
@@ -190,15 +213,13 @@ export default function InstallationPage() {
             <div>
               <div className="text-slate-400">{"// Import everything"}</div>
               <div>
-                <span className="text-sky-300">import</span>{" "}
-                {"{ Button, Card }"} <span className="text-sky-300">from</span>{" "}
+                <span className="text-sky-300">import</span> {"{ Button, Card }"}{" "}
+                <span className="text-sky-300">from</span>{" "}
                 <span className="text-green-300">{'"poyraz-ui"'}</span>;
               </div>
             </div>
             <div>
-              <div className="text-slate-400">
-                {"// Or import by layer (tree-shake friendly)"}
-              </div>
+              <div className="text-slate-400">{"// Or import by layer (tree-shake friendly)"}</div>
               <div>
                 <span className="text-sky-300">import</span> {"{ Button }"}{" "}
                 <span className="text-sky-300">from</span>{" "}
@@ -207,18 +228,12 @@ export default function InstallationPage() {
               <div>
                 <span className="text-sky-300">import</span> {"{ Dialog }"}{" "}
                 <span className="text-sky-300">from</span>{" "}
-                <span className="text-green-300">
-                  {'"poyraz-ui/molecules"'}
-                </span>
-                ;
+                <span className="text-green-300">{'"poyraz-ui/molecules"'}</span>;
               </div>
               <div>
                 <span className="text-sky-300">import</span> {"{ Navbar }"}{" "}
                 <span className="text-sky-300">from</span>{" "}
-                <span className="text-green-300">
-                  {'"poyraz-ui/organisms"'}
-                </span>
-                ;
+                <span className="text-green-300">{'"poyraz-ui/organisms"'}</span>;
               </div>
             </div>
           </div>
@@ -228,9 +243,7 @@ export default function InstallationPage() {
       {/* Step 5: Example */}
       <section className="space-y-4">
         <Typography variant="h2">5. Minimal Example</Typography>
-        <Typography variant="p">
-          Here&apos;s a complete example using a Button:
-        </Typography>
+        <Typography variant="p">Here&apos;s a complete example using a Button:</Typography>
 
         <CopyBlock
           code={`import { Button } from "poyraz-ui/atoms";\n\nexport default function App() {\n  return (\n    <Button variant="default">\n      Click me\n    </Button>\n  );\n}`}
@@ -272,8 +285,8 @@ export default function InstallationPage() {
       <section className="space-y-4">
         <Typography variant="h2">6. Theme Support (Optional)</Typography>
         <Typography variant="p">
-          Poyraz UI v2 uses semantic CSS tokens that can be overridden for full
-          theme customization. For dynamic theme switching, install{" "}
+          Poyraz UI v3 uses semantic CSS tokens that can be overridden for full theme customization.
+          For dynamic theme switching, install{" "}
           <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
             reactive-switcher
           </code>{" "}
@@ -285,9 +298,7 @@ export default function InstallationPage() {
             <p className="text-xs font-bold uppercase tracking-wide text-placeholder mb-1.5">
               Install reactive-switcher
             </p>
-            <CopyBlock code="pnpm add reactive-switcher">
-              pnpm add reactive-switcher
-            </CopyBlock>
+            <CopyBlock code="pnpm add reactive-switcher">pnpm add reactive-switcher</CopyBlock>
           </div>
 
           <div>
@@ -299,20 +310,15 @@ export default function InstallationPage() {
             >
               <div className="space-y-1">
                 <div>
-                  <span className="text-sky-300">import</span>{" "}
-                  {"{ ThemeProvider }"}{" "}
+                  <span className="text-sky-300">import</span> {"{ ThemeProvider }"}{" "}
                   <span className="text-sky-300">from</span>{" "}
-                  <span className="text-green-300">
-                    {'"reactive-switcher"'}
-                  </span>
-                  ;
+                  <span className="text-green-300">{'"reactive-switcher"'}</span>;
                 </div>
                 <div>
                   <span className="text-sky-300">import</span>{" "}
                   {"{ poyrazLightTheme, poyrazDarkTheme }"}{" "}
                   <span className="text-sky-300">from</span>{" "}
-                  <span className="text-green-300">{'"poyraz-ui/themes"'}</span>
-                  ;
+                  <span className="text-green-300">{'"poyraz-ui/themes"'}</span>;
                 </div>
               </div>
             </CopyBlock>
@@ -320,8 +326,8 @@ export default function InstallationPage() {
         </div>
 
         <Typography variant="muted">
-          The CLI wizard (<code className="text-xs">npx poyraz-ui init</code>)
-          can scaffold this configuration automatically.
+          The CLI wizard (<code className="text-xs">npx poyraz-ui@3 init --mode package</code>) can
+          scaffold this configuration automatically.
         </Typography>
       </section>
 

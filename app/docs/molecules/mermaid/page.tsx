@@ -62,7 +62,7 @@ export default function MermaidPage() {
   return (
     <ComponentPage
       name="Mermaid"
-      description="Renders Mermaid diagrams with a brutalist dashed theme. Pass mermaid code as children or via the code prop."
+      description="Client-only Mermaid renderer with dynamic import, semantic light/dark theme resolution and soft, minimal or technical diagram styles."
       importCode={`import { Mermaid } from "poyraz-ui/molecules";`}
     >
       <DemoSection
@@ -75,7 +75,25 @@ export default function MermaidPage() {
     D --> B
     C --> E[Ship it]\`}</Mermaid>`}
       >
-        <Mermaid>{flowchartCode}</Mermaid>
+        <Mermaid surface="glass" radius="xl" diagramStyle="soft">
+          {flowchartCode}
+        </Mermaid>
+      </DemoSection>
+
+      <DemoSection
+        title="Visual Variants"
+        description="Diagram style and container surface can be customized independently. Theme changes trigger a semantic re-render."
+        code={`<Mermaid surface="soft" diagramStyle="minimal">{code}</Mermaid>
+<Mermaid surface="glass" diagramStyle="technical">{code}</Mermaid>`}
+      >
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Mermaid surface="soft" diagramStyle="minimal">
+            {flowchartCode}
+          </Mermaid>
+          <Mermaid surface="glass" diagramStyle="technical">
+            {flowchartCode}
+          </Mermaid>
+        </div>
       </DemoSection>
 
       <DemoSection

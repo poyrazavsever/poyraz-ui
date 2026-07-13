@@ -1,0 +1,51 @@
+{
+  "$schema": "./docs/v3/release-config.schema.json",
+  "schemaVersion": 2,
+  "product": "poyraz-ui",
+  "targetVersion": "3.0.0",
+  "releaseTagPrefix": "v",
+  "repository": "poyrazavsever/poyraz-ui",
+  "registry": {
+    "namespace": "@poyraz",
+    "homepage": "https://ui.poyrazavsever.com",
+    "baseUrl": "https://ui.poyrazavsever.com/r",
+    "template": "https://ui.poyrazavsever.com/r/{name}.json",
+    "index": "registry.json",
+    "minimumItems": 71,
+    "smokeItems": ["poyraz-theme", "poyraz-utils", "button", "dialog", "navbar"]
+  },
+  "npm": {
+    "package": "poyraz-ui",
+    "role": "primary-v3-runtime",
+    "expectedMajor": 3,
+    "legacyVersion": "2.1.0",
+    "maintenanceTag": "legacy-v2",
+    "prereleaseTag": "next",
+    "stableTag": "latest",
+    "publishV3Package": true,
+    "publishWorkflowReady": true,
+    "versionPolicy": "release-commit",
+    "tarball": {
+      "maxSizeBytes": 750000,
+      "maxUnpackedSizeBytes": 3500000
+    }
+  },
+  "milestones": [
+    { "version": "3.0.0-alpha.1", "channel": "alpha", "status": "complete" },
+    { "version": "3.0.0-alpha.2", "channel": "alpha", "status": "complete" },
+    { "version": "3.0.0-beta.1", "channel": "beta", "status": "complete" },
+    { "version": "3.0.0-beta.2", "channel": "beta", "status": "complete" },
+    { "version": "3.0.0-rc.1", "channel": "rc", "status": "planned" },
+    { "version": "3.0.0", "channel": "stable", "status": "candidate" }
+  ],
+  "support": {
+    "v2BlockerFixesUntil": "2027-03-31",
+    "v2EndOfMaintenance": "2027-06-30"
+  },
+  "requiredChecks": [
+    "Static quality",
+    "Component tests",
+    "Browser quality",
+    "Clean fixture distribution"
+  ]
+}

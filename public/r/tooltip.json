@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass tooltip component with standardized floating and overlay behavior.",
+  "dependencies": [
+    "@radix-ui/react-tooltip@^1.2.8"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/poyraz-recipes"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase6/molecules/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  floatingMotion,\n  floatingSurfaceVariants,\n  type FloatingSurfaceProps,\n} from \"@/components/ui/recipes\";\n\nconst TooltipProvider = TooltipPrimitive.Provider;\n\nconst Tooltip = TooltipPrimitive.Root;\n\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> &\n    FloatingSurfaceProps & { size?: \"sm\" | \"md\" }\n>(\n  (\n    {\n      className,\n      sideOffset = 6,\n      collisionPadding = 8,\n      surface = \"solid\",\n      radius,\n      size = \"sm\",\n      style,\n      ...props\n    },\n    ref,\n  ) => (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Content\n        ref={ref}\n        sideOffset={sideOffset}\n        collisionPadding={collisionPadding}\n        style={\n          {\n            \"--poyraz-floating-transform-origin\": \"var(--radix-tooltip-content-transform-origin)\",\n            \"--poyraz-floating-slide\": \"var(--poyraz-floating-slide-distance, 0.375rem)\",\n            ...style,\n          } as React.CSSProperties\n        }\n        className={cn(\n          floatingSurfaceVariants({ surface, radius }),\n          floatingMotion,\n          \"z-50 max-w-xs\",\n          size === \"sm\" && \"px-2.5 py-1.5 text-xs\",\n          size === \"md\" && \"px-3 py-2 text-sm\",\n          className,\n        )}\n        {...props}\n      />\n    </TooltipPrimitive.Portal>\n  ),\n);\nTooltipContent.displayName = TooltipPrimitive.Content.displayName;\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui",
+      "target": "@ui/molecules/tooltip.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-6-interactive",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}

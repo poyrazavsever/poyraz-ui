@@ -14,13 +14,7 @@ import {
 } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
-function PatternPreview({
-  children,
-  label,
-}: {
-  children: React.ReactNode;
-  label: string;
-}) {
+function PatternPreview({ children, label }: { children: React.ReactNode; label: string }) {
   return (
     <div className="relative h-48 border border-border rounded-sm bg-background overflow-hidden">
       {children}
@@ -222,13 +216,7 @@ export default function BgPatternsPage() {
 </section>`}
       >
         <div className="relative h-48 bg-background border border-border rounded-sm overflow-hidden flex items-center justify-center">
-          <PatternDots
-            overlay
-            size={28}
-            opacity={0.12}
-            color="#334155"
-            className="w-full h-full"
-          />
+          <PatternDots overlay size={28} opacity={0.12} color="#334155" className="w-full h-full" />
           <div className="relative z-10 text-center">
             <h2 className="text-lg font-bold">Hero Title</h2>
             <p className="text-sm text-muted-foreground">Content above the pattern</p>

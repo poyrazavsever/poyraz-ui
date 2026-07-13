@@ -1,0 +1,10 @@
+{
+  "name": "poyraz-ui-v2-v3-migration-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck:v2": "tsc --noEmit --project tsconfig.v2.json",
+    "typecheck:v3": "tsc --noEmit --project tsconfig.v3.json",
+    "build": "vite build"
+  }
+}

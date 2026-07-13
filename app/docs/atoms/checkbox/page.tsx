@@ -25,10 +25,7 @@ export default function CheckboxPage() {
         </div>
       </DemoSection>
 
-      <DemoSection
-        title="Checked by Default"
-        code={`<Checkbox id="newsletter" defaultChecked />`}
-      >
+      <DemoSection title="Checked by Default" code={`<Checkbox id="newsletter" defaultChecked />`}>
         <div className="flex items-center gap-2">
           <Checkbox id="newsletter-demo" defaultChecked />
           <Label htmlFor="newsletter-demo">Subscribe to newsletter</Label>

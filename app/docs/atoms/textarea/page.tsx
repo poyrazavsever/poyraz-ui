@@ -1,14 +1,14 @@
 "use client";
 
-import { Textarea } from "poyraz-ui/atoms";
-import { Label } from "poyraz-ui/atoms";
+import { Textarea } from "@/components/ui/atoms/textarea";
+import { Label } from "@/components/ui/atoms/label";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function TextareaPage() {
   return (
     <ComponentPage
       name="Textarea"
-      description="Multi-line text input with the brutalist dashed-border style. Extends all native textarea attributes."
+      description="Multi-line field with default, soft and glass surfaces, semantic invalid state and customizable radius."
       importCode={`import { Textarea } from "poyraz-ui/atoms";`}
     >
       <DemoSection
@@ -18,6 +18,16 @@ export default function TextareaPage() {
       >
         <div className="max-w-sm">
           <Textarea placeholder="Write something bold..." />
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="Variants"
+        code={`<Textarea variant="soft" />\n<Textarea variant="glass" radius="xl" />`}
+      >
+        <div className="grid max-w-lg gap-3 rounded-2xl bg-gradient-to-br from-red-100 to-slate-200 p-5 dark:from-red-950 dark:to-slate-900">
+          <Textarea variant="soft" placeholder="Soft textarea" />
+          <Textarea variant="glass" radius="xl" placeholder="Glass textarea" />
         </div>
       </DemoSection>
 
@@ -33,10 +43,7 @@ export default function TextareaPage() {
         </div>
       </DemoSection>
 
-      <DemoSection
-        title="Disabled"
-        code={`<Textarea placeholder="Cannot type here" disabled />`}
-      >
+      <DemoSection title="Disabled" code={`<Textarea placeholder="Cannot type here" disabled />`}>
         <div className="max-w-sm">
           <Textarea placeholder="Cannot type here" disabled />
         </div>

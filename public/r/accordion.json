@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "Accordion",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass accordion component with standardized floating and overlay behavior.",
+  "dependencies": [
+    "@radix-ui/react-accordion@^1.2.12",
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/poyraz-recipes"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase6/molecules/accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { ChevronDown } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\nimport {\n  accordionMotion,\n  floatingSurfaceVariants,\n  type FloatingSurfaceProps,\n} from \"@/components/ui/recipes\";\n\nconst Accordion = AccordionPrimitive.Root;\n\nconst AccordionItem = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> &\n    FloatingSurfaceProps & { separated?: boolean }\n>(({ className, surface, radius, separated = false, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"border-b border-border transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]\",\n      \"data-[state=open]:border-border-strong\",\n      separated && floatingSurfaceVariants({ surface, radius }),\n      separated && \"mb-2 border p-0 data-[state=open]:border-border-strong\",\n      className,\n    )}\n    {...props}\n  />\n));\nAccordionItem.displayName = \"AccordionItem\";\n\nconst AccordionTrigger = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"flex flex-1 items-center justify-between py-3 font-medium\",\n        \"transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:text-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background\",\n        \"[&[data-state=open]>svg]:rotate-180\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <ChevronDown className=\"h-4 w-4 shrink-0 transition-transform duration-[var(--poyraz-motion-duration-base)] ease-[var(--poyraz-motion-ease-out)]\" />\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;\n\nconst AccordionContent = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Content\n    ref={ref}\n    className={cn(\"overflow-hidden text-sm\", accordionMotion)}\n    {...props}\n  >\n    <div\n      className={cn(\n        \"pb-4 pt-0 data-[state=open]:animate-poyraz-fade-in motion-reduce:animate-none\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  </AccordionPrimitive.Content>\n));\nAccordionContent.displayName = AccordionPrimitive.Content.displayName;\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/molecules/accordion.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-6-interactive",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}

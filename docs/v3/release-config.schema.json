@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.poyrazavsever.com/schemas/release-config.schema.json",
+  "title": "Poyraz UI release configuration",
+  "type": "object",
+  "required": ["schemaVersion", "product", "targetVersion", "registry", "npm", "milestones"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "product": { "const": "poyraz-ui" },
+    "targetVersion": { "type": "string", "pattern": "^3\\.\\d+\\.\\d+(-[a-z]+\\.\\d+)?$" },
+    "releaseTagPrefix": { "type": "string" },
+    "repository": { "type": "string" },
+    "registry": {
+      "type": "object",
+      "required": ["namespace", "homepage", "baseUrl", "template", "index", "minimumItems"],
+      "properties": {
+        "namespace": { "const": "@poyraz" },
+        "homepage": { "type": "string", "format": "uri" },
+        "baseUrl": { "type": "string", "format": "uri" },
+        "template": { "type": "string", "pattern": "\\{name\\}" },
+        "index": { "const": "registry.json" },
+        "minimumItems": { "type": "integer", "minimum": 1 },
+        "smokeItems": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      },
+      "additionalProperties": false
+    },
+    "npm": {
+      "type": "object",
+      "required": [
+        "package",
+        "role",
+        "expectedMajor",
+        "legacyVersion",
+        "maintenanceTag",
+        "prereleaseTag",
+        "stableTag",
+        "publishV3Package",
+        "publishWorkflowReady",
+        "versionPolicy",
+        "tarball"
+      ],
+      "properties": {
+        "package": { "const": "poyraz-ui" },
+        "role": { "const": "primary-v3-runtime" },
+        "expectedMajor": { "const": 3 },
+        "legacyVersion": { "type": "string", "pattern": "^2\\.\\d+\\.\\d+$" },
+        "maintenanceTag": { "const": "legacy-v2" },
+        "prereleaseTag": { "const": "next" },
+        "stableTag": { "const": "latest" },
+        "publishV3Package": { "const": true },
+        "publishWorkflowReady": { "type": "boolean" },
+        "versionPolicy": { "const": "release-commit" },
+        "tarball": {
+          "type": "object",
+          "required": ["maxSizeBytes", "maxUnpackedSizeBytes"],
+          "properties": {
+            "maxSizeBytes": { "type": "integer", "minimum": 1 },
+            "maxUnpackedSizeBytes": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "milestones": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["version", "channel", "status"],
+        "properties": {
+          "version": { "type": "string" },
+          "channel": { "enum": ["alpha", "beta", "rc", "stable"] },
+          "status": { "enum": ["planned", "complete", "candidate", "released"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

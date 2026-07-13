@@ -1,10 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Autocomplete,
-  type AutocompleteOption,
-} from "poyraz-ui/molecules";
+import { Autocomplete, type AutocompleteOption } from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 const fruits: AutocompleteOption[] = [
@@ -108,6 +105,37 @@ export default function AutocompletePage() {
 />`}
       >
         <SingleDemo />
+      </DemoSection>
+
+      <DemoSection
+        title="Async States"
+        description="Loading, empty and error states preserve the same combobox anatomy and live-region semantics."
+        code={`<Autocomplete options={[]} state="loading" loadingText="Searching…" />
+<Autocomplete options={[]} state="ready" emptyContent="No matching technologies." />
+<Autocomplete options={[]} state="error" errorText="Could not load technologies." />`}
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          <Autocomplete
+            options={[]}
+            state="loading"
+            defaultOpen
+            loadingText="Searching…"
+            variant="glass"
+          />
+          <Autocomplete
+            options={[]}
+            state="ready"
+            defaultOpen
+            emptyContent="No matching technologies."
+            variant="soft"
+          />
+          <Autocomplete
+            options={[]}
+            state="error"
+            defaultOpen
+            errorText="Could not load technologies."
+          />
+        </div>
       </DemoSection>
 
       <DemoSection

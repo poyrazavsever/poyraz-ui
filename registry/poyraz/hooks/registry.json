@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "navbar-auto-hide",
+      "type": "registry:hook",
+      "title": "Navbar Auto Hide",
+      "description": "Poyraz Soft Glass Navbar Auto Hide with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase8/use-navbar-auto-hide.ts",
+          "type": "registry:hook",
+          "target": "@ui/hooks/use-navbar-auto-hide.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-hook",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    },
+    {
+      "name": "persistent-announcement",
+      "type": "registry:hook",
+      "title": "Persistent Announcement",
+      "description": "Poyraz Soft Glass Persistent Announcement with container-responsive layout and semantic tokens.",
+      "author": "Poyraz Avsever",
+      "dependencies": [],
+      "registryDependencies": [
+        "@poyraz/poyraz-utils",
+        "@poyraz/poyraz-theme"
+      ],
+      "files": [
+        {
+          "path": "phase8/use-persistent-announcement.ts",
+          "type": "registry:hook",
+          "target": "@ui/hooks/use-persistent-announcement.ts"
+        }
+      ],
+      "meta": {
+        "category": "phase-8-hook",
+        "phase": "beta",
+        "responsive": "container",
+        "accessibilityReviewed": true
+      }
+    }
+  ]
+}

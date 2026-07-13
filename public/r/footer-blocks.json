@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-blocks",
+  "title": "Footer Blocks",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Footer Blocks with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/button",
+    "@poyraz/footer",
+    "@poyraz/footer-newsletter"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/footer-blocks.tsx",
+      "content": "import { Github, Sparkles } from \"lucide-react\";\n\nimport { Button } from \"@/components/ui/atoms/button\";\nimport {\n  Footer,\n  FooterBottom,\n  FooterBrand,\n  FooterGrid,\n  FooterHeading,\n  FooterLink,\n  FooterSection,\n  FooterSocialLink,\n  FooterSocials,\n} from \"@/components/ui/organisms/footer\";\nimport { FooterNewsletter } from \"@/components/ui/organisms/footer-newsletter\";\n\nfunction CompactFooterBlock() {\n  return (\n    <div data-slot=\"compact-footer-block\" className=\"@container/footer-block\">\n      <Footer variant=\"compact\">\n        <FooterBottom className=\"m-0 border-0 pt-0\">\n          <span>Poyraz UI</span>\n          <span>Open source under MIT.</span>\n        </FooterBottom>\n      </Footer>\n    </div>\n  );\n}\n\nfunction CenteredFooterBlock() {\n  return (\n    <div data-slot=\"centered-footer-block\" className=\"@container/footer-block\">\n      <Footer variant=\"centered\">\n        <FooterBrand className=\"mx-auto items-center\">\n          <Sparkles className=\"size-5 text-primary\" />\n          <p className=\"text-sm font-semibold\">Poyraz UI</p>\n        </FooterBrand>\n        <div className=\"mt-4 flex flex-wrap justify-center gap-4\">\n          <FooterLink href=\"#\">Components</FooterLink>\n          <FooterLink href=\"#\">Blocks</FooterLink>\n          <FooterLink href=\"#\">Docs</FooterLink>\n        </div>\n      </Footer>\n    </div>\n  );\n}\n\nfunction BrandedFooterBlock() {\n  return (\n    <div data-slot=\"branded-footer-block\" className=\"@container/footer-block\">\n      <Footer variant=\"branded\">\n        <div className=\"grid gap-8 @lg/footer:grid-cols-[1.3fr_2fr]\">\n          <div>\n            <FooterBrand>\n              <p className=\"text-lg font-semibold\">Poyraz UI</p>\n              <p className=\"text-sm text-muted-foreground\">\n                Open React components with a restrained soft glass language.\n              </p>\n              <FooterSocials>\n                <FooterSocialLink href=\"#\" aria-label=\"GitHub\">\n                  <Github className=\"size-4\" />\n                </FooterSocialLink>\n              </FooterSocials>\n            </FooterBrand>\n            <FooterNewsletter className=\"mt-5\" />\n          </div>\n          <FooterGrid className=\"@lg/footer:grid-cols-2\">\n            <FooterSection>\n              <FooterHeading>Product</FooterHeading>\n              <FooterLink href=\"#\">Components</FooterLink>\n              <FooterLink href=\"#\">Blocks</FooterLink>\n            </FooterSection>\n            <FooterSection>\n              <FooterHeading>Start</FooterHeading>\n              <Button size=\"sm\">Open registry</Button>\n            </FooterSection>\n          </FooterGrid>\n        </div>\n      </Footer>\n    </div>\n  );\n}\n\nexport { BrandedFooterBlock, CenteredFooterBlock, CompactFooterBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/footer-blocks.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

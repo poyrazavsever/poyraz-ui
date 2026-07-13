@@ -17,7 +17,6 @@ import {
   BarChart3,
   TrendingUp,
   Activity,
-  Calendar,
   CircleDot,
   Mail,
   Lock,
@@ -31,7 +30,6 @@ import { Typography } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
-import { Switch } from "poyraz-ui/atoms";
 import { Checkbox } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
@@ -45,13 +43,7 @@ import {
   CardDescription,
   CardFooter,
 } from "poyraz-ui/atoms";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "poyraz-ui/molecules";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "poyraz-ui/molecules";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import {
   Pagination,
@@ -108,11 +100,7 @@ function CopyInstallCommand() {
         className="text-placeholder hover:text-foreground cursor-pointer transition-colors"
         aria-label="Copy install command"
       >
-        {copied ? (
-          <Check className="h-4 w-4 text-success-solid" />
-        ) : (
-          <Copy className="h-4 w-4" />
-        )}
+        {copied ? <Check className="h-4 w-4 text-success-solid" /> : <Copy className="h-4 w-4" />}
       </button>
     </div>
   );
@@ -125,9 +113,7 @@ function PaymentMethodCard() {
     <Card className="w-full">
       <CardHeader>
         <CardTitle className="text-base">Payment Method</CardTitle>
-        <CardDescription>
-          All transactions are secure and encrypted
-        </CardDescription>
+        <CardDescription>All transactions are secure and encrypted</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
@@ -216,9 +202,7 @@ function SecurityCard() {
             <Shield className="h-5 w-5 text-muted-foreground" />
             <div>
               <p className="text-sm font-semibold">Two-factor authentication</p>
-              <p className="text-xs text-muted-foreground">
-                Verify via email or phone number.
-              </p>
+              <p className="text-xs text-muted-foreground">Verify via email or phone number.</p>
             </div>
           </div>
           <Button variant="outline" size="sm">
@@ -251,10 +235,7 @@ function AppearanceCard() {
             <div className="flex items-start gap-3 rounded-sm border border-border p-3">
               <RadioGroupItem value="kubernetes" id="k8s" className="mt-0.5" />
               <div>
-                <Label
-                  htmlFor="k8s"
-                  className="normal-case font-medium text-sm"
-                >
+                <Label htmlFor="k8s" className="normal-case font-medium text-sm">
                   Kubernetes
                 </Label>
                 <p className="text-xs text-muted-foreground mt-0.5">
@@ -355,9 +336,7 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                Total Revenue
-              </p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Revenue</p>
               <p className="text-xl font-bold mt-1">$45,231</p>
               <p className="text-xs text-success-solid mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +20.1%
@@ -374,9 +353,7 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                Subscriptions
-              </p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Subscriptions</p>
               <p className="text-xl font-bold mt-1">+2,350</p>
               <p className="text-xs text-success-solid mt-1 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" /> +180.1%
@@ -393,9 +370,7 @@ function DashboardShowcase() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                Active Now
-              </p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Active Now</p>
               <p className="text-xl font-bold mt-1">+573</p>
               <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                 <Activity className="h-3 w-3" /> +201 since last hour
@@ -492,8 +467,7 @@ function TasksShowcase() {
     {
       id: 1,
       label: "TASK-8782",
-      title:
-        "You can't compress the program without quantifying the open-source SSD.",
+      title: "You can't compress the program without quantifying the open-source SSD.",
       status: "In Progress",
       priority: "Medium",
       checked: false,
@@ -501,8 +475,7 @@ function TasksShowcase() {
     {
       id: 2,
       label: "TASK-7878",
-      title:
-        "Try to calculate the EXE feed, maybe it will index the multi-byte pixel!",
+      title: "Try to calculate the EXE feed, maybe it will index the multi-byte pixel!",
       status: "Backlog",
       priority: "High",
       checked: false,
@@ -518,8 +491,7 @@ function TasksShowcase() {
     {
       id: 4,
       label: "TASK-5562",
-      title:
-        "The SAS interface is down, bypass the open-source pixel so we can program.",
+      title: "The SAS interface is down, bypass the open-source pixel so we can program.",
       status: "Backlog",
       priority: "Medium",
       checked: false,
@@ -527,8 +499,7 @@ function TasksShowcase() {
     {
       id: 5,
       label: "TASK-8686",
-      title:
-        "I'll parse the wireless SSL protocol, that should driver the API panel!",
+      title: "I'll parse the wireless SSL protocol, that should driver the API panel!",
       status: "Canceled",
       priority: "Low",
       checked: false,
@@ -536,8 +507,7 @@ function TasksShowcase() {
     {
       id: 6,
       label: "TASK-1280",
-      title:
-        "Use the digital TLS panel, then you can transmit the haptic system!",
+      title: "Use the digital TLS panel, then you can transmit the haptic system!",
       status: "Done",
       priority: "High",
       checked: true,
@@ -587,16 +557,11 @@ function TasksShowcase() {
             </thead>
             <tbody>
               {tasks.map((task) => (
-                <tr
-                  key={task.id}
-                  className="border-b border-border last:border-0"
-                >
+                <tr key={task.id} className="border-b border-border last:border-0">
                   <td className="p-3">
                     <Checkbox defaultChecked={task.checked} />
                   </td>
-                  <td className="p-3 font-mono text-xs text-muted-foreground">
-                    {task.label}
-                  </td>
+                  <td className="p-3 font-mono text-xs text-muted-foreground">{task.label}</td>
                   <td className="p-3 max-w-xs truncate">{task.title}</td>
                   <td className="p-3">
                     <Badge variant="outline" className="text-[10px] gap-1">
@@ -623,9 +588,7 @@ function TasksShowcase() {
           </table>
         </div>
         <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-          <p className="text-xs text-muted-foreground">
-            0 of {tasks.length} row(s) selected.
-          </p>
+          <p className="text-xs text-muted-foreground">0 of {tasks.length} row(s) selected.</p>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" className="h-8 text-xs">
               Previous
@@ -651,9 +614,7 @@ function AuthShowcase() {
       <Card className="w-full">
         <CardHeader className="text-center">
           <CardTitle className="text-lg">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardDescription>Enter your email below to login to your account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -681,20 +642,13 @@ function AuthShowcase() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-placeholder hover:text-muted-foreground cursor-pointer"
               >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="remember" />
-            <Label
-              htmlFor="remember"
-              className="normal-case font-normal text-sm"
-            >
+            <Label htmlFor="remember" className="normal-case font-normal text-sm">
               Remember me
             </Label>
           </div>
@@ -703,9 +657,7 @@ function AuthShowcase() {
         <CardFooter className="justify-center">
           <p className="text-xs text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <span className="text-primary font-medium cursor-pointer hover:underline">
-              Sign up
-            </span>
+            <span className="text-primary font-medium cursor-pointer hover:underline">Sign up</span>
           </p>
         </CardFooter>
       </Card>
@@ -714,9 +666,7 @@ function AuthShowcase() {
       <Card className="w-full">
         <CardHeader className="text-center">
           <CardTitle className="text-lg">Create Account</CardTitle>
-          <CardDescription>
-            Enter your information to create an account
-          </CardDescription>
+          <CardDescription>Enter your information to create an account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
@@ -809,8 +759,7 @@ export default function Home() {
           </Link>
 
           <Typography variant="h1">
-            <span className="font-secondary text-primary">UI Kit</span> for
-            Poyraz
+            <span className="font-secondary text-primary">UI Kit</span> for Poyraz
           </Typography>
 
           <Typography variant="lead" className="max-w-2xl">
@@ -827,11 +776,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href={socialLinks.repo} target="_blank">
-              <Button
-                variant="outline"
-                size="lg"
-                className="bg-background w-full sm:w-auto"
-              >
+              <Button variant="outline" size="lg" className="bg-background w-full sm:w-auto">
                 <Github className="mr-2 h-4 w-4" /> GitHub
               </Button>
             </Link>
@@ -895,8 +840,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <Typography variant="h2">Ready to Build?</Typography>
           <Typography variant="muted" className="max-w-lg mx-auto">
-            Start using Poyraz UI in your projects today. Free, open-source, and
-            built with care.
+            Start using Poyraz UI in your projects today. Free, open-source, and built with care.
           </Typography>
           <div className="flex justify-center gap-4 pt-4">
             <Link href="/docs">
@@ -915,13 +859,10 @@ export default function Home() {
           <FooterBrand>
             <div className="flex items-center gap-3">
               <Logo width={40} height={40} />
-              <span className="text-lg font-bold tracking-tight">
-                Poyraz UI
-              </span>
+              <span className="text-lg font-bold tracking-tight">Poyraz UI</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-              An open-source minimal UI component library for modern web
-              applications.
+              An open-source minimal UI component library for modern web applications.
             </p>
           </FooterBrand>
           <FooterGrid className="flex-1 max-w-lg grid-cols-2">
@@ -938,9 +879,7 @@ export default function Home() {
           </FooterGrid>
         </div>
         <FooterBottom>
-          <span>
-            &copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.
-          </span>
+          <span>&copy; {new Date().getFullYear()} Poyraz Avsever. MIT License.</span>
           <FooterSocials>
             <FooterSocialLink href={socialLinks.github} aria-label="GitHub">
               <Github className="h-4 w-4" />

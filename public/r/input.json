@@ -1,0 +1,49 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "title": "Input",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass input component.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/poyraz-recipes"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase5/atoms/input.tsx",
+      "content": "import * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\n\nimport { fieldVariants } from \"@/components/ui/recipes\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof fieldVariants> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, radius, type, variant, ...props }, ref) => (\n    <input\n      ref={ref}\n      type={type}\n      data-slot=\"input\"\n      data-variant={variant ?? \"default\"}\n      data-radius={radius ?? \"md\"}\n      data-invalid={props[\"aria-invalid\"] ? \"\" : undefined}\n      className={cn(\n        fieldVariants({ variant, radius }),\n        \"h-10 px-3 py-2 file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-semibold file:text-primary\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nInput.displayName = \"Input\";\n\nexport type InputGroupProps = React.HTMLAttributes<HTMLDivElement> &\n  VariantProps<typeof fieldVariants>;\n\nconst InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(\n  ({ className, radius, variant, ...props }, ref) => (\n    <div\n      ref={ref}\n      data-slot=\"input-group\"\n      data-variant={variant ?? \"default\"}\n      data-radius={radius ?? \"md\"}\n      aria-invalid={props[\"aria-invalid\"]}\n      className={cn(\n        fieldVariants({ variant, radius }),\n        \"group h-10 items-center overflow-hidden p-0 focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/20 has-[[aria-invalid=true]]:border-invalid has-[[aria-invalid=true]]:ring-invalid/15 [&_[data-slot=input]]:h-full [&_[data-slot=input]]:rounded-none [&_[data-slot=input]]:border-0 [&_[data-slot=input]]:bg-transparent [&_[data-slot=input]]:shadow-none [&_[data-slot=input]]:outline-none [&_[data-slot=input]]:ring-0 [&_[data-slot=input]]:ring-offset-0\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\nInputGroup.displayName = \"InputGroup\";\n\ntype InputGroupAddonProps = React.HTMLAttributes<HTMLDivElement> & {\n  position?: \"start\" | \"end\";\n};\n\nfunction InputGroupAddon({ className, position = \"start\", ...props }: InputGroupAddonProps) {\n  return (\n    <div\n      data-slot=\"input-group-addon\"\n      data-position={position}\n      className={cn(\n        \"flex h-full shrink-0 items-center justify-center px-3 text-muted-foreground [&_svg]:size-4\",\n        position === \"start\" ? \"border-r border-border\" : \"border-l border-border\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input, InputGroup, InputGroupAddon, fieldVariants };\n",
+      "type": "registry:ui",
+      "target": "@ui/atoms/input.tsx"
+    }
+  ],
+  "css": {
+    ".poyraz-glass-field": {
+      "background-color": "var(--glass-fallback)"
+    },
+    "@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))": {
+      ".poyraz-glass-field": {
+        "background-color": "var(--glass-background)",
+        "-webkit-backdrop-filter": "blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass))",
+        "backdrop-filter": "blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass))"
+      }
+    },
+    "input:autofill, textarea:autofill, input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus": {
+      "-webkit-text-fill-color": "var(--foreground)",
+      "color": "var(--foreground)",
+      "caret-color": "var(--foreground)",
+      "box-shadow": "0 0 0 1000px var(--background) inset"
+    },
+    ".poyraz-glass-field:autofill, .poyraz-glass-field:-webkit-autofill, .poyraz-glass-field:-webkit-autofill:hover, .poyraz-glass-field:-webkit-autofill:focus": {
+      "box-shadow": "0 0 0 1000px var(--glass-fallback) inset"
+    }
+  },
+  "meta": {
+    "category": "phase-5-foundation",
+    "phase": "beta"
+  },
+  "type": "registry:ui"
+}

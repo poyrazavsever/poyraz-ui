@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-newsletter",
+  "title": "Footer Newsletter",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Footer Newsletter with container-responsive layout and semantic tokens.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/button",
+    "@poyraz/input"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase8/footer-newsletter.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { Button } from \"@/components/ui/atoms/button\";\nimport { Input } from \"@/components/ui/atoms/input\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FooterNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {\n  heading?: string;\n  description?: string;\n  placeholder?: string;\n  buttonText?: string;\n  onSubscribe?: (email: string) => void;\n}\n\nconst FooterNewsletter = React.forwardRef<HTMLDivElement, FooterNewsletterProps>(\n  (\n    {\n      className,\n      heading = \"Subscribe to our newsletter\",\n      description = \"Get the latest updates directly in your inbox.\",\n      placeholder = \"you@example.com\",\n      buttonText = \"Subscribe\",\n      onSubscribe,\n      ...props\n    },\n    ref,\n  ) => {\n    const [email, setEmail] = React.useState(\"\");\n\n    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {\n      event.preventDefault();\n      const value = email.trim();\n      if (!value) return;\n      onSubscribe?.(value);\n      setEmail(\"\");\n    }\n\n    return (\n      <div\n        ref={ref}\n        data-slot=\"footer-newsletter\"\n        className={cn(\n          \"rounded-lg border border-border bg-surface-subtle p-4 @sm/footer:p-6\",\n          className,\n        )}\n        {...props}\n      >\n        <h4 className=\"text-sm font-semibold text-foreground\">{heading}</h4>\n        <p className=\"mt-1 text-xs text-muted-foreground\">{description}</p>\n        <form\n          data-slot=\"footer-newsletter-form\"\n          onSubmit={handleSubmit}\n          className=\"mt-4 flex flex-col gap-2 @sm/footer:flex-row\"\n        >\n          <Input\n            type=\"email\"\n            value={email}\n            onChange={(event) => setEmail(event.target.value)}\n            placeholder={placeholder}\n            aria-label={placeholder}\n            required\n            className=\"min-w-0 flex-1\"\n          />\n          <Button type=\"submit\" className=\"shrink-0\">\n            {buttonText}\n          </Button>\n        </form>\n      </div>\n    );\n  },\n);\nFooterNewsletter.displayName = \"FooterNewsletter\";\n\nexport { FooterNewsletter };\n",
+      "type": "registry:ui",
+      "target": "@ui/organisms/footer-newsletter.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-organism",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:ui"
+}

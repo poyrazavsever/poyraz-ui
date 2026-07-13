@@ -27,21 +27,11 @@ import {
   NavbarMobileDrillMenu,
   NavbarMobileDrillTrigger,
   NavbarMobileDrillPanel,
-  NavbarSearch,
   NavbarDivider,
 } from "poyraz-ui/organisms";
 import { Button } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
-import {
-  BookOpen,
-  Layers,
-  Zap,
-  Globe,
-  Package,
-  Code,
-  FileText,
-  Users,
-} from "lucide-react";
+import { Layers, Zap, Globe } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function NavbarPage() {
@@ -178,9 +168,7 @@ export default function NavbarPage() {
         <div className="border border-border rounded-sm">
           <Navbar>
             <NavbarTopBar>
-              <span className="text-xs">
-                🎉 v1.0 is live — check the changelog!
-              </span>
+              <span className="text-xs">🎉 v1.0 is live — check the changelog!</span>
               <a href="#" className="text-xs underline">
                 Learn more →
               </a>
@@ -311,11 +299,7 @@ export default function NavbarPage() {
                       title="Integrations"
                       description="Connect your favorite tools"
                     />
-                    <NavbarMegaMenuItem
-                      href="#"
-                      title="API"
-                      description="Build custom solutions"
-                    />
+                    <NavbarMegaMenuItem href="#" title="API" description="Build custom solutions" />
                   </NavbarMegaMenu>
                 </NavbarDropdown>
                 <NavbarLink href="#">Pricing</NavbarLink>
@@ -597,18 +581,10 @@ export default function NavbarPage() {
               <NavbarLinks>
                 <NavbarLink href="#">Home</NavbarLink>
                 <NavbarPopoverDropdown label="Resources" align="start">
-                  <NavbarPopoverDropdownItem href="#">
-                    Documentation
-                  </NavbarPopoverDropdownItem>
-                  <NavbarPopoverDropdownItem href="#">
-                    Blog
-                  </NavbarPopoverDropdownItem>
-                  <NavbarPopoverDropdownItem href="#">
-                    Changelog
-                  </NavbarPopoverDropdownItem>
-                  <NavbarPopoverDropdownItem href="#">
-                    Status
-                  </NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">Documentation</NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">Blog</NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">Changelog</NavbarPopoverDropdownItem>
+                  <NavbarPopoverDropdownItem href="#">Status</NavbarPopoverDropdownItem>
                 </NavbarPopoverDropdown>
                 <NavbarLink href="#">Pricing</NavbarLink>
               </NavbarLinks>
@@ -646,11 +622,7 @@ export default function NavbarPage() {
               </NavbarBrand>
               <NavbarLinks>
                 <NavbarLink href="#">Home</NavbarLink>
-                <NavbarPanelDropdown
-                  label="Products"
-                  width="380px"
-                  align="start"
-                >
+                <NavbarPanelDropdown label="Products" width="380px" align="start">
                   <NavbarPanelDropdownItem
                     href="#"
                     title="Analytics"
@@ -859,10 +831,7 @@ export default function NavbarPage() {
                 <NavbarMobileLink href="#">Integrations</NavbarMobileLink>
                 <NavbarMobileLink href="#">API</NavbarMobileLink>
               </NavbarMobileDrillPanel>
-              <NavbarMobileDrillPanel
-                panelId="drill-resources"
-                backLabel="Back"
-              >
+              <NavbarMobileDrillPanel panelId="drill-resources" backLabel="Back">
                 <NavbarMobileLink href="#">Blog</NavbarMobileLink>
                 <NavbarMobileLink href="#">Documentation</NavbarMobileLink>
                 <NavbarMobileLink href="#">Changelog</NavbarMobileLink>
@@ -953,8 +922,7 @@ import { mainNav } from "@/lib/navigation";
                 <strong>footerNav</strong> — Grouped sections for Footer
               </li>
               <li>
-                <strong>componentRegistry</strong> — Sidebar component groups
-                with basePath
+                <strong>componentRegistry</strong> — Sidebar component groups with basePath
               </li>
               <li>
                 <strong>socialLinks</strong> — Centralized social/external URLs

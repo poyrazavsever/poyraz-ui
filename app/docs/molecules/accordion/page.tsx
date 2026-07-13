@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "poyraz-ui/molecules";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "poyraz-ui/molecules";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function AccordionPage() {
@@ -41,21 +36,15 @@ export default function AccordionPage() {
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
+            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>Is it styled?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It uses the brutalist dashed-border aesthetic.
-            </AccordionContent>
+            <AccordionContent>Yes. It uses the brutalist dashed-border aesthetic.</AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger>Can I customize it?</AccordionTrigger>
-            <AccordionContent>
-              Absolutely. Use className to override any styles.
-            </AccordionContent>
+            <AccordionContent>Absolutely. Use className to override any styles.</AccordionContent>
           </AccordionItem>
         </Accordion>
       </DemoSection>
@@ -77,15 +66,11 @@ export default function AccordionPage() {
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="a">
             <AccordionTrigger>Section A</AccordionTrigger>
-            <AccordionContent>
-              You can open multiple panels at once.
-            </AccordionContent>
+            <AccordionContent>You can open multiple panels at once.</AccordionContent>
           </AccordionItem>
           <AccordionItem value="b">
             <AccordionTrigger>Section B</AccordionTrigger>
-            <AccordionContent>
-              This one can also be open while A is open.
-            </AccordionContent>
+            <AccordionContent>This one can also be open while A is open.</AccordionContent>
           </AccordionItem>
         </Accordion>
       </DemoSection>

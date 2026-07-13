@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sidebar-provider",
+  "title": "Sidebar Provider",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Sidebar Provider with container-responsive layout and semantic tokens.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase8/sidebar-provider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nexport type SidebarVariant =\n  \"default\" | \"collapsible\" | \"floating\" | \"mini\" | \"dark\" | \"bordered\" | \"inset\";\n\nexport interface SidebarContextValue {\n  collapsed: boolean;\n  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;\n  mobileOpen: boolean;\n  setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;\n  variant: SidebarVariant;\n}\n\nconst SidebarContext = React.createContext<SidebarContextValue | null>(null);\n\nexport interface SidebarProviderProps {\n  children: React.ReactNode;\n  variant?: SidebarVariant;\n  defaultCollapsed?: boolean;\n  defaultMobileOpen?: boolean;\n}\n\nfunction SidebarProvider({\n  children,\n  variant = \"default\",\n  defaultCollapsed = false,\n  defaultMobileOpen = false,\n}: SidebarProviderProps) {\n  const [collapsed, setCollapsed] = React.useState(variant === \"mini\" ? true : defaultCollapsed);\n  const [mobileOpen, setMobileOpen] = React.useState(defaultMobileOpen);\n  const value = React.useMemo(\n    () => ({ collapsed, setCollapsed, mobileOpen, setMobileOpen, variant }),\n    [collapsed, mobileOpen, variant],\n  );\n\n  return <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>;\n}\n\nfunction useSidebar() {\n  const context = React.useContext(SidebarContext);\n  if (!context) throw new Error(\"useSidebar must be used within SidebarProvider\");\n  return context;\n}\n\nexport { SidebarProvider, useSidebar };\n",
+      "type": "registry:ui",
+      "target": "@ui/organisms/sidebar-provider.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-organism",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:ui"
+}

@@ -1,0 +1,545 @@
+{
+  "version": 1,
+  "v2Baseline": "2.1.x",
+  "v3Distribution": "registry",
+  "support": {
+    "securityAndBlockerFixesUntil": "2027-03-31",
+    "endOfMaintenance": "2027-06-30",
+    "legacyDistTag": "legacy-v2"
+  },
+  "componentMappings": [
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Avatar*",
+      "item": "avatar",
+      "target": "@/components/ui/atoms/avatar"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Badge",
+      "item": "badge",
+      "target": "@/components/ui/atoms/badge"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Button, buttonVariants",
+      "item": "button",
+      "target": "@/components/ui/atoms/button"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Card*",
+      "item": "card",
+      "target": "@/components/ui/atoms/card"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "BasicContentCard, GlassCard and card compositions",
+      "item": "card-variants",
+      "target": "@/components/ui/atoms/card-variants"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Checkbox",
+      "item": "checkbox",
+      "target": "@/components/ui/atoms/checkbox"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Input, InputGroup*",
+      "item": "input",
+      "target": "@/components/ui/atoms/input"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "NumberInput, MaskedInput and field helpers",
+      "item": "form-fields",
+      "target": "@/components/ui/atoms/form-fields"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Label",
+      "item": "label",
+      "target": "@/components/ui/atoms/label"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Logo",
+      "item": "logo",
+      "target": "@/components/ui/atoms/logo"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "RadioGroup*",
+      "item": "radio-group",
+      "target": "@/components/ui/atoms/radio-group"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "ScrollArea",
+      "item": "scroll-area",
+      "target": "@/components/ui/atoms/scroll-area"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Separator",
+      "item": "separator",
+      "target": "@/components/ui/atoms/separator"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Skeleton",
+      "item": "skeleton",
+      "target": "@/components/ui/atoms/skeleton"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Switch",
+      "item": "switch",
+      "target": "@/components/ui/atoms/switch"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Textarea",
+      "item": "textarea",
+      "target": "@/components/ui/atoms/textarea"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Typography, TextEffect",
+      "item": "typography",
+      "target": "@/components/ui/atoms/typography"
+    },
+    {
+      "layer": "Atoms",
+      "v2Module": "poyraz-ui/atoms",
+      "symbols": "Pattern*",
+      "item": "bg-pattern",
+      "target": "@/components/ui/atoms/bg-pattern"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Accordion*",
+      "item": "accordion",
+      "target": "@/components/ui/molecules/accordion"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Alert*",
+      "item": "alert",
+      "target": "@/components/ui/molecules/alert"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Autocomplete",
+      "item": "autocomplete",
+      "target": "@/components/ui/molecules/autocomplete"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Breadcrumb*",
+      "item": "breadcrumb",
+      "target": "@/components/ui/molecules/breadcrumb"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Calendar",
+      "item": "calendar",
+      "target": "@/components/ui/molecules/calendar"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "CommandPalette*",
+      "item": "command-palette",
+      "target": "@/components/ui/molecules/command-palette"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "DatePicker",
+      "item": "date-picker",
+      "target": "@/components/ui/molecules/date-picker"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Dialog*",
+      "item": "dialog",
+      "target": "@/components/ui/molecules/dialog"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Drawer*",
+      "item": "drawer",
+      "target": "@/components/ui/molecules/drawer"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "DropdownMenu*",
+      "item": "dropdown-menu",
+      "target": "@/components/ui/molecules/dropdown-menu"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Form*",
+      "item": "form",
+      "target": "@/components/ui/molecules/form"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "HoverCard*",
+      "item": "hover-card",
+      "target": "@/components/ui/molecules/hover-card"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Mermaid",
+      "item": "mermaid",
+      "target": "@/components/ui/molecules/mermaid",
+      "note": "V2 source existed but was not exported from the public barrel."
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Modal*",
+      "item": "modal",
+      "target": "@/components/ui/molecules/modal"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Pagination*",
+      "item": "pagination",
+      "target": "@/components/ui/molecules/pagination"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Popover*",
+      "item": "popover",
+      "target": "@/components/ui/molecules/popover"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Select*",
+      "item": "select",
+      "target": "@/components/ui/molecules/select"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Sheet*",
+      "item": "sheet",
+      "target": "@/components/ui/molecules/sheet"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Tabs*",
+      "item": "tabs",
+      "target": "@/components/ui/molecules/tabs"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Toaster, toast",
+      "item": "sonner",
+      "target": "@/components/ui/molecules/sonner"
+    },
+    {
+      "layer": "Molecules",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "Tooltip*",
+      "item": "tooltip",
+      "target": "@/components/ui/molecules/tooltip"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "ArticleCard",
+      "item": "article-card",
+      "target": "@/components/ui/blocks/card-templates/article-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "ImageCard",
+      "item": "image-card",
+      "target": "@/components/ui/blocks/card-templates/image-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "NewsCard",
+      "item": "news-card",
+      "target": "@/components/ui/blocks/card-templates/news-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "StatsCard",
+      "item": "stats-card",
+      "target": "@/components/ui/blocks/card-templates/stats-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "TestimonialCard",
+      "item": "testimonial-card",
+      "target": "@/components/ui/blocks/card-templates/testimonial-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "PricingCard",
+      "item": "pricing-card",
+      "target": "@/components/ui/blocks/card-templates/pricing-card"
+    },
+    {
+      "layer": "Blocks",
+      "v2Module": "poyraz-ui/molecules",
+      "symbols": "ProductCard",
+      "item": "product-card",
+      "target": "@/components/ui/blocks/card-templates/product-card"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "AnnouncementBar",
+      "item": "announcement-bar",
+      "target": "@/components/ui/organisms/announcement-bar"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "DataTable*",
+      "item": "data-table",
+      "target": "@/components/ui/organisms/data-table"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "DataTableCore",
+      "item": "data-table-core",
+      "target": "@/components/ui/organisms/data-table-core"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "Footer*",
+      "item": "footer",
+      "target": "@/components/ui/organisms/footer"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "FooterNewsletter",
+      "item": "footer-newsletter",
+      "target": "@/components/ui/organisms/footer-newsletter"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "Navbar*",
+      "item": "navbar",
+      "target": "@/components/ui/organisms/navbar"
+    },
+    {
+      "layer": "Organisms",
+      "v2Module": "poyraz-ui/organisms",
+      "symbols": "Sidebar*",
+      "item": "sidebar",
+      "target": "@/components/ui/organisms/sidebar"
+    }
+  ],
+  "propMappings": [
+    {
+      "component": "All",
+      "v2": "className",
+      "v3": "className",
+      "action": "Preserved; re-apply overrides after visual comparison."
+    },
+    { "component": "All forwardRef components", "v2": "ref", "v3": "ref", "action": "Preserved." },
+    {
+      "component": "Button",
+      "v2": "asChild",
+      "v3": "asChild",
+      "action": "Preserved; disabled links now use aria-disabled."
+    },
+    {
+      "component": "Button",
+      "v2": "loading",
+      "v3": "loading",
+      "action": "Preserved; V3 keeps an accessible name and blocks interaction."
+    },
+    {
+      "component": "Button",
+      "v2": "variant, size",
+      "v3": "variant, size, radius, effect, fillDirection, swapTarget",
+      "action": "Existing names compile; review changed dimensions and opt into new effects."
+    },
+    {
+      "component": "Card",
+      "v2": "variant",
+      "v3": "variant, radius",
+      "action": "Legacy variants remain; V3 default radius is xl."
+    },
+    {
+      "component": "Badge",
+      "v2": "variant",
+      "v3": "variant, size, radius",
+      "action": "Existing variants remain; root element is now span rather than div."
+    },
+    {
+      "component": "Input/Textarea",
+      "v2": "native props",
+      "v3": "native props plus size/radius/invalid",
+      "action": "Preserved; use aria-invalid for validation state."
+    },
+    {
+      "component": "Dialog/Sheet/Modal",
+      "v2": "open, defaultOpen, onOpenChange",
+      "v3": "same controlled contract",
+      "action": "Preserved; re-test focus return and portal theme inheritance."
+    },
+    {
+      "component": "Select/Tabs/Accordion",
+      "v2": "value, defaultValue, onValueChange",
+      "v3": "same controlled contract",
+      "action": "Preserved; re-test keyboard behavior."
+    },
+    {
+      "component": "Navbar/Sidebar",
+      "v2": "layout props",
+      "v3": "composable parts plus container-responsive props",
+      "action": "Migrate composition manually; codemod only changes safe imports."
+    },
+    {
+      "component": "Theme",
+      "v2": "ThemeProvider themes object",
+      "v3": "CSS variables on :root/.dark/[data-poyraz-theme]",
+      "action": "Remove runtime theme objects after CSS parity is verified."
+    }
+  ],
+  "variantMappings": [
+    {
+      "component": "Button",
+      "v2": "default|secondary|outline|destructive|ghost|link",
+      "v3": "same names",
+      "action": "Visual treatment and control heights changed; snapshot each use."
+    },
+    {
+      "component": "Button",
+      "v2": "size=default (32px)",
+      "v3": "size=sm (32px)",
+      "action": "Use sm to preserve approximate old height; V3 default is 40px."
+    },
+    {
+      "component": "Button",
+      "v2": "size=sm (28px)",
+      "v3": "size=xs (28px)",
+      "action": "Use xs for approximate parity."
+    },
+    {
+      "component": "Button",
+      "v2": "size=lg (36px)",
+      "v3": "size=default (40px) or lg (44px)",
+      "action": "No exact alias; choose by layout."
+    },
+    {
+      "component": "Card",
+      "v2": "default|bordered|elevated|highlight|ghost|interactive",
+      "v3": "same names",
+      "action": "Compatibility names remain but V3 removes directional hover movement."
+    },
+    {
+      "component": "Badge",
+      "v2": "default|secondary|outline|destructive",
+      "v3": "same plus glass|info|success|warning",
+      "action": "Existing names remain; V3 defaults to full radius."
+    },
+    {
+      "component": "Typography",
+      "v2": "legacy visual variants",
+      "v3": "semantic typography variants and text effects",
+      "action": "Review heading level separately from visual variant."
+    }
+  ],
+  "tokenMappings": [
+    { "v2": "--poyraz-background", "v3": "--poyraz-background", "status": "preserved" },
+    { "v2": "--poyraz-foreground", "v3": "--poyraz-foreground", "status": "preserved" },
+    {
+      "v2": "--poyraz-primary*",
+      "v3": "--poyraz-primary*",
+      "status": "preserved, values redesigned"
+    },
+    {
+      "v2": "--poyraz-secondary*",
+      "v3": "--poyraz-secondary*",
+      "status": "preserved, semantic surface"
+    },
+    { "v2": "--poyraz-muted*", "v3": "--poyraz-muted*", "status": "preserved" },
+    { "v2": "--poyraz-accent*", "v3": "--poyraz-accent*", "status": "preserved" },
+    { "v2": "--poyraz-destructive*", "v3": "--poyraz-destructive*", "status": "preserved" },
+    { "v2": "--poyraz-border / --poyraz-border-strong", "v3": "same names", "status": "preserved" },
+    { "v2": "--poyraz-input", "v3": "--poyraz-input", "status": "preserved" },
+    { "v2": "--poyraz-ring", "v3": "--poyraz-ring", "status": "preserved" },
+    {
+      "v2": "--poyraz-overlay*",
+      "v3": "--poyraz-overlay*",
+      "status": "preserved, backdrop policy added"
+    },
+    {
+      "v2": "--poyraz-surface-50/100/200",
+      "v3": "same aliases; prefer --poyraz-surface, -subtle, -raised, -elevated",
+      "status": "compatibility alias"
+    },
+    {
+      "v2": "--poyraz-info/success/warning*",
+      "v3": "same semantic names",
+      "status": "preserved, independent status palettes"
+    },
+    { "v2": "--font-sans", "v3": "--poyraz-font-primary", "status": "Tailwind alias remains" },
+    {
+      "v2": "--font-secondary",
+      "v3": "--poyraz-font-secondary",
+      "status": "Tailwind alias remains"
+    },
+    { "v2": "custom hardcoded glass colors", "v3": "--poyraz-glass-*", "status": "replace" },
+    {
+      "v2": "custom duration/easing literals",
+      "v3": "--poyraz-motion-duration-* / --poyraz-motion-ease-*",
+      "status": "replace"
+    },
+    { "v2": "custom border radius literals", "v3": "--poyraz-radius-*", "status": "replace" }
+  ]
+}

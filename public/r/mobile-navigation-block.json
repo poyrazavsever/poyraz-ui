@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mobile-navigation-block",
+  "title": "Mobile Navigation Block",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass Mobile Navigation Block with container-responsive layout and semantic tokens.",
+  "dependencies": [
+    "lucide-react@^0.574.0"
+  ],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/button",
+    "@poyraz/sheet",
+    "@poyraz/navigation-block"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/blocks/phase8/mobile-navigation-block.tsx",
+      "content": "\"use client\";\n\nimport { Menu, Sparkles } from \"lucide-react\";\n\nimport { Button } from \"@/components/ui/atoms/button\";\nimport { Sheet, SheetContent, SheetTitle, SheetTrigger } from \"@/components/ui/molecules/sheet\";\nimport {\n  navigationItems,\n  type NavigationItem,\n} from \"@/components/ui/blocks/phase8/navigation-block\";\n\nfunction MobileNavigationBlock({\n  items = navigationItems,\n  activeHref,\n}: {\n  items?: NavigationItem[];\n  activeHref?: string;\n}) {\n  return (\n    <div\n      data-slot=\"mobile-navigation-block\"\n      className=\"@container/mobile-nav flex items-center justify-between rounded-lg border border-glass-border-outer bg-glass p-2 shadow-sm backdrop-blur-glass\"\n    >\n      <a href=\"#overview\" className=\"flex items-center gap-2 text-sm font-semibold\">\n        <Sparkles className=\"size-4 text-primary\" /> Poyraz UI\n      </a>\n      <Sheet>\n        <SheetTrigger asChild>\n          <Button variant=\"ghost\" size=\"icon\" aria-label=\"Open primary navigation\">\n            <Menu className=\"size-4\" />\n          </Button>\n        </SheetTrigger>\n        <SheetContent side=\"right\" surface=\"glass\" className=\"w-[min(88vw,22rem)]\">\n          <SheetTitle>Navigation</SheetTitle>\n          <nav aria-label=\"Primary navigation\" className=\"mt-6 flex flex-col gap-1\">\n            {items.map((item) => (\n              <a\n                key={item.href}\n                href={item.href}\n                aria-current={activeHref === item.href ? \"page\" : undefined}\n                className=\"rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-surface-subtle hover:text-foreground aria-[current=page]:bg-primary-muted aria-[current=page]:text-primary-muted-foreground\"\n              >\n                {item.label}\n              </a>\n            ))}\n          </nav>\n        </SheetContent>\n      </Sheet>\n    </div>\n  );\n}\n\nexport { MobileNavigationBlock };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/phase8/mobile-navigation-block.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-8-block",
+    "phase": "beta",
+    "responsive": "container",
+    "accessibilityReviewed": true
+  },
+  "type": "registry:block"
+}

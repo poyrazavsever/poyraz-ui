@@ -1,6 +1,6 @@
 "use client";
 
-import { User, CreditCard, Settings, Keyboard, LogOut } from "lucide-react";
+import { User, CreditCard, Settings, Keyboard, LogOut, Sparkles, Users } from "lucide-react";
 import { Button } from "poyraz-ui/atoms";
 import {
   DropdownMenu,
@@ -40,7 +40,7 @@ export default function DropdownMenuPage() {
   <DropdownMenuTrigger asChild>
     <Button variant="outline">Open Menu</Button>
   </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
+  <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
@@ -73,7 +73,7 @@ export default function DropdownMenuPage() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Open Menu</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
@@ -109,6 +109,84 @@ export default function DropdownMenuPage() {
       </DemoSection>
 
       <DemoSection
+        title="Hover + Glass"
+        description="Mouse hover opens the menu; keyboard, touch, and click remain available. Surface, radius, density, and nested motion are independent options."
+        code={`<DropdownMenu interaction="hover" closeDelay={160}>
+  <DropdownMenuTrigger asChild>
+    <Button variant="glass">Hover me</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent surface="glass" radius="xl" itemSize="lg">
+    <DropdownMenuItem media={<Sparkles />} description="Generate a polished starting point">
+      AI workspace
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`}
+      >
+        <DropdownMenu interaction="hover" closeDelay={160}>
+          <DropdownMenuTrigger asChild>
+            <Button variant="glass">Hover or click</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent surface="glass" radius="xl" itemSize="lg" className="w-72">
+            <DropdownMenuLabel>Quick actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              media={<Sparkles className="size-4 text-primary" />}
+              description="Generate a polished starting point"
+              trailing={<DropdownMenuShortcut>⌘G</DropdownMenuShortcut>}
+            >
+              AI workspace
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              media={<Users className="size-4" />}
+              description="Invite and manage collaborators"
+            >
+              Team access
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </DemoSection>
+
+      <DemoSection
+        title="Compact and Spacious"
+        description="The same menu anatomy can be compact and text-only, or spacious with rich media and supporting copy."
+        code={`<DropdownMenuContent surface="soft" itemSize="sm">...</DropdownMenuContent>
+<DropdownMenuContent surface="solid" itemSize="lg" itemRadius="lg">...</DropdownMenuContent>`}
+      >
+        <div className="flex flex-wrap gap-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                Compact
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent surface="soft" itemSize="sm" radius="md">
+              <DropdownMenuItem>Overview</DropdownMenuItem>
+              <DropdownMenuItem>Analytics</DropdownMenuItem>
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Rich content</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent surface="solid" itemSize="lg" itemRadius="lg" className="w-72">
+              <DropdownMenuItem
+                media={<span className="font-semibold text-primary">PA</span>}
+                description="Product designer · Istanbul"
+              >
+                Poyraz Avsever
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                media={<CreditCard className="size-4" />}
+                description="Plan, invoices and payment methods"
+              >
+                Billing
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </DemoSection>
+
+      <DemoSection
         title="Sub Menu"
         description="Nested sub-menu for grouped actions."
         code={`<DropdownMenuSub>
@@ -123,7 +201,7 @@ export default function DropdownMenuPage() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Menu with Sub</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          <DropdownMenuContent>
             <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem>Duplicate</DropdownMenuItem>
             <DropdownMenuSeparator />

@@ -977,28 +977,28 @@ Dogrulama hedefleri:
 
 Bu matris, her motion degisikliginden sonra hizli manuel kontrol icin kullanilacak ana kontrol listesidir. Build'in gecmesi zorunlu, route uzerinden gorsel/etkilesimli kontrol ise ilgili faz kapsamindaki componentler icin uygulanir.
 
-| Alan | Docs route | Kontrol edilecek motion | Klavye/semantik kontrol | Viewport kontrolu |
-| --- | --- | --- | --- | --- |
-| Tabs | `/docs/molecules/tabs` | Active tab border/indicator gecisi, content slide/fade, trigger hover/focus | Tablist/tabpanel semantigi, arrow/tab navigasyonu | Mobile yatay overflow ve desktop inline layout |
-| Accordion | `/docs/molecules/accordion` | Open/closed height, trigger chevron rotate, nested content fade | Trigger focus ring, Enter/Space toggle | Dar ekranda content padding ve layout shift |
-| DropdownMenu | `/docs/molecules/dropdown-menu` | Content fade/scale/slide, item focus translate, checkbox/radio indicator scale | Arrow navigation, Escape close, item roles | Mobile touch hedefleri ve portal hizasi |
-| Select | `/docs/molecules/select` | Trigger icon rotate/scale, content open/close, selected check scale | Native-like select keyboard flow, disabled item skip | Popper width, mobile scroll buttonlari |
-| CommandPalette | `/docs/molecules/command-palette` | Overlay/content open, result list fade, item focus translate, empty state fade | Dialog focus trap, Escape close, input focus | Mobile max-width ve top offset |
-| Autocomplete | `/docs/molecules/autocomplete` | Dropdown mount, loading/empty fade, tag scale, selected check scale | Combobox aria, arrow navigation, Enter select, Escape close | Dropdown width, tag wrapping |
-| Calendar | `/docs/molecules/calendar` | Month/year grid slide, prev/next icon motion, selected/today state | Button labels, focus ring, disabled date skip | Calendar grid compact layout |
-| DatePicker | `/docs/molecules/date-picker` | Trigger open state, popover open, calendar icon scale | Trigger button semantics, date select close | Popover alignment and overflow |
-| Pagination | `/docs/molecules/pagination` | Active page scale, prev/next icon translate, ellipsis fade | Anchor semantics, aria-current | Hidden text behavior on mobile |
-| Breadcrumb | `/docs/molecules/breadcrumb` | Link hover, current page fade, separator/ellipsis state | aria-current page, nav label | Wrapping and separator spacing |
-| Form | `/docs/molecules/form` | Validation message slide, label/descriptive text color transition | aria-describedby, aria-invalid | Error text wrapping |
-| Navbar | `/docs/organisms/navbar` | Mega menu/dropdown open, mobile panel slide, drill-down transition | Menu button labels, Escape/back behavior | Desktop menu and mobile panel breakpoints |
-| Sidebar | `/docs/organisms/sidebar` | Backdrop fade, panel slide, collapse width, nested submenu motion | Toggle button label, focusable links | Collapsed rail and mobile overlay |
-| AnnouncementBar | `/docs/organisms/announcement-bar` | Mount slide, icon scale, action hover, dismiss affordance | Dismiss button label, link semantics | Single-line and wrapping behavior |
-| DataTable | `/docs/organisms/data-table` | Row hover, sort icon, selected badge, empty state, pagination icons | Table semantics, checkbox labels, keyboard focus | Horizontal overflow and toolbar wrapping |
-| Footer | `/docs/organisms/footer` | Link/social/action hover, newsletter CTA state | Link/button semantics | Column wrapping and dense mobile layout |
-| Auth template | `/docs/templates/auth` | Card mount/scale, social button hover, password/action affordance | Form labels, submit button focus | Centered card and mobile spacing |
-| Dashboard template | `/docs/templates/dashboard` | Stats cards, chart bars, activity rows, table/status state | Interactive buttons and links retain focus | Grid collapse and chart readability |
-| Hero template | `/docs/templates/hero` | Hero content entrance, CTA hover, stats/features motion | CTA link/button semantics | First viewport content and next-section hint |
-| Pricing template | `/docs/templates/pricing` | Header entrance, plan card hover, FAQ fade | Plan CTA focus, badge readability | Pricing grid collapse |
+| Alan               | Docs route                         | Kontrol edilecek motion                                                        | Klavye/semantik kontrol                                     | Viewport kontrolu                              |
+| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------- | ---------------------------------------------- |
+| Tabs               | `/docs/molecules/tabs`             | Active tab border/indicator gecisi, content slide/fade, trigger hover/focus    | Tablist/tabpanel semantigi, arrow/tab navigasyonu           | Mobile yatay overflow ve desktop inline layout |
+| Accordion          | `/docs/molecules/accordion`        | Open/closed height, trigger chevron rotate, nested content fade                | Trigger focus ring, Enter/Space toggle                      | Dar ekranda content padding ve layout shift    |
+| DropdownMenu       | `/docs/molecules/dropdown-menu`    | Content fade/scale/slide, item focus translate, checkbox/radio indicator scale | Arrow navigation, Escape close, item roles                  | Mobile touch hedefleri ve portal hizasi        |
+| Select             | `/docs/molecules/select`           | Trigger icon rotate/scale, content open/close, selected check scale            | Native-like select keyboard flow, disabled item skip        | Popper width, mobile scroll buttonlari         |
+| CommandPalette     | `/docs/molecules/command-palette`  | Overlay/content open, result list fade, item focus translate, empty state fade | Dialog focus trap, Escape close, input focus                | Mobile max-width ve top offset                 |
+| Autocomplete       | `/docs/molecules/autocomplete`     | Dropdown mount, loading/empty fade, tag scale, selected check scale            | Combobox aria, arrow navigation, Enter select, Escape close | Dropdown width, tag wrapping                   |
+| Calendar           | `/docs/molecules/calendar`         | Month/year grid slide, prev/next icon motion, selected/today state             | Button labels, focus ring, disabled date skip               | Calendar grid compact layout                   |
+| DatePicker         | `/docs/molecules/date-picker`      | Trigger open state, popover open, calendar icon scale                          | Trigger button semantics, date select close                 | Popover alignment and overflow                 |
+| Pagination         | `/docs/molecules/pagination`       | Active page scale, prev/next icon translate, ellipsis fade                     | Anchor semantics, aria-current                              | Hidden text behavior on mobile                 |
+| Breadcrumb         | `/docs/molecules/breadcrumb`       | Link hover, current page fade, separator/ellipsis state                        | aria-current page, nav label                                | Wrapping and separator spacing                 |
+| Form               | `/docs/molecules/form`             | Validation message slide, label/descriptive text color transition              | aria-describedby, aria-invalid                              | Error text wrapping                            |
+| Navbar             | `/docs/organisms/navbar`           | Mega menu/dropdown open, mobile panel slide, drill-down transition             | Menu button labels, Escape/back behavior                    | Desktop menu and mobile panel breakpoints      |
+| Sidebar            | `/docs/organisms/sidebar`          | Backdrop fade, panel slide, collapse width, nested submenu motion              | Toggle button label, focusable links                        | Collapsed rail and mobile overlay              |
+| AnnouncementBar    | `/docs/organisms/announcement-bar` | Mount slide, icon scale, action hover, dismiss affordance                      | Dismiss button label, link semantics                        | Single-line and wrapping behavior              |
+| DataTable          | `/docs/organisms/data-table`       | Row hover, sort icon, selected badge, empty state, pagination icons            | Table semantics, checkbox labels, keyboard focus            | Horizontal overflow and toolbar wrapping       |
+| Footer             | `/docs/organisms/footer`           | Link/social/action hover, newsletter CTA state                                 | Link/button semantics                                       | Column wrapping and dense mobile layout        |
+| Auth template      | `/docs/templates/auth`             | Card mount/scale, social button hover, password/action affordance              | Form labels, submit button focus                            | Centered card and mobile spacing               |
+| Dashboard template | `/docs/templates/dashboard`        | Stats cards, chart bars, activity rows, table/status state                     | Interactive buttons and links retain focus                  | Grid collapse and chart readability            |
+| Hero template      | `/docs/templates/hero`             | Hero content entrance, CTA hover, stats/features motion                        | CTA link/button semantics                                   | First viewport content and next-section hint   |
+| Pricing template   | `/docs/templates/pricing`          | Header entrance, plan card hover, FAQ fade                                     | Plan CTA focus, badge readability                           | Pricing grid collapse                          |
 
 ### Faz Sonu QA Formati
 

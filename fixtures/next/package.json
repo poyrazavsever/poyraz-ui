@@ -1,0 +1,19 @@
+{
+  "name": "poyraz-ui-next-clean-fixture",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "next build"
+  },
+  "dependencies": {
+    "next": "16.0.10",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5"
+  }
+}

@@ -10,8 +10,7 @@ const templates = [
   {
     name: "Hero",
     slug: "hero",
-    description:
-      "Landing page hero section with CTA buttons and feature highlights.",
+    description: "Landing page hero section with CTA buttons and feature highlights.",
   },
   {
     name: "Pricing",
@@ -21,8 +20,7 @@ const templates = [
   {
     name: "Dashboard",
     slug: "dashboard",
-    description:
-      "Admin dashboard layout with stats, chart area, and recent data.",
+    description: "Admin dashboard layout with stats, chart area, and recent data.",
   },
   {
     name: "Auth",
@@ -40,8 +38,7 @@ export default function TemplatesPage() {
         </Badge>
         <Typography variant="h1">Templates</Typography>
         <Typography variant="lead">
-          Ready-to-use page templates built with Poyraz UI components. Copy,
-          paste, and customize.
+          Ready-to-use page templates built with Poyraz UI components. Copy, paste, and customize.
         </Typography>
       </div>
       <Separator />
@@ -53,12 +50,8 @@ export default function TemplatesPage() {
             href={`/docs/templates/${t.slug}`}
             className="group block p-5 border border-border rounded-sm hover:border-foreground/30 transition-colors"
           >
-            <h3 className="font-semibold text-sm group-hover:underline">
-              {t.name}
-            </h3>
-            <p className="text-xs text-muted-foreground mt-1">
-              {t.description}
-            </p>
+            <h3 className="font-semibold text-sm group-hover:underline">{t.name}</h3>
+            <p className="text-xs text-muted-foreground mt-1">{t.description}</p>
           </Link>
         ))}
       </div>
@@ -67,11 +60,7 @@ export default function TemplatesPage() {
         <Separator />
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <Link href="/docs/atoms">
-            <Button
-              variant="outline"
-              size="lg"
-              className="gap-2 w-full sm:w-auto"
-            >
+            <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
               Back to Components <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

@@ -3,7 +3,7 @@
  *  Used by Navbar, Sidebar, and Footer organisms.
  *
  *  Usage:
- *    import { mainNav, footerNav, componentRegistry } from "@/lib/navigation";
+ *    import { mainNav, footerNav } from "@/lib/navigation";
  * ─────────────────────────────────────────────────────────────────── */
 
 export interface NavItem {
@@ -16,12 +16,6 @@ export interface NavItem {
 export interface FooterSection {
   heading: string;
   links: NavItem[];
-}
-
-export interface ComponentGroup {
-  label: string;
-  basePath: string;
-  items: string[];
 }
 
 /* ── Main Navigation (Navbar) ─────────────────────────────────────── */
@@ -44,78 +38,7 @@ export const mobileNav: NavItem[] = [
   { label: "Return Back", href: "https://poyrazavsever.com", external: true },
 ];
 
-export const docsMobileNav: NavItem[] = [
-  { label: "Introduction", href: "/docs" },
-  { label: "Installation", href: "/docs/installation" },
-  { label: "Atoms", href: "/docs/atoms" },
-  { label: "Molecules", href: "/docs/molecules" },
-  { label: "Organisms", href: "/docs/organisms" },
-  { label: "Templates", href: "/docs/templates" },
-];
-
 /* ── Component Registry (Sidebar) ─────────────────────────────────── */
-
-export const componentRegistry: ComponentGroup[] = [
-  {
-    label: "Atoms",
-    basePath: "/docs/atoms",
-    items: [
-      "Button",
-      "Input",
-      "Textarea",
-      "Checkbox",
-      "Radio Group",
-      "Switch",
-      "Badge",
-      "Avatar",
-      "Card",
-      "Typography",
-      "Label",
-      "Separator",
-      "Skeleton",
-      "Scroll Area",
-      "Form Fields",
-      "Logo",
-      "BG Patterns",
-    ],
-  },
-  {
-    label: "Molecules",
-    basePath: "/docs/molecules",
-    items: [
-      "Accordion",
-      "Alert",
-      "Autocomplete",
-      "Breadcrumb",
-      "Calendar",
-      "Command Palette",
-      "Date Picker",
-      "Dialog",
-      "Drawer",
-      "Dropdown Menu",
-      "Form",
-      "Hover Card",
-      "Modal",
-      "Pagination",
-      "Popover",
-      "Select",
-      "Sheet",
-      "Sonner",
-      "Tabs",
-      "Tooltip",
-    ],
-  },
-  {
-    label: "Organisms",
-    basePath: "/docs/organisms",
-    items: ["Announcement Bar", "Data Table", "Footer", "Navbar", "Sidebar"],
-  },
-  {
-    label: "Templates",
-    basePath: "/docs/templates",
-    items: ["Hero", "Pricing", "Dashboard", "Auth"],
-  },
-];
 
 /* ── Footer Navigation ────────────────────────────────────────────── */
 
@@ -125,6 +48,7 @@ export const footerNav: FooterSection[] = [
     links: [
       { label: "Getting Started", href: "/docs" },
       { label: "Installation", href: "/docs/installation" },
+      { label: "Theme", href: "/docs/theme" },
       { label: "Components", href: "/docs/atoms" },
     ],
   },

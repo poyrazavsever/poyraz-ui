@@ -5,13 +5,12 @@ import { Typography } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "poyraz-ui/atoms";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "poyraz-ui/atoms";
+import docsCatalog from "@/src/docs-registry.json";
+
+const sectionCounts = Object.fromEntries(
+  docsCatalog.navigation.map((group) => [group.section, group.items.length]),
+);
 
 export default function DocsIntroPage() {
   return (
@@ -19,12 +18,12 @@ export default function DocsIntroPage() {
       {/* Header */}
       <div className="space-y-4">
         <Badge variant="outline" className="text-xs">
-          v2.1.0
+          V3 Registry
         </Badge>
         <Typography variant="h2">Introduction</Typography>
         <Typography variant="lead">
-          Poyraz UI is a minimal design system built with React, Next.js,
-          Tailwind CSS v4, and Radix UI.
+          Poyraz UI is a minimal design system built with React, Next.js, Tailwind CSS v4, and Radix
+          UI.
         </Typography>
       </div>
 
@@ -34,25 +33,21 @@ export default function DocsIntroPage() {
       <section className="space-y-4">
         <Typography variant="h2">What is Poyraz UI?</Typography>
         <Typography variant="p">
-          Poyraz UI is an open-source component library designed specifically
-          for building modern web applications with a bold, brutalist aesthetic.
-          It provides a comprehensive set of accessible, composable, and
-          customizable components.
+          Poyraz UI is an open-source component library designed specifically for building modern
+          web applications with a bold, brutalist aesthetic. It provides a comprehensive set of
+          accessible, composable, and customizable components.
         </Typography>
         <Typography variant="p">
-          Unlike traditional UI libraries that rely on rounded corners, subtle
-          shadows, and soft gradients, Poyraz UI embraces a clean, minimal
-          design language. Every component is built with solid borders, subtle
-          rounding, and high-contrast color schemes.
+          Unlike traditional UI libraries that rely on rounded corners, subtle shadows, and soft
+          gradients, Poyraz UI embraces a clean, minimal design language. Every component is built
+          with solid borders, subtle rounding, and high-contrast color schemes.
         </Typography>
       </section>
 
       {/* Design Philosophy */}
       <section className="space-y-6">
         <Typography variant="h2">Design Philosophy</Typography>
-        <Typography variant="p">
-          The design system follows four core principles:
-        </Typography>
+        <Typography variant="p">The design system follows four core principles:</Typography>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="p-5 border border-border rounded-sm bg-background space-y-2">
@@ -63,11 +58,9 @@ export default function DocsIntroPage() {
               </h3>
             </div>
             <p className="text-sm text-muted-foreground">
-              <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
-                border
-              </code>{" "}
-              is the DNA of the system. Every interactive element, card, and
-              section uses clean solid borders as its primary visual identifier.
+              <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">border</code>{" "}
+              is the DNA of the system. Every interactive element, card, and section uses clean
+              solid borders as its primary visual identifier.
             </p>
           </div>
 
@@ -82,8 +75,8 @@ export default function DocsIntroPage() {
               <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
                 rounded-sm
               </code>{" "}
-              is applied everywhere. Gentle, intentional corners give each
-              element a refined, modern feel.
+              is applied everywhere. Gentle, intentional corners give each element a refined, modern
+              feel.
             </p>
           </div>
 
@@ -98,8 +91,8 @@ export default function DocsIntroPage() {
               <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
                 shadow-none
               </code>{" "}
-              by default. Instead of box-shadow, elevated components use
-              red-colored offset boxes as a brutalist alternative.
+              by default. Instead of box-shadow, elevated components use red-colored offset boxes as
+              a brutalist alternative.
             </p>
           </div>
 
@@ -111,8 +104,8 @@ export default function DocsIntroPage() {
               </h3>
             </div>
             <p className="text-sm text-muted-foreground">
-              Red-600 as primary, slate for neutral tones. Bold typography with
-              uppercase labels and wide tracking ensures clear visual hierarchy.
+              Red-600 as primary, slate for neutral tones. Bold typography with uppercase labels and
+              wide tracking ensures clear visual hierarchy.
             </p>
           </div>
         </div>
@@ -129,13 +122,13 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-primary">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Atoms</CardTitle>
-              <CardDescription>17 components</CardDescription>
+              <CardDescription>{sectionCounts.Atoms} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">
-                Fundamental building blocks: Button, Input, Badge, Avatar, Card,
-                Typography, Checkbox, Radio, Switch, Label, Textarea, Separator,
-                Skeleton, Scroll Area, Form Fields, Logo, BG Patterns.
+                Fundamental building blocks: Button, Input, Badge, Avatar, Card, Typography,
+                Checkbox, Radio, Switch, Label, Textarea, Separator, Skeleton, Scroll Area, Form
+                Fields, Logo, BG Patterns.
               </Typography>
             </CardContent>
           </Card>
@@ -143,14 +136,13 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-foreground">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Molecules</CardTitle>
-              <CardDescription>21 components</CardDescription>
+              <CardDescription>{sectionCounts.Molecules} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">
-                Functional groups: Accordion, Alert, Autocomplete, Breadcrumb,
-                Calendar, Command Palette, Date Picker, Dialog, Drawer, Dropdown
-                Menu, Form, Hover Card, Modal, Pagination, Popover, Select,
-                Sheet, Sonner/Toast, Tabs, Tooltip, Mermaid.
+                Functional groups: Accordion, Alert, Autocomplete, Breadcrumb, Calendar, Command
+                Palette, Date Picker, Dialog, Drawer, Dropdown Menu, Form, Hover Card, Modal,
+                Pagination, Popover, Select, Sheet, Sonner/Toast, Tabs, Tooltip, Mermaid.
               </Typography>
             </CardContent>
           </Card>
@@ -158,13 +150,13 @@ export default function DocsIntroPage() {
           <Card className="border-l-4 border-l-placeholder">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Organisms</CardTitle>
-              <CardDescription>5 components</CardDescription>
+              <CardDescription>{sectionCounts.Organisms} registry components</CardDescription>
             </CardHeader>
             <CardContent>
               <Typography variant="small">
-                Complex sections: Announcement Bar, Data Table, Navbar (with
-                TopBar, MegaMenu, Mobile support), Sidebar (collapsible,
-                floating, mini), Footer (full, compact, branded).
+                Complex sections: Announcement Bar, Data Table, Navbar (with TopBar, MegaMenu,
+                Mobile support), Sidebar (collapsible, floating, mini), Footer (full, compact,
+                branded).
               </Typography>
             </CardContent>
           </Card>
@@ -181,9 +173,7 @@ export default function DocsIntroPage() {
                 <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
                   Technology
                 </th>
-                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">
-                  Purpose
-                </th>
+                <th className="text-left p-3 font-bold uppercase text-xs tracking-wide">Purpose</th>
               </tr>
             </thead>
             <tbody>
@@ -211,10 +201,9 @@ export default function DocsIntroPage() {
       <section className="space-y-6">
         <Typography variant="h2">v2.1.0 - Motion System</Typography>
         <Typography variant="p">
-          Poyraz UI v2.1 adds a centralized motion layer for molecule and
-          overlay components. Accordion, Dropdown Menu, Select, Popover,
-          Tooltip, Hover Card, Dialog, Modal, Sheet, Command Palette, Date
-          Picker, Autocomplete, Tabs, Calendar and related interaction states
+          Poyraz UI v2.1 adds a centralized motion layer for molecule and overlay components.
+          Accordion, Dropdown Menu, Select, Popover, Tooltip, Hover Card, Dialog, Modal, Sheet,
+          Command Palette, Date Picker, Autocomplete, Tabs, Calendar and related interaction states
           now use the shared motion utilities from{" "}
           <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
             poyraz-ui/preset.css
@@ -222,8 +211,8 @@ export default function DocsIntroPage() {
           .
         </Typography>
         <Typography variant="p">
-          No component API changes are required. Existing JSX, props and import
-          paths continue to work after updating the package.
+          No component API changes are required. Existing JSX, props and import paths continue to
+          work after updating the package.
         </Typography>
       </section>
 
@@ -231,13 +220,12 @@ export default function DocsIntroPage() {
       <section className="space-y-6">
         <Typography variant="h2">v2.0.1 - Theming & CLI</Typography>
         <Typography variant="p">
-          Poyraz UI v2 introduces a semantic token system powered by CSS custom
-          properties. All components now use{" "}
+          Poyraz UI v2 introduces a semantic token system powered by CSS custom properties. All
+          components now use{" "}
           <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
             var(--poyraz-*)
           </code>{" "}
-          tokens, making full theme customization possible without touching
-          component source code.
+          tokens, making full theme customization possible without touching component source code.
         </Typography>
 
         <div className="grid sm:grid-cols-2 gap-4">
@@ -246,9 +234,8 @@ export default function DocsIntroPage() {
               Semantic Tokens
             </h3>
             <p className="text-sm text-muted-foreground">
-              40+ CSS custom properties with sensible fallbacks. Works
-              standalone (light theme) or with any CSS variable-based theme
-              switcher.
+              40+ CSS custom properties with sensible fallbacks. Works standalone (light theme) or
+              with any CSS variable-based theme switcher.
             </p>
           </div>
 
@@ -257,8 +244,8 @@ export default function DocsIntroPage() {
               reactive-switcher Support
             </h3>
             <p className="text-sm text-muted-foreground">
-              Optional integration with reactive-switcher for dynamic theme
-              switching. Light & Dark themes included out of the box.
+              Optional integration with reactive-switcher for dynamic theme switching. Light & Dark
+              themes included out of the box.
             </p>
           </div>
 
@@ -271,8 +258,7 @@ export default function DocsIntroPage() {
               <code className="text-xs bg-accent px-1.5 py-0.5 border border-border">
                 npx poyraz-ui init
               </code>{" "}
-              to automatically configure CSS imports and optionally scaffold
-              theme configuration.
+              to automatically configure CSS imports and optionally scaffold theme configuration.
             </p>
           </div>
 

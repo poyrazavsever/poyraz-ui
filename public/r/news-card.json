@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "news-card",
+  "title": "News Card",
+  "author": "Poyraz Avsever",
+  "description": "Poyraz Soft Glass news-card with semantic states and composable variants.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@poyraz/poyraz-utils",
+    "@poyraz/poyraz-theme",
+    "@poyraz/card",
+    "@poyraz/badge"
+  ],
+  "files": [
+    {
+      "path": "registry/poyraz/ui/phase7/blocks/card-templates/news-card.tsx",
+      "content": "import * as React from \"react\";\nimport { Badge } from \"@/components/ui/atoms/badge\";\nimport { Card, type CardProps } from \"@/components/ui/atoms/card\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface NewsCardProps extends Omit<CardProps, \"title\"> {\n  image?: string;\n  category?: string;\n  title: string;\n  date?: string;\n  href?: string;\n}\nconst NewsCard = React.forwardRef<HTMLDivElement, NewsCardProps>(\n  ({ category, className, date, href, image, title, ...props }, ref) => {\n    const content = (\n      <Card\n        ref={ref}\n        variant=\"interactive\"\n        className={cn(\"group h-fit self-start overflow-hidden\", className)}\n        {...props}\n      >\n        <div className=\"flex min-h-28\">\n          {image && (\n            <div className=\"w-28 shrink-0 overflow-hidden border-r border-border\">\n              <img\n                src={image}\n                alt=\"\"\n                className=\"size-full object-cover transition-transform duration-300 group-hover:scale-105\"\n              />\n            </div>\n          )}\n          <div className=\"flex min-w-0 flex-col justify-center gap-2 p-4\">\n            {category && (\n              <Badge size=\"sm\" variant=\"outline\">\n                {category}\n              </Badge>\n            )}\n            <h3 className=\"line-clamp-2 text-sm font-semibold leading-snug\">{title}</h3>\n            {date && <span className=\"text-xs text-muted-foreground\">{date}</span>}\n          </div>\n        </div>\n      </Card>\n    );\n    return href ? (\n      <a href={href} className=\"block text-inherit no-underline\">\n        {content}\n      </a>\n    ) : (\n      content\n    );\n  },\n);\nNewsCard.displayName = \"NewsCard\";\nexport { NewsCard };\n",
+      "type": "registry:block",
+      "target": "@ui/blocks/card-templates/news-card.tsx"
+    }
+  ],
+  "meta": {
+    "category": "phase-7-card-block",
+    "phase": "beta"
+  },
+  "type": "registry:block"
+}

@@ -7,15 +7,17 @@ import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 function DatePickerDemo() {
   const [date, setDate] = React.useState<Date | undefined>();
-  return (
-    <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />
-  );
+  return <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />;
 }
 
 function DatePickerPreselected() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (
-    <DatePicker selected={date} onSelect={setDate} placeholder="Pick a date" />
+    <DatePicker
+      defaultSelected={new Date()}
+      clearable
+      popoverSurface="glass"
+      placeholder="Pick a date"
+    />
   );
 }
 
@@ -23,7 +25,7 @@ export default function DatePickerPage() {
   return (
     <ComponentPage
       name="Date Picker"
-      description="A popover-based date picker that combines the Calendar component with a trigger button. Displays the selected date in a readable format."
+      description="Controlled or uncontrolled date picker with independent selection/open state, clear action and customizable trigger/popover surfaces."
       importCode={`import { DatePicker } from "poyraz-ui/molecules";`}
     >
       <DemoSection
@@ -44,11 +46,9 @@ export default function DatePickerPage() {
       </DemoSection>
 
       <DemoSection
-        title="Pre-selected"
-        description="Date picker with a default date already selected."
-        code={`const [date, setDate] = useState<Date | undefined>(new Date());
-
-<DatePicker selected={date} onSelect={setDate} />`}
+        title="Uncontrolled Glass"
+        description="Use defaultSelected for uncontrolled state and opt into clearable glass UI."
+        code={`<DatePicker defaultSelected={new Date()} clearable popoverSurface="glass" />`}
       >
         <div className="max-w-xs space-y-2">
           <Label>Start Date</Label>

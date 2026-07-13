@@ -45,6 +45,7 @@ export default defineConfig({
     "sonner",
     "vaul",
     "lucide-react",
+    "mermaid",
   ],
   onSuccess: addUseClientDirective,
 });

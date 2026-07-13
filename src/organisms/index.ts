@@ -36,6 +36,8 @@ export {
 } from "@/components/ui/organisms/navbar";
 export {
   Sidebar,
+  SidebarProvider,
+  SidebarPanel,
   SidebarHeader,
   SidebarBranding,
   SidebarContent,
@@ -49,6 +51,7 @@ export {
   SidebarBadge,
   SidebarFooter,
   SidebarTrigger,
+  SidebarRail,
   SidebarSearch,
   SidebarSubMenu,
   SidebarSubMenuItem,
@@ -65,7 +68,6 @@ export {
   FooterBrand,
   FooterSocials,
   FooterSocialLink,
-  FooterNewsletter,
   FooterDivider,
   FooterBottom,
   FooterBottomLinks,
@@ -78,8 +80,14 @@ export {
   footerVariants,
 } from "@/components/ui/organisms/footer";
 export {
+  FooterNewsletter,
+  type FooterNewsletterProps,
+} from "@/components/ui/organisms/footer-newsletter";
+export {
   AnnouncementBar,
   announcementBarVariants,
 } from "@/components/ui/organisms/announcement-bar";
 export { DataTable } from "@/components/ui/organisms/data-table";
 export type { DataTableColumnDef } from "@/components/ui/organisms/data-table";
+export { DataTableCore } from "@/components/ui/organisms/data-table-core";
+export type { DataTableCoreProps, DataTableState } from "@/components/ui/organisms/data-table-core";

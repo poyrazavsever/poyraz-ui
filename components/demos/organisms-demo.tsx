@@ -28,7 +28,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "poyraz-ui/atoms";
-import { Badge } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import {
   Navbar,
@@ -116,21 +115,13 @@ function SharedNavLinks() {
       <NavbarDropdown label="Showcase">
         <NavbarMegaMenu className="grid-cols-[200px_1fr_1fr]">
           <div className="flex flex-col gap-1">
-            <NavbarMegaMenuItem
-              href="#"
-              title="Portfolio"
-              description="Our latest projects"
-            />
+            <NavbarMegaMenuItem href="#" title="Portfolio" description="Our latest projects" />
             <NavbarMegaMenuItem
               href="#"
               title="Case Studies"
               description="In-depth project analysis"
             />
-            <NavbarMegaMenuItem
-              href="#"
-              title="Tech Stack"
-              description="Tools we use daily"
-            />
+            <NavbarMegaMenuItem href="#" title="Tech Stack" description="Tools we use daily" />
             <NavbarMegaMenuItem
               href="#"
               title="Open Source"
@@ -143,9 +134,7 @@ function SharedNavLinks() {
             </span>
           </div>
           <div className="bg-slate-100 border border-slate-200 rounded-sm p-4 flex items-center justify-center min-h-[150px]">
-            <span className="text-xs text-slate-400 uppercase tracking-wider">
-              Latest Work
-            </span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider">Latest Work</span>
           </div>
         </NavbarMegaMenu>
       </NavbarDropdown>
@@ -156,16 +145,8 @@ function SharedNavLinks() {
             title="Poyraz UI"
             description="Brutalist component library"
           />
-          <NavbarMegaMenuItem
-            href="#"
-            title="Design System"
-            description="Complete design tokens"
-          />
-          <NavbarMegaMenuItem
-            href="#"
-            title="CLI Tool"
-            description="Scaffold projects fast"
-          />
+          <NavbarMegaMenuItem href="#" title="Design System" description="Complete design tokens" />
+          <NavbarMegaMenuItem href="#" title="CLI Tool" description="Scaffold projects fast" />
           <NavbarMegaMenuItem
             href="#"
             title="Templates"
@@ -175,16 +156,8 @@ function SharedNavLinks() {
       </NavbarDropdown>
       <NavbarDropdown label="Resources">
         <NavbarMegaMenu className="grid-cols-2">
-          <NavbarMegaMenuItem
-            href="#"
-            title="Documentation"
-            description="Guides and references"
-          />
-          <NavbarMegaMenuItem
-            href="#"
-            title="Blog"
-            description="Articles and tutorials"
-          />
+          <NavbarMegaMenuItem href="#" title="Documentation" description="Guides and references" />
+          <NavbarMegaMenuItem href="#" title="Blog" description="Articles and tutorials" />
         </NavbarMegaMenu>
       </NavbarDropdown>
       <NavbarLink href="#">Pricing</NavbarLink>
@@ -197,11 +170,7 @@ function SharedNavLinks() {
 /*  SIDEBAR CONTENT SHARED                                             */
 /* ================================================================== */
 
-function DashboardSidebarContent({
-  showLabels = true,
-}: {
-  showLabels?: boolean;
-}) {
+function DashboardSidebarContent({ showLabels = true }: { showLabels?: boolean }) {
   return (
     <>
       <SidebarGroup>
@@ -213,15 +182,9 @@ function DashboardSidebarContent({
           <SidebarMenuItem icon={<FileText className="h-4 w-4" />} badge="3">
             Invoices
           </SidebarMenuItem>
-          <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>
-            Payments
-          </SidebarMenuItem>
-          <SidebarMenuItem icon={<Users className="h-4 w-4" />}>
-            Clients
-          </SidebarMenuItem>
-          <SidebarMenuItem icon={<Package className="h-4 w-4" />}>
-            Products
-          </SidebarMenuItem>
+          <SidebarMenuItem icon={<CreditCard className="h-4 w-4" />}>Payments</SidebarMenuItem>
+          <SidebarMenuItem icon={<Users className="h-4 w-4" />}>Clients</SidebarMenuItem>
+          <SidebarMenuItem icon={<Package className="h-4 w-4" />}>Products</SidebarMenuItem>
           <SidebarMenuItem icon={<BarChart3 className="h-4 w-4" />} badge="New">
             Analytics
           </SidebarMenuItem>
@@ -231,12 +194,8 @@ function DashboardSidebarContent({
       <SidebarGroup>
         {showLabels && <SidebarGroupLabel>Support</SidebarGroupLabel>}
         <SidebarMenu>
-          <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>
-            Settings
-          </SidebarMenuItem>
-          <SidebarMenuItem icon={<HelpCircle className="h-4 w-4" />}>
-            Help
-          </SidebarMenuItem>
+          <SidebarMenuItem icon={<Settings className="h-4 w-4" />}>Settings</SidebarMenuItem>
+          <SidebarMenuItem icon={<HelpCircle className="h-4 w-4" />}>Help</SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
     </>
@@ -436,9 +395,7 @@ const fullColumns: DataTableColumnDef<Employee>[] = [
     id: "salary",
     header: "Salary",
     accessorKey: "salary",
-    cell: (row) => (
-      <span className="font-mono text-xs">${row.salary.toLocaleString()}</span>
-    ),
+    cell: (row) => <span className="font-mono text-xs">${row.salary.toLocaleString()}</span>,
   },
   {
     id: "startDate",
@@ -486,9 +443,7 @@ export function OrganismsDemo() {
       {/* NAVBAR SECTION                               */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
-        Navbar
-      </h2>
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">Navbar</h2>
 
       {/* DEFAULT */}
       <section className="space-y-4">
@@ -567,28 +522,16 @@ export function OrganismsDemo() {
                 <Logo width={40} height={40} />
               </NavbarBrand>
               <NavbarLinks>
-                <NavbarLink
-                  href="#"
-                  className="text-white/90 hover:text-white hover:bg-white/10"
-                >
+                <NavbarLink href="#" className="text-white/90 hover:text-white hover:bg-white/10">
                   Home
                 </NavbarLink>
-                <NavbarLink
-                  href="#"
-                  className="text-white/90 hover:text-white hover:bg-white/10"
-                >
+                <NavbarLink href="#" className="text-white/90 hover:text-white hover:bg-white/10">
                   About
                 </NavbarLink>
-                <NavbarLink
-                  href="#"
-                  className="text-white/90 hover:text-white hover:bg-white/10"
-                >
+                <NavbarLink href="#" className="text-white/90 hover:text-white hover:bg-white/10">
                   Services
                 </NavbarLink>
-                <NavbarLink
-                  href="#"
-                  className="text-white/90 hover:text-white hover:bg-white/10"
-                >
+                <NavbarLink href="#" className="text-white/90 hover:text-white hover:bg-white/10">
                   Contact
                 </NavbarLink>
               </NavbarLinks>
@@ -600,10 +543,7 @@ export function OrganismsDemo() {
                 >
                   Login
                 </Button>
-                <Button
-                  size="sm"
-                  className="bg-white text-red-600 border-white hover:bg-white/90"
-                >
+                <Button size="sm" className="bg-white text-red-600 border-white hover:bg-white/90">
                   Get Started
                 </Button>
               </NavbarActions>
@@ -617,9 +557,7 @@ export function OrganismsDemo() {
       {/* SIDEBAR SECTION                              */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
-        Sidebar
-      </h2>
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">Sidebar</h2>
 
       {/* DEFAULT */}
       <section className="space-y-4">
@@ -631,9 +569,7 @@ export function OrganismsDemo() {
           <Sidebar variant="default">
             <SidebarHeader>
               <Logo width={32} height={32} />
-              <span className="text-sm font-bold tracking-tight">
-                Invoice App
-              </span>
+              <span className="text-sm font-bold tracking-tight">Invoice App</span>
             </SidebarHeader>
             <SidebarContent>
               <DashboardSidebarContent />
@@ -645,9 +581,7 @@ export function OrganismsDemo() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold truncate">Poyraz A.</p>
-                  <p className="text-[10px] text-slate-400 truncate">
-                    admin@poyraz.dev
-                  </p>
+                  <p className="text-[10px] text-slate-400 truncate">admin@poyraz.dev</p>
                 </div>
                 <LogOut className="h-4 w-4 text-slate-400 hover:text-red-600 cursor-pointer transition-colors" />
               </div>
@@ -663,8 +597,8 @@ export function OrganismsDemo() {
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Sidebar — Collapsible</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Collapses to icon-only rail. Click the trigger to toggle. Tooltips on
-          hover when collapsed.
+          Collapses to icon-only rail. Click the trigger to toggle. Tooltips on hover when
+          collapsed.
         </p>
         <div className="border border-slate-200 rounded-sm h-[420px] flex">
           <Sidebar variant="collapsible" defaultCollapsed={false}>
@@ -723,9 +657,7 @@ export function OrganismsDemo() {
       {/* FOOTER SECTION                               */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
-        Footer
-      </h2>
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">Footer</h2>
 
       {/* FULL */}
       <section className="space-y-4">
@@ -776,9 +708,7 @@ export function OrganismsDemo() {
               </FooterSection>
             </FooterGrid>
             <FooterBottom>
-              <span>
-                &copy; {new Date().getFullYear()} Poyraz. All rights reserved.
-              </span>
+              <span>&copy; {new Date().getFullYear()} Poyraz. All rights reserved.</span>
               <FooterBottomLinks>
                 <FooterLink href="#">Privacy Policy</FooterLink>
                 <FooterLink href="#">Terms of Service</FooterLink>
@@ -796,10 +726,7 @@ export function OrganismsDemo() {
           Single-line footer for SaaS dashboards and internal tools.
         </p>
         <div className="border border-slate-200 rounded-sm">
-          <Footer
-            variant="compact"
-            className="flex items-center justify-between"
-          >
+          <Footer variant="compact" className="flex items-center justify-between">
             <span className="text-xs text-slate-400">
               &copy; {new Date().getFullYear()} Poyraz. All rights reserved.
             </span>
@@ -824,13 +751,11 @@ export function OrganismsDemo() {
               <FooterBrand>
                 <div className="flex items-center gap-3">
                   <Logo width={40} height={40} />
-                  <span className="text-xl font-bold tracking-tight">
-                    Poyraz
-                  </span>
+                  <span className="text-xl font-bold tracking-tight">Poyraz</span>
                 </div>
                 <p className="text-sm text-slate-500 leading-relaxed">
-                  Brutalist UI components for modern web applications. No
-                  rounding, no shadows — just bold design.
+                  Brutalist UI components for modern web applications. No rounding, no shadows —
+                  just bold design.
                 </p>
                 <Button size="sm">Get Started Free</Button>
               </FooterBrand>
@@ -850,10 +775,7 @@ export function OrganismsDemo() {
               </FooterGrid>
             </div>
             <FooterBottom>
-              <span>
-                &copy; {new Date().getFullYear()} Poyraz. Built with ❤️ in
-                Ankara.
-              </span>
+              <span>&copy; {new Date().getFullYear()} Poyraz. Built with ❤️ in Ankara.</span>
               <FooterSocials>
                 <FooterSocialLink href="#" aria-label="GitHub">
                   <Github className="h-4 w-4" />
@@ -874,25 +796,19 @@ export function OrganismsDemo() {
       {/* ANNOUNCEMENT BAR SECTION                     */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
-        Announcement Bar
-      </h2>
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">Announcement Bar</h2>
 
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Announcement Bar — Variants</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Dismissable notification strip with 6 variants, icons, and action
-          slots.
+          Dismissable notification strip with 6 variants, icons, and action slots.
         </p>
         <div className="space-y-3">
           <AnnouncementBar
             variant="default"
             icon={<Megaphone className="h-4 w-4" />}
             action={
-              <a
-                href="#"
-                className="underline text-xs font-semibold hover:no-underline"
-              >
+              <a href="#" className="underline text-xs font-semibold hover:no-underline">
                 Learn more →
               </a>
             }
@@ -904,17 +820,11 @@ export function OrganismsDemo() {
             Scheduled maintenance on Dec 15 from 2:00–4:00 AM UTC.
           </AnnouncementBar>
 
-          <AnnouncementBar
-            variant="success"
-            icon={<CheckCircle2 className="h-4 w-4" />}
-          >
+          <AnnouncementBar variant="success" icon={<CheckCircle2 className="h-4 w-4" />}>
             All systems are operational. Status: online.
           </AnnouncementBar>
 
-          <AnnouncementBar
-            variant="warning"
-            icon={<AlertTriangle className="h-4 w-4" />}
-          >
+          <AnnouncementBar variant="warning" icon={<AlertTriangle className="h-4 w-4" />}>
             Your trial expires in 3 days. Upgrade now to keep access.
           </AnnouncementBar>
 
@@ -938,10 +848,7 @@ export function OrganismsDemo() {
             variant="branded"
             icon={<Sparkles className="h-4 w-4" />}
             action={
-              <a
-                href="#"
-                className="underline text-xs font-semibold hover:no-underline"
-              >
+              <a href="#" className="underline text-xs font-semibold hover:no-underline">
                 Get started →
               </a>
             }
@@ -955,9 +862,7 @@ export function OrganismsDemo() {
       {/* DATA TABLE SECTION                           */}
       {/* ──────────────────────────────────────────── */}
 
-      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">
-        Data Table
-      </h2>
+      <h2 className="text-2xl font-bold border-b border-slate-200 pb-3">Data Table</h2>
 
       {/* Basic Table */}
       <section className="space-y-4">
@@ -972,8 +877,7 @@ export function OrganismsDemo() {
       <section className="space-y-4">
         <h3 className="text-lg font-bold">Data Table — Full Featured</h3>
         <p className="text-sm text-slate-500 mb-4">
-          Row selection, column visibility toggle, custom cell renderers, and
-          all features enabled.
+          Row selection, column visibility toggle, custom cell renderers, and all features enabled.
         </p>
         <DataTableFullDemo />
       </section>
