@@ -319,10 +319,14 @@
             "backdrop-filter": "blur(var(--poyraz-blur-soft)) saturate(var(--poyraz-saturation-glass))"
           }
         },
-        "input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus": {
+        "input:autofill, textarea:autofill, input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus": {
           "-webkit-text-fill-color": "var(--foreground)",
+          "color": "var(--foreground)",
           "caret-color": "var(--foreground)",
           "box-shadow": "0 0 0 1000px var(--background) inset"
+        },
+        ".poyraz-glass-field:autofill, .poyraz-glass-field:-webkit-autofill, .poyraz-glass-field:-webkit-autofill:hover, .poyraz-glass-field:-webkit-autofill:focus": {
+          "box-shadow": "0 0 0 1000px var(--glass-fallback) inset"
         }
       },
       "files": [

@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-07-13",
+  "command": "pnpm test:coverage",
+  "statements": { "covered": 174, "total": 1656, "percent": 10.5, "threshold": 10 },
+  "branches": { "covered": 83, "total": 1627, "percent": 5.1, "threshold": 5 },
+  "functions": { "covered": 17, "total": 490, "percent": 3.46, "threshold": 3 },
+  "lines": { "covered": 169, "total": 1536, "percent": 11, "threshold": 10 },
+  "policy": "Global coverage is a regression floor, not proof that every component is release-ready. Release-critical behavior is tracked in the Phase 15 DoD evidence matrix."
+}

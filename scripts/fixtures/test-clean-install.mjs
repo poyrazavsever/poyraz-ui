@@ -39,11 +39,15 @@ try {
       destination: join(destination, ".registry"),
     });
     const manifestPath = join(destination, "package.json");
+    const fixturePolicy = await readFile(join(destination, "pnpm-workspace.yaml"), "utf8");
+    if (!fixturePolicy.includes("allowBuilds:")) {
+      throw new Error(`${fixture} fixture must own an explicit pnpm build approval policy`);
+    }
     const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
     manifest.dependencies = { ...manifest.dependencies, ...installed.dependencies };
     await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 
-    await run(["install", "--ignore-workspace", "--frozen-lockfile=false"], destination);
+    await run(["install", "--frozen-lockfile=false"], destination);
     await run(["run", "typecheck"], destination);
     await run(["run", "build"], destination);
   }

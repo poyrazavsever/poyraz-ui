@@ -1120,6 +1120,7 @@ const NavbarMobileDrillTrigger = React.forwardRef<HTMLButtonElement, NavbarMobil
           "transition-[color,background-color,border-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] group",
           "hover:bg-muted hover:border-border",
           "cursor-pointer",
+          className,
         )}
         {...props}
       >

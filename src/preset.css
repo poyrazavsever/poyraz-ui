@@ -865,13 +865,26 @@
   }
 }
 
+input:autofill,
+textarea:autofill,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--poyraz-foreground);
+  color: var(--poyraz-foreground);
   caret-color: var(--poyraz-foreground);
   box-shadow: 0 0 0 1000px var(--poyraz-surface) inset;
   transition: background-color 9999s ease-out 0s;
+}
+
+.poyraz-glass-field:autofill,
+.poyraz-glass-field:-webkit-autofill,
+.poyraz-glass-field:-webkit-autofill:hover,
+.poyraz-glass-field:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1000px var(--poyraz-glass-fallback) inset;
 }
 
 @media (forced-colors: active) {

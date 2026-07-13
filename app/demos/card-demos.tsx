@@ -12,7 +12,6 @@ import { Button } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 import { Avatar, AvatarFallback, AvatarImage } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
-import { Typography } from "poyraz-ui/atoms";
 
 // ═══════════════════════════════════════════════════════════════
 // 1. BLOG POST CARD — elevated variant, horizontal on md+

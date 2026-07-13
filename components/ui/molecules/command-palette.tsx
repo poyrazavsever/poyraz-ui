@@ -24,11 +24,15 @@ import {
 interface CommandPaletteContextValue {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  selectedItemId: string | null;
+  setSelectedItemId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const CommandPaletteCtx = React.createContext<CommandPaletteContextValue>({
   search: "",
   setSearch: () => {},
+  selectedItemId: null,
+  setSelectedItemId: () => {},
 });
 
 /* ── Root ─────────────────────────────────────────────────────────── */
@@ -39,15 +43,19 @@ interface CommandPaletteProps extends React.ComponentPropsWithoutRef<typeof Dial
 
 function CommandPalette({ children, ...props }: CommandPaletteProps) {
   const [search, setSearch] = React.useState("");
+  const [selectedItemId, setSelectedItemId] = React.useState<string | null>(null);
 
   // Reset search when closed
   const handleOpenChange = (open: boolean) => {
-    if (!open) setSearch("");
+    if (!open) {
+      setSearch("");
+      setSelectedItemId(null);
+    }
     props.onOpenChange?.(open);
   };
 
   return (
-    <CommandPaletteCtx.Provider value={{ search, setSearch }}>
+    <CommandPaletteCtx.Provider value={{ search, setSearch, selectedItemId, setSelectedItemId }}>
       <DialogPrimitive.Root {...props} onOpenChange={handleOpenChange}>
         {children}
       </DialogPrimitive.Root>
@@ -213,45 +221,100 @@ interface CommandPaletteItemProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CommandPaletteItem = React.forwardRef<HTMLDivElement, CommandPaletteItemProps>(
   (
-    { className, children, shortcut, disabled, icon, description, media, size, radius, ...props },
+    {
+      className,
+      children,
+      shortcut,
+      disabled,
+      icon,
+      description,
+      media,
+      size,
+      radius,
+      onFocus,
+      onKeyDown,
+      ...props
+    },
     ref,
-  ) => (
-    <div
-      ref={ref}
-      role="option"
-      aria-disabled={disabled}
-      className={cn(
-        floatingItemVariants({ size, radius }),
-        "cursor-pointer border border-transparent hover:border-border hover:bg-accent",
-        disabled && "pointer-events-none opacity-40",
-        className,
-      )}
-      tabIndex={disabled ? -1 : 0}
-      {...props}
-    >
-      {media && (
-        <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
-          {media}
-        </span>
-      )}
-      {icon && (
-        <span className="text-placeholder shrink-0 transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
-          {icon}
-        </span>
-      )}
-      <span className="min-w-0 flex-1">
-        <span className="block truncate font-medium">{children}</span>
-        {description && (
-          <span className="mt-0.5 block truncate text-xs text-muted-foreground">{description}</span>
+  ) => {
+    const itemId = React.useId();
+    const { selectedItemId, setSelectedItemId } = React.useContext(CommandPaletteCtx);
+    const controlledSelection = props["aria-selected"];
+    const isSelected = controlledSelection ?? selectedItemId === itemId;
+
+    const moveFocus = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+
+      const list = event.currentTarget.closest('[role="listbox"]');
+      const options = Array.from(
+        list?.querySelectorAll<HTMLElement>('[role="option"]:not([aria-disabled="true"])') ?? [],
+      );
+      if (options.length === 0) return;
+
+      event.preventDefault();
+      const currentIndex = options.indexOf(event.currentTarget);
+      const nextIndex =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? options.length - 1
+            : event.key === "ArrowDown"
+              ? (currentIndex + 1) % options.length
+              : (currentIndex - 1 + options.length) % options.length;
+      options[nextIndex]?.focus();
+    };
+
+    return (
+      <div
+        {...props}
+        ref={ref}
+        id={props.id ?? itemId}
+        role="option"
+        aria-disabled={disabled || undefined}
+        aria-selected={isSelected}
+        className={cn(
+          floatingItemVariants({ size, radius }),
+          "cursor-pointer border border-transparent hover:border-border hover:bg-accent",
+          isSelected && "border-border bg-accent",
+          disabled && "pointer-events-none opacity-40",
+          className,
         )}
-      </span>
-      {shortcut && (
-        <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5 transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
-          {shortcut}
-        </kbd>
-      )}
-    </div>
-  ),
+        tabIndex={disabled ? -1 : 0}
+        onFocus={(event) => {
+          if (controlledSelection === undefined) setSelectedItemId(itemId);
+          onFocus?.(event);
+        }}
+        onKeyDown={(event) => {
+          moveFocus(event);
+          onKeyDown?.(event);
+        }}
+      >
+        {media && (
+          <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-surface-subtle [&_img]:size-full [&_img]:object-cover">
+            {media}
+          </span>
+        )}
+        {icon && (
+          <span className="text-placeholder shrink-0 transition-[color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
+            {icon}
+          </span>
+        )}
+        <span className="min-w-0 flex-1">
+          <span className="block truncate font-medium">{children}</span>
+          {description && (
+            <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+              {description}
+            </span>
+          )}
+        </span>
+        {shortcut && (
+          <kbd className="ml-auto text-[11px] font-mono tracking-wider text-placeholder border border-border px-1.5 py-0.5 transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]">
+            {shortcut}
+          </kbd>
+        )}
+      </div>
+    );
+  },
 );
 CommandPaletteItem.displayName = "CommandPaletteItem";
 

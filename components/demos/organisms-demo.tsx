@@ -28,7 +28,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "poyraz-ui/atoms";
-import { Badge } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import {
   Navbar,

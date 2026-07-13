@@ -166,7 +166,7 @@ function Autocomplete({
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [freeSolo]);
+  }, [freeSolo, setOpen]);
 
   // Reset highlight when filtered list changes
   React.useEffect(() => {

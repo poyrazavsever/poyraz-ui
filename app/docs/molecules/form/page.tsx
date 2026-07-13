@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPage, DemoSection, CodeBlock } from "@/components/docs/code-block";
+import { ComponentPage, CodeBlock } from "@/components/docs/code-block";
 
 export default function FormPage() {
   return (

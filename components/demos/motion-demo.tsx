@@ -85,7 +85,7 @@ export function MotionDemo() {
         onValueChange={(value) => selectSample(samples.findIndex((item) => item.slot === value))}
       >
         <TabsList aria-label="Motion family">
-          {samples.map((item, index) => (
+          {samples.map((item) => (
             <TabsTrigger key={item.name} value={item.slot}>
               {item.name}
             </TabsTrigger>

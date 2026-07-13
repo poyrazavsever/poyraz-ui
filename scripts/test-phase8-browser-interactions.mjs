@@ -16,9 +16,8 @@ socket.addEventListener("message", ({ data }) => {
     const request = pending.get(message.id);
     if (!request) return;
     pending.delete(message.id);
-    message.error
-      ? request.reject(new Error(message.error.message))
-      : request.resolve(message.result);
+    if (message.error) request.reject(new Error(message.error.message));
+    else request.resolve(message.result);
     return;
   }
   const listeners = waiters.get(message.method) ?? [];

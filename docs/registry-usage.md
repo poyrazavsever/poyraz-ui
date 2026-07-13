@@ -41,10 +41,10 @@ yönlendirilebilir:
 pnpm dlx shadcn@latest add @poyraz/button
 ```
 
-Varsayılan shadcn alias'larında kurulum sonucu:
+Poyraz UI'nin atom taxonomy'sini kullanan varsayılan alias'larda kurulum sonucu:
 
 ```text
-components/ui/button.tsx
+components/ui/atoms/button.tsx
 lib/utils.ts
 ```
 
@@ -82,10 +82,10 @@ Namespace kullanmadan tek item URL'si kurulabilir:
 pnpm dlx shadcn@latest add https://ui.poyrazavsever.com/r/button.json
 ```
 
-Repository public olduğunda GitHub registry adresi de kullanılabilir:
+Repository public olduğunda GitHub raw item adresi de kullanılabilir:
 
 ```bash
-pnpm dlx shadcn@latest add poyrazavsever/poyraz-ui/button
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/poyrazavsever/poyraz-ui/v3/public/r/button.json
 ```
 
 Button'ın Poyraz registry dependency'leri namespaced olduğu için GitHub veya

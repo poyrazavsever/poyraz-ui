@@ -42,6 +42,9 @@ jobs:
         run: git diff --exit-code -- public/r src/docs-registry.json COMPONENTS.md
       - name: Production build
         run: pnpm build
+      - name: Validate build-time package dist
+        run: pnpm dist:check
+      - run: pnpm test:package-exports
       - run: pnpm quality:static
       - name: Upload registry and v2 baseline evidence
         if: always()
@@ -89,7 +92,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install chromium
+      - run: pnpm exec playwright install chromium firefox webkit
       - run: pnpm test:browser
       - uses: actions/upload-artifact@v7
         if: always()
@@ -115,5 +118,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm registry:build
       - run: pnpm registry:smoke
+      - run: pnpm registry:consumer-smoke
       - run: pnpm fixture:clean-install
       - run: pnpm test:phase12

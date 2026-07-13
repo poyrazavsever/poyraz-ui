@@ -27,12 +27,11 @@ import {
   NavbarMobileDrillMenu,
   NavbarMobileDrillTrigger,
   NavbarMobileDrillPanel,
-  NavbarSearch,
   NavbarDivider,
 } from "poyraz-ui/organisms";
 import { Button } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
-import { BookOpen, Layers, Zap, Globe, Package, Code, FileText, Users } from "lucide-react";
+import { Layers, Zap, Globe } from "lucide-react";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";
 
 export default function NavbarPage() {

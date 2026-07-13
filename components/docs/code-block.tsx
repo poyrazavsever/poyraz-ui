@@ -18,6 +18,7 @@ export function DemoBlock({
   return (
     <div
       data-slot="docs-demo"
+      data-testid="docs-preview"
       className={cn(
         "@container/demo relative min-w-0 overflow-visible rounded-lg border border-border bg-[linear-gradient(135deg,var(--poyraz-primary-muted),var(--poyraz-surface),var(--poyraz-info))] p-3 @sm/demo:p-4 @lg/demo:p-6",
         className,

@@ -1,7 +1,6 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "poyraz-ui/molecules";
-import { Button } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
 import { ComponentPage, DemoSection } from "@/components/docs/code-block";

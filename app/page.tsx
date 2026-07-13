@@ -17,7 +17,6 @@ import {
   BarChart3,
   TrendingUp,
   Activity,
-  Calendar,
   CircleDot,
   Mail,
   Lock,
@@ -31,7 +30,6 @@ import { Typography } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 import { Logo } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
-import { Switch } from "poyraz-ui/atoms";
 import { Checkbox } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";

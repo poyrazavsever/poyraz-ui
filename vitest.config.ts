@@ -19,6 +19,12 @@ export default defineConfig({
       reporter: ["text", "json-summary", "lcov"],
       reportsDirectory: "coverage",
       include: ["components/ui/**/*.{ts,tsx}", "lib/**/*.ts", "registry/poyraz/ui/button.tsx"],
+      thresholds: {
+        statements: 10,
+        branches: 5,
+        functions: 3,
+        lines: 10,
+      },
     },
     projects: [
       {

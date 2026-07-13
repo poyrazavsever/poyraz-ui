@@ -68,5 +68,20 @@ export default defineConfig({
         contextOptions: { reducedMotion: "reduce" },
       },
     },
+    {
+      name: "autofill-chromium",
+      testMatch: "autofill.spec.ts",
+      use: { ...devices["Desktop Chrome"], colorScheme: "light" },
+    },
+    {
+      name: "autofill-firefox",
+      testMatch: "autofill.spec.ts",
+      use: { ...devices["Desktop Firefox"], colorScheme: "light" },
+    },
+    {
+      name: "autofill-webkit",
+      testMatch: "autofill.spec.ts",
+      use: { ...devices["Desktop Safari"], colorScheme: "light" },
+    },
   ],
 });
