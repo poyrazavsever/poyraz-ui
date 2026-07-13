@@ -100,16 +100,11 @@ const CommandPaletteContent = React.forwardRef<
         ref={ref}
         className={cn(
           overlaySurfaceVariants({ surface, radius }),
-          "fixed left-[50%] top-[20%] z-50 w-full max-w-lg translate-x-[-50%]",
-          "overflow-hidden",
-          "data-[state=open]:animate-in data-[state=closed]:animate-out",
-          "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-          "data-[state=open]:[--poyraz-enter-scale:0.98] data-[state=closed]:[--poyraz-exit-scale:0.98]",
-          "data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[2%]",
-          "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[2%]",
-          "motion-reduce:[--poyraz-enter-scale:1] motion-reduce:[--poyraz-exit-scale:1] motion-reduce:[--poyraz-enter-translate-x:0] motion-reduce:[--poyraz-enter-translate-y:0] motion-reduce:duration-100",
+          "fixed left-1/2 top-[clamp(5rem,14vh,8rem)] z-50 w-[calc(100%-2rem)] max-w-2xl [--poyraz-command-translate-x:-50%]",
+          "overflow-hidden shadow-[0_28px_90px_-28px_rgb(0_0_0/0.5)] ring-1 ring-foreground/5",
+          "data-[state=open]:animate-poyraz-command-in data-[state=closed]:animate-poyraz-command-out",
           mobile === "fullscreen" &&
-            "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:rounded-none",
+            "max-sm:inset-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:rounded-none max-sm:[--poyraz-command-translate-x:0%]",
           className,
         )}
         {...props}
@@ -140,11 +135,11 @@ const CommandPaletteInput = React.forwardRef<HTMLInputElement, CommandPaletteInp
     return (
       <div
         className={cn(
-          "flex items-center gap-2 px-4",
-          "border-b border-border transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+          "flex items-center gap-3 border-b border-border bg-surface-subtle/55 px-5",
+          "transition-colors duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
         )}
       >
-        <Search className="h-4 w-4 shrink-0 text-placeholder transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]" />
+        <Search className="size-4.5 shrink-0 text-muted-foreground transition-transform duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]" />
         <input
           ref={ref}
           value={search}
@@ -153,7 +148,7 @@ const CommandPaletteInput = React.forwardRef<HTMLInputElement, CommandPaletteInp
             onValueChange?.(e.target.value);
           }}
           className={cn(
-            "flex h-10 w-full bg-transparent py-2",
+            "flex h-14 w-full bg-transparent py-3",
             "text-sm text-foreground placeholder:text-placeholder",
             "outline-none",
             "disabled:opacity-40 disabled:cursor-not-allowed",
@@ -161,7 +156,7 @@ const CommandPaletteInput = React.forwardRef<HTMLInputElement, CommandPaletteInp
           )}
           {...props}
         />
-        <DialogPrimitive.Close className="rounded-sm p-1 opacity-50 transition-[opacity,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:opacity-100 hover:bg-accent hover:scale-105 active:scale-95 cursor-pointer">
+        <DialogPrimitive.Close className="flex size-8 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-[color,background-color,transform] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)] hover:scale-105 hover:bg-accent hover:text-foreground active:scale-95">
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
@@ -177,7 +172,10 @@ const CommandPaletteList = React.forwardRef<HTMLDivElement, React.HTMLAttributes
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("max-h-[300px] overflow-y-auto p-2 animate-poyraz-fade-in", className)}
+      className={cn(
+        "max-h-[min(56vh,26rem)] overflow-y-auto p-2.5 animate-poyraz-fade-in",
+        className,
+      )}
       role="listbox"
       {...props}
     />
@@ -348,8 +346,7 @@ const CommandPaletteFooter = React.forwardRef<HTMLDivElement, React.HTMLAttribut
     <div
       ref={ref}
       className={cn(
-        "flex items-center gap-4 px-4 py-2",
-        "border-t border-border",
+        "flex items-center gap-4 border-t border-border bg-surface-subtle/45 px-5 py-2.5",
         "text-[11px] text-placeholder",
         className,
       )}

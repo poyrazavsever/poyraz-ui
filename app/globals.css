@@ -1,6 +1,29 @@
 @import "tailwindcss";
 @import "../src/preset.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --poyraz-hero-wave-base: color-mix(in oklab, var(--poyraz-background) 96%, var(--poyraz-primary));
+  --poyraz-hero-wave-soft: color-mix(in oklab, var(--poyraz-background) 88%, var(--poyraz-primary));
+  --poyraz-hero-wave-mid: color-mix(in oklab, var(--poyraz-background) 72%, var(--poyraz-primary));
+  --poyraz-hero-wave-strong: color-mix(
+    in oklab,
+    var(--poyraz-background) 55%,
+    var(--poyraz-primary)
+  );
+}
+
+.poyraz-hero-wave-overlay {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      color-mix(in srgb, var(--poyraz-surface) 72%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--poyraz-primary) 12%, transparent));
+}
+
 @font-face {
   font-family: "Poyraz Inter";
   src: url("/fonts/inter-latin-ext.woff2") format("woff2");
@@ -60,3 +83,60 @@ body {
  * both :root and .dark semantic maps, so the documentation app needs no local
  * token overrides and cannot drift from the published theme.
  */
+
+@keyframes poyraz-hero-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.poyraz-hero-marquee-track {
+  animation: poyraz-hero-marquee var(--hero-marquee-duration, 46s) linear infinite;
+  animation-delay: var(--hero-marquee-delay, 0s);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.poyraz-hero-marquee-viewport {
+  mask-image: linear-gradient(to right, transparent 0%, currentColor 12%, currentColor 100%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    currentColor 12%,
+    currentColor 100%
+  );
+}
+
+.poyraz-hero-showcase:hover .poyraz-hero-marquee-track,
+.poyraz-hero-showcase:focus-within .poyraz-hero-marquee-track,
+.poyraz-hero-showcase[data-interacting] .poyraz-hero-marquee-track {
+  animation-play-state: paused;
+}
+
+.poyraz-hero-marquee-edge {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  width: 5rem;
+  pointer-events: none;
+}
+
+.poyraz-hero-marquee-edge-start {
+  left: 0;
+  mask-image: linear-gradient(to right, currentColor, transparent);
+  -webkit-mask-image: linear-gradient(to right, currentColor, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poyraz-hero-marquee-track {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}

@@ -11,11 +11,15 @@ type ThemeToggleProps = {
   activeClassName?: string;
 };
 
+const subscribeToHydration = () => () => {};
+
 export function ThemeToggle({ className, buttonClassName, activeClassName }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
+  const mounted = React.useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
+  );
 
   const modes = [
     { value: "light", label: "Light", icon: Sun },
@@ -26,7 +30,7 @@ export function ThemeToggle({ className, buttonClassName, activeClassName }: The
   return (
     <div
       className={cn(
-        "flex items-center rounded-md border border-border bg-surface p-0.5",
+        "flex h-8 items-center rounded-md border border-border bg-surface p-0.5",
         className,
       )}
       aria-label="Color theme"
@@ -39,7 +43,7 @@ export function ThemeToggle({ className, buttonClassName, activeClassName }: The
           aria-label={`${label} theme`}
           aria-pressed={mounted && theme === value}
           className={cn(
-            "flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground",
+            "flex h-full aspect-square items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground",
             buttonClassName,
             mounted && theme === value && cn("bg-accent text-foreground", activeClassName),
           )}

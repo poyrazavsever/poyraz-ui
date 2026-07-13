@@ -161,6 +161,7 @@ export {
   TestimonialCard,
   PricingCard,
   ProductCard,
+  StarRating,
 } from "@/components/ui/molecules/card-templates";
 export type {
   ArticleCardProps,
@@ -170,4 +171,5 @@ export type {
   TestimonialCardProps,
   PricingCardProps,
   ProductCardProps,
+  StarRatingProps,
 } from "@/components/ui/molecules/card-templates";

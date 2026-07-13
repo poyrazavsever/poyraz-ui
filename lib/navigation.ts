@@ -35,7 +35,7 @@ export const mainNav: NavItem[] = [
 export const mobileNav: NavItem[] = [
   { label: "Documentation", href: "/docs" },
   { label: "Components", href: "/docs/atoms" },
-  { label: "Return Back", href: "https://poyrazavsever.com", external: true },
+  { label: "Get Started", href: "/docs" },
 ];
 
 /* ── Component Registry (Sidebar) ─────────────────────────────────── */

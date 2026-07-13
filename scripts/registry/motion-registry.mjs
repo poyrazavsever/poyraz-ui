@@ -15,6 +15,11 @@ export function buildRegistryMotionCss() {
     utility("animate-poyraz-floating-out", `poyraz-floating-out ${exit}`),
     utility("animate-poyraz-overlay-in", `poyraz-overlay-in ${entrance}`),
     utility("animate-poyraz-overlay-out", `poyraz-overlay-out ${exit}`),
+    utility(
+      "animate-poyraz-command-in",
+      `poyraz-command-in ${duration("slow", "260ms")} ${easing("out", "cubic-bezier(0.16, 1, 0.3, 1)")} both`,
+    ),
+    utility("animate-poyraz-command-out", `poyraz-command-out ${exit}`),
     utility("animate-poyraz-slide-in-from-top", `poyraz-slide-in-from-top ${entrance}`),
     utility("animate-poyraz-slide-in-from-bottom", `poyraz-slide-in-from-bottom ${entrance}`),
     utility("animate-poyraz-slide-in-from-left", `poyraz-slide-in-from-left ${entrance}`),
@@ -160,6 +165,33 @@ export function buildRegistryMotionCss() {
     ],
     ["@keyframes poyraz-overlay-in", { from: { opacity: "0" } }],
     ["@keyframes poyraz-overlay-out", { to: { opacity: "0" } }],
+    [
+      "@keyframes poyraz-command-in",
+      {
+        from: {
+          opacity: "0",
+          transform:
+            "translate3d(var(--poyraz-command-translate-x, -50%), -0.75rem, 0) scale(0.96)",
+        },
+        to: {
+          opacity: "1",
+          transform: "translate3d(var(--poyraz-command-translate-x, -50%), 0, 0) scale(1)",
+        },
+      },
+    ],
+    [
+      "@keyframes poyraz-command-out",
+      {
+        from: {
+          opacity: "1",
+          transform: "translate3d(var(--poyraz-command-translate-x, -50%), 0, 0) scale(1)",
+        },
+        to: {
+          opacity: "0",
+          transform: "translate3d(var(--poyraz-command-translate-x, -50%), -0.5rem, 0) scale(0.98)",
+        },
+      },
+    ],
     [
       "@keyframes poyraz-slide-in-from-top",
       { from: { opacity: "0", transform: "translateY(-0.5rem)" } },

@@ -721,12 +721,12 @@ const NavbarSearch = React.forwardRef<HTMLInputElement, NavbarSearchProps>(
           placeholder={placeholder}
           onKeyDown={handleKeyDown}
           className={cn(
-            "h-7 w-36 @lg/navbar:w-52 pl-8 pr-3",
+            "h-8 w-36 @lg/navbar:w-52 pl-8 pr-3",
             "text-xs font-medium",
-            "border rounded-sm",
+            "border rounded-md",
             "bg-background border-border-strong text-foreground placeholder:text-placeholder",
-            "transition-colors duration-150",
-            "focus:outline-none focus:ring-2 focus:ring-ring",
+            "outline-none transition-[color,background-color,border-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+            "focus:border-ring focus:ring-[3px] focus:ring-ring/20",
             className,
           )}
           {...props}

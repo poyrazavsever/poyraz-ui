@@ -178,7 +178,7 @@ function GlobalSearchPalette({
         if (!nextOpen) setQuery("");
       }}
     >
-      <CommandPaletteContent surface="glass" radius="xl" overlayTone="glass">
+      <CommandPaletteContent surface="solid" radius="xl" overlayTone="glass">
         <CommandPaletteInput
           autoFocus
           placeholder="Search components, docs, blocks..."
@@ -221,18 +221,8 @@ function GlobalSearchPalette({
   );
 }
 
-export function SiteNavbar({ hero = false }: { hero?: boolean }) {
-  const [isScrolled, setIsScrolled] = React.useState(false);
+export function SiteNavbar() {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
-  const transparent = hero && !isScrolled;
-
-  React.useEffect(() => {
-    if (!hero) return;
-    const updateScrollState = () => setIsScrolled(window.scrollY > 24);
-    updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrollState);
-  }, [hero]);
 
   React.useEffect(() => {
     const openSearchFromShortcut = (event: KeyboardEvent) => {
@@ -261,18 +251,14 @@ export function SiteNavbar({ hero = false }: { hero?: boolean }) {
       <GlobalSearchPalette open={isSearchOpen} onOpenChange={setIsSearchOpen} />
 
       <Navbar
-        variant={transparent ? "transparent" : hero ? "glass" : "minimal"}
-        sticky={!hero}
-        containerClassName={hero ? undefined : "mx-auto max-w-[1440px] px-5 lg:px-8"}
-        className={
-          hero
-            ? "fixed left-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300"
-            : "border-b border-border/80 bg-background/90 backdrop-blur-lg"
-        }
+        variant="minimal"
+        sticky
+        containerClassName="mx-auto max-w-[1440px] px-5 lg:px-8"
+        className="border-b border-border/80 bg-background/90 backdrop-blur-lg"
       >
-        <NavbarMain className={transparent ? "border-white/10" : undefined}>
+        <NavbarMain>
           <NavbarBrand href="/">
-            <Logo width={hero ? 32 : 30} height={hero ? 32 : 30} />
+            <Logo width={30} height={30} />
           </NavbarBrand>
 
           <NavbarLinks className="mr-auto">
@@ -280,11 +266,6 @@ export function SiteNavbar({ hero = false }: { hero?: boolean }) {
               <NavbarLink
                 key={item.href}
                 href={item.href}
-                className={
-                  transparent
-                    ? "text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
-                    : undefined
-                }
                 {...(item.external ? { target: "_blank" } : {})}
               >
                 {item.label}
@@ -300,11 +281,6 @@ export function SiteNavbar({ hero = false }: { hero?: boolean }) {
               aria-expanded={isSearchOpen}
               readOnly
               wrapperClassName="hidden xl:flex"
-              className={
-                transparent
-                  ? "border-white/20 bg-white/10 text-white placeholder:text-white/60 focus:ring-white/35"
-                  : undefined
-              }
               onClick={() => setIsSearchOpen(true)}
               onFocus={() => setIsSearchOpen(true)}
               onKeyDown={(event) => {
@@ -314,47 +290,18 @@ export function SiteNavbar({ hero = false }: { hero?: boolean }) {
                 }
               }}
             />
-            <ThemeToggle
-              className={
-                transparent ? "border-white/20 bg-white/10 text-white backdrop-blur-md" : undefined
-              }
-              buttonClassName={
-                transparent
-                  ? "text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
-                  : undefined
-              }
-              activeClassName={transparent ? "bg-white/20 text-white" : undefined}
-            />
-            <Link href={socialLinks.website} target="_blank">
-              <Button
-                size="sm"
-                effect="swap"
-                variant={transparent ? "outline" : "default"}
-                className={
-                  transparent
-                    ? "border-white/30 bg-white/10 text-white backdrop-blur-md hover:border-white/60 hover:bg-white/15"
-                    : undefined
-                }
-              >
-                Return Back
-              </Button>
-            </Link>
-            {!hero && (
-              <Button asChild size="icon" variant="ghost">
-                <Link href={socialLinks.repo} target="_blank" aria-label="GitHub repository">
-                  <Github className="size-4" />
-                </Link>
-              </Button>
-            )}
+            <ThemeToggle />
+            <Button asChild size="icon-sm" variant="ghost">
+              <Link href={socialLinks.repo} target="_blank" aria-label="GitHub repository">
+                <Github className="size-4" />
+              </Link>
+            </Button>
+            <Button asChild size="sm" effect="swap" variant="default">
+              <Link href="/docs">Get Started</Link>
+            </Button>
           </NavbarActions>
 
-          <NavbarMobileToggle
-            className={
-              transparent
-                ? "border-white/25 text-white hover:border-white/50 hover:bg-white/10"
-                : undefined
-            }
-          />
+          <NavbarMobileToggle />
         </NavbarMain>
 
         <NavbarMobileMenu>

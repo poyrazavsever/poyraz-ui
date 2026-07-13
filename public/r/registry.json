@@ -413,6 +413,12 @@
         "@utility animate-poyraz-overlay-out": {
           "animation": "poyraz-overlay-out var(--poyraz-motion-duration-fast, 120ms) var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both"
         },
+        "@utility animate-poyraz-command-in": {
+          "animation": "poyraz-command-in var(--poyraz-motion-duration-slow, 260ms) var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both"
+        },
+        "@utility animate-poyraz-command-out": {
+          "animation": "poyraz-command-out var(--poyraz-motion-duration-fast, 120ms) var(--poyraz-motion-ease-in, cubic-bezier(0.7, 0, 0.84, 0)) both"
+        },
         "@utility animate-poyraz-slide-in-from-top": {
           "animation": "poyraz-slide-in-from-top var(--poyraz-motion-duration-base, 180ms) var(--poyraz-motion-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both"
         },
@@ -631,6 +637,26 @@
         "@keyframes poyraz-overlay-out": {
           "to": {
             "opacity": "0"
+          }
+        },
+        "@keyframes poyraz-command-in": {
+          "from": {
+            "opacity": "0",
+            "transform": "translate3d(var(--poyraz-command-translate-x, -50%), -0.75rem, 0) scale(0.96)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translate3d(var(--poyraz-command-translate-x, -50%), 0, 0) scale(1)"
+          }
+        },
+        "@keyframes poyraz-command-out": {
+          "from": {
+            "opacity": "1",
+            "transform": "translate3d(var(--poyraz-command-translate-x, -50%), 0, 0) scale(1)"
+          },
+          "to": {
+            "opacity": "0",
+            "transform": "translate3d(var(--poyraz-command-translate-x, -50%), -0.5rem, 0) scale(0.98)"
           }
         },
         "@keyframes poyraz-slide-in-from-top": {

@@ -17,3 +17,7 @@ export {
   ProductCard,
   type ProductCardProps,
 } from "@/components/ui/blocks/card-templates/product-card";
+export {
+  StarRating,
+  type StarRatingProps,
+} from "@/components/ui/blocks/card-templates/star-rating";
