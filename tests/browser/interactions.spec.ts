@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
 
-test("home and docs share the same navbar and command palette motion", async ({ page }) => {
+test("home hero navbar transitions without changing the shared navbar layout", async ({ page }) => {
+  const consoleErrors: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+
   const readNavbarSnapshot = async () => {
     const navbar = page.locator('[data-slot="navbar"]');
     const logo = navbar.locator('[data-slot="logo"]');
@@ -41,13 +46,32 @@ test("home and docs share the same navbar and command palette motion", async ({ 
       actionHeights: measurements.slice(2).map(({ height }) => height),
       logoHeight: measurements[1].height,
       navbarHeight: measurements[0].height,
-      sticky: await navbar.getAttribute("data-sticky"),
-      variant: await navbar.getAttribute("data-variant"),
     };
   };
 
   await page.goto("/");
+  const navbar = page.locator('[data-slot="navbar"]');
   const homeNavbar = await readNavbarSnapshot();
+
+  await expect(navbar).toHaveAttribute("data-variant", "transparent");
+  await expect(navbar).not.toHaveAttribute("data-sticky");
+  await expect
+    .poll(() =>
+      navbar.evaluate((element) => ({
+        backgroundColor: getComputedStyle(element).backgroundColor,
+        position: getComputedStyle(element).position,
+      })),
+    )
+    .toEqual({ backgroundColor: "rgba(0, 0, 0, 0)", position: "absolute" });
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) <=
+          window.innerHeight + 1,
+      ),
+    )
+    .toBe(true);
 
   const search = page.getByLabel("Search documentation");
 
@@ -68,10 +92,33 @@ test("home and docs share the same navbar and command palette motion", async ({ 
     .toBe(Math.round((page.viewportSize()?.width ?? 0) / 2));
 
   await page.keyboard.press("Escape");
+
+  await page.evaluate(() => {
+    document.body.style.minHeight = "200vh";
+    window.scrollTo(0, 128);
+  });
+  await expect(navbar).toHaveAttribute("data-variant", "minimal");
+  await expect
+    .poll(() =>
+      navbar.evaluate((element) => ({
+        hasBackground: getComputedStyle(element).backgroundColor !== "rgba(0, 0, 0, 0)",
+        position: getComputedStyle(element).position,
+      })),
+    )
+    .toEqual({ hasBackground: true, position: "fixed" });
+
   await page.goto("/docs");
   const docsNavbar = await readNavbarSnapshot();
 
+  await expect(page.locator('[data-slot="navbar"]')).toHaveAttribute("data-sticky", "");
+  await expect(page.locator('[data-slot="navbar"]')).toHaveAttribute("data-variant", "minimal");
   expect(docsNavbar).toEqual(homeNavbar);
+
+  expect(
+    consoleErrors.filter(
+      (message) => message.includes("same key") || message.includes("Encountered two children"),
+    ),
+  ).toEqual([]);
 });
 
 test("hero component conveyor loops left and pauses as one unit", async ({ page }) => {

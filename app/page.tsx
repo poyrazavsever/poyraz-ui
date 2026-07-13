@@ -72,7 +72,7 @@ function HeroWaveBackground() {
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      <SiteNavbar />
+      <SiteNavbar hero />
 
       <section className="relative isolate flex min-h-screen overflow-hidden pb-16 pt-28 text-foreground md:pt-36">
         <HeroWaveBackground />

@@ -221,8 +221,19 @@ function GlobalSearchPalette({
   );
 }
 
-export function SiteNavbar() {
+export function SiteNavbar({ hero = false }: { hero?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!hero) return;
+
+    const updateScrollState = () => setIsScrolled(window.scrollY > 0);
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, [hero]);
 
   React.useEffect(() => {
     const openSearchFromShortcut = (event: KeyboardEvent) => {
@@ -246,17 +257,25 @@ export function SiteNavbar() {
     return () => window.removeEventListener("keydown", openSearchFromShortcut);
   }, []);
 
+  const isHeroTransparent = hero && !isScrolled;
+
   return (
     <>
       <GlobalSearchPalette open={isSearchOpen} onOpenChange={setIsSearchOpen} />
 
       <Navbar
-        variant="minimal"
-        sticky
+        variant={isHeroTransparent ? "transparent" : "minimal"}
+        sticky={!hero}
         containerClassName="mx-auto max-w-[1440px] px-5 lg:px-8"
-        className="border-b border-border/80 bg-background/90 backdrop-blur-lg"
+        className={
+          hero
+            ? isScrolled
+              ? "fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-lg transition-[background-color,border-color,backdrop-filter] duration-300"
+              : "absolute inset-x-0 top-0 z-50 border-b border-transparent bg-transparent transition-[background-color,border-color,backdrop-filter] duration-300"
+            : "border-b border-border/80 bg-background/90 backdrop-blur-lg"
+        }
       >
-        <NavbarMain>
+        <NavbarMain className={isHeroTransparent ? "border-transparent" : undefined}>
           <NavbarBrand href="/">
             <Logo width={30} height={30} />
           </NavbarBrand>
@@ -306,7 +325,7 @@ export function SiteNavbar() {
 
         <NavbarMobileMenu>
           {mobileNav.map((item) => (
-            <NavbarMobileLink key={item.href} href={item.href}>
+            <NavbarMobileLink key={`${item.label}-${item.href}`} href={item.href}>
               {item.label}
             </NavbarMobileLink>
           ))}
