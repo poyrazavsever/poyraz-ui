@@ -22,7 +22,7 @@ assert.equal(config.npm.package, "poyraz-ui");
 assert.equal(config.npm.role, "primary-v3-runtime");
 assert.equal(config.npm.expectedMajor, 3);
 assert.equal(config.npm.publishV3Package, true);
-assert.equal(config.npm.publishWorkflowReady, false);
+assert.equal(config.npm.publishWorkflowReady, true);
 assert.equal(config.npm.versionPolicy, "release-commit");
 assert.equal(config.npm.stableTag, "latest");
 assert.equal(config.npm.prereleaseTag, "next");
@@ -43,15 +43,13 @@ assert.throws(
   /belongs to stable/,
 );
 
-await assert.rejects(
-  runReleasePreflight({
-    version: config.targetVersion,
-    channel: "stable",
-    allowDirty: true,
-    checkGit: false,
-  }),
-  /Release commit must set poyraz-ui to 3.0.0; found 2.1.0/,
-);
+const strict = await runReleasePreflight({
+  version: config.targetVersion,
+  channel: "stable",
+  allowDirty: true,
+  checkGit: false,
+});
+assert.equal(strict.packageVersionReady, true);
 
 const diagnostic = await runReleasePreflight({
   version: config.targetVersion,
@@ -60,7 +58,7 @@ const diagnostic = await runReleasePreflight({
   checkGit: false,
   enforcePackageVersion: false,
 });
-assert.equal(diagnostic.packageVersionReady, false);
+assert.equal(diagnostic.packageVersionReady, true);
 assert.equal(diagnostic.npmDistTag, "latest");
 
 const temporaryRoot = await mkdtemp(join(tmpdir(), "poyraz-phase14-"));
@@ -77,8 +75,8 @@ try {
   assert.equal(manifest.npm.role, "primary-v3-runtime");
   assert.equal(manifest.npm.distTag, "latest");
   assert.equal(manifest.npm.publishV3Package, true);
-  assert.equal(manifest.npm.publishWorkflowReady, false);
-  assert.equal(manifest.npm.packageVersionReady, false);
+  assert.equal(manifest.npm.publishWorkflowReady, true);
+  assert.equal(manifest.npm.packageVersionReady, true);
   assert.deepEqual(manifest.npm.legacy, { version: "2.1.0", distTag: "legacy-v2" });
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });

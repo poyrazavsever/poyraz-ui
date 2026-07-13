@@ -11,7 +11,7 @@
 
 - RC artifacts must pass package export smoke, clean Next/Vite tarball install, CLI binary smoke and production builds before npm `next` publish approval.
 
-## [3.0.0] - Unreleased
+## [3.0.0] - 2026-07-13
 
 ### Added
 

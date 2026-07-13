@@ -189,8 +189,15 @@ export async function runReleasePreflight({
   ]);
 
   const changelog = await readFile("CHANGELOG.md", "utf8");
-  if (!changelog.includes(`## [${version}] - Unreleased`)) {
-    errors.push(`CHANGELOG.md is missing the [${version}] - Unreleased section.`);
+  const stableReleaseHeadingPattern = new RegExp(
+    `^## \\[${version.replaceAll(".", "\\.")}\\] - \\d{4}-\\d{2}-\\d{2}$`,
+    "m",
+  );
+  if (
+    !changelog.includes(`## [${version}] - Unreleased`) &&
+    !stableReleaseHeadingPattern.test(changelog)
+  ) {
+    errors.push(`CHANGELOG.md is missing the [${version}] release section.`);
   }
 
   if (checkGit) {

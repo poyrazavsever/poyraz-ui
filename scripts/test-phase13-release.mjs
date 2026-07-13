@@ -15,20 +15,19 @@ const preflight = await runReleasePreflight({
   version: config.targetVersion,
   channel: "stable",
   allowDirty: true,
-  enforcePackageVersion: false,
 });
 
 assert.equal(preflight.tag, "v3.0.0");
 assert.ok(preflight.registryItems >= 71);
-assert.equal(preflight.packageVersion.split(".")[0], "2");
-assert.equal(preflight.packageVersionReady, false);
+assert.equal(preflight.packageVersion, config.targetVersion);
+assert.equal(preflight.packageVersionReady, true);
 assert.equal(preflight.npmDistTag, "latest");
 assert.equal(config.schemaVersion, 2);
 assert.equal(config.product, "poyraz-ui");
 assert.equal(config.npm.role, "primary-v3-runtime");
 assert.equal(config.npm.expectedMajor, 3);
 assert.equal(config.npm.publishV3Package, true);
-assert.equal(config.npm.publishWorkflowReady, false);
+assert.equal(config.npm.publishWorkflowReady, true);
 assert.equal(config.npm.prereleaseTag, "next");
 assert.equal(config.npm.stableTag, "latest");
 assert.equal(config.npm.maintenanceTag, "legacy-v2");

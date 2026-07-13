@@ -1389,17 +1389,17 @@ Release kapısı:
 
 Release görevleri:
 
-- [ ] `R-001` `package.json` versionını `3.0.0` yap ve changelog'u release tarihiyle güncelle.
-- [ ] `R-002` Registry production build üret.
-- [ ] `R-003` Registry schema doğrula.
-- [ ] `R-004` Tüm fixture install/build testlerini çalıştır.
-- [ ] `R-005` Docs production build çalıştır.
+- [x] `R-001` `package.json` versionını `3.0.0` yap ve changelog'u release tarihiyle güncelle.
+- [x] `R-002` Registry production build üret.
+- [x] `R-003` Registry schema doğrula.
+- [x] `R-004` Tüm fixture install/build testlerini çalıştır.
+- [x] `R-005` Docs production build çalıştır.
 - [ ] `R-006` Release tag oluştur.
 - [ ] `R-007` `poyraz-ui@3.0.0` paketini npm'e yayınla, `latest` → V3 ve `legacy-v2` → son V2 olacak şekilde dist-tag politikasını doğrula.
 - [ ] `R-008` Registry namespace production config'i yayınla.
 - [ ] `R-009` Migration guide ve release notes yayınla.
-- [ ] `R-010` Legacy v2 docs linkini görünür tut.
-- [ ] `R-011` Kurulum komutlarını gerçek temiz projede son kez doğrula.
+- [x] `R-010` Legacy v2 docs linkini görünür tut.
+- [x] `R-011` Kurulum komutlarını gerçek temiz projede son kez doğrula.
 - [ ] `R-012` Post-release smoke test yap.
 
 ### 13.7 `v3.0.1` — Stabilizasyon penceresi
@@ -1721,10 +1721,10 @@ deploy'unu doğrulamak ve aynı commit'ten npm stable package ile immutable GitH
 
 ### 17.3 Stable npm ve GitHub Release
 
-- [ ] `P17-PUBLISH-001` Master release SHA üzerinde `package.json` versionının tam `3.0.0` olduğunu doğrula.
-- [ ] `P17-PUBLISH-002` Changelog'daki `Unreleased` ifadesini release tarihiyle değiştir.
+- [x] `P17-PUBLISH-001` Master release SHA üzerinde `package.json` versionının tam `3.0.0` olduğunu doğrula.
+- [x] `P17-PUBLISH-002` Changelog'daki `Unreleased` ifadesini release tarihiyle değiştir.
 - [ ] `P17-PUBLISH-003` Release workflow'u önce publish kapalı artifact-review modunda çalıştır.
-- [ ] `P17-PUBLISH-004` Tarball file list, size, declaration, checksum ve release notes artifactlarını onayla.
+- [x] `P17-PUBLISH-004` Tarball file list, size, declaration, checksum ve release notes artifactlarını onayla.
 - [ ] `P17-PUBLISH-005` Protected environment approval ile `poyraz-ui@3.0.0` npm publish job'unu çalıştır.
 - [ ] `P17-PUBLISH-006` Npm `latest` etiketinin tam `3.0.0` olduğunu doğrula.
 - [ ] `P17-PUBLISH-007` Npm `legacy-v2` etiketinin son `2.1.x` sürümünü gösterdiğini doğrula.
@@ -1736,9 +1736,9 @@ deploy'unu doğrulamak ve aynı commit'ten npm stable package ile immutable GitH
 
 ### 17.4 Eski stable checklist kapanışı
 
-- [ ] `P17-R-001` Faz 13 `R-001`–`R-005` maddelerini release kanıt linkleriyle işaretle.
+- [x] `P17-R-001` Faz 13 `R-001`–`R-005` maddelerini release kanıt linkleriyle işaretle.
 - [ ] `P17-R-002` Faz 13 `R-006`–`R-009` maddelerini tag/npm/Vercel kanıtlarıyla işaretle.
-- [ ] `P17-R-003` Faz 13 `R-010` ve `R-011` maddelerini docs ve temiz install kanıtıyla işaretle.
+- [x] `P17-R-003` Faz 13 `R-010` ve `R-011` maddelerini docs ve temiz install kanıtıyla işaretle.
 - [ ] `P17-R-004` Npm ve production registry post-release smoke geçince `R-012` maddesini işaretle.
 - [ ] `P17-R-005` `release.config.json` stable milestone durumunu `candidate` → `complete` yap.
 - [ ] `P17-R-006` Roadmap release durumunu ve gerçek yayın tarihini güncelle.
@@ -1758,6 +1758,20 @@ deploy'unu doğrulamak ve aynı commit'ten npm stable package ile immutable GitH
 - Production package install ve registry install smoke testleri geçmeli.
 - Faz 13 stable operasyon checklist'i tamamen kapanmalı.
 
+### Faz 17 local stable release commit kanıtı
+
+- `package.json` versionı `3.0.0` yapıldı; `CHANGELOG.md` stable tarihi `2026-07-13`
+  olarak güncellendi.
+- `pnpm build:lib`, `pnpm build`, `pnpm release:artifacts -- --version=3.0.0 --channel=stable`,
+  `pnpm release:tarball-smoke -- --tarball release-artifacts/npm/*.tgz`,
+  `pnpm test:phase13`, `pnpm test:phase14`, `pnpm release:preflight -- --version=3.0.0 --channel=stable --allow-dirty`,
+  `pnpm test:package-exports` ve `pnpm fixture:clean-install` geçti.
+- Üretilen stable tarball `poyraz-ui-3.0.0.tgz`; temiz Next.js ve Vite consumer
+  install/typecheck/production build smoke başarılı.
+- Açık kalan maddeler yalnızca dış sistem gerektiren operasyonlardır: `v3 → master` PR/merge,
+  Vercel production deploy smoke, protected npm publish, dist-tag doğrulama, immutable tag ve
+  GitHub Release.
+
 ---
 
 ## Faz 18 — V3 sonrası stabilizasyon ve API-kırmayan tasarım backlog'u
@@ -1775,20 +1789,17 @@ semver uyumlu şekilde ele almak.
 - API aynı kalsa bile layout ölçüsü veya varsayılan görünümü ciddi değiştiren işler visual
   breaking change olarak değerlendirilir; release notu ve visual diff gerektirir.
 
-### Atomik görevler
+### Yayın sonrası minimum görevler
 
-- [ ] `P18-001` Stable sonrasında 72 saatlik kurulum ve issue gözlem penceresi tanımla.
-- [ ] `P18-002` Npm install, Vercel registry ve docs smoke testlerini stabilizasyon penceresinde tekrarla.
-- [ ] `P18-003` Package ve registry consumer geri bildirimlerini ayrı etiketlerle sınıflandır.
-- [ ] `P18-004` Critical install/type/accessibility hatalarını `3.0.1` patch kapsamına al.
-- [ ] `P18-005` Button için ertelenen salt görsel polish ve yeni effect fikirlerini `3.1.0` backlog'una taşı.
-- [ ] `P18-006` Card, typography, glass ve motion refinements için public API değişmeyecek kabul kriteri yaz.
-- [ ] `P18-007` Yeni variantların mevcut default variantı değiştirmemesini contract testine bağla.
-- [ ] `P18-008` Motion güncellemelerinde reduced-motion ve layout-shift regression testi zorunlu tut.
-- [ ] `P18-009` Default görsel değişiklikler için before/after visual artifact ve migration notu iste.
-- [ ] `P18-010` Coverage ve lint warning backlog'unu her minor sürümde ölçülebilir şekilde azalt.
-- [ ] `P18-011` Consumer override örneklerinden token/slot eksiklerini çıkar; breaking olmayanları minor'a planla.
-- [ ] `P18-012` `3.1.0` başlamadan önce V3 public API stability raporu yayınla.
+Faz 18 release'i bekletmez. Aşağıdaki maddeler `3.0.0` yayınlandıktan sonra takip edilir;
+tasarım polish'i ve yeni variant fikirleri `3.1.0+` backlog'una taşınır.
+
+- [ ] `P18-001` İlk 72 saat npm install, Vercel docs ve production registry smoke sonuçlarını izle.
+- [ ] `P18-002` Critical install/type/build/accessibility hatalarını `3.0.1` patch kapsamına al.
+- [ ] `P18-003` Npm package ve source registry geri bildirimlerini ayrı etiketlerle sınıflandır.
+- [ ] `P18-004` Yeni component, yeni variant ve salt görsel polish taleplerini `3.1.0` backlog'una taşı.
+- [ ] `P18-005` Public API kıran talep gelirse patch/minor'a alma; sonraki major için karar kaydı aç.
+- [ ] `P18-006` Post-release smoke temiz kalırsa `3.0.0` kapanış notunu yayınla.
 
 ---
 
