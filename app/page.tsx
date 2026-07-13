@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Bell,
@@ -29,7 +28,6 @@ import { Checkbox } from "poyraz-ui/atoms";
 import { MaskedInput, PhoneInput, UrlInput } from "poyraz-ui/atoms";
 import { Input } from "poyraz-ui/atoms";
 import { Label } from "poyraz-ui/atoms";
-import { Logo } from "poyraz-ui/atoms";
 import { RadioGroup, RadioGroupItem } from "poyraz-ui/atoms";
 import { ScrollArea } from "poyraz-ui/atoms";
 import { Separator } from "poyraz-ui/atoms";
@@ -47,15 +45,6 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  CommandPalette,
-  CommandPaletteContent,
-  CommandPaletteEmpty,
-  CommandPaletteFooter,
-  CommandPaletteGroup,
-  CommandPaletteInput,
-  CommandPaletteItem,
-  CommandPaletteList,
-  CommandPaletteSeparator,
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
@@ -81,209 +70,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "poyraz-ui/molecules";
-import {
-  Navbar,
-  NavbarActions,
-  NavbarBrand,
-  NavbarLink,
-  NavbarLinks,
-  NavbarMain,
-  NavbarMobileLink,
-  NavbarMobileMenu,
-  NavbarMobileToggle,
-  NavbarSearch,
-} from "poyraz-ui/organisms";
 
-import { ThemeToggle } from "@/components/theme-toggle";
-import { mainNav, mobileNav, socialLinks } from "@/lib/navigation";
-
-const globalSearchItems = [
-  {
-    title: "Button",
-    href: "/docs/atoms/button",
-    group: "Atoms",
-    description: "Variants, sizes and hover effects",
-  },
-  {
-    title: "Card",
-    href: "/docs/atoms/card",
-    group: "Atoms",
-    description: "Soft, glass and content surfaces",
-  },
-  {
-    title: "Checkbox",
-    href: "/docs/atoms/checkbox",
-    group: "Atoms",
-    description: "Accessible boolean controls",
-  },
-  {
-    title: "Form Fields",
-    href: "/docs/atoms/form-fields",
-    group: "Atoms",
-    description: "Masked, phone and URL inputs",
-  },
-  {
-    title: "Input",
-    href: "/docs/atoms/input",
-    group: "Atoms",
-    description: "Composable field primitives",
-  },
-  { title: "Logo", href: "/docs/atoms/logo", group: "Atoms", description: "Brand mark variants" },
-  {
-    title: "Typography",
-    href: "/docs/atoms/typography",
-    group: "Atoms",
-    description: "Text scales and emphasis effects",
-  },
-  {
-    title: "Alert",
-    href: "/docs/molecules/alert",
-    group: "Molecules",
-    description: "Semantic feedback banners",
-  },
-  {
-    title: "Autocomplete",
-    href: "/docs/molecules/autocomplete",
-    group: "Molecules",
-    description: "Searchable combobox patterns",
-  },
-  {
-    title: "Command Palette",
-    href: "/docs/molecules/command-palette",
-    group: "Molecules",
-    description: "Global search and action overlay",
-  },
-  {
-    title: "Dropdown Menu",
-    href: "/docs/molecules/dropdown-menu",
-    group: "Molecules",
-    description: "Click and hover menu variants",
-  },
-  {
-    title: "Pagination",
-    href: "/docs/molecules/pagination",
-    group: "Molecules",
-    description: "Page navigation controls",
-  },
-  {
-    title: "Select",
-    href: "/docs/molecules/select",
-    group: "Molecules",
-    description: "Styled select menus",
-  },
-  {
-    title: "Sonner",
-    href: "/docs/molecules/sonner",
-    group: "Molecules",
-    description: "Toast notifications",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/molecules/tabs",
-    group: "Molecules",
-    description: "Animated tab navigation",
-  },
-  {
-    title: "Navbar",
-    href: "/docs/organisms/navbar",
-    group: "Organisms",
-    description: "Responsive navigation systems",
-  },
-  {
-    title: "Data Table",
-    href: "/docs/organisms/data-table",
-    group: "Organisms",
-    description: "Interactive table patterns",
-  },
-  {
-    title: "Blocks",
-    href: "/docs/blocks",
-    group: "Templates",
-    description: "Copy-ready UI sections",
-  },
-];
-
-function GlobalSearchPalette({
-  onOpenChange,
-  open,
-}: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
-  const normalizedQuery = query.trim().toLowerCase();
-  const filteredItems = globalSearchItems.filter((item) => {
-    if (!normalizedQuery) return true;
-    return [item.title, item.group, item.description]
-      .join(" ")
-      .toLowerCase()
-      .includes(normalizedQuery);
-  });
-  const groupedItems = filteredItems.reduce<Record<string, typeof globalSearchItems>>(
-    (groups, item) => {
-      groups[item.group] ??= [];
-      groups[item.group].push(item);
-      return groups;
-    },
-    {},
-  );
-
-  const closeAndNavigate = (href: string) => {
-    onOpenChange(false);
-    router.push(href);
-  };
-
-  return (
-    <CommandPalette
-      open={open}
-      onOpenChange={(nextOpen) => {
-        onOpenChange(nextOpen);
-        if (!nextOpen) setQuery("");
-      }}
-    >
-      <CommandPaletteContent surface="glass" radius="xl" overlayTone="glass">
-        <CommandPaletteInput
-          autoFocus
-          placeholder="Search components, docs, blocks..."
-          onValueChange={setQuery}
-        />
-        <CommandPaletteList>
-          {filteredItems.length === 0 ? (
-            <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
-          ) : (
-            Object.entries(groupedItems).map(([group, items], groupIndex) => (
-              <div key={group}>
-                {groupIndex > 0 && <CommandPaletteSeparator />}
-                <CommandPaletteGroup heading={group}>
-                  {items.map((item) => (
-                    <CommandPaletteItem
-                      key={item.href}
-                      icon={<Search className="size-4" />}
-                      description={item.description}
-                      shortcut="↵"
-                      onClick={() => closeAndNavigate(item.href)}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") closeAndNavigate(item.href);
-                      }}
-                    >
-                      {item.title}
-                    </CommandPaletteItem>
-                  ))}
-                </CommandPaletteGroup>
-              </div>
-            ))
-          )}
-        </CommandPaletteList>
-        <CommandPaletteFooter>
-          <span>Type to search</span>
-          <span>Enter to open</span>
-          <span>Esc to close</span>
-        </CommandPaletteFooter>
-      </CommandPaletteContent>
-    </CommandPalette>
-  );
-}
+import { SiteNavbar } from "@/components/site-navbar";
+import { socialLinks } from "@/lib/navigation";
 
 function CopyInstallCommand() {
   const [copied, setCopied] = useState(false);
@@ -678,133 +467,9 @@ function InteractiveComponentPanel() {
 }
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  useEffect(() => {
-    const updateScrollState = () => setIsScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrollState);
-  }, []);
-
-  useEffect(() => {
-    const openSearchFromShortcut = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      const isTypingTarget =
-        target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.isContentEditable;
-
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        setIsSearchOpen(true);
-        return;
-      }
-
-      if (!isTypingTarget && event.key === "/") {
-        event.preventDefault();
-        setIsSearchOpen(true);
-      }
-    };
-
-    window.addEventListener("keydown", openSearchFromShortcut);
-    return () => window.removeEventListener("keydown", openSearchFromShortcut);
-  }, []);
-
   return (
     <main className="min-h-screen bg-background">
-      <GlobalSearchPalette open={isSearchOpen} onOpenChange={setIsSearchOpen} />
-
-      <Navbar
-        variant={isScrolled ? "glass" : "transparent"}
-        className="fixed left-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300"
-      >
-        <NavbarMain className={isScrolled ? undefined : "border-white/10"}>
-          <NavbarBrand href="/">
-            <Logo width={32} height={32} />
-          </NavbarBrand>
-
-          <NavbarLinks className="mr-auto">
-            {mainNav.map((item) => (
-              <NavbarLink
-                key={item.href}
-                href={item.href}
-                className={
-                  isScrolled
-                    ? undefined
-                    : "text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
-                }
-                {...(item.external ? { target: "_blank" } : {})}
-              >
-                {item.label}
-              </NavbarLink>
-            ))}
-          </NavbarLinks>
-
-          <NavbarActions>
-            <NavbarSearch
-              placeholder="Search docs..."
-              aria-label="Search documentation"
-              aria-haspopup="dialog"
-              aria-expanded={isSearchOpen}
-              readOnly
-              wrapperClassName="hidden xl:flex"
-              className={
-                isScrolled
-                  ? undefined
-                  : "border-white/20 bg-white/10 text-white placeholder:text-white/60 focus:ring-white/35"
-              }
-              onClick={() => setIsSearchOpen(true)}
-              onFocus={() => setIsSearchOpen(true)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  setIsSearchOpen(true);
-                }
-              }}
-            />
-            <ThemeToggle
-              className={
-                isScrolled ? undefined : "border-white/20 bg-white/10 text-white backdrop-blur-md"
-              }
-              buttonClassName={
-                isScrolled
-                  ? undefined
-                  : "text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-white/70"
-              }
-              activeClassName={isScrolled ? undefined : "bg-white/20 text-white"}
-            />
-            <Link href={socialLinks.website} target="_blank">
-              <Button
-                size="sm"
-                effect="swap"
-                variant={isScrolled ? "default" : "outline"}
-                className={
-                  isScrolled
-                    ? undefined
-                    : "border-white/30 bg-white/10 text-white backdrop-blur-md hover:border-white/60 hover:bg-white/15"
-                }
-              >
-                Return Back
-              </Button>
-            </Link>
-          </NavbarActions>
-
-          <NavbarMobileToggle
-            className={
-              isScrolled
-                ? undefined
-                : "border-white/25 text-white hover:border-white/50 hover:bg-white/10"
-            }
-          />
-        </NavbarMain>
-
-        <NavbarMobileMenu>
-          {mobileNav.map((item) => (
-            <NavbarMobileLink key={item.href} href={item.href}>
-              {item.label}
-            </NavbarMobileLink>
-          ))}
-        </NavbarMobileMenu>
-      </Navbar>
+      <SiteNavbar hero />
 
       <section className="relative isolate flex min-h-screen overflow-hidden px-6 pb-16 pt-28 text-white md:pt-36">
         <HeroWaveBackground />
