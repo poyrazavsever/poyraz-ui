@@ -1,6 +1,6 @@
 {
   "name": "poyraz-ui",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Soft glass React component system with npm package imports and a shadcn-compatible source registry",
   "author": "Poyraz Avsever",
   "license": "MIT",
