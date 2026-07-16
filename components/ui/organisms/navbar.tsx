@@ -20,7 +20,7 @@ interface NavbarContextValue {
   containerClassName: string;
 }
 
-const DEFAULT_CONTAINER = "max-w-5xl mx-auto px-6";
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 
 const NavbarContext = React.createContext<NavbarContextValue>({
   mobileOpen: false,

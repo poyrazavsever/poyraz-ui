@@ -84,7 +84,7 @@ export default function Home() {
           <div className="flex max-w-[34rem] flex-col items-start space-y-7 text-left">
             <Link href={socialLinks.repo} target="_blank">
               <Badge variant="glass" className="px-4 py-1.5 text-sm uppercase tracking-widest">
-                v3.0.1 - Open Source
+                v3.0.2 - Open Source
               </Badge>
             </Link>
 

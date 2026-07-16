@@ -20,7 +20,7 @@ interface NavbarContextValue {
   containerClassName: string;
 }
 
-const DEFAULT_CONTAINER = "max-w-5xl mx-auto px-6";
+const DEFAULT_CONTAINER = "max-w-5xl mx-auto";
 
 const NavbarContext = React.createContext<NavbarContextValue>({
   mobileOpen: false,
@@ -587,7 +587,7 @@ const NavbarMobileMenu = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
           {...props}
         >
           {/* Panel header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+          <div className="flex items-center justify-between py-4 border-b border-border">
             <span className="text-xs font-bold tracking-widest uppercase text-placeholder">
               Menu
             </span>
