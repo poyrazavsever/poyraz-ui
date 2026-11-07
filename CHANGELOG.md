@@ -1,6 +1,31 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added `docs/poyraz-ui-ai-consumer-guide.md`, an AI consumer guide covering Poyraz UI import paths, variants, theming and usage rules for React/Next.js projects.
+
+## [3.0.2] - 2026-07-16
+
+### Fixed
+
+- Removed horizontal padding (`px-6`) from the `Navbar` default container class.
+
+## [3.0.1] - 2026-07-16
+
+### Added
+
+- Added `StarRating` component and `StarRatingProps` type to the `poyraz-ui/molecules` export.
+
+### Fixed
+
+- Removed horizontal padding (`px-6`) from the Navbar mobile menu panel header.
+- Refined Navbar search input styling, including height, rounded corners, transitions and focus ring styles.
+
 ## [3.0.0-rc.1] - Unreleased
+
+> Release candidate milestone; superseded by [3.0.0]. No `3.0.0-rc.1` artifact was published to npm.
 
 ### Added
 
